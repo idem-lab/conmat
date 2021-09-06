@@ -1,20 +1,13 @@
-# use ggplot to plot a matrix in the output format
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param matrix PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' Use ggplot to plot a matrix in the output format
+#' @param matrix matrix
+#' @return a ggplot object
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[ggplot2]{ggplot}},\code{\link[ggplot2]{aes}},\code{\link[ggplot2]{geom_raster}},\code{\link[ggplot2]{coord_fixed}},\code{\link[ggplot2]{scale_colour_brewer}},\code{\link[ggplot2]{ggtheme}},\code{\link[ggplot2]{theme}},\code{\link[ggplot2]{margin}}
-#' @rdname plot_matrix
 #' @export 
-#' @importFrom ggplot2 ggplot aes geom_tile coord_fixed scale_fill_distiller theme_minimal theme element_text
 plot_matrix <- function(matrix) {
   
   matrix %>%

@@ -2,21 +2,19 @@
 % Please edit documentation in R/add_rotated_ages.R
 \name{add_rotated_ages}
 \alias{add_rotated_ages}
-\title{FUNCTION_TITLE}
+\title{apply a 45 degree rotation to age contact pairs}
 \usage{
 add_rotated_ages(contact_data)
 }
 \arguments{
-\item{contact_data}{PARAM_DESCRIPTION}
+\item{contact_data}{contact data}
 }
 \value{
-OUTPUT_DESCRIPTION
+data set with rotated age contact paris
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+apply a 45 degree rotation to age contact pairs, to model trends along
+the diagonal, and perpendicularly across the diagonal.
 }
 \examples{
 \dontrun{
@@ -24,7 +22,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{mutate}}
 }

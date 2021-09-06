@@ -1,23 +1,21 @@
-# given a named list of contact datasets (with names giving the setting, and
-# assumed to together make up the full set of contacts for individuals in the
-# survey), a representative population distribution for the survey, and a set of
-# age breaks at which to aggregate contacts, return a set of predicted contact
-# matrices for each setting, and for all combined.
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' Get predicted contact matrices for each setting and combined
+#' 
+#' Given a named list of contact datasets (with names giving the setting, and
+#' assumed to together make up the full set of contacts for individuals in the
+#' survey), a representative population distribution for the survey, and a set 
+#' of age breaks at which to aggregate contacts, return a set of predicted 
+#' contact matrices for each setting, and for all combined.
 #' @param contact_data_list PARAM_DESCRIPTION
 #' @param survey_population PARAM_DESCRIPTION
 #' @param prediction_population PARAM_DESCRIPTION, Default: survey_population
 #' @param age_breaks PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname estimate_setting_contacts
 #' @export 
 estimate_setting_contacts <- function(
   contact_data_list,

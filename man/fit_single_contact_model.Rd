@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_single_contact_model.R
 \name{fit_single_contact_model}
 \alias{fit_single_contact_model}
-\title{FUNCTION_TITLE}
+\title{fit a single GAM contact model to a dataset}
 \usage{
 fit_single_contact_model(contact_data, population)
 }
@@ -15,7 +15,7 @@ fit_single_contact_model(contact_data, population)
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+fit a single GAM contact model to a dataset
 }
 \details{
 DETAILS
@@ -26,8 +26,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[mgcv]{bam}}
-\code{\link[stats]{offset}},\code{\link[stats]{c("Poisson", "family")}}
 }

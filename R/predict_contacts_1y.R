@@ -1,25 +1,17 @@
-# predict contacts to a given population at full 1y resolution 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' predict contacts to a given population at full 1y resolution 
+#' 
 #' @param model PARAM_DESCRIPTION
 #' @param population PARAM_DESCRIPTION
 #' @param age_min PARAM_DESCRIPTION, Default: 0
 #' @param age_max PARAM_DESCRIPTION, Default: 100
 #' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[tidyr]{expand_grid}}
-#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}}
-#' @rdname predict_contacts_1y
 #' @export 
-#' @importFrom tidyr expand_grid
-#' @importFrom dplyr mutate select
 predict_contacts_1y <- function(model, population, age_min = 0, age_max = 100) {
   
   all_ages <- age_min:age_max

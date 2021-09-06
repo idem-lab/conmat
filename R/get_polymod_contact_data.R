@@ -1,6 +1,5 @@
-# format polymod data and filter contacts to certain settings
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' Format polymod data and filter contacts to certain settings
+#' 
 #' @param setting PARAM_DESCRIPTION, Default: c("all", "home", "work", "school", "other")
 #' @param ages PARAM_DESCRIPTION, Default: 0:100
 #' @param contact_age_imputation PARAM_DESCRIPTION, Default: c("sample", "mean", "remove_participant")
@@ -12,15 +11,7 @@
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{mutate-joins}},\code{\link[dplyr]{mutate}},\code{\link[dplyr]{context}},\code{\link[dplyr]{case_when}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{filter}},\code{\link[dplyr]{select}},\code{\link[dplyr]{summarise}},\code{\link[dplyr]{n_distinct}}
-#'  \code{\link[stats]{Uniform}}
-#'  \code{\link[tidyr]{complete}},\code{\link[tidyr]{expand}}
-#' @rdname get_polymod_contact_data
 #' @export 
-#' @importFrom dplyr left_join mutate n case_when group_by ungroup filter select summarise n_distinct
-#' @importFrom stats runif
-#' @importFrom tidyr complete nesting
 get_polymod_contact_data <- function(
   setting = c("all", "home", "work", "school", "other"),
   ages = 0:100,

@@ -2,18 +2,15 @@
 % Please edit documentation in R/get_polymod_setting_data.R
 \name{get_polymod_setting_data}
 \alias{get_polymod_setting_data}
-\title{FUNCTION_TITLE}
+\title{Get polymod setting data}
 \usage{
 get_polymod_setting_data()
 }
 \value{
-OUTPUT_DESCRIPTION
+polymod data
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Get polymod setting data
 }
 \examples{
 \dontrun{

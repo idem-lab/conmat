@@ -2,23 +2,21 @@
 % Please edit documentation in R/add_population_age_to.R
 \name{add_population_age_to}
 \alias{add_population_age_to}
-\title{FUNCTION_TITLE}
+\title{Add the population distribution for contact ages.}
 \usage{
 add_population_age_to(contact_data, population = get_polymod_population())
 }
 \arguments{
-\item{contact_data}{PARAM_DESCRIPTION}
+\item{contact_data}{contact data}
 
-\item{population}{PARAM_DESCRIPTION, Default: get_polymod_population()}
+\item{population}{Default: get_polymod_population()}
 }
 \value{
-OUTPUT_DESCRIPTION
+data frame
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+If 'polymod' then use the participant-weighted average of polymod
+country/year distributions
 }
 \examples{
 \dontrun{
@@ -26,7 +24,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{mutate}}
 }

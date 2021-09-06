@@ -2,7 +2,7 @@
 % Please edit documentation in R/extrapolate_polymod.R
 \name{extrapolate_polymod}
 \alias{extrapolate_polymod}
-\title{FUNCTION_TITLE}
+\title{fit all-of-polymod model and extrapolate to a given population an age breaks}
 \usage{
 extrapolate_polymod(population, age_breaks = c(seq(0, 75, by = 5), Inf))
 }
@@ -15,7 +15,7 @@ extrapolate_polymod(population, age_breaks = c(seq(0, 75, by = 5), Inf))
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+fit all-of-polymod model and extrapolate to a given population an age breaks
 }
 \details{
 DETAILS

@@ -1,25 +1,19 @@
-# aggregate predicted contacts from complete 1y resolution to a stated resolution
-# must pass in the population to do approppriate weighting of 'from' age groups
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param predicted_contacts_1y PARAM_DESCRIPTION
-#' @param population PARAM_DESCRIPTION
-#' @param age_breaks PARAM_DESCRIPTION, Default: c(seq(0, 75, by = 5), Inf)
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' aggregate predicted contacts from complete 1y resolution
+#' 
+#' aggregate predicted contacts from complete 1y resolution to a stated 
+#' resolution must pass in the population to do approppriate weighting of 
+#' 'from' age groups
+#' @param predicted_contacts_1y contacts in 1 year breaks
+#' @param population population
+#' @param age_breaks Default: c(seq(0, 75, by = 5), Inf)
+#' @return data frame
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{filter}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{summarise}}
-#'  \code{\link[stats]{weighted.mean}}
-#' @rdname aggregate_predicted_contacts
 #' @export 
-#' @importFrom dplyr mutate filter group_by summarise
-#' @importFrom stats weighted.mean
 aggregate_predicted_contacts <- function(
   predicted_contacts_1y,
   population,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregate_predicted_contacts.R
 \name{aggregate_predicted_contacts}
 \alias{aggregate_predicted_contacts}
-\title{FUNCTION_TITLE}
+\title{aggregate predicted contacts from complete 1y resolution}
 \usage{
 aggregate_predicted_contacts(
   predicted_contacts_1y,
@@ -11,20 +11,19 @@ aggregate_predicted_contacts(
 )
 }
 \arguments{
-\item{predicted_contacts_1y}{PARAM_DESCRIPTION}
+\item{predicted_contacts_1y}{contacts in 1 year breaks}
 
-\item{population}{PARAM_DESCRIPTION}
+\item{population}{population}
 
-\item{age_breaks}{PARAM_DESCRIPTION, Default: c(seq(0, 75, by = 5), Inf)}
+\item{age_breaks}{Default: c(seq(0, 75, by = 5), Inf)}
 }
 \value{
-OUTPUT_DESCRIPTION
+data frame
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+aggregate predicted contacts from complete 1y resolution to a stated
+resolution must pass in the population to do approppriate weighting of
+'from' age groups
 }
 \examples{
 \dontrun{
@@ -32,8 +31,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{mutate}},\code{\link[dplyr]{filter}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{summarise}}
-\code{\link[stats]{weighted.mean}}
 }

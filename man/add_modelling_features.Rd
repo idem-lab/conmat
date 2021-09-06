@@ -2,23 +2,20 @@
 % Please edit documentation in R/add_modelling_features.R
 \name{add_modelling_features}
 \alias{add_modelling_features}
-\title{FUNCTION_TITLE}
+\title{Add features required for modelling to the dataset}
 \usage{
 add_modelling_features(contact_data, ...)
 }
 \arguments{
-\item{contact_data}{PARAM_DESCRIPTION}
+\item{contact_data}{contact data}
 
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{extra dots}
 }
 \value{
-OUTPUT_DESCRIPTION
+data frame
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Add features required for modelling to the dataset
 }
 \examples{
 \dontrun{

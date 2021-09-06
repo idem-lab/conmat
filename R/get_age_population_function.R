@@ -1,7 +1,9 @@
-# return an interpolating function to get populations in 1y age increments from
-# chunkier distributions produced by socialmixr::wpp_age() (must contain `lower.age.limit` and `population`)
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' return an interpolating function for populations in 1y age increments 
+#' 
+#' Return an interpolating function to get populations in 1y age increments 
+#' from chunkier distributions produced by socialmixr::wpp_age() (must contain
+#' `lower.age.limit` and `population`)
+#' 
 #' @param population PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -11,13 +13,7 @@
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{arrange}}
-#'  \code{\link[stats]{splinefun}}
-#' @rdname get_age_population_function
 #' @export 
-#' @importFrom dplyr arrange
-#' @importFrom stats splinefun spline
 get_age_population_function <- function(population) {
   
   population <- population %>%

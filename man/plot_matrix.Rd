@@ -2,21 +2,18 @@
 % Please edit documentation in R/plot_matrix.R
 \name{plot_matrix}
 \alias{plot_matrix}
-\title{FUNCTION_TITLE}
+\title{Use ggplot to plot a matrix in the output format}
 \usage{
 plot_matrix(matrix)
 }
 \arguments{
-\item{matrix}{PARAM_DESCRIPTION}
+\item{matrix}{matrix}
 }
 \value{
-OUTPUT_DESCRIPTION
+a ggplot object
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Use ggplot to plot a matrix in the output format
 }
 \examples{
 \dontrun{
@@ -24,7 +21,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[ggplot2]{ggplot}},\code{\link[ggplot2]{aes}},\code{\link[ggplot2]{geom_raster}},\code{\link[ggplot2]{coord_fixed}},\code{\link[ggplot2]{scale_colour_brewer}},\code{\link[ggplot2]{ggtheme}},\code{\link[ggplot2]{theme}},\code{\link[ggplot2]{margin}}
 }

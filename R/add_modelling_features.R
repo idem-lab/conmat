@@ -1,17 +1,14 @@
-# add features required for modelling to the dataset
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param contact_data PARAM_DESCRIPTION
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' Add features required for modelling to the dataset
+#' 
+#' @param contact_data contact data
+#' @param ... extra dots
+#' @return data frame
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname add_modelling_features
 #' @export 
 add_modelling_features <- function(contact_data, ...) {
   

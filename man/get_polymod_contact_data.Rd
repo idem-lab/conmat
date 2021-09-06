@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_polymod_contact_data.R
 \name{get_polymod_contact_data}
 \alias{get_polymod_contact_data}
-\title{FUNCTION_TITLE}
+\title{Format polymod data and filter contacts to certain settings}
 \usage{
 get_polymod_contact_data(
   setting = c("all", "home", "work", "school", "other"),
@@ -21,7 +21,7 @@ get_polymod_contact_data(
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+Format polymod data and filter contacts to certain settings
 }
 \details{
 DETAILS
@@ -32,9 +32,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{mutate-joins}},\code{\link[dplyr]{mutate}},\code{\link[dplyr]{context}},\code{\link[dplyr]{case_when}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{filter}},\code{\link[dplyr]{select}},\code{\link[dplyr]{summarise}},\code{\link[dplyr]{n_distinct}}
-\code{\link[stats]{Uniform}}
-\code{\link[tidyr]{complete}},\code{\link[tidyr]{expand}}
 }

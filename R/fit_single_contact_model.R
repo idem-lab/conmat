@@ -1,6 +1,5 @@
-# fit a single GAM contact model to a dataset
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' fit a single GAM contact model to a dataset
+#' 
 #' @param contact_data PARAM_DESCRIPTION
 #' @param population PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
@@ -11,13 +10,7 @@
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[mgcv]{bam}}
-#'  \code{\link[stats]{offset}},\code{\link[stats]{c("Poisson", "family")}}
-#' @rdname fit_single_contact_model
 #' @export 
-#' @importFrom mgcv bam
-#' @importFrom stats offset poisson
 fit_single_contact_model <- function(contact_data, population) {
   
   # contact model for all locations together

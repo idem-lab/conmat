@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_contacts_1y.R
 \name{predict_contacts_1y}
 \alias{predict_contacts_1y}
-\title{FUNCTION_TITLE}
+\title{predict contacts to a given population at full 1y resolution}
 \usage{
 predict_contacts_1y(model, population, age_min = 0, age_max = 100)
 }
@@ -19,10 +19,7 @@ predict_contacts_1y(model, population, age_min = 0, age_max = 100)
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+predict contacts to a given population at full 1y resolution
 }
 \examples{
 \dontrun{
@@ -30,8 +27,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[tidyr]{expand_grid}}
-\code{\link[dplyr]{mutate}},\code{\link[dplyr]{select}}
 }

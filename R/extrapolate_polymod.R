@@ -1,6 +1,5 @@
-# fit all-of-polymod model and extrapolate to a given population an age breaks
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' fit all-of-polymod model and extrapolate to a given population an age breaks
+#' 
 #' @param population PARAM_DESCRIPTION
 #' @param age_breaks PARAM_DESCRIPTION, Default: c(seq(0, 75, by = 5), Inf)
 #' @return OUTPUT_DESCRIPTION
@@ -11,7 +10,6 @@
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname extrapolate_polymod
 #' @export 
 extrapolate_polymod <- function(
   population,

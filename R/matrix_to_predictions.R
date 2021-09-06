@@ -1,7 +1,6 @@
-# convert a contact matrix as output by these functions (or socialmixr) into a
-# long-form tibble
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' Convert a contact matrix as output by these functions (or socialmixr) into 
+#' a long-form tibble
+#' 
 #' @param contact_matrix PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
@@ -11,15 +10,7 @@
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[tibble]{as_tibble}}
-#'  \code{\link[tidyr]{pivot_longer}}
-#'  \code{\link[dplyr]{mutate}},\code{\link[dplyr]{across}},\code{\link[dplyr]{reexports}}
-#' @rdname matrix_to_predictions
 #' @export 
-#' @importFrom tibble as_tibble
-#' @importFrom tidyr pivot_longer
-#' @importFrom dplyr mutate across starts_with
 matrix_to_predictions <- function(contact_matrix) {
   contact_matrix %>%
     tibble::as_tibble(

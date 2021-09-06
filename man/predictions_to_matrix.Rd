@@ -2,7 +2,7 @@
 % Please edit documentation in R/predictions_to_matrix.R
 \name{predictions_to_matrix}
 \alias{predictions_to_matrix}
-\title{FUNCTION_TITLE}
+\title{Predict contacts to matrix}
 \usage{
 predictions_to_matrix(contact_predictions)
 }
@@ -13,10 +13,7 @@ predictions_to_matrix(contact_predictions)
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Predict contacts to matrix
 }
 \examples{
 \dontrun{
@@ -24,8 +21,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[tidyr]{pivot_wider}}
-\code{\link[tibble]{rownames}}
 }

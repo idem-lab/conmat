@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_setting_matrices.R
 \name{plot_setting_matrices}
 \alias{plot_setting_matrices}
-\title{FUNCTION_TITLE}
+\title{Plot setting matrices using ggplot2}
 \usage{
 plot_setting_matrices(
   matrices,
@@ -10,18 +10,15 @@ plot_setting_matrices(
 )
 }
 \arguments{
-\item{matrices}{PARAM_DESCRIPTION}
+\item{matrices}{matrix}
 
-\item{title}{PARAM_DESCRIPTION, Default: 'Setting-specific synthetic contact matrices (all polymod data)'}
+\item{title}{title to give, Default: 'Setting-specific synthetic contact matrices (all polymod data)'}
 }
 \value{
-OUTPUT_DESCRIPTION
+ggplot
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Plot setting matrices using ggplot2
 }
 \examples{
 \dontrun{
@@ -29,8 +26,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[ggplot2]{labs}}
-\code{\link[patchwork]{plot_layout}},\code{\link[patchwork]{plot_annotation}}
 }

@@ -2,21 +2,24 @@
 % Please edit documentation in R/add_school_work_participation.R
 \name{add_school_work_participation}
 \alias{add_school_work_participation}
-\title{FUNCTION_TITLE}
+\title{Add fractions of the population in each age group that attend school/work
+(average FTE)}
 \usage{
 add_school_work_participation(contact_data)
 }
 \arguments{
-\item{contact_data}{PARAM_DESCRIPTION}
+\item{contact_data}{contact data}
 }
 \value{
-OUTPUT_DESCRIPTION
+dataset
 }
 \description{
-FUNCTION_DESCRIPTION
+Add fractions of the population in each age group that attend school/work
+(average FTE) to compute the probability that both participant and
+contact attend school/work.
 }
-\details{
-DETAILS
+\note{
+this is fake data that will get replaced with abs data soon
 }
 \examples{
 \dontrun{
@@ -24,7 +27,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{mutate}},\code{\link[dplyr]{across}},\code{\link[dplyr]{reexports}},\code{\link[dplyr]{case_when}}
 }

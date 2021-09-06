@@ -1,27 +1,18 @@
-# return the polymod-average population age distribution in 5y
-# increments (weight country population distributions by number of participants)
-# note that we don't want to weight by survey age distributions for this, since
-# the total number of *participants* represents the sampling
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' return the polymod-average population age distribution in 5y
+#' 
+#' return the polymod-average population age distribution in 5y increments 
+#' (weight country population distributions by number of participants) 
+#' note that we don't want to weight by survey age distributions for this, since
+#' the total number of *participants* represents the sampling
+#' 
+#' @return data frame
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{filter}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{summarise}},\code{\link[dplyr]{context}},\code{\link[dplyr]{mutate-joins}}
-#'  \code{\link[socialmixr]{wpp_age}}
-#'  \code{\link[stats]{weighted.mean}}
-#' @rdname get_polymod_population
 #' @export 
-#' @importFrom dplyr filter group_by summarise n left_join
-#' @importFrom socialmixr wpp_age
-#' @importFrom stats weighted.mean
 get_polymod_population <- function() {
   
   socialmixr::polymod$participants %>%

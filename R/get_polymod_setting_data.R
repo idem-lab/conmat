@@ -1,15 +1,12 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' Get polymod setting data
 
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @return polymod data
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @rdname get_polymod_setting_data
 #' @export 
 get_polymod_setting_data <- function() {
   list(

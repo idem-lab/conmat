@@ -1,21 +1,17 @@
-# apply a 45 degree rotation to age contact pairs, to model trends along the
-# diagonal, and perpendicularly across the diagonal
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param contact_data PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' apply a 45 degree rotation to age contact pairs
+#' 
+#' apply a 45 degree rotation to age contact pairs, to model trends along 
+#' the diagonal, and perpendicularly across the diagonal.
+#' 
+#' @param contact_data contact data
+#' @return data set with rotated age contact paris
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{mutate}}
-#' @rdname add_rotated_ages
 #' @export 
-#' @importFrom dplyr mutate
 add_rotated_ages <- function(contact_data) {
   theta <- pi / 4
   contact_data %>%

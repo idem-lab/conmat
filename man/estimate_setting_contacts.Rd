@@ -2,7 +2,7 @@
 % Please edit documentation in R/estimate_setting_contacts.R
 \name{estimate_setting_contacts}
 \alias{estimate_setting_contacts}
-\title{FUNCTION_TITLE}
+\title{Get predicted contact matrices for each setting and combined}
 \usage{
 estimate_setting_contacts(
   contact_data_list,
@@ -24,10 +24,11 @@ estimate_setting_contacts(
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+Given a named list of contact datasets (with names giving the setting, and
+assumed to together make up the full set of contacts for individuals in the
+survey), a representative population distribution for the survey, and a set
+of age breaks at which to aggregate contacts, return a set of predicted
+contact matrices for each setting, and for all combined.
 }
 \examples{
 \dontrun{

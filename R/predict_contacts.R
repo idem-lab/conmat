@@ -1,24 +1,18 @@
-# predict number of contacts in all combinations of the age groups specified by
-# age_breaks, given a model and a population distribution of the time/place to
-# predict to
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' predict number of contacts in all combinations of the age groups specified 
+#' by age_breaks, given a model and a population distribution of the time/place 
+#' to predict to
+#' 
 #' @param model PARAM_DESCRIPTION
 #' @param population PARAM_DESCRIPTION
 #' @param age_breaks PARAM_DESCRIPTION, Default: c(seq(0, 75, by = 5), Inf)
 #' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
-#' @seealso 
-#'  \code{\link[dplyr]{arrange}}
-#' @rdname predict_contacts
 #' @export 
-#' @importFrom dplyr arrange
 predict_contacts <- function (
   model,
   population,

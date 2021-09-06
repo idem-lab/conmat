@@ -2,7 +2,8 @@
 % Please edit documentation in R/matrix_to_predictions.R
 \name{matrix_to_predictions}
 \alias{matrix_to_predictions}
-\title{FUNCTION_TITLE}
+\title{Convert a contact matrix as output by these functions (or socialmixr) into
+a long-form tibble}
 \usage{
 matrix_to_predictions(contact_matrix)
 }
@@ -13,7 +14,8 @@ matrix_to_predictions(contact_matrix)
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+Convert a contact matrix as output by these functions (or socialmixr) into
+a long-form tibble
 }
 \details{
 DETAILS
@@ -24,9 +26,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[tibble]{as_tibble}}
-\code{\link[tidyr]{pivot_longer}}
-\code{\link[dplyr]{mutate}},\code{\link[dplyr]{across}},\code{\link[dplyr]{reexports}}
 }

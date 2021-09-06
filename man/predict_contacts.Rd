@@ -2,7 +2,9 @@
 % Please edit documentation in R/predict_contacts.R
 \name{predict_contacts}
 \alias{predict_contacts}
-\title{FUNCTION_TITLE}
+\title{predict number of contacts in all combinations of the age groups specified
+by age_breaks, given a model and a population distribution of the time/place
+to predict to}
 \usage{
 predict_contacts(model, population, age_breaks = c(seq(0, 75, by = 5), Inf))
 }
@@ -17,10 +19,9 @@ predict_contacts(model, population, age_breaks = c(seq(0, 75, by = 5), Inf))
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+predict number of contacts in all combinations of the age groups specified
+by age_breaks, given a model and a population distribution of the time/place
+to predict to
 }
 \examples{
 \dontrun{
@@ -28,7 +29,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{arrange}}
 }

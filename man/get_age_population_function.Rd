@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_age_population_function.R
 \name{get_age_population_function}
 \alias{get_age_population_function}
-\title{FUNCTION_TITLE}
+\title{return an interpolating function for populations in 1y age increments}
 \usage{
 get_age_population_function(population)
 }
@@ -13,7 +13,9 @@ get_age_population_function(population)
 OUTPUT_DESCRIPTION
 }
 \description{
-FUNCTION_DESCRIPTION
+Return an interpolating function to get populations in 1y age increments
+from chunkier distributions produced by socialmixr::wpp_age() (must contain
+\code{lower.age.limit} and \code{population})
 }
 \details{
 DETAILS
@@ -24,8 +26,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{arrange}}
-\code{\link[stats]{splinefun}}
 }

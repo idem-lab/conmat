@@ -2,18 +2,18 @@
 % Please edit documentation in R/get_polymod_population.R
 \name{get_polymod_population}
 \alias{get_polymod_population}
-\title{FUNCTION_TITLE}
+\title{return the polymod-average population age distribution in 5y}
 \usage{
 get_polymod_population()
 }
 \value{
-OUTPUT_DESCRIPTION
+data frame
 }
 \description{
-FUNCTION_DESCRIPTION
-}
-\details{
-DETAILS
+return the polymod-average population age distribution in 5y increments
+(weight country population distributions by number of participants)
+note that we don't want to weight by survey age distributions for this, since
+the total number of \emph{participants} represents the sampling
 }
 \examples{
 \dontrun{
@@ -21,9 +21,4 @@ if(interactive()){
  #EXAMPLE1
  }
 }
-}
-\seealso{
-\code{\link[dplyr]{filter}},\code{\link[dplyr]{group_by}},\code{\link[dplyr]{summarise}},\code{\link[dplyr]{context}},\code{\link[dplyr]{mutate-joins}}
-\code{\link[socialmixr]{wpp_age}}
-\code{\link[stats]{weighted.mean}}
 }
