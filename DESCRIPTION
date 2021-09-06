@@ -1,0 +1,37 @@
+Package: conmat
+Title: Builds contact matrices using GAMs and population data
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Nicholas",
+             family = "Tierney",
+             role = c("aut", "cre"),
+             email = "nicholas.tierney@gmail.com",
+             comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722")),
+      person(given = "Nick",
+             family = "Golding",
+             role = "aut",
+             email = "nick.golding.research@gmail.com",
+             comment = c(ORCID = "0000-0001-8916-5570")))
+Description: Builds contact matrices using GAMs and population data
+License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-GB
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    mgcv,
+    dplyr,
+    stats,
+    tidyr,
+    socialmixr,
+    ggplot2,
+    tibble

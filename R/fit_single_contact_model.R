@@ -1,0 +1,48 @@
+# fit a single GAM contact model to a dataset
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param contact_data PARAM_DESCRIPTION
+#' @param population PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[mgcv]{bam}}
+#'  \code{\link[stats]{offset}},\code{\link[stats]{c("Poisson", "family")}}
+#' @rdname fit_single_contact_model
+#' @export 
+#' @importFrom mgcv bam
+#' @importFrom stats offset poisson
+fit_single_contact_model <- function(contact_data, population) {
+  
+  # contact model for all locations together
+  contact_data %>%
+    add_modelling_features(
+      population = population
+    ) %>%
+    mgcv::bam(
+      contacts ~
+        # multiplicative offset for population in the 'to' age group, to account for
+        # opportunity to contact
+        stats::offset(log(pop_age_to)) +
+        # deviation of contact age distribution from population age distribution
+        s(age_to) +
+        # number of contacts by age
+        s(age_from) +
+        # intergenerational contact patterns
+        s(abs(age_from - age_to)) +
+        # probabilities of both attending (any) school/work
+        school_probability +
+        work_probability,
+      family = stats::poisson,
+      # add number of participants as a multilpicative offset here rather than in
+      # the formula, so it is not needed for prediction,
+      offset = log(participants),
+      data = .
+    )
+}
