@@ -86,8 +86,167 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"njtierney/conmat"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"njtierney/conmat"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">conmat</span><span class="op">)</span>
+<span class="co"># build synthetic age-structured contact matrices with GAMs</span>
+<span class="co"># analysis of polymod data</span>
+
+<span class="co"># set age breaks</span>
+<span class="va">age_breaks_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
+<span class="va">age_breaks_1y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
+
+<span class="co"># fit a single overall contact model to polymod</span>
+<span class="va">m_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fit_single_contact_model.html">fit_single_contact_model</a></span><span class="op">(</span>
+  contact_data <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span>,
+  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="va">m_all</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Family: poisson </span>
+<span class="co">#&gt; Link function: log </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Formula:</span>
+<span class="co">#&gt; contacts ~ stats::offset(log(pop_age_to)) + s(age_to) + s(age_from) + </span>
+<span class="co">#&gt;     s(abs(age_from - age_to)) + school_probability + work_probability</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Estimated degrees of freedom:</span>
+<span class="co">#&gt; 8.62 8.59 8.74  total = 29.94 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; fREML score: 31372.71</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
+<span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
+  model <span class="op">=</span> <span class="va">m_all</span>, 
+  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,
+  age_breaks <span class="op">=</span> <span class="va">age_breaks_5y</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">synthetic_all_5y</span>
+<span class="co">#&gt;               (0,5]    (5,10]   (10,15]   (15,20]   (20,25]   (25,30]   (30,35]</span>
+<span class="co">#&gt; (0,5]    2.06569538 1.4108567 0.7325322 0.6119214 0.8080797 0.9949699 0.9451293</span>
+<span class="co">#&gt; (5,10]   1.31897716 4.9615065 2.7749920 0.8362608 0.5377895 0.7564040 0.9900896</span>
+<span class="co">#&gt; (10,15]  0.57252933 2.5061052 6.8047137 2.3704114 0.6285231 0.5715781 0.8518096</span>
+<span class="co">#&gt; (15,20]  0.44309604 0.7197169 2.3486638 4.1297751 1.6245931 0.6759037 0.6531640</span>
+<span class="co">#&gt; (20,25]  0.55399988 0.4364962 0.5890769 1.5577445 3.5765064 1.6646914 0.7056831</span>
+<span class="co">#&gt; (25,30]  0.64555031 0.5759457 0.5008473 0.6076294 1.5379361 3.4865936 1.6517096</span>
+<span class="co">#&gt; (30,35]  0.59242259 0.7253395 0.7154997 0.5655268 0.6312068 1.5533045 3.5768043</span>
+<span class="co">#&gt; (35,40]  0.48172818 0.6988296 0.9256627 0.8292778 0.6037774 0.6609076 1.6653365</span>
+<span class="co">#&gt; (40,45]  0.37449698 0.5563295 0.8717135 1.0466489 0.8631189 0.6121656 0.6848665</span>
+<span class="co">#&gt; (45,50]  0.29189406 0.4264034 0.6848814 0.9726934 1.0814291 0.8679023 0.6235630</span>
+<span class="co">#&gt; (50,55]  0.25906455 0.3402265 0.5396088 0.7849146 1.0331014 1.1184175 0.9096854</span>
+<span class="co">#&gt; (55,60]  0.27852064 0.2898152 0.4211812 0.6051854 0.8156266 1.0436169 1.1408944</span>
+<span class="co">#&gt; (60,65]  0.29765775 0.2764359 0.3232159 0.4253773 0.5678985 0.7460320 0.9682674</span>
+<span class="co">#&gt; (65,70]  0.24589370 0.2872025 0.2975329 0.3159707 0.3881163 0.5052451 0.6719835</span>
+<span class="co">#&gt; (70,75]  0.16022049 0.2671059 0.3382749 0.3185828 0.3139094 0.3728547 0.4894913</span>
+<span class="co">#&gt; (75,Inf] 0.09649184 0.1443118 0.2523426 0.3224829 0.3159348 0.2976620 0.3258061</span>
+<span class="co">#&gt;            (35,40]   (40,45]   (45,50]   (50,55]   (55,60]   (60,65]   (65,70]</span>
+<span class="co">#&gt; (0,5]    0.7771551 0.5923034 0.4131544 0.2945795 0.2553989 0.2426033 0.1810278</span>
+<span class="co">#&gt; (5,10]   0.9639672 0.7510493 0.5145425 0.3282641 0.2237130 0.1912787 0.1817199</span>
+<span class="co">#&gt; (10,15]  1.1189212 1.0296672 0.7222369 0.4548569 0.2828920 0.1941626 0.1639757</span>
+<span class="co">#&gt; (15,20]  0.9754510 1.2064331 0.9994831 0.6447129 0.3958846 0.2484380 0.1690502</span>
+<span class="co">#&gt; (20,25]  0.6810977 0.9559263 1.0672012 0.8161764 0.5136705 0.3192916 0.1998557</span>
+<span class="co">#&gt; (25,30]  0.7020786 0.6352366 0.8003399 0.8255544 0.6170573 0.3939174 0.2443640</span>
+<span class="co">#&gt; (30,35]  1.7026974 0.6829123 0.5522698 0.6408218 0.6463187 0.4899687 0.3116323</span>
+<span class="co">#&gt; (35,40]  3.7886488 1.6908438 0.6119969 0.4570491 0.5189072 0.5290201 0.3981860</span>
+<span class="co">#&gt; (40,45]  1.7385581 3.6894323 1.4769917 0.4917279 0.3605257 0.4156850 0.4204198</span>
+<span class="co">#&gt; (45,50]  0.6993367 1.6604046 3.1947178 1.1830716 0.3825763 0.2845065 0.3262080</span>
+<span class="co">#&gt; (50,55]  0.6558375 0.6895094 1.4604615 2.6195220 0.9483220 0.3105567 0.2295342</span>
+<span class="co">#&gt; (55,60]  0.9274249 0.6319830 0.6000036 1.1803414 2.0438686 0.7371652 0.2431742</span>
+<span class="co">#&gt; (60,65]  1.0624960 0.8172409 0.5002963 0.4340837 0.8327433 1.4651221 0.5280067</span>
+<span class="co">#&gt; (65,70]  0.8739487 0.9047946 0.6274806 0.3527887 0.2984115 0.5767466 0.9968431</span>
+<span class="co">#&gt; (70,75]  0.6522575 0.7991686 0.7466912 0.4777451 0.2615741 0.2219393 0.4204617</span>
+<span class="co">#&gt; (75,Inf] 0.4061874 0.5011288 0.5531943 0.5022953 0.3577630 0.2204172 0.1590380</span>
+<span class="co">#&gt;            (70,75]  (75,Inf]</span>
+<span class="co">#&gt; (0,5]    0.0943347 0.0964396</span>
+<span class="co">#&gt; (5,10]   0.1351093 0.1177464</span>
+<span class="co">#&gt; (10,15]  0.1494591 0.1762278</span>
+<span class="co">#&gt; (15,20]  0.1366820 0.2267258</span>
+<span class="co">#&gt; (20,25]  0.1297480 0.2250068</span>
+<span class="co">#&gt; (25,30]  0.1450715 0.2024897</span>
+<span class="co">#&gt; (30,35]  0.1827108 0.2062973</span>
+<span class="co">#&gt; (35,40]  0.2392003 0.2437236</span>
+<span class="co">#&gt; (40,45]  0.2984087 0.3008662</span>
+<span class="co">#&gt; (45,50]  0.3119127 0.3726442</span>
+<span class="co">#&gt; (50,55]  0.2484684 0.4333839</span>
+<span class="co">#&gt; (55,60]  0.1712133 0.4078533</span>
+<span class="co">#&gt; (60,65]  0.1638680 0.2981578</span>
+<span class="co">#&gt; (65,70]  0.3426248 0.2279924</span>
+<span class="co">#&gt; (70,75]  0.7043027 0.3401906</span>
+<span class="co">#&gt; (75,Inf] 0.2186608 0.5618851</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
+<span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
+  model <span class="op">=</span> <span class="va">m_all</span>, 
+  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,
+  age_breaks <span class="op">=</span> <span class="va">age_breaks_5y</span>
+<span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">synthetic_all_5y</span>
+<span class="co">#&gt;               (0,5]    (5,10]   (10,15]   (15,20]   (20,25]   (25,30]   (30,35]</span>
+<span class="co">#&gt; (0,5]    2.06569538 1.4108567 0.7325322 0.6119214 0.8080797 0.9949699 0.9451293</span>
+<span class="co">#&gt; (5,10]   1.31897716 4.9615065 2.7749920 0.8362608 0.5377895 0.7564040 0.9900896</span>
+<span class="co">#&gt; (10,15]  0.57252933 2.5061052 6.8047137 2.3704114 0.6285231 0.5715781 0.8518096</span>
+<span class="co">#&gt; (15,20]  0.44309604 0.7197169 2.3486638 4.1297751 1.6245931 0.6759037 0.6531640</span>
+<span class="co">#&gt; (20,25]  0.55399988 0.4364962 0.5890769 1.5577445 3.5765064 1.6646914 0.7056831</span>
+<span class="co">#&gt; (25,30]  0.64555031 0.5759457 0.5008473 0.6076294 1.5379361 3.4865936 1.6517096</span>
+<span class="co">#&gt; (30,35]  0.59242259 0.7253395 0.7154997 0.5655268 0.6312068 1.5533045 3.5768043</span>
+<span class="co">#&gt; (35,40]  0.48172818 0.6988296 0.9256627 0.8292778 0.6037774 0.6609076 1.6653365</span>
+<span class="co">#&gt; (40,45]  0.37449698 0.5563295 0.8717135 1.0466489 0.8631189 0.6121656 0.6848665</span>
+<span class="co">#&gt; (45,50]  0.29189406 0.4264034 0.6848814 0.9726934 1.0814291 0.8679023 0.6235630</span>
+<span class="co">#&gt; (50,55]  0.25906455 0.3402265 0.5396088 0.7849146 1.0331014 1.1184175 0.9096854</span>
+<span class="co">#&gt; (55,60]  0.27852064 0.2898152 0.4211812 0.6051854 0.8156266 1.0436169 1.1408944</span>
+<span class="co">#&gt; (60,65]  0.29765775 0.2764359 0.3232159 0.4253773 0.5678985 0.7460320 0.9682674</span>
+<span class="co">#&gt; (65,70]  0.24589370 0.2872025 0.2975329 0.3159707 0.3881163 0.5052451 0.6719835</span>
+<span class="co">#&gt; (70,75]  0.16022049 0.2671059 0.3382749 0.3185828 0.3139094 0.3728547 0.4894913</span>
+<span class="co">#&gt; (75,Inf] 0.09649184 0.1443118 0.2523426 0.3224829 0.3159348 0.2976620 0.3258061</span>
+<span class="co">#&gt;            (35,40]   (40,45]   (45,50]   (50,55]   (55,60]   (60,65]   (65,70]</span>
+<span class="co">#&gt; (0,5]    0.7771551 0.5923034 0.4131544 0.2945795 0.2553989 0.2426033 0.1810278</span>
+<span class="co">#&gt; (5,10]   0.9639672 0.7510493 0.5145425 0.3282641 0.2237130 0.1912787 0.1817199</span>
+<span class="co">#&gt; (10,15]  1.1189212 1.0296672 0.7222369 0.4548569 0.2828920 0.1941626 0.1639757</span>
+<span class="co">#&gt; (15,20]  0.9754510 1.2064331 0.9994831 0.6447129 0.3958846 0.2484380 0.1690502</span>
+<span class="co">#&gt; (20,25]  0.6810977 0.9559263 1.0672012 0.8161764 0.5136705 0.3192916 0.1998557</span>
+<span class="co">#&gt; (25,30]  0.7020786 0.6352366 0.8003399 0.8255544 0.6170573 0.3939174 0.2443640</span>
+<span class="co">#&gt; (30,35]  1.7026974 0.6829123 0.5522698 0.6408218 0.6463187 0.4899687 0.3116323</span>
+<span class="co">#&gt; (35,40]  3.7886488 1.6908438 0.6119969 0.4570491 0.5189072 0.5290201 0.3981860</span>
+<span class="co">#&gt; (40,45]  1.7385581 3.6894323 1.4769917 0.4917279 0.3605257 0.4156850 0.4204198</span>
+<span class="co">#&gt; (45,50]  0.6993367 1.6604046 3.1947178 1.1830716 0.3825763 0.2845065 0.3262080</span>
+<span class="co">#&gt; (50,55]  0.6558375 0.6895094 1.4604615 2.6195220 0.9483220 0.3105567 0.2295342</span>
+<span class="co">#&gt; (55,60]  0.9274249 0.6319830 0.6000036 1.1803414 2.0438686 0.7371652 0.2431742</span>
+<span class="co">#&gt; (60,65]  1.0624960 0.8172409 0.5002963 0.4340837 0.8327433 1.4651221 0.5280067</span>
+<span class="co">#&gt; (65,70]  0.8739487 0.9047946 0.6274806 0.3527887 0.2984115 0.5767466 0.9968431</span>
+<span class="co">#&gt; (70,75]  0.6522575 0.7991686 0.7466912 0.4777451 0.2615741 0.2219393 0.4204617</span>
+<span class="co">#&gt; (75,Inf] 0.4061874 0.5011288 0.5531943 0.5022953 0.3577630 0.2204172 0.1590380</span>
+<span class="co">#&gt;            (70,75]  (75,Inf]</span>
+<span class="co">#&gt; (0,5]    0.0943347 0.0964396</span>
+<span class="co">#&gt; (5,10]   0.1351093 0.1177464</span>
+<span class="co">#&gt; (10,15]  0.1494591 0.1762278</span>
+<span class="co">#&gt; (15,20]  0.1366820 0.2267258</span>
+<span class="co">#&gt; (20,25]  0.1297480 0.2250068</span>
+<span class="co">#&gt; (25,30]  0.1450715 0.2024897</span>
+<span class="co">#&gt; (30,35]  0.1827108 0.2062973</span>
+<span class="co">#&gt; (35,40]  0.2392003 0.2437236</span>
+<span class="co">#&gt; (40,45]  0.2984087 0.3008662</span>
+<span class="co">#&gt; (45,50]  0.3119127 0.3726442</span>
+<span class="co">#&gt; (50,55]  0.2484684 0.4333839</span>
+<span class="co">#&gt; (55,60]  0.1712133 0.4078533</span>
+<span class="co">#&gt; (60,65]  0.1638680 0.2981578</span>
+<span class="co">#&gt; (65,70]  0.3426248 0.2279924</span>
+<span class="co">#&gt; (70,75]  0.7043027 0.3401906</span>
+<span class="co">#&gt; (75,Inf] 0.2186608 0.5618851</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_all_5y</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"synthetic all at once"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
 </div>
   </div>
