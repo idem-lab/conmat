@@ -32,7 +32,7 @@ get_polymod_contact_data <- function(
   
   contact_data <- polymod$participants %>%
     dplyr::left_join(
-      polymod$contacts,
+      socialmixr::polymod$contacts,
       by = "part_id"
     )
   

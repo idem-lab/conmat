@@ -24,7 +24,7 @@
 #' @importFrom stats weighted.mean
 get_polymod_population <- function() {
   
-  polymod$participants %>%
+  socialmixr::polymod$participants %>%
     dplyr::filter(
       !is.na(year)
     ) %>%

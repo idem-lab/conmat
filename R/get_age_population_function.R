@@ -42,7 +42,8 @@ get_age_population_function <- function(population) {
   
   # wrap this up in a function to handle values outside this range
   function(age) {
-    population <- stats::spline(age)
+    # population <- stats::spline(age)
+    population <- spline(age)
     invalid <- age < min(age) | age > max_age
     population[invalid] <- 0
     pmax(population, 0)
