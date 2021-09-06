@@ -45,6 +45,8 @@ abs_pop_age_lga_2020 <- file_path %>%
   # death to em-dashes
   mutate(age = str_replace(age, "–", "-")) %>% 
   clean_names() %>% 
-  mutate(year = 2020, .before = state)
+  mutate(year = 2020, .before = state) %>% 
+  rename(lga_code = lga_code19,
+         lga_name = lga_name19)
 
-use_data(abs_pop_age_lga_2020)
+use_data(abs_pop_age_lga_2020, overwrite = TRUE)

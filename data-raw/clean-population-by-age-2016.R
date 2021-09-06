@@ -46,6 +46,8 @@ abs_pop_age_lga_2016 <- file_path %>%
   mutate(age = str_replace(age, "–", "-")) %>% 
   clean_names() %>% 
   mutate(year = 2016,
-         .before = state)
+         .before = state)  %>% 
+  rename(lga_code = lga_code19,
+         lga_name = lga_name19)
 
-use_data(abs_pop_age_lga_2016)
+use_data(abs_pop_age_lga_2016, overwrite = TRUE)

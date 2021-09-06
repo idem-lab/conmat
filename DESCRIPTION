@@ -1,8 +1,10 @@
 Package: conmat
-Title: Builds contact matrices using GAMs and population data
+Title: Builds contact matrices using GAMs and population data. This package 
+  incorporates data that is copyright Commonwealth of Australia (Australian 
+  Electoral Commission and Australian Bureau of Statistics) 2020.
 Version: 0.0.0.9000
-Authors@R: 
-    c(person(given = "Nicholas",
+Authors@R: c(
+      person(given = "Nicholas",
              family = "Tierney",
              role = c("aut", "cre"),
              email = "nicholas.tierney@gmail.com",
@@ -11,7 +13,10 @@ Authors@R:
              family = "Golding",
              role = "aut",
              email = "nick.golding.research@gmail.com",
-             comment = c(ORCID = "0000-0001-8916-5570")))
+             comment = c(ORCID = "0000-0001-8916-5570")),
+      person("Commonwealth of Australia", "AEC", role = c("cph")),
+      person("Australian Bureau of Statistics", "ABS", role = c("cph")))
+      )
 Description: Builds contact matrices using GAMs and population data
 License: MIT + file LICENSE
 Depends: 
