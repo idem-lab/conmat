@@ -27,6 +27,57 @@ The goal of conmat is to provide methods for producing contact matrices.
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("njtierney/conmat")
+# install.packages("remotes")
+remotes::install_github("njtierney/conmat")
 ```
+
+## Example
+
+```{r}
+library(conmat)
+# build synthetic age-structured contact matrices with GAMs
+# analysis of polymod data
+
+# set age breaks
+age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
+age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
+
+# fit a single overall contact model to polymod
+m_all <- fit_single_contact_model(
+  contact_data = get_polymod_contact_data("all"),
+  population = get_polymod_population()
+)
+
+m_all
+```
+
+
+```{r}
+# predict contacts at 1y and 5y resolutions for inspection
+synthetic_all_5y <- predict_contacts(
+  model = m_all, 
+  population = get_polymod_population(),
+  age_breaks = age_breaks_5y
+) %>%
+  predictions_to_matrix()
+
+synthetic_all_5y
+```
+
+
+```{r}
+# predict contacts at 1y and 5y resolutions for inspection
+synthetic_all_5y <- predict_contacts(
+  model = m_all, 
+  population = get_polymod_population(),
+  age_breaks = age_breaks_5y
+) %>%
+  predictions_to_matrix()
+
+synthetic_all_5y
+
+library(ggplot2)
+plot_matrix(synthetic_all_5y) +
+  ggtitle("synthetic all at once")
+```
+
