@@ -4,6 +4,10 @@
 # conmat
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
+[![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
 <!-- badges: end -->
 
 The goal of conmat is to provide methods for producing contact matrices.
