@@ -37,6 +37,8 @@ m_all <- fit_single_contact_model(
   contact_data = get_polymod_contact_data("all"),
   population = get_polymod_population()
 )
+
+m_all
 ```
 
 
@@ -48,6 +50,8 @@ synthetic_all_5y <- predict_contacts(
   age_breaks = age_breaks_5y
 ) %>%
   predictions_to_matrix()
+
+synthetic_all_5y
 ```
 
 
