@@ -1,0 +1,22 @@
+#' ABS education by state for 2020
+#'
+#' A dataset containing Australian Bureau of Statistics education data by
+#'   state for 2020
+#'
+#' @format A data frame with 4317 rows and 13 variables:
+#' \describe{
+#'   \item{year}{year - 2020}
+#'   \item{state}{state - short state or territory name}
+#'   \item{sex}{as recorded in data - either Male or Female}
+#'   \item{age}{4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)}
+#'   \item{n_full_time}{number of people who are full time}
+#'   \item{n_part_time}{number of people part time}
+#'   \item{n_full_and_part_time}{number of people full and part time}
+#'   \item{affiliation_gov_non_gov}{"Government" or "Non-government"}
+#'   \item{affiliation_gov_cath_ind}{"Government", "Catholic", or "Independent"}
+#'   \item{aboriginal_and_torres_strait_islander_status}{"Aboriginal and Torres Strait Islander" or  "Non-Indigenous"}
+#'   \item{school_level}{"Primary School" or "Secondary School"}
+#'   \item{anr_school_level}{"Primary School", "Junior Secondary School", or "Senior Secondary School"}
+#' }
+#' @source \url{https://www.abs.gov.au/statistics/people/education/schools/2020#data-download} (table 42B)
+"abs_education_state_2020"

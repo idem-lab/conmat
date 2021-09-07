@@ -8,4 +8,3 @@
 ^docs$
 ^pkgdown$
 ^CODE_OF_CONDUCT\.md$
-^\.pre-commit-config\.yaml$

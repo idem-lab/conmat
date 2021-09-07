@@ -39,7 +39,8 @@ household_raw <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_0609202116075360
       n_persons_usually_resident == "Seven persons" ~ "7",
       n_persons_usually_resident == "Eight or more persons" ~ "8+"
     )
-  )
+  ) %>%
+  filter(household_composition == "Total Households")
 
 abs_2016_lga_pop <- abs_pop_age_lga_2016 %>%
   group_by(year, state, lga_name) %>%
@@ -61,7 +62,6 @@ household_raw %>%
 abs_pop_age_lga_2016
 unique(household_raw$household_composition)
 
-
 # question - with these categories in "household_composition"
 # we are just interested in "total households", right?
 c(
@@ -76,6 +76,19 @@ c(
   "Group household"
 )
 
+household_raw %>%
+  pull(household_composition) %>%
+  unique()
+
+household_raw %>%
+  filter(n_persons_usually_resident %in% as.character(c(1:7))) %>%
+  mutate(
+    n_persons_usually_resident = parse_number(n_persons_usually_resident),
+    n_persons_in_household = n_persons_usually_resident * n_households
+  ) %>%
+  group_by(lga_name) %>%
+  summarise(total_in_residence = sum(n_persons_in_household))
+
 
 household_raw %>%
   filter(n_persons_usually_resident %in% c(
@@ -85,6 +98,13 @@ household_raw %>%
   left_join(
     abs_2016_lga_pop,
     by = c("year", "state", "lga_name")
-  )
+  ) %>%
+  arrange(lga_name)
 # for 8 or more - take Total population, and subtract the sum of the other
 # 1-7 groups (from LGA data)
+
+# currently cleaning household data
+
+abs_household_lga <- household_raw
+
+use_data(abs_household_lga)
