@@ -65,7 +65,7 @@ synthetic_all_5y
 ```
 
 
-```{r}
+```{r matrix-plot}
 # predict contacts at 1y and 5y resolutions for inspection
 synthetic_all_5y <- predict_contacts(
   model = m_all, 
@@ -81,3 +81,6 @@ plot_matrix(synthetic_all_5y) +
   ggtitle("synthetic all at once")
 ```
 
+## Code of Conduct
+
+Please note that the conmat project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
