@@ -1,19 +1,17 @@
 #' Plot setting matrices using ggplot2
-#' 
+#'
 #' @param matrices matrix
 #' @param title title to give, Default: 'Setting-specific synthetic contact matrices (all polymod data)'
 #' @return ggplot
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
-plot_setting_matrices <- function(
-  matrices,
-  title = "Setting-specific synthetic contact matrices (all polymod data)"
-) {
+#' }
+#' @export
+plot_setting_matrices <- function(matrices,
+                                  title = "Setting-specific synthetic contact matrices (all polymod data)") {
   plot_matrix(matrices$home) +
     ggplot2::ggtitle("home") +
     plot_matrix(matrices$school) +

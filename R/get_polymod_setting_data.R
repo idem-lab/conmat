@@ -1,13 +1,13 @@
 #' Get polymod setting data
 
 #' @return polymod data
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 get_polymod_setting_data <- function() {
   list(
     home = get_polymod_contact_data("home"),

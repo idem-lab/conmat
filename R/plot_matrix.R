@@ -1,15 +1,14 @@
 #' Use ggplot to plot a matrix in the output format
 #' @param matrix matrix
 #' @return a ggplot object
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 plot_matrix <- function(matrix) {
-  
   matrix %>%
     matrix_to_predictions() %>%
     ggplot2::ggplot(

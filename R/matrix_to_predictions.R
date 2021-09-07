@@ -1,16 +1,16 @@
-#' Convert a contact matrix as output by these functions (or socialmixr) into 
+#' Convert a contact matrix as output by these functions (or socialmixr) into
 #' a long-form tibble
-#' 
+#'
 #' @param contact_matrix PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 matrix_to_predictions <- function(contact_matrix) {
   contact_matrix %>%
     tibble::as_tibble(
@@ -24,7 +24,7 @@ matrix_to_predictions <- function(contact_matrix) {
     dplyr::mutate(
       dplyr::across(
         dplyr::starts_with("age_group"),
-        ~factor(.x, levels = unique(.x))
+        ~ factor(.x, levels = unique(.x))
       )
     )
 }

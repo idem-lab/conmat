@@ -1,32 +1,29 @@
 #' Format polymod data and filter contacts to certain settings
-#' 
+#'
 #' @param setting PARAM_DESCRIPTION, Default: c("all", "home", "work", "school", "other")
 #' @param ages PARAM_DESCRIPTION, Default: 0:100
 #' @param contact_age_imputation PARAM_DESCRIPTION, Default: c("sample", "mean", "remove_participant")
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
-get_polymod_contact_data <- function(
-  setting = c("all", "home", "work", "school", "other"),
-  ages = 0:100,
-  contact_age_imputation = c("sample", "mean", "remove_participant")
-) {
-  
+#' }
+#' @export
+get_polymod_contact_data <- function(setting = c("all", "home", "work", "school", "other"),
+                                     ages = 0:100,
+                                     contact_age_imputation = c("sample", "mean", "remove_participant")) {
   setting <- match.arg(setting)
   contact_age_imputation <- match.arg(contact_age_imputation)
-  
+
   contact_data <- polymod$participants %>%
     dplyr::left_join(
       socialmixr::polymod$contacts,
       by = "part_id"
     )
-  
+
   # impute contact ages according to the required method
   contact_data_imputed <- contact_data %>%
     dplyr::mutate(
@@ -50,7 +47,7 @@ get_polymod_contact_data <- function(
         TRUE ~ NA_real_
       ),
     )
-  
+
   # filter out any participants with missing contact ages or settings (can't
   # just remove the contacts as that will bias the count)
   contact_data_filtered <- contact_data_imputed %>%
@@ -72,7 +69,7 @@ get_polymod_contact_data <- function(
       !missing_any_contact_age,
       !missing_any_contact_setting
     )
-  
+
   # get contacts by setting (keeping 0s, so we can record 0 contacts for some individuals)
   contact_data_setting <- contact_data_filtered %>%
     dplyr::mutate(
@@ -84,7 +81,7 @@ get_polymod_contact_data <- function(
         setting == "other" ~ pmax(cnt_transport, cnt_leisure, cnt_otherplace),
       )
     )
-  
+
   # collapse down number of contacts per participant and contact age
   contact_data_setting %>%
     dplyr::select(
@@ -107,5 +104,4 @@ get_polymod_contact_data <- function(
       participants = dplyr::n_distinct(part_id),
       .groups = "drop"
     )
-  
 }
