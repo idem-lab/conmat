@@ -1,6 +1,6 @@
 #' ABS population by age for 2016 for LGAs
 #'
-#' A dataset containing Australian Bureau of Statistics population data by 
+#' A dataset containing Australian Bureau of Statistics population data by
 #'   local government area (LGA) for age for 2016
 #'
 #' @format A data frame with 9918 rows and 6 variables:

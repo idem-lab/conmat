@@ -1,18 +1,18 @@
 #' fit a single GAM contact model to a dataset
-#' 
+#'
 #' @param contact_data PARAM_DESCRIPTION
 #' @param population PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 fit_single_contact_model <- function(contact_data, population) {
-  
+
   # contact model for all locations together
   contact_data %>%
     add_modelling_features(
@@ -20,9 +20,9 @@ fit_single_contact_model <- function(contact_data, population) {
     ) %>%
     mgcv::bam(
       contacts ~
-        # multiplicative offset for population in the 'to' age group, to account for
-        # opportunity to contact
-        stats::offset(log(pop_age_to)) +
+      # multiplicative offset for population in the 'to' age group, to account for
+      # opportunity to contact
+      stats::offset(log(pop_age_to)) +
         # deviation of contact age distribution from population age distribution
         s(age_to) +
         # number of contacts by age

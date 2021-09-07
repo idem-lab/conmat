@@ -1,31 +1,29 @@
 #' aggregate predicted contacts from complete 1y resolution
-#' 
-#' aggregate predicted contacts from complete 1y resolution to a stated 
-#' resolution must pass in the population to do approppriate weighting of 
+#'
+#' aggregate predicted contacts from complete 1y resolution to a stated
+#' resolution must pass in the population to do approppriate weighting of
 #' 'from' age groups
 #' @param predicted_contacts_1y contacts in 1 year breaks
 #' @param population population
 #' @param age_breaks Default: c(seq(0, 75, by = 5), Inf)
 #' @return data frame
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
-aggregate_predicted_contacts <- function(
-  predicted_contacts_1y,
-  population,
-  age_breaks = c(
-    seq(0, 75, by = 5),
-    Inf
-  )
-) {
-  
+#' }
+#' @export
+aggregate_predicted_contacts <- function(predicted_contacts_1y,
+                                         population,
+                                         age_breaks = c(
+                                           seq(0, 75, by = 5),
+                                           Inf
+                                         )) {
+
   # get function for 1y age populations in this country
   age_population_function <- get_age_population_function(population)
-  
+
   # aggregate contacts within age breaks
   predicted_contacts_1y %>%
     dplyr::mutate(

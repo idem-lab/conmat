@@ -1,19 +1,19 @@
 #' Add fractions of the population in each age group that attend school/work
 #' (average FTE)
-#' 
+#'
 #' Add fractions of the population in each age group that attend school/work
-#'   (average FTE) to compute the probability that both participant and 
+#'   (average FTE) to compute the probability that both participant and
 #'   contact attend school/work.
 #' @param contact_data contact data
 #' @return dataset
 #' @note this is fake data that will get replaced with abs data soon
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 add_school_work_participation <- function(contact_data) {
   contact_data %>%
     dplyr::mutate(

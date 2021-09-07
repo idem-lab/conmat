@@ -1,26 +1,25 @@
-#' Add the population distribution for contact ages. 
-#' 
-#' If 'polymod' then use the participant-weighted average of polymod 
+#' Add the population distribution for contact ages.
+#'
+#' If 'polymod' then use the participant-weighted average of polymod
 #' country/year distributions
 #' @param contact_data contact data
 #' @param population Default: get_polymod_population()
 #' @return data frame
-#' @examples 
+#' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' if (interactive()) {
+#'   # EXAMPLE1
 #' }
-#' @export 
+#' }
+#' @export
 add_population_age_to <- function(contact_data, population = get_polymod_population()) {
-  
-  # get function to interpolate population age distributions to 1y bins 
+
+  # get function to interpolate population age distributions to 1y bins
   age_population_function <- get_age_population_function(population)
-  
+
   # add the population in each 'to' age for the survey context
   contact_data %>%
     dplyr::mutate(
       pop_age_to = age_population_function(age_to)
     )
-  
 }
