@@ -17,8 +17,8 @@ Use ggplot to plot a matrix in the output format
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

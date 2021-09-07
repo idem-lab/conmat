@@ -32,8 +32,8 @@ contact matrices for each setting, and for all combined.
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

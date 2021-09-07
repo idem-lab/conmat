@@ -23,8 +23,8 @@ predict contacts to a given population at full 1y resolution
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

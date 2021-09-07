@@ -23,8 +23,8 @@ this is fake data that will get replaced with abs data soon
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

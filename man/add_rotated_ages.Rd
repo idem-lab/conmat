@@ -18,8 +18,8 @@ the diagonal, and perpendicularly across the diagonal.
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

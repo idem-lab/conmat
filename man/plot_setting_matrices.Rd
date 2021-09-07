@@ -22,8 +22,8 @@ Plot setting matrices using ggplot2
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

@@ -27,8 +27,8 @@ resolution must pass in the population to do approppriate weighting of
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

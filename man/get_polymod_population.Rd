@@ -17,8 +17,8 @@ the total number of \emph{participants} represents the sampling
 }
 \examples{
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }
