@@ -1,4 +1,4 @@
-#' Abbreviate australian state names
+#' Abbreviate Australian state names
 #'
 #' @param state_names vector of state names in long form
 #'

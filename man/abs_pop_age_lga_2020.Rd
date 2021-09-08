@@ -9,9 +9,8 @@ A data frame with 9900 rows and 6 variables:
 \describe{
 \item{year}{year - 2020}
 \item{state}{state - long state or territory name}
-\item{lga_code}{code number for LGA}
-\item{lga_name}{LGA name}
-\item{age}{age band, 0-4, in 5 year increments up to 80-84, then 85+}
+\item{lga}{LGA name}
+\item{age_group}{age group band, 0-4, in 5 year increments up to 80-84, then 85+}
 \item{population}{number of people in a given lga in an age band}
 }
 }

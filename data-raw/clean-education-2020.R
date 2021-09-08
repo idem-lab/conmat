@@ -32,14 +32,42 @@ abs_state_age_lookup <- abs_state_age %>%
 
 abs_state_age_lookup
 
-abs_education_state_2020 <- abs_education_state_2020_raw %>%
+c(seq(5, 95, by = 5))
+
+agebreaks <- seq(5, 95, by = 5)
+
+lookup <- tibble(
+  lower = c(0, agebreaks, 100),
+  upper = c(agebreaks-1, 99, Inf),
+  age_group = as.character(glue::glue("{lower}-{upper}"))
+) %>% 
+  mutate(
+    age_group = case_when(
+    age_group == "100-Inf" ~ "100+",
+    TRUE ~ age_group
+    ),
+    age_group = factor(age_group,
+                       levels = str_sort(age_group, numeric = TRUE))
+  ) %>% 
+  arrange(age_group)
+
+abs_education_state_2020_raw %>%
   left_join(abs_state_age_lookup,
             by = c(
               "state",
               "age"
             )
-  ) %>%
-  mutate(prop = population / population_interpolated)
+  ) %>% 
+  left_join(
+    lookup,
+    by = c("age" = "lower")
+  ) %>% 
+  select(-upper) %>% 
+  fill(age_group) %>% 
+  group_by(year, state, age_group) %>% 
+  summarise(population = sum(population),
+            population_interpolated = sum(population_interpolated)) %>% 
+  mutate(prop = population / population_interpolated) 
 
 abs_education_state_2020
 

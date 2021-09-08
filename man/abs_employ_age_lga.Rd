@@ -10,20 +10,12 @@ A data frame with 4317 rows and 13 variables:
 \item{year}{year - 2-16}
 \item{state}{state - long state or territory name}
 \item{lga}{local government area name}
-\item{lga_code}{lga code}
-\item{labour_force_status}{contains: "Total Employed", "Total Unemployed",
-"Total Labour Force", and "Total". (although initially contained:
-"Employed, worked full-time", "Employed, worked part-time",
-"Employed, away from work", "Employed, hours of work not stated",
-"Unemployed, looking for full-time work",
-"Unemployed, looking for part-time work", "Not in the labour force",
-"Labour force status not stated", "Total Employed", "Total Unemployed",
-"Total Labour Force", "Total"}
-\item{age}{4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)}
-\item{males}{number of males in a category}
-\item{females}{number of females in a category}
-\item{persons}{total number of people in a category}
-\item{diff}{difference in numbers, as calcualted as persons - (males + females)}
+\item{age_group}{age groups are as follows: 15-19, 20-24, 25-34, 35-44, 45-54, 55-64,
+65-74, 75-84, 85+, total}
+\item{total_employed}{total  number of people employed}
+\item{total_unemploted}{total number of people unemployed}
+\item{total_labour_force}{total number of people in the labour force}
+\item{total}{sum of these totals...or thereabouts??}
 }
 }
 \source{
@@ -37,5 +29,8 @@ abs_employ_age_lga
 \description{
 A dataset containing Australian Bureau of Statistics employment data by
 state for 206
+}
+\note{
+still need to finalise these columns
 }
 \keyword{datasets}

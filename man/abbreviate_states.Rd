@@ -2,7 +2,7 @@
 % Please edit documentation in R/abbreviate_states.R
 \name{abbreviate_states}
 \alias{abbreviate_states}
-\title{Abbreviate australian state names}
+\title{Abbreviate Australian state names}
 \usage{
 abbreviate_states(state_names)
 }
@@ -13,7 +13,7 @@ abbreviate_states(state_names)
 shortened state names
 }
 \description{
-Abbreviate australian state names
+Abbreviate Australian state names
 }
 \examples{
 abbreviate_states("Victoria")

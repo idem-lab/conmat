@@ -27,12 +27,20 @@ abs_state_age <- read_excel(
   filter(
     age_group != "All ages",
     state != "Australia"
+  ) %>% 
+  mutate(state = abbreviate_states(state)) %>% 
+  relocate(
+    state, 
+    age_group,
+    population
   )
 
-use_data(abs_state_age)
+abs_state_age
+
+use_data(abs_state_age, overwrite = TRUE)
 
 abs_state_age %>%
-  pull(age_group) %>%
+  pull(state) %>%
   unique()
 
 abs_state_age %>%

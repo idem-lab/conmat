@@ -1,6 +1,7 @@
 library(tidyverse)
 library(here)
-household_raw <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_06092021160753604.csv")) %>%
+library(conmat)
+abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_06092021160753604.csv")) %>%
   rename(
     throw_hhcd_2016 = HHCD_2016,
     household_composition = `Household Composition`,
@@ -40,10 +41,17 @@ household_raw <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_0609202116075360
       n_persons_usually_resident == "Eight or more persons" ~ "8+"
     )
   ) %>%
-  filter(household_composition == "Total Households")
+  filter(household_composition == "Total Households") %>% 
+  select( - household_composition) %>% 
+  mutate(state = abbreviate_states(state))  %>% 
+  drop_na() %>% 
+  rename(lga = lga_name)
+
+use_data(abs_household_lga, overwrite = TRUE)
+
 
 abs_2016_lga_pop <- abs_pop_age_lga_2016 %>%
-  group_by(year, state, lga_name) %>%
+  group_by(year, state, lga) %>%
   summarise(total_popn = sum(population))
 
 abs_2016_lga_pop
@@ -102,9 +110,3 @@ household_raw %>%
   arrange(lga_name)
 # for 8 or more - take Total population, and subtract the sum of the other
 # 1-7 groups (from LGA data)
-
-# currently cleaning household data
-
-abs_household_lga <- household_raw
-
-use_data(abs_household_lga)

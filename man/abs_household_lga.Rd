@@ -9,7 +9,7 @@ A data frame with 4986 rows and 6 variables:
 \describe{
 \item{year}{year - 2020}
 \item{state}{state - long state or territory name}
-\item{lga_name}{name of LGA}
+\item{lga}{name of LGA}
 \item{household_composition}{as recorded in data - either Male or Female}
 \item{n_persons_usually_resident}{Number of people typically in residence}
 \item{n_households}{number of households with that number of people}
@@ -23,7 +23,8 @@ A data frame with 4986 rows and 6 variables:
 abs_household_lga
 }
 \description{
-A dataset containing Australian Bureau of Statistics household data for 2016
+A dataset containing Australian Bureau of Statistics household data for 2016.
+The data is filtered to "Total Households".
 }
 \note{
 still need to clean this

@@ -21,7 +21,7 @@ names_2 <- file_path %>%
 
 names <- c(names_1[1:4], names_2[-(1:4)])
 
-abs_pop_age_lga_2020 <- file_path %>%
+abs_pop_age_lga_2020_raw <- file_path %>%
   read_excel(
     sheet = "Table 3",
     skip = 10,
@@ -48,7 +48,20 @@ abs_pop_age_lga_2020 <- file_path %>%
   mutate(year = 2020, .before = state) %>%
   rename(
     lga_code = lga_code19,
-    lga_name = lga_name19
-  )
+    lga = lga_name19
+  ) %>% 
+  mutate(state = abbreviate_states(state)) %>% 
+  select(-lga_code) %>% 
+  rename(age_group = age)
+
+# about 1% missing data for state, lga, and population
+abs_pop_age_lga_2020_raw %>% 
+  naniar::miss_var_summary()
+
+abs_pop_age_lga_2020_raw %>% 
+  naniar::gg_miss_var(facet = state)
+
+abs_pop_age_lga_2020 <- abs_pop_age_lga_2020_raw %>% 
+  drop_na()
 
 use_data(abs_pop_age_lga_2020, overwrite = TRUE)

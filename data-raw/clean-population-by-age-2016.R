@@ -21,7 +21,7 @@ names_2 <- file_path %>%
   names()
 
 names <- c(names_1[1:4], names_2[-(1:4)])
-abs_pop_age_lga_2016 <- file_path %>%
+abs_pop_age_lga_2016_raw <- file_path %>%
   read_excel(
     sheet = "Table 3",
     skip = 10,
@@ -36,7 +36,7 @@ abs_pop_age_lga_2016 <- file_path %>%
     state = `S/T name`,
     LGA_NAME19 = `LGA name`,
     LGA_CODE19 = `LGA code`
-  ) %>%
+  ) %>% 
   pivot_longer(
     cols = -c(state, LGA_NAME19, LGA_CODE19),
     names_to = "age",
@@ -51,7 +51,17 @@ abs_pop_age_lga_2016 <- file_path %>%
   ) %>%
   rename(
     lga_code = lga_code19,
-    lga_name = lga_name19
-  )
+    lga = lga_name19
+  ) %>%
+  mutate(state = abbreviate_states(state)) %>% 
+  select(-lga_code) %>% 
+  rename(age_group = age)
+  
+# there's about 1% missing...
+abs_pop_age_lga_2016_raw %>% 
+  naniar::miss_var_summary()
+
+abs_pop_age_lga_2016 <- abs_pop_age_lga_2016_raw %>% 
+  drop_na()
 
 use_data(abs_pop_age_lga_2016, overwrite = TRUE)
