@@ -8,7 +8,7 @@
 #' @examples
 #' abbreviate_states("Victoria")
 abbreviate_states <- function(state_names) {
-  case_when(
+  dplyr::case_when(
     state_names %in% c("Australian Capital Territory", "ACT") ~ "ACT",
     state_names %in% c("New South Wales", "NSW") ~ "NSW",
     state_names %in% c("Northern Territory", "NT") ~ "NT",

@@ -4,11 +4,11 @@
 \name{conmat-package}
 \alias{conmat}
 \alias{conmat-package}
-\title{conmat: Builds contact matrices using GAMs and population data. This package 
-  incorporates data that is copyright Commonwealth of Australia (Australian 
-  Electoral Commission and Australian Bureau of Statistics) 2020.}
+\title{conmat: Builds contact matrices using GAMs and population data.}
 \description{
-Builds contact matrices using GAMs and population data
+Builds contact matrices using GAMs and population data. This package 
+  incorporates data that is copyright Commonwealth of Australia (Australian 
+  Electoral Commission and Australian Bureau of Statistics) 2020.
 }
 \author{
 \strong{Maintainer}: Nicholas Tierney \email{nicholas.tierney@gmail.com} (\href{https://orcid.org/0000-0003-1460-8722}{ORCID})
