@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ABS education by state for 2020 — abs_education_state_2020 • conmat</title>
+<title>ABS education population data, interpolated into 1 year bins, by state for 2020 — abs_education_state_2020 • conmat</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,11 @@
 
 
 
-<meta property="og:title" content="ABS education by state for 2020 — abs_education_state_2020" />
+<meta property="og:title" content="ABS education population data, interpolated into 1 year bins, by state for 2020 — abs_education_state_2020" />
 <meta property="og:description" content="A dataset containing Australian Bureau of Statistics education data by
-state for 2020" />
+state for 2020. These were interpolated into 1 year age bins. There are
+still some issued with the methods used, as the interpolated values are
+sometimes higher than the population" />
 
 
 
@@ -116,14 +118,16 @@ state for 2020" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ABS education by state for 2020</h1>
+    <h1>ABS education population data, interpolated into 1 year bins, by state for 2020</h1>
     
     <div class="hidden name"><code>abs_education_state_2020.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>A dataset containing Australian Bureau of Statistics education data by
-state for 2020</p>
+state for 2020. These were interpolated into 1 year age bins. There are
+still some issued with the methods used, as the interpolated values are
+sometimes higher than the population</p>
     </div>
 
     <pre class="usage"><span class='va'>abs_education_state_2020</span></pre>
@@ -131,19 +135,13 @@ state for 2020</p>
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 4317 rows and 13 variables:</p><dl>
+    <p>A data frame with 808 rows and 6 variables:</p><dl>
 <dt>year</dt><dd><p>year - 2020</p></dd>
 <dt>state</dt><dd><p>state - short state or territory name</p></dd>
-<dt>sex</dt><dd><p>as recorded in data - either Male or Female</p></dd>
-<dt>age</dt><dd><p>4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)</p></dd>
-<dt>n_full_time</dt><dd><p>number of people who are full time</p></dd>
-<dt>n_part_time</dt><dd><p>number of people part time</p></dd>
-<dt>n_full_and_part_time</dt><dd><p>number of people full and part time</p></dd>
-<dt>affiliation_gov_non_gov</dt><dd><p>"Government" or "Non-government"</p></dd>
-<dt>affiliation_gov_cath_ind</dt><dd><p>"Government", "Catholic", or "Independent"</p></dd>
-<dt>aboriginal_and_torres_strait_islander_status</dt><dd><p>"Aboriginal and Torres Strait Islander" or  "Non-Indigenous"</p></dd>
-<dt>school_level</dt><dd><p>"Primary School" or "Secondary School"</p></dd>
-<dt>anr_school_level</dt><dd><p>"Primary School", "Junior Secondary School", or "Senior Secondary School"</p></dd>
+<dt>age</dt><dd><p>0 to 100</p></dd>
+<dt>population</dt><dd><p>number of people full and part time</p></dd>
+<dt>population_interpolated</dt><dd><p>"Government" or "Non-government"</p></dd>
+<dt>prop</dt><dd><p>population / population_interpolated</p></dd>
 
 </dl>
 
