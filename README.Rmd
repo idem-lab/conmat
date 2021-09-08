@@ -33,7 +33,7 @@ remotes::install_github("njtierney/conmat")
 
 ## Example
 
-```{r}
+```{r example}
 library(conmat)
 # build synthetic age-structured contact matrices with GAMs
 # analysis of polymod data
@@ -52,7 +52,7 @@ m_all
 ```
 
 
-```{r}
+```{r syn-all-5y}
 # predict contacts at 1y and 5y resolutions for inspection
 synthetic_all_5y <- predict_contacts(
   model = m_all, 
@@ -66,6 +66,7 @@ synthetic_all_5y
 
 
 ```{r matrix-plot}
+set.seed(2021-09-08)
 # predict contacts at 1y and 5y resolutions for inspection
 synthetic_all_5y <- predict_contacts(
   model = m_all, 
@@ -79,6 +80,59 @@ synthetic_all_5y
 library(ggplot2)
 plot_matrix(synthetic_all_5y) +
   ggtitle("synthetic all at once")
+```
+
+## Data sources
+
+This package provides data for use in calculating contact matrices.
+
+These data are still being cleaned and processed, but their current forms are shown below:
+
+### abs_education_state
+
+```{r abs-education-state}
+abs_education_state
+```
+
+### abs_education_state_2020
+
+```{r abs-education-state-2020}
+abs_education_state_2020
+```
+
+
+### abs_employ_age_lga
+
+```{r abs-employ-age-lga}
+abs_employ_age_lga
+```
+
+
+### abs_household_lga
+
+```{r abs-household-lga}
+abs_household_lga
+```
+
+
+### abs_pop_age_lga_2016
+
+```{r abs-pop-age-lga-2016}
+abs_pop_age_lga_2016
+```
+
+
+### abs_pop_age_lga_2020
+
+```{r abs-pop-age-lga-2020}
+abs_pop_age_lga_2020
+```
+
+
+### abs_state_age
+
+```{r abs-state-age}
+abs_state_age
 ```
 
 ## Code of Conduct

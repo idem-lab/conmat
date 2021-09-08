@@ -78,6 +78,8 @@ abs_education_state <- abs_education_state_raw %>%
   arrange(age) %>%
   ungroup()
 
+use_data(abs_education_state, overwrite = TRUE)
+
 abs_education_state_2020 <- abs_education_state %>%
   filter(year == 2020) %>%
   mutate(state = toupper(state)) %>%
@@ -90,11 +92,6 @@ abs_education_state_2020 <- abs_education_state %>%
     age = 0:100,
     fill = list(value = 0)
   )
-
-abs_state_age %>%
-  pull(age_group) %>%
-  unique() %>%
-  parse_number()
 
 abs_state_age_lookup <- abs_state_age %>%
   mutate(
@@ -131,8 +128,6 @@ abs_education_state_2020_interp
 abs_education_state_2020_interp$population[[2]]
 
 abs_education_state_2020_interp
-
-use_data(abs_education_state_2020)
 
 abs_education_state_raw_table_notes <- read_excel(
   here("data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"),
