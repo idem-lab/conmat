@@ -7,7 +7,7 @@
 #' \describe{
 #'   \item{year}{year - 2020}
 #'   \item{state}{state - short state or territory name}
-#'   \item{age}{4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)}
+#'   \item{age}{4 through to 21. Note that "4" is 4 or younger and "21" is actually 21+ (21 or older)}
 #'   \item{n_full_and_part_time}{number of people full and part time}
 #'   \item{aboriginal_and_torres_strait_islander_status}{"Aboriginal and Torres Strait Islander" or  "Non-Indigenous"}
 #' }

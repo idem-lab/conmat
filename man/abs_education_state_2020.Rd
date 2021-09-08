@@ -3,22 +3,16 @@
 \docType{data}
 \name{abs_education_state_2020}
 \alias{abs_education_state_2020}
-\title{ABS education by state for 2020}
+\title{ABS education population data, interpolated into 1 year bins, by state for 2020}
 \format{
-A data frame with 4317 rows and 13 variables:
+A data frame with 808 rows and 6 variables:
 \describe{
 \item{year}{year - 2020}
 \item{state}{state - short state or territory name}
-\item{sex}{as recorded in data - either Male or Female}
-\item{age}{4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)}
-\item{n_full_time}{number of people who are full time}
-\item{n_part_time}{number of people part time}
-\item{n_full_and_part_time}{number of people full and part time}
-\item{affiliation_gov_non_gov}{"Government" or "Non-government"}
-\item{affiliation_gov_cath_ind}{"Government", "Catholic", or "Independent"}
-\item{aboriginal_and_torres_strait_islander_status}{"Aboriginal and Torres Strait Islander" or  "Non-Indigenous"}
-\item{school_level}{"Primary School" or "Secondary School"}
-\item{anr_school_level}{"Primary School", "Junior Secondary School", or "Senior Secondary School"}
+\item{age}{0 to 100}
+\item{population}{number of people full and part time}
+\item{population_interpolated}{"Government" or "Non-government"}
+\item{prop}{population / population_interpolated}
 }
 }
 \source{
@@ -29,6 +23,8 @@ abs_education_state_2020
 }
 \description{
 A dataset containing Australian Bureau of Statistics education data by
-state for 2020
+state for 2020. These were interpolated into 1 year age bins. There are
+still some issued with the methods used, as the interpolated values are
+sometimes higher than the population
 }
 \keyword{datasets}

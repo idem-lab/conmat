@@ -32,18 +32,6 @@ abs_education_state_raw <- read_excel(
     n_full_and_part_time = all_full_time_and_part_time_student_count
   )
 
-abs_education_state_raw %>%
-  pull(sex) %>%
-  unique()
-abs_education_state_raw %>%
-  pull(affiliation_gov_non_gov) %>%
-  unique()
-abs_education_state_raw %>%
-  pull(affiliation_gov_cath_ind) %>%
-  unique()
-abs_education_state_raw %>%
-  filter(year == 2020)
-
 abs_education_state <- abs_education_state_raw %>%
   relocate(
     year,
@@ -74,64 +62,9 @@ abs_education_state <- abs_education_state_raw %>%
   # NOTE
   # we are collapsing 4 and under into 4
   # and 21 and older into 21
-  mutate(age = parse_number(age)) %>%
+  mutate(age = parse_number(age),
+         state = toupper(state)) %>%
   arrange(age) %>%
   ungroup()
 
 use_data(abs_education_state, overwrite = TRUE)
-
-abs_education_state_2020 <- abs_education_state %>%
-  filter(year == 2020) %>%
-  mutate(state = toupper(state)) %>%
-  group_by(year, state, age) %>%
-  summarise(value = sum(n_full_and_part_time)) %>%
-  ungroup() %>%
-  complete(
-    year,
-    state,
-    age = 0:100,
-    fill = list(value = 0)
-  )
-
-abs_state_age_lookup <- abs_state_age %>%
-  mutate(
-    lower.age.limit = parse_number(age_group),
-    state = abbreviate_states(state)
-  ) %>%
-  select(
-    state,
-    lower.age.limit,
-    population
-  ) %>%
-  group_by(state) %>%
-  nest() %>%
-  mutate(age_function = map(data, get_age_population_function)) %>%
-  select(-data) %>%
-  summarise(
-    pop = map_dbl(0:100, age_function),
-    age = 0:100
-  )
-
-abs_state_age_lookup
-
-abs_education_state_2020_interp <- abs_education_state_2020 %>%
-  left_join(abs_state_age_lookup,
-    by = c(
-      "state",
-      "age"
-    )
-  ) %>%
-  mutate(prop = value / pop)
-
-abs_education_state_2020_interp
-
-abs_education_state_2020_interp$population[[2]]
-
-abs_education_state_2020_interp
-
-abs_education_state_raw_table_notes <- read_excel(
-  here("data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"),
-  sheet = "Table 2",
-  skip = 68563
-)
-abs_education_state_raw_table_notes
