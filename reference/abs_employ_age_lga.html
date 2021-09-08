@@ -135,20 +135,12 @@ state for 206</p>
 <dt>year</dt><dd><p>year - 2-16</p></dd>
 <dt>state</dt><dd><p>state - long state or territory name</p></dd>
 <dt>lga</dt><dd><p>local government area name</p></dd>
-<dt>lga_code</dt><dd><p>lga code</p></dd>
-<dt>labour_force_status</dt><dd><p>contains: "Total Employed", "Total Unemployed",
-"Total Labour Force", and "Total". (although initially contained:
-"Employed, worked full-time", "Employed, worked part-time",
-"Employed, away from work", "Employed, hours of work not stated",
-"Unemployed, looking for full-time work",
-"Unemployed, looking for part-time work", "Not in the labour force",
-"Labour force status not stated", "Total Employed", "Total Unemployed",
-"Total Labour Force", "Total"</p></dd>
-<dt>age</dt><dd><p>4- (4 or younger, then 1 year increments to 20, then 21+ (21 or older)</p></dd>
-<dt>males</dt><dd><p>number of males in a category</p></dd>
-<dt>females</dt><dd><p>number of females in a category</p></dd>
-<dt>persons</dt><dd><p>total number of people in a category</p></dd>
-<dt>diff</dt><dd><p>difference in numbers, as calcualted as persons - (males + females)</p></dd>
+<dt>age_group</dt><dd><p>age groups are as follows: 15-19, 20-24, 25-34, 35-44, 45-54, 55-64,
+65-74, 75-84, 85+, total</p></dd>
+<dt>total_employed</dt><dd><p>total  number of people employed</p></dd>
+<dt>total_unemploted</dt><dd><p>total number of people unemployed</p></dd>
+<dt>total_labour_force</dt><dd><p>total number of people in the labour force</p></dd>
+<dt>total</dt><dd><p>sum of these totals...or thereabouts??</p></dd>
 
 </dl>
 
@@ -157,6 +149,9 @@ state for 206</p>
     <p>ABS.stat <a href='https://stat.data.abs.gov.au/Index.aspx?'>https://stat.data.abs.gov.au/Index.aspx?</a> LABOUR &gt;
 Employment and Unemployment &gt; Labour force status &gt;
 Census 2016, G43 labour status by age and sex (LGA)</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>still need to finalise these columns</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
