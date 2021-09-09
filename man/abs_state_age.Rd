@@ -5,7 +5,7 @@
 \alias{abs_state_age}
 \title{ABS state population data for 2020}
 \format{
-A data frame with 4986 rows and 6 variables:
+A data frame with 168 rows and 3 variables:
 \describe{
 \item{age_group}{age group in five year bins from 0 to 99, then 100+}
 \item{state}{state - short state or territory name}

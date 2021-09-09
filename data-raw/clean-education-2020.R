@@ -1,4 +1,26 @@
+library(tidyverse)
 library(conmat)
+abs_state_age_lookup
+
+agebreaks <- seq(5, 95, by = 5)
+
+lookup <- tibble(
+  lower = c(0, agebreaks, 100),
+  upper = c(agebreaks-1, 99, Inf),
+  age_group = as.character(glue::glue("{lower}-{upper}"))
+) %>% 
+  mutate(
+    age_group = case_when(
+      age_group == "100-Inf" ~ "100+",
+      TRUE ~ age_group
+    ),
+    age_group = factor(age_group,
+                       levels = str_sort(age_group, numeric = TRUE))
+  ) %>% 
+  arrange(age_group)
+
+
+
 abs_education_state_2020_raw <- abs_education_state %>%
   filter(year == 2020) %>%
   group_by(year, state, age) %>%
@@ -29,27 +51,6 @@ abs_state_age_lookup <- abs_state_age %>%
     population_interpolated = map_dbl(0:100, age_function),
     age = 0:100
   )
-
-abs_state_age_lookup
-
-c(seq(5, 95, by = 5))
-
-agebreaks <- seq(5, 95, by = 5)
-
-lookup <- tibble(
-  lower = c(0, agebreaks, 100),
-  upper = c(agebreaks-1, 99, Inf),
-  age_group = as.character(glue::glue("{lower}-{upper}"))
-) %>% 
-  mutate(
-    age_group = case_when(
-    age_group == "100-Inf" ~ "100+",
-    TRUE ~ age_group
-    ),
-    age_group = factor(age_group,
-                       levels = str_sort(age_group, numeric = TRUE))
-  ) %>% 
-  arrange(age_group)
 
 abs_education_state_2020_raw %>%
   left_join(abs_state_age_lookup,

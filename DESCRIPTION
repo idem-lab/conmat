@@ -43,4 +43,7 @@ Imports:
     ggplot2,
     tibble,
     patchwork,
-    magrittr
+    magrittr,
+    stringr,
+    rlang,
+    glue
