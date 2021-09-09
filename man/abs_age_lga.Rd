@@ -7,7 +7,7 @@
 abs_age_lga(lga_name)
 }
 \arguments{
-\item{lga}{lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine.}
+\item{lga_name}{lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See \code{\link[=check_lga_name]{check_lga_name()}} for more details.}
 }
 \value{
 dataset of columns
@@ -16,5 +16,5 @@ dataset of columns
 Return abs age population data for a given LGA
 }
 \examples{
-abs_age_lga("Albury")
+abs_age_lga("Albury (C)")
 }

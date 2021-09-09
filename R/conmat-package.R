@@ -12,6 +12,10 @@ NULL
 if (getRversion() >= "2.15.1") utils::globalVariables(c("."))
 globalVariables(
   c(
+    "abs_pop_age_lga_2020",
+    "age_group",
+    "lga",
+    "state",
     "age_from",
     "age_group_from",
     "age_group_to",

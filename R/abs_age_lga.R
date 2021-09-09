@@ -1,9 +1,9 @@
 #' @title Return abs age population data for a given LGA
-#' @param lga lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See [check_lga_name()] for more details.
+#' @param lga_name lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See [check_lga_name()] for more details.
 #' @return dataset of columns
 #' @export
 #' @examples 
-#' abs_age_lga("Albury")
+#' abs_age_lga("Albury (C)")
 abs_age_lga <- function(lga_name) {
   
   # check LGA name
