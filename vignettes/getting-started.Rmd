@@ -30,7 +30,6 @@ library(patchwork)
 
 age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
 
-age_breaks_5y
 age_breaks_1y
 
 # get polymod population for later use
