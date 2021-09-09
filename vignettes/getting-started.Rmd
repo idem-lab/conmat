@@ -28,14 +28,22 @@ library(patchwork)
 # build synthetic age-structured contact matrices with GAMs
 # analysis of polymod data
 
-# set age breaks
-age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
 age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
 
+age_breaks_5y
+age_breaks_1y
+
+# get polymod population for later use
+polymod_population <- get_polymod_population()
+polymod_population
+```
+
+
+```{r}
 # fit a single overall contact model to polymod
 m_all <- fit_single_contact_model(
   contact_data = get_polymod_contact_data("all"),
-  population = get_polymod_population()
+  population = polymod_population
 )
 
 m_all
@@ -44,9 +52,12 @@ m_all
 
 ```{r}
 # predict contacts at 1y and 5y resolutions for inspection
+# set age breaks
+age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
+
 synthetic_all_5y <- predict_contacts(
   model = m_all, 
-  population = get_polymod_population(),
+  population = polymod_population,
   age_breaks = age_breaks_5y
 ) %>%
   predictions_to_matrix()
@@ -58,18 +69,22 @@ synthetic_all_5y
 ```{r}
 synthetic_all_1y <- predict_contacts(
   model = m_all, 
-  population = get_polymod_population(),
+  population = polymod_population,
   age_breaks = age_breaks_1y
 ) %>%
   predictions_to_matrix()
+
+synthetic_all_1y
 ```
 
 
 ```{r}
 # compute setting-specific and combined age matrices for polymod
 synthetic_settings_5y_polymod <- extrapolate_polymod(
-  population = get_polymod_population()
+  population = polymod_population
 )
+
+synthetic_settings_5y_polymod
 ```
 
 
@@ -78,6 +93,7 @@ synthetic_settings_5y_polymod <- extrapolate_polymod(
 synthetic_settings_5y_italy_2005 <- extrapolate_polymod(
   population = wpp_age("Italy", "2005")
 )
+synthetic_settings_5y_italy_2005
 ```
 
 
@@ -85,6 +101,8 @@ synthetic_settings_5y_italy_2005 <- extrapolate_polymod(
 synthetic_settings_5y_germany_2005 <- extrapolate_polymod(
   population = wpp_age("Germany", "2005")
 )
+
+synthetic_settings_5y_germany_2005
 ```
 
 
@@ -92,6 +110,8 @@ synthetic_settings_5y_germany_2005 <- extrapolate_polymod(
 synthetic_settings_5y_bolivia_2015 <- extrapolate_polymod(
   population = wpp_age("Bolivia", "2015")
 )
+
+synthetic_settings_5y_bolivia_2015 
 ```
 
 
@@ -99,6 +119,8 @@ synthetic_settings_5y_bolivia_2015 <- extrapolate_polymod(
 synthetic_settings_5y_ghana_2015 <- extrapolate_polymod(
   population = wpp_age("Ghana", "2015")
 )
+
+synthetic_settings_5y_ghana_2015
 ```
 
 
@@ -113,6 +135,7 @@ empirical_all_5y <- contact_matrix(
   missing.contact.age = "remove"
 )$matrix
 
+empirical_all_5y
 # plot setting-specific matrices
 ```
 

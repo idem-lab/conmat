@@ -13,7 +13,7 @@ A data frame with 4317 rows and 13 variables:
 \item{age_group}{age groups are as follows: 15-19, 20-24, 25-34, 35-44, 45-54, 55-64,
 65-74, 75-84, 85+, total}
 \item{total_employed}{total  number of people employed}
-\item{total_unemploted}{total number of people unemployed}
+\item{total_unemployed}{total number of people unemployed}
 \item{total_labour_force}{total number of people in the labour force}
 \item{total}{sum of these totals...or thereabouts??}
 }

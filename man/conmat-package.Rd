@@ -4,7 +4,7 @@
 \name{conmat-package}
 \alias{conmat}
 \alias{conmat-package}
-\title{conmat: Builds contact matrices using GAMs and population data.}
+\title{conmat: Builds contact matrices using GAMs and population data}
 \description{
 Builds contact matrices using GAMs and population data. This package 
   incorporates data that is copyright Commonwealth of Australia (Australian 

@@ -8,7 +8,6 @@
 #'   \item{year}{year - 2020}
 #'   \item{state}{state - long state or territory name}
 #'   \item{lga}{name of LGA}
-#'   \item{household_composition}{as recorded in data - either Male or Female}
 #'   \item{n_persons_usually_resident}{Number of people typically in residence}
 #'   \item{n_households}{number of households with that number of people}
 #' }

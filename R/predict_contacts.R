@@ -16,9 +16,11 @@
 predict_contacts <- function(model,
                              population,
                              age_breaks = c(seq(0, 75, by = 5), Inf)) {
+  # NOTE - need to remove / upgrade fragile use of `lower.age.limit`
   population <- population %>%
     dplyr::arrange(lower.age.limit)
 
+  # this could be changed to a function for lower age limit
   age_min_integration <- min(population$lower.age.limit)
   bin_widths <- diff(population$lower.age.limit)
   final_bin_width <- bin_widths[length(bin_widths)]
@@ -27,6 +29,8 @@ predict_contacts <- function(model,
   pred_1y <- predict_contacts_1y(
     model = model,
     population = population,
+    # these two arguments could be changed by just taking in the age vector
+    # and then doing that step above internally
     age_min = age_min_integration,
     age_max = age_max_integration
   )
