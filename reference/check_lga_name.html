@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ABS state population data for 2020 — abs_state_age • conmat</title>
+<title>Check LGA name in Australia — check_lga_name • conmat</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="ABS state population data for 2020 — abs_state_age" />
-<meta property="og:description" content="A dataset containing Australian Bureau of Statistics state level population data for 2020" />
+<meta property="og:title" content="Check LGA name in Australia — check_lga_name" />
+<meta property="og:description" content="Check LGA name in Australia" />
 
 
 
@@ -103,30 +103,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ABS state population data for 2020</h1>
+    <h1>Check LGA name in Australia</h1>
     
-    <div class="hidden name"><code>abs_state_age.Rd</code></div>
+    <div class="hidden name"><code>check_lga_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing Australian Bureau of Statistics state level population data for 2020</p>
+    <p>Check LGA name in Australia</p>
     </div>
 
-    <pre class="usage"><span class='va'>abs_state_age</span></pre>
+    <pre class="usage"><span class='fu'>check_lga_name</span><span class='op'>(</span><span class='va'>lga_name</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>lga_name</th>
+      <td><p>character of length 1</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 168 rows and 3 variables:</p><dl>
-<dt>age_group</dt><dd><p>age group in five year bins from 0 to 99, then 100+</p></dd>
-<dt>state</dt><dd><p>state - short state or territory name</p></dd>
-<dt>population</dt><dd><p>population size</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/dec-2020#data-downloads-data-cubes'>https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/dec-2020#data-downloads-data-cubes</a></p>
+    <p>errors if lga name not in ABS data</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
