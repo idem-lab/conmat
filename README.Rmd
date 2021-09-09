@@ -33,8 +33,39 @@ remotes::install_github("njtierney/conmat")
 
 ## Example
 
-```{r example}
+```{r get-syd}
 library(conmat)
+sydney_age_pop <- abs_age_lga("Sydney (C)")
+sydney_age_pop
+```
+
+
+```{r sydney-synth-5, cache = TRUE}
+synthetic_settings_5y_sydney <- extrapolate_polymod(
+  population = sydney_age_pop,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+synthetic_settings_5y_sydney
+```
+
+```{r sydney-synth-5-plot}
+# this code is erroring for the moment - something to do with rendering a large plot I think.
+# plot_setting_matrices(
+#   synthetic_settings_5y_sydney,
+#   title = "Setting-specific synthetic contact matrices (Sydney 2020 projected)"
+# )
+```
+
+```{r plot-matrix-differents}
+plot_matrix(synthetic_settings_5y_sydney$home)
+plot_matrix(synthetic_settings_5y_sydney$work)
+plot_matrix(synthetic_settings_5y_sydney$school)
+plot_matrix(synthetic_settings_5y_sydney$other)
+plot_matrix(synthetic_settings_5y_sydney$all)
+```
+
+
+```{r example}
 # build synthetic age-structured contact matrices with GAMs
 # analysis of polymod data
 

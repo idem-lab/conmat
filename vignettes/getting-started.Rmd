@@ -85,6 +85,15 @@ synthetic_settings_5y_polymod <- extrapolate_polymod(
 synthetic_settings_5y_polymod
 ```
 
+```{r}
+synthetic_settings_5y_sydney <- extrapolate_polymod(
+  population = abs_age_lga("Sydney (C)")
+)
+synthetic_settings_5y_sydney
+
+```
+
+
 
 ```{r}
 # extrapolate to other contexts
