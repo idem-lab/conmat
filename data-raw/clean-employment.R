@@ -91,6 +91,44 @@ abs_employ_age_lga
 
 
 use_data(abs_employ_age_lga, overwrite = TRUE)
+
+# interpolation stuff
+abs_employ_age_lga %>% 
+  ungroup() %>%
+  # take the lower? age group?
+  mutate(age = parse_number(as.character(age_group))) %>% 
+  complete(
+    year,
+    state,
+    lga,
+    age = 0:100,
+    fill = list(total_employed = 0)
+  ) %>% 
+  select(-age_group) %>% 
+  left_join(
+    age_group_lookup,
+    by = c("age" = "lower")
+  ) %>% 
+  select(-upper) %>% 
+  fill(age_group)
+  mutate(
+    lower.age.limit = parse_number(as.character(age_group)),
+  ) %>% 
+  select(
+    state,
+    lga,
+    lower.age.limit,
+    total_employed
+  ) 
+  group_by(state) %>%
+  nest() %>%
+  mutate(age_function = map(data, get_age_population_function)) %>%
+  select(-data) %>%
+  summarise(
+    population_interpolated = map_dbl(0:100, age_function),
+    age = 0:100
+  )
+
 abs_employ_age_lga
 
 hist(abs_employ_age_lga$diff)
