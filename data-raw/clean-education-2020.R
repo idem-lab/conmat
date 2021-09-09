@@ -24,18 +24,35 @@ lookup <- tibble(
 abs_education_state_2020_raw <- abs_education_state %>%
   filter(year == 2020) %>%
   group_by(year, state, age) %>%
-  summarise(population = sum(n_full_and_part_time)) %>%
+  summarise(population_educated = sum(n_full_and_part_time)) %>%
   ungroup() %>%
   complete(
     year,
     state,
     age = 0:100,
     fill = list(population = 0)
-  )
+  ) 
+
+abs_education_state_2020_aggregated <- abs_education_state_2020_raw %>% 
+  left_join(
+    lookup,
+    by = c("age" = "lower")
+  ) %>% 
+    select(-upper) %>% 
+    fill(age_group) %>% 
+  group_by(year, state, age_group) %>% 
+  summarise(population_educated = sum(population_educated, na.rm = TRUE))
+
+abs_education_state_2020_aggregated %>% 
+  left_join(
+    abs_state_age,
+    by = c("state",
+           "age_group")) %>% 
+  mutate(prop = population_educated / population)
 
 abs_state_age_lookup <- abs_state_age %>%
   mutate(
-    lower.age.limit = parse_number(age_group),
+    lower.age.limit = parse_number(as.character(age_group)),
     state = abbreviate_states(state)
   ) %>%
   select(
@@ -66,9 +83,9 @@ abs_education_state_2020_raw %>%
   select(-upper) %>% 
   fill(age_group) %>% 
   group_by(year, state, age_group) %>% 
-  summarise(population = sum(population),
-            population_interpolated = sum(population_interpolated)) %>% 
-  mutate(prop = population / population_interpolated) 
+  summarise(population_educated = sum(population_educated, na.rm = TRUE),
+            population_interpolated = sum(population_interpolated, na.rm = TRUE)) %>% 
+  mutate(prop = population_educated / population_interpolated) 
 
 abs_education_state_2020
 

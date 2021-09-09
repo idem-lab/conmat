@@ -33,7 +33,19 @@ abs_state_age <- read_excel(
     state, 
     age_group,
     population
-  )
+  ) %>% 
+  mutate(
+    # replace emdash.
+    age_group = str_replace_all(age_group,
+                                "–",
+                                "-"),
+  age_group = case_when(
+    age_group == "100 and over" ~ "100+",
+    TRUE ~ age_group
+  ),
+    age_group = factor(age_group,
+                       levels = str_sort(unique(age_group), numeric = TRUE))
+    )
 
 abs_state_age
 
