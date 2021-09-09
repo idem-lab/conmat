@@ -55,7 +55,17 @@ abs_pop_age_lga_2016_raw <- file_path %>%
   ) %>%
   mutate(state = abbreviate_states(state)) %>% 
   select(-lga_code) %>% 
-  rename(age_group = age)
+  rename(age_group = age) %>% 
+  # replace emdash
+  mutate(
+    age_group = str_replace_all(age_group,
+                                "–",
+                                "-"),
+    age_group = factor(age_group,
+                       levels = str_sort(unique(age_group), numeric = TRUE))
+  ) %>% 
+  arrange(state,
+          age_group)
   
 # there's about 1% missing...
 abs_pop_age_lga_2016_raw %>% 

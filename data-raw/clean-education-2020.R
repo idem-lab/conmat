@@ -1,25 +1,7 @@
 library(tidyverse)
 library(conmat)
 abs_state_age_lookup
-
-agebreaks <- seq(5, 95, by = 5)
-
-lookup <- tibble(
-  lower = c(0, agebreaks, 100),
-  upper = c(agebreaks-1, 99, Inf),
-  age_group = as.character(glue::glue("{lower}-{upper}"))
-) %>% 
-  mutate(
-    age_group = case_when(
-      age_group == "100-Inf" ~ "100+",
-      TRUE ~ age_group
-    ),
-    age_group = factor(age_group,
-                       levels = str_sort(age_group, numeric = TRUE))
-  ) %>% 
-  arrange(age_group)
-
-
+age_group_lookup
 
 abs_education_state_2020_raw <- abs_education_state %>%
   filter(year == 2020) %>%
@@ -35,7 +17,7 @@ abs_education_state_2020_raw <- abs_education_state %>%
 
 abs_education_state_2020_aggregated <- abs_education_state_2020_raw %>% 
   left_join(
-    lookup,
+    age_group_lookup,
     by = c("age" = "lower")
   ) %>% 
     select(-upper) %>% 

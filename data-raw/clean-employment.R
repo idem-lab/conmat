@@ -24,6 +24,8 @@ abs_employ_age_lga <- abs_employment_raw %>%
     values_from = value
   ) %>%
   clean_names() %>%
+  # remove "total"
+  filter(age != "Total") %>% 
   mutate(
     diff = persons - (males + females),
     age = case_when(
@@ -35,8 +37,8 @@ abs_employ_age_lga <- abs_employment_raw %>%
       age == "55 - 64" ~ str_remove_all(age, " "),
       age == "65 - 74" ~ str_remove_all(age, " "),
       age == "75 - 84" ~ str_remove_all(age, " "),
-      age == "85 and over" ~ "85+",
-      age == "Total" ~ "total"
+      age == "85 and over" ~ "85+"
+      # age == "Total" ~ "total"
     ),
     age = factor(
       age,
@@ -49,8 +51,8 @@ abs_employ_age_lga <- abs_employment_raw %>%
         "55-64",
         "65-74",
         "75-84",
-        "85+",
-        "total"
+        "85+"
+        # "total"
       )
     )
   ) %>%
@@ -76,7 +78,17 @@ abs_employ_age_lga <- abs_employment_raw %>%
   # drop "other territories"
   drop_na() %>% 
   select(-lga_code) %>% 
-  rename(age_group = age)
+  rename(age_group = age) %>% 
+  select(year,
+         state,
+         lga,
+         age_group,
+         total_employed)
+
+abs_employ_age_lga %>% pull(age_group)
+
+abs_employ_age_lga
+
 
 use_data(abs_employ_age_lga, overwrite = TRUE)
 abs_employ_age_lga
