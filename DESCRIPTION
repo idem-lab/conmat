@@ -24,6 +24,7 @@ Depends:
 Suggests: 
     covr,
     knitr,
+    testthat (>= 3.0.0),
     rmarkdown
 VignetteBuilder: 
     knitr
