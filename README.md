@@ -24,6 +24,9 @@ remotes::install_github("njtierney/conmat")
 
 ## Example
 
+We can extract out the ABS age population data using `abs_age_lga` like
+so:
+
 ``` r
 library(conmat)
 sydney_age_pop <- abs_age_lga("Sydney (C)")
@@ -50,6 +53,29 @@ sydney_age_pop
 #> 17 Sydney (C)              80  2020       2583
 #> 18 Sydney (C)              85  2020       2506
 ```
+
+Note that you need to use the exact LGA name - you can look up LGA names
+in the data set `abs_lga_lookup`:
+
+``` r
+abs_lga_lookup
+#> # A tibble: 545 × 3
+#>    state lga_code lga                  
+#>    <chr>    <dbl> <chr>                
+#>  1 NSW      10050 Albury (C)           
+#>  2 NSW      10180 Armidale Regional (A)
+#>  3 NSW      10250 Ballina (A)          
+#>  4 NSW      10300 Balranald (A)        
+#>  5 NSW      10470 Bathurst Regional (A)
+#>  6 NSW      10500 Bayside (A)          
+#>  7 NSW      10550 Bega Valley (A)      
+#>  8 NSW      10600 Bellingen (A)        
+#>  9 NSW      10650 Berrigan (A)         
+#> 10 NSW      10750 Blacktown (C)        
+#> # … with 535 more rows
+```
+
+We can then extrapolate this data from polymod and plot a matrix, below:
 
 ``` r
 synthetic_settings_5y_sydney <- extrapolate_polymod(
