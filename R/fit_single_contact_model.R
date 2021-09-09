@@ -15,6 +15,10 @@ fit_single_contact_model <- function(contact_data, population) {
 
   # contact model for all locations together
   contact_data %>%
+    # NOTE
+    # Do we need to have this data cleaning step in here?
+    # I think we should instead have this as a separate preparation step for
+    # model fitting.
     add_modelling_features(
       population = population
     ) %>%

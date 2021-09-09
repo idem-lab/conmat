@@ -17,6 +17,9 @@ data frame
 \description{
 Add features required for modelling to the dataset
 }
+\note{
+internal
+}
 \examples{
 \dontrun{
 if (interactive()) {

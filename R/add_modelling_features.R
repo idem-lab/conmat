@@ -9,6 +9,7 @@
 #'   # EXAMPLE1
 #' }
 #' }
+#' @note internal
 #' @export
 add_modelling_features <- function(contact_data, ...) {
   contact_data %>%
