@@ -118,8 +118,8 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lga</th>
-      <td><p>lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine.</p></td>
+      <th>lga_name</th>
+      <td><p>lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See <code><a href='check_lga_name.html'>check_lga_name()</a></code> for more details.</p></td>
     </tr>
     </table>
 
@@ -128,10 +128,28 @@
     <p>dataset of columns</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>abs_age_lga</span><span class='op'>(</span><span class='st'>"Albury"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: The LGA name provided does not match LGAs in Australia</span>
-#&gt; <span class='error'><span style='color: #BB0000;'>✖</span> The lga name 'Albury' did not match (it probabley needs 'Albury (C)' or similar</span>
-#&gt; <span class='error'><span style='color: #0000BB;'>ℹ</span> See `abs_lga_lookup` for a list of all LGAs</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>abs_age_lga</span><span class='op'>(</span><span class='st'>"Albury (C)"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 18 × 4</span>
+#&gt;    lga        lower.age.limit  year population
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> Albury (C)               0  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>764
+#&gt; <span style='color: #BCBCBC;'> 2</span> Albury (C)               5  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>614
+#&gt; <span style='color: #BCBCBC;'> 3</span> Albury (C)              10  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>369
+#&gt; <span style='color: #BCBCBC;'> 4</span> Albury (C)              15  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>334
+#&gt; <span style='color: #BCBCBC;'> 5</span> Albury (C)              20  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>603
+#&gt; <span style='color: #BCBCBC;'> 6</span> Albury (C)              25  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>736
+#&gt; <span style='color: #BCBCBC;'> 7</span> Albury (C)              30  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>443
+#&gt; <span style='color: #BCBCBC;'> 8</span> Albury (C)              35  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>371
+#&gt; <span style='color: #BCBCBC;'> 9</span> Albury (C)              40  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>187
+#&gt; <span style='color: #BCBCBC;'>10</span> Albury (C)              45  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>449
+#&gt; <span style='color: #BCBCBC;'>11</span> Albury (C)              50  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>297
+#&gt; <span style='color: #BCBCBC;'>12</span> Albury (C)              55  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>412
+#&gt; <span style='color: #BCBCBC;'>13</span> Albury (C)              60  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>3</span>368
+#&gt; <span style='color: #BCBCBC;'>14</span> Albury (C)              65  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>2</span>967
+#&gt; <span style='color: #BCBCBC;'>15</span> Albury (C)              70  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>2</span>602
+#&gt; <span style='color: #BCBCBC;'>16</span> Albury (C)              75  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>1</span>966
+#&gt; <span style='color: #BCBCBC;'>17</span> Albury (C)              80  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>1</span>254
+#&gt; <span style='color: #BCBCBC;'>18</span> Albury (C)              85  <span style='text-decoration: underline;'>2</span>020       <span style='text-decoration: underline;'>1</span>319</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
