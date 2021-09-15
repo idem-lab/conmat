@@ -11,7 +11,7 @@
 #' }
 #' @export
 plot_setting_matrices <- function(matrices,
-                                  title = "Setting-specific synthetic contact matrices (all polymod data)") {
+                                  title = "Setting-specific synthetic contact matrices") {
   plot_matrix(matrices$home) +
     ggplot2::ggtitle("home") +
     plot_matrix(matrices$school) +
