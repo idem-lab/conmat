@@ -15,7 +15,7 @@ abs_age_lga <- function(lga_name) {
            age_group,
            year,
            population) %>% 
-    dplyr::mutate(age_group = readr::parse_number(age_group)) %>% 
+    dplyr::mutate(age_group = readr::parse_number(as.character(age_group))) %>% 
     dplyr::rename(lower.age.limit = age_group)
 
 }
