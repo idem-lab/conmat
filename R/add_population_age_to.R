@@ -14,8 +14,14 @@
 #' @export
 add_population_age_to <- function(contact_data, population = get_polymod_population()) {
 
+  # normalise to get a relative population
+  population_scaled <- population %>%
+    dplyr::mutate(
+      population = population / sum(population)
+    )
+  
   # get function to interpolate population age distributions to 1y bins
-  age_population_function <- get_age_population_function(population)
+  age_population_function <- get_age_population_function(population_scaled)
 
   # add the population in each 'to' age for the survey context
   contact_data %>%
