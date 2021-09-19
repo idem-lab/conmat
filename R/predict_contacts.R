@@ -25,7 +25,15 @@ predict_contacts <- function(model,
   bin_widths <- diff(population$lower.age.limit)
   final_bin_width <- bin_widths[length(bin_widths)]
   age_max_integration <- max(population$lower.age.limit) + final_bin_width
-
+  
+  # need to check we are not predicting to 0 populations (interpolator can
+  # predict 0 values, then the aggregated ages get screwed up)
+  pop_fun <- get_age_population_function(population)
+  ages <- age_min_integration:age_max_integration
+  valid <- pop_fun(ages) > 0
+  age_min_integration <- min(ages[valid])
+  age_max_integration <- max(ages[valid])
+  
   pred_1y <- predict_contacts_1y(
     model = model,
     population = population,
