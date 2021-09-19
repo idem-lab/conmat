@@ -29,7 +29,8 @@ aggregate_predicted_contacts <- function(predicted_contacts_1y,
     dplyr::mutate(
       age_group_to = cut(
         pmax(0.1, age_to),
-        age_breaks
+        age_breaks,
+        right = FALSE
       )
     ) %>%
     dplyr::filter(
@@ -52,7 +53,8 @@ aggregate_predicted_contacts <- function(predicted_contacts_1y,
       pop_age_from = age_population_function(age_from),
       age_group_from = cut(
         pmax(0.1, age_from),
-        age_breaks
+        age_breaks,
+        right = FALSE
       )
     ) %>%
     dplyr::filter(
