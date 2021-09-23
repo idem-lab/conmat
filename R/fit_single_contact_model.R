@@ -26,7 +26,7 @@ fit_single_contact_model <- function(contact_data, population) {
       contacts ~
       # multiplicative offset for population in the 'to' age group, to account for
       # opportunity to contact
-      stats::offset(log(pop_age_to)) +
+      offset(log(pop_age_to)) +
         # deviation of contact age distribution from population age distribution
         s(age_to) +
         # number of contacts by age
