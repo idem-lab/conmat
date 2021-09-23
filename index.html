@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">conmat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -70,8 +70,11 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<p>You can install the development version with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"conmat"</span>, repos <span class="op">=</span> <span class="st">"https://njtierney.r-universe.dev"</span><span class="op">)</span></code></pre></div>
+<p>Or alternatively you can use <code>remotes</code> (although I recommend using the above code)</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"njtierney/conmat"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -79,7 +82,7 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>We can extract out the ABS age population data using <code>abs_age_lga</code> like so:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">conmat</span><span class="op">)</span>
 <span class="va">sydney_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/abs_age_lga.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Sydney (C)"</span><span class="op">)</span>
 <span class="va">sydney_age_pop</span>
@@ -105,7 +108,7 @@
 <span class="co">#&gt; 17 Sydney (C)              80  2020       2583</span>
 <span class="co">#&gt; 18 Sydney (C)              85  2020       2506</span></code></pre></div>
 <p>Note that you need to use the exact LGA name - you can look up LGA names in the data set <code>abs_lga_lookup</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_lga_lookup</span>
 <span class="co">#&gt; # A tibble: 545 × 3</span>
 <span class="co">#&gt;    state lga_code lga                  </span>
@@ -122,7 +125,7 @@
 <span class="co">#&gt; 10 NSW      10750 Blacktown (C)        </span>
 <span class="co">#&gt; # … with 535 more rows</span></code></pre></div>
 <p>We can then extrapolate this data from polymod and plot a matrix, below:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">synthetic_settings_5y_sydney</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span>
   population <span class="op">=</span> <span class="va">sydney_age_pop</span>,
   age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
@@ -460,28 +463,28 @@
 <span class="co">#&gt; (75,80]  0.3137362 0.46179099 0.55879980 0.22309751 0.07430663</span>
 <span class="co">#&gt; (80,85]  0.1800356 0.19601947 0.27795013 0.31881193 0.12752762</span>
 <span class="co">#&gt; (85,Inf] 0.2267480 0.14867998 0.13856854 0.17121600 0.17106318</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># this code is erroring for the moment - something to do with rendering a large plot I think.</span>
 <span class="co"># plot_setting_matrices(</span>
 <span class="co">#   synthetic_settings_5y_sydney,</span>
 <span class="co">#   title = "Setting-specific synthetic contact matrices (Sydney 2020 projected)"</span>
 <span class="co"># )</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_sydney</span><span class="op">$</span><span class="va">home</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-matrix-differents-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_sydney</span><span class="op">$</span><span class="va">work</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-matrix-differents-2.png" width="100%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_sydney</span><span class="op">$</span><span class="va">school</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-matrix-differents-3.png" width="100%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_sydney</span><span class="op">$</span><span class="va">other</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-matrix-differents-4.png" width="100%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_sydney</span><span class="op">$</span><span class="va">all</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-plot-matrix-differents-5.png" width="100%"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># build synthetic age-structured contact matrices with GAMs</span>
 <span class="co"># analysis of polymod data</span>
 
@@ -509,7 +512,7 @@
 <span class="co">#&gt;  8.59  8.99  8.73 26.91  total = 57.22 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; fREML score: 21672.8</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
 <span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
   model <span class="op">=</span> <span class="va">m_all</span>, 
@@ -519,58 +522,58 @@
   <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">synthetic_all_5y</span>
-<span class="co">#&gt;              (0,5]    (5,10]   (10,15]   (15,20]   (20,25]   (25,30]   (30,35]</span>
-<span class="co">#&gt; (0,5]    2.8508122 1.0261897 0.2740786 0.2553871 0.4637616 0.8589641 1.1327036</span>
-<span class="co">#&gt; (5,10]   1.1055888 6.5877661 1.7008984 0.3183471 0.3050594 0.6144337 1.1535098</span>
-<span class="co">#&gt; (10,15]  0.1935188 1.5137797 8.9560636 1.7686009 0.3443310 0.3694931 0.6765594</span>
-<span class="co">#&gt; (15,20]  0.2078833 0.2655427 1.5869873 7.1160340 1.7183802 0.5550813 0.5752567</span>
-<span class="co">#&gt; (20,25]  0.4118141 0.3393674 0.4140731 1.3355101 4.3990708 1.7438296 0.9025981</span>
-<span class="co">#&gt; (25,30]  0.5441417 0.5410691 0.5596640 0.6390010 1.2506846 2.5548009 1.6633969</span>
-<span class="co">#&gt; (30,35]  0.5984805 0.6482894 0.6952873 0.7586164 0.9699783 1.5074130 1.9945502</span>
-<span class="co">#&gt; (35,40]  0.5806084 0.7636892 0.8041150 0.7750872 0.9167360 1.3685552 1.9252051</span>
-<span class="co">#&gt; (40,45]  0.4323454 0.6984888 0.9209905 0.8763628 0.8022659 0.9806385 1.4841156</span>
-<span class="co">#&gt; (45,50]  0.3265139 0.4709297 0.7853869 1.0099419 0.9846684 0.8938010 0.9669401</span>
-<span class="co">#&gt; (50,55]  0.3314816 0.3415279 0.4912126 0.7867468 1.1052545 1.2082855 1.0724060</span>
-<span class="co">#&gt; (55,60]  0.3387993 0.3527938 0.3575234 0.4500610 0.7136780 1.0992329 1.2632303</span>
-<span class="co">#&gt; (60,65]  0.2409226 0.3589747 0.3644624 0.3302234 0.3832912 0.5818628 0.8588249</span>
-<span class="co">#&gt; (65,70]  0.1482333 0.2502417 0.3309553 0.3299539 0.3226622 0.3770195 0.5042766</span>
-<span class="co">#&gt; (70,75]  0.1515121 0.1642328 0.2010812 0.2474405 0.2988861 0.3604290 0.4372162</span>
-<span class="co">#&gt; (75,Inf] 0.3217773 0.2713872 0.1882210 0.1733257 0.1914743 0.2095386 0.2587094</span>
-<span class="co">#&gt;            (35,40]   (40,45]   (45,50]   (50,55]   (55,60]   (60,65]   (65,70]</span>
-<span class="co">#&gt; (0,5]    0.9551177 0.6390308 0.4469810 0.3764891 0.3621076 0.3300166 0.2454988</span>
-<span class="co">#&gt; (5,10]   1.3350054 0.9643264 0.5705271 0.3567530 0.2653538 0.2232160 0.1875362</span>
-<span class="co">#&gt; (10,15]  1.0729020 1.0683553 0.7195080 0.4069750 0.2367376 0.1683389 0.1449993</span>
-<span class="co">#&gt; (15,20]  0.8216016 1.0159024 0.8995644 0.5871573 0.3187444 0.1778135 0.1261893</span>
-<span class="co">#&gt; (20,25]  0.8576193 0.9418480 0.9414137 0.7636752 0.4813665 0.2530393 0.1372760</span>
-<span class="co">#&gt; (25,30]  1.1369983 0.9977653 0.9462567 0.8436946 0.6385846 0.3866512 0.1959273</span>
-<span class="co">#&gt; (30,35]  1.6132874 1.1728797 0.9428782 0.8292934 0.7209910 0.5447402 0.3240677</span>
-<span class="co">#&gt; (35,40]  1.9704383 1.5548814 1.0503042 0.7447749 0.6153376 0.5512488 0.4440498</span>
-<span class="co">#&gt; (40,45]  1.9846784 1.9467666 1.3872427 0.8046357 0.4843458 0.3752810 0.3617452</span>
-<span class="co">#&gt; (45,50]  1.2859202 1.7083316 1.7635869 1.1683863 0.5778236 0.3008166 0.2295723</span>
-<span class="co">#&gt; (50,55]  0.9696899 1.1107655 1.4488660 1.5112972 0.9559838 0.4412369 0.2247998</span>
-<span class="co">#&gt; (55,60]  1.0843440 0.9198179 1.0114496 1.2668953 1.2316961 0.7396965 0.3455911</span>
-<span class="co">#&gt; (60,65]  0.9559897 0.8396635 0.7621255 0.8589997 1.0264377 0.9752177 0.5446614</span>
-<span class="co">#&gt; (65,70]  0.6382536 0.6698787 0.6135820 0.5866973 0.6503986 0.7934692 0.8414640</span>
-<span class="co">#&gt; (70,75]  0.5254169 0.6002684 0.5970080 0.5150616 0.4369955 0.4448456 0.6259871</span>
-<span class="co">#&gt; (75,Inf] 0.3223328 0.3870417 0.4444625 0.4355639 0.3316998 0.2230737 0.1965648</span>
-<span class="co">#&gt;             (70,75]  (75,Inf]</span>
-<span class="co">#&gt; (0,5]    0.14402005 0.1038985</span>
-<span class="co">#&gt; (5,10]   0.13375621 0.1077371</span>
-<span class="co">#&gt; (10,15]  0.12412059 0.1293980</span>
-<span class="co">#&gt; (15,20]  0.10921473 0.1636373</span>
-<span class="co">#&gt; (20,25]  0.09483828 0.1606335</span>
-<span class="co">#&gt; (25,30]  0.10112164 0.1445233</span>
-<span class="co">#&gt; (30,35]  0.15895547 0.1672551</span>
-<span class="co">#&gt; (35,40]  0.27205079 0.2559498</span>
-<span class="co">#&gt; (40,45]  0.32057576 0.3932071</span>
-<span class="co">#&gt; (45,50]  0.23439904 0.4618270</span>
-<span class="co">#&gt; (50,55]  0.16989138 0.4161955</span>
-<span class="co">#&gt; (55,60]  0.18245533 0.3411069</span>
-<span class="co">#&gt; (60,65]  0.25096614 0.3020497</span>
-<span class="co">#&gt; (65,70]  0.41679403 0.3334136</span>
-<span class="co">#&gt; (70,75]  0.85977738 0.5625109</span>
-<span class="co">#&gt; (75,Inf] 0.32675139 1.1458679</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
+<span class="co">#&gt; [0,5)    2.3066714 0.9908839 0.2645564 0.2354563 0.4124642 0.7766301 1.0710777</span>
+<span class="co">#&gt; [5,10)   0.9269783 5.9322770 1.6412516 0.3293630 0.2982234 0.6008712 1.1470422</span>
+<span class="co">#&gt; [10,15)  0.1565049 1.4474163 8.6800435 1.7985496 0.3233863 0.3481690 0.6591402</span>
+<span class="co">#&gt; [15,20)  0.1499982 0.2491648 1.6234662 7.7914091 1.6916353 0.4989649 0.5233660</span>
+<span class="co">#&gt; [20,25)  0.3063423 0.2979485 0.3740951 1.3685347 4.9022949 1.7557242 0.8332495</span>
+<span class="co">#&gt; [25,30)  0.4331285 0.5032399 0.5158615 0.5907021 1.2455709 2.7961723 1.6783187</span>
+<span class="co">#&gt; [30,35)  0.4733449 0.6105346 0.6703291 0.7236198 0.8905689 1.4267372 2.0405555</span>
+<span class="co">#&gt; [35,40)  0.4699244 0.7175725 0.7798907 0.7671040 0.8894827 1.2986084 1.8578884</span>
+<span class="co">#&gt; [40,45)  0.3582584 0.6679588 0.8987900 0.8672943 0.7950559 0.9763717 1.4954771</span>
+<span class="co">#&gt; [45,50)  0.2667940 0.4581231 0.7756663 0.9945650 0.9496617 0.8645032 0.9697134</span>
+<span class="co">#&gt; [50,55)  0.2655649 0.3320711 0.4924168 0.7948484 1.0862531 1.1630774 1.0402889</span>
+<span class="co">#&gt; [55,60)  0.2777921 0.3419629 0.3587456 0.4640038 0.7342441 1.1188652 1.2844896</span>
+<span class="co">#&gt; [60,65)  0.2040135 0.3534700 0.3676866 0.3375306 0.3939697 0.6077550 0.9176382</span>
+<span class="co">#&gt; [65,70)  0.1203994 0.2500545 0.3426645 0.3377653 0.3191848 0.3711212 0.5108570</span>
+<span class="co">#&gt; [70,75)  0.1142273 0.1643896 0.2163573 0.2654114 0.3040918 0.3509925 0.4218244</span>
+<span class="co">#&gt; [75,Inf) 0.2470254 0.2700230 0.1951563 0.1714866 0.1945785 0.2185701 0.2669530</span>
+<span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
+<span class="co">#&gt; [0,5)    0.9500182 0.6527267 0.4586965 0.3833718 0.3738467 0.3517170 0.2702781</span>
+<span class="co">#&gt; [5,10)   1.3721966 1.0139182 0.6066234 0.3844091 0.2902702 0.2473126 0.2095636</span>
+<span class="co">#&gt; [10,15)  1.0893381 1.1153819 0.7583190 0.4332858 0.2554572 0.1823934 0.1553336</span>
+<span class="co">#&gt; [15,20)  0.7908657 1.0299195 0.9301544 0.6110496 0.3336612 0.1872230 0.1327858</span>
+<span class="co">#&gt; [20,25)  0.8051911 0.9247752 0.9571984 0.7894380 0.5022637 0.2660609 0.1449952</span>
+<span class="co">#&gt; [25,30)  1.1079034 0.9868314 0.9545853 0.8641253 0.6612563 0.4033038 0.2053388</span>
+<span class="co">#&gt; [30,35)  1.6185596 1.1771951 0.9667918 0.8614808 0.7486034 0.5627574 0.3339562</span>
+<span class="co">#&gt; [35,40)  1.9639179 1.5756319 1.0881066 0.7930355 0.6644875 0.5907038 0.4662924</span>
+<span class="co">#&gt; [40,45)  2.0099572 1.9641166 1.4276724 0.8569040 0.5346031 0.4189982 0.3961145</span>
+<span class="co">#&gt; [45,50)  1.3324301 1.7718716 1.8097805 1.2121827 0.6162796 0.3277839 0.2493536</span>
+<span class="co">#&gt; [50,55)  0.9693499 1.1362003 1.4903974 1.5631945 0.9986530 0.4635043 0.2346013</span>
+<span class="co">#&gt; [55,60)  1.1066252 0.9392596 1.0323540 1.3060424 1.2905049 0.7835502 0.3631911</span>
+<span class="co">#&gt; [60,65)  1.0326332 0.8984769 0.8001077 0.8973472 1.0794111 1.0211226 0.5793323</span>
+<span class="co">#&gt; [65,70)  0.6669660 0.7081942 0.6464042 0.6184180 0.6923118 0.8352807 0.8561217</span>
+<span class="co">#&gt; [70,75)  0.5135301 0.5941420 0.5974098 0.5274169 0.4643432 0.4814928 0.6514789</span>
+<span class="co">#&gt; [75,Inf) 0.3324091 0.3990296 0.4589235 0.4599427 0.3658102 0.2533845 0.2181625</span>
+<span class="co">#&gt;            [70,75)  [75,Inf)</span>
+<span class="co">#&gt; [0,5)    0.1637861 0.1244027</span>
+<span class="co">#&gt; [5,10)   0.1511722 0.1286386</span>
+<span class="co">#&gt; [10,15)  0.1321557 0.1444806</span>
+<span class="co">#&gt; [15,20)  0.1154218 0.1806738</span>
+<span class="co">#&gt; [20,25)  0.1009521 0.1820001</span>
+<span class="co">#&gt; [25,30)  0.1070261 0.1622240</span>
+<span class="co">#&gt; [30,35)  0.1644020 0.1789747</span>
+<span class="co">#&gt; [35,40)  0.2820880 0.2695212</span>
+<span class="co">#&gt; [40,45)  0.3436736 0.4228168</span>
+<span class="co">#&gt; [45,50)  0.2529511 0.5097593</span>
+<span class="co">#&gt; [50,55)  0.1778399 0.4663389</span>
+<span class="co">#&gt; [55,60)  0.1902172 0.3849934</span>
+<span class="co">#&gt; [60,65)  0.2689729 0.3407465</span>
+<span class="co">#&gt; [65,70)  0.4341747 0.3689968</span>
+<span class="co">#&gt; [70,75)  0.8467295 0.5947409</span>
+<span class="co">#&gt; [75,Inf) 0.3368489 1.2138199</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">08</span><span class="op">)</span>
 <span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
 <span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
@@ -581,57 +584,57 @@
   <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">synthetic_all_5y</span>
-<span class="co">#&gt;              (0,5]    (5,10]   (10,15]   (15,20]   (20,25]   (25,30]   (30,35]</span>
-<span class="co">#&gt; (0,5]    2.8508122 1.0261897 0.2740786 0.2553871 0.4637616 0.8589641 1.1327036</span>
-<span class="co">#&gt; (5,10]   1.1055888 6.5877661 1.7008984 0.3183471 0.3050594 0.6144337 1.1535098</span>
-<span class="co">#&gt; (10,15]  0.1935188 1.5137797 8.9560636 1.7686009 0.3443310 0.3694931 0.6765594</span>
-<span class="co">#&gt; (15,20]  0.2078833 0.2655427 1.5869873 7.1160340 1.7183802 0.5550813 0.5752567</span>
-<span class="co">#&gt; (20,25]  0.4118141 0.3393674 0.4140731 1.3355101 4.3990708 1.7438296 0.9025981</span>
-<span class="co">#&gt; (25,30]  0.5441417 0.5410691 0.5596640 0.6390010 1.2506846 2.5548009 1.6633969</span>
-<span class="co">#&gt; (30,35]  0.5984805 0.6482894 0.6952873 0.7586164 0.9699783 1.5074130 1.9945502</span>
-<span class="co">#&gt; (35,40]  0.5806084 0.7636892 0.8041150 0.7750872 0.9167360 1.3685552 1.9252051</span>
-<span class="co">#&gt; (40,45]  0.4323454 0.6984888 0.9209905 0.8763628 0.8022659 0.9806385 1.4841156</span>
-<span class="co">#&gt; (45,50]  0.3265139 0.4709297 0.7853869 1.0099419 0.9846684 0.8938010 0.9669401</span>
-<span class="co">#&gt; (50,55]  0.3314816 0.3415279 0.4912126 0.7867468 1.1052545 1.2082855 1.0724060</span>
-<span class="co">#&gt; (55,60]  0.3387993 0.3527938 0.3575234 0.4500610 0.7136780 1.0992329 1.2632303</span>
-<span class="co">#&gt; (60,65]  0.2409226 0.3589747 0.3644624 0.3302234 0.3832912 0.5818628 0.8588249</span>
-<span class="co">#&gt; (65,70]  0.1482333 0.2502417 0.3309553 0.3299539 0.3226622 0.3770195 0.5042766</span>
-<span class="co">#&gt; (70,75]  0.1515121 0.1642328 0.2010812 0.2474405 0.2988861 0.3604290 0.4372162</span>
-<span class="co">#&gt; (75,Inf] 0.3217773 0.2713872 0.1882210 0.1733257 0.1914743 0.2095386 0.2587094</span>
-<span class="co">#&gt;            (35,40]   (40,45]   (45,50]   (50,55]   (55,60]   (60,65]   (65,70]</span>
-<span class="co">#&gt; (0,5]    0.9551177 0.6390308 0.4469810 0.3764891 0.3621076 0.3300166 0.2454988</span>
-<span class="co">#&gt; (5,10]   1.3350054 0.9643264 0.5705271 0.3567530 0.2653538 0.2232160 0.1875362</span>
-<span class="co">#&gt; (10,15]  1.0729020 1.0683553 0.7195080 0.4069750 0.2367376 0.1683389 0.1449993</span>
-<span class="co">#&gt; (15,20]  0.8216016 1.0159024 0.8995644 0.5871573 0.3187444 0.1778135 0.1261893</span>
-<span class="co">#&gt; (20,25]  0.8576193 0.9418480 0.9414137 0.7636752 0.4813665 0.2530393 0.1372760</span>
-<span class="co">#&gt; (25,30]  1.1369983 0.9977653 0.9462567 0.8436946 0.6385846 0.3866512 0.1959273</span>
-<span class="co">#&gt; (30,35]  1.6132874 1.1728797 0.9428782 0.8292934 0.7209910 0.5447402 0.3240677</span>
-<span class="co">#&gt; (35,40]  1.9704383 1.5548814 1.0503042 0.7447749 0.6153376 0.5512488 0.4440498</span>
-<span class="co">#&gt; (40,45]  1.9846784 1.9467666 1.3872427 0.8046357 0.4843458 0.3752810 0.3617452</span>
-<span class="co">#&gt; (45,50]  1.2859202 1.7083316 1.7635869 1.1683863 0.5778236 0.3008166 0.2295723</span>
-<span class="co">#&gt; (50,55]  0.9696899 1.1107655 1.4488660 1.5112972 0.9559838 0.4412369 0.2247998</span>
-<span class="co">#&gt; (55,60]  1.0843440 0.9198179 1.0114496 1.2668953 1.2316961 0.7396965 0.3455911</span>
-<span class="co">#&gt; (60,65]  0.9559897 0.8396635 0.7621255 0.8589997 1.0264377 0.9752177 0.5446614</span>
-<span class="co">#&gt; (65,70]  0.6382536 0.6698787 0.6135820 0.5866973 0.6503986 0.7934692 0.8414640</span>
-<span class="co">#&gt; (70,75]  0.5254169 0.6002684 0.5970080 0.5150616 0.4369955 0.4448456 0.6259871</span>
-<span class="co">#&gt; (75,Inf] 0.3223328 0.3870417 0.4444625 0.4355639 0.3316998 0.2230737 0.1965648</span>
-<span class="co">#&gt;             (70,75]  (75,Inf]</span>
-<span class="co">#&gt; (0,5]    0.14402005 0.1038985</span>
-<span class="co">#&gt; (5,10]   0.13375621 0.1077371</span>
-<span class="co">#&gt; (10,15]  0.12412059 0.1293980</span>
-<span class="co">#&gt; (15,20]  0.10921473 0.1636373</span>
-<span class="co">#&gt; (20,25]  0.09483828 0.1606335</span>
-<span class="co">#&gt; (25,30]  0.10112164 0.1445233</span>
-<span class="co">#&gt; (30,35]  0.15895547 0.1672551</span>
-<span class="co">#&gt; (35,40]  0.27205079 0.2559498</span>
-<span class="co">#&gt; (40,45]  0.32057576 0.3932071</span>
-<span class="co">#&gt; (45,50]  0.23439904 0.4618270</span>
-<span class="co">#&gt; (50,55]  0.16989138 0.4161955</span>
-<span class="co">#&gt; (55,60]  0.18245533 0.3411069</span>
-<span class="co">#&gt; (60,65]  0.25096614 0.3020497</span>
-<span class="co">#&gt; (65,70]  0.41679403 0.3334136</span>
-<span class="co">#&gt; (70,75]  0.85977738 0.5625109</span>
-<span class="co">#&gt; (75,Inf] 0.32675139 1.1458679</span>
+<span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
+<span class="co">#&gt; [0,5)    2.3066714 0.9908839 0.2645564 0.2354563 0.4124642 0.7766301 1.0710777</span>
+<span class="co">#&gt; [5,10)   0.9269783 5.9322770 1.6412516 0.3293630 0.2982234 0.6008712 1.1470422</span>
+<span class="co">#&gt; [10,15)  0.1565049 1.4474163 8.6800435 1.7985496 0.3233863 0.3481690 0.6591402</span>
+<span class="co">#&gt; [15,20)  0.1499982 0.2491648 1.6234662 7.7914091 1.6916353 0.4989649 0.5233660</span>
+<span class="co">#&gt; [20,25)  0.3063423 0.2979485 0.3740951 1.3685347 4.9022949 1.7557242 0.8332495</span>
+<span class="co">#&gt; [25,30)  0.4331285 0.5032399 0.5158615 0.5907021 1.2455709 2.7961723 1.6783187</span>
+<span class="co">#&gt; [30,35)  0.4733449 0.6105346 0.6703291 0.7236198 0.8905689 1.4267372 2.0405555</span>
+<span class="co">#&gt; [35,40)  0.4699244 0.7175725 0.7798907 0.7671040 0.8894827 1.2986084 1.8578884</span>
+<span class="co">#&gt; [40,45)  0.3582584 0.6679588 0.8987900 0.8672943 0.7950559 0.9763717 1.4954771</span>
+<span class="co">#&gt; [45,50)  0.2667940 0.4581231 0.7756663 0.9945650 0.9496617 0.8645032 0.9697134</span>
+<span class="co">#&gt; [50,55)  0.2655649 0.3320711 0.4924168 0.7948484 1.0862531 1.1630774 1.0402889</span>
+<span class="co">#&gt; [55,60)  0.2777921 0.3419629 0.3587456 0.4640038 0.7342441 1.1188652 1.2844896</span>
+<span class="co">#&gt; [60,65)  0.2040135 0.3534700 0.3676866 0.3375306 0.3939697 0.6077550 0.9176382</span>
+<span class="co">#&gt; [65,70)  0.1203994 0.2500545 0.3426645 0.3377653 0.3191848 0.3711212 0.5108570</span>
+<span class="co">#&gt; [70,75)  0.1142273 0.1643896 0.2163573 0.2654114 0.3040918 0.3509925 0.4218244</span>
+<span class="co">#&gt; [75,Inf) 0.2470254 0.2700230 0.1951563 0.1714866 0.1945785 0.2185701 0.2669530</span>
+<span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
+<span class="co">#&gt; [0,5)    0.9500182 0.6527267 0.4586965 0.3833718 0.3738467 0.3517170 0.2702781</span>
+<span class="co">#&gt; [5,10)   1.3721966 1.0139182 0.6066234 0.3844091 0.2902702 0.2473126 0.2095636</span>
+<span class="co">#&gt; [10,15)  1.0893381 1.1153819 0.7583190 0.4332858 0.2554572 0.1823934 0.1553336</span>
+<span class="co">#&gt; [15,20)  0.7908657 1.0299195 0.9301544 0.6110496 0.3336612 0.1872230 0.1327858</span>
+<span class="co">#&gt; [20,25)  0.8051911 0.9247752 0.9571984 0.7894380 0.5022637 0.2660609 0.1449952</span>
+<span class="co">#&gt; [25,30)  1.1079034 0.9868314 0.9545853 0.8641253 0.6612563 0.4033038 0.2053388</span>
+<span class="co">#&gt; [30,35)  1.6185596 1.1771951 0.9667918 0.8614808 0.7486034 0.5627574 0.3339562</span>
+<span class="co">#&gt; [35,40)  1.9639179 1.5756319 1.0881066 0.7930355 0.6644875 0.5907038 0.4662924</span>
+<span class="co">#&gt; [40,45)  2.0099572 1.9641166 1.4276724 0.8569040 0.5346031 0.4189982 0.3961145</span>
+<span class="co">#&gt; [45,50)  1.3324301 1.7718716 1.8097805 1.2121827 0.6162796 0.3277839 0.2493536</span>
+<span class="co">#&gt; [50,55)  0.9693499 1.1362003 1.4903974 1.5631945 0.9986530 0.4635043 0.2346013</span>
+<span class="co">#&gt; [55,60)  1.1066252 0.9392596 1.0323540 1.3060424 1.2905049 0.7835502 0.3631911</span>
+<span class="co">#&gt; [60,65)  1.0326332 0.8984769 0.8001077 0.8973472 1.0794111 1.0211226 0.5793323</span>
+<span class="co">#&gt; [65,70)  0.6669660 0.7081942 0.6464042 0.6184180 0.6923118 0.8352807 0.8561217</span>
+<span class="co">#&gt; [70,75)  0.5135301 0.5941420 0.5974098 0.5274169 0.4643432 0.4814928 0.6514789</span>
+<span class="co">#&gt; [75,Inf) 0.3324091 0.3990296 0.4589235 0.4599427 0.3658102 0.2533845 0.2181625</span>
+<span class="co">#&gt;            [70,75)  [75,Inf)</span>
+<span class="co">#&gt; [0,5)    0.1637861 0.1244027</span>
+<span class="co">#&gt; [5,10)   0.1511722 0.1286386</span>
+<span class="co">#&gt; [10,15)  0.1321557 0.1444806</span>
+<span class="co">#&gt; [15,20)  0.1154218 0.1806738</span>
+<span class="co">#&gt; [20,25)  0.1009521 0.1820001</span>
+<span class="co">#&gt; [25,30)  0.1070261 0.1622240</span>
+<span class="co">#&gt; [30,35)  0.1644020 0.1789747</span>
+<span class="co">#&gt; [35,40)  0.2820880 0.2695212</span>
+<span class="co">#&gt; [40,45)  0.3436736 0.4228168</span>
+<span class="co">#&gt; [45,50)  0.2529511 0.5097593</span>
+<span class="co">#&gt; [50,55)  0.1778399 0.4663389</span>
+<span class="co">#&gt; [55,60)  0.1902172 0.3849934</span>
+<span class="co">#&gt; [60,65)  0.2689729 0.3407465</span>
+<span class="co">#&gt; [65,70)  0.4341747 0.3689968</span>
+<span class="co">#&gt; [70,75)  0.8467295 0.5947409</span>
+<span class="co">#&gt; [75,Inf) 0.3368489 1.2138199</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_all_5y</span><span class="op">)</span> <span class="op">+</span>
@@ -646,7 +649,7 @@
 <div id="abs_education_state" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_education_state" class="anchor"></a>abs_education_state</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_education_state</span>
 <span class="co">#&gt; # A tibble: 4,194 × 5</span>
 <span class="co">#&gt;     year state aboriginal_and_torres_strait_islander_status   age n_full_and_part…</span>
@@ -666,7 +669,7 @@
 <div id="abs_education_state_2020" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_education_state_2020" class="anchor"></a>abs_education_state_2020</h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_education_state_2020</span>
 <span class="co">#&gt; # A tibble: 808 × 6</span>
 <span class="co">#&gt;     year state   age population population_interpolated  prop</span>
@@ -686,7 +689,7 @@
 <div id="abs_employ_age_lga" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_employ_age_lga" class="anchor"></a>abs_employ_age_lga</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_employ_age_lga</span>
 <span class="co">#&gt; # A tibble: 5,600 × 8</span>
 <span class="co">#&gt;     year state lga    age_group total_employed total_unemployed total_labour_fo…</span>
@@ -706,7 +709,7 @@
 <div id="abs_household_lga" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_household_lga" class="anchor"></a>abs_household_lga</h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_household_lga</span>
 <span class="co">#&gt; # A tibble: 4,968 × 5</span>
 <span class="co">#&gt;     year state lga                   n_persons_usually_resident n_households</span>
@@ -726,61 +729,61 @@
 <div id="abs_pop_age_lga_2016" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_pop_age_lga_2016" class="anchor"></a>abs_pop_age_lga_2016</h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_pop_age_lga_2016</span>
 <span class="co">#&gt; # A tibble: 9,792 × 5</span>
-<span class="co">#&gt;     year state lga        age_group population</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2016 NSW   Albury (C) 0-4             3505</span>
-<span class="co">#&gt;  2  2016 NSW   Albury (C) 5-9             3279</span>
-<span class="co">#&gt;  3  2016 NSW   Albury (C) 10-14           3228</span>
-<span class="co">#&gt;  4  2016 NSW   Albury (C) 15-19           3381</span>
-<span class="co">#&gt;  5  2016 NSW   Albury (C) 20-24           3744</span>
-<span class="co">#&gt;  6  2016 NSW   Albury (C) 25-29           3485</span>
-<span class="co">#&gt;  7  2016 NSW   Albury (C) 30-34           3400</span>
-<span class="co">#&gt;  8  2016 NSW   Albury (C) 35-39           3143</span>
-<span class="co">#&gt;  9  2016 NSW   Albury (C) 40-44           3206</span>
-<span class="co">#&gt; 10  2016 NSW   Albury (C) 45-49           3330</span>
+<span class="co">#&gt;     year state lga                age_group population</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              &lt;fct&gt;          &lt;dbl&gt;</span>
+<span class="co">#&gt;  1  2016 ACT   Unincorporated ACT 0-4            28054</span>
+<span class="co">#&gt;  2  2016 ACT   Unincorporated ACT 5-9            25767</span>
+<span class="co">#&gt;  3  2016 ACT   Unincorporated ACT 10-14          22170</span>
+<span class="co">#&gt;  4  2016 ACT   Unincorporated ACT 15-19          24906</span>
+<span class="co">#&gt;  5  2016 ACT   Unincorporated ACT 20-24          32615</span>
+<span class="co">#&gt;  6  2016 ACT   Unincorporated ACT 25-29          34243</span>
+<span class="co">#&gt;  7  2016 ACT   Unincorporated ACT 30-34          34574</span>
+<span class="co">#&gt;  8  2016 ACT   Unincorporated ACT 35-39          30340</span>
+<span class="co">#&gt;  9  2016 ACT   Unincorporated ACT 40-44          28387</span>
+<span class="co">#&gt; 10  2016 ACT   Unincorporated ACT 45-49          26431</span>
 <span class="co">#&gt; # … with 9,782 more rows</span></code></pre></div>
 </div>
 <div id="abs_pop_age_lga_2020" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_pop_age_lga_2020" class="anchor"></a>abs_pop_age_lga_2020</h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_pop_age_lga_2020</span>
 <span class="co">#&gt; # A tibble: 9,774 × 5</span>
-<span class="co">#&gt;     year state lga        age_group population</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2020 NSW   Albury (C) 0-4             3764</span>
-<span class="co">#&gt;  2  2020 NSW   Albury (C) 5-9             3614</span>
-<span class="co">#&gt;  3  2020 NSW   Albury (C) 10-14           3369</span>
-<span class="co">#&gt;  4  2020 NSW   Albury (C) 15-19           3334</span>
-<span class="co">#&gt;  5  2020 NSW   Albury (C) 20-24           3603</span>
-<span class="co">#&gt;  6  2020 NSW   Albury (C) 25-29           3736</span>
-<span class="co">#&gt;  7  2020 NSW   Albury (C) 30-34           3443</span>
-<span class="co">#&gt;  8  2020 NSW   Albury (C) 35-39           3371</span>
-<span class="co">#&gt;  9  2020 NSW   Albury (C) 40-44           3187</span>
-<span class="co">#&gt; 10  2020 NSW   Albury (C) 45-49           3449</span>
+<span class="co">#&gt;     year state lga                age_group population</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              &lt;fct&gt;          &lt;dbl&gt;</span>
+<span class="co">#&gt;  1  2020 ACT   Unincorporated ACT 0-4            27861</span>
+<span class="co">#&gt;  2  2020 ACT   Unincorporated ACT 5-9            28871</span>
+<span class="co">#&gt;  3  2020 ACT   Unincorporated ACT 10-14          26015</span>
+<span class="co">#&gt;  4  2020 ACT   Unincorporated ACT 15-19          23867</span>
+<span class="co">#&gt;  5  2020 ACT   Unincorporated ACT 20-24          32626</span>
+<span class="co">#&gt;  6  2020 ACT   Unincorporated ACT 25-29          33992</span>
+<span class="co">#&gt;  7  2020 ACT   Unincorporated ACT 30-34          35734</span>
+<span class="co">#&gt;  8  2020 ACT   Unincorporated ACT 35-39          35354</span>
+<span class="co">#&gt;  9  2020 ACT   Unincorporated ACT 40-44          30155</span>
+<span class="co">#&gt; 10  2020 ACT   Unincorporated ACT 45-49          29103</span>
 <span class="co">#&gt; # … with 9,764 more rows</span></code></pre></div>
 </div>
 <div id="abs_state_age" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_state_age" class="anchor"></a>abs_state_age</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_state_age</span>
 <span class="co">#&gt; # A tibble: 168 × 3</span>
 <span class="co">#&gt;    state age_group population</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 NSW   0–4           495060</span>
-<span class="co">#&gt;  2 VIC   0–4           401992</span>
-<span class="co">#&gt;  3 QLD   0–4           314592</span>
-<span class="co">#&gt;  4 SA    0–4            98400</span>
-<span class="co">#&gt;  5 WA    0–4           171531</span>
-<span class="co">#&gt;  6 TAS   0–4            29258</span>
-<span class="co">#&gt;  7 NT    0–4            17766</span>
-<span class="co">#&gt;  8 ACT   0–4            27846</span>
-<span class="co">#&gt;  9 NSW   5–9           512687</span>
-<span class="co">#&gt; 10 VIC   5–9           416633</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;fct&gt;          &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 NSW   0-4           495060</span>
+<span class="co">#&gt;  2 VIC   0-4           401992</span>
+<span class="co">#&gt;  3 QLD   0-4           314592</span>
+<span class="co">#&gt;  4 SA    0-4            98400</span>
+<span class="co">#&gt;  5 WA    0-4           171531</span>
+<span class="co">#&gt;  6 TAS   0-4            29258</span>
+<span class="co">#&gt;  7 NT    0-4            17766</span>
+<span class="co">#&gt;  8 ACT   0-4            27846</span>
+<span class="co">#&gt;  9 NSW   5-9           512687</span>
+<span class="co">#&gt; 10 VIC   5-9           416633</span>
 <span class="co">#&gt; # … with 158 more rows</span></code></pre></div>
 </div>
 </div>
