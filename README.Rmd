@@ -24,7 +24,14 @@ The goal of conmat is to provide methods for producing contact matrices.
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version with:
+
+```r
+install.packages("conmat", repos = "https://njtierney.r-universe.dev")
+```
+
+
+Or alternatively you can use `remotes` (although I recommend using the above code)
 
 ``` r
 # install.packages("remotes")

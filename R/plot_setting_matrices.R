@@ -1,8 +1,8 @@
 #' Plot setting matrices using ggplot2
-#'
+#' 
 #' @param matrices matrix
-#' @param title title to give, Default: 'Setting-specific synthetic contact matrices (all polymod data)'
-#' @return ggplot
+#' @param title Title to give to plot setting matrices. Default value is: Setting-specific synthetic contact matrices (all polymod data)'
+#' @return a ggplot
 #' @examples
 #' \dontrun{
 #' if (interactive()) {
