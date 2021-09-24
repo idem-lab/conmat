@@ -1,6 +1,6 @@
 #' Fit a contact model to a survey poulation
 #' @param contact_data_list contact_data_list
-#' @param survey_population survey_population
+#' @param population survey_population
 #' @return list of fitted gam models
 #' @author Nicholas Tierney
 #' @export
@@ -9,15 +9,15 @@
 #' \dontrun{
 #' contact_model <- fit_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(), 
-#'   survey_population = get_polymod_population()
+#'   population = get_polymod_population()
 #' )
 #' }
-fit_setting_contacts <- function(contact_data_list, survey_population) {
+fit_setting_contacts <- function(contact_data_list, population) {
 
   furrr::future_map(
     .x = contact_data_list,
     .f = fit_single_contact_model,
-    population = survey_population,
+    population = population,
     .options = furrr::furrr_options(seed = TRUE)
   )
 
