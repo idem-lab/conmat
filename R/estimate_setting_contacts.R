@@ -10,37 +10,23 @@
 #' @param prediction_population PARAM_DESCRIPTION, Default: survey_population
 #' @param age_breaks PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
-#' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
 #' @export
 estimate_setting_contacts <- function(contact_data_list,
                                       survey_population,
                                       prediction_population = survey_population,
                                       age_breaks) {
-  setting_models <- furrr::map(
-    .x = contact_data_list,
-    .f = fit_single_contact_model,
+  
+  setting_models <- fit_setting_contacts(
+    contact_data_list = contact_data_list,
     population = survey_population
   )
+  
+  contact_model_pred <- predict_setting_contacts(
+      population = prediction_population,
+      contact_model = setting_models,
+      age_breaks = age_breaks
+    )
+  
+  contact_model_pred
 
-  setting_predictions <- furrr::map(
-    .x = setting_models,
-    .f = predict_contacts,
-    population = prediction_population,
-    age_breaks = age_breaks
-  )
-
-  setting_matrices <- furrr::map(
-    .x = setting_predictions,
-    .f = predictions_to_matrix
-  )
-
-  combination <- Reduce("+", setting_matrices)
-  setting_matrices$all <- combination
-
-  setting_matrices
 }
