@@ -1,0 +1,287 @@
+# list names are kept
+
+    Code
+      names(contact_model)
+    Output
+      [1] "home"   "work"   "school" "other" 
+
+---
+
+    Code
+      names(contact_model_pred)
+    Output
+      [1] "home"   "work"   "school" "other"  "all"   
+
+# Model coefficients are the same
+
+    Code
+      names(contact_model[[1]]$coefficients)
+    Output
+       [1] "(Intercept)"                          
+       [2] "school_probability"                   
+       [3] "work_probability"                     
+       [4] "s(age_to).1"                          
+       [5] "s(age_to).2"                          
+       [6] "s(age_to).3"                          
+       [7] "s(age_to).4"                          
+       [8] "s(age_to).5"                          
+       [9] "s(age_to).6"                          
+      [10] "s(age_to).7"                          
+      [11] "s(age_to).8"                          
+      [12] "s(age_to).9"                          
+      [13] "s(age_from).1"                        
+      [14] "s(age_from).2"                        
+      [15] "s(age_from).3"                        
+      [16] "s(age_from).4"                        
+      [17] "s(age_from).5"                        
+      [18] "s(age_from).6"                        
+      [19] "s(age_from).7"                        
+      [20] "s(age_from).8"                        
+      [21] "s(age_from).9"                        
+      [22] "s(abs(age_from - age_to)).1"          
+      [23] "s(abs(age_from - age_to)).2"          
+      [24] "s(abs(age_from - age_to)).3"          
+      [25] "s(abs(age_from - age_to)).4"          
+      [26] "s(abs(age_from - age_to)).5"          
+      [27] "s(abs(age_from - age_to)).6"          
+      [28] "s(abs(age_from - age_to)).7"          
+      [29] "s(abs(age_from - age_to)).8"          
+      [30] "s(abs(age_from - age_to)).9"          
+      [31] "s(abs(age_from - age_to),age_from).1" 
+      [32] "s(abs(age_from - age_to),age_from).2" 
+      [33] "s(abs(age_from - age_to),age_from).3" 
+      [34] "s(abs(age_from - age_to),age_from).4" 
+      [35] "s(abs(age_from - age_to),age_from).5" 
+      [36] "s(abs(age_from - age_to),age_from).6" 
+      [37] "s(abs(age_from - age_to),age_from).7" 
+      [38] "s(abs(age_from - age_to),age_from).8" 
+      [39] "s(abs(age_from - age_to),age_from).9" 
+      [40] "s(abs(age_from - age_to),age_from).10"
+      [41] "s(abs(age_from - age_to),age_from).11"
+      [42] "s(abs(age_from - age_to),age_from).12"
+      [43] "s(abs(age_from - age_to),age_from).13"
+      [44] "s(abs(age_from - age_to),age_from).14"
+      [45] "s(abs(age_from - age_to),age_from).15"
+      [46] "s(abs(age_from - age_to),age_from).16"
+      [47] "s(abs(age_from - age_to),age_from).17"
+      [48] "s(abs(age_from - age_to),age_from).18"
+      [49] "s(abs(age_from - age_to),age_from).19"
+      [50] "s(abs(age_from - age_to),age_from).20"
+      [51] "s(abs(age_from - age_to),age_from).21"
+      [52] "s(abs(age_from - age_to),age_from).22"
+      [53] "s(abs(age_from - age_to),age_from).23"
+      [54] "s(abs(age_from - age_to),age_from).24"
+      [55] "s(abs(age_from - age_to),age_from).25"
+      [56] "s(abs(age_from - age_to),age_from).26"
+      [57] "s(abs(age_from - age_to),age_from).27"
+
+---
+
+    Code
+      names(contact_model[[2]]$coefficients)
+    Output
+       [1] "(Intercept)"                          
+       [2] "school_probability"                   
+       [3] "work_probability"                     
+       [4] "s(age_to).1"                          
+       [5] "s(age_to).2"                          
+       [6] "s(age_to).3"                          
+       [7] "s(age_to).4"                          
+       [8] "s(age_to).5"                          
+       [9] "s(age_to).6"                          
+      [10] "s(age_to).7"                          
+      [11] "s(age_to).8"                          
+      [12] "s(age_to).9"                          
+      [13] "s(age_from).1"                        
+      [14] "s(age_from).2"                        
+      [15] "s(age_from).3"                        
+      [16] "s(age_from).4"                        
+      [17] "s(age_from).5"                        
+      [18] "s(age_from).6"                        
+      [19] "s(age_from).7"                        
+      [20] "s(age_from).8"                        
+      [21] "s(age_from).9"                        
+      [22] "s(abs(age_from - age_to)).1"          
+      [23] "s(abs(age_from - age_to)).2"          
+      [24] "s(abs(age_from - age_to)).3"          
+      [25] "s(abs(age_from - age_to)).4"          
+      [26] "s(abs(age_from - age_to)).5"          
+      [27] "s(abs(age_from - age_to)).6"          
+      [28] "s(abs(age_from - age_to)).7"          
+      [29] "s(abs(age_from - age_to)).8"          
+      [30] "s(abs(age_from - age_to)).9"          
+      [31] "s(abs(age_from - age_to),age_from).1" 
+      [32] "s(abs(age_from - age_to),age_from).2" 
+      [33] "s(abs(age_from - age_to),age_from).3" 
+      [34] "s(abs(age_from - age_to),age_from).4" 
+      [35] "s(abs(age_from - age_to),age_from).5" 
+      [36] "s(abs(age_from - age_to),age_from).6" 
+      [37] "s(abs(age_from - age_to),age_from).7" 
+      [38] "s(abs(age_from - age_to),age_from).8" 
+      [39] "s(abs(age_from - age_to),age_from).9" 
+      [40] "s(abs(age_from - age_to),age_from).10"
+      [41] "s(abs(age_from - age_to),age_from).11"
+      [42] "s(abs(age_from - age_to),age_from).12"
+      [43] "s(abs(age_from - age_to),age_from).13"
+      [44] "s(abs(age_from - age_to),age_from).14"
+      [45] "s(abs(age_from - age_to),age_from).15"
+      [46] "s(abs(age_from - age_to),age_from).16"
+      [47] "s(abs(age_from - age_to),age_from).17"
+      [48] "s(abs(age_from - age_to),age_from).18"
+      [49] "s(abs(age_from - age_to),age_from).19"
+      [50] "s(abs(age_from - age_to),age_from).20"
+      [51] "s(abs(age_from - age_to),age_from).21"
+      [52] "s(abs(age_from - age_to),age_from).22"
+      [53] "s(abs(age_from - age_to),age_from).23"
+      [54] "s(abs(age_from - age_to),age_from).24"
+      [55] "s(abs(age_from - age_to),age_from).25"
+      [56] "s(abs(age_from - age_to),age_from).26"
+      [57] "s(abs(age_from - age_to),age_from).27"
+
+---
+
+    Code
+      names(contact_model[[3]]$coefficients)
+    Output
+       [1] "(Intercept)"                          
+       [2] "school_probability"                   
+       [3] "work_probability"                     
+       [4] "s(age_to).1"                          
+       [5] "s(age_to).2"                          
+       [6] "s(age_to).3"                          
+       [7] "s(age_to).4"                          
+       [8] "s(age_to).5"                          
+       [9] "s(age_to).6"                          
+      [10] "s(age_to).7"                          
+      [11] "s(age_to).8"                          
+      [12] "s(age_to).9"                          
+      [13] "s(age_from).1"                        
+      [14] "s(age_from).2"                        
+      [15] "s(age_from).3"                        
+      [16] "s(age_from).4"                        
+      [17] "s(age_from).5"                        
+      [18] "s(age_from).6"                        
+      [19] "s(age_from).7"                        
+      [20] "s(age_from).8"                        
+      [21] "s(age_from).9"                        
+      [22] "s(abs(age_from - age_to)).1"          
+      [23] "s(abs(age_from - age_to)).2"          
+      [24] "s(abs(age_from - age_to)).3"          
+      [25] "s(abs(age_from - age_to)).4"          
+      [26] "s(abs(age_from - age_to)).5"          
+      [27] "s(abs(age_from - age_to)).6"          
+      [28] "s(abs(age_from - age_to)).7"          
+      [29] "s(abs(age_from - age_to)).8"          
+      [30] "s(abs(age_from - age_to)).9"          
+      [31] "s(abs(age_from - age_to),age_from).1" 
+      [32] "s(abs(age_from - age_to),age_from).2" 
+      [33] "s(abs(age_from - age_to),age_from).3" 
+      [34] "s(abs(age_from - age_to),age_from).4" 
+      [35] "s(abs(age_from - age_to),age_from).5" 
+      [36] "s(abs(age_from - age_to),age_from).6" 
+      [37] "s(abs(age_from - age_to),age_from).7" 
+      [38] "s(abs(age_from - age_to),age_from).8" 
+      [39] "s(abs(age_from - age_to),age_from).9" 
+      [40] "s(abs(age_from - age_to),age_from).10"
+      [41] "s(abs(age_from - age_to),age_from).11"
+      [42] "s(abs(age_from - age_to),age_from).12"
+      [43] "s(abs(age_from - age_to),age_from).13"
+      [44] "s(abs(age_from - age_to),age_from).14"
+      [45] "s(abs(age_from - age_to),age_from).15"
+      [46] "s(abs(age_from - age_to),age_from).16"
+      [47] "s(abs(age_from - age_to),age_from).17"
+      [48] "s(abs(age_from - age_to),age_from).18"
+      [49] "s(abs(age_from - age_to),age_from).19"
+      [50] "s(abs(age_from - age_to),age_from).20"
+      [51] "s(abs(age_from - age_to),age_from).21"
+      [52] "s(abs(age_from - age_to),age_from).22"
+      [53] "s(abs(age_from - age_to),age_from).23"
+      [54] "s(abs(age_from - age_to),age_from).24"
+      [55] "s(abs(age_from - age_to),age_from).25"
+      [56] "s(abs(age_from - age_to),age_from).26"
+      [57] "s(abs(age_from - age_to),age_from).27"
+
+---
+
+    Code
+      names(contact_model[[4]]$coefficients)
+    Output
+       [1] "(Intercept)"                          
+       [2] "school_probability"                   
+       [3] "work_probability"                     
+       [4] "s(age_to).1"                          
+       [5] "s(age_to).2"                          
+       [6] "s(age_to).3"                          
+       [7] "s(age_to).4"                          
+       [8] "s(age_to).5"                          
+       [9] "s(age_to).6"                          
+      [10] "s(age_to).7"                          
+      [11] "s(age_to).8"                          
+      [12] "s(age_to).9"                          
+      [13] "s(age_from).1"                        
+      [14] "s(age_from).2"                        
+      [15] "s(age_from).3"                        
+      [16] "s(age_from).4"                        
+      [17] "s(age_from).5"                        
+      [18] "s(age_from).6"                        
+      [19] "s(age_from).7"                        
+      [20] "s(age_from).8"                        
+      [21] "s(age_from).9"                        
+      [22] "s(abs(age_from - age_to)).1"          
+      [23] "s(abs(age_from - age_to)).2"          
+      [24] "s(abs(age_from - age_to)).3"          
+      [25] "s(abs(age_from - age_to)).4"          
+      [26] "s(abs(age_from - age_to)).5"          
+      [27] "s(abs(age_from - age_to)).6"          
+      [28] "s(abs(age_from - age_to)).7"          
+      [29] "s(abs(age_from - age_to)).8"          
+      [30] "s(abs(age_from - age_to)).9"          
+      [31] "s(abs(age_from - age_to),age_from).1" 
+      [32] "s(abs(age_from - age_to),age_from).2" 
+      [33] "s(abs(age_from - age_to),age_from).3" 
+      [34] "s(abs(age_from - age_to),age_from).4" 
+      [35] "s(abs(age_from - age_to),age_from).5" 
+      [36] "s(abs(age_from - age_to),age_from).6" 
+      [37] "s(abs(age_from - age_to),age_from).7" 
+      [38] "s(abs(age_from - age_to),age_from).8" 
+      [39] "s(abs(age_from - age_to),age_from).9" 
+      [40] "s(abs(age_from - age_to),age_from).10"
+      [41] "s(abs(age_from - age_to),age_from).11"
+      [42] "s(abs(age_from - age_to),age_from).12"
+      [43] "s(abs(age_from - age_to),age_from).13"
+      [44] "s(abs(age_from - age_to),age_from).14"
+      [45] "s(abs(age_from - age_to),age_from).15"
+      [46] "s(abs(age_from - age_to),age_from).16"
+      [47] "s(abs(age_from - age_to),age_from).17"
+      [48] "s(abs(age_from - age_to),age_from).18"
+      [49] "s(abs(age_from - age_to),age_from).19"
+      [50] "s(abs(age_from - age_to),age_from).20"
+      [51] "s(abs(age_from - age_to),age_from).21"
+      [52] "s(abs(age_from - age_to),age_from).22"
+      [53] "s(abs(age_from - age_to),age_from).23"
+      [54] "s(abs(age_from - age_to),age_from).24"
+      [55] "s(abs(age_from - age_to),age_from).25"
+      [56] "s(abs(age_from - age_to),age_from).26"
+      [57] "s(abs(age_from - age_to),age_from).27"
+
+# Matrix dims are kept
+
+    Code
+      map(contact_model_pred, dim)
+    Output
+      $home
+      [1] 16 16
+      
+      $work
+      [1] 16 16
+      
+      $school
+      [1] 16 16
+      
+      $other
+      [1] 16 16
+      
+      $all
+      [1] 16 16
+      
+

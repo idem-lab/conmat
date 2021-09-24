@@ -30,10 +30,3 @@ survey), a representative population distribution for the survey, and a set
 of age breaks at which to aggregate contacts, return a set of predicted
 contact matrices for each setting, and for all combined.
 }
-\examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
-}
