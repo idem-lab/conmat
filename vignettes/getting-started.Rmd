@@ -22,6 +22,8 @@ library(dplyr)
 library(tidyr)
 library(mgcv)
 library(patchwork)
+library(future)
+plan(multisession, workers = 4)
 ```
 
 ```{r}
@@ -35,8 +37,13 @@ polymod_population
 
 ```{r}
 # fit a single overall contact model to polymod
+example_contact_data_all <- get_polymod_contact_data("all") %>% 
+  filter(age_from <= 10,
+         age_to <= 10)
+
+
 m_all <- fit_single_contact_model(
-  contact_data = get_polymod_contact_data("all"),
+  contact_data = example_contact_data_all,
   population = polymod_population
 )
 
@@ -93,8 +100,6 @@ synthetic_settings_5y_sydney
 
 ```
 
-
-
 ```{r}
 # extrapolate to other contexts
 synthetic_settings_5y_italy_2005 <- extrapolate_polymod(
@@ -102,34 +107,6 @@ synthetic_settings_5y_italy_2005 <- extrapolate_polymod(
 )
 synthetic_settings_5y_italy_2005
 ```
-
-
-```{r}
-synthetic_settings_5y_germany_2005 <- extrapolate_polymod(
-  population = wpp_age("Germany", "2005")
-)
-
-synthetic_settings_5y_germany_2005
-```
-
-
-```{r}
-synthetic_settings_5y_bolivia_2015 <- extrapolate_polymod(
-  population = wpp_age("Bolivia", "2015")
-)
-
-synthetic_settings_5y_bolivia_2015 
-```
-
-
-```{r}
-synthetic_settings_5y_ghana_2015 <- extrapolate_polymod(
-  population = wpp_age("Ghana", "2015")
-)
-
-synthetic_settings_5y_ghana_2015
-```
-
 
 ```{r}
 # empirical 5y polymod matrix
@@ -158,33 +135,6 @@ plot_setting_matrices(synthetic_settings_5y_polymod)
 plot_setting_matrices(
   synthetic_settings_5y_italy_2005,
   title = "Setting-specific synthetic contact matrices (Italy 2005 projected)"
-)
-```
-
-
-```{r}
-# synthetic_setting_specific_germany.png
-plot_setting_matrices(
-  synthetic_settings_5y_germany_2005,
-  title = "Setting-specific synthetic contact matrices (Germany 2005 projected)"
-)
-```
-
-
-```{r}
-# synthetic_setting_specific_bolivia.png
-plot_setting_matrices(
-  synthetic_settings_5y_bolivia_2015,
-  title = "Setting-specific synthetic contact matrices (Bolivia 2015 projected)"
-)
-```
-
-
-```{r}
-# synthetic_setting_specific_ghana.png
-plot_setting_matrices(
-  synthetic_settings_5y_ghana_2015,
-  title = "Setting-specific synthetic contact matrices (Ghana 2015 projected)"
 )
 ```
 
