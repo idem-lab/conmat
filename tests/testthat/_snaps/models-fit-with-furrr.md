@@ -1,6 +1,13 @@
 # list names are kept
 
     Code
+      names(contact_model)
+    Output
+      [1] "home"   "work"   "school" "other" 
+
+---
+
+    Code
       names(contact_model_pred)
     Output
       [1] "home"   "work"   "school" "other"  "all"   

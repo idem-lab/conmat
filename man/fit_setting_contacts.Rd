@@ -4,12 +4,12 @@
 \alias{fit_setting_contacts}
 \title{Fit a contact model to a survey poulation}
 \usage{
-fit_setting_contacts(contact_data_list, survey_population)
+fit_setting_contacts(contact_data_list, population)
 }
 \arguments{
 \item{contact_data_list}{contact_data_list}
 
-\item{survey_population}{survey_population}
+\item{population}{survey_population}
 }
 \value{
 list of fitted gam models
@@ -22,7 +22,7 @@ Fit a contact model to a survey poulation
 \dontrun{
 contact_model <- fit_setting_contacts(
   contact_data_list = get_polymod_setting_data(), 
-  survey_population = get_polymod_population()
+  population = get_polymod_population()
 )
 }
 }
