@@ -54,13 +54,30 @@ Note that you need to use the exact LGA name - you can look up LGA names in the 
 abs_lga_lookup
 ```
 
-We can then extrapolate this data from polymod and plot a matrix, below:
+First we want to fit the model to the polymod data
 
-```{r sydney-synth-5, cache = TRUE}
-synthetic_settings_5y_sydney <- extrapolate_polymod(
+```{r fit-polymod}
+set.seed(2021-09-24)
+polymod_contact_data <- get_polymod_setting_data()
+polymod_survey_data <- get_polymod_population()
+
+setting_models <- fit_setting_contacts(
+  contact_data_list = polymod_contact_data,
+  population = polymod_survey_data
+  )
+```
+
+
+Then we take this model and extrapolate to the sydney data:
+
+```{r sydney-synth-5}
+set.seed(2021-09-24)
+synthetic_settings_5y_sydney <- predict_setting_contacts(
   population = sydney_age_pop,
+  contact_model = setting_models,
   age_breaks = c(seq(0, 85, by = 5), Inf)
-)
+  )
+  
 synthetic_settings_5y_sydney
 ```
 
@@ -73,6 +90,7 @@ synthetic_settings_5y_sydney
 ```
 
 ```{r plot-matrix-differents}
+set.seed(2021-09-24)
 plot_matrix(synthetic_settings_5y_sydney$home)
 plot_matrix(synthetic_settings_5y_sydney$work)
 plot_matrix(synthetic_settings_5y_sydney$school)
