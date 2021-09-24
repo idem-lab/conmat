@@ -21,22 +21,22 @@ estimate_setting_contacts <- function(contact_data_list,
                                       survey_population,
                                       prediction_population = survey_population,
                                       age_breaks) {
-  setting_models <- lapply(
-    X = contact_data_list,
-    FUN = fit_single_contact_model,
+  setting_models <- furrr::map(
+    .x = contact_data_list,
+    .f = fit_single_contact_model,
     population = survey_population
   )
 
-  setting_predictions <- lapply(
-    X = setting_models,
-    FUN = predict_contacts,
+  setting_predictions <- furrr::map(
+    .x = setting_models,
+    .f = predict_contacts,
     population = prediction_population,
     age_breaks = age_breaks
   )
 
-  setting_matrices <- lapply(
-    X = setting_predictions,
-    FUN = predictions_to_matrix
+  setting_matrices <- furrr::map(
+    .x = setting_predictions,
+    .f = predictions_to_matrix
   )
 
   combination <- Reduce("+", setting_matrices)
