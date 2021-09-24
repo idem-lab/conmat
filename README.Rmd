@@ -148,7 +148,7 @@ polymod_population <- get_polymod_population()
 
 contact_model <- fit_setting_contacts(
   contact_data_list = polymod_setting_data,
-  survey_population = polymod_population
+  population = polymod_population
 )
 
 contact_model_pred <- predict_setting_contacts(
