@@ -624,6 +624,38 @@ plot_matrix(synthetic_all_5y) +
 
 <img src="man/figures/README-matrix-plot-1.png" width="100%" />
 
+## Speeding up computation with `future`
+
+`conmat` now supports parallelisation, which is useful in a couple of
+contexts with the model fitting, here is an example:
+
+``` r
+library(future)
+plan(multisession, workers = 4)
+```
+
+We set the future plan, saying multisession, with 4 workers.
+
+Then we run the code as normal:
+
+``` r
+polymod_setting_data <- get_polymod_setting_data()
+polymod_population <- get_polymod_population()
+
+contact_model <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  survey_population = polymod_population
+)
+
+contact_model_pred <- predict_setting_contacts(
+  population = polymod_population,
+  contact_model = contact_model,
+  age_breaks = c(seq(0, 75, by = 5), Inf)
+)
+```
+
+Notably this is about 3 times faster than without using that plan.
+
 ## Data sources
 
 This package provides data for use in calculating contact matrices.

@@ -23,18 +23,20 @@
 #' }
 predict_setting_contacts <- function(population, contact_model, age_breaks) {
 
-  setting_predictions <- lapply(
-    X = contact_model,
-    FUN = predict_contacts,
+  setting_predictions <- furrr::future_map(
+    .x = contact_model,
+    .f = predict_contacts,
     population = population,
-    age_breaks = age_breaks
+    age_breaks = age_breaks,
+    .options = furrr::furrr_options(seed = TRUE)
   )
   
-  setting_matrices <- lapply(
-    X = setting_predictions,
-    FUN = predictions_to_matrix
+  setting_matrices <- furrr::future_map(
+    .x = setting_predictions,
+    .f = predictions_to_matrix,
+    .options = furrr::furrr_options(seed = TRUE)
   )
-  
+
   combination <- Reduce("+", setting_matrices)
   setting_matrices$all <- combination
   

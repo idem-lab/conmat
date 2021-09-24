@@ -14,10 +14,11 @@
 #' }
 fit_setting_contacts <- function(contact_data_list, survey_population) {
 
-  lapply(
-    X = contact_data_list,
-    FUN = fit_single_contact_model,
-    population = survey_population
+  furrr::future_map(
+    .x = contact_data_list,
+    .f = fit_single_contact_model,
+    population = survey_population,
+    .options = furrr::furrr_options(seed = TRUE)
   )
 
 }
