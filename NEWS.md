@@ -6,3 +6,4 @@
 * implement parallelisation with `furrr`. Resolves [#31](https://github.com/njtierney/conmat/issues/31)
 * change argument of `fit_setting_contacts` from `survey_population` to just `population`
 * reduce vignette size, closes [#28](https://github.com/njtierney/conmat/issues/28)
+* Add missing LGAs, closes [#37](https://github.com/njtierney/conmat/issues/37)
