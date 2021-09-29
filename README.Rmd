@@ -44,8 +44,8 @@ We can extract out the ABS age population data using `abs_age_lga` like so:
 
 ```{r get-syd}
 library(conmat)
-sydney_age_pop <- abs_age_lga("Sydney (C)")
-sydney_age_pop
+fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+fairfield_age_pop
 ```
 
 Note that you need to use the exact LGA name - you can look up LGA names in the data set `abs_lga_lookup`:
@@ -68,34 +68,32 @@ setting_models <- fit_setting_contacts(
 ```
 
 
-Then we take this model and extrapolate to the sydney data:
+Then we take this model and extrapolate to the fairfield data:
 
-```{r sydney-synth-5}
+```{r fairfield-synth-5}
 set.seed(2021-09-24)
-synthetic_settings_5y_sydney <- predict_setting_contacts(
-  population = sydney_age_pop,
+synthetic_settings_5y_fairfield <- predict_setting_contacts(
+  population = fairfield_age_pop,
   contact_model = setting_models,
   age_breaks = c(seq(0, 85, by = 5), Inf)
   )
-  
-synthetic_settings_5y_sydney
 ```
 
-```{r sydney-synth-5-plot}
+```{r fairfield-synth-5-plot}
 # this code is erroring for the moment - something to do with rendering a large plot I think.
-# plot_setting_matrices(
-#   synthetic_settings_5y_sydney,
-#   title = "Setting-specific synthetic contact matrices (Sydney 2020 projected)"
-# )
+plot_setting_matrices(
+  synthetic_settings_5y_fairfield,
+  title = "Setting-specific synthetic contact matrices (fairfield 2020 projected)"
+)
 ```
 
 ```{r plot-matrix-differents}
 set.seed(2021-09-24)
-plot_matrix(synthetic_settings_5y_sydney$home)
-plot_matrix(synthetic_settings_5y_sydney$work)
-plot_matrix(synthetic_settings_5y_sydney$school)
-plot_matrix(synthetic_settings_5y_sydney$other)
-plot_matrix(synthetic_settings_5y_sydney$all)
+plot_matrix(synthetic_settings_5y_fairfield$home)
+plot_matrix(synthetic_settings_5y_fairfield$work)
+plot_matrix(synthetic_settings_5y_fairfield$school)
+plot_matrix(synthetic_settings_5y_fairfield$other)
+plot_matrix(synthetic_settings_5y_fairfield$all)
 ```
 
 
