@@ -58,12 +58,4 @@ abs_lga_lookup <- abs_pop_age_lga_2020_raw %>%
          lga) %>% 
   distinct()
 
-extra_lgas <- anti_join(abs_lga_lookup, abs_household_lga, by = "lga") %>% 
-  drop_na(lga_code, lga)
-
-abs_lga_lookup <- abs_lga_lookup %>% 
-  bind_rows(extra_lgas) %>% 
-  arrange(state, lga)
-
-
 use_data(abs_lga_lookup, overwrite = TRUE)
