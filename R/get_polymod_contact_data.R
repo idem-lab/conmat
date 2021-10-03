@@ -13,12 +13,17 @@
 #' }
 #' @export
 get_polymod_contact_data <- function(setting = c("all", "home", "work", "school", "other"),
+                                     countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands", 
+                                                 "Poland", "United Kingdom"),
                                      ages = 0:100,
                                      contact_age_imputation = c("sample", "mean", "remove_participant")) {
   setting <- match.arg(setting)
   contact_age_imputation <- match.arg(contact_age_imputation)
 
   contact_data <- polymod$participants %>%
+    filter(
+      country %in% countries
+    ) %>%
     dplyr::left_join(
       socialmixr::polymod$contacts,
       by = "part_id"

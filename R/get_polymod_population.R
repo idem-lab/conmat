@@ -13,10 +13,12 @@
 #' }
 #' }
 #' @export
-get_polymod_population <- function() {
+get_polymod_population <- function(countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands", 
+                                                 "Poland", "United Kingdom")) {
   socialmixr::polymod$participants %>%
     dplyr::filter(
-      !is.na(year)
+      !is.na(year),
+      country %in% countries
     ) %>%
     dplyr::group_by(
       country,
