@@ -6,6 +6,8 @@
 \usage{
 get_polymod_contact_data(
   setting = c("all", "home", "work", "school", "other"),
+  countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands",
+    "Poland", "United Kingdom"),
   ages = 0:100,
   contact_age_imputation = c("sample", "mean", "remove_participant")
 )

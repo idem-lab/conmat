@@ -4,7 +4,10 @@
 \alias{get_polymod_setting_data}
 \title{Get polymod setting data}
 \usage{
-get_polymod_setting_data()
+get_polymod_setting_data(
+  countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands",
+    "Poland", "United Kingdom")
+)
 }
 \value{
 polymod data
