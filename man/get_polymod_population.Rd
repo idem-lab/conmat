@@ -4,7 +4,10 @@
 \alias{get_polymod_population}
 \title{return the polymod-average population age distribution in 5y}
 \usage{
-get_polymod_population()
+get_polymod_population(
+  countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands",
+    "Poland", "United Kingdom")
+)
 }
 \value{
 data frame
