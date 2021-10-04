@@ -31,8 +31,9 @@ get_age_population_function <- function(population) {
 
   # interpolator to 1y age groups up to 100
   spline <- stats::splinefun(
-    x = population$lower.age.limit,
-    y = population$population / bin_widths,
+    # use midpoint, and set population to 0 just beyond the upper bound
+    x = c(population$lower.age.limit + bin_widths / 2, max_age + 1),
+    y = c(population$population / bin_widths, 0)
   )
 
   # wrap this up in a function to handle values outside this range
