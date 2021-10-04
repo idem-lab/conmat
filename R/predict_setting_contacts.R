@@ -2,6 +2,7 @@
 #' @param population population
 #' @param contact_model contact_model
 #' @param age_breaks age_breaks
+#' @param household_size_distribution household_size_distribution
 #' @return list of matrices
 #' @author Nicholas Tierney
 #' @export
@@ -20,8 +21,19 @@
 #'   contact_model = contact_model, 
 #'   age_breaks = c(seq(0, 75, by = 5), Inf)
 #' )
+#' 
+#' # Adjust the household size distribution
+#' synthetic_settings_5y_fairfield <- predict_setting_contacts(
+#'   population = fairfield_age_pop,
+#'   contact_model = setting_models,
+#'   age_breaks = c(seq(0, 85, by = 5), Inf),
+#'   household_size_distribution = fairfield_household_sizes
+#' )
 #' }
-predict_setting_contacts <- function(population, contact_model, age_breaks) {
+predict_setting_contacts <- function(population, 
+                                     contact_model, 
+                                     age_breaks,
+                                     household_size_distribution = NULL) {
 
   setting_predictions <- furrr::future_map(
     .x = contact_model,
