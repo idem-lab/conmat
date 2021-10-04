@@ -21,7 +21,7 @@ get_polymod_contact_data <- function(setting = c("all", "home", "work", "school"
   contact_age_imputation <- match.arg(contact_age_imputation)
 
   contact_data <- polymod$participants %>%
-    filter(
+    dplyr::filter(
       country %in% countries
     ) %>%
     dplyr::left_join(
