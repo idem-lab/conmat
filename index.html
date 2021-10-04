@@ -190,9 +190,9 @@
 <span class="co">#&gt;     school_probability + work_probability</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Estimated degrees of freedom:</span>
-<span class="co">#&gt;  8.67  8.99  8.68 26.91  total = 56.26 </span>
+<span class="co">#&gt;  8.77  8.98  8.67 26.93  total = 56.35 </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; fREML score: 22074.32</span></code></pre></div>
+<span class="co">#&gt; fREML score: 21336.64</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
 <span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
@@ -204,56 +204,56 @@
 
 <span class="va">synthetic_all_5y</span>
 <span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
-<span class="co">#&gt; [0,5)    2.2891737 0.9949687 0.2691132 0.2394117 0.4182412 0.7758830 1.0625373</span>
-<span class="co">#&gt; [5,10)   0.9250158 5.9172474 1.6408940 0.3277472 0.2994007 0.5994652 1.1394165</span>
-<span class="co">#&gt; [10,15)  0.1564236 1.4495157 8.6842279 1.7818410 0.3210659 0.3458876 0.6575636</span>
-<span class="co">#&gt; [15,20)  0.1498034 0.2494135 1.6221258 7.7674864 1.6814767 0.4917967 0.5195025</span>
-<span class="co">#&gt; [20,25)  0.3066034 0.2999524 0.3748132 1.3630679 4.9011663 1.7411600 0.8233086</span>
-<span class="co">#&gt; [25,30)  0.4338632 0.5084420 0.5179072 0.5844292 1.2379027 2.7802984 1.6666857</span>
-<span class="co">#&gt; [30,35)  0.4724034 0.6177384 0.6769786 0.7191672 0.8828595 1.4130443 2.0243651</span>
-<span class="co">#&gt; [35,40)  0.4665727 0.7230177 0.7890517 0.7671371 0.8858053 1.2882586 1.8463474</span>
-<span class="co">#&gt; [40,45)  0.3553404 0.6695318 0.9056751 0.8685303 0.7951551 0.9707911 1.4902907</span>
-<span class="co">#&gt; [45,50)  0.2656129 0.4586718 0.7774093 0.9920817 0.9505373 0.8618402 0.9657264</span>
-<span class="co">#&gt; [50,55)  0.2652696 0.3335625 0.4928810 0.7889709 1.0839066 1.1610205 1.0378091</span>
-<span class="co">#&gt; [55,60)  0.2779783 0.3444442 0.3600289 0.4598311 0.7295451 1.1144280 1.2853488</span>
-<span class="co">#&gt; [60,65)  0.2038195 0.3563334 0.3697974 0.3351314 0.3902712 0.6015204 0.9153784</span>
-<span class="co">#&gt; [65,70)  0.1186364 0.2517017 0.3452473 0.3367333 0.3169853 0.3660394 0.5048739</span>
-<span class="co">#&gt; [70,75)  0.1095165 0.1646628 0.2192171 0.2668296 0.3052080 0.3498869 0.4182720</span>
-<span class="co">#&gt; [75,Inf) 0.2547570 0.2872322 0.2215026 0.1995964 0.2129546 0.2283466 0.2732799</span>
+<span class="co">#&gt; [0,5)    2.2961778 0.9841760 0.2665967 0.2436655 0.4263069 0.7686328 1.0457418</span>
+<span class="co">#&gt; [5,10)   0.9175304 5.9371406 1.6621643 0.3355184 0.3035360 0.5921631 1.1227155</span>
+<span class="co">#&gt; [10,15)  0.1560111 1.4031858 8.6739195 1.8637429 0.3277827 0.3409390 0.6454148</span>
+<span class="co">#&gt; [15,20)  0.1523118 0.2469108 1.5818971 7.7827790 1.7205829 0.4877014 0.5113751</span>
+<span class="co">#&gt; [20,25)  0.3093607 0.2952594 0.3694681 1.3860727 4.9504574 1.7040590 0.8051970</span>
+<span class="co">#&gt; [25,30)  0.4394524 0.5026583 0.5100119 0.5911413 1.2744947 2.7749975 1.6327936</span>
+<span class="co">#&gt; [30,35)  0.4783429 0.6128759 0.6709726 0.7279402 0.8997542 1.4076367 2.0034893</span>
+<span class="co">#&gt; [35,40)  0.4707160 0.7161894 0.7818917 0.7754519 0.8982554 1.2761030 1.8279342</span>
+<span class="co">#&gt; [40,45)  0.3585837 0.6616827 0.8958419 0.8786357 0.8075277 0.9583238 1.4669700</span>
+<span class="co">#&gt; [45,50)  0.2694747 0.4548469 0.7697744 1.0041722 0.9687434 0.8558886 0.9518309</span>
+<span class="co">#&gt; [50,55)  0.2688993 0.3315254 0.4888495 0.7979599 1.1016920 1.1536309 1.0257817</span>
+<span class="co">#&gt; [55,60)  0.2800674 0.3418540 0.3564905 0.4629270 0.7351270 1.0983144 1.2677984</span>
+<span class="co">#&gt; [60,65)  0.2047405 0.3530780 0.3664221 0.3391652 0.3958605 0.5933897 0.9004819</span>
+<span class="co">#&gt; [65,70)  0.1192766 0.2500690 0.3431780 0.3416790 0.3228740 0.3627953 0.4976479</span>
+<span class="co">#&gt; [70,75)  0.1102092 0.1645586 0.2203824 0.2729754 0.3113342 0.3471806 0.4138156</span>
+<span class="co">#&gt; [75,Inf) 0.2734595 0.3064248 0.2138374 0.1389023 0.1280255 0.1656627 0.2357608</span>
 <span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
-<span class="co">#&gt; [0,5)    0.9493580 0.6519831 0.4556524 0.3867690 0.3724571 0.3435719 0.2757343</span>
-<span class="co">#&gt; [5,10)   1.3675059 1.0083798 0.6044589 0.3922269 0.2915877 0.2394097 0.2107546</span>
-<span class="co">#&gt; [10,15)  1.0913430 1.1090114 0.7530522 0.4433578 0.2602545 0.1778190 0.1544232</span>
-<span class="co">#&gt; [15,20)  0.7947386 1.0283718 0.9226043 0.6221873 0.3410001 0.1850457 0.1336665</span>
-<span class="co">#&gt; [20,25)  0.8055499 0.9242376 0.9518948 0.8024749 0.5101751 0.2631519 0.1482032</span>
-<span class="co">#&gt; [25,30)  1.1071329 0.9817657 0.9472848 0.8778943 0.6672166 0.3948120 0.2087426</span>
-<span class="co">#&gt; [30,35)  1.6236300 1.1736590 0.9576277 0.8745315 0.7542811 0.5484007 0.3355116</span>
-<span class="co">#&gt; [35,40)  1.9568005 1.5709759 1.0801767 0.8051132 0.6709106 0.5785565 0.4687143</span>
-<span class="co">#&gt; [40,45)  2.0138131 1.9411765 1.4120118 0.8682299 0.5396522 0.4115969 0.4011043</span>
-<span class="co">#&gt; [45,50)  1.3375906 1.7651199 1.7811647 1.2241008 0.6206899 0.3198197 0.2524756</span>
-<span class="co">#&gt; [50,55)  0.9711036 1.1306380 1.4758079 1.5786365 1.0054753 0.4498633 0.2354822</span>
-<span class="co">#&gt; [55,60)  1.1132429 0.9341166 1.0190510 1.3232209 1.2972753 0.7627647 0.3639279</span>
-<span class="co">#&gt; [60,65)  1.0417119 0.8990143 0.7911803 0.9062217 1.0812876 0.9943012 0.5826591</span>
-<span class="co">#&gt; [65,70)  0.6669633 0.7071213 0.6420229 0.6265520 0.6927873 0.8141661 0.8601807</span>
-<span class="co">#&gt; [70,75)  0.5098696 0.5861997 0.5892296 0.5352969 0.4683113 0.4718484 0.6575502</span>
-<span class="co">#&gt; [75,Inf) 0.3364058 0.3946486 0.4475374 0.4600678 0.3668111 0.2486042 0.2217512</span>
-<span class="co">#&gt;            [70,75)  [75,Inf)</span>
-<span class="co">#&gt; [0,5)    0.1668769 0.1292756</span>
-<span class="co">#&gt; [5,10)   0.1549106 0.1525056</span>
-<span class="co">#&gt; [10,15)  0.1325375 0.1595105</span>
-<span class="co">#&gt; [15,20)  0.1153000 0.1787327</span>
-<span class="co">#&gt; [20,25)  0.1028265 0.1788953</span>
-<span class="co">#&gt; [25,30)  0.1100376 0.1632014</span>
-<span class="co">#&gt; [30,35)  0.1670185 0.1825263</span>
-<span class="co">#&gt; [35,40)  0.2842698 0.2727809</span>
-<span class="co">#&gt; [40,45)  0.3487355 0.4266697</span>
-<span class="co">#&gt; [45,50)  0.2588026 0.5250746</span>
-<span class="co">#&gt; [50,55)  0.1811590 0.4930047</span>
-<span class="co">#&gt; [55,60)  0.1921257 0.4106243</span>
-<span class="co">#&gt; [60,65)  0.2718940 0.3589770</span>
-<span class="co">#&gt; [65,70)  0.4402282 0.3840373</span>
-<span class="co">#&gt; [70,75)  0.8585981 0.6174334</span>
-<span class="co">#&gt; [75,Inf) 0.3443620 1.2402697</span></code></pre></div>
+<span class="co">#&gt; [0,5)    0.9659428 0.6537108 0.4503856 0.3820578 0.3796647 0.3429701 0.2809982</span>
+<span class="co">#&gt; [5,10)   1.3931823 1.0130246 0.6007397 0.3900379 0.2974886 0.2380190 0.2138697</span>
+<span class="co">#&gt; [10,15)  1.1082553 1.1105445 0.7483189 0.4427546 0.2667620 0.1768716 0.1561535</span>
+<span class="co">#&gt; [15,20)  0.8083659 1.0268667 0.9122820 0.6187293 0.3494482 0.1847988 0.1349457</span>
+<span class="co">#&gt; [20,25)  0.8192829 0.9264065 0.9437859 0.7962770 0.5202391 0.2619769 0.1491834</span>
+<span class="co">#&gt; [25,30)  1.1249652 0.9842276 0.9420020 0.8757729 0.6833611 0.3932824 0.2097393</span>
+<span class="co">#&gt; [30,35)  1.6605228 1.1779630 0.9493098 0.8715278 0.7754303 0.5487952 0.3392793</span>
+<span class="co">#&gt; [35,40)  2.0005634 1.5807540 1.0701711 0.7972073 0.6849897 0.5760937 0.4745477</span>
+<span class="co">#&gt; [40,45)  2.0549419 1.9468994 1.4015427 0.8618834 0.5496203 0.4078352 0.4039658</span>
+<span class="co">#&gt; [45,50)  1.3628629 1.7679749 1.7637476 1.2197031 0.6354214 0.3185311 0.2542919</span>
+<span class="co">#&gt; [50,55)  0.9907296 1.1317668 1.4619191 1.5649061 1.0302608 0.4507559 0.2377263</span>
+<span class="co">#&gt; [55,60)  1.1376829 0.9357412 1.0062316 1.3095410 1.3229469 0.7646212 0.3689179</span>
+<span class="co">#&gt; [60,65)  1.0619998 0.9020357 0.7833675 0.8988580 1.1057568 0.9891921 0.5885683</span>
+<span class="co">#&gt; [65,70)  0.6801188 0.7100285 0.6374689 0.6220742 0.7079672 0.8097389 0.8743001</span>
+<span class="co">#&gt; [70,75)  0.5222652 0.5901288 0.5864612 0.5332604 0.4797534 0.4706634 0.6720563</span>
+<span class="co">#&gt; [75,Inf) 0.3193049 0.3745879 0.4244675 0.4438412 0.3674579 0.2390325 0.2078713</span>
+<span class="co">#&gt;             [70,75)  [75,Inf)</span>
+<span class="co">#&gt; [0,5)    0.16128692 0.1245205</span>
+<span class="co">#&gt; [5,10)   0.14870550 0.1298568</span>
+<span class="co">#&gt; [10,15)  0.12691810 0.1459016</span>
+<span class="co">#&gt; [15,20)  0.10982848 0.1812284</span>
+<span class="co">#&gt; [20,25)  0.09786404 0.1830864</span>
+<span class="co">#&gt; [25,30)  0.10476741 0.1656551</span>
+<span class="co">#&gt; [30,35)  0.15995892 0.1832448</span>
+<span class="co">#&gt; [35,40)  0.27327554 0.2746340</span>
+<span class="co">#&gt; [40,45)  0.33234102 0.4275889</span>
+<span class="co">#&gt; [45,50)  0.24550335 0.5154186</span>
+<span class="co">#&gt; [50,55)  0.17222193 0.4693506</span>
+<span class="co">#&gt; [55,60)  0.18382065 0.3847631</span>
+<span class="co">#&gt; [60,65)  0.26047764 0.3421757</span>
+<span class="co">#&gt; [65,70)  0.42438380 0.3736197</span>
+<span class="co">#&gt; [70,75)  0.82086074 0.5982686</span>
+<span class="co">#&gt; [75,Inf) 0.29256809 1.2298811</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">08</span><span class="op">)</span>
 <span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
@@ -266,56 +266,56 @@
 
 <span class="va">synthetic_all_5y</span>
 <span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
-<span class="co">#&gt; [0,5)    2.2891737 0.9949687 0.2691132 0.2394117 0.4182412 0.7758830 1.0625373</span>
-<span class="co">#&gt; [5,10)   0.9250158 5.9172474 1.6408940 0.3277472 0.2994007 0.5994652 1.1394165</span>
-<span class="co">#&gt; [10,15)  0.1564236 1.4495157 8.6842279 1.7818410 0.3210659 0.3458876 0.6575636</span>
-<span class="co">#&gt; [15,20)  0.1498034 0.2494135 1.6221258 7.7674864 1.6814767 0.4917967 0.5195025</span>
-<span class="co">#&gt; [20,25)  0.3066034 0.2999524 0.3748132 1.3630679 4.9011663 1.7411600 0.8233086</span>
-<span class="co">#&gt; [25,30)  0.4338632 0.5084420 0.5179072 0.5844292 1.2379027 2.7802984 1.6666857</span>
-<span class="co">#&gt; [30,35)  0.4724034 0.6177384 0.6769786 0.7191672 0.8828595 1.4130443 2.0243651</span>
-<span class="co">#&gt; [35,40)  0.4665727 0.7230177 0.7890517 0.7671371 0.8858053 1.2882586 1.8463474</span>
-<span class="co">#&gt; [40,45)  0.3553404 0.6695318 0.9056751 0.8685303 0.7951551 0.9707911 1.4902907</span>
-<span class="co">#&gt; [45,50)  0.2656129 0.4586718 0.7774093 0.9920817 0.9505373 0.8618402 0.9657264</span>
-<span class="co">#&gt; [50,55)  0.2652696 0.3335625 0.4928810 0.7889709 1.0839066 1.1610205 1.0378091</span>
-<span class="co">#&gt; [55,60)  0.2779783 0.3444442 0.3600289 0.4598311 0.7295451 1.1144280 1.2853488</span>
-<span class="co">#&gt; [60,65)  0.2038195 0.3563334 0.3697974 0.3351314 0.3902712 0.6015204 0.9153784</span>
-<span class="co">#&gt; [65,70)  0.1186364 0.2517017 0.3452473 0.3367333 0.3169853 0.3660394 0.5048739</span>
-<span class="co">#&gt; [70,75)  0.1095165 0.1646628 0.2192171 0.2668296 0.3052080 0.3498869 0.4182720</span>
-<span class="co">#&gt; [75,Inf) 0.2547570 0.2872322 0.2215026 0.1995964 0.2129546 0.2283466 0.2732799</span>
+<span class="co">#&gt; [0,5)    2.2961778 0.9841760 0.2665967 0.2436655 0.4263069 0.7686328 1.0457418</span>
+<span class="co">#&gt; [5,10)   0.9175304 5.9371406 1.6621643 0.3355184 0.3035360 0.5921631 1.1227155</span>
+<span class="co">#&gt; [10,15)  0.1560111 1.4031858 8.6739195 1.8637429 0.3277827 0.3409390 0.6454148</span>
+<span class="co">#&gt; [15,20)  0.1523118 0.2469108 1.5818971 7.7827790 1.7205829 0.4877014 0.5113751</span>
+<span class="co">#&gt; [20,25)  0.3093607 0.2952594 0.3694681 1.3860727 4.9504574 1.7040590 0.8051970</span>
+<span class="co">#&gt; [25,30)  0.4394524 0.5026583 0.5100119 0.5911413 1.2744947 2.7749975 1.6327936</span>
+<span class="co">#&gt; [30,35)  0.4783429 0.6128759 0.6709726 0.7279402 0.8997542 1.4076367 2.0034893</span>
+<span class="co">#&gt; [35,40)  0.4707160 0.7161894 0.7818917 0.7754519 0.8982554 1.2761030 1.8279342</span>
+<span class="co">#&gt; [40,45)  0.3585837 0.6616827 0.8958419 0.8786357 0.8075277 0.9583238 1.4669700</span>
+<span class="co">#&gt; [45,50)  0.2694747 0.4548469 0.7697744 1.0041722 0.9687434 0.8558886 0.9518309</span>
+<span class="co">#&gt; [50,55)  0.2688993 0.3315254 0.4888495 0.7979599 1.1016920 1.1536309 1.0257817</span>
+<span class="co">#&gt; [55,60)  0.2800674 0.3418540 0.3564905 0.4629270 0.7351270 1.0983144 1.2677984</span>
+<span class="co">#&gt; [60,65)  0.2047405 0.3530780 0.3664221 0.3391652 0.3958605 0.5933897 0.9004819</span>
+<span class="co">#&gt; [65,70)  0.1192766 0.2500690 0.3431780 0.3416790 0.3228740 0.3627953 0.4976479</span>
+<span class="co">#&gt; [70,75)  0.1102092 0.1645586 0.2203824 0.2729754 0.3113342 0.3471806 0.4138156</span>
+<span class="co">#&gt; [75,Inf) 0.2734595 0.3064248 0.2138374 0.1389023 0.1280255 0.1656627 0.2357608</span>
 <span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
-<span class="co">#&gt; [0,5)    0.9493580 0.6519831 0.4556524 0.3867690 0.3724571 0.3435719 0.2757343</span>
-<span class="co">#&gt; [5,10)   1.3675059 1.0083798 0.6044589 0.3922269 0.2915877 0.2394097 0.2107546</span>
-<span class="co">#&gt; [10,15)  1.0913430 1.1090114 0.7530522 0.4433578 0.2602545 0.1778190 0.1544232</span>
-<span class="co">#&gt; [15,20)  0.7947386 1.0283718 0.9226043 0.6221873 0.3410001 0.1850457 0.1336665</span>
-<span class="co">#&gt; [20,25)  0.8055499 0.9242376 0.9518948 0.8024749 0.5101751 0.2631519 0.1482032</span>
-<span class="co">#&gt; [25,30)  1.1071329 0.9817657 0.9472848 0.8778943 0.6672166 0.3948120 0.2087426</span>
-<span class="co">#&gt; [30,35)  1.6236300 1.1736590 0.9576277 0.8745315 0.7542811 0.5484007 0.3355116</span>
-<span class="co">#&gt; [35,40)  1.9568005 1.5709759 1.0801767 0.8051132 0.6709106 0.5785565 0.4687143</span>
-<span class="co">#&gt; [40,45)  2.0138131 1.9411765 1.4120118 0.8682299 0.5396522 0.4115969 0.4011043</span>
-<span class="co">#&gt; [45,50)  1.3375906 1.7651199 1.7811647 1.2241008 0.6206899 0.3198197 0.2524756</span>
-<span class="co">#&gt; [50,55)  0.9711036 1.1306380 1.4758079 1.5786365 1.0054753 0.4498633 0.2354822</span>
-<span class="co">#&gt; [55,60)  1.1132429 0.9341166 1.0190510 1.3232209 1.2972753 0.7627647 0.3639279</span>
-<span class="co">#&gt; [60,65)  1.0417119 0.8990143 0.7911803 0.9062217 1.0812876 0.9943012 0.5826591</span>
-<span class="co">#&gt; [65,70)  0.6669633 0.7071213 0.6420229 0.6265520 0.6927873 0.8141661 0.8601807</span>
-<span class="co">#&gt; [70,75)  0.5098696 0.5861997 0.5892296 0.5352969 0.4683113 0.4718484 0.6575502</span>
-<span class="co">#&gt; [75,Inf) 0.3364058 0.3946486 0.4475374 0.4600678 0.3668111 0.2486042 0.2217512</span>
-<span class="co">#&gt;            [70,75)  [75,Inf)</span>
-<span class="co">#&gt; [0,5)    0.1668769 0.1292756</span>
-<span class="co">#&gt; [5,10)   0.1549106 0.1525056</span>
-<span class="co">#&gt; [10,15)  0.1325375 0.1595105</span>
-<span class="co">#&gt; [15,20)  0.1153000 0.1787327</span>
-<span class="co">#&gt; [20,25)  0.1028265 0.1788953</span>
-<span class="co">#&gt; [25,30)  0.1100376 0.1632014</span>
-<span class="co">#&gt; [30,35)  0.1670185 0.1825263</span>
-<span class="co">#&gt; [35,40)  0.2842698 0.2727809</span>
-<span class="co">#&gt; [40,45)  0.3487355 0.4266697</span>
-<span class="co">#&gt; [45,50)  0.2588026 0.5250746</span>
-<span class="co">#&gt; [50,55)  0.1811590 0.4930047</span>
-<span class="co">#&gt; [55,60)  0.1921257 0.4106243</span>
-<span class="co">#&gt; [60,65)  0.2718940 0.3589770</span>
-<span class="co">#&gt; [65,70)  0.4402282 0.3840373</span>
-<span class="co">#&gt; [70,75)  0.8585981 0.6174334</span>
-<span class="co">#&gt; [75,Inf) 0.3443620 1.2402697</span>
+<span class="co">#&gt; [0,5)    0.9659428 0.6537108 0.4503856 0.3820578 0.3796647 0.3429701 0.2809982</span>
+<span class="co">#&gt; [5,10)   1.3931823 1.0130246 0.6007397 0.3900379 0.2974886 0.2380190 0.2138697</span>
+<span class="co">#&gt; [10,15)  1.1082553 1.1105445 0.7483189 0.4427546 0.2667620 0.1768716 0.1561535</span>
+<span class="co">#&gt; [15,20)  0.8083659 1.0268667 0.9122820 0.6187293 0.3494482 0.1847988 0.1349457</span>
+<span class="co">#&gt; [20,25)  0.8192829 0.9264065 0.9437859 0.7962770 0.5202391 0.2619769 0.1491834</span>
+<span class="co">#&gt; [25,30)  1.1249652 0.9842276 0.9420020 0.8757729 0.6833611 0.3932824 0.2097393</span>
+<span class="co">#&gt; [30,35)  1.6605228 1.1779630 0.9493098 0.8715278 0.7754303 0.5487952 0.3392793</span>
+<span class="co">#&gt; [35,40)  2.0005634 1.5807540 1.0701711 0.7972073 0.6849897 0.5760937 0.4745477</span>
+<span class="co">#&gt; [40,45)  2.0549419 1.9468994 1.4015427 0.8618834 0.5496203 0.4078352 0.4039658</span>
+<span class="co">#&gt; [45,50)  1.3628629 1.7679749 1.7637476 1.2197031 0.6354214 0.3185311 0.2542919</span>
+<span class="co">#&gt; [50,55)  0.9907296 1.1317668 1.4619191 1.5649061 1.0302608 0.4507559 0.2377263</span>
+<span class="co">#&gt; [55,60)  1.1376829 0.9357412 1.0062316 1.3095410 1.3229469 0.7646212 0.3689179</span>
+<span class="co">#&gt; [60,65)  1.0619998 0.9020357 0.7833675 0.8988580 1.1057568 0.9891921 0.5885683</span>
+<span class="co">#&gt; [65,70)  0.6801188 0.7100285 0.6374689 0.6220742 0.7079672 0.8097389 0.8743001</span>
+<span class="co">#&gt; [70,75)  0.5222652 0.5901288 0.5864612 0.5332604 0.4797534 0.4706634 0.6720563</span>
+<span class="co">#&gt; [75,Inf) 0.3193049 0.3745879 0.4244675 0.4438412 0.3674579 0.2390325 0.2078713</span>
+<span class="co">#&gt;             [70,75)  [75,Inf)</span>
+<span class="co">#&gt; [0,5)    0.16128692 0.1245205</span>
+<span class="co">#&gt; [5,10)   0.14870550 0.1298568</span>
+<span class="co">#&gt; [10,15)  0.12691810 0.1459016</span>
+<span class="co">#&gt; [15,20)  0.10982848 0.1812284</span>
+<span class="co">#&gt; [20,25)  0.09786404 0.1830864</span>
+<span class="co">#&gt; [25,30)  0.10476741 0.1656551</span>
+<span class="co">#&gt; [30,35)  0.15995892 0.1832448</span>
+<span class="co">#&gt; [35,40)  0.27327554 0.2746340</span>
+<span class="co">#&gt; [40,45)  0.33234102 0.4275889</span>
+<span class="co">#&gt; [45,50)  0.24550335 0.5154186</span>
+<span class="co">#&gt; [50,55)  0.17222193 0.4693506</span>
+<span class="co">#&gt; [55,60)  0.18382065 0.3847631</span>
+<span class="co">#&gt; [60,65)  0.26047764 0.3421757</span>
+<span class="co">#&gt; [65,70)  0.42438380 0.3736197</span>
+<span class="co">#&gt; [70,75)  0.82086074 0.5982686</span>
+<span class="co">#&gt; [75,Inf) 0.29256809 1.2298811</span>
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_all_5y</span><span class="op">)</span> <span class="op">+</span>
@@ -353,10 +353,86 @@
 <a href="#data-sources" class="anchor"></a>Data sources</h2>
 <p>This package provides data for use in calculating contact matrices.</p>
 <p>These data are still being cleaned and processed, but their current forms are shown below:</p>
+<div id="eyre_transmission_probabilities" class="section level3">
+<h3 class="hasAnchor">
+<a href="#eyre_transmission_probabilities" class="anchor"></a>eyre_transmission_probabilities</h3>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">eyre_transmission_probabilities</span>
+<span class="co">#&gt; # A tibble: 40,804 × 6</span>
+<span class="co">#&gt;    setting   case_age contact_age case_age_5y contact_age_5y probability</span>
+<span class="co">#&gt;    &lt;chr&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 household        0           0 0-4         0-4                  0.195</span>
+<span class="co">#&gt;  2 household        0           1 0-4         0-4                  0.195</span>
+<span class="co">#&gt;  3 household        0           2 0-4         0-4                  0.195</span>
+<span class="co">#&gt;  4 household        0           3 0-4         0-4                  0.195</span>
+<span class="co">#&gt;  5 household        0           4 0-4         0-4                  0.195</span>
+<span class="co">#&gt;  6 household        0           5 0-4         5-9                  0.196</span>
+<span class="co">#&gt;  7 household        0           6 0-4         5-9                  0.198</span>
+<span class="co">#&gt;  8 household        0           7 0-4         5-9                  0.198</span>
+<span class="co">#&gt;  9 household        0           8 0-4         5-9                  0.199</span>
+<span class="co">#&gt; 10 household        0           9 0-4         5-9                  0.201</span>
+<span class="co">#&gt; # … with 40,794 more rows</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="va">eyre_transmission_probabilities</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>
+     <span class="va">setting</span>,
+     <span class="va">case_age_5y</span>,
+     <span class="va">contact_age_5y</span>
+   <span class="op">)</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
+       <span class="va">probability</span>,
+       <span class="va">mean</span>
+     <span class="op">)</span>,
+     .groups <span class="op">=</span> <span class="st">"drop"</span>
+   <span class="op">)</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>
+     case_age <span class="op">=</span> <span class="va">case_age_5y</span>,
+     contact_age <span class="op">=</span> <span class="va">contact_age_5y</span>
+   <span class="op">)</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
+       <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>,
+       <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">.x</span>,
+                levels <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_order.html">str_sort</a></span><span class="op">(</span>
+                  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,
+                  numeric <span class="op">=</span> <span class="cn">TRUE</span>
+                <span class="op">)</span>
+       <span class="op">)</span>
+     <span class="op">)</span>
+   <span class="op">)</span> <span class="op">%&gt;%</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
+       x <span class="op">=</span> <span class="va">case_age</span>,
+       y <span class="op">=</span> <span class="va">contact_age</span>,
+       fill <span class="op">=</span> <span class="va">probability</span>
+     <span class="op">)</span>
+   <span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">setting</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+     axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+   <span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-eyre-transmission-probabilities-1.png" width="100%"></p>
+</div>
 <div id="abs_education_state" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_education_state" class="anchor"></a>abs_education_state</h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_education_state</span>
 <span class="co">#&gt; # A tibble: 4,194 × 5</span>
 <span class="co">#&gt;     year state aboriginal_and_torres_strait_islander_status   age n_full_and_part…</span>
@@ -376,7 +452,7 @@
 <div id="abs_education_state_2020" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_education_state_2020" class="anchor"></a>abs_education_state_2020</h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_education_state_2020</span>
 <span class="co">#&gt; # A tibble: 808 × 6</span>
 <span class="co">#&gt;     year state   age population population_interpolated  prop</span>
@@ -396,7 +472,7 @@
 <div id="abs_employ_age_lga" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_employ_age_lga" class="anchor"></a>abs_employ_age_lga</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_employ_age_lga</span>
 <span class="co">#&gt; # A tibble: 5,600 × 8</span>
 <span class="co">#&gt;     year state lga    age_group total_employed total_unemployed total_labour_fo…</span>
@@ -416,7 +492,7 @@
 <div id="abs_household_lga" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_household_lga" class="anchor"></a>abs_household_lga</h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_household_lga</span>
 <span class="co">#&gt; # A tibble: 4,968 × 5</span>
 <span class="co">#&gt;     year state lga                   n_persons_usually_resident n_households</span>
@@ -436,7 +512,7 @@
 <div id="abs_pop_age_lga_2016" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_pop_age_lga_2016" class="anchor"></a>abs_pop_age_lga_2016</h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_pop_age_lga_2016</span>
 <span class="co">#&gt; # A tibble: 9,792 × 5</span>
 <span class="co">#&gt;     year state lga                age_group population</span>
@@ -456,7 +532,7 @@
 <div id="abs_pop_age_lga_2020" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_pop_age_lga_2020" class="anchor"></a>abs_pop_age_lga_2020</h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_pop_age_lga_2020</span>
 <span class="co">#&gt; # A tibble: 9,774 × 5</span>
 <span class="co">#&gt;     year state lga                age_group population</span>
@@ -476,7 +552,7 @@
 <div id="abs_state_age" class="section level3">
 <h3 class="hasAnchor">
 <a href="#abs_state_age" class="anchor"></a>abs_state_age</h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abs_state_age</span>
 <span class="co">#&gt; # A tibble: 168 × 3</span>
 <span class="co">#&gt;    state age_group population</span>
