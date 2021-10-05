@@ -1,9 +1,10 @@
-#' @title
-#' @param household_data
+#' @title Get per capita household size based on state or LGA name
+#' @param state state name
+#' @param lga lga name
 #' @return
 #' @author Nick Golding
 #' @export
-get_mean_household_size <- function(state = NULL, lga = NULL) {
+get_per_capita_household_size <- function(state = NULL, lga = NULL) {
   
   level <- dplyr::case_when(
     is.null(state) & is.null(lga) ~ "national",
@@ -18,6 +19,14 @@ get_mean_household_size <- function(state = NULL, lga = NULL) {
   
   if (length(state) > 1 | length(lga) > 1) {
     stop ("only one state or LGA at a time, please")
+  }
+  
+  if (!is.null(state)) {
+    check_state_name(state)
+  }
+  
+  if (!is.null(lga)){
+    check_lga_name(lga)
   }
   
   # given ABS data on household sizes for a *single location*, get average

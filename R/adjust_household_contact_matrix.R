@@ -1,12 +1,17 @@
 #' @title Adjust Household Contact Matrix
-#' @param setting_matrices
-#' @param household_size
-#' @return
+#'
+#' @param setting_matrices setting matrix
+#' @param population population information
+#' @param household_size single number of the size of a household
+#' @param household_contact_rate default of 1
+#' @param model_mean_other_householders default of 2.248971
+#'
+#' @return contact matrix that has household adjustment
 #' @author Nick Golding
 #' @export
 adjust_household_contact_matrix <- function(setting_matrices,
-                                            household_size,
                                             population,
+                                            household_size,
                                             household_contact_rate = 1,
                                             model_mean_other_householders = 2.248971) {
   

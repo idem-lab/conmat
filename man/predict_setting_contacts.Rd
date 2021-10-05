@@ -4,7 +4,12 @@
 \alias{predict_setting_contacts}
 \title{Predict setting contacts}
 \usage{
-predict_setting_contacts(population, contact_model, age_breaks)
+predict_setting_contacts(
+  population,
+  contact_model,
+  age_breaks,
+  per_capita_household_size = NULL
+)
 }
 \arguments{
 \item{population}{population}
@@ -12,6 +17,8 @@ predict_setting_contacts(population, contact_model, age_breaks)
 \item{contact_model}{contact_model}
 
 \item{age_breaks}{age_breaks}
+
+\item{per_capita_household_size}{single number, which is the per capita household size. See \code{get_per_capita_household_size()} function for a helper for Australian data.}
 }
 \value{
 list of matrices
@@ -33,6 +40,14 @@ contact_model_pred <- predict_setting_contacts(
   population = get_polymod_population(), 
   contact_model = contact_model, 
   age_breaks = c(seq(0, 75, by = 5), Inf)
+)
+
+# Adjust the household size distribution
+synthetic_settings_5y_fairfield <- predict_setting_contacts(
+  population = fairfield_age_pop,
+  contact_model = setting_models,
+  age_breaks = c(seq(0, 85, by = 5), Inf),
+  household_size_distribution = fairfield_household_sizes
 )
 }
 }

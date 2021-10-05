@@ -2,7 +2,7 @@
 #' @param population population
 #' @param contact_model contact_model
 #' @param age_breaks age_breaks
-#' @param household_size_distribution household_size_distribution
+#' @param per_capita_household_size single number, which is the per capita household size. See `get_per_capita_household_size()` function for a helper for Australian data.
 #' @return list of matrices
 #' @author Nicholas Tierney
 #' @export
@@ -33,7 +33,7 @@
 predict_setting_contacts <- function(population, 
                                      contact_model, 
                                      age_breaks,
-                                     household_size_distribution = NULL) {
+                                     per_capita_household_size = NULL) {
 
   setting_predictions <- furrr::future_map(
     .x = contact_model,
@@ -48,10 +48,23 @@ predict_setting_contacts <- function(population,
     .f = predictions_to_matrix,
     .options = furrr::furrr_options(seed = TRUE)
   )
-
+  
   combination <- Reduce("+", setting_matrices)
   setting_matrices$all <- combination
   
-  setting_matrices
+  if (is.null(per_capita_household_size)) {
+    return(setting_matrices)
+  } else if (!is.null(per_capita_household_size)){
+    setting_matrices <- adjust_household_contact_matrix(
+      setting_matrices = setting_matrices,
+      # how do we choose this household size?
+      household_size = per_capita_household_size,
+      population = population
+      )
+    return(
+      setting_matrices
+    )
+    
+  }
 
 }
