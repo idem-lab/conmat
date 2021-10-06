@@ -61,7 +61,8 @@ predict_setting_contacts <- function(population,
                                      contact_model, 
                                      age_breaks,
                                      per_capita_household_size = NULL,
-                                     model_per_capita_household_size = get_polymod_percapita_household_size()) {
+                                     model_per_capita_household_size =
+                                       get_polymod_per_capita_household_size()) {
 
   setting_predictions <- furrr::future_map(
     .x = contact_model,
