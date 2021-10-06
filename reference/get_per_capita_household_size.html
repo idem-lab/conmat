@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Setting weights from Eyre et al. — setting_weights • conmat</title>
+<title>Get per capita household size based on state or LGA name — get_per_capita_household_size • conmat</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Setting weights from Eyre et al. — setting_weights" />
-<meta property="og:description" content="A vector that contains the weights computed from the digitised transmission probabilities from &quot;The impact of SARS-CoV-2 vaccination on Alpha &amp;amp; Delta variant transmission&quot;, by David W Eyre, Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels, A Sarah Walker, Tim EA Peto (doi: 10.1101/2021.09.28.21264260
-." />
+<meta property="og:title" content="Get per capita household size based on state or LGA name — get_per_capita_household_size" />
+<meta property="og:description" content="Get per capita household size based on state or LGA name" />
 
 
 
@@ -104,27 +103,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Setting weights from Eyre et al.</h1>
+    <h1>Get per capita household size based on state or LGA name</h1>
     
-    <div class="hidden name"><code>setting_weights.Rd</code></div>
+    <div class="hidden name"><code>get_per_capita_household_size.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A vector that contains the weights computed from the digitised transmission probabilities from "The impact of SARS-CoV-2 vaccination on Alpha &amp; Delta variant transmission", by David W Eyre, Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels, A Sarah Walker, Tim EA Peto (doi: <a href='https://doi.org/10.1101/2021.09.28.21264260'>10.1101/2021.09.28.21264260</a>
-.</p>
+    <p>Get per capita household size based on state or LGA name</p>
     </div>
 
-    <pre class="usage"><span class='va'>setting_weights</span></pre>
+    <pre class="usage"><span class='fu'>get_per_capita_household_size</span><span class='op'>(</span>state <span class='op'>=</span> <span class='cn'>NULL</span>, lga <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>state</th>
+      <td><p>state name</p></td>
+    </tr>
+    <tr>
+      <th>lga</th>
+      <td><p>lga name</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named vector of weights relative to home, for home, work, school, and other</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>Numeric of length 1 - the per capita household size for a given state
+or LGA.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>When using this data, ensure that you cite the original authors at</p>
-<p>Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., &amp; Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha &amp; Delta variant transmission Preprint. Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260</p>
+    <p>Nick Golding</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>get_per_capita_household_size</span><span class='op'>(</span>lga <span class='op'>=</span> <span class='st'>"Fairfield (C)"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 4.199372</div><div class='input'><span class='fu'>get_per_capita_household_size</span><span class='op'>(</span>state <span class='op'>=</span> <span class='st'>"NSW"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 3.4407</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># cannot specify both state and LGA</span>
+<span class='fu'>get_per_capita_household_size</span><span class='op'>(</span>state <span class='op'>=</span> <span class='st'>"NSW"</span>, lga <span class='op'>=</span> <span class='st'>"Fairfield (C)"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
