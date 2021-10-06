@@ -9,7 +9,7 @@ predict_setting_contacts(
   contact_model,
   age_breaks,
   per_capita_household_size = NULL,
-  ...
+  model_per_capita_household_size = get_polymod_percapita_household_size()
 )
 }
 \arguments{
@@ -21,20 +21,33 @@ predict_setting_contacts(
 
 \item{per_capita_household_size}{Optional (defaults to NULL). When set, it
 adjusts the household contact matrix by some per capital household size.
-To set it, provide a single number, which is the per capita household size.
-See \code{get_per_capita_household_size()} function for a helper for Australian
-data with a workflow on how to ge this number.}
+To set it, provide a single number, the per capita household size. More
+information is provided below in Details. See
+\code{\link[=get_per_capita_household_size]{get_per_capita_household_size()}} function for a helper for Australian
+data with a workflow on how to get this number.}
 
-\item{...}{extra arguments to pass to the \code{per_capita_household_size}
-adjustment - see \code{adjust_household_contact_matrix} for details.
-Default values for this are \code{household_contact_rate = 1} and
-\code{model_mean_other_householders = 2.248971}.}
+\item{model_per_capita_household_size}{modelled per capita household size.
+Default values for this are from
+\code{\link[=get_polymod_per_capita_household_size]{get_polymod_per_capita_household_size()}}, which ends up being 3.248971}
 }
 \value{
 List of setting matrices
 }
 \description{
 Predict setting contacts
+}
+\details{
+We use Per-capita household size instead of mean household size.
+Per-capita household size is different to mean household size, as the
+household size averaged over people in the \strong{population}, not over
+households, so larger households get upweighted. It is calculated by
+taking a distribution of the number of households of each size in a
+population, multiplying the size by the household by the household count
+to get the number of people with that size of household, and computing
+the population-weighted average of household sizes. We use per-capita
+household size as it is a more accurate reflection of the average
+number of household members a person in the population can have contact
+with.
 }
 \examples{
 # don't run as it takes too long to fit

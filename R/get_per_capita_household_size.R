@@ -99,11 +99,11 @@ get_per_capita_household_size <- function(state = NULL, lga = NULL) {
       fraction = n_people / sum(n_people)
     ) %>%
     dplyr::summarise(
-      mean_household_size = sum(size * fraction),
+      per_capita_household_size = sum(size * fraction),
       .groups = "drop"
     ) %>%
     dplyr::pull(
-      mean_household_size
+      per_capita_household_size
     )
   
 }

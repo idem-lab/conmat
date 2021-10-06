@@ -1,32 +1,30 @@
 #' @title Adjust Household Contact Matrix
 #' 
-#' This function is used internally within [predict_setting_contacts()]
+#' This function is used internally within [predict_setting_contacts()].
+#' See details below for why we use the per capita adjustment
+#' 
+#' @details We use Per-capita household size instead of mean household size.
+#'     Per-capita household size is different to mean household size, as the 
+#'     household size averaged over people in the **population**, not over 
+#'     households, so larger households get upweighted. It is calculated by 
+#'     taking a distribution of the number of households of each size in a 
+#'     population, multiplying the size by the household by the household count 
+#'     to get the number of people with that size of household, and computing 
+#'     the population-weighted average of household sizes. We use per-capita 
+#'     household size as it is a more accurate reflection of the average 
+#'     number of household members a person in the population can have contact 
+#'     with.
 #'
 #' @param setting_matrices setting matrix
-#' @param population population information
-#' @param household_size single number of the size of a household
-#' @param household_contact_rate default of 1
+#' @param per_capita_household_size single number of the size of a household
 #' @param model_mean_other_householders default of 2.248971
 #'
 #' @return contact matrix that has household adjustment
 #' @author Nick Golding
 #' @export
 adjust_household_contact_matrix <- function(setting_matrices,
-                                            population,
-                                            household_size,
-                                            household_contact_rate = 1,
-                                            model_mean_other_householders = 2.248971) {
-  
-  # get the mean number of other household members from thpolymod data used to
-  # train the contact model
-  
-  # model_mean_other_householders <- socialmixr::polymod$participants %>%
-  #   mutate(
-  #     other_householders = hh_size - 1
-  #   ) %>%
-  #   summarise(
-  #     mean(other_householders)
-  #   )
+                                            per_capita_household_size,
+                                            model_percapita_household_size = 2.248971) {
   
   # given a list of 4 setting-specific synthetic contact matrices (including
   # 'home'), and a mean household size, adjust the number of household contacts
@@ -37,8 +35,7 @@ adjust_household_contact_matrix <- function(setting_matrices,
   # get ratio between expected number of other household members (household size
   # minus 1) for this place from ABS data, and the average from the data used to
   # train the model
-  expected_other_householders <- household_contact_rate * (household_size - 1)
-  ratio <- expected_other_householders / model_mean_other_householders
+  ratio <- (per_capita_household_size - 1) / (model_per_capita_household_size - 1)
   
   # adjust home matrix and recompute all matrix
   settings <- setdiff(names(setting_matrices), "all")
