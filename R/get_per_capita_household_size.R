@@ -1,9 +1,17 @@
 #' @title Get per capita household size based on state or LGA name
 #' @param state state name
 #' @param lga lga name
-#' @return
+#' @return Numeric of length 1 - the per capita household size for a given state
+#'     or LGA.
 #' @author Nick Golding
 #' @export
+#' @examples 
+#' get_per_capita_household_size(lga = "Fairfield (C)")
+#' get_per_capita_household_size(state = "NSW")
+#' \dontrun{
+#' # cannot specify both state and LGA
+#' get_per_capita_household_size(state = "NSW", lga = "Fairfield (C)")
+#' }
 get_per_capita_household_size <- function(state = NULL, lga = NULL) {
   
   level <- dplyr::case_when(

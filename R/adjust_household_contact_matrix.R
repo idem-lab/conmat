@@ -1,4 +1,6 @@
 #' @title Adjust Household Contact Matrix
+#' 
+#' This function is used internally within [predict_setting_contacts()]
 #'
 #' @param setting_matrices setting matrix
 #' @param population population information

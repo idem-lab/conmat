@@ -12,10 +12,19 @@ get_per_capita_household_size(state = NULL, lga = NULL)
 \item{lga}{lga name}
 }
 \value{
-
+Numeric of length 1 - the per capita household size for a given state
+or LGA.
 }
 \description{
 Get per capita household size based on state or LGA name
+}
+\examples{
+get_per_capita_household_size(lga = "Fairfield (C)")
+get_per_capita_household_size(state = "NSW")
+\dontrun{
+# cannot specify both state and LGA
+get_per_capita_household_size(state = "NSW", lga = "Fairfield (C)")
+}
 }
 \author{
 Nick Golding
