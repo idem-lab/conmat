@@ -27,7 +27,7 @@ and the code to digitise these figures is in \code{data-raw} under
 authors at
 }
 \details{
-Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission \link{Preprint}. Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
+Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission (Preprint). Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
 }
 \examples{
 \dontrun{

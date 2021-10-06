@@ -9,6 +9,9 @@ get_polymod_setting_data(
     "Poland", "United Kingdom")
 )
 }
+\arguments{
+\item{countries}{countries to extract data from}
+}
 \value{
 polymod data
 }

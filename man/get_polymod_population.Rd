@@ -9,6 +9,9 @@ get_polymod_population(
     "Poland", "United Kingdom")
 )
 }
+\arguments{
+\item{countries}{countries to extract data from}
+}
 \value{
 data frame
 }

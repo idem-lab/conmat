@@ -1,5 +1,6 @@
 #' Get polymod setting data
 
+#' @param countries countries to extract data from
 #' @return polymod data
 #' @examples
 #' \dontrun{

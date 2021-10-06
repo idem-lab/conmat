@@ -17,14 +17,14 @@
 #'
 #' @param setting_matrices setting matrix
 #' @param per_capita_household_size single number of the size of a household
-#' @param model_mean_other_householders 
+#' @param model_per_capita_household_size per capita household size
 #'
 #' @return contact matrix that has household adjustment
 #' @author Nick Golding
 #' @export
 adjust_household_contact_matrix <- function(setting_matrices,
                                             per_capita_household_size,
-                                            model_percapita_household_size) {
+                                            model_per_capita_household_size) {
   
   # given a list of 4 setting-specific synthetic contact matrices (including
   # 'home'), and a mean household size, adjust the number of household contacts

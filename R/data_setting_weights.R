@@ -4,7 +4,7 @@
 #' 
 #' When using this data, ensure that you cite the original authors at 
 #' 
-#' Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission [Preprint]. Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
+#' Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission (Preprint). Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
 #'
 #' @format A named vector of weights relative to home, for home, work, school, and other
 "setting_weights"

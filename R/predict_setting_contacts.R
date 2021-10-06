@@ -91,9 +91,9 @@ predict_setting_contacts <- function(population,
     setting_matrices <- adjust_household_contact_matrix(
       setting_matrices = setting_matrices,
       # how do we choose this household size?
-      household_size = per_capita_household_size,
+      per_capita_household_size = per_capita_household_size,
       # extra arguments to adjust_household_contact_matrix
-      model_percapita_household_size = model_per_capita_household_size
+      model_per_capita_household_size = model_per_capita_household_size
       )
     return(
       setting_matrices

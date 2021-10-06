@@ -13,11 +13,13 @@ get_polymod_contact_data(
 )
 }
 \arguments{
-\item{setting}{PARAM_DESCRIPTION, Default: c("all", "home", "work", "school", "other")}
+\item{setting}{Default: c("all", "home", "work", "school", "other")}
 
-\item{ages}{PARAM_DESCRIPTION, Default: 0:100}
+\item{countries}{countries to extract data from}
 
-\item{contact_age_imputation}{PARAM_DESCRIPTION, Default: c("sample", "mean", "remove_participant")}
+\item{ages}{Default: 0:100}
+
+\item{contact_age_imputation}{Default: c("sample", "mean", "remove_participant")}
 }
 \value{
 OUTPUT_DESCRIPTION

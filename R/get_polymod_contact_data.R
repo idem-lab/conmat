@@ -1,8 +1,9 @@
 #' Format polymod data and filter contacts to certain settings
 #'
-#' @param setting PARAM_DESCRIPTION, Default: c("all", "home", "work", "school", "other")
-#' @param ages PARAM_DESCRIPTION, Default: 0:100
-#' @param contact_age_imputation PARAM_DESCRIPTION, Default: c("sample", "mean", "remove_participant")
+#' @param setting Default: c("all", "home", "work", "school", "other")
+#' @param countries countries to extract data from
+#' @param ages Default: 0:100
+#' @param contact_age_imputation Default: c("sample", "mean", "remove_participant")
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples

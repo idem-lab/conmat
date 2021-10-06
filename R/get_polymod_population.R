@@ -5,6 +5,7 @@
 #' note that we don't want to weight by survey age distributions for this, since
 #' the total number of *participants* represents the sampling
 #'
+#' @param countries countries to extract data from
 #' @return data frame
 #' @examples
 #' \dontrun{

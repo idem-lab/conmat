@@ -16,6 +16,6 @@ A vector that contains the weights computed from the digitised transmission prob
 \details{
 When using this data, ensure that you cite the original authors at
 
-Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission \link{Preprint}. Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
+Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission (Preprint). Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260
 }
 \keyword{datasets}

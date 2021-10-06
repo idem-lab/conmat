@@ -10,7 +10,7 @@ See details below for why we use the per capita adjustment}
 adjust_household_contact_matrix(
   setting_matrices,
   per_capita_household_size,
-  model_percapita_household_size
+  model_per_capita_household_size
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ adjust_household_contact_matrix(
 
 \item{per_capita_household_size}{single number of the size of a household}
 
-\item{model_mean_other_householders}{}
+\item{model_per_capita_household_size}{per capita household size}
 }
 \value{
 contact matrix that has household adjustment
