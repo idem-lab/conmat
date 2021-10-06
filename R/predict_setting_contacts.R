@@ -3,7 +3,7 @@
 #' @param contact_model contact_model
 #' @param age_breaks age_breaks
 #' @param per_capita_household_size Optional (defaults to NULL). When set, it 
-#'   adjusts the household contact matrix by some per capital household size. 
+#'   adjusts the household contact matrix by some per capita household size. 
 #'   To set it, provide a single number, the per capita household size. More
 #'   information is provided below in Details. See 
 #'   [get_per_capita_household_size()] function for a helper for Australian
@@ -14,7 +14,7 @@
 #'
 #' @details We use Per-capita household size instead of mean household size.
 #'     Per-capita household size is different to mean household size, as the 
-#'     household size averaged over people in the **population**, not over 
+#'     household size averaged over **people** in the population, not over 
 #'     households, so larger households get upweighted. It is calculated by 
 #'     taking a distribution of the number of households of each size in a 
 #'     population, multiplying the size by the household by the household count 
