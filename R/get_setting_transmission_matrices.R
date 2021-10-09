@@ -1,13 +1,30 @@
 #' Get Setting Transmission Matrices
 #'
-#' Given some age breaks, return a named list of matrices containing relative
-#'     transmission probability matrices for each of 4 settings: home, school,
-#'     work, other. These can be combined with contact matrices to produce
-#'     setting-specific relative next generation matrices.
+#' Given some age breaks, return a named list of matrices containing per-contact
+#' transmission rate matrices for each of 4 settings: home, school, work, other.
+#' These can be combined with contact matrices to produce setting-specific
+#' relative next generation matrices. Note that these are not probabilities, but
+#' the ratio of the expected number of transmission events per contact (using
+#' the conmat/polymod contact definitions). For 'home' and 'school' these are
+#' likely to reflect transmission probabilities (secondary attack rates), since
+#' they were calibrated to known attack rates in these settings. For 'other'
+#' they contain many values larger than 1, reflecting the fact that the contact
+#' definition in conmat/polymod does not capture all potential opportunities for
+#' onward transmission.
 #'
-#' @param age_breaks vector of age breaks, defaults to `c(seq(0, 80, by = 5), Inf)`
+#' When using this data, ensure that you cite this package, and the original
+#' authors of the paper from which these estimates were derived at:
 #'
-#' @return list of matrices, containing the transmission probabilities for each setting
+#' Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B.,
+#' Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on
+#' Alpha & Delta variant transmission (Preprint). medRxiv 2021.09.28.21264260
+#' https://doi.org/10.1101/2021.09.28.21264260
+#'
+#' @param age_breaks vector of age breaks, defaults to `c(seq(0, 80, by = 5),
+#'   Inf)`
+#'
+#' @return list of matrices, containing the per-contact transmission rate for
+#'   each setting
 #' @export
 #'
 #' @examples
@@ -34,8 +51,8 @@
 #' # remove the 'all' matrix, keep the other four settings
 #' contact_matrices <- contact_matrices[c("home", "school", "work", "other")]
 #'
-#' # get setting-specific transmission probability matrices for the same age
-#' # aggregations
+#' # get setting-specific per-contact transmission rate matrices for the same
+#' # age aggregations
 #' transmission_matrices <- get_setting_transmission_matrices(
 #'   age_breaks = age_breaks
 #' )
@@ -54,9 +71,10 @@
 get_setting_transmission_matrices <- function(
   age_breaks = c(seq(0, 80, by = 5), Inf)
   ) {
-    # format the setting weights (calibrated for these  transmission probabilities
-    # and conmat contact matrices against English infection data) into a tibble to
-    # join to the transmission probabilities
+  
+    # format the setting transmission scalings (calibrated for thesetransmission
+    # probabilities and conmat contact matrices against English infection data)
+    # into a tibble to join to the transmission probabilities
     setting_weights_tibble <- tibble::tibble(setting = names(setting_weights),
                                              weight = setting_weights)
     
@@ -107,7 +125,13 @@ get_setting_transmission_matrices <- function(
       # add on the setting weights and multiply to reweight the relative probabilities
       dplyr::left_join(setting_weights_tibble,
                        by = "setting") %>%
-      dplyr::mutate(matrix = mapply(`*`, matrix, weight, SIMPLIFY = FALSE)) %>%
+      dplyr::rowwise() %>%
+      dplyr::mutate(
+        matrix = dplyr::case_when(
+          setting == "home" ~ list(1 - (1 - matrix) ^ weight),# ,
+          TRUE ~ list(matrix * weight)
+        )
+      ) %>%
       # turn this into a list to return
       dplyr::select(-weight) %>%
       tidyr::pivot_wider(names_from = setting,
