@@ -49,9 +49,21 @@ add_school_work_participation <- function(contact_data) {
         ),
         .names = "{.fn}_{.col}"
       ),
-      # the probabilities that both parties go to school/work. May not be the same
-      # place. But proportional to the increase in contacts due to attendance
+      # the probability that a person of the other age other party goes to the
+      # same school/work. May not be the same place. But proportional to the
+      # increase in contacts due to attendance
       school_probability = school_fraction_age_from * school_fraction_age_to,
       work_probability = work_fraction_age_from * work_fraction_age_to,
+      # the probability that a person of the other age would be in the same
+      # school year
+      school_year_probability = school_probability * (2 - pmin(2, abs(age_from - age_to))) / 4,
+      # a weighted combination of this and the population age distribution, so
+      # that if the contact is in the same school year, the weight is 1, and
+      # otherwise it is the population age fraction. this can be used as an
+      # offset, so that population age distribution can be used outside the
+      # classroomm, but does not affect classroom contacts (which due to
+      # cohorting and regularised class sizes are unlikely to depend on the
+      # population age distribution)
+      school_weighted_pop_fraction = pop_age_to * (1 - school_year_probability) + 1 * school_year_probability
     )
 }

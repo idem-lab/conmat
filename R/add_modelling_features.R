@@ -15,5 +15,5 @@ add_modelling_features <- function(contact_data, ...) {
   contact_data %>%
     add_population_age_to(...) %>%
     add_school_work_participation() %>%
-    add_rotated_ages()
+    add_offset()
 }
