@@ -15,33 +15,115 @@
 #' }
 #' @export
 get_age_population_function <- function(population) {
-  population <- population %>%
-    dplyr::arrange(lower.age.limit)
-
-  # compute the widths of age bins
-  bin_widths <- diff(population$lower.age.limit)
-  final_bin_width <- bin_widths[length(bin_widths)]
-  bin_widths <- c(bin_widths, final_bin_width)
-
-  # range of ages (assume the final bin width is that same as the previous one,
-  # since we cannot extrapolate the infinite upper bound without known the upper
-  # age limit)
-  min_age <- min(population$lower.age.limit)
-  max_age <- max(population$lower.age.limit) + final_bin_width
-
-  # interpolator to 1y age groups up to 100
-  spline <- stats::splinefun(
-    # use midpoint, and set population to 0 just beyond the upper bound
-    x = c(population$lower.age.limit + bin_widths / 2, max_age + 1),
-    y = c(population$population / bin_widths, 0)
-  )
-
-  # wrap this up in a function to handle values outside this range
+  
+  # prepare population data for modelling
+  pop_model <- population %>%
+    arrange(
+      lower.age.limit
+    ) %>%
+    mutate(
+      # model based on bin midpoint
+      bin_width = bin_widths(lower.age.limit),
+      midpoint = lower.age.limit + bin_width / 2,
+      # scaling down the population appropriately
+      log_pop = log(population / bin_width)
+    )
+  
+  # find the maximum of the bounded age groups, and the populations above and
+  # below
+  max_bound <- max(pop_model$lower.age.limit)
+  
+  # filter to just the bounded age groups for fitting
+  pop_model_bounded <- pop_model %>%
+    filter(
+      lower.age.limit < max_bound
+    )
+  
+  total_pop <- sum(pop_model$population)
+  bounded_pop <- sum(pop_model_bounded$population)
+  unbounded_pop <- total_pop - bounded_pop
+  
+  # fit to bounded age groups  
+  fit <- pop_model_bounded %>%
+    with(
+      smooth.spline(
+        x = midpoint,
+        y = log_pop,
+        df = 10
+      )
+    )
+  
+  # predict to a long range of ages, to deal with upper bound
+  pred <- tibble(
+    age = 0:200
+  ) %>%
+    mutate(
+      log_pred = predict(fit, age)$y,
+      pred = exp(log_pred)
+    ) %>%
+    # group into whether it is in the bounded or unbounded population
+    mutate(
+      bounded = age < max_bound,
+    ) %>%
+    group_by(
+      bounded
+    ) %>%
+    # adjust populations within bounded ages to match totals
+    mutate(
+      required_pop = if_else(bounded, bounded_pop, unbounded_pop),
+      modelled_pop = sum(pred),
+      ratio = required_pop / modelled_pop,
+      pred_adj = pred * ratio
+    ) %>%
+    ungroup() %>%
+    # adjust the unbounded region to drop off smoothly, based on the weights
+    mutate(
+      # this is a weird way of getting the population of the final age bin in
+      # the bounded group. Needs to happen after the previous grouped
+      # reweighting step, and needs to be ungrouped now to do it.
+      max_bound_pop = pred_adj[bounded][sum(bounded)],
+    ) %>%
+    group_by(
+      bounded
+    ) %>%
+    mutate(
+      # linearly extrapolate the final population group over years past the
+      # upper bound. Select the number of years past such that all the excess
+      # population is used up
+      max_years_over = 2 * required_pop / max_bound_pop,
+      years_over = pmax(0, age - max_bound),
+      weight = pmax(0, 1 - years_over / max_years_over),
+      weight_sum = sum(weight),
+      target_weight_sum = required_pop / max_bound_pop,
+      weight = weight * target_weight_sum / weight_sum,
+      population = ifelse(bounded, pred_adj, max_bound_pop * weight)
+    ) %>%
+    ungroup() %>%
+    select(
+      age,
+      population
+    ) %>%
+    filter(
+      population > 0
+    )
+  
+  # return a function to look up populations for integer ages
   function(age) {
-    # population <- stats::spline(age)
-    population <- spline(age)
-    invalid <- age < min(age) | age > max_age
-    population[invalid] <- 0
-    pmax(population, 0)
+    
+    tibble(
+      age = age
+    ) %>%
+      left_join(
+        pred,
+        by = "age"
+      ) %>%
+      mutate(
+        population = replace_na(population, 0)
+      ) %>%
+      pull(
+        population
+      )
+    
   }
+  
 }
