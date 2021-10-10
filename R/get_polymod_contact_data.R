@@ -109,5 +109,11 @@ get_polymod_contact_data <- function(setting = c("all", "home", "work", "school"
       contacts = sum(contacted),
       participants = dplyr::n_distinct(part_id),
       .groups = "drop"
+    ) %>%
+    # add the setting information, so models can act differently for each
+    # setting
+    dplyr::mutate(
+      setting = setting,
+      .before = dplyr::everything()
     )
 }
