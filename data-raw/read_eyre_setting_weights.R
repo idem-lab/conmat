@@ -1,6 +1,6 @@
-setting_weights <- c(home = 0.398439750414615,
-                     school = 0.0518003014374517,
-                     work = 0.573187963566651, 
-                     other = 3.90164436403358)
+setting_weights <- c(home = 0.404005921975799,
+                     school = 0.0514654062732588,
+                     work = 0.493991465531508, 
+                     other = 3.84842900440189)
 
 use_data(setting_weights)
