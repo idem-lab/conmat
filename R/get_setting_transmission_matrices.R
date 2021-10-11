@@ -1,16 +1,11 @@
 #' Get Setting Transmission Matrices
 #'
-#' Given some age breaks, return a named list of matrices containing per-contact
-#' transmission rate matrices for each of 4 settings: home, school, work, other.
-#' These can be combined with contact matrices to produce setting-specific
-#' relative next generation matrices. Note that these are not probabilities, but
-#' the ratio of the expected number of transmission events per contact (using
-#' the conmat/polymod contact definitions). For 'home' and 'school' these are
-#' likely to reflect transmission probabilities (secondary attack rates), since
-#' they were calibrated to known attack rates in these settings. For 'other'
-#' they contain many values larger than 1, reflecting the fact that the contact
-#' definition in conmat/polymod does not capture all potential opportunities for
-#' onward transmission.
+#' Given some age breaks, return a named list of matrices containing relative
+#' per-contact transmission probability matrices for each of 4 settings: home,
+#' school, work, other. These can be combined with contact matrices to produce
+#' setting-specific relative next generation matrices (NGMs). These can be
+#' scaled to match a required reproduction number based on the dominant
+#' eigenvalue of the all-settings NGM (the elementwise sum of all setting NGMs)
 #'
 #' When using this data, ensure that you cite this package, and the original
 #' authors of the paper from which these estimates were derived at:
@@ -23,8 +18,8 @@
 #' @param age_breaks vector of age breaks, defaults to `c(seq(0, 80, by = 5),
 #'   Inf)`
 #'
-#' @return list of matrices, containing the per-contact transmission rate for
-#'   each setting
+#' @return list of matrices, containing the relative per-contact transmission
+#'   probability for each setting
 #' @export
 #'
 #' @examples
@@ -117,7 +112,7 @@ get_setting_transmission_matrices <- function(
         home = household,
         school = work_education,
         work = work_education,
-        other = events_activities
+        other = work_education
       ) %>%
       tidyr::pivot_longer(cols = everything(),
                           names_to = "setting",
@@ -128,7 +123,7 @@ get_setting_transmission_matrices <- function(
       dplyr::rowwise() %>%
       dplyr::mutate(
         matrix = dplyr::case_when(
-          setting == "home" ~ list(1 - (1 - matrix) ^ weight),# ,
+          setting == "home" ~ list(1 - (1 - matrix) ^ weight),
           TRUE ~ list(matrix * weight)
         )
       ) %>%
