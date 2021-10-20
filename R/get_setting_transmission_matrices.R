@@ -174,7 +174,7 @@ get_setting_transmission_matrices <- function(
       age_group_to,
       probability
     )
-    
+  
   matrices <- data %>%
     # convert into matrices
     tidyr::nest(
@@ -188,12 +188,12 @@ get_setting_transmission_matrices <- function(
       matrix = lapply(
         matrix,
         tidyr::pivot_wider,
-        names_from = age_group_to,
+        names_from = age_group_from,
         values_from = probability
       ),
       matrix = lapply(matrix,
                       tibble::column_to_rownames,
-                      "age_group_from"),
+                      "age_group_to"),
       matrix = lapply(matrix,
                         as.matrix)
     ) %>%
