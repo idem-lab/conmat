@@ -14,11 +14,11 @@
 matrix_to_predictions <- function(contact_matrix) {
   contact_matrix %>%
     tibble::as_tibble(
-      rownames = "age_group_from"
+      rownames = "age_group_to"
     ) %>%
     tidyr::pivot_longer(
-      cols = -c(age_group_from),
-      names_to = "age_group_to",
+      cols = -c(age_group_to),
+      names_to = "age_group_from",
       values_to = "contacts"
     ) %>%
     dplyr::mutate(
