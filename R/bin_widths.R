@@ -1,10 +1,8 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param lower.age.limit
-#' @return
+#' @title return the widths of bins denoted by a sequence of lower bounds
+#' @description  return the widths of bins denoted by a sequence of lower 
+#'   bounds (assumming the final is the same as the `[penultimate]`).
+#' @param lower_bound lower bound value - a numeric vector
+#' @return vector
 #' @author Nick Golding
 #' @export
 bin_widths <- function(lower_bound) {

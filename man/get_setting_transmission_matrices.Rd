@@ -4,19 +4,59 @@
 \alias{get_setting_transmission_matrices}
 \title{Get Setting Transmission Matrices}
 \usage{
-get_setting_transmission_matrices(age_breaks = c(seq(0, 80, by = 5), Inf))
+get_setting_transmission_matrices(
+  age_breaks = c(seq(0, 80, by = 5), Inf),
+  asymptomatic_relative_infectiousness = 0.5,
+  susceptibility_estimate = c("davies_updated", "davies_original")
+)
 }
 \arguments{
 \item{age_breaks}{vector of age breaks, defaults to \code{c(seq(0, 80, by = 5), Inf)}}
+
+\item{asymptomatic_relative_infectiousness}{the assumed ratio of onward
+infectiousness between asymptomatic and symptomatic cases}
+
+\item{susceptibility_estimate}{which estimate to use for susceptibiloty by
+age - the smoothed original Davies et al estimates, or the set updated to match UK
+under-16 infections (the default)}
 }
 \value{
-list of matrices, containing the transmission probabilities for each setting
+list of matrices, containing the relative per-contact transmission
+probability for each setting
 }
 \description{
-Given some age breaks, return a named list of matrices containing relative
-transmission probability matrices for each of 4 settings: home, school,
-work, other. These can be combined with contact matrices to produce
-setting-specific relative next generation matrices.
+Given some age breaks, return a named list of matrices containing
+age-specific relative per-contact transmission probability matrices for each
+of 4 settings: home, school, work, other. These can be combined with contact
+matrices to produce setting-specific relative next generation matrices
+(NGMs). These can be scaled to match a required reproduction number based on
+the dominant eigenvalue of the all-settings NGM (the elementwise sum of all
+setting NGMs).
+}
+\details{
+These matrices are created from: an estimate of the clinical fraction for
+each age (inferred by applying a smoothing spline to the mean estimates from
+Davies et al.); an assumption of the infectiousness of asymptomatics relative
+to symptomatics (provided as an argument); estimates of the relative
+susceptibility to infection of individuals of different ages, inferred from a
+smoothing-spline estimate of the mean relative susceptibility estimate from
+Davies et al., combined with a re-estimation of the susceptibility profile
+for under-16s, estimated in a similar way but to the age-distribution of
+infections in England from the UK ONS prevalence survey (rather than case
+counts with may undercount children), assuming the above clinical fraction
+estimates, and accounting for vaccination, reduced mixing, and reduced
+transmissibility in work and other settings due to hygiene behaviour; and
+estimates of the relative transmissibility in household vs non-household
+settings - scaled linearly for non-household transmission and binomially for
+household transmission (so that onward onfections do not to exceed the number
+of other household members).
+
+When using this data, ensure that you cite this package, and the original
+authors of the paper from which these estimates were derived:
+
+Davies, N.G., Klepac, P., Liu, Y. et al. Age-dependent effects in the
+transmission and control of COVID-19 epidemics. Nat Med 26, 1205–1211 (2020).
+https://doi.org/10.1038/s41591-020-0962-9
 }
 \examples{
 \dontrun{
@@ -42,8 +82,8 @@ contact_matrices <- predict_setting_contacts(
 # remove the 'all' matrix, keep the other four settings
 contact_matrices <- contact_matrices[c("home", "school", "work", "other")]
 
-# get setting-specific transmission probability matrices for the same age
-# aggregations
+# get setting-specific per-contact transmission rate matrices for the same
+# age aggregations
 transmission_matrices <- get_setting_transmission_matrices(
   age_breaks = age_breaks
 )

@@ -1,10 +1,7 @@
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-
-#' @return
+#' @title Adds offset
+#' @return contact data with two extra columns: 
+#'   `log_contactable_population_school` and `log_contactable_population`
+#' @param contact_data contact_data
 #' @author Nick Golding
 #' @export
 add_offset <- function(contact_data) {
