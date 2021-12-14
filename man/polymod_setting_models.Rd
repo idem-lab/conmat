@@ -3,19 +3,32 @@
 \docType{data}
 \name{polymod_setting_models}
 \alias{polymod_setting_models}
-\title{Polymod Settings model}
+\title{Polymod Settings models}
 \format{
-A model predicting the number of contacts in each of the four
-settings, which are: ..., ...
+An object of class \code{list} of length 4.
 }
 \usage{
 polymod_setting_models
 }
 \description{
-Add details on how the model was fit using the following code (copy in the
-model fitting code from "create-polymod-model.R"):\preformatted{}
+A data object containing a list of fitted gam models predicting the number of contacts in each of the four
+settings which are "home","work","school" and "other". For more details on model fitting, see \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}
 }
-\details{
-\preformatted{}
+\examples{
+\dontrun{
+library(conmat)
+polymod_contact_data <- get_polymod_setting_data()
+polymod_survey_data <- get_polymod_population()
+polymod_setting_models <- fit_setting_contacts(
+ contact_data_list = polymod_contact_data,
+)
+}
+
+
+
+
+}
+\seealso{
+\code{\link[=fit_setting_contacts]{fit_setting_contacts()}}
 }
 \keyword{datasets}
