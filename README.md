@@ -28,7 +28,7 @@ above code)
 remotes::install_github("njtierney/conmat")
 ```
 
-## Disclaimer
+## Note
 
 The contact matrices created using the package are in transposed format
 when compared to the contact matrices discussed by
