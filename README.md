@@ -30,9 +30,9 @@ remotes::install_github("njtierney/conmat")
 
 ## Disclaimer
 
-The contact matrices created using the package are transposed compared
-to the contact matrices discussed by
-[Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697#pcbi.1005697.ref023)
+The contact matrices created using the package are in transposed format
+when compared to the contact matrices discussed by
+[Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697)
 and
 [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074).
 
