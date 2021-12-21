@@ -1,44 +1,71 @@
-get_per_capita_household_size(lga = "Fairfield (C)")
-get_per_capita_household_size(lga = "Botany Bay (C)")
 
-all_household_lgas <- unique(abs_household_lga$lga)
 
-all_household_lgas
 library(purrr)
+library(conmat)
 
-# instead of writing it out for each of the household LGAs
-# we can use purrr
-    # get_per_capita_household_size(lga = all_household_lgas[1])
-    # get_per_capita_household_size(lga = all_household_lgas[2])
-    # get_per_capita_household_size(lga = all_household_lgas[3])
-    # get_per_capita_household_size(lga = all_household_lgas[4])
+# Checking to see the lga in abs_pop_age_lga_2020 that are not in abs_household_lga (has 552 unique lgas) as
+# check_lga_name() in get_per_capita_household_size() uses abs_pop_age_lga_2020 (has 543 unique lgas) 
+# therefore renaming the lgas present in abs_pop_age_lga_2020 
 
-# but this errors out when we have an LGA that doesn't work
-household_per_capita_runs <- map(
-  .x = all_household_lgas,
-  .f = ~get_per_capita_household_size(lga = .x)
-)
+get_unique_lgas<- function(household_data){
+  population_household_lgas<- left_join(abs_pop_age_lga_2020,household_data,by="lga") 
+  per_capita_household_lgas<- population_household_lgas[rowSums(is.na(population_household_lgas)) > 0, ]  
+  all_lgas <- unique(per_capita_household_lgas$lga)
+  return(all_lgas)
+}
 
-# use `safely` function from purrr to capture the errors
+
 safe_get_per_capita_household_size <- safely(get_per_capita_household_size)
 
-get_per_capita_household_size(lga = "Fairfield (C)")
-safe_get_per_capita_household_size(lga = "Fairfield (C)")
-safe_get_per_capita_household_size(lga = "Botany Bay (C)")
+all_household_lgas <- get_unique_lgas(abs_household_lga)
 
 household_per_capita_runs <- map(
   .x = all_household_lgas,
   .f = ~safe_get_per_capita_household_size(lga = .x)
 )
 
-household_per_capita_runs[[1]]
-household_per_capita_runs[[2]]
-
 t_household_per_capita_runs <- transpose(household_per_capita_runs)
 
 # count or test if the result is all not NULL
-sum(map_lgl(t_household_per_capita_runs$result, is.null))
+null_household_lgas<- sum(map_lgl(t_household_per_capita_runs$result, is.null)) 
 
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+
+
+updated_abs_household_lga<- abs_household_lga  %>%
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
+updated_all_household_lgas <- get_unique_lgas(updated_abs_household_lga)
+
+safe_get_updated_per_capita_household_size <- safely(get_per_capita_household_size)
+
+
+
+updated_household_per_capita_runs <- map(
+  .x = updated_all_household_lgas,
+  .f = ~safe_get_updated_per_capita_household_size(lga = .x)
+)
+
+t_updated_household_per_capita_runs <- transpose(updated_household_per_capita_runs)
+
+# count or test if the result is all not NULL
+null_updated_household_lgas<- sum(map_lgl(t_updated_household_per_capita_runs$result, is.null)) 
+
+
+
+test_that("all lgas present in abs_pop_age_lga_2020", {
+  expect_false(isTRUE(all.equal(null_household_lgas, null_updated_household_lgas)))
 })
