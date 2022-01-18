@@ -7,4 +7,4 @@ polymod_setting_models <- fit_setting_contacts(
   population = polymod_survey_data
   )
 
-use_data(polymod_setting_models)
+use_data(polymod_setting_models, compress = "xz", overwrite = TRUE)
