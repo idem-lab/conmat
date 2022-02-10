@@ -14,24 +14,25 @@
 #' }
 #' }
 #' @export
-get_age_population_function <- function(population) {
+get_age_population_function <- function(population, 
+                                        age_col) {
   
   # prepare population data for modelling
   pop_model <- population %>%
     dplyr::arrange(
-      lower.age.limit
+      {{ age_col }}
     ) %>%
     dplyr::mutate(
       # model based on bin midpoint
-      bin_width = bin_widths(lower.age.limit),
-      midpoint = lower.age.limit + bin_width / 2,
+      bin_width = bin_widths( {{ age_col }} ),
+      midpoint = {{ age_col }} + bin_width / 2,
       # scaling down the population appropriately
       log_pop = log(population / bin_width)
     )
   
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(pop_model$lower.age.limit)
+  max_bound <- max(pop_model[[ {{ age_col }} ]])
   
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
