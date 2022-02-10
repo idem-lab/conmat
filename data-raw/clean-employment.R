@@ -110,7 +110,7 @@ abs_employ_age_lga %>%
     by = c("age" = "lower")
   ) %>% 
   select(-upper) %>% 
-  fill(age_group)
+  fill(age_group) %>% 
   mutate(
     lower.age.limit = parse_number(as.character(age_group)),
   ) %>% 
@@ -119,10 +119,10 @@ abs_employ_age_lga %>%
     lga,
     lower.age.limit,
     total_employed
-  ) 
+  )  %>% 
   group_by(state) %>%
-  nest() %>%
-  mutate(age_function = map(data, get_age_population_function)) %>%
+  nest() %>% 
+  mutate(age_function = map(data, get_age_population_function))
   select(-data) %>%
   summarise(
     population_interpolated = map_dbl(0:100, age_function),
