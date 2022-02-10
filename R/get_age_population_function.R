@@ -9,9 +9,12 @@
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
+#' # previous use
+#' get_age_population_function(population)
+#' 
+#' # new use
+#' get_age_population_function(population, age_col = lower.age.limit)
+#' get_age_population_function(new_data, age_col = new_age_column)
 #' }
 #' @export
 get_age_population_function <- function(population, 

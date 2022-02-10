@@ -4,7 +4,7 @@
 \alias{get_age_population_function}
 \title{return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(population)
+get_age_population_function(population, age_col)
 }
 \arguments{
 \item{population}{PARAM_DESCRIPTION}
@@ -22,8 +22,11 @@ DETAILS
 }
 \examples{
 \dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
+# previous use
+get_age_population_function(population)
+
+# new use
+get_age_population_function(population, age_col = lower.age.limit)
+get_age_population_function(new_data, age_col = new_age_column)
 }
 }
