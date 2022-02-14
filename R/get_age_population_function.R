@@ -1,20 +1,15 @@
 #' return an interpolating function for populations in 1y age increments
 #'
 #' Return an interpolating function to get populations in 1y age increments
-#' from chunkier distributions produced by socialmixr::wpp_age() (must contain
-#' `lower.age.limit` and `population`)
+#' from chunkier distributions produced by socialmixr::wpp_age()
 #'
-#' @param population PARAM_DESCRIPTION
+#' @param population population data
+#' @param age_col age variable 
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples
 #' \dontrun{
-#' # previous use
-#' get_age_population_function(population)
-#' 
-#' # new use
 #' get_age_population_function(population, age_col = lower.age.limit)
-#' get_age_population_function(new_data, age_col = new_age_column)
 #' }
 #' @export
 get_age_population_function <- function(population, 
@@ -27,20 +22,22 @@ get_age_population_function <- function(population,
     ) %>%
     dplyr::mutate(
       # model based on bin midpoint
-      bin_width = bin_widths( {{ age_col }} ),
-      midpoint = {{ age_col }} + bin_width / 2,
+      bin_width = bin_widths(  {{ age_col }} ),
+      midpoint =  {{ age_col }} + bin_width / 2,
       # scaling down the population appropriately
       log_pop = log(population / bin_width)
     )
   
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(pop_model[[ {{ age_col }} ]])
+  max_bound <- max(pop_model%>%
+                     dplyr::pull({{ age_col }})
+                     )
   
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
     dplyr::filter(
-      lower.age.limit < max_bound
+      {{age_col}} < max_bound
     )
   
   total_pop <- sum(pop_model$population)
