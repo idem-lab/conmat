@@ -1,3 +1,4 @@
+
 #' @title Return cleaned country specific population data with lower and upper limits of age
 #' @param data dataset
 #' @param country_col column name for country
@@ -19,5 +20,5 @@
 age_population_year_country <- function(data, country_col, country, age_col, year_col, year) {
   cleaned_df <- age_population_year(data, {{ age_col }}, {{ year_col }}, {{ year }})
   return(cleaned_df %>%
-    dplyr::filter({{ country_col }} == {{ country }}))
+           dplyr::filter({{ country_col }} == {{ country }}))
 }
