@@ -5,7 +5,7 @@
     Output
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
-         <chr>      <int>  <dbl>    <dbl>        <int>
+         <chr>      <int>  <dbl>    <int>        <int>
        1 all            0      0       31           92
        2 all            0      1       12           92
        3 all            0      2       26           92
@@ -46,7 +46,7 @@
       $home
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
-         <chr>      <int>  <dbl>    <dbl>        <int>
+         <chr>      <int>  <dbl>    <int>        <int>
        1 home           0      0       10           92
        2 home           0      1        7           92
        3 home           0      2       11           92
@@ -62,7 +62,7 @@
       $work
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
-         <chr>      <int>  <dbl>    <dbl>        <int>
+         <chr>      <int>  <dbl>    <int>        <int>
        1 work           0      0        0           92
        2 work           0      1        0           92
        3 work           0      2        0           92
@@ -78,7 +78,7 @@
       $school
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
-         <chr>      <int>  <dbl>    <dbl>        <int>
+         <chr>      <int>  <dbl>    <int>        <int>
        1 school         0      0       13           92
        2 school         0      1        2           92
        3 school         0      2        3           92
@@ -94,7 +94,7 @@
       $other
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
-         <chr>      <int>  <dbl>    <dbl>        <int>
+         <chr>      <int>  <dbl>    <int>        <int>
        1 other          0      0        7           92
        2 other          0      1        7           92
        3 other          0      2       11           92

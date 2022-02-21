@@ -4,7 +4,7 @@
 \alias{get_age_population_function}
 \title{return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(population, age_col)
+get_age_population_function(population, age_col = lower.age.limit)
 }
 \arguments{
 \item{population}{population data}
