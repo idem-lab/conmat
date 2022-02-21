@@ -4,29 +4,25 @@
 \alias{get_age_population_function}
 \title{return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(population, age_col)
+get_age_population_function(population, age_col = lower.age.limit)
 }
 \arguments{
-\item{population}{PARAM_DESCRIPTION}
+\item{population}{population data}
+
+\item{age_col}{age variable}
 }
 \value{
 OUTPUT_DESCRIPTION
 }
 \description{
 Return an interpolating function to get populations in 1y age increments
-from chunkier distributions produced by socialmixr::wpp_age() (must contain
-\code{lower.age.limit} and \code{population})
+from chunkier distributions produced by socialmixr::wpp_age()
 }
 \details{
 DETAILS
 }
 \examples{
 \dontrun{
-# previous use
-get_age_population_function(population)
-
-# new use
 get_age_population_function(population, age_col = lower.age.limit)
-get_age_population_function(new_data, age_col = new_age_column)
 }
 }
