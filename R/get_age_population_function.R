@@ -14,6 +14,7 @@
 #' @export
 get_age_population_function <- function(population, 
                                         age_col= lower.age.limit) {
+
   
   # prepare population data for modelling
   pop_model <- population %>%
