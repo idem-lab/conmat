@@ -30,14 +30,16 @@ get_age_population_function <- function(population,
   
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(pop_model%>%
-                     dplyr::pull({{ age_col }})
-                     )
+  max_bound <- max(
+               dplyr::pull(
+                pop_model,
+                {{ age_col }}
+                 ))
   
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
     dplyr::filter(
-      {{age_col}} < max_bound
+      {{ age_col }} < max_bound
     )
   
   total_pop <- sum(pop_model$population)
