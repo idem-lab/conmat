@@ -8,7 +8,8 @@ estimate_setting_contacts(
   contact_data_list,
   survey_population,
   prediction_population = survey_population,
-  age_breaks
+  age_breaks,
+  per_capita_household_size = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ estimate_setting_contacts(
 \item{prediction_population}{PARAM_DESCRIPTION, Default: survey_population}
 
 \item{age_breaks}{PARAM_DESCRIPTION}
+
+\item{per_capita_household_size}{PARAM_DESCRIPTION, Default : NULL}
 }
 \value{
 OUTPUT_DESCRIPTION

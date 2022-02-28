@@ -4,12 +4,18 @@
 \alias{extrapolate_polymod}
 \title{fit all-of-polymod model and extrapolate to a given population an age breaks}
 \usage{
-extrapolate_polymod(population, age_breaks = c(seq(0, 75, by = 5), Inf))
+extrapolate_polymod(
+  population,
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  per_capita_household_size = NULL
+)
 }
 \arguments{
 \item{population}{PARAM_DESCRIPTION}
 
 \item{age_breaks}{PARAM_DESCRIPTION, Default: c(seq(0, 75, by = 5), Inf)}
+
+\item{per_capita_household_size}{PARAM_DESCRIPTION, Default : NULL}
 }
 \value{
 OUTPUT_DESCRIPTION

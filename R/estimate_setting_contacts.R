@@ -8,13 +8,15 @@
 #' @param contact_data_list PARAM_DESCRIPTION
 #' @param survey_population PARAM_DESCRIPTION
 #' @param prediction_population PARAM_DESCRIPTION, Default: survey_population
-#' @param age_breaks PARAM_DESCRIPTION
+#' @param age_breaks PARAM_DESCRIPTION 
+#' @param per_capita_household_size PARAM_DESCRIPTION, Default : NULL
 #' @return OUTPUT_DESCRIPTION
 #' @export
 estimate_setting_contacts <- function(contact_data_list,
                                       survey_population,
                                       prediction_population = survey_population,
-                                      age_breaks) {
+                                      age_breaks,
+                                      per_capita_household_size = NULL) {
   
   setting_models <- fit_setting_contacts(
     contact_data_list = contact_data_list,
@@ -24,7 +26,8 @@ estimate_setting_contacts <- function(contact_data_list,
   contact_model_pred <- predict_setting_contacts(
       population = prediction_population,
       contact_model = setting_models,
-      age_breaks = age_breaks
+      age_breaks = age_breaks,
+      per_capita_household_size = per_capita_household_size
     )
   
   contact_model_pred
