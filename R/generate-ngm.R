@@ -30,11 +30,11 @@ generate_ngm <- function(state_name = NULL,
  
    if (!is.null(state_name))
   {
-    population <- abs_age_state(state = {{ state_name }})
+    population <- abs_age_state(state_name = {{ state_name }})
     household_size <- get_per_capita_household_size(state = {{ state_name }})
   } else
   {
-    population <- abs_age_lga(lga = {{ lga_name }})
+    population <- abs_age_lga(lga_name = {{ lga_name }})
     household_size <- get_per_capita_household_size(lga = {{ lga_name }})
   }
   # predict from the model to contact rates for a population with these characteristics, 
