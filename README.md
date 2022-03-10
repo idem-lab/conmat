@@ -30,11 +30,13 @@ remotes::install_github("njtierney/conmat")
 
 ## Note
 
-The contact matrices created using the package are in transposed format
-when compared to the contact matrices discussed by
+The contact matrices created using this package are transposed when
+compared to the contact matrices discussed by
 [Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697)
 and
 [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074).
+That is, the rows are “age group to”, and the columns are “age group
+from”.
 
 ## Example
 
@@ -45,7 +47,7 @@ so:
 library(conmat)
 fairfield_age_pop <- abs_age_lga("Fairfield (C)")
 fairfield_age_pop
-#> # A tibble: 18 x 4
+#> # A tibble: 18 × 4
 #>    lga           lower.age.limit  year population
 #>    <chr>                   <dbl> <dbl>      <dbl>
 #>  1 Fairfield (C)               0  2020      12261
@@ -73,7 +75,7 @@ in the data set `abs_lga_lookup`:
 
 ``` r
 abs_lga_lookup
-#> # A tibble: 545 x 3
+#> # A tibble: 545 × 3
 #>    state lga_code lga                  
 #>    <chr>    <dbl> <chr>                
 #>  1 NSW      10050 Albury (C)           
@@ -86,7 +88,7 @@ abs_lga_lookup
 #>  8 NSW      10600 Bellingen (A)        
 #>  9 NSW      10650 Berrigan (A)         
 #> 10 NSW      10750 Blacktown (C)        
-#> # ... with 535 more rows
+#> # … with 535 more rows
 ```
 
 First we want to fit the model to the polymod data
@@ -356,11 +358,11 @@ This package provides data for use in calculating contact matrices.
 These data are still being cleaned and processed, but their current
 forms are shown below:
 
-### eyre\_transmission\_probabilities
+### eyre_transmission_probabilities
 
 ``` r
 eyre_transmission_probabilities
-#> # A tibble: 40,804 x 6
+#> # A tibble: 40,804 × 6
 #>    setting   case_age contact_age case_age_5y contact_age_5y probability
 #>    <chr>        <int>       <int> <chr>       <chr>                <dbl>
 #>  1 household        0           0 0-4         0-4                  0.195
@@ -373,7 +375,7 @@ eyre_transmission_probabilities
 #>  8 household        0           7 0-4         5-9                  0.198
 #>  9 household        0           8 0-4         5-9                  0.199
 #> 10 household        0           9 0-4         5-9                  0.201
-#> # ... with 40,794 more rows
+#> # … with 40,794 more rows
 
 library(ggplot2)
 library(stringr)
@@ -433,31 +435,31 @@ eyre_transmission_probabilities %>%
 
 <img src="man/figures/README-eyre-transmission-probabilities-1.png" width="100%" />
 
-### abs\_education\_state
+### abs_education_state
 
 ``` r
 abs_education_state
-#> # A tibble: 4,194 x 5
-#>     year state aboriginal_and_torres_strait_islander_~   age n_full_and_part_ti~
-#>    <dbl> <chr> <chr>                                   <dbl>               <dbl>
-#>  1  2006 ACT   Aboriginal and Torres Strait Islander       4                   5
-#>  2  2006 ACT   Non-Indigenous                              4                 109
-#>  3  2006 NSW   Aboriginal and Torres Strait Islander       4                 104
-#>  4  2006 NSW   Non-Indigenous                              4                1870
-#>  5  2006 NT    Aboriginal and Torres Strait Islander       4                 102
-#>  6  2006 NT    Non-Indigenous                              4                  63
-#>  7  2006 QLD   Aboriginal and Torres Strait Islander       4                  37
-#>  8  2006 QLD   Non-Indigenous                              4                 740
-#>  9  2006 SA    Aboriginal and Torres Strait Islander       4                  42
-#> 10  2006 SA    Non-Indigenous                              4                1023
-#> # ... with 4,184 more rows
+#> # A tibble: 4,194 × 5
+#>     year state aboriginal_and_torres_strait_islander_sta…   age n_full_and_part…
+#>    <dbl> <chr> <chr>                                      <dbl>            <dbl>
+#>  1  2006 ACT   Aboriginal and Torres Strait Islander          4                5
+#>  2  2006 ACT   Non-Indigenous                                 4              109
+#>  3  2006 NSW   Aboriginal and Torres Strait Islander          4              104
+#>  4  2006 NSW   Non-Indigenous                                 4             1870
+#>  5  2006 NT    Aboriginal and Torres Strait Islander          4              102
+#>  6  2006 NT    Non-Indigenous                                 4               63
+#>  7  2006 QLD   Aboriginal and Torres Strait Islander          4               37
+#>  8  2006 QLD   Non-Indigenous                                 4              740
+#>  9  2006 SA    Aboriginal and Torres Strait Islander          4               42
+#> 10  2006 SA    Non-Indigenous                                 4             1023
+#> # … with 4,184 more rows
 ```
 
-### abs\_education\_state\_2020
+### abs_education_state_2020
 
 ``` r
 abs_education_state_2020
-#> # A tibble: 808 x 6
+#> # A tibble: 808 × 6
 #>     year state   age population population_interpolated  prop
 #>    <dbl> <chr> <dbl>      <dbl>                   <dbl> <dbl>
 #>  1  2020 ACT       0          0                   5569. 0    
@@ -470,34 +472,34 @@ abs_education_state_2020
 #>  8  2020 ACT       7       6163                   5623. 1.10 
 #>  9  2020 ACT       8       5881                   5510. 1.07 
 #> 10  2020 ACT       9       5921                   5370. 1.10 
-#> # ... with 798 more rows
+#> # … with 798 more rows
 ```
 
-### abs\_employ\_age\_lga
+### abs_employ_age_lga
 
 ``` r
 abs_employ_age_lga
-#> # A tibble: 5,600 x 8
-#>     year state lga    age_group total_employed total_unemployed total_labour_fo~
+#> # A tibble: 5,600 × 8
+#>     year state lga    age_group total_employed total_unemployed total_labour_fo…
 #>    <dbl> <chr> <chr>  <fct>              <dbl>            <dbl>            <dbl>
-#>  1  2016 NSW   Albur~ 15-19               1527              300             1830
-#>  2  2016 NSW   Armid~ 15-19                838              217             1055
-#>  3  2016 NSW   Balli~ 15-19               1064              185             1255
-#>  4  2016 NSW   Balra~ 15-19                 41                9               46
-#>  5  2016 NSW   Bathu~ 15-19               1103              241             1341
-#>  6  2016 NSW   Bega ~ 15-19                801               97              897
-#>  7  2016 NSW   Belli~ 15-19                241               42              281
-#>  8  2016 NSW   Berri~ 15-19                168               16              181
-#>  9  2016 NSW   Black~ 15-19               7534             2136             9670
-#> 10  2016 NSW   Bland~ 15-19                124               14              140
-#> # ... with 5,590 more rows, and 1 more variable: total <dbl>
+#>  1  2016 NSW   Albur… 15-19               1527              300             1830
+#>  2  2016 NSW   Armid… 15-19                838              217             1055
+#>  3  2016 NSW   Balli… 15-19               1064              185             1255
+#>  4  2016 NSW   Balra… 15-19                 41                9               46
+#>  5  2016 NSW   Bathu… 15-19               1103              241             1341
+#>  6  2016 NSW   Bega … 15-19                801               97              897
+#>  7  2016 NSW   Belli… 15-19                241               42              281
+#>  8  2016 NSW   Berri… 15-19                168               16              181
+#>  9  2016 NSW   Black… 15-19               7534             2136             9670
+#> 10  2016 NSW   Bland… 15-19                124               14              140
+#> # … with 5,590 more rows, and 1 more variable: total <dbl>
 ```
 
-### abs\_household\_lga
+### abs_household_lga
 
 ``` r
 abs_household_lga
-#> # A tibble: 4,968 x 5
+#> # A tibble: 4,968 × 5
 #>     year state lga                   n_persons_usually_resident n_households
 #>    <dbl> <chr> <chr>                 <chr>                             <dbl>
 #>  1  2016 NSW   Albury (C)            total                             19495
@@ -510,14 +512,14 @@ abs_household_lga
 #>  8  2016 NSW   Albury (C)            7                                    56
 #>  9  2016 NSW   Albury (C)            8+                                   42
 #> 10  2016 NSW   Armidale Regional (A) total                             10276
-#> # ... with 4,958 more rows
+#> # … with 4,958 more rows
 ```
 
-### abs\_pop\_age\_lga\_2016
+### abs_pop_age_lga_2016
 
 ``` r
 abs_pop_age_lga_2016
-#> # A tibble: 9,792 x 5
+#> # A tibble: 9,792 × 5
 #>     year state lga                age_group population
 #>    <dbl> <chr> <chr>              <fct>          <dbl>
 #>  1  2016 ACT   Unincorporated ACT 0-4            28054
@@ -530,14 +532,14 @@ abs_pop_age_lga_2016
 #>  8  2016 ACT   Unincorporated ACT 35-39          30340
 #>  9  2016 ACT   Unincorporated ACT 40-44          28387
 #> 10  2016 ACT   Unincorporated ACT 45-49          26431
-#> # ... with 9,782 more rows
+#> # … with 9,782 more rows
 ```
 
-### abs\_pop\_age\_lga\_2020
+### abs_pop_age_lga_2020
 
 ``` r
 abs_pop_age_lga_2020
-#> # A tibble: 9,774 x 5
+#> # A tibble: 9,774 × 5
 #>     year state lga                age_group population
 #>    <dbl> <chr> <chr>              <fct>          <dbl>
 #>  1  2020 ACT   Unincorporated ACT 0-4            27861
@@ -550,14 +552,14 @@ abs_pop_age_lga_2020
 #>  8  2020 ACT   Unincorporated ACT 35-39          35354
 #>  9  2020 ACT   Unincorporated ACT 40-44          30155
 #> 10  2020 ACT   Unincorporated ACT 45-49          29103
-#> # ... with 9,764 more rows
+#> # … with 9,764 more rows
 ```
 
-### abs\_state\_age
+### abs_state_age
 
 ``` r
 abs_state_age
-#> # A tibble: 168 x 3
+#> # A tibble: 168 × 3
 #>    state age_group population
 #>    <chr> <fct>          <dbl>
 #>  1 NSW   0-4           495060
@@ -570,7 +572,7 @@ abs_state_age
 #>  8 ACT   0-4            27846
 #>  9 NSW   5-9           512687
 #> 10 VIC   5-9           416633
-#> # ... with 158 more rows
+#> # … with 158 more rows
 ```
 
 ## Code of Conduct

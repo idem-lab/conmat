@@ -41,7 +41,7 @@ remotes::install_github("njtierney/conmat")
 
 ## Note 
 
-The contact matrices created using the package are in transposed format when compared to the contact matrices discussed by [Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697) and [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074).
+The contact matrices created using this package are transposed when compared to the contact matrices discussed by [Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697) and [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074). That is, the rows are "age group to", and the columns are "age group from".
 
 ## Example
 
