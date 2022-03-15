@@ -56,8 +56,8 @@ get_age_population_function <- function(.data = population,
       {{age_col}} < max_bound
     )
   
-  total_pop <- pull(pop_model, {{ pop_col }}) %>% sum()
-  bounded_pop <- pull(pop_model_bounded, {{ pop_col }}) %>% sum()
+  total_pop <- dplyr::pull(pop_model, {{ pop_col }}) %>% sum()
+  bounded_pop <- dplyr::pull(pop_model_bounded, {{ pop_col }}) %>% sum()
   unbounded_pop <- total_pop - bounded_pop
   
   # fit to bounded age groups  
