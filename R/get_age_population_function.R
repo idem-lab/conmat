@@ -3,21 +3,36 @@
 #' Return an interpolating function to get populations in 1y age increments
 #' from chunkier distributions produced by socialmixr::wpp_age()
 #'
-#' @param population population data
+#' @param .data population data
 #' @param age_col age variable 
+#' @param pop_col population variable
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples
-#' \dontrun{
-#' get_age_population_function(population, age_col = lower.age.limit)
-#' }
+#' polymod_pop <- get_polymod_population()
+#' age_pop_function <- get_age_population_function(.data=polymod_pop,
+#'                                                  age_col = lower.age.limit,
+#'                                                  pop_col= population)
+#' # Estimated population for a particular age
+#' age_pop_function(4)
+#' 
+#' # Estimated population for a particular age range
+#' age_pop_function(1:4)
+#' 
+#' # Usage in dplyr 
+#' library(dplyr)
+#' example_df <- slice_head(abs_education_state, n = 5)
+#' example_df %>%
+#' mutate(population_est = age_pop_function(age))
+#' 
 #' @export
-get_age_population_function <- function(population, 
-                                        age_col= lower.age.limit) {
+get_age_population_function <- function(.data = population, 
+                                        age_col= lower.age.limit,
+                                        pop_col= population) {
 
   
   # prepare population data for modelling
-  pop_model <- population %>%
+  pop_model <- .data %>%
     dplyr::arrange(
       {{ age_col }}
     ) %>%
@@ -26,7 +41,7 @@ get_age_population_function <- function(population,
       bin_width = bin_widths(  {{ age_col }} ),
       midpoint =  {{ age_col }} + bin_width / 2,
       # scaling down the population appropriately
-      log_pop = log(population / bin_width)
+      log_pop = log({{ pop_col }} / bin_width)
     )
   
   # find the maximum of the bounded age groups, and the populations above and
@@ -41,8 +56,8 @@ get_age_population_function <- function(population,
       {{age_col}} < max_bound
     )
   
-  total_pop <- sum(pop_model$population)
-  bounded_pop <- sum(pop_model_bounded$population)
+  total_pop <- pull(pop_model, {{ pop_col }}) %>% sum()
+  bounded_pop <- pull(pop_model_bounded, {{ pop_col }}) %>% sum()
   unbounded_pop <- total_pop - bounded_pop
   
   # fit to bounded age groups  

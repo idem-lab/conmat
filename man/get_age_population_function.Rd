@@ -4,12 +4,18 @@
 \alias{get_age_population_function}
 \title{return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(population, age_col = lower.age.limit)
+get_age_population_function(
+  .data = population,
+  age_col = lower.age.limit,
+  pop_col = population
+)
 }
 \arguments{
-\item{population}{population data}
+\item{.data}{population data}
 
 \item{age_col}{age variable}
+
+\item{pop_col}{population variable}
 }
 \value{
 OUTPUT_DESCRIPTION
@@ -22,7 +28,20 @@ from chunkier distributions produced by socialmixr::wpp_age()
 DETAILS
 }
 \examples{
-\dontrun{
-get_age_population_function(population, age_col = lower.age.limit)
-}
+polymod_pop <- get_polymod_population()
+age_pop_function <- get_age_population_function(.data=polymod_pop,
+                                                 age_col = lower.age.limit,
+                                                 pop_col= population)
+# Estimated population for a particular age
+age_pop_function(4)
+
+# Estimated population for a particular age range
+age_pop_function(1:4)
+
+# Usage in dplyr 
+library(dplyr)
+example_df <- slice_head(abs_education_state, n = 5)
+example_df \%>\%
+mutate(population_est = age_pop_function(age))
+
 }
