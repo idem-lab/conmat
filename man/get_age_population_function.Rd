@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_age_population_function.R
 \name{get_age_population_function}
 \alias{get_age_population_function}
-\title{return an interpolating function for populations in 1y age increments}
+\title{Return an interpolating function for populations in 1y age increments}
 \usage{
 get_age_population_function(
   .data = population,
@@ -11,21 +11,18 @@ get_age_population_function(
 )
 }
 \arguments{
-\item{.data}{population data}
+\item{.data}{dataset containing information on population of a given age/age group}
 
-\item{age_col}{age variable}
+\item{age_col}{unquoted variable name for the column with age information}
 
-\item{pop_col}{population variable}
+\item{pop_col}{unquoted variable name for the column with population information}
 }
 \value{
-OUTPUT_DESCRIPTION
+An interpolating function to get populations in 1y age increments
 }
 \description{
-Return an interpolating function to get populations in 1y age increments
+This function returns an interpolating function to get populations in 1y age increments
 from chunkier distributions produced by socialmixr::wpp_age()
-}
-\details{
-DETAILS
 }
 \examples{
 polymod_pop <- get_polymod_population()
