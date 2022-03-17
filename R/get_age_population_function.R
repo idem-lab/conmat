@@ -4,8 +4,8 @@
 #' from chunkier distributions produced by socialmixr::wpp_age()
 #'
 #' @param .data dataset containing information on population of a given age/age group
-#' @param age_col unquoted variable name for the column with age information 
-#' @param pop_col unquoted variable name for the column with population information
+#' @param age_col bare variable name for the column with age information 
+#' @param pop_col bare variable name for the column with population information
 #' @return An interpolating function to get populations in 1y age increments
 #' @examples
 #' polymod_pop <- get_polymod_population()
@@ -28,7 +28,7 @@
 get_age_population_function <- function(.data = population, 
                                         age_col= lower.age.limit,
                                         pop_col= population) {
-
+  
   
   # prepare population data for modelling
   pop_model <- .data %>%
@@ -47,7 +47,7 @@ get_age_population_function <- function(.data = population,
   # below
   max_bound <- max(pop_model%>%
                      dplyr::pull({{ age_col }})
-                     )
+  )
   
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
