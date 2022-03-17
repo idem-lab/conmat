@@ -2,27 +2,43 @@
 % Please edit documentation in R/get_age_population_function.R
 \name{get_age_population_function}
 \alias{get_age_population_function}
-\title{return an interpolating function for populations in 1y age increments}
+\title{Return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(population, age_col = lower.age.limit)
+get_age_population_function(
+  .data = population,
+  age_col = lower.age.limit,
+  pop_col = population
+)
 }
 \arguments{
-\item{population}{population data}
+\item{.data}{dataset containing information on population of a given age/age group}
 
-\item{age_col}{age variable}
+\item{age_col}{bare variable name for the column with age information}
+
+\item{pop_col}{bare variable name for the column with population information}
 }
 \value{
-OUTPUT_DESCRIPTION
+An interpolating function to get populations in 1y age increments
 }
 \description{
-Return an interpolating function to get populations in 1y age increments
+This function returns an interpolating function to get populations in 1y age increments
 from chunkier distributions produced by socialmixr::wpp_age()
 }
-\details{
-DETAILS
-}
 \examples{
-\dontrun{
-get_age_population_function(population, age_col = lower.age.limit)
-}
+polymod_pop <- get_polymod_population()
+age_pop_function <- get_age_population_function(.data=polymod_pop,
+                                                 age_col = lower.age.limit,
+                                                 pop_col= population)
+# Estimated population for a particular age
+age_pop_function(4)
+
+# Estimated population for a particular age range
+age_pop_function(1:4)
+
+# Usage in dplyr 
+library(dplyr)
+example_df <- slice_head(abs_education_state, n = 5)
+example_df \%>\%
+mutate(population_est = age_pop_function(age))
+
 }

@@ -1,22 +1,37 @@
-#' return an interpolating function for populations in 1y age increments
+#' Return an interpolating function for populations in 1y age increments
 #'
-#' Return an interpolating function to get populations in 1y age increments
+#' This function returns an interpolating function to get populations in 1y age increments
 #' from chunkier distributions produced by socialmixr::wpp_age()
 #'
-#' @param population population data
-#' @param age_col age variable 
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @param .data dataset containing information on population of a given age/age group
+#' @param age_col bare variable name for the column with age information 
+#' @param pop_col bare variable name for the column with population information
+#' @return An interpolating function to get populations in 1y age increments
 #' @examples
-#' \dontrun{
-#' get_age_population_function(population, age_col = lower.age.limit)
-#' }
+#' polymod_pop <- get_polymod_population()
+#' age_pop_function <- get_age_population_function(.data=polymod_pop,
+#'                                                  age_col = lower.age.limit,
+#'                                                  pop_col= population)
+#' # Estimated population for a particular age
+#' age_pop_function(4)
+#' 
+#' # Estimated population for a particular age range
+#' age_pop_function(1:4)
+#' 
+#' # Usage in dplyr 
+#' library(dplyr)
+#' example_df <- slice_head(abs_education_state, n = 5)
+#' example_df %>%
+#' mutate(population_est = age_pop_function(age))
+#' 
 #' @export
-get_age_population_function <- function(population, 
-                                        age_col=lower.age.limit) {
+get_age_population_function <- function(.data = population, 
+                                        age_col= lower.age.limit,
+                                        pop_col= population) {
+  
   
   # prepare population data for modelling
-  pop_model <- population %>%
+  pop_model <- .data %>%
     dplyr::arrange(
       {{ age_col }}
     ) %>%
@@ -25,25 +40,23 @@ get_age_population_function <- function(population,
       bin_width = bin_widths(  {{ age_col }} ),
       midpoint =  {{ age_col }} + bin_width / 2,
       # scaling down the population appropriately
-      log_pop = log(population / bin_width)
+      log_pop = log({{ pop_col }} / bin_width)
     )
   
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(
-               dplyr::pull(
-                pop_model,
-                {{ age_col }}
-                 ))
+  max_bound <- max(pop_model%>%
+                     dplyr::pull({{ age_col }})
+  )
   
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
     dplyr::filter(
-      {{ age_col }} < max_bound
+      {{age_col}} < max_bound
     )
   
-  total_pop <- sum(pop_model$population)
-  bounded_pop <- sum(pop_model_bounded$population)
+  total_pop <- dplyr::pull(pop_model, {{ pop_col }}) %>% sum()
+  bounded_pop <- dplyr::pull(pop_model_bounded, {{ pop_col }}) %>% sum()
   unbounded_pop <- total_pop - bounded_pop
   
   # fit to bounded age groups  
