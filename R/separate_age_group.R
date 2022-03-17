@@ -1,6 +1,6 @@
-separate_age_group <- function(data, age_col) {
+separate_age_group <- function(.data, age_col) {
   return(
-    data %>%
+    .data %>%
       tidyr::separate(
         {{ age_col }}, 
         c("lower.age.limit", "upper.age.limit"), "[[:punct:]]", extra = "merge") %>%
