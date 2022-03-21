@@ -1,11 +1,13 @@
 #' Get next generation contact matrices
-#' @param state_name target state name
-#' @param lga_name target LGA name
-#' @param age_breaks age breaks
+#' @param state_name target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
+#' @param lga_name target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
+#'   [abs_lga_lookup()] for list of lga names
+#' @param age_breaks vector depicting age values. For example, c(seq(0, 85, by = 5), Inf)
 #' @param R_target target reproduction number
 #'
 #' @export
 #' @examples
+#' # don't run as both together takes a long time to run
 #' \dontrun{
 #' ngm_NSW <- generate_ngm(
 #'   state_name = "NSW",
@@ -28,12 +30,10 @@ generate_ngm <- function(state_name = NULL,
  # the per-capita (ie. averaged over people, not households) household
  # size in this population
  
-   if (!is.null(state_name))
-  {
+   if (!is.null(state_name)){
     population <- abs_age_state(state_name = {{ state_name }})
     household_size <- get_per_capita_household_size(state = {{ state_name }})
-  } else
-  {
+  } else{
     population <- abs_age_lga(lga_name = {{ lga_name }})
     household_size <- get_per_capita_household_size(lga = {{ lga_name }})
   }

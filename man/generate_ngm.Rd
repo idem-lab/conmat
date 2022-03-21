@@ -7,11 +7,12 @@
 generate_ngm(state_name = NULL, lga_name = NULL, age_breaks, R_target)
 }
 \arguments{
-\item{state_name}{target state name}
+\item{state_name}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
 
-\item{lga_name}{target LGA name}
+\item{lga_name}{target Australian local government area (LGA) name, such as "Fairfield (C)".  See
+\code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 
-\item{age_breaks}{age breaks}
+\item{age_breaks}{vector depicting age values. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
 }
@@ -19,6 +20,7 @@ generate_ngm(state_name = NULL, lga_name = NULL, age_breaks, R_target)
 Get next generation contact matrices
 }
 \examples{
+# don't run as both together takes a long time to run
 \dontrun{
 ngm_NSW <- generate_ngm(
   state_name = "NSW",
