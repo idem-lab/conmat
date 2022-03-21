@@ -5,7 +5,7 @@
 #' @param data dataset containing information on population for a given age, country, and year
 #' @param age_col bare variable name for the column with age information 
 #' @param location_col bare variable name for the column with location information
-#' @param location character vector with country names
+#' @param location character vector with location names
 #' @param year_col bare variable name for the column with year information
 #' @param year numeric vector representing the desired year(s)
 #' @return tidy dataset with information on population of different age bands

@@ -18,7 +18,7 @@ age_population(
 
 \item{location_col}{bare variable name for the column with location information}
 
-\item{location}{character vector with country names}
+\item{location}{character vector with location names}
 
 \item{age_col}{bare variable name for the column with age information}
 
