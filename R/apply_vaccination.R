@@ -39,7 +39,7 @@ apply_vaccination <- function(ngm,
     {{ transmission_col }})
   )%>%
     # transform these into matrices of reduction in transmission, matching the NGM
-    summarise(
+    dplyr::summarise(
       transmission_reduction_matrix =
         list(
           outer(
