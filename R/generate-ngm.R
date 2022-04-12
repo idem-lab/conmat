@@ -2,7 +2,7 @@
 #' @param state_name target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
 #' @param lga_name target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
 #'   [abs_lga_lookup()] for list of lga names
-#' @param age_breaks vector depicting age values. For example, c(seq(0, 85, by = 5), Inf)
+#' @param age_breaks vector depicting age values with the highest age depicted as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
 #' @param R_target target reproduction number
 #'
 #' @export

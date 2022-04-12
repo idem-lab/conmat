@@ -12,7 +12,7 @@ generate_ngm(state_name = NULL, lga_name = NULL, age_breaks, R_target)
 \item{lga_name}{target Australian local government area (LGA) name, such as "Fairfield (C)".  See
 \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 
-\item{age_breaks}{vector depicting age values. For example, c(seq(0, 85, by = 5), Inf)}
+\item{age_breaks}{vector depicting age values with the highest age depicted as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
 }
