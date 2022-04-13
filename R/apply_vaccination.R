@@ -7,7 +7,8 @@
 #' @export
 #' @examples
 #' 
-#' # example data frame with vaccine coverage, acquisition and transmission efficacy of different age groups
+#' # example data frame with vaccine coverage, acquisition and transmission efficacy 
+#' # of different age groups
 #' vaccination_effect_example_data
 #' 
 #' # Generate next generation matrices
