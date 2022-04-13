@@ -3,7 +3,7 @@
 \docType{data}
 \name{vaccination_effect_example_data}
 \alias{vaccination_effect_example_data}
-\title{Example data set with information on age based vaccination coverage,acquisition and transmission}
+\title{Example dataset with information on age based vaccination coverage,acquisition and transmission}
 \format{
 Tibble
 }
@@ -11,7 +11,7 @@ Tibble
 vaccination_effect_example_data
 }
 \description{
-data set with information on vaccine coverage, efficacy of acquisition/susceptibility and efficacy of transmission/infectiousness
-for the ordered age groupsfrom lowest to highest of the next generation matrix
+data frame with information on vaccine coverage, efficacy of acquisition/susceptibility and efficacy of transmission/infectiousness
+for the ordered age groups from lowest to highest of the next generation matrix
 }
 \keyword{datasets}

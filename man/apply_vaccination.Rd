@@ -9,7 +9,7 @@ apply_vaccination(ngm, data, coverage_col, acquisition_col, transmission_col)
 \arguments{
 \item{ngm}{next generation matrices. See \code{\link[=generate_ngm]{generate_ngm()}} for creating next generation matrices of a state or a local government area for specific age groups}
 
-\item{data}{data set with location specific information on vaccine coverage, efficacy of acquisition/susceptibility and efficacy of transmission/infectiousness for the ordered age groups from lowest to highest of the next generation matrix}
+\item{data}{data frame with location specific information on vaccine coverage, efficacy of acquisition/susceptibility and efficacy of transmission/infectiousness for the ordered age groups from lowest to highest of the next generation matrix}
 
 \item{coverage_col}{bare variable name for the column with information on vaccine coverage by age groups}
 
@@ -22,15 +22,20 @@ Apply vaccination effects to next generation contact matrices
 }
 \examples{
 
+# example data frame with vaccine coverage, acquisition and transmission efficacy of different age groups
 vaccination_effect_example_data
+
+# Generate next generation matrices
 ngm_NSW <- generate_ngm(state_name = "NSW", 
                         age_breaks = c(seq(0, 80, by = 5),Inf),
                         R_target = 1.5
                         ) 
-ngm_5y_NSW_vacc_0.5 <- apply_vaccination(ngm = ngm_NSW,
-                                         data=vaccination_effect_example_data,
-                                         coverage_col=coverage,
-                                         acquisition_col=acquisition,
-                                         transmission_col=transmission)
+                        
+# Apply vaccination effect to next generation matrices                       
+ngm_NSW_vacc <- apply_vaccination(ngm = ngm_NSW,
+                                  data = vaccination_effect_example_data,
+                                  coverage_col = coverage,
+                                  acquisition_col = acquisition,
+                                  transmission_col = transmission)
 
 }
