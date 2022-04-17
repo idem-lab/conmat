@@ -17,8 +17,11 @@ apply_vaccination(ngm, data, coverage_col, acquisition_col, transmission_col)
 
 \item{transmission_col}{bare variable name for the column with information on efficacy of transmission}
 }
+\value{
+list of contact matrices with reduction in transmission matching the next generation matrices
+}
 \description{
-Apply vaccination effects to next generation contact matrices
+Applies vaccination effects to next generation matrices that leads to reduction of acquisition and transmission in each age group
 }
 \examples{
 

@@ -1,9 +1,12 @@
 #' Apply vaccination effects to next generation contact matrices
+#' 
+#' @description Applies vaccination effects to next generation matrices that leads to reduction of acquisition and transmission in each age group
 #' @param ngm next generation matrices. See [generate_ngm()] for creating next generation matrices of a state or a local government area for specific age groups
 #' @param data data frame with location specific information on vaccine coverage, efficacy of acquisition/susceptibility and efficacy of transmission/infectiousness for the ordered age groups from lowest to highest of the next generation matrix 
 #' @param coverage_col bare variable name for the column with information on vaccine coverage by age groups
 #' @param acquisition_col bare variable name for the column with information on efficacy of acquisition
 #' @param transmission_col bare variable name for the column with information on efficacy of transmission
+#' @return list of contact matrices with reduction in transmission matching the next generation matrices
 #' @export
 #' @examples
 #' 
