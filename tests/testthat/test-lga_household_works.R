@@ -16,7 +16,7 @@ household_per_capita_runs <- map(
 )
 
 t_household_per_capita_runs <- transpose(household_per_capita_runs)
-t_household_per_capita_runs$error[!sapply(household_per_capita_runs$error, is.null)]
+t_household_per_capita_runs$error[!sapply(t_household_per_capita_runs$error, is.null)]
 
 
 test_that("check_lga_name errors for some lgas", {
