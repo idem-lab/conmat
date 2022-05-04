@@ -8,3 +8,4 @@
 * Reduce vignette size, closes [#28](https://github.com/njtierney/conmat/issues/28)
 * Add transmission probability data from Eyre et al., closes [#39](https://github.com/njtierney/conmat/issues/39)
 * Add household adjustment - [#41](https://github.com/njtierney/conmat/issues/41)
+* Added setting weights, related to #44 (but no longer Eyre weights)
