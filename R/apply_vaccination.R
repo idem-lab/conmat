@@ -15,13 +15,13 @@
 #' vaccination_effect_example_data
 #' 
 #' # Generate next generation matrices
-#' ngm_NSW <- generate_ngm(state_name = "NSW", 
+#' ngm_nsw <- generate_ngm(state_name = "NSW", 
 #'                         age_breaks = c(seq(0, 80, by = 5),Inf),
 #'                         R_target = 1.5
 #'                         ) 
 #'                         
 #'# Apply vaccination effect to next generation matrices                       
-#' ngm_NSW_vacc <- apply_vaccination(ngm = ngm_NSW,
+#' ngm_nsw_vacc <- apply_vaccination(ngm = ngm_nsw,
 #'                                   data = vaccination_effect_example_data,
 #'                                   coverage_col = coverage,
 #'                                   acquisition_col = acquisition,
@@ -63,7 +63,7 @@ apply_vaccination <- function(ngm,
     ) %>%
    dplyr::pull(transmission_reduction_matrix)
   
-ngm_vaccinated=Map('*',ngm,transmission_reduction_matrix)
+ngm_vaccinated <- Map('*',ngm,transmission_reduction_matrix)
 return(ngm_vaccinated)
 
 }

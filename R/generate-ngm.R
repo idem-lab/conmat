@@ -9,7 +9,7 @@
 #' @examples
 #' # don't run as both together takes a long time to run
 #' \dontrun{
-#' ngm_NSW <- generate_ngm(
+#' ngm_nsw <- generate_ngm(
 #'   state_name = "NSW",
 #'   age_breaks = c(seq(0, 85, by = 5), Inf),
 #'   R_target = 1.5
