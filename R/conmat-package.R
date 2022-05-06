@@ -13,6 +13,7 @@ globalVariables(
   c(
     "abs_household_lga",
     "abs_pop_age_lga_2020",
+    "acquisition_multiplier",
     "across",
     "age",
     "age_from",
@@ -84,6 +85,7 @@ globalVariables(
     "state",
     "susceptibility",
     "target_weight_sum",
+    "transmission_multiplier",
     "update",
     "weight",
     "weight_sum",
