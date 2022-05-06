@@ -47,7 +47,10 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: rcmdcheck
+          cache-version: 2
+          extra-packages: |
+            local::.
+            any::rcmdcheck
 
       - name: Check
         env:
