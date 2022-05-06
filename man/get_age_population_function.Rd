@@ -14,8 +14,6 @@ get_age_population_function(
 \item{.data}{dataset containing information on population of a given age/age group}
 
 
-
-
 \item{age_col}{bare variable name for the column with age information}
 
 \item{pop_col}{bare variable name for the column with population information}
