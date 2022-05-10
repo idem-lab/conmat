@@ -7,9 +7,9 @@
 get_household_size_distribution(state = NULL, lga = NULL)
 }
 \arguments{
-\item{state_name}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
+\item{state}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
 
-\item{lga_name}{target Australian local government area (LGA) name, such as "Fairfield (C)".  See
+\item{lga}{target Australian local government area (LGA) name, such as "Fairfield (C)".  See
 \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 }
 \value{

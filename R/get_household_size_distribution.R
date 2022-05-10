@@ -1,6 +1,6 @@
 #' @title Get household size distribution based on state or LGA name
-#' @param state_name target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
-#' @param lga_name target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
+#' @param state target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
+#' @param lga target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
 #'   [abs_lga_lookup()] for list of lga names
 #' @return returns a data frame with household size distributions of a specific state or LGA
 #' @export
@@ -56,8 +56,8 @@ get_household_size_distribution <- function(state = NULL, lga = NULL) {
       # number of *people* in a household of that size
       n_people = n_households * size,
     )%>%
-    select(-c(n_persons_usually_resident,n_households))%>%
-    rename(household_size=size)
+    dplyr::select(-c(n_persons_usually_resident,n_households))%>%
+    dplyr::rename(household_size=size)
   
   state <- rlang::enquo(state)
   lga <- rlang::enquo(lga)
