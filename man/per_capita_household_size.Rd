@@ -5,17 +5,17 @@
 \title{Get per capita household size with household size distribution}
 \usage{
 per_capita_household_size(
-  household_data = sample_data,
-  household_size = household_size,
-  n_people = n_people
+  household_data,
+  household_size_col = household_size,
+  n_people_col = n_people
 )
 }
 \arguments{
 \item{household_data}{data set with information on the household size distribution of specific state or LGA.}
 
-\item{household_size}{bare variable name of the column depicting the household size. Default is 'household_size' from \code{\link[=get_household_size_distribution]{get_household_size_distribution()}}.}
+\item{household_size_col}{bare variable name of the column depicting the household size. Default is 'household_size' from \code{\link[=get_household_size_distribution]{get_household_size_distribution()}}.}
 
-\item{n_people}{bare variable name of the column depicting the total number of people belonging to the respective household size. Default is 'n_people' from \code{\link[=get_household_size_distribution]{get_household_size_distribution()}}.}
+\item{n_people_col}{bare variable name of the column depicting the total number of people belonging to the respective household size. Default is 'n_people' from \code{\link[=get_household_size_distribution]{get_household_size_distribution()}}.}
 }
 \value{
 Numeric of length 1 - the per capita household size for a given state
@@ -26,8 +26,11 @@ Returns the per capita household size for a location given its household size di
 See \code{\link[=get_household_size_distribution]{get_household_size_distribution()}} function for retrieving household size distributions for a given place.
 }
 \examples{
-sample_data <- get_household_size_distribution(lga = "Fairfield (C)")
-per_capita_household_size(sample_data,household_size,n_people)
+demo_data <- get_household_size_distribution(lga = "Fairfield (C)")
+demo_data
+per_capita_household_size(household_data=demo_data,
+                          household_size_col=household_size,
+                          n_people_col=n_people)
 
 
 }
