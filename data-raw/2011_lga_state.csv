@@ -1,0 +1,1400 @@
+STATE_NAME_2011,STATE_CODE_2011,LGA_NAME_2011,LGA_CODE_2011,SLA_NAME_2011,SLA_MAINCODE_2011
+New South Wales,1,Albury (C),10050,Albury (C),155050050
+New South Wales,1,Armidale Dumaresq (A),10110,Armidale Dumaresq (A) - City,130150111
+New South Wales,1,Armidale Dumaresq (A),10110,Armidale Dumaresq (A) Bal,130150112
+New South Wales,1,Ashfield (A),10150,Ashfield (A),105350150
+New South Wales,1,Auburn (C),10200,Auburn (C),105400200
+New South Wales,1,Ballina (A),10250,Ballina (A),120100250
+New South Wales,1,Balranald (A),10300,Balranald (A),155200300
+New South Wales,1,Bankstown (C),10350,Bankstown (C) - North-East,105200351
+New South Wales,1,Bankstown (C),10350,Bankstown (C) - North-West,105200353
+New South Wales,1,Bankstown (C),10350,Bankstown (C) - South,105200355
+New South Wales,1,Bathurst Regional (A),10470,Bathurst Regional (A) - Pt A,140030471
+New South Wales,1,Bathurst Regional (A),10470,Bathurst Regional (A) - Pt B,140070473
+New South Wales,1,Bega Valley (A),10550,Bega Valley (A),145150550
+New South Wales,1,Bellingen (A),10600,Bellingen (A),125050600
+New South Wales,1,Berrigan (A),10650,Berrigan (A),155150650
+New South Wales,1,Blacktown (C),10750,Blacktown (C) - North,105530751
+New South Wales,1,Blacktown (C),10750,Blacktown (C) - South-East,105530752
+New South Wales,1,Blacktown (C),10750,Blacktown (C) - South-West,105530753
+New South Wales,1,Bland (A),10800,Bland (A),140150800
+New South Wales,1,Blayney (A),10850,Blayney (A),140070850
+New South Wales,1,Blue Mountains (C),10900,Blue Mountains (C),105450900
+New South Wales,1,Bogan (A),10950,Bogan (A),135100950
+New South Wales,1,Bombala (A),11000,Bombala (A),145201000
+New South Wales,1,Boorowa (A),11050,Boorowa (A),145101050
+New South Wales,1,Botany Bay (C),11100,Botany Bay (C),105051100
+New South Wales,1,Bourke (A),11150,Bourke (A),135151150
+New South Wales,1,Brewarrina (A),11200,Brewarrina (A),135151200
+New South Wales,1,Broken Hill (C),11250,Broken Hill (C),160101250
+New South Wales,1,Burwood (A),11300,Burwood (A),105351300
+New South Wales,1,Byron (A),11350,Byron (A),120101350
+New South Wales,1,Cabonne (A),11400,Cabonne (A),140071400
+New South Wales,1,Camden (A),11450,Camden (A),105301450
+New South Wales,1,Campbelltown (C),11500,Campbelltown (C) - North,105301501
+New South Wales,1,Campbelltown (C),11500,Campbelltown (C) - South,105301504
+New South Wales,1,Canada Bay (A),11520,Canada Bay (A) - Concord,105351521
+New South Wales,1,Canada Bay (A),11520,Canada Bay (A) - Drummoyne,105351524
+New South Wales,1,Canterbury (C),11550,Canterbury (C),105201550
+New South Wales,1,Carrathool (A),11600,Carrathool (A),150151600
+New South Wales,1,Central Darling (A),11700,Central Darling (A),160101700
+New South Wales,1,Cessnock (C),11720,Cessnock (C),110051720
+New South Wales,1,Clarence Valley (A),11730,Clarence Valley (A) - Coast,125051736
+New South Wales,1,Clarence Valley (A),11730,Clarence Valley (A) - Grafton,125051737
+New South Wales,1,Clarence Valley (A),11730,Clarence Valley (A) Bal,125051738
+New South Wales,1,Cobar (A),11750,Cobar (A),135151750
+New South Wales,1,Coffs Harbour (C),11800,Coffs Harbour (C) - Pt A,125011801
+New South Wales,1,Coffs Harbour (C),11800,Coffs Harbour (C) - Pt B,125051804
+New South Wales,1,Conargo (A),11860,Conargo (A),155151860
+New South Wales,1,Coolamon (A),12000,Coolamon (A),150102000
+New South Wales,1,Cooma-Monaro (A),12050,Cooma-Monaro (A),145202050
+New South Wales,1,Coonamble (A),12150,Coonamble (A),135102150
+New South Wales,1,Cootamundra (A),12200,Cootamundra (A),150102200
+New South Wales,1,Corowa Shire (A),12300,Corowa Shire (A),155102300
+New South Wales,1,Cowra (A),12350,Cowra (A),140152350
+New South Wales,1,Deniliquin (A),12500,Deniliquin (A),155152500
+New South Wales,1,Dubbo (C),12600,Dubbo (C) - Pt A,135012601
+New South Wales,1,Dubbo (C),12600,Dubbo (C) - Pt B,135052604
+New South Wales,1,Dungog (A),12700,Dungog (A),110102700
+New South Wales,1,Eurobodalla (A),12750,Eurobodalla (A),145152750
+New South Wales,1,Fairfield (C),12850,Fairfield (C) - East,105252851
+New South Wales,1,Fairfield (C),12850,Fairfield (C) - West,105252854
+New South Wales,1,Forbes (A),12900,Forbes (A),140152900
+New South Wales,1,Gilgandra (A),12950,Gilgandra (A),135052950
+New South Wales,1,Glen Innes Severn (A),13010,Glen Innes Severn (A),130153010
+New South Wales,1,Gloucester (A),13050,Gloucester (A),110103050
+New South Wales,1,Gosford (C),13100,Gosford (C) - East,105703101
+New South Wales,1,Gosford (C),13100,Gosford (C) - West,105703104
+New South Wales,1,Goulburn Mulwaree (A),13310,Goulburn Mulwaree (A) - Goulburn,145103311
+New South Wales,1,Goulburn Mulwaree (A),13310,Goulburn Mulwaree (A) Bal,145103314
+New South Wales,1,Great Lakes (A),13320,Great Lakes (A),110103320
+New South Wales,1,Greater Hume Shire (A),13340,Greater Hume Shire (A) - Pt A,155053341
+New South Wales,1,Greater Hume Shire (A),13340,Greater Hume Shire (A) - Pt B,155103342
+New South Wales,1,Greater Taree (C),13380,Greater Taree (C),125103380
+New South Wales,1,Griffith (C),13450,Griffith (C),150153450
+New South Wales,1,Gundagai (A),13500,Gundagai (A),150103500
+New South Wales,1,Gunnedah (A),13550,Gunnedah (A),130103550
+New South Wales,1,Guyra (A),13650,Guyra (A),130153650
+New South Wales,1,Gwydir (A),13660,Gwydir (A),130103660
+New South Wales,1,Harden (A),13700,Harden (A),145103700
+New South Wales,1,Hawkesbury (C),13800,Hawkesbury (C),105453800
+New South Wales,1,Hay (A),13850,Hay (A),150153850
+New South Wales,1,Holroyd (C),13950,Holroyd (C),105403950
+New South Wales,1,Hornsby (A),14000,Hornsby (A) - North,105604001
+New South Wales,1,Hornsby (A),14000,Hornsby (A) - South,105604004
+New South Wales,1,Hunters Hill (A),14100,Hunters Hill (A),105554100
+New South Wales,1,Hurstville (C),14150,Hurstville (C),105154150
+New South Wales,1,Inverell (A),14200,Inverell (A) - Pt A,130104201
+New South Wales,1,Inverell (A),14200,Inverell (A) - Pt B,130154202
+New South Wales,1,Jerilderie (A),14250,Jerilderie (A),155154250
+New South Wales,1,Junee (A),14300,Junee (A),150104300
+New South Wales,1,Kempsey (A),14350,Kempsey (A),125104350
+New South Wales,1,Kiama (A),14400,Kiama (A),115054400
+New South Wales,1,Kogarah (C),14450,Kogarah (C),105154450
+New South Wales,1,Ku-ring-gai (A),14500,Ku-ring-gai (A),105604500
+New South Wales,1,Kyogle (A),14550,Kyogle (A),120104550
+New South Wales,1,Lachlan (A),14600,Lachlan (A),140154600
+New South Wales,1,Lake Macquarie (C),14650,Lake Macquarie (C) - East,110054651
+New South Wales,1,Lake Macquarie (C),14650,Lake Macquarie (C) - North,110054653
+New South Wales,1,Lake Macquarie (C),14650,Lake Macquarie (C) - West,110054655
+New South Wales,1,Lane Cove (A),14700,Lane Cove (A),105554700
+New South Wales,1,Leeton (A),14750,Leeton (A),150154750
+New South Wales,1,Leichhardt (A),14800,Leichhardt (A),105054800
+New South Wales,1,Lismore (C),14850,Lismore (C) - Pt A,120074851
+New South Wales,1,Lismore (C),14850,Lismore (C) - Pt B,120104854
+New South Wales,1,Lithgow (C),14870,Lithgow (C),140074870
+New South Wales,1,Liverpool (C),14900,Liverpool (C) - East,105254901
+New South Wales,1,Liverpool (C),14900,Liverpool (C) - West,105254904
+New South Wales,1,Liverpool Plains (A),14920,Liverpool Plains (A),130104920
+New South Wales,1,Lockhart (A),14950,Lockhart (A),150104950
+New South Wales,1,Maitland (C),15050,Maitland (C),110055050
+New South Wales,1,Manly (A),15150,Manly (A),105655150
+New South Wales,1,Marrickville (A),15200,Marrickville (A),105055200
+New South Wales,1,Mid-Western Regional (A),15270,Mid-Western Regional (A) - Pt A,135055271
+New South Wales,1,Mid-Western Regional (A),15270,Mid-Western Regional (A) - Pt B,140075274
+New South Wales,1,Moree Plains (A),15300,Moree Plains (A),130205300
+New South Wales,1,Mosman (A),15350,Mosman (A),105555350
+New South Wales,1,Murray (A),15500,Murray (A),155155500
+New South Wales,1,Murrumbidgee (A),15550,Murrumbidgee (A),150155550
+New South Wales,1,Muswellbrook (A),15650,Muswellbrook (A),110105650
+New South Wales,1,Nambucca (A),15700,Nambucca (A),125055700
+New South Wales,1,Narrabri (A),15750,Narrabri (A),130205750
+New South Wales,1,Narrandera (A),15800,Narrandera (A),150105800
+New South Wales,1,Narromine (A),15850,Narromine (A),135055850
+New South Wales,1,Newcastle (C),15900,Newcastle (C) - Inner City,110055903
+New South Wales,1,Newcastle (C),15900,Newcastle (C) - Outer West,110055904
+New South Wales,1,Newcastle (C),15900,Newcastle (C) - Throsby,110055905
+New South Wales,1,North Sydney (A),15950,North Sydney (A),105555950
+New South Wales,1,Oberon (A),16100,Oberon (A),140076100
+New South Wales,1,Orange (C),16150,Orange (C),140206150
+New South Wales,1,Palerang (A),16180,Palerang (A) - Pt A,145056181
+New South Wales,1,Palerang (A),16180,Palerang (A) - Pt B,145106184
+New South Wales,1,Parkes (A),16200,Parkes (A),140156200
+New South Wales,1,Parramatta (C),16250,Parramatta (C) - Inner,105406251
+New South Wales,1,Parramatta (C),16250,Parramatta (C) - North-East,105406252
+New South Wales,1,Parramatta (C),16250,Parramatta (C) - North-West,105406253
+New South Wales,1,Parramatta (C),16250,Parramatta (C) - South,105406254
+New South Wales,1,Penrith (C),16350,Penrith (C) - East,105456351
+New South Wales,1,Penrith (C),16350,Penrith (C) - West,105456354
+New South Wales,1,Pittwater (A),16370,Pittwater (A),105656370
+New South Wales,1,Port Macquarie-Hastings (A),16380,Port Macquarie-Hastings (A) - Pt A,125036381
+New South Wales,1,Port Macquarie-Hastings (A),16380,Port Macquarie-Hastings (A) - Pt B,125106385
+New South Wales,1,Port Stephens (A),16400,Port Stephens (A),110056400
+New South Wales,1,Queanbeyan (C),16470,Queanbeyan (C),145056470
+New South Wales,1,Randwick (C),16550,Randwick (C),105106550
+New South Wales,1,Richmond Valley (A),16610,Richmond Valley (A) - Casino,120106611
+New South Wales,1,Richmond Valley (A),16610,Richmond Valley (A) Bal,120106612
+New South Wales,1,Rockdale (C),16650,Rockdale (C),105156650
+New South Wales,1,Ryde (C),16700,Ryde (C),105556700
+New South Wales,1,Shellharbour (C),16900,Shellharbour (C),115056900
+New South Wales,1,Shoalhaven (C),16950,Shoalhaven (C) - Pt A,115076951
+New South Wales,1,Shoalhaven (C),16950,Shoalhaven (C) - Pt B,115106952
+New South Wales,1,Singleton (A),17000,Singleton (A),110107000
+New South Wales,1,Snowy River (A),17050,Snowy River (A),145207050
+New South Wales,1,Strathfield (A),17100,Strathfield (A),105357100
+New South Wales,1,Sutherland Shire (A),17150,Sutherland Shire (A) - East,105157151
+New South Wales,1,Sutherland Shire (A),17150,Sutherland Shire (A) - West,105157152
+New South Wales,1,Sydney (C),17200,Sydney (C) - East,105057204
+New South Wales,1,Sydney (C),17200,Sydney (C) - Inner,105057201
+New South Wales,1,Sydney (C),17200,Sydney (C) - South,105057205
+New South Wales,1,Sydney (C),17200,Sydney (C) - West,105057206
+New South Wales,1,Tamworth Regional (A),17310,Tamworth Regional (A) - Pt A,130057311
+New South Wales,1,Tamworth Regional (A),17310,Tamworth Regional (A) - Pt B,130107314
+New South Wales,1,Temora (A),17350,Temora (A),150107350
+New South Wales,1,Tenterfield (A),17400,Tenterfield (A),130157400
+New South Wales,1,The Hills Shire (A),17420,The Hills Shire (A) - Central,105607421
+New South Wales,1,The Hills Shire (A),17420,The Hills Shire (A) - North,105607423
+New South Wales,1,The Hills Shire (A),17420,The Hills Shire (A) - South,105607425
+New South Wales,1,Tumbarumba (A),17450,Tumbarumba (A),155107450
+New South Wales,1,Tumut Shire (A),17500,Tumut Shire (A),150107500
+New South Wales,1,Tweed (A),17550,Tweed (A) - Pt B,120107558
+New South Wales,1,Tweed (A),17550,Tweed (A) - Tweed Coast,120057556
+New South Wales,1,Tweed (A),17550,Tweed (A) - Tweed-Heads,120057554
+New South Wales,1,Upper Hunter Shire (A),17620,Upper Hunter Shire (A),110107620
+New South Wales,1,Upper Lachlan Shire (A),17640,Upper Lachlan Shire (A),145107640
+New South Wales,1,Uralla (A),17650,Uralla (A),130157650
+New South Wales,1,Urana (A),17700,Urana (A),155107700
+New South Wales,1,Wagga Wagga (C),17750,Wagga Wagga (C) - Pt A,150057751
+New South Wales,1,Wagga Wagga (C),17750,Wagga Wagga (C) - Pt B,150107754
+New South Wales,1,Wakool (A),17800,Wakool (A),155157800
+New South Wales,1,Walcha (A),17850,Walcha (A),130157850
+New South Wales,1,Walgett (A),17900,Walgett (A),135107900
+New South Wales,1,Warren (A),17950,Warren (A),135107950
+New South Wales,1,Warringah (A),18000,Warringah (A),105658000
+New South Wales,1,Warrumbungle Shire (A),18020,Warrumbungle Shire (A),135058020
+New South Wales,1,Waverley (A),18050,Waverley (A),105108050
+New South Wales,1,Weddin (A),18100,Weddin (A),140158100
+New South Wales,1,Wellington (A),18150,Wellington (A),135058150
+New South Wales,1,Wentworth (A),18200,Wentworth (A),155208200
+New South Wales,1,Willoughby (C),18250,Willoughby (C),105558250
+New South Wales,1,Wingecarribee (A),18350,Wingecarribee (A),115108350
+New South Wales,1,Wollondilly (A),18400,Wollondilly (A),105308400
+New South Wales,1,Wollongong (C),18450,Wollongong (C) - Inner,115058451
+New South Wales,1,Wollongong (C),18450,Wollongong (C) Bal,115058454
+New South Wales,1,Woollahra (A),18500,Woollahra (A),105108500
+New South Wales,1,Wyong (A),18550,Wyong (A) - North-East,105708551
+New South Wales,1,Wyong (A),18550,Wyong (A) - South and West,105708554
+New South Wales,1,Yass Valley (A),18710,Yass Valley (A),145108710
+New South Wales,1,Young (A),18750,Young (A),145108750
+New South Wales,1,Unincorporated NSW,19399,Lord Howe Island,125108859
+New South Wales,1,Unincorporated NSW,19399,Migratory - Offshore - Shipping (NSW),185019779
+New South Wales,1,Unincorporated NSW,19399,Unincorp. Far West,160108809
+Victoria,2,Alpine (S),20110,Alpine (S) - East,245150111
+Victoria,2,Alpine (S),20110,Alpine (S) - West,245150112
+Victoria,2,Ararat (RC),20260,Ararat (RC),220150260
+Victoria,2,Ballarat (C),20570,Ballarat (C) - Central,220050571
+Victoria,2,Ballarat (C),20570,Ballarat (C) - Inner North,220050572
+Victoria,2,Ballarat (C),20570,Ballarat (C) - North,220050573
+Victoria,2,Ballarat (C),20570,Ballarat (C) - South,220050574
+Victoria,2,Banyule (C),20660,Banyule (C) - Heidelberg,205300661
+Victoria,2,Banyule (C),20660,Banyule (C) - North,205300662
+Victoria,2,Bass Coast (S),20740,Bass Coast (S) - Phillip Is.,255200741
+Victoria,2,Bass Coast (S),20740,Bass Coast (S) Bal,255200744
+Victoria,2,Baw Baw (S),20830,Baw Baw (S) - Pt A,255050831
+Victoria,2,Baw Baw (S),20830,Baw Baw (S) - Pt B East,255100834
+Victoria,2,Baw Baw (S),20830,Baw Baw (S) - Pt B West,255100835
+Victoria,2,Bayside (C),20910,Bayside (C) - Brighton,205650911
+Victoria,2,Bayside (C),20910,Bayside (C) - South,205650912
+Victoria,2,Benalla (RC),21010,Benalla (RC) - Benalla,240151011
+Victoria,2,Benalla (RC),21010,Benalla (RC) Bal,240151014
+Victoria,2,Boroondara (C),21110,Boroondara (C) - Camberwell N.,205451111
+Victoria,2,Boroondara (C),21110,Boroondara (C) - Camberwell S.,205451112
+Victoria,2,Boroondara (C),21110,Boroondara (C) - Hawthorn,205451113
+Victoria,2,Boroondara (C),21110,Boroondara (C) - Kew,205451114
+Victoria,2,Brimbank (C),21180,Brimbank (C) - Keilor,205101181
+Victoria,2,Brimbank (C),21180,Brimbank (C) - Sunshine,205101182
+Victoria,2,Buloke (S),21270,Buloke (S) - North,230101271
+Victoria,2,Buloke (S),21270,Buloke (S) - South,230101272
+Victoria,2,Campaspe (S),21370,Campaspe (S) - Echuca,240101371
+Victoria,2,Campaspe (S),21370,Campaspe (S) - Kyabram,240101374
+Victoria,2,Campaspe (S),21370,Campaspe (S) - Rochester,240101375
+Victoria,2,Campaspe (S),21370,Campaspe (S) - South,240101376
+Victoria,2,Cardinia (S),21450,Cardinia (S) - North,205801452
+Victoria,2,Cardinia (S),21450,Cardinia (S) - Pakenham,205801453
+Victoria,2,Cardinia (S),21450,Cardinia (S) - South,205801454
+Victoria,2,Casey (C),21610,Casey (C) - Berwick,205801612
+Victoria,2,Casey (C),21610,Casey (C) - Cranbourne,205801613
+Victoria,2,Casey (C),21610,Casey (C) - Hallam,205801616
+Victoria,2,Casey (C),21610,Casey (C) - South,205801618
+Victoria,2,Central Goldfields (S),21670,C. Goldfields (S) - M'borough,235101671
+Victoria,2,Central Goldfields (S),21670,C. Goldfields (S) Bal,235101674
+Victoria,2,Colac-Otway (S),21750,Colac-Otway (S) - Colac,210151751
+Victoria,2,Colac-Otway (S),21750,Colac-Otway (S) - North,210151754
+Victoria,2,Colac-Otway (S),21750,Colac-Otway (S) - South,210151755
+Victoria,2,Corangamite (S),21830,Corangamite (S) - North,215051831
+Victoria,2,Corangamite (S),21830,Corangamite (S) - South,215051832
+Victoria,2,Darebin (C),21890,Darebin (C) - Northcote,205301891
+Victoria,2,Darebin (C),21890,Darebin (C) - Preston,205301892
+Victoria,2,East Gippsland (S),22110,E. Gippsland (S) - Bairnsdale,250052111
+Victoria,2,East Gippsland (S),22110,E. Gippsland (S) - Orbost,250052113
+Victoria,2,East Gippsland (S),22110,E. Gippsland (S) - South-West,250052115
+Victoria,2,East Gippsland (S),22110,E. Gippsland (S) Bal,250052117
+Victoria,2,Frankston (C),22170,Frankston (C) - East,205852171
+Victoria,2,Frankston (C),22170,Frankston (C) - West,205852174
+Victoria,2,Gannawarra (S),22250,Gannawarra (S),230152250
+Victoria,2,Glen Eira (C),22310,Glen Eira (C) - Caulfield,205652311
+Victoria,2,Glen Eira (C),22310,Glen Eira (C) - South,205652314
+Victoria,2,Glenelg (S),22410,Glenelg (S) - Heywood,215102411
+Victoria,2,Glenelg (S),22410,Glenelg (S) - North,215102412
+Victoria,2,Glenelg (S),22410,Glenelg (S) - Portland,215102413
+Victoria,2,Golden Plains (S),22490,Golden Plains (S) - North-West,210152491
+Victoria,2,Golden Plains (S),22490,Golden Plains (S) - South-East,210152492
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Central,235052621
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Eaglehawk,235052622
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Inner East,235052623
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Inner North,235052624
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Inner West,235052625
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - Pt B,235102628
+Victoria,2,Greater Bendigo (C),22620,Gr. Bendigo (C) - S'saye,235052626
+Victoria,2,Greater Dandenong (C),22670,Gr. Dandenong (C) - Dandenong,205752671
+Victoria,2,Greater Dandenong (C),22670,Gr. Dandenong (C) Bal,205752674
+Victoria,2,Greater Geelong (C),22750,Bellarine - Inner,210052751
+Victoria,2,Greater Geelong (C),22750,Corio - Inner,210052752
+Victoria,2,Greater Geelong (C),22750,Geelong,210052753
+Victoria,2,Greater Geelong (C),22750,Geelong West,210052754
+Victoria,2,Greater Geelong (C),22750,Greater Geelong (C) - Pt B,210102757
+Victoria,2,Greater Geelong (C),22750,Greater Geelong (C) - Pt C,210152758
+Victoria,2,Greater Geelong (C),22750,Newtown,210052755
+Victoria,2,Greater Geelong (C),22750,South Barwon - Inner,210052756
+Victoria,2,Greater Shepparton (C),22830,Gr. Shepparton (C) - Pt A,240052831
+Victoria,2,Greater Shepparton (C),22830,Gr. Shepparton (C) - Pt B East,240102834
+Victoria,2,Greater Shepparton (C),22830,Gr. Shepparton (C) - Pt B West,240102835
+Victoria,2,Hepburn (S),22910,Hepburn (S) - East,220102911
+Victoria,2,Hepburn (S),22910,Hepburn (S) - West,220102912
+Victoria,2,Hindmarsh (S),22980,Hindmarsh (S),225102980
+Victoria,2,Hobsons Bay (C),23110,Hobsons Bay (C) - Altona,205103111
+Victoria,2,Hobsons Bay (C),23110,Hobsons Bay (C) - Williamstown,205103112
+Victoria,2,Horsham (RC),23190,Horsham (RC) - Central,225053191
+Victoria,2,Horsham (RC),23190,Horsham (RC) Bal,225053194
+Victoria,2,Hume (C),23270,Hume (C) - Broadmeadows,205353271
+Victoria,2,Hume (C),23270,Hume (C) - Craigieburn,205353274
+Victoria,2,Hume (C),23270,Hume (C) - Sunbury,205353275
+Victoria,2,Indigo (S),23350,Indigo (S) - Pt A,245053351
+Victoria,2,Indigo (S),23350,Indigo (S) - Pt B,245103352
+Victoria,2,Kingston (C),23430,Kingston (C) - North,205653431
+Victoria,2,Kingston (C),23430,Kingston (C) - South,205653434
+Victoria,2,Knox (C),23670,Knox (C) - North-East,205553672
+Victoria,2,Knox (C),23670,Knox (C) - North-West,205553673
+Victoria,2,Knox (C),23670,Knox (C) - South,205553674
+Victoria,2,Latrobe (C),23810,Latrobe (C) - Moe,255053811
+Victoria,2,Latrobe (C),23810,Latrobe (C) - Morwell,255053814
+Victoria,2,Latrobe (C),23810,Latrobe (C) - Traralgon,255053815
+Victoria,2,Latrobe (C),23810,Latrobe (C) Bal,255053818
+Victoria,2,Loddon (S),23940,Loddon (S) - North,235103943
+Victoria,2,Loddon (S),23940,Loddon (S) - South,235103945
+Victoria,2,Macedon Ranges (S),24130,Macedon Ranges (S) - Kyneton,235204131
+Victoria,2,Macedon Ranges (S),24130,Macedon Ranges (S) - Romsey,235204134
+Victoria,2,Macedon Ranges (S),24130,Macedon Ranges (S) Bal,235204135
+Victoria,2,Manningham (C),24210,Manningham (C) - East,205504211
+Victoria,2,Manningham (C),24210,Manningham (C) - West,205504214
+Victoria,2,Mansfield (S),24250,Mansfield (S),240154250
+Victoria,2,Maribyrnong (C),24330,Maribyrnong (C),205104330
+Victoria,2,Maroondah (C),24410,Maroondah (C) - Croydon,205554411
+Victoria,2,Maroondah (C),24410,Maroondah (C) - Ringwood,205554412
+Victoria,2,Melbourne (C),24600,Melbourne (C) - Inner,205054601
+Victoria,2,Melbourne (C),24600,Melbourne (C) - Remainder,205054608
+Victoria,2,Melbourne (C),24600,Melbourne (C) - S'bank-D'lands,205054605
+Victoria,2,Melton (S),24650,Melton (S) - East,205204651
+Victoria,2,Melton (S),24650,Melton (S) Bal,205204654
+Victoria,2,Mildura (RC),24780,Mildura (RC) - Pt A,230054781
+Victoria,2,Mildura (RC),24780,Mildura (RC) - Pt B,230104782
+Victoria,2,Mitchell (S),24850,Mitchell (S) - North,240204851
+Victoria,2,Mitchell (S),24850,Mitchell (S) - South,240204854
+Victoria,2,Moira (S),24900,Moira (S) - East,240104901
+Victoria,2,Moira (S),24900,Moira (S) - West,240104904
+Victoria,2,Monash (C),24970,Monash (C) - South-West,205504971
+Victoria,2,Monash (C),24970,Monash (C) - Waverley East,205504974
+Victoria,2,Monash (C),24970,Monash (C) - Waverley West,205504975
+Victoria,2,Moonee Valley (C),25060,Moonee Valley (C) - Essendon,205105063
+Victoria,2,Moonee Valley (C),25060,Moonee Valley (C) - West,205105065
+Victoria,2,Moorabool (S),25150,Moorabool (S) - Bacchus Marsh,220105151
+Victoria,2,Moorabool (S),25150,Moorabool (S) - Ballan,220105154
+Victoria,2,Moorabool (S),25150,Moorabool (S) - West,220105155
+Victoria,2,Moreland (C),25250,Moreland (C) - Brunswick,205255251
+Victoria,2,Moreland (C),25250,Moreland (C) - Coburg,205255252
+Victoria,2,Moreland (C),25250,Moreland (C) - North,205255253
+Victoria,2,Mornington Peninsula (S),25340,Mornington P'sula (S) - East,205905341
+Victoria,2,Mornington Peninsula (S),25340,Mornington P'sula (S) - South,205905344
+Victoria,2,Mornington Peninsula (S),25340,Mornington P'sula (S) - West,205905345
+Victoria,2,Mount Alexander (S),25430,Mount Alexander (S) - C'maine,235105431
+Victoria,2,Mount Alexander (S),25430,Mount Alexander (S) Bal,235105434
+Victoria,2,Moyne (S),25490,Moyne (S) - North-East,215055491
+Victoria,2,Moyne (S),25490,Moyne (S) - North-West,215055493
+Victoria,2,Moyne (S),25490,Moyne (S) - South,215055496
+Victoria,2,Murrindindi (S),25620,Murrindindi (S) - East,240205621
+Victoria,2,Murrindindi (S),25620,Murrindindi (S) - West,240205622
+Victoria,2,Nillumbik (S),25710,Nillumbik (S) - South,205405713
+Victoria,2,Nillumbik (S),25710,Nillumbik (S) - South-West,205405715
+Victoria,2,Nillumbik (S),25710,Nillumbik (S) Bal,205405718
+Victoria,2,Northern Grampians (S),25810,N. Grampians (S) - St Arnaud,225055811
+Victoria,2,Northern Grampians (S),25810,N. Grampians (S) - Stawell,225055814
+Victoria,2,Port Phillip (C),25900,Port Phillip (C) - St Kilda,205055901
+Victoria,2,Port Phillip (C),25900,Port Phillip (C) - West,205055902
+Victoria,2,Pyrenees (S),25990,Pyrenees (S) - North,220155991
+Victoria,2,Pyrenees (S),25990,Pyrenees (S) - South,220155994
+Victoria,2,Queenscliffe (B),26080,Queenscliffe (B),210106080
+Victoria,2,South Gippsland (S),26170,South Gippsland (S) - Central,255206171
+Victoria,2,South Gippsland (S),26170,South Gippsland (S) - East,255206174
+Victoria,2,South Gippsland (S),26170,South Gippsland (S) - West,255206175
+Victoria,2,Southern Grampians (S),26260,S. Grampians (S) - Hamilton,215106261
+Victoria,2,Southern Grampians (S),26260,S. Grampians (S) - Wannon,215106264
+Victoria,2,Southern Grampians (S),26260,S. Grampians (S) Bal,215106265
+Victoria,2,Stonnington (C),26350,Stonnington (C) - Malvern,205656352
+Victoria,2,Stonnington (C),26350,Stonnington (C) - Prahran,205056351
+Victoria,2,Strathbogie (S),26430,Strathbogie (S),240156430
+Victoria,2,Surf Coast (S),26490,Surf Coast (S) - East,210106493
+Victoria,2,Surf Coast (S),26490,Surf Coast (S) - West,210106495
+Victoria,2,Swan Hill (RC),26610,Swan Hill (RC) - Central,230156611
+Victoria,2,Swan Hill (RC),26610,Swan Hill (RC) - Robinvale,230156614
+Victoria,2,Swan Hill (RC),26610,Swan Hill (RC) Bal,230156616
+Victoria,2,Towong (S),26670,Towong (S) - Pt A,245056671
+Victoria,2,Towong (S),26670,Towong (S) - Pt B,245156672
+Victoria,2,Wangaratta (RC),26700,Wangaratta (RC) - Central,245106701
+Victoria,2,Wangaratta (RC),26700,Wangaratta (RC) - North,245106704
+Victoria,2,Wangaratta (RC),26700,Wangaratta (RC) - South,245106705
+Victoria,2,Warrnambool (C),26730,Warrnambool (C),215016730
+Victoria,2,Wellington (S),26810,Wellington (S) - Alberton,250156811
+Victoria,2,Wellington (S),26810,Wellington (S) - Avon,250156812
+Victoria,2,Wellington (S),26810,Wellington (S) - Maffra,250156813
+Victoria,2,Wellington (S),26810,Wellington (S) - Rosedale,250156814
+Victoria,2,Wellington (S),26810,Wellington (S) - Sale,250156815
+Victoria,2,West Wimmera (S),26890,West Wimmera (S),225056890
+Victoria,2,Whitehorse (C),26980,Whitehorse (C) - Box Hill,205506981
+Victoria,2,Whitehorse (C),26980,Whitehorse (C) - Nunawading E.,205506984
+Victoria,2,Whitehorse (C),26980,Whitehorse (C) - Nunawading W.,205506985
+Victoria,2,Whittlesea (C),27070,Whittlesea (C) - North,205407071
+Victoria,2,Whittlesea (C),27070,Whittlesea (C) - South-East,205407075
+Victoria,2,Whittlesea (C),27070,Whittlesea (C) - South-West,205407076
+Victoria,2,Wodonga (RC),27170,Wodonga (RC),245057170
+Victoria,2,Wyndham (C),27260,Wyndham (C) - North,205207261
+Victoria,2,Wyndham (C),27260,Wyndham (C) - South,205207264
+Victoria,2,Wyndham (C),27260,Wyndham (C) - West,205207267
+Victoria,2,Yarra (C),27350,Yarra (C) - North,205057351
+Victoria,2,Yarra (C),27350,Yarra (C) - Richmond,205057352
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - Central,205607451
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - Dandenongs,205607452
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - Lilydale,205607453
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - North,205607454
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - Pt B,255107458
+Victoria,2,Yarra Ranges (S),27450,Yarra Ranges (S) - Seville,205607456
+Victoria,2,Yarriambiack (S),27630,Yarriambiack (S) - North,225107631
+Victoria,2,Yarriambiack (S),27630,Yarriambiack (S) - South,225107632
+Victoria,2,Unincorporated Vic,29399,Bass Strait Islands,255208649
+Victoria,2,Unincorporated Vic,29399,Falls Creek Alpine Resort,245158109
+Victoria,2,Unincorporated Vic,29399,French Island,255208529
+Victoria,2,Unincorporated Vic,29399,Lady Julia Percy Island,215058469
+Victoria,2,Unincorporated Vic,29399,Lake Mountain Alpine Resort,240208149
+Victoria,2,Unincorporated Vic,29399,Migratory - Offshore - Shipping (Vic.),285019779
+Victoria,2,Unincorporated Vic,29399,Mount Baw Baw Alpine Resort,255108209
+Victoria,2,Unincorporated Vic,29399,Mount Buller Alpine Resort,240158249
+Victoria,2,Unincorporated Vic,29399,Mount Hotham Alpine Resort,245158309
+Victoria,2,Unincorporated Vic,29399,Mount Stirling Alpine Resort,240158349
+Queensland,3,Aurukun (S),30250,Aurukun (S),350100250
+Queensland,3,Balonne (S),30300,Balonne (S),325050300
+Queensland,3,Banana (S),30370,Banana (S),330150370
+Queensland,3,Barcaldine (R),30410,Barcaldine (R) - Aramac,335050412
+Queensland,3,Barcaldine (R),30410,Barcaldine (R) - Barcaldine,335050416
+Queensland,3,Barcaldine (R),30410,Barcaldine (R) - Jericho,335050418
+Queensland,3,Barcoo (S),30450,Barcoo (S),335050450
+Queensland,3,Blackall Tambo (R),30760,Blackall Tambo (R) - Blackall,335050762
+Queensland,3,Blackall Tambo (R),30760,Blackall Tambo (R) - Tambo,335050765
+Queensland,3,Boulia (S),30900,Boulia (S),335050900
+Queensland,3,Brisbane (C),31000,Acacia Ridge,305111001
+Queensland,3,Brisbane (C),31000,Albion,305031004
+Queensland,3,Brisbane (C),31000,Alderley,305031007
+Queensland,3,Brisbane (C),31000,Algester,305111012
+Queensland,3,Brisbane (C),31000,Annerley,305091015
+Queensland,3,Brisbane (C),31000,Anstead,305071018
+Queensland,3,Brisbane (C),31000,Archerfield,305111023
+Queensland,3,Brisbane (C),31000,Ascot,305031026
+Queensland,3,Brisbane (C),31000,Ashgrove,305031031
+Queensland,3,Brisbane (C),31000,Aspley,305071034
+Queensland,3,Brisbane (C),31000,Bald Hills,305071037
+Queensland,3,Brisbane (C),31000,Balmoral,305091042
+Queensland,3,Brisbane (C),31000,Banyo,305071045
+Queensland,3,Brisbane (C),31000,Bardon,305031048
+Queensland,3,Brisbane (C),31000,Bellbowrie,305071053
+Queensland,3,Brisbane (C),31000,Belmont-Mackenzie,305111057
+Queensland,3,Brisbane (C),31000,Boondall,305071064
+Queensland,3,Brisbane (C),31000,Bowen Hills,305011067
+Queensland,3,Brisbane (C),31000,Bracken Ridge,305071072
+Queensland,3,Brisbane (C),31000,Bridgeman Downs,305071075
+Queensland,3,Brisbane (C),31000,Brighton,305071078
+Queensland,3,Brisbane (C),31000,Brookfield (incl. Brisbane Forest Park),305071084
+Queensland,3,Brisbane (C),31000,Bulimba,305091086
+Queensland,3,Brisbane (C),31000,Burbank,305111091
+Queensland,3,Brisbane (C),31000,Calamvale,305111094
+Queensland,3,Brisbane (C),31000,Camp Hill,305091097
+Queensland,3,Brisbane (C),31000,Cannon Hill,305091102
+Queensland,3,Brisbane (C),31000,Carina,305091113
+Queensland,3,Brisbane (C),31000,Carina Heights,305091116
+Queensland,3,Brisbane (C),31000,Carindale,305091108
+Queensland,3,Brisbane (C),31000,Carseldine,305071121
+Queensland,3,Brisbane (C),31000,Chandler-Capalaba West,305111123
+Queensland,3,Brisbane (C),31000,Chapel Hill,305071127
+Queensland,3,Brisbane (C),31000,Chelmer,305031132
+Queensland,3,Brisbane (C),31000,Chermside,305071135
+Queensland,3,Brisbane (C),31000,Chermside West,305071138
+Queensland,3,Brisbane (C),31000,City - Inner,305011143
+Queensland,3,Brisbane (C),31000,City - Remainder,305011146
+Queensland,3,Brisbane (C),31000,Clayfield,305031151
+Queensland,3,Brisbane (C),31000,Coopers Plains,305111154
+Queensland,3,Brisbane (C),31000,Coorparoo,305091157
+Queensland,3,Brisbane (C),31000,Corinda,305031162
+Queensland,3,Brisbane (C),31000,Darra-Sumner,305071167
+Queensland,3,Brisbane (C),31000,Deagon,305071173
+Queensland,3,Brisbane (C),31000,Doolandella-Forest Lake,305071176
+Queensland,3,Brisbane (C),31000,Durack,305071184
+Queensland,3,Brisbane (C),31000,Dutton Park,305011187
+Queensland,3,Brisbane (C),31000,East Brisbane,305091195
+Queensland,3,Brisbane (C),31000,Eight Mile Plains,305111198
+Queensland,3,Brisbane (C),31000,Ellen Grove,305071203
+Queensland,3,Brisbane (C),31000,Enoggera,305031206
+Queensland,3,Brisbane (C),31000,Everton Park,305071211
+Queensland,3,Brisbane (C),31000,Fairfield,305091214
+Queensland,3,Brisbane (C),31000,Ferny Grove,305071217
+Queensland,3,Brisbane (C),31000,Fig Tree Pocket,305071222
+Queensland,3,Brisbane (C),31000,Fortitude Valley,305011227
+Queensland,3,Brisbane (C),31000,Geebung,305071236
+Queensland,3,Brisbane (C),31000,Graceville,305031241
+Queensland,3,Brisbane (C),31000,Grange,305031244
+Queensland,3,Brisbane (C),31000,Greenslopes,305091247
+Queensland,3,Brisbane (C),31000,Gumdale-Ransome,305111251
+Queensland,3,Brisbane (C),31000,Hamilton,305031255
+Queensland,3,Brisbane (C),31000,Hawthorne,305091258
+Queensland,3,Brisbane (C),31000,Hemmant-Lytton,305111265
+Queensland,3,Brisbane (C),31000,Hendra,305031271
+Queensland,3,Brisbane (C),31000,Herston,305011274
+Queensland,3,Brisbane (C),31000,Highgate Hill,305011277
+Queensland,3,Brisbane (C),31000,Holland Park,305091282
+Queensland,3,Brisbane (C),31000,Holland Park West,305091285
+Queensland,3,Brisbane (C),31000,Inala,305071288
+Queensland,3,Brisbane (C),31000,Indooroopilly,305031293
+Queensland,3,Brisbane (C),31000,Jamboree Heights,305071296
+Queensland,3,Brisbane (C),31000,Jindalee,305071301
+Queensland,3,Brisbane (C),31000,Kangaroo Point,305011304
+Queensland,3,Brisbane (C),31000,Karana Downs-Lake Manchester,305071306
+Queensland,3,Brisbane (C),31000,Kedron,305031312
+Queensland,3,Brisbane (C),31000,Kelvin Grove,305011315
+Queensland,3,Brisbane (C),31000,Kenmore,305071318
+Queensland,3,Brisbane (C),31000,Kenmore Hills,305071323
+Queensland,3,Brisbane (C),31000,Keperra,305071326
+Queensland,3,Brisbane (C),31000,Kuraby,305111331
+Queensland,3,Brisbane (C),31000,Lota,305111337
+Queensland,3,Brisbane (C),31000,Lutwyche,305031345
+Queensland,3,Brisbane (C),31000,MacGregor,305111356
+Queensland,3,Brisbane (C),31000,Manly,305111364
+Queensland,3,Brisbane (C),31000,Manly West,305111367
+Queensland,3,Brisbane (C),31000,Mansfield,305111372
+Queensland,3,Brisbane (C),31000,McDowall,305071353
+Queensland,3,Brisbane (C),31000,Middle Park,305071375
+Queensland,3,Brisbane (C),31000,Milton,305011378
+Queensland,3,Brisbane (C),31000,Mitchelton,305071383
+Queensland,3,Brisbane (C),31000,Moggill,305071386
+Queensland,3,Brisbane (C),31000,Moorooka,305091391
+Queensland,3,Brisbane (C),31000,Moreton Island,305111394
+Queensland,3,Brisbane (C),31000,Morningside,305091397
+Queensland,3,Brisbane (C),31000,Mount Gravatt,305111402
+Queensland,3,Brisbane (C),31000,Mount Gravatt East,305111405
+Queensland,3,Brisbane (C),31000,Mount Ommaney,305071408
+Queensland,3,Brisbane (C),31000,Murarrie,305111413
+Queensland,3,Brisbane (C),31000,Nathan,305111416
+Queensland,3,Brisbane (C),31000,New Farm,305011421
+Queensland,3,Brisbane (C),31000,Newmarket,305031424
+Queensland,3,Brisbane (C),31000,Newstead,305011427
+Queensland,3,Brisbane (C),31000,Norman Park,305091432
+Queensland,3,Brisbane (C),31000,Northgate,305071435
+Queensland,3,Brisbane (C),31000,Nudgee,305071442
+Queensland,3,Brisbane (C),31000,Nundah,305031446
+Queensland,3,Brisbane (C),31000,Oxley,305071451
+Queensland,3,Brisbane (C),31000,Paddington,305011454
+Queensland,3,Brisbane (C),31000,Pallara-Heathwood-Larapinta,305111456
+Queensland,3,Brisbane (C),31000,Parkinson-Drewvale,305111463
+Queensland,3,Brisbane (C),31000,Pinjarra Hills,305071465
+Queensland,3,Brisbane (C),31000,Pinkenba-Eagle Farm,305071467
+Queensland,3,Brisbane (C),31000,Pullenvale,305071473
+Queensland,3,Brisbane (C),31000,Red Hill,305011481
+Queensland,3,Brisbane (C),31000,Richlands,305071484
+Queensland,3,Brisbane (C),31000,Riverhills,305071487
+Queensland,3,Brisbane (C),31000,Robertson,305111492
+Queensland,3,Brisbane (C),31000,Rochedale,305111495
+Queensland,3,Brisbane (C),31000,Rocklea,305111498
+Queensland,3,Brisbane (C),31000,Runcorn,305111503
+Queensland,3,Brisbane (C),31000,Salisbury,305111511
+Queensland,3,Brisbane (C),31000,Sandgate,305071514
+Queensland,3,Brisbane (C),31000,Seventeen Mile Rocks,305071517
+Queensland,3,Brisbane (C),31000,Sherwood,305031522
+Queensland,3,Brisbane (C),31000,South Brisbane,305011525
+Queensland,3,Brisbane (C),31000,Spring Hill,305011528
+Queensland,3,Brisbane (C),31000,St Lucia,305031506
+Queensland,3,Brisbane (C),31000,Stafford,305031533
+Queensland,3,Brisbane (C),31000,Stafford Heights,305031536
+Queensland,3,Brisbane (C),31000,Stretton-Karawatha,305111541
+Queensland,3,Brisbane (C),31000,Sunnybank,305111547
+Queensland,3,Brisbane (C),31000,Sunnybank Hills,305111552
+Queensland,3,Brisbane (C),31000,Taigum-Fitzgibbon,305071556
+Queensland,3,Brisbane (C),31000,Taringa,305031558
+Queensland,3,Brisbane (C),31000,Tarragindi,305091563
+Queensland,3,Brisbane (C),31000,The Gap,305071567
+Queensland,3,Brisbane (C),31000,Tingalpa,305111571
+Queensland,3,Brisbane (C),31000,Toowong,305031574
+Queensland,3,Brisbane (C),31000,Upper Kedron,305071585
+Queensland,3,Brisbane (C),31000,Upper Mount Gravatt,305111588
+Queensland,3,Brisbane (C),31000,Virginia,305071593
+Queensland,3,Brisbane (C),31000,Wacol,305071596
+Queensland,3,Brisbane (C),31000,Wakerley,305111601
+Queensland,3,Brisbane (C),31000,Wavell Heights,305071604
+Queensland,3,Brisbane (C),31000,West End,305011607
+Queensland,3,Brisbane (C),31000,Westlake,305071612
+Queensland,3,Brisbane (C),31000,Willawong,305111615
+Queensland,3,Brisbane (C),31000,Wilston,305031618
+Queensland,3,Brisbane (C),31000,Windsor,305031623
+Queensland,3,Brisbane (C),31000,Wishart,305111626
+Queensland,3,Brisbane (C),31000,Woolloongabba,305011631
+Queensland,3,Brisbane (C),31000,Wooloowin,305031634
+Queensland,3,Brisbane (C),31000,Wynnum,305111637
+Queensland,3,Brisbane (C),31000,Wynnum West,305111642
+Queensland,3,Brisbane (C),31000,Yeerongpilly,305091645
+Queensland,3,Brisbane (C),31000,Yeronga,305091648
+Queensland,3,Brisbane (C),31000,Zillmere,305071653
+Queensland,3,Bulloo (S),31750,Bulloo (S),325051750
+Queensland,3,Bundaberg (R),31820,Bundaberg (R) - Bundaberg,315051822
+Queensland,3,Bundaberg (R),31820,Bundaberg (R) - Burnett Pt A,315051824
+Queensland,3,Bundaberg (R),31820,Bundaberg (R) - Burnett Pt B,315101825
+Queensland,3,Bundaberg (R),31820,Bundaberg (R) - Isis,315101827
+Queensland,3,Bundaberg (R),31820,Bundaberg (R) - Kolan,315101828
+Queensland,3,Burdekin (S),31900,Burdekin (S),345151900
+Queensland,3,Burke (S),31950,Burke (S),355051950
+Queensland,3,Cairns (R),32070,Cairns (R) - Barron,350052062
+Queensland,3,Cairns (R),32070,Cairns (R) - Central Suburbs,350052065
+Queensland,3,Cairns (R),32070,Cairns (R) - City,350052066
+Queensland,3,Cairns (R),32070,Cairns (R) - Douglas,350102067
+Queensland,3,Cairns (R),32070,Cairns (R) - Mt Whitfield,350052068
+Queensland,3,Cairns (R),32070,Cairns (R) - Northern Suburbs,350052072
+Queensland,3,Cairns (R),32070,Cairns (R) - Pt B,350102078
+Queensland,3,Cairns (R),32070,Cairns (R) - Trinity,350052074
+Queensland,3,Cairns (R),32070,Cairns (R) - Western Suburbs,350052076
+Queensland,3,Carpentaria (S),32250,Carpentaria (S),355052250
+Queensland,3,Cassowary Coast (R),32260,Cassowary Coast (R) - Cardwell,350102262
+Queensland,3,Cassowary Coast (R),32260,Cassowary Coast (R) - Johnstone,350102264
+Queensland,3,Central Highlands (R),32270,Central Highlands (R) - Bauhinia,330152272
+Queensland,3,Central Highlands (R),32270,Central Highlands (R) - Duaringa,330152274
+Queensland,3,Central Highlands (R),32270,Central Highlands (R) - Emerald,330152276
+Queensland,3,Central Highlands (R),32270,Central Highlands (R) - Peak Downs,330152278
+Queensland,3,Charters Towers (R),32310,Charters Towers (R) - Charters Towers,345152312
+Queensland,3,Charters Towers (R),32310,Charters Towers (R) - Dalrymple,345152314
+Queensland,3,Cherbourg (S),32330,Cherbourg (S),315102330
+Queensland,3,Cloncurry (S),32450,Cloncurry (S),355052450
+Queensland,3,Cook (S),32500,Cook (S),350102500
+Queensland,3,Croydon (S),32600,Croydon (S),350102600
+Queensland,3,Diamantina (S),32750,Diamantina (S),335052750
+Queensland,3,Doomadgee (S),32770,Doomadgee (S),355052770
+Queensland,3,Etheridge (S),33100,Etheridge (S),350103100
+Queensland,3,Flinders (S),33200,Flinders (S),355053200
+Queensland,3,Fraser Coast (R),33220,Fraser Coast (R) - Hervey Bay Pt A,315073222
+Queensland,3,Fraser Coast (R),33220,Fraser Coast (R) - Hervey Bay Pt B,315103223
+Queensland,3,Fraser Coast (R),33220,Fraser Coast (R) - Maryborough,315103225
+Queensland,3,Fraser Coast (R),33220,Fraser Coast (R) - Woocoo-Tiaro,315103227
+Queensland,3,Gladstone (R),33360,Gladstone (R) - Calliope Pt A,330103362
+Queensland,3,Gladstone (R),33360,Gladstone (R) - Calliope Pt B,330153364
+Queensland,3,Gladstone (R),33360,Gladstone (R) - Gladstone,330103366
+Queensland,3,Gladstone (R),33360,Gladstone (R) - Miriam Vale,330153368
+Queensland,3,Gold Coast (C),33430,Ashmore-Benowa,307153502
+Queensland,3,Gold Coast (C),33430,Biggera Waters-Labrador,307103508
+Queensland,3,Gold Coast (C),33430,Bilinga-Tugun,307103511
+Queensland,3,Gold Coast (C),33430,Broadbeach Waters,307103515
+Queensland,3,Gold Coast (C),33430,Broadbeach-Mermaid Beach,307103514
+Queensland,3,Gold Coast (C),33430,Bundall,307103517
+Queensland,3,Gold Coast (C),33430,Burleigh Heads,307103521
+Queensland,3,Gold Coast (C),33430,Burleigh Waters,307103523
+Queensland,3,Gold Coast (C),33430,Carrara-Merrimac,307153525
+Queensland,3,Gold Coast (C),33430,Coolangatta,307103527
+Queensland,3,Gold Coast (C),33430,Coombabah,307153531
+Queensland,3,Gold Coast (C),33430,Currumbin,307103533
+Queensland,3,Gold Coast (C),33430,Currumbin Valley-Tallebudgera,307153534
+Queensland,3,Gold Coast (C),33430,Currumbin Waters,307153535
+Queensland,3,Gold Coast (C),33430,Elanora,307153537
+Queensland,3,Gold Coast (C),33430,Guanaba-Springbrook,307203538
+Queensland,3,Gold Coast (C),33430,Helensvale,307153543
+Queensland,3,Gold Coast (C),33430,Hope Island,307153547
+Queensland,3,Gold Coast (C),33430,Jacobs Well-Alberton,307153552
+Queensland,3,Gold Coast (C),33430,Kingsholme-Upper Coomera,307153556
+Queensland,3,Gold Coast (C),33430,Main Beach-South Stradbroke,307103555
+Queensland,3,Gold Coast (C),33430,Mermaid Wtrs-Clear Is. Wtrs,307103562
+Queensland,3,Gold Coast (C),33430,Miami,307103563
+Queensland,3,Gold Coast (C),33430,Molendinar,307153564
+Queensland,3,Gold Coast (C),33430,Mudgeeraba-Reedy Creek,307153566
+Queensland,3,Gold Coast (C),33430,Nerang,307153567
+Queensland,3,Gold Coast (C),33430,Ormeau-Yatala,307153574
+Queensland,3,Gold Coast (C),33430,Oxenford-Maudsland,307153568
+Queensland,3,Gold Coast (C),33430,Pacific Pines-Gaven,307153572
+Queensland,3,Gold Coast (C),33430,Palm Beach,307103573
+Queensland,3,Gold Coast (C),33430,Paradise Point-Runaway Bay,307103576
+Queensland,3,Gold Coast (C),33430,Parkwood-Arundel,307153578
+Queensland,3,Gold Coast (C),33430,Pimpama-Coomera,307153581
+Queensland,3,Gold Coast (C),33430,Robina,307153582
+Queensland,3,Gold Coast (C),33430,Southport,307103585
+Queensland,3,Gold Coast (C),33430,Surfers Paradise,307103587
+Queensland,3,Gold Coast (C),33430,Varsity Lakes,307153592
+Queensland,3,Gold Coast (C),33430,Worongary-Tallai,307153593
+Queensland,3,Goondiwindi (R),33610,Goondiwindi (R) - Goondiwindi,320053612
+Queensland,3,Goondiwindi (R),33610,Goondiwindi (R) - Inglewood,320053614
+Queensland,3,Goondiwindi (R),33610,Goondiwindi (R) - Waggamba,320053616
+Queensland,3,Gympie (R),33620,Gympie (R) - Cooloola,315103622
+Queensland,3,Gympie (R),33620,Gympie (R) - Gympie,315103624
+Queensland,3,Gympie (R),33620,Gympie (R) - Kilkivan,315103626
+Queensland,3,Hinchinbrook (S),33800,Hinchinbrook (S),345153800
+Queensland,3,Hope Vale (S),33830,Hope Vale (S),350103830
+Queensland,3,Ipswich (C),33960,Ipswich (C) - Central,305253962
+Queensland,3,Ipswich (C),33960,Ipswich (C) - East,305253965
+Queensland,3,Ipswich (C),33960,Ipswich (C) - North,305253966
+Queensland,3,Ipswich (C),33960,Ipswich (C) - South-West,305253971
+Queensland,3,Ipswich (C),33960,Ipswich (C) - West,305253976
+Queensland,3,Isaac (R),33980,Isaac (R) - Belyando,340103982
+Queensland,3,Isaac (R),33980,Isaac (R) - Broadsound,340103984
+Queensland,3,Isaac (R),33980,Isaac (R) - Nebo,340103986
+Queensland,3,Kowanyama (S),34420,Kowanyama (S),350104420
+Queensland,3,Lockhart River (S),34570,Lockhart River (S),350104570
+Queensland,3,Lockyer Valley (R),34580,Lockyer Valley (R) - Gatton,312104582
+Queensland,3,Lockyer Valley (R),34580,Lockyer Valley (R) - Laidley,312104584
+Queensland,3,Logan (C),34590,Beenleigh,305304595
+Queensland,3,Logan (C),34590,Bethania-Waterford,305304597
+Queensland,3,Logan (C),34590,Browns Plains,305304601
+Queensland,3,Logan (C),34590,Carbrook-Cornubia,305304603
+Queensland,3,Logan (C),34590,Daisy Hill-Priestdale,305304605
+Queensland,3,Logan (C),34590,Eagleby,305304606
+Queensland,3,Logan (C),34590,Edens Landing-Holmview,305304607
+Queensland,3,Logan (C),34590,Greenbank-Boronia Heights,305304608
+Queensland,3,Logan (C),34590,Jimboomba-Logan Village,305304611
+Queensland,3,Logan (C),34590,Kingston,305304612
+Queensland,3,Logan (C),34590,Loganholme,305304615
+Queensland,3,Logan (C),34590,Loganlea,305304618
+Queensland,3,Logan (C),34590,Marsden,305304623
+Queensland,3,Logan (C),34590,Mt Warren Park,305304626
+Queensland,3,Logan (C),34590,Park Ridge-Logan Reserve,305304627
+Queensland,3,Logan (C),34590,Rochedale South,305304631
+Queensland,3,Logan (C),34590,Shailer Park,305304634
+Queensland,3,Logan (C),34590,Slacks Creek,305304637
+Queensland,3,Logan (C),34590,Springwood,305304642
+Queensland,3,Logan (C),34590,Tanah Merah,305304645
+Queensland,3,Logan (C),34590,Underwood,305304651
+Queensland,3,Logan (C),34590,Waterford West,305304654
+Queensland,3,Logan (C),34590,Wolffdene-Bahrs Scrub,305304655
+Queensland,3,Logan (C),34590,Woodridge,305304656
+Queensland,3,Longreach (R),34710,Longreach (R) - Ilfracombe,335054712
+Queensland,3,Longreach (R),34710,Longreach (R) - Isisford,335054714
+Queensland,3,Longreach (R),34710,Longreach (R) - Longreach,335054716
+Queensland,3,Mackay (R),34770,Mackay (R) - Mackay Pt A,340054772
+Queensland,3,Mackay (R),34770,Mackay (R) - Mackay Pt B,340104773
+Queensland,3,Mackay (R),34770,Mackay (R) - Mirani,340104775
+Queensland,3,Mackay (R),34770,Mackay (R) - Sarina,340104777
+Queensland,3,McKinlay (S),34800,McKinlay (S),355054800
+Queensland,3,Mapoon (S),34830,Mapoon (S),350104830
+Queensland,3,Maranoa (R),34860,Maranoa (R) - Bendemere,325054862
+Queensland,3,Maranoa (R),34860,Maranoa (R) - Booringa,325054864
+Queensland,3,Maranoa (R),34860,Maranoa (R) - Bungil,325054865
+Queensland,3,Maranoa (R),34860,Maranoa (R) - Roma,325054867
+Queensland,3,Maranoa (R),34860,Maranoa (R) - Warroo,325054868
+Queensland,3,Moreton Bay (R),35010,Albany Creek,305405013
+Queensland,3,Moreton Bay (R),35010,Bray Park,305405016
+Queensland,3,Moreton Bay (R),35010,Bribie Island,305205019
+Queensland,3,Moreton Bay (R),35010,Burpengary-Narangba,305205021
+Queensland,3,Moreton Bay (R),35010,Caboolture Central,305205023
+Queensland,3,Moreton Bay (R),35010,Caboolture East,305205025
+Queensland,3,Moreton Bay (R),35010,Caboolture Hinterland,305205027
+Queensland,3,Moreton Bay (R),35010,Caboolture Midwest,305205028
+Queensland,3,Moreton Bay (R),35010,Central Pine West,305405033
+Queensland,3,Moreton Bay (R),35010,Clontarf,305455035
+Queensland,3,Moreton Bay (R),35010,Dakabin-Kallangur-M. Downs,305405037
+Queensland,3,Moreton Bay (R),35010,Deception Bay,305205039
+Queensland,3,Moreton Bay (R),35010,Griffin-Mango Hill,305405043
+Queensland,3,Moreton Bay (R),35010,Hills District,305405047
+Queensland,3,Moreton Bay (R),35010,Lawnton,305405051
+Queensland,3,Moreton Bay (R),35010,Margate-Woody Point,305455053
+Queensland,3,Moreton Bay (R),35010,Morayfield,305205056
+Queensland,3,Moreton Bay (R),35010,Moreton Bay (R) Bal,305405068
+Queensland,3,Moreton Bay (R),35010,Petrie,305405058
+Queensland,3,Moreton Bay (R),35010,Redcliffe-Scarborough,305455063
+Queensland,3,Moreton Bay (R),35010,Rothwell-Kippa-Ring,305455065
+Queensland,3,Moreton Bay (R),35010,Strathpine-Brendale,305405067
+Queensland,3,Mornington (S),35250,Mornington (S),355055250
+Queensland,3,Mount Isa (C),35300,Mount Isa (C),355055300
+Queensland,3,Murweh (S),35600,Murweh (S),325055600
+Queensland,3,Napranum (S),35670,Napranum (S),350105670
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Biggenden,315105761
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Eidsvold,315105762
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Gayndah,315105763
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Monto,315105764
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Mundubbera,315105765
+Queensland,3,North Burnett (R),35760,North Burnett (R) - Perry,315105766
+Queensland,3,Northern Peninsula Area (R),35780,Northern Peninsula Area (R) - Bamaga,350105781
+Queensland,3,Northern Peninsula Area (R),35780,Northern Peninsula Area (R) - Injinoo,350105783
+Queensland,3,Northern Peninsula Area (R),35780,Northern Peninsula Area (R) - New Mapoon,350105784
+Queensland,3,Northern Peninsula Area (R),35780,Northern Peninsula Area (R) - Seisia,350105786
+Queensland,3,Northern Peninsula Area (R),35780,Northern Peninsula Area (R) - Umagico,350105788
+Queensland,3,Palm Island (S),35790,Palm Island (S),345155790
+Queensland,3,Paroo (S),35800,Paroo (S),325055800
+Queensland,3,Pormpuraaw (S),36070,Pormpuraaw (S),350106070
+Queensland,3,Quilpie (S),36150,Quilpie (S),325056150
+Queensland,3,Redland (C),36250,Alexandra Hills,305506251
+Queensland,3,Redland (C),36250,Birkdale,305506254
+Queensland,3,Redland (C),36250,Capalaba,305506257
+Queensland,3,Redland (C),36250,Cleveland,305506262
+Queensland,3,Redland (C),36250,Ormiston,305506264
+Queensland,3,Redland (C),36250,Redland (C) Bal,305506283
+Queensland,3,Redland (C),36250,Redland Bay,305506265
+Queensland,3,Redland (C),36250,Sheldon-Mt Cotton,305506267
+Queensland,3,Redland (C),36250,Thorneside,305506268
+Queensland,3,Redland (C),36250,Thornlands,305506271
+Queensland,3,Redland (C),36250,Victoria Point,305506273
+Queensland,3,Redland (C),36250,Wellington Point,305506276
+Queensland,3,Richmond (S),36300,Richmond (S),355056300
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Fitzroy Pt A,330056362
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Fitzroy Pt B,330156363
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Livingstone Pt A,330056365
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Livingstone Pt B,330156366
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Mount Morgan,330156367
+Queensland,3,Rockhampton (R),36360,Rockhampton (R) - Rockhampton,330056368
+Queensland,3,Scenic Rim (R),36510,Scenic Rim (R) - Beaudesert,312106512
+Queensland,3,Scenic Rim (R),36510,Scenic Rim (R) - Boonah,312106514
+Queensland,3,Scenic Rim (R),36510,Scenic Rim (R) - Tamborine-Canungra,312106516
+Queensland,3,Somerset (R),36580,Somerset (R) - Esk,312056582
+Queensland,3,Somerset (R),36580,Somerset (R) - Kilcoy,312056584
+Queensland,3,South Burnett (R),36630,South Burnett (R) - Kingaroy,315106632
+Queensland,3,South Burnett (R),36630,South Burnett (R) - Murgon,315106634
+Queensland,3,South Burnett (R),36630,South Burnett (R) - Nanango,315106636
+Queensland,3,South Burnett (R),36630,South Burnett (R) - Wondai,315106638
+Queensland,3,Southern Downs (R),36660,Southern Downs (R) - Allora,320056662
+Queensland,3,Southern Downs (R),36660,Southern Downs (R) - Killarney,320056665
+Queensland,3,Southern Downs (R),36660,Southern Downs (R) - Stanthorpe,320056666
+Queensland,3,Southern Downs (R),36660,Southern Downs (R) - Warwick,320056667
+Queensland,3,Southern Downs (R),36660,Southern Downs (R) - West,320056668
+Queensland,3,Sunshine Coast (R),36710,Buderim,309056713
+Queensland,3,Sunshine Coast (R),36710,Caloundra Hinterland,309106716
+Queensland,3,Sunshine Coast (R),36710,Caloundra North,309056718
+Queensland,3,Sunshine Coast (R),36710,Caloundra South,309056721
+Queensland,3,Sunshine Coast (R),36710,Coolum-Mudjimba,309056723
+Queensland,3,Sunshine Coast (R),36710,Glass House Country,309106725
+Queensland,3,Sunshine Coast (R),36710,Kawana,309056728
+Queensland,3,Sunshine Coast (R),36710,Maroochy Hinterland,309106733
+Queensland,3,Sunshine Coast (R),36710,Maroochydore,309056738
+Queensland,3,Sunshine Coast (R),36710,Mooloolaba,309056744
+Queensland,3,Sunshine Coast (R),36710,Nambour,309056748
+Queensland,3,Sunshine Coast (R),36710,Noosa Hinterland,309106753
+Queensland,3,Sunshine Coast (R),36710,Noosa-Noosaville,309056755
+Queensland,3,Sunshine Coast (R),36710,Paynter-Petrie Creek,309056761
+Queensland,3,Sunshine Coast (R),36710,Sunshine-Peregian,309056763
+Queensland,3,Sunshine Coast (R),36710,Tewantin,309056772
+Queensland,3,Tablelands (R),36810,Tablelands (R) - Atherton,350106812
+Queensland,3,Tablelands (R),36810,Tablelands (R) - Eacham,350106814
+Queensland,3,Tablelands (R),36810,Tablelands (R) - Herberton,350106816
+Queensland,3,Tablelands (R),36810,Tablelands (R) - Mareeba,350106818
+Queensland,3,Toowoomba (R),36910,Cambooya,320016912
+Queensland,3,Toowoomba (R),36910,Clifton,320056914
+Queensland,3,Toowoomba (R),36910,Crow's Nest,320056916
+Queensland,3,Toowoomba (R),36910,Gowrie,320016921
+Queensland,3,Toowoomba (R),36910,Greenmount,320056923
+Queensland,3,Toowoomba (R),36910,Highfields,320016926
+Queensland,3,Toowoomba (R),36910,Jondaryan,320056928
+Queensland,3,Toowoomba (R),36910,Millmerran,320056931
+Queensland,3,Toowoomba (R),36910,Pittsworth,320056933
+Queensland,3,Toowoomba (R),36910,Rosalie,320056935
+Queensland,3,Toowoomba (R),36910,Toowoomba Central,320016937
+Queensland,3,Toowoomba (R),36910,Toowoomba North-East,320016941
+Queensland,3,Toowoomba (R),36910,Toowoomba North-West,320016943
+Queensland,3,Toowoomba (R),36910,Toowoomba South-East,320016945
+Queensland,3,Toowoomba (R),36910,Toowoomba West,320016946
+Queensland,3,Toowoomba (R),36910,Westbrook,320016947
+Queensland,3,Torres (S),36950,Torres (S),350106950
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Badu,350106963
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Boigu,350106965
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Dauan,350106968
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Erub,350106972
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Hammond,350106974
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Iama,350106976
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Kubin,350106978
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Mabuiag,350106982
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Mer,350106984
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Poruma,350106986
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Saibai,350106992
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - St Pauls,350106993
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Ugar,350106995
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Warraber,350106996
+Queensland,3,Torres Strait Island (R),36960,Torres Strait Island (R) - Yorke,350106998
+Queensland,3,Townsville (C),37010,Aitkenvale,345057001
+Queensland,3,Townsville (C),37010,City,345057003
+Queensland,3,Townsville (C),37010,Condon-Rasmussen-Bohle Basin,345107005
+Queensland,3,Townsville (C),37010,Cranbrook,345057007
+Queensland,3,Townsville (C),37010,Currajong,345057012
+Queensland,3,Townsville (C),37010,Douglas,345057014
+Queensland,3,Townsville (C),37010,Garbutt,345057015
+Queensland,3,Townsville (C),37010,Gulliver,345057018
+Queensland,3,Townsville (C),37010,Heatley,345057023
+Queensland,3,Townsville (C),37010,Hermit Park,345057026
+Queensland,3,Townsville (C),37010,Hyde Park-Mysterton,345057027
+Queensland,3,Townsville (C),37010,Kelso,345107028
+Queensland,3,Townsville (C),37010,Kirwan,345107030
+Queensland,3,Townsville (C),37010,Magnetic Island,345057031
+Queensland,3,Townsville (C),37010,Mt Louisa-Mt St John-Bohle,345057033
+Queensland,3,Townsville (C),37010,Mundingburra,345057034
+Queensland,3,Townsville (C),37010,Murray,345057038
+Queensland,3,Townsville (C),37010,North Ward-Castle Hill,345057041
+Queensland,3,Townsville (C),37010,Northern Beaches-Pinnacles,345157043
+Queensland,3,Townsville (C),37010,Oonoonba-Idalia-Cluden,345057044
+Queensland,3,Townsville (C),37010,Pallarenda-Shelley Beach,345057047
+Queensland,3,Townsville (C),37010,Pimlico,345057051
+Queensland,3,Townsville (C),37010,Railway Estate,345057054
+Queensland,3,Townsville (C),37010,Rosslea,345057058
+Queensland,3,Townsville (C),37010,Rowes Bay-Belgian Gardens,345057062
+Queensland,3,Townsville (C),37010,South Townsville,345057065
+Queensland,3,Townsville (C),37010,Stuart-Roseneath,345057068
+Queensland,3,Townsville (C),37010,Vincent,345057071
+Queensland,3,Townsville (C),37010,West End,345057074
+Queensland,3,Townsville (C),37010,Woodstock-Cleveland-Ross,345157076
+Queensland,3,Townsville (C),37010,Wulguru,345057078
+Queensland,3,Weipa (T),37300,Weipa (T),350107300
+Queensland,3,Western Downs (R),37310,Western Downs (R) - Chinchilla,320057312
+Queensland,3,Western Downs (R),37310,Western Downs (R) - Dalby,320057313
+Queensland,3,Western Downs (R),37310,Western Downs (R) - Murilla-Wandoan,320057315
+Queensland,3,Western Downs (R),37310,Western Downs (R) - Tara,320057316
+Queensland,3,Western Downs (R),37310,Western Downs (R) - Wambo,320057318
+Queensland,3,Whitsunday (R),37340,Whitsunday (R) - Bowen,340107342
+Queensland,3,Whitsunday (R),37340,Whitsunday (R) - Whitsunday,340107345
+Queensland,3,Winton (S),37400,Winton (S),335057400
+Queensland,3,Woorabinda (S),37550,Woorabinda (S),330157550
+Queensland,3,Wujal Wujal (S),37570,Wujal Wujal (S),350107570
+Queensland,3,Yarrabah (S),37600,Yarrabah (S),350107600
+Queensland,3,Unincorporated Qld,39399,Migratory - Offshore - Shipping (Qld),385019779
+South Australia,4,Adelaide (C),40070,Adelaide (C),405150070
+South Australia,4,Adelaide Hills (DC),40120,Adelaide Hills (DC) - Central,405150121
+South Australia,4,Adelaide Hills (DC),40120,Adelaide Hills (DC) - North,410150125
+South Australia,4,Adelaide Hills (DC),40120,Adelaide Hills (DC) - Ranges,405150124
+South Australia,4,Adelaide Hills (DC),40120,Adelaide Hills (DC) Bal,410150128
+South Australia,4,Alexandrina (DC),40220,Alexandrina (DC) - Coastal,410200221
+South Australia,4,Alexandrina (DC),40220,Alexandrina (DC) - Strathalbyn,410200224
+South Australia,4,Anangu Pitjantjatjara (AC),40250,Anangu Pitjantjatjara (AC),435250250
+South Australia,4,Barossa (DC),40310,Barossa (DC) - Angaston,410050311
+South Australia,4,Barossa (DC),40310,Barossa (DC) - Barossa,410050314
+South Australia,4,Barossa (DC),40310,Barossa (DC) - Tanunda,410050315
+South Australia,4,Barunga West (DC),40430,Barunga West (DC),415050430
+South Australia,4,Berri and Barmera (DC),40520,Berri & Barmera (DC) - Barmera,420050521
+South Australia,4,Berri and Barmera (DC),40520,Berri & Barmera (DC) - Berri,420050524
+South Australia,4,Burnside (C),40700,Burnside (C) - North-East,405150701
+South Australia,4,Burnside (C),40700,Burnside (C) - South-West,405150704
+South Australia,4,Campbelltown (C),40910,Campbelltown (C) - East,405150911
+South Australia,4,Campbelltown (C),40910,Campbelltown (C) - West,405150914
+South Australia,4,Ceduna (DC),41010,Ceduna (DC),430101010
+South Australia,4,Charles Sturt (C),41060,Charles Sturt (C) - Coastal,405101061
+South Australia,4,Charles Sturt (C),41060,Charles Sturt (C) - Inner East,405101064
+South Australia,4,Charles Sturt (C),41060,Charles Sturt (C) - Inner West,405101065
+South Australia,4,Charles Sturt (C),41060,Charles Sturt (C) - North-East,405101068
+South Australia,4,Clare and Gilbert Valleys (DC),41140,Clare and Gilbert Valleys (DC),415101140
+South Australia,4,Cleve (DC),41190,Cleve (DC),430051190
+South Australia,4,Coober Pedy (DC),41330,Coober Pedy (DC),435251330
+South Australia,4,Copper Coast (DC),41560,Copper Coast (DC),415051560
+South Australia,4,Elliston (DC),41750,Elliston (DC),430051750
+South Australia,4,Flinders Ranges (DC),41830,Flinders Ranges (DC),435201830
+South Australia,4,Franklin Harbour (DC),41960,Franklin Harbour (DC),430051960
+South Australia,4,Gawler (T),42030,Gawler (T),405052030
+South Australia,4,Goyder (DC),42110,Goyder (DC),415102110
+South Australia,4,Grant (DC),42250,Grant (DC),425102250
+South Australia,4,Holdfast Bay (C),42600,Holdfast Bay (C) - North,405202601
+South Australia,4,Holdfast Bay (C),42600,Holdfast Bay (C) - South,405202604
+South Australia,4,Kangaroo Island (DC),42750,Kangaroo Island (DC),410102750
+South Australia,4,Karoonda East Murray (DC),43080,Karoonda East Murray (DC),420103080
+South Australia,4,Kimba (DC),43220,Kimba (DC),430053220
+South Australia,4,Kingston (DC),43360,Kingston (DC),425053360
+South Australia,4,Light (RegC),43650,Light (RegC),410053650
+South Australia,4,Lower Eyre Peninsula (DC),43710,Lower Eyre Peninsula (DC),430053710
+South Australia,4,Loxton Waikerie (DC),43790,Loxton Waikerie (DC) - East,420053791
+South Australia,4,Loxton Waikerie (DC),43790,Loxton Waikerie (DC) - West,420053794
+South Australia,4,Mallala (DC),43920,Mallala (DC),410053920
+South Australia,4,Maralinga Tjarutja (AC),44000,Maralinga Tjarutja (AC),435254000
+South Australia,4,Marion (C),44060,Marion (C) - Central,405204061
+South Australia,4,Marion (C),44060,Marion (C) - North,405204064
+South Australia,4,Marion (C),44060,Marion (C) - South,405204065
+South Australia,4,Mid Murray (DC),44210,Mid Murray (DC),420054210
+South Australia,4,Mitcham (C),44340,Mitcham (C) - Hills,405204341
+South Australia,4,Mitcham (C),44340,Mitcham (C) - North-East,405204344
+South Australia,4,Mitcham (C),44340,Mitcham (C) - West,405204345
+South Australia,4,Mount Barker (DC),44550,Mount Barker (DC) - Central,410154551
+South Australia,4,Mount Barker (DC),44550,Mount Barker (DC) Bal,410154554
+South Australia,4,Mount Gambier (C),44620,Mount Gambier (C),425104620
+South Australia,4,Mount Remarkable (DC),44830,Mount Remarkable (DC),435204830
+South Australia,4,Murray Bridge (RC),45040,Murray Bridge (RC),420105040
+South Australia,4,Naracoorte and Lucindale (DC),45090,Naracoorte and Lucindale (DC),425055090
+South Australia,4,Northern Areas (DC),45120,Northern Areas (DC),435155120
+South Australia,4,Norwood Payneham St Peters (C),45290,Norw. P'ham St Ptrs (C) - East,405155291
+South Australia,4,Norwood Payneham St Peters (C),45290,Norw. P'ham St Ptrs (C) - West,405155294
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - Hackham,405205341
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - Hills,405205342
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - Morphett,405205343
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - North Coast,405205344
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - Reservoir,405205345
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - South Coast,405205346
+South Australia,4,Onkaparinga (C),45340,Onkaparinga (C) - Woodcroft,405205347
+South Australia,4,Orroroo/Carrieton (DC),45400,Orroroo/Carrieton (DC),435155400
+South Australia,4,Peterborough (DC),45540,Peterborough (DC),435155540
+South Australia,4,Playford (C),45680,Playford (C) - East Central,405055681
+South Australia,4,Playford (C),45680,Playford (C) - Elizabeth,405055683
+South Australia,4,Playford (C),45680,Playford (C) - Hills,405055684
+South Australia,4,Playford (C),45680,Playford (C) - West,405055686
+South Australia,4,Playford (C),45680,Playford (C) - West Central,405055688
+South Australia,4,Port Adelaide Enfield (C),45890,Port Adel. Enfield (C) - Coast,405105895
+South Australia,4,Port Adelaide Enfield (C),45890,Port Adel. Enfield (C) - East,405055891
+South Australia,4,Port Adelaide Enfield (C),45890,Port Adel. Enfield (C) - Inner,405055894
+South Australia,4,Port Adelaide Enfield (C),45890,Port Adel. Enfield (C) - Park,405105896
+South Australia,4,Port Adelaide Enfield (C),45890,Port Adel. Enfield (C) - Port,405105897
+South Australia,4,Port Augusta (C),46090,Port Augusta (C),435206090
+South Australia,4,Port Lincoln (C),46300,Port Lincoln (C),430056300
+South Australia,4,Port Pirie City and Dists (M),46450,Port Pirie C Dists (M) - City,435156451
+South Australia,4,Port Pirie City and Dists (M),46450,Port Pirie C Dists (M) Bal,435156454
+South Australia,4,Prospect (C),46510,Prospect (C),405156510
+South Australia,4,Renmark Paringa (DC),46670,Renmark Paringa (DC) - Paringa,420056671
+South Australia,4,Renmark Paringa (DC),46670,Renmark Paringa (DC) - Renmark,420056674
+South Australia,4,Robe (DC),46860,Robe (DC),425056860
+South Australia,4,Roxby Downs (M),46970,Roxby Downs (M),435256970
+South Australia,4,Salisbury (C),47140,Salisbury (C) - Central,405057141
+South Australia,4,Salisbury (C),47140,Salisbury (C) - Inner North,405057143
+South Australia,4,Salisbury (C),47140,Salisbury (C) - North-East,405057144
+South Australia,4,Salisbury (C),47140,Salisbury (C) - South-East,405057146
+South Australia,4,Salisbury (C),47140,Salisbury (C) Bal,405057148
+South Australia,4,Southern Mallee (DC),47290,Southern Mallee (DC),420107290
+South Australia,4,Streaky Bay (DC),47490,Streaky Bay (DC),430107490
+South Australia,4,Tatiara (DC),47630,Tatiara (DC),425057630
+South Australia,4,Tea Tree Gully (C),47700,Tea Tree Gully (C) - Central,405057701
+South Australia,4,Tea Tree Gully (C),47700,Tea Tree Gully (C) - Hills,405057704
+South Australia,4,Tea Tree Gully (C),47700,Tea Tree Gully (C) - North,405057705
+South Australia,4,Tea Tree Gully (C),47700,Tea Tree Gully (C) - South,405057708
+South Australia,4,The Coorong (DC),47800,The Coorong (DC),420107800
+South Australia,4,Tumby Bay (DC),47910,Tumby Bay (DC),430057910
+South Australia,4,Unley (C),47980,Unley (C) - East,405157981
+South Australia,4,Unley (C),47980,Unley (C) - West,405157984
+South Australia,4,Victor Harbor (C),48050,Victor Harbor (C),410208050
+South Australia,4,Wakefield (DC),48130,Wakefield (DC),415108130
+South Australia,4,Walkerville (M),48260,Walkerville (M),405158260
+South Australia,4,Wattle Range (DC),48340,Wattle Range (DC) - East,425108341
+South Australia,4,Wattle Range (DC),48340,Wattle Range (DC) - West,425108344
+South Australia,4,West Torrens (C),48410,West Torrens (C) - East,405108411
+South Australia,4,West Torrens (C),48410,West Torrens (C) - West,405108414
+South Australia,4,Whyalla (C),48540,Whyalla (C),435058540
+South Australia,4,Wudinna (DC),48640,Wudinna (DC),430058640
+South Australia,4,Yankalilla (DC),48750,Yankalilla (DC),410208750
+South Australia,4,Yorke Peninsula (DC),48830,Yorke Peninsula (DC) - North,415058831
+South Australia,4,Yorke Peninsula (DC),48830,Yorke Peninsula (DC) - South,415058834
+South Australia,4,Unincorporated SA,49399,Migratory - Offshore - Shipping (SA),485019779
+South Australia,4,Unincorporated SA,49399,Unincorp. Far North,435259589
+South Australia,4,Unincorporated SA,49399,Unincorp. Flinders Ranges,435209529
+South Australia,4,Unincorporated SA,49399,Unincorp. Lincoln,430059179
+South Australia,4,Unincorporated SA,49399,Unincorp. Murray Mallee,420109109
+South Australia,4,Unincorporated SA,49399,Unincorp. Pirie,435159459
+South Australia,4,Unincorporated SA,49399,Unincorp. Riverland,420059039
+South Australia,4,Unincorporated SA,49399,Unincorp. West Coast,430109249
+South Australia,4,Unincorporated SA,49399,Unincorp. Western,405108899
+South Australia,4,Unincorporated SA,49399,Unincorp. Whyalla,435059389
+South Australia,4,Unincorporated SA,49399,Unincorp. Yorke,415058969
+Western Australia,5,Albany (C),50080,Albany (C) - Central,515100081
+Western Australia,5,Albany (C),50080,Albany (C) Bal,515100084
+Western Australia,5,Armadale (C),50210,Armadale (C),505250210
+Western Australia,5,Ashburton (S),50250,Ashburton (S),540100250
+Western Australia,5,Augusta-Margaret River (S),50280,Augusta-Margaret River (S),510150280
+Western Australia,5,Bassendean (T),50350,Bassendean (T),505100350
+Western Australia,5,Bayswater (C),50420,Bayswater (C),505100420
+Western Australia,5,Belmont (C),50490,Belmont (C),505250490
+Western Australia,5,Beverley (S),50560,Beverley (S),525100560
+Western Australia,5,Boddington (S),50630,Boddington (S),510100630
+Western Australia,5,Boyup Brook (S),50770,Boyup Brook (S),510200770
+Western Australia,5,Bridgetown-Greenbushes (S),50840,Bridgetown-Greenbushes (S),510200840
+Western Australia,5,Brookton (S),50910,Brookton (S),520050910
+Western Australia,5,Broome (S),50980,Broome (S),545100980
+Western Australia,5,Broomehill-Tambellup (S),51080,Broomehill-Tambellup (S),515051080
+Western Australia,5,Bruce Rock (S),51120,Bruce Rock (S),525151120
+Western Australia,5,Bunbury (C),51190,Bunbury (C),510031190
+Western Australia,5,Busselton (S),51260,Busselton (S),510151260
+Western Australia,5,Cambridge (T),51310,Cambridge (T),505051310
+Western Australia,5,Canning (C),51330,Canning (C),505251330
+Western Australia,5,Capel (S),51400,Capel (S) - Pt A,510031401
+Western Australia,5,Capel (S),51400,Capel (S) - Pt B,510101404
+Western Australia,5,Carnamah (S),51470,Carnamah (S),535151470
+Western Australia,5,Carnarvon (S),51540,Carnarvon (S),535051540
+Western Australia,5,Chapman Valley (S),51610,Chapman Valley (S),535151610
+Western Australia,5,Chittering (S),51680,Chittering (S),525051680
+Western Australia,5,Claremont (T),51750,Claremont (T),505051750
+Western Australia,5,Cockburn (C),51820,Cockburn (C),505201820
+Western Australia,5,Collie (S),51890,Collie (S),510101890
+Western Australia,5,Coolgardie (S),51960,Coolgardie (S),530051960
+Western Australia,5,Coorow (S),52030,Coorow (S),535152030
+Western Australia,5,Corrigin (S),52100,Corrigin (S),520102100
+Western Australia,5,Cottesloe (T),52170,Cottesloe (T),505052170
+Western Australia,5,Cranbrook (S),52240,Cranbrook (S),515102240
+Western Australia,5,Cuballing (S),52310,Cuballing (S),520052310
+Western Australia,5,Cue (S),52380,Cue (S),535102380
+Western Australia,5,Cunderdin (S),52450,Cunderdin (S),525102450
+Western Australia,5,Dalwallinu (S),52520,Dalwallinu (S),525102520
+Western Australia,5,Dandaragan (S),52590,Dandaragan (S),525052590
+Western Australia,5,Dardanup (S),52660,Dardanup (S) - Pt A,510032661
+Western Australia,5,Dardanup (S),52660,Dardanup (S) - Pt B,510102664
+Western Australia,5,Denmark (S),52730,Denmark (S),515102730
+Western Australia,5,Derby-West Kimberley (S),52800,Derby-West Kimberley (S),545102800
+Western Australia,5,Donnybrook-Balingup (S),52870,Donnybrook-Balingup (S),510102870
+Western Australia,5,Dowerin (S),52940,Dowerin (S),525102940
+Western Australia,5,Dumbleyung (S),53010,Dumbleyung (S),520053010
+Western Australia,5,Dundas (S),53080,Dundas (S),530103080
+Western Australia,5,East Fremantle (T),53150,East Fremantle (T),505203150
+Western Australia,5,East Pilbara (S),53220,East Pilbara (S),540053220
+Western Australia,5,Esperance (S),53290,Esperance (S),530103290
+Western Australia,5,Exmouth (S),53360,Exmouth (S),535053360
+Western Australia,5,Fremantle (C),53430,Fremantle (C) - Inner,505203431
+Western Australia,5,Fremantle (C),53430,Fremantle (C) - Remainder,505203432
+Western Australia,5,Geraldton-Greenough (C),53520,Geraldton,535033522
+Western Australia,5,Geraldton-Greenough (C),53520,Greenough - Pt A,535033524
+Western Australia,5,Geraldton-Greenough (C),53520,Greenough - Pt B,535153526
+Western Australia,5,Gingin (S),53570,Gingin (S),525053570
+Western Australia,5,Gnowangerup (S),53640,Gnowangerup (S),515053640
+Western Australia,5,Goomalling (S),53710,Goomalling (S),525103710
+Western Australia,5,Gosnells (C),53780,Gosnells (C),505253780
+Western Australia,5,Halls Creek (S),53920,Halls Creek (S),545053920
+Western Australia,5,Harvey (S),53990,Harvey (S) - Pt A,510033991
+Western Australia,5,Harvey (S),53990,Harvey (S) - Pt B,510103994
+Western Australia,5,Irwin (S),54060,Irwin (S),535154060
+Western Australia,5,Jerramungup (S),54130,Jerramungup (S),515054130
+Western Australia,5,Joondalup (C),54170,Joondalup (C) - North,505154171
+Western Australia,5,Joondalup (C),54170,Joondalup (C) - South,505154174
+Western Australia,5,Kalamunda (S),54200,Kalamunda (S),505104200
+Western Australia,5,Kalgoorlie/Boulder (C),54280,Kalgoorlie/Boulder (C) - Pt A,530014281
+Western Australia,5,Kalgoorlie/Boulder (C),54280,Kalgoorlie/Boulder (C) - Pt B,530054284
+Western Australia,5,Katanning (S),54340,Katanning (S),515054340
+Western Australia,5,Kellerberrin (S),54410,Kellerberrin (S),525154410
+Western Australia,5,Kent (S),54480,Kent (S),515054480
+Western Australia,5,Kojonup (S),54550,Kojonup (S),515054550
+Western Australia,5,Kondinin (S),54620,Kondinin (S),520104620
+Western Australia,5,Koorda (S),54690,Koorda (S),525104690
+Western Australia,5,Kulin (S),54760,Kulin (S),520104760
+Western Australia,5,Kwinana (T),54830,Kwinana (T),505204830
+Western Australia,5,Lake Grace (S),54900,Lake Grace (S),520104900
+Western Australia,5,Laverton (S),54970,Laverton (S),530054970
+Western Australia,5,Leonora (S),55040,Leonora (S),530055040
+Western Australia,5,Mandurah (C),55110,Mandurah (C),510015110
+Western Australia,5,Manjimup (S),55180,Manjimup (S),510205180
+Western Australia,5,Meekatharra (S),55250,Meekatharra (S),535105250
+Western Australia,5,Melville (C),55320,Melville (C),505205320
+Western Australia,5,Menzies (S),55390,Menzies (S),530055390
+Western Australia,5,Merredin (S),55460,Merredin (S),525155460
+Western Australia,5,Mingenew (S),55530,Mingenew (S),535155530
+Western Australia,5,Moora (S),55600,Moora (S),525055600
+Western Australia,5,Morawa (S),55670,Morawa (S),535155670
+Western Australia,5,Mosman Park (T),55740,Mosman Park (T),505055740
+Western Australia,5,Mount Magnet (S),55810,Mount Magnet (S),535105810
+Western Australia,5,Mount Marshall (S),55880,Mount Marshall (S),525155880
+Western Australia,5,Mukinbudin (S),55950,Mukinbudin (S),525155950
+Western Australia,5,Mullewa (S),56020,Mullewa (S),535156020
+Western Australia,5,Mundaring (S),56090,Mundaring (S),505106090
+Western Australia,5,Murchison (S),56160,Murchison (S),535106160
+Western Australia,5,Murray (S),56230,Murray (S),510016230
+Western Australia,5,Nannup (S),56300,Nannup (S),510206300
+Western Australia,5,Narembeen (S),56370,Narembeen (S),525156370
+Western Australia,5,Narrogin (S),56450,Narrogin (S),520056450
+Western Australia,5,Narrogin (T),56520,Narrogin (T),520056520
+Western Australia,5,Nedlands (C),56580,Nedlands (C),505056580
+Western Australia,5,Ngaanyatjarraku (S),56620,Ngaanyatjarraku (S),530056620
+Western Australia,5,Northam (S),56730,Northam,525106732
+Western Australia,5,Northam (S),56730,Northam Town,525106735
+Western Australia,5,Northampton (S),56790,Northampton (S),535156790
+Western Australia,5,Nungarin (S),56860,Nungarin (S),525156860
+Western Australia,5,Peppermint Grove (S),56930,Peppermint Grove (S),505056930
+Western Australia,5,Perenjori (S),57000,Perenjori (S),535157000
+Western Australia,5,Perth (C),57080,Perth (C) - Inner,505057081
+Western Australia,5,Perth (C),57080,Perth (C) - Remainder,505057082
+Western Australia,5,Pingelly (S),57140,Pingelly (S),520057140
+Western Australia,5,Plantagenet (S),57210,Plantagenet (S),515107210
+Western Australia,5,Port Hedland (T),57280,Port Hedland (T),540057280
+Western Australia,5,Quairading (S),57350,Quairading (S),525107350
+Western Australia,5,Ravensthorpe (S),57420,Ravensthorpe (S),530107420
+Western Australia,5,Rockingham (C),57490,Rockingham (C),505207490
+Western Australia,5,Roebourne (S),57560,Roebourne (S),540107560
+Western Australia,5,Sandstone (S),57630,Sandstone (S),535107630
+Western Australia,5,Serpentine-Jarrahdale (S),57700,Serpentine-Jarrahdale (S),505257700
+Western Australia,5,Shark Bay (S),57770,Shark Bay (S),535057770
+Western Australia,5,South Perth (C),57840,South Perth (C),505257840
+Western Australia,5,Stirling (C),57910,Stirling (C) - Central,505157914
+Western Australia,5,Stirling (C),57910,Stirling (C) - Coastal,505157915
+Western Australia,5,Stirling (C),57910,Stirling (C) - South-Eastern,505157916
+Western Australia,5,Subiaco (C),57980,Subiaco (C),505057980
+Western Australia,5,Swan (C),58050,Swan (C),505108050
+Western Australia,5,Tammin (S),58190,Tammin (S),525108190
+Western Australia,5,Three Springs (S),58260,Three Springs (S),535158260
+Western Australia,5,Toodyay (S),58330,Toodyay (S),525108330
+Western Australia,5,Trayning (S),58400,Trayning (S),525158400
+Western Australia,5,Upper Gascoyne (S),58470,Upper Gascoyne (S),535058470
+Western Australia,5,Victoria Park (T),58510,Victoria Park (T),505258510
+Western Australia,5,Victoria Plains (S),58540,Victoria Plains (S),525058540
+Western Australia,5,Vincent (T),58570,Vincent (T),505058570
+Western Australia,5,Wagin (S),58610,Wagin (S),520058610
+Western Australia,5,Wandering (S),58680,Wandering (S),520058680
+Western Australia,5,Wanneroo (C),58760,Wanneroo (C) - North-East,505158761
+Western Australia,5,Wanneroo (C),58760,Wanneroo (C) - North-West,505158764
+Western Australia,5,Wanneroo (C),58760,Wanneroo (C) - South,505158767
+Western Australia,5,Waroona (S),58820,Waroona (S),510108820
+Western Australia,5,West Arthur (S),58890,West Arthur (S),520058890
+Western Australia,5,Westonia (S),59030,Westonia (S),525159030
+Western Australia,5,Wickepin (S),59100,Wickepin (S),520059100
+Western Australia,5,Williams (S),59170,Williams (S),520059170
+Western Australia,5,Wiluna (S),59250,Wiluna (S),535109250
+Western Australia,5,Wongan-Ballidu (S),59310,Wongan-Ballidu (S),525109310
+Western Australia,5,Woodanilling (S),59320,Woodanilling (S),515059320
+Western Australia,5,Wyalkatchem (S),59330,Wyalkatchem (S),525109330
+Western Australia,5,Wyndham-East Kimberley (S),59340,Wyndham-East Kimberley (S),545059340
+Western Australia,5,Yalgoo (S),59350,Yalgoo (S),535109350
+Western Australia,5,Yilgarn (S),59360,Yilgarn (S),525159360
+Western Australia,5,York (S),59370,York (S),525109370
+Western Australia,5,Unincorporated WA,59399,Migratory - Offshore - Shipping (WA),585019779
+Tasmania,6,Break O'Day (M),60210,Break O'Day (M),615150210
+Tasmania,6,Brighton (M),60410,Brighton (M),605050410
+Tasmania,6,Burnie (C),60610,Burnie (C) - Pt A,620050611
+Tasmania,6,Burnie (C),60610,Burnie (C) - Pt B,620100612
+Tasmania,6,Central Coast (M),60810,Central Coast (M) - Pt A,620050811
+Tasmania,6,Central Coast (M),60810,Central Coast (M) - Pt B,620100812
+Tasmania,6,Central Highlands (M),61010,Central Highlands (M),610051010
+Tasmania,6,Circular Head (M),61210,Circular Head (M),620101210
+Tasmania,6,Clarence (C),61410,Clarence (C),605051410
+Tasmania,6,Derwent Valley (M),61510,Derwent Valley (M) - Pt A,605051511
+Tasmania,6,Derwent Valley (M),61510,Derwent Valley (M) - Pt B,610051512
+Tasmania,6,Devonport (C),61610,Devonport (C),620051610
+Tasmania,6,Dorset (M),61810,Dorset (M),615151810
+Tasmania,6,Flinders (M),62010,Flinders (M),615152010
+Tasmania,6,George Town (M),62210,George Town (M) - Pt A,615052211
+Tasmania,6,George Town (M),62210,George Town (M) - Pt B,615102212
+Tasmania,6,Glamorgan/Spring Bay (M),62410,Glamorgan/Spring Bay (M),610052410
+Tasmania,6,Glenorchy (C),62610,Glenorchy (C),605052610
+Tasmania,6,Hobart (C),62810,Hobart (C) - Inner,605052811
+Tasmania,6,Hobart (C),62810,Hobart (C) - Remainder,605052812
+Tasmania,6,Huon Valley (M),63010,Huon Valley (M),610053010
+Tasmania,6,Kentish (M),63210,Kentish (M),620103210
+Tasmania,6,King Island (M),63410,King Island (M),620103410
+Tasmania,6,Kingborough (M),63610,Kingborough (M) - Pt A,605053611
+Tasmania,6,Kingborough (M),63610,Kingborough (M) - Pt B,610053612
+Tasmania,6,Latrobe (M),63810,Latrobe (M) - Pt A,620053811
+Tasmania,6,Latrobe (M),63810,Latrobe (M) - Pt B,620103812
+Tasmania,6,Launceston (C),64010,Launceston (C) - Inner,615054011
+Tasmania,6,Launceston (C),64010,Launceston (C) - Pt B,615054012
+Tasmania,6,Launceston (C),64010,Launceston (C) - Pt C,615104013
+Tasmania,6,Meander Valley (M),64210,Meander Valley (M) - Pt A,615054211
+Tasmania,6,Meander Valley (M),64210,Meander Valley (M) - Pt B,615104212
+Tasmania,6,Northern Midlands (M),64610,Northern Midlands (M) - Pt A,615054611
+Tasmania,6,Northern Midlands (M),64610,Northern Midlands (M) - Pt B,615104612
+Tasmania,6,Sorell (M),64810,Sorell (M) - Pt A,605054811
+Tasmania,6,Sorell (M),64810,Sorell (M) - Pt B,610054812
+Tasmania,6,Southern Midlands (M),65010,Southern Midlands (M),610055010
+Tasmania,6,Tasman (M),65210,Tasman (M),610055210
+Tasmania,6,Waratah/Wynyard (M),65410,Waratah/Wynyard (M) - Pt A,620055411
+Tasmania,6,Waratah/Wynyard (M),65410,Waratah/Wynyard (M) - Pt B,620105412
+Tasmania,6,West Coast (M),65610,West Coast (M),620155610
+Tasmania,6,West Tamar (M),65810,West Tamar (M) - Pt A,615055811
+Tasmania,6,West Tamar (M),65810,West Tamar (M) - Pt B,615105812
+Tasmania,6,Unincorporated Tas,69399,Migratory - Offshore - Shipping (Tas.),685019779
+Northern Territory,7,Alice Springs (T),70200,Alice Springs (T) - Charles,710400201
+Northern Territory,7,Alice Springs (T),70200,Alice Springs (T) - Heavitree,710400203
+Northern Territory,7,Alice Springs (T),70200,Alice Springs (T) - Larapinta,710400205
+Northern Territory,7,Alice Springs (T),70200,Alice Springs (T) - Ross,710400207
+Northern Territory,7,Alice Springs (T),70200,Alice Springs (T) - Stuart,710400208
+Northern Territory,7,Barkly (S),70420,Barkly (S) - Tennant Creek,710350422
+Northern Territory,7,Barkly (S),70420,Barkly (S) Bal,710350425
+Northern Territory,7,Belyuen (S),70540,Belyuen (S),710050540
+Northern Territory,7,Central Desert (S),70620,Central Desert (S),710400620
+Northern Territory,7,Coomalie (S),70700,Coomalie (S),710050700
+Northern Territory,7,Darwin (C),71000,Alawa,705051004
+Northern Territory,7,Darwin (C),71000,Anula,705051008
+Northern Territory,7,Darwin (C),71000,Bayview-Woolner,705051011
+Northern Territory,7,Darwin (C),71000,Brinkin,705051014
+Northern Territory,7,Darwin (C),71000,City - Inner,705051018
+Northern Territory,7,Darwin (C),71000,City - Remainder,705051138
+Northern Territory,7,Darwin (C),71000,Coconut Grove,705051024
+Northern Territory,7,Darwin (C),71000,Fannie Bay,705051028
+Northern Territory,7,Darwin (C),71000,Jingili,705051034
+Northern Territory,7,Darwin (C),71000,Karama,705051038
+Northern Territory,7,Darwin (C),71000,Larrakeyah,705051044
+Northern Territory,7,Darwin (C),71000,Leanyer,705051048
+Northern Territory,7,Darwin (C),71000,Lee Point-Leanyer Swamp,705051052
+Northern Territory,7,Darwin (C),71000,Ludmilla,705051054
+Northern Territory,7,Darwin (C),71000,Malak,705051058
+Northern Territory,7,Darwin (C),71000,Marrara,705051064
+Northern Territory,7,Darwin (C),71000,Millner,705051068
+Northern Territory,7,Darwin (C),71000,Moil,705051074
+Northern Territory,7,Darwin (C),71000,Nakara,705051078
+Northern Territory,7,Darwin (C),71000,Narrows,705051084
+Northern Territory,7,Darwin (C),71000,Nightcliff,705051088
+Northern Territory,7,Darwin (C),71000,Parap,705051094
+Northern Territory,7,Darwin (C),71000,Rapid Creek,705051098
+Northern Territory,7,Darwin (C),71000,Stuart Park,705051104
+Northern Territory,7,Darwin (C),71000,The Gardens,705051108
+Northern Territory,7,Darwin (C),71000,Tiwi,705051114
+Northern Territory,7,Darwin (C),71000,Wagaman,705051118
+Northern Territory,7,Darwin (C),71000,Wanguri,705051124
+Northern Territory,7,Darwin (C),71000,Winnellie,705051128
+Northern Territory,7,Darwin (C),71000,Wulagi,705051134
+Northern Territory,7,East Arnhem (S),71300,East Arnhem (S),710251300
+Northern Territory,7,Katherine (T),72200,Katherine (T),710302200
+Northern Territory,7,Litchfield (M),72300,Litchfield (M) - Pt A,705202304
+Northern Territory,7,Litchfield (M),72300,Litchfield (M) - Pt B,705202308
+Northern Territory,7,MacDonnell (S),72330,MacDonnell (S),710402330
+Northern Territory,7,Palmerston (C),72800,Bakewell,705102802
+Northern Territory,7,Palmerston (C),72800,Driver,705102804
+Northern Territory,7,Palmerston (C),72800,Durack,705102806
+Northern Territory,7,Palmerston (C),72800,Gray,705102808
+Northern Territory,7,Palmerston (C),72800,Gunn-Palmerston City,705102811
+Northern Territory,7,Palmerston (C),72800,Moulden,705102814
+Northern Territory,7,Palmerston (C),72800,Palmerston (C) Bal,705102824
+Northern Territory,7,Palmerston (C),72800,Woodroffe,705102818
+Northern Territory,7,Roper Gulf (S),73600,Roper Gulf (S),710303600
+Northern Territory,7,Tiwi Islands (S),74050,Tiwi Islands (S),710104050
+Northern Territory,7,Victoria-Daly (S),74500,Victoria-Daly (S) - Wadeye and OS,710304505
+Northern Territory,7,Victoria-Daly (S),74500,Victoria-Daly (S) Bal,710304508
+Northern Territory,7,Wagait (S),74560,Wagait (S),710054560
+Northern Territory,7,West Arnhem (S),74660,West Arnhem (S) - Jabiru,710154663
+Northern Territory,7,West Arnhem (S),74660,West Arnhem (S) Bal,710154666
+Northern Territory,7,Unincorporated NT,79399,Alyangula,710250419
+Northern Territory,7,Unincorporated NT,79399,Darwin Waterfront,705051026
+Northern Territory,7,Unincorporated NT,79399,East Arm,705101169
+Northern Territory,7,Unincorporated NT,79399,Finniss-Mary,710051509
+Northern Territory,7,Unincorporated NT,79399,Migratory - Offshore - Shipping (NT),785019779
+Northern Territory,7,Unincorporated NT,79399,Nhulunbuy,710252409
+Northern Territory,7,Unincorporated NT,79399,Yulara,710406059
+Australian Capital Territory,8,Unincorporated ACT,89399,Acton,805050089
+Australian Capital Territory,8,Unincorporated ACT,89399,Ainslie,805050189
+Australian Capital Territory,8,Unincorporated ACT,89399,Amaroo,805400239
+Australian Capital Territory,8,Unincorporated ACT,89399,Aranda,805100279
+Australian Capital Territory,8,Unincorporated ACT,89399,Banks,805250339
+Australian Capital Territory,8,Unincorporated ACT,89399,Barton,805350369
+Australian Capital Territory,8,Unincorporated ACT,89399,Belconnen - SSD Bal,805100549
+Australian Capital Territory,8,Unincorporated ACT,89399,Belconnen Town Centre,805100459
+Australian Capital Territory,8,Unincorporated ACT,89399,Bonner,805400589
+Australian Capital Territory,8,Unincorporated ACT,89399,Bonython,805250609
+Australian Capital Territory,8,Unincorporated ACT,89399,Braddon,805050639
+Australian Capital Territory,8,Unincorporated ACT,89399,Bruce,805100729
+Australian Capital Territory,8,Unincorporated ACT,89399,Calwell,805250819
+Australian Capital Territory,8,Unincorporated ACT,89399,Campbell,805050909
+Australian Capital Territory,8,Unincorporated ACT,89399,Casey,805400939
+Australian Capital Territory,8,Unincorporated ACT,89399,Chapman,805201089
+Australian Capital Territory,8,Unincorporated ACT,89399,Charnwood,805101179
+Australian Capital Territory,8,Unincorporated ACT,89399,Chifley,805151269
+Australian Capital Territory,8,Unincorporated ACT,89399,Chisholm,805251359
+Australian Capital Territory,8,Unincorporated ACT,89399,City,805051449
+Australian Capital Territory,8,Unincorporated ACT,89399,Conder,805251549
+Australian Capital Territory,8,Unincorporated ACT,89399,Cook,805101629
+Australian Capital Territory,8,Unincorporated ACT,89399,Crace,805401649
+Australian Capital Territory,8,Unincorporated ACT,89399,Curtin,805151719
+Australian Capital Territory,8,Unincorporated ACT,89399,Deakin,805351809
+Australian Capital Territory,8,Unincorporated ACT,89399,Dickson,805051889
+Australian Capital Territory,8,Unincorporated ACT,89399,Downer,805051989
+Australian Capital Territory,8,Unincorporated ACT,89399,Duffy,805202079
+Australian Capital Territory,8,Unincorporated ACT,89399,Dunlop,805102139
+Australian Capital Territory,8,Unincorporated ACT,89399,Duntroon,805052169
+Australian Capital Territory,8,Unincorporated ACT,89399,Evatt,805102259
+Australian Capital Territory,8,Unincorporated ACT,89399,Fadden,805252349
+Australian Capital Territory,8,Unincorporated ACT,89399,Farrer,805152439
+Australian Capital Territory,8,Unincorporated ACT,89399,Fisher,805202529
+Australian Capital Territory,8,Unincorporated ACT,89399,Florey,805102619
+Australian Capital Territory,8,Unincorporated ACT,89399,Flynn,805102709
+Australian Capital Territory,8,Unincorporated ACT,89399,Forde,805402779
+Australian Capital Territory,8,Unincorporated ACT,89399,Forrest,805352789
+Australian Capital Territory,8,Unincorporated ACT,89399,Franklin,805402849
+Australian Capital Territory,8,Unincorporated ACT,89399,Fraser,805102889
+Australian Capital Territory,8,Unincorporated ACT,89399,Fyshwick,805352979
+Australian Capital Territory,8,Unincorporated ACT,89399,Garran,805153069
+Australian Capital Territory,8,Unincorporated ACT,89399,Gilmore,805253159
+Australian Capital Territory,8,Unincorporated ACT,89399,Giralang,805103249
+Australian Capital Territory,8,Unincorporated ACT,89399,Gordon,805253289
+Australian Capital Territory,8,Unincorporated ACT,89399,Gowrie,805253339
+Australian Capital Territory,8,Unincorporated ACT,89399,Greenway,805253379
+Australian Capital Territory,8,Unincorporated ACT,89399,Griffith,805353429
+Australian Capital Territory,8,Unincorporated ACT,89399,Gungahlin,805403519
+Australian Capital Territory,8,Unincorporated ACT,89399,Gungahlin-Hall - SSD Bal,805403529
+Australian Capital Territory,8,Unincorporated ACT,89399,Hackett,805053609
+Australian Capital Territory,8,Unincorporated ACT,89399,Hall,805403689
+Australian Capital Territory,8,Unincorporated ACT,89399,Harman,805353789
+Australian Capital Territory,8,Unincorporated ACT,89399,Harrison,805403819
+Australian Capital Territory,8,Unincorporated ACT,89399,Hawker,805103879
+Australian Capital Territory,8,Unincorporated ACT,89399,Higgins,805103969
+Australian Capital Territory,8,Unincorporated ACT,89399,Holder,805204059
+Australian Capital Territory,8,Unincorporated ACT,89399,Holt,805104149
+Australian Capital Territory,8,Unincorporated ACT,89399,Hughes,805154239
+Australian Capital Territory,8,Unincorporated ACT,89399,Hume,805354329
+Australian Capital Territory,8,Unincorporated ACT,89399,Isaacs,805154419
+Australian Capital Territory,8,Unincorporated ACT,89399,Isabella Plains,805254509
+Australian Capital Territory,8,Unincorporated ACT,89399,Jerrabomberra,805354589
+Australian Capital Territory,8,Unincorporated ACT,89399,Kaleen,805104779
+Australian Capital Territory,8,Unincorporated ACT,89399,Kambah,805254869
+Australian Capital Territory,8,Unincorporated ACT,89399,Kingston,805354959
+Australian Capital Territory,8,Unincorporated ACT,89399,Kowen,805055049
+Australian Capital Territory,8,Unincorporated ACT,89399,Latham,805105139
+Australian Capital Territory,8,Unincorporated ACT,89399,Lyneham,805055229
+Australian Capital Territory,8,Unincorporated ACT,89399,Lyons,805155319
+Australian Capital Territory,8,Unincorporated ACT,89399,Macarthur,805255489
+Australian Capital Territory,8,Unincorporated ACT,89399,Macgregor,805105589
+Australian Capital Territory,8,Unincorporated ACT,89399,Macquarie,805105679
+Australian Capital Territory,8,Unincorporated ACT,89399,Majura,805055769
+Australian Capital Territory,8,Unincorporated ACT,89399,Mawson,805155859
+Australian Capital Territory,8,Unincorporated ACT,89399,McKellar,805105409
+Australian Capital Territory,8,Unincorporated ACT,89399,Melba,805105949
+Australian Capital Territory,8,Unincorporated ACT,89399,Migratory - Offshore - Shipping (ACT),885019779
+Australian Capital Territory,8,Unincorporated ACT,89399,Mitchell,805406039
+Australian Capital Territory,8,Unincorporated ACT,89399,Monash,805256129
+Australian Capital Territory,8,Unincorporated ACT,89399,Narrabundah,805356219
+Australian Capital Territory,8,Unincorporated ACT,89399,Ngunnawal,805406249
+Australian Capital Territory,8,Unincorporated ACT,89399,Nicholls,805406279
+Australian Capital Territory,8,Unincorporated ACT,89399,Oaks Estate,805356309
+Australian Capital Territory,8,Unincorporated ACT,89399,O'Connor,805056389
+Australian Capital Territory,8,Unincorporated ACT,89399,O'Malley,805156489
+Australian Capital Territory,8,Unincorporated ACT,89399,Oxley,805256579
+Australian Capital Territory,8,Unincorporated ACT,89399,Page,805106669
+Australian Capital Territory,8,Unincorporated ACT,89399,Palmerston,805406719
+Australian Capital Territory,8,Unincorporated ACT,89399,Parkes,805356759
+Australian Capital Territory,8,Unincorporated ACT,89399,Pearce,805156849
+Australian Capital Territory,8,Unincorporated ACT,89399,Phillip,805156939
+Australian Capital Territory,8,Unincorporated ACT,89399,Pialligo,805357029
+Australian Capital Territory,8,Unincorporated ACT,89399,Red Hill,805357119
+Australian Capital Territory,8,Unincorporated ACT,89399,Reid,805057209
+Australian Capital Territory,8,Unincorporated ACT,89399,Remainder of ACT,810059009
+Australian Capital Territory,8,Unincorporated ACT,89399,Richardson,805257289
+Australian Capital Territory,8,Unincorporated ACT,89399,Rivett,805207389
+Australian Capital Territory,8,Unincorporated ACT,89399,Russell,805057479
+Australian Capital Territory,8,Unincorporated ACT,89399,Scullin,805107569
+Australian Capital Territory,8,Unincorporated ACT,89399,Spence,805107659
+Australian Capital Territory,8,Unincorporated ACT,89399,Stirling,805207749
+Australian Capital Territory,8,Unincorporated ACT,89399,Stromlo,805207839
+Australian Capital Territory,8,Unincorporated ACT,89399,Symonston,805357929
+Australian Capital Territory,8,Unincorporated ACT,89399,Theodore,805258019
+Australian Capital Territory,8,Unincorporated ACT,89399,Torrens,805158109
+Australian Capital Territory,8,Unincorporated ACT,89399,Tuggeranong - SSD Bal,805258189
+Australian Capital Territory,8,Unincorporated ACT,89399,Turner,805058289
+Australian Capital Territory,8,Unincorporated ACT,89399,Wanniassa,805258379
+Australian Capital Territory,8,Unincorporated ACT,89399,Waramanga,805208469
+Australian Capital Territory,8,Unincorporated ACT,89399,Watson,805058559
+Australian Capital Territory,8,Unincorporated ACT,89399,Weetangera,805108649
+Australian Capital Territory,8,Unincorporated ACT,89399,Weston,805208739
+Australian Capital Territory,8,Unincorporated ACT,89399,Weston Creek-Stromlo - SSD Bal,805208829
+Australian Capital Territory,8,Unincorporated ACT,89399,Yarralumla,805358919
+Other Territories,9,Unincorp. Other Territories,99399,Jervis Bay Territory,910051009
+Other Territories,9,Unincorp. Other Territories,99399,Migratory - Offshore - Shipping (OT),985019779
+Other Territories,9,Unincorp. Other Territories,99399,Territory of Christmas Island,910052009
+Other Territories,9,Unincorp. Other Territories,99399,Territory of Cocos (Keeling) Islands,910053009
