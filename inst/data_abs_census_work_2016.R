@@ -50,3 +50,45 @@ data_abs_state_work_2016%>%
 data_abs_state_work_2016%>%
   filter(state=="VIC")%>%
   arrange(-proportion) 
+
+
+work_fraction = ~ dplyr::case_when(
+  # child labour
+  .x %in% 12:19 ~ 0.2,
+  # young adults (not at school)
+  .x %in% 20:24 ~ 0.7,
+  # main workforce
+  .x %in% 25:60 ~ 1,
+  # possibly retired
+  .x %in% 61:65 ~ 0.7,
+  # other
+  TRUE ~ 0.05
+)
+
+data_abs_state_work_2016%>%
+  mutate(age_group=case_when(
+    # child labour
+    age %in% 12:19 ~ "12-19",
+    # young adults (not at school)
+    age %in% 20:24 ~ "20-24",
+    # main workforce
+    age %in% 25:60 ~ "25-60",
+    # possibly retired
+    age %in% 61:65 ~ "61-64",
+    # other
+    TRUE ~"Other"
+  ) 
+  )%>%
+  group_by(age_group) %>%
+  summarise(work_fraction = sum(employed_population) / sum(total_population))->work_fraction
+
+
+conmat_work_prop_data <-
+  tibble(
+    age_group = c("12-19", "20-24", "25-60", "61-64", "Other"),
+    conmat_work_prop = c(0.2, 0.7, 1, 0.7, 0.05)
+  )
+
+inner_join(conmat_work_prop_data,work_fraction,by="age_group") -> work_fraction_comparison_table
+work_fraction_comparison_table
+
