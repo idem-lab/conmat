@@ -1,69 +1,7 @@
+library(readr)
 library(tidyverse)
 library(janitor)
-library(readxl)
 library(conmat)
-
-data_abs_lga_education <- list()
-for (i in 1:6)
-  
-{
-  abs_lga_education_df <-
-    read_excel(
-      "data-raw/2016_abs_lga_education.xls",
-      sheet = i,
-      skip = 7,
-      n_max = 566
-    )
-  
-  df <- abs_lga_education_df %>%
-    row_to_names(1)
-  colnames(df)[2] <- "lga"
-  df <- df[-1, ]
-  
-  data_abs_lga_education[[i]] <- df %>%
-    select(-c(Total, `AGEP Age`)) %>%
-    filter(lga != "Total") %>%
-    pivot_longer(
-      cols = "0":"115",
-      names_to = "age",
-      values_to = colnames(abs_lga_education_df[1])
-    )
-}
-
-data_abs_census_lga_education <- data_abs_lga_education %>%
-  reduce(left_join, by = c("lga", "age")) %>%
-  clean_names() %>%
-  mutate(across(.cols = -lga, .fn = as.numeric)) %>%
-  mutate(
-    year = 2016,
-    population_educated = full_time_student +
-      part_time_student +
-      institution_typp_stated_full_time_part_time_status_stup_not_stated,
-    proportion = population_educated / total
-  ) %>%
-  mutate(
-    proportion = case_when(
-      total == 0 & population_educated == 0 ~ 0,
-      TRUE ~ as.numeric(proportion)
-    ),
-    anomaly_flag = case_when(
-      total >= population_educated ~ FALSE,
-      total < population_educated ~ TRUE
-    ),
-    anomaly_flag = as.logical(anomaly_flag)
-  ) %>%
-  select(year,
-         lga,
-         age,
-         population_educated,
-         total_population = total,
-         proportion,
-         anomaly_flag)
-
-visdat::vis_miss(data_abs_census_lga_education)
-summary(data_abs_census_lga_education)
-summary(data_abs_census_lga_education$anomaly_flag)
-
 
 data_lga_state <- read_csv("data-raw/2011_lga_state.csv") %>%
   select(state = STATE_NAME_2011,
@@ -90,6 +28,66 @@ data_lga_state <- read_csv("data-raw/2011_lga_state.csv") %>%
     )
   )
 
+abs_census_lga_work <-
+  read_csv(
+    "data-raw/2016_abs_census_lga_work.csv",
+    col_types = cols(...1 = col_character()),
+    skip = 8,
+    n_max = 65873
+  ) %>% row_to_names(1) %>% clean_names() %>%
+  rename(age = na,
+         lga = lfsp_labour_force_status) %>%
+  slice(-1) %>%
+  mutate(
+    year = 2016,
+    employed_worked_full_time = as.numeric(employed_worked_full_time),
+    employed_worked_part_time = as.numeric(employed_worked_part_time),
+    employed_away_from_work = as.numeric(employed_away_from_work),
+    total = as.numeric(total)
+  )
+
+for (i in 1:nrow(abs_census_lga_work))
+{
+  if (is.na(abs_census_lga_work$age[i]) == TRUE) {
+    abs_census_lga_work$age[i] <- abs_census_lga_work$age[i - 1]
+  } else {
+    abs_census_lga_work$age[i] <- abs_census_lga_work$age[i]
+  }
+}
+
+# new total calculated as total in the data is giving weird values such as < employed people in the given lga. Check
+# Etheridge (S)for age 46
+
+
+data_abs_census_lga_work <- abs_census_lga_work %>%
+  filter(age != "Total") %>%
+  mutate(across(.cols = -lga, .fn = as.numeric)) %>%
+  arrange(lga) %>%
+  mutate(
+    employed_population = as.numeric(
+      employed_worked_full_time +
+        employed_worked_part_time +
+        employed_away_from_work
+    ),
+    proportion = employed_population / total,
+    anomaly_flag = case_when(
+      total >= employed_population ~ FALSE,
+      total < employed_population ~ TRUE
+    ),
+    anomaly_flag = as.logical(anomaly_flag)
+  ) %>%
+  mutate(proportion = case_when(
+    total == 0 & employed_population == 0 ~ 0,
+    TRUE ~ as.numeric(proportion)
+  )) %>%
+  select(year,
+         lga,
+         age,
+         employed_population,
+         total_population = total,
+         proportion,
+         anomaly_flag)
+
 
 # No usual address : https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/2900.0main+features100882016
 
@@ -102,10 +100,10 @@ data_lga_state <- data_lga_state %>%
 conmat::abs_household_lga %>%
   distinct(lga, state) -> conmat_abs_household_data
 
-lgas_in_education_census <- data_abs_census_lga_education %>%
+lgas_in_work_census <- data_abs_census_lga_work %>%
   select(lga) %>%
   distinct()
-lga_state <- lgas_in_education_census %>%
+lga_state <- lgas_in_work_census %>%
   left_join(data_lga_state, by = "lga") %>%
   mutate(
     state = case_when(
@@ -129,10 +127,10 @@ lga_state <- lgas_in_education_census %>%
   )) %>%
   select(lga, state = state_new)
 
-data_abs_census_lga_education %>%
+data_abs_census_lga_work %>%
   left_join(lga_state, by = "lga") %>%
-  relocate(year, state, everything())%>%
-  filter(!str_detect(lga,"No usual address"))%>%
+  relocate(year, state, everything()) %>%
+  filter(!str_detect(lga, "No usual address"))%>%
   mutate(
     lga = case_when(
       lga == "Botany Bay (C)" ~ "Bayside (A)",
@@ -149,15 +147,24 @@ data_abs_census_lga_education %>%
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
     )
-  )-> data_abs_lga_education
+  ) -> data_abs_lga_work
 
+summary(data_abs_lga_work)
 
-data_abs_lga_education%>%
-  select(lga)%>%
-  distinct()%>%
-  left_join(conmat_abs_household_data)-> check_lga
-summary(data_abs_census_lga_education)
+data_abs_lga_work %>%
+  filter(anomaly_flag == FALSE) %>%
+  ggplot(aes(x = age, y = proportion)) +
+  geom_point()
 
-skimr::skim(data_abs_lga_education)
+# lga%>%clean_names()->lga
+# data_abs_lga_work%>%
+#   distinct(lga,state)%>%
+#   left_join(lga%>%
+#               select(official_name_state,long_official_name_local_government_area),
+#             by=c("lga"="long_official_name_local_government_area"),keep=
+#             TRUE)->check_lga
+# all_lga <- conmat::abs_lga_lookup
+# check_lga%>%
+# anti_join(all_lga)%>%filter(is.na(official_name_state))->c
 
-use_data(data_abs_lga_education, overwrite = TRUE)
+use_data(data_abs_lga_work, overwrite = TRUE)
