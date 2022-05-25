@@ -93,7 +93,8 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
 
 data_lga_state <- data_lga_state %>%
   mutate(lga = case_when(
-    (state == "NSW" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (NSW)",
+    (state == "NSW" &
+       lga == "Campbelltown (C)") ~ "Campbelltown (C) (NSW)",
     TRUE ~ as.character(lga)
   ))
 
@@ -127,10 +128,15 @@ lga_state <- lgas_in_work_census %>%
   )) %>%
   select(lga, state = state_new)
 
+patterns <-
+  c(
+    "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
+  )
+
 data_abs_census_lga_work %>%
   left_join(lga_state, by = "lga") %>%
   relocate(year, state, everything()) %>%
-  filter(!str_detect(lga, "No usual address"))%>%
+  filter(!str_detect(lga, "No usual address")) %>%
   mutate(
     lga = case_when(
       lga == "Botany Bay (C)" ~ "Bayside (A)",
@@ -147,7 +153,11 @@ data_abs_census_lga_work %>%
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
     )
-  ) -> data_abs_lga_work
+  ) %>%
+  mutate(lga = case_when(
+    str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+    TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+  )) -> data_abs_lga_work
 
 summary(data_abs_lga_work)
 

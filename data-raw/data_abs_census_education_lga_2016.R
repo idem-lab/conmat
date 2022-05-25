@@ -149,7 +149,11 @@ data_abs_census_lga_education %>%
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
     )
-  )-> data_abs_lga_education
+  )%>%
+  mutate(lga = case_when(
+    str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+    TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+  ))-> data_abs_lga_education
 
 
 data_abs_lga_education%>%
