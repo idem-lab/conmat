@@ -58,7 +58,7 @@ abs_lga_lookup <- abs_pop_age_lga_2020_raw %>%
                  TRUE ~ str_trim(str_remove_all(lga,pattern = patterns)))
          )%>%
   mutate(state = case_when(
-    lga == "Unincorp. Other Territories" ~ "Other Territories",
+    lga == "Unincorp. Other Territories" ~ "OT",
     TRUE ~ as.character(state)
   )) %>%
   filter_all(any_vars(!is.na(.)))
