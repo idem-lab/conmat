@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_data_abs_age_education.R
 \name{get_data_abs_age_education}
 \alias{get_data_abs_age_education}
-\title{Return educated population data for a given age and state or lga of Australia}
+\title{Return  data on educated population for a given age and state or lga of Australia}
 \usage{
 get_data_abs_age_education(age, state = NULL, lga = NULL)
 }
 \arguments{
-\item{age}{a numeric denoting age}
+\item{age}{a numeric or numeric vector denoting ages between 0 to 115}
 
 \item{state}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
 
@@ -15,13 +15,13 @@ get_data_abs_age_education(age, state = NULL, lga = NULL)
 \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 }
 \value{
-dataset with information on the educated population belonging to the given age, its total population
+dataset with information on the number of educated people belonging to a particular age, its total population
 and the corresponding proportion.
 }
 \description{
-Return educated population data for a given age and state or lga of Australia
+Return  data on educated population for a given age and state or lga of Australia
 }
 \examples{
-get_data_abs_age_education(state="NSW",age=9)
+get_data_abs_age_education(state="VIC",age=1:10)
 get_data_abs_age_education(lga="Albury (C)",age=10)
 }

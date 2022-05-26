@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_data_abs_age_work.R
 \name{get_data_abs_age_work}
 \alias{get_data_abs_age_work}
-\title{Return employed population data for a given age and state or lga of Australia}
+\title{Return  data on employed population for a given age and state or lga of Australia}
 \usage{
 get_data_abs_age_work(age, state = NULL, lga = NULL)
 }
 \arguments{
-\item{age}{a numeric denoting age}
+\item{age}{a numeric or numeric vector denoting ages between 0 to 115}
 
 \item{state}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
 
@@ -15,13 +15,13 @@ get_data_abs_age_work(age, state = NULL, lga = NULL)
 \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 }
 \value{
-data set with information on the number of people employed belonging to the given age, its total population
+data set with information on the number of employed people belonging to a particular age, its total population
 and the corresponding proportion.
 }
 \description{
-Return employed population data for a given age and state or lga of Australia
+Return  data on employed population for a given age and state or lga of Australia
 }
 \examples{
-get_data_abs_age_work(state="NSW",age=9)
-get_data_abs_age_work(lga="Albury (C)",age=10)
+get_data_abs_age_work(state="NSW",age=10:20)
+get_data_abs_age_work(lga="Barcoo (S)",age=39)
 }
