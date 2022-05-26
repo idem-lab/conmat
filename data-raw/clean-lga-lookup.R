@@ -44,28 +44,10 @@ abs_pop_age_lga_2020_raw <- file_path %>%
          lga = lga_name19) %>%
   mutate(state = abbreviate_states(state))
 
-
-patterns <- c(
-    "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
-            )
-
 abs_lga_lookup <- abs_pop_age_lga_2020_raw %>%
   select(state,
          lga_code,
          lga) %>%
-  distinct() %>%
-  mutate(lga = case_when(str_detect(lga,"Migratory - Offshore - Shipping") ~ as.character(lga),
-                 TRUE ~ str_trim(str_remove_all(lga,pattern = patterns)))
-         )%>%
-  mutate(state = case_when(
-    lga == "Unincorp. Other Territories" ~ "OT",
-    TRUE ~ as.character(state)
-  )) %>%
-  filter_all(any_vars(!is.na(.)))
-
-# lga_diff<- all_lga%>%
-#   anti_join(abs_lga_lookup,by=c("lga"="lga"),keep=TRUE)
-# conmat::abs_lga_lookup->all_lga
-
+  distinct() 
 use_data(abs_lga_lookup, overwrite = TRUE)
 
