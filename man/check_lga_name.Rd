@@ -4,7 +4,7 @@
 \alias{check_lga_name}
 \title{Check LGA name in Australia}
 \usage{
-check_lga_name(lga_name)
+check_lga_name(lga_name, multiple_lga = FALSE)
 }
 \arguments{
 \item{lga_name}{character of length 1}
