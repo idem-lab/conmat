@@ -2,26 +2,34 @@
 % Please edit documentation in R/estimate_setting_contacts.R
 \name{estimate_setting_contacts}
 \alias{estimate_setting_contacts}
-\title{Get predicted contact matrices for each setting and combined}
+\title{Get predicted setting specific as well as combined contact matrices}
 \usage{
 estimate_setting_contacts(
   contact_data_list,
   survey_population,
   prediction_population = survey_population,
-  age_breaks
+  age_breaks,
+  per_capita_household_size = NULL
 )
 }
 \arguments{
-\item{contact_data_list}{PARAM_DESCRIPTION}
+\item{contact_data_list}{list of data sets with information on the contacts of individuals at different settings}
 
-\item{survey_population}{PARAM_DESCRIPTION}
+\item{survey_population}{representative population distribution for the survey}
 
-\item{prediction_population}{PARAM_DESCRIPTION, Default: survey_population}
+\item{prediction_population}{population for prediction. The default value set is survey_population}
 
-\item{age_breaks}{PARAM_DESCRIPTION}
+\item{age_breaks}{vector depicting age values. For example, c(seq(0, 75, by = 5), Inf)}
+
+\item{per_capita_household_size}{Optional (defaults to NULL). When set, it
+adjusts the household contact matrix by some per capita household size.
+To set it, provide a single number, the per capita household size. More
+information is provided below in Details. See
+\code{\link[=get_per_capita_household_size]{get_per_capita_household_size()}} function for a helper for Australian
+data with a workflow on how to get this number.}
 }
 \value{
-OUTPUT_DESCRIPTION
+predicted setting specific contact matrices, and for all combined
 }
 \description{
 Given a named list of contact datasets (with names giving the setting, and

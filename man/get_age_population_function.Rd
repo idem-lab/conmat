@@ -13,9 +13,9 @@ get_age_population_function(
 \arguments{
 \item{.data}{dataset containing information on population of a given age/age group}
 
-\item{age_col}{unquoted variable name for the column with age information}
+\item{age_col}{bare variable name for the column with age information}
 
-\item{pop_col}{unquoted variable name for the column with population information}
+\item{pop_col}{bare variable name for the column with population information}
 }
 \value{
 An interpolating function to get populations in 1y age increments

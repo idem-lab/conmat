@@ -11,8 +11,8 @@ abs_education_state_2020_raw <- abs_education_state %>%
   complete(
     year,
     state,
-    age = 0:24,
-    fill = list(population_educated = 0)
+    age = 0:100,
+    fill = list(population = 0)
   ) 
 
 abs_education_state_2020_aggregated <- abs_education_state_2020_raw %>% 
@@ -25,12 +25,12 @@ abs_education_state_2020_aggregated <- abs_education_state_2020_raw %>%
   group_by(year, state, age_group) %>% 
   summarise(population_educated = sum(population_educated, na.rm = TRUE))
 
-# abs_education_state_2020_aggregated %>% 
-#   left_join(
-#     abs_state_age,
-#     by = c("state",
-#            "age_group")) %>% 
-#   mutate(prop = population_educated / population)
+abs_education_state_2020_aggregated %>% 
+  left_join(
+    abs_state_age,
+    by = c("state",
+           "age_group")) %>% 
+  mutate(prop = population_educated / population)
 
 abs_state_age_lookup <- abs_state_age %>%
   mutate(
@@ -51,7 +51,7 @@ abs_state_age_lookup <- abs_state_age %>%
     age = 0:100
   )
 
-abs_ed_state_2020_age_group <- abs_education_state_2020_raw %>%
+abs_education_state_2020_raw %>%
   left_join(abs_state_age_lookup,
             by = c(
               "state",

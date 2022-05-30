@@ -45,7 +45,25 @@ abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_060920211607
   select( - household_composition) %>% 
   mutate(state = abbreviate_states(state))  %>% 
   drop_na() %>% 
-  rename(lga = lga_name)
+  rename(lga = lga_name) %>%
+  # renaming LGAs according to abs_lga_lookup & abs_pop_age_lga_2020
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Rockdale (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
 
 use_data(abs_household_lga, overwrite = TRUE)
 
