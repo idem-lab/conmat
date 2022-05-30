@@ -4,7 +4,7 @@
 \alias{get_data_abs_age_work}
 \title{Return  data on employed population for a given age and state or lga of Australia}
 \usage{
-get_data_abs_age_work(age, state = NULL, lga = NULL)
+get_data_abs_age_work(age = NULL, state = NULL, lga = NULL)
 }
 \arguments{
 \item{age}{a numeric or numeric vector denoting ages between 0 to 115}
@@ -22,6 +22,9 @@ and the corresponding proportion.
 Return  data on employed population for a given age and state or lga of Australia
 }
 \examples{
-get_data_abs_age_work(state="NSW",age=10:20)
-get_data_abs_age_work(lga="Barcoo (S)",age=39)
+get_data_abs_age_work(state="NSW")
+get_data_abs_age_work(state="WA",lga="Albany (C)",age=1:5)
+get_data_abs_age_work(lga="West Tamar (M)",state="SA",age=1:5)
+get_data_abs_age_work(state=c("QLD","TAS"),age=5)
+get_data_abs_age_work(lga=c("Albury (C)","Barcoo (S)"),age=39)
 }

@@ -4,7 +4,7 @@
 \alias{get_data_abs_age_education}
 \title{Return  data on educated population for a given age and state or lga of Australia}
 \usage{
-get_data_abs_age_education(age, state = NULL, lga = NULL)
+get_data_abs_age_education(age = NULL, state = NULL, lga = NULL)
 }
 \arguments{
 \item{age}{a numeric or numeric vector denoting ages between 0 to 115}
@@ -22,6 +22,9 @@ and the corresponding proportion.
 Return  data on educated population for a given age and state or lga of Australia
 }
 \examples{
-get_data_abs_age_education(state="VIC",age=1:10)
-get_data_abs_age_education(lga="Albury (C)",age=10)
+get_data_abs_age_education(state="VIC")
+get_data_abs_age_education(state="WA",lga="Albany (C)",age=1:5)
+get_data_abs_age_education(lga="York (S)",state="SA",age=1:5)
+get_data_abs_age_education(state=c("QLD","TAS"),age=5)
+get_data_abs_age_education(lga=c("Albury (C)","Barcoo (S)"),age=10)
 }
