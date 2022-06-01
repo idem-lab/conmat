@@ -7,12 +7,12 @@
 get_data_abs_age_work(age = NULL, state = NULL, lga = NULL)
 }
 \arguments{
-\item{age}{a numeric or numeric vector denoting ages between 0 to 115}
+\item{age}{a numeric or numeric vector denoting ages between 0 to 115. The default is NULL.}
 
-\item{state}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
+\item{state}{target Australian state name or a vector with multiple state names in its abbreviated form, such as "QLD", "NSW", or "TAS"}
 
-\item{lga}{target Australian local government area (LGA) name, such as "Fairfield (C)".  See
-\code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
+\item{lga}{target Australian local government area (LGA) name, such as "Fairfield (C)" or a vector with multiple lga names.
+See \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names.}
 }
 \value{
 data set with information on the number of employed people belonging to a particular age, its total population
