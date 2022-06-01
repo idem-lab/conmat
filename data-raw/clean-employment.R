@@ -83,7 +83,10 @@ abs_employ_age_lga <- abs_employment_raw %>%
          state,
          lga,
          age_group,
-         total_employed)
+         total_employed)%>%
+  mutate(lga = case_when(str_detect(lga,"Migratory - Offshore - Shipping") ~ as.character(lga),
+                         TRUE ~ str_trim(str_remove_all(lga,pattern = patterns)))
+  )
 
 abs_employ_age_lga %>% pull(age_group)
 

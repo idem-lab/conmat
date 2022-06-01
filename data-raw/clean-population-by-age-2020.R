@@ -71,7 +71,18 @@ abs_pop_age_lga_2020_raw %>%
 abs_pop_age_lga_2020_raw %>% 
   naniar::gg_miss_var(facet = state)
 
+patterns <- c(
+  "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
+)
+
 abs_pop_age_lga_2020 <- abs_pop_age_lga_2020_raw %>% 
-  drop_na()
+  drop_na()%>%
+  mutate(lga = case_when(str_detect(lga,"Migratory - Offshore - Shipping") ~ as.character(lga),
+                         TRUE ~ str_trim(str_remove_all(lga,pattern = patterns)))
+  )%>%
+  mutate(state = case_when(
+    lga == "Unincorp. Other Territories" ~ "OT",
+    TRUE ~ as.character(state)
+  ))
 
 use_data(abs_pop_age_lga_2020, overwrite = TRUE)

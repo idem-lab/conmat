@@ -1,6 +1,11 @@
 library(tidyverse)
 library(here)
 library(conmat)
+
+patterns <- c(
+  "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
+)
+
 abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_06092021160753604.csv")) %>%
   rename(
     throw_hhcd_2016 = HHCD_2016,
@@ -63,7 +68,14 @@ abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_060920211607
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
     )
-  )
+  )%>%
+  mutate(lga = case_when(str_detect(lga,"Migratory - Offshore - Shipping") ~ as.character(lga),
+                         TRUE ~ str_trim(str_remove_all(lga,pattern = patterns)))
+  )%>%
+  mutate(state = case_when(
+    lga == "Unincorp. Other Territories" ~ "OT",
+    TRUE ~ as.character(state)
+  ))
 
 use_data(abs_household_lga, overwrite = TRUE)
 
