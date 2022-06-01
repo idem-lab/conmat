@@ -1,5 +1,6 @@
 #' @title Check LGA name in Australia
-#' @param lga_name character of length 1
+#' @param lga_name a string denoting the official name of Local Government Area. For example, 'Albury (C).'
+#' @param multiple_lga logical response that allows multiple lgas to be checked if set to `TRUE`. Default is FALSE.
 #' @return errors if lga name not in ABS data
 #' @export
 check_lga_name <- function(lga_name,multiple_lga=FALSE) {
