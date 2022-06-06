@@ -58,7 +58,24 @@ data_abs_census_lga_education <- data_abs_lga_education %>%
          population_educated,
          total_population = total,
          proportion,
-         anomaly_flag)
+         anomaly_flag)%>%
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Rockdale (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
 
 visdat::vis_miss(data_abs_census_lga_education)
 summary(data_abs_census_lga_education)
@@ -104,7 +121,24 @@ conmat::abs_household_lga %>%
 
 lgas_in_education_census <- data_abs_census_lga_education %>%
   select(lga) %>%
-  distinct()
+  distinct() %>%
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Rockdale (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
 lga_state <- lgas_in_education_census %>%
   left_join(data_lga_state, by = "lga") %>%
   mutate(
@@ -133,27 +167,24 @@ data_abs_census_lga_education %>%
   left_join(lga_state, by = "lga") %>%
   relocate(year, state, everything())%>%
   filter(!str_detect(lga,"No usual address"))%>%
-  mutate(
-    lga = case_when(
-      lga == "Botany Bay (C)" ~ "Bayside (A)",
-      lga == "Rockdale (C)" ~ "Bayside (A)",
-      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
-      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
-      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
-      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
-      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
-      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
-      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
-      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
-      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
-      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
-      TRUE ~ lga
-    )
-  )%>%
   mutate(lga = case_when(
-    str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
-    TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+    (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
+    (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
+    (state == "QLD" & lga == "Central Highlands (R)") ~ "Central Highlands (R) (Qld)",
+    (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
+    (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
+    
+    (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
+    (state == "TAS" & lga == "Central Coast (M)") ~ "Central Coast (M) (Tas.)",
+    (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
+    (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
+    (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
+    TRUE ~ as.character(lga)
   ))-> data_abs_lga_education
+  # mutate(lga = case_when(
+  #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+  #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+  # ))
 
 
 data_abs_lga_education%>%

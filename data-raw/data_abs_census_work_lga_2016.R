@@ -86,7 +86,24 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
          employed_population,
          total_population = total,
          proportion,
-         anomaly_flag)
+         anomaly_flag)%>%
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Rockdale (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
 
 
 # No usual address : https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/2900.0main+features100882016
@@ -103,7 +120,24 @@ conmat::abs_household_lga %>%
 
 lgas_in_work_census <- data_abs_census_lga_work %>%
   select(lga) %>%
-  distinct()
+  distinct()%>%
+  mutate(
+    lga = case_when(
+      lga == "Botany Bay (C)" ~ "Bayside (A)",
+      lga == "Rockdale (C)" ~ "Bayside (A)",
+      lga == "Gundagai (A)" ~ "Cootamundra-Gundagai Regional (A)",
+      lga == "Nambucca (A)" ~ "Nambucca Valley (A)",
+      lga == "Western Plains Regional (A)" ~ "Dubbo Regional (A)",
+      lga == "Mallala (DC)" ~ "Adelaide Plains (DC)",
+      lga == "Orroroo/Carrieton (DC)" ~ "Orroroo-Carrieton (DC)",
+      lga == "Break O'Day (M)" ~ "Break O`Day (M)",
+      lga == "Glamorgan/Spring Bay (M)" ~ "Glamorgan-Spring Bay (M)",
+      lga == "Waratah/Wynyard (M)" ~ "Waratah-Wynyard (M)",
+      lga == "Kalamunda (S)" ~ "Kalamunda (C)",
+      lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
+      TRUE ~ lga
+    )
+  )
 lga_state <- lgas_in_work_census %>%
   left_join(data_lga_state, by = "lga") %>%
   mutate(
@@ -128,10 +162,10 @@ lga_state <- lgas_in_work_census %>%
   )) %>%
   select(lga, state = state_new)
 
-patterns <-
-  c(
-    "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
-  )
+# patterns <-
+#   c(
+#     "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
+#   )
 
 data_abs_census_lga_work %>%
   left_join(lga_state, by = "lga") %>%
@@ -152,12 +186,25 @@ data_abs_census_lga_work %>%
       lga == "Kalamunda (S)" ~ "Kalamunda (C)",
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
-    )
-  ) %>%
+    ))%>%
   mutate(lga = case_when(
-    str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
-    TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
-  )) -> data_abs_lga_work
+    (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
+    (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
+    (state == "QLD" & lga == "Central Highlands (R)") ~ "Central Highlands (R) (Qld)",
+    (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
+    (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
+    
+    (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
+    (state == "TAS" & lga == "Central Coast (M)") ~ "Central Coast (M) (Tas.)",
+    (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
+    (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
+    (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
+    TRUE ~ as.character(lga)
+  ))-> data_abs_lga_work
+  # mutate(lga = case_when(
+  #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+  #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+  # )) 
 
 summary(data_abs_lga_work)
 
@@ -178,3 +225,9 @@ data_abs_lga_work %>%
 # anti_join(all_lga)%>%filter(is.na(official_name_state))->c
 
 use_data(data_abs_lga_work, overwrite = TRUE)
+
+visdat::vis_miss(data_abs_lga_work)
+
+data_abs_lga_work%>%
+  filter(is.na(state))%>%
+  distinct(lga)->missing
