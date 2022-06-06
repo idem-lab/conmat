@@ -2,7 +2,7 @@
 #' @param state target Australian state name or a vector with multiple state names in its abbreviated form, such as "QLD", "NSW", or "TAS"
 #' @param lga target Australian local government area (LGA) name, such as "Fairfield (C)" or a vector with multiple lga names.
 #' See [abs_lga_lookup()] for list of lga names.
-#' @param age a numeric or numeric vector denoting ages between 0 to 115. The default is NULL.
+#' @param age a numeric or numeric vector denoting ages between 0 to 115. The default is to return all ages.
 #' @return dataset with information on the number of educated people belonging to a particular age, its total population
 #'  and the corresponding proportion.
 #' @export

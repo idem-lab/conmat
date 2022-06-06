@@ -7,7 +7,7 @@
 get_data_abs_age_work(age = NULL, state = NULL, lga = NULL)
 }
 \arguments{
-\item{age}{a numeric or numeric vector denoting ages between 0 to 115. The default is NULL.}
+\item{age}{a numeric or numeric vector denoting ages between 0 to 115. The default is to return all ages.}
 
 \item{state}{target Australian state name or a vector with multiple state names in its abbreviated form, such as "QLD", "NSW", or "TAS"}
 
