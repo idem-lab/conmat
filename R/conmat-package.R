@@ -49,6 +49,7 @@ globalVariables(
     "fraction",
     "get_polymod_percapita_household_size",
     "household",
+    "household_size",
     "infectiousness",
     "lga",
     "log_pop",
