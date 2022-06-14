@@ -2,10 +2,7 @@
 % Please edit documentation in R/get_polymod_per_capita_household_size.R
 \name{get_polymod_per_capita_household_size}
 \alias{get_polymod_per_capita_household_size}
-\title{get polymod per capita houshold size
-
-Convenience function to help get the per capita household size. This is
-calculated as \code{mean(socialmixr::polymod$participants$hh_size)}.}
+\title{Get polymod per capita houshold size.}
 \usage{
 get_polymod_per_capita_household_size()
 }
@@ -13,10 +10,8 @@ get_polymod_per_capita_household_size()
 number, 3.248971
 }
 \description{
-get polymod per capita houshold size
-
-Convenience function to help get the per capita household size. This is
-calculated as \code{mean(socialmixr::polymod$participants$hh_size)}.
+Convenience function to help get the per capita household size.
+This is calculated as \code{mean(socialmixr::polymod$participants$hh_size)}.
 }
 \author{
 Nicholas Tierney

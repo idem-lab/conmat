@@ -1,10 +1,13 @@
-#' @title Get cleaned population data with lower and upper limits of age
+#' @title Get cleaned population data with lower and upper limits of age.
 #' 
-#' 
-#' @description This function helps clean up datasets of population data, similar to `socialmixr::wpp_age()` or any given dataset with a structure that has information on, population, location, age, and year.
-#' @param data dataset containing information on population for a given age, country, and year
+#' @description This function helps clean up datasets of population data, 
+#'   similar to `socialmixr::wpp_age()` or any given dataset with a structure 
+#'   that has information on, population, location, age, and year.
+#' @param data dataset containing information on population for a given age, 
+#'   country, and year
 #' @param age_col bare variable name for the column with age information 
-#' @param location_col bare variable name for the column with location information
+#' @param location_col bare variable name for the column with location 
+#'   information
 #' @param location character vector with location names
 #' @param year_col bare variable name for the column with year information
 #' @param year numeric vector representing the desired year(s)

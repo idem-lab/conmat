@@ -4,10 +4,12 @@
 \alias{check_lga_name}
 \title{Check LGA name in Australia}
 \usage{
-check_lga_name(lga_name)
+check_lga_name(lga_name, multiple_lga = FALSE)
 }
 \arguments{
-\item{lga_name}{character of length 1}
+\item{lga_name}{a string denoting the official name of Local Government Area. For example, 'Albury (C).'}
+
+\item{multiple_lga}{logical response that allows multiple lgas to be checked if set to \code{TRUE}. Default is FALSE.}
 }
 \value{
 errors if lga name not in ABS data
