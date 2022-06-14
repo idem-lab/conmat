@@ -1,10 +1,14 @@
-#' @title Return  data on educated population for a given age and state or lga of Australia
-#' @param state target Australian state name or a vector with multiple state names in its abbreviated form, such as "QLD", "NSW", or "TAS"
-#' @param lga target Australian local government area (LGA) name, such as "Fairfield (C)" or a vector with multiple lga names.
-#' See [abs_lga_lookup()] for list of lga names.
-#' @param age a numeric or numeric vector denoting ages between 0 to 115. The default is to return all ages.
-#' @return dataset with information on the number of educated people belonging to a particular age, its total population
-#'  and the corresponding proportion.
+#' @title Return  data on educated population for a given age and state or 
+#'   lga of Australia.
+#' @param state target Australian state name or a vector with multiple state 
+#'   names in its abbreviated form, such as "QLD", "NSW", or "TAS"
+#' @param lga target Australian local government area (LGA) name, such as 
+#'   "Fairfield (C)" or a vector with multiple lga names. See 
+#'   [abs_lga_lookup()] for list of lga names.
+#' @param age a numeric or numeric vector denoting ages between 0 to 115. The
+#'    default is to return all ages.
+#' @return dataset with information on the number of educated people belonging 
+#'   to a particular age, its total population and the corresponding proportion.
 #' @export
 #' @examples
 #' get_data_abs_age_education(state="VIC")
@@ -40,7 +44,9 @@ get_data_abs_age_education <- function(age = NULL, state = NULL, lga = NULL) {
             rlang::abort(
               message = c(
                 "The LGA name provided does not belong to the state",
-                i = "Specify the exact LGA name and the corresponding state it belongs to. See `abs_lga_lookup` for a list of all LGAs and the state it belongs to",
+                i = "Specify the exact LGA name and the corresponding state \\
+                it belongs to. See `abs_lga_lookup` for a list of all LGAs and\\
+                the state it belongs to",
                 x = glue::glue(
                   "The lga name '{lga}' does not belong to the state '{state}'"
                 )
