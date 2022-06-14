@@ -1,7 +1,8 @@
-#' @title Adjust Household Contact Matrix
+#' @title Adjust Household Contact Matrix.
 #' 
-#' This function is used internally within [predict_setting_contacts()].
-#' See details below for why we use the per capita adjustment
+#' @description This function is used internally within 
+#'   [predict_setting_contacts()]. See details below for why we use the per 
+#'   capita adjustment
 #' 
 #' @details We use Per-capita household size instead of mean household size.
 #'     Per-capita household size is different to mean household size, as the 

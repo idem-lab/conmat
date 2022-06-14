@@ -2,7 +2,7 @@
 % Please edit documentation in R/age-population-year.R
 \name{age_population}
 \alias{age_population}
-\title{Get cleaned population data with lower and upper limits of age}
+\title{Get cleaned population data with lower and upper limits of age.}
 \usage{
 age_population(
   data,
@@ -14,9 +14,11 @@ age_population(
 )
 }
 \arguments{
-\item{data}{dataset containing information on population for a given age, country, and year}
+\item{data}{dataset containing information on population for a given age,
+country, and year}
 
-\item{location_col}{bare variable name for the column with location information}
+\item{location_col}{bare variable name for the column with location
+information}
 
 \item{location}{character vector with location names}
 
@@ -30,7 +32,9 @@ age_population(
 tidy dataset with information on population of different age bands
 }
 \description{
-This function helps clean up datasets of population data, similar to \code{socialmixr::wpp_age()} or any given dataset with a structure that has information on, population, location, age, and year.
+This function helps clean up datasets of population data,
+similar to \code{socialmixr::wpp_age()} or any given dataset with a structure
+that has information on, population, location, age, and year.
 }
 \examples{
 world_data <- socialmixr::wpp_age()

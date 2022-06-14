@@ -2,10 +2,7 @@
 % Please edit documentation in R/adjust_household_contact_matrix.R
 \name{adjust_household_contact_matrix}
 \alias{adjust_household_contact_matrix}
-\title{Adjust Household Contact Matrix
-
-This function is used internally within \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.
-See details below for why we use the per capita adjustment}
+\title{Adjust Household Contact Matrix.}
 \usage{
 adjust_household_contact_matrix(
   setting_matrices,
@@ -24,10 +21,9 @@ adjust_household_contact_matrix(
 contact matrix that has household adjustment
 }
 \description{
-Adjust Household Contact Matrix
-
-This function is used internally within \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.
-See details below for why we use the per capita adjustment
+This function is used internally within
+\code{\link[=predict_setting_contacts]{predict_setting_contacts()}}. See details below for why we use the per
+capita adjustment
 }
 \details{
 We use Per-capita household size instead of mean household size.
