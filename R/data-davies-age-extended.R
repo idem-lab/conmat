@@ -1,7 +1,7 @@
 #' Susceptibility and clinical fraction parameters from Davies et al.
 #'
 #'
-#' A dataset containing data from ... \url{},
+#' A dataset containing data from ...(insert url here),
 #' When using this data, ensure that you cite the original authors at 
 #' 
 #' ""
