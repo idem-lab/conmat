@@ -50,6 +50,11 @@ fit_single_contact_model <- function(contact_data, population) {
     # I think we should instead have this as a separate preparation step for
     # model fitting.
     add_modelling_features(
+      # NOTE
+      # The modelling features added here are:
+        # the school and work offsets
+        # pop_age_to (interpolated population)
+        # `log_contactable_population_school`, and ` log_contactable_population`
       population = population
     ) %>%
     mgcv::bam(
@@ -57,6 +62,8 @@ fit_single_contact_model <- function(contact_data, population) {
       family = stats::poisson,
       # add number of participants as a multilpicative offset here rather than in
       # the formula, so it is not needed for prediction,
+      # NOTE
+      # is this offset here in addition to or replacement of `formula_offset`?
       offset = log(participants),
       data = .
     )
