@@ -17,7 +17,7 @@ A data frame of the probability of transmission from a case to a contact. There 
 davies_age_extended
 }
 \description{
-A dataset containing data from ... \url{},
+A dataset containing data from ...(insert url here),
 When using this data, ensure that you cite the original authors at
 }
 \details{

@@ -14,13 +14,22 @@ reference:
       Data provided with the package to assist with model fitting
     contents:
       - starts_with("abs_")
+      - data_abs_lga_education
+      - data_abs_lga_work
+      - data_abs_state_education
+      - data_abs_state_work
+      - davies_age_extended
+      - eyre_transmission_probabilities
       - polymod
+      - setting_weights
 
   - title: "Model fitting and predictions"
     desc: >
-      some works
+      Functions for model fitting and predictions
     contents:
       - fit_single_contact_model
+      - fit_setting_contacts
+      - adjust_household_contact_matrix
       - aggregate_predicted_contacts
       - estimate_setting_contacts
       - extrapolate_polymod
@@ -41,20 +50,34 @@ reference:
       For dealing with ABS data and other features
     contents:
       - abbreviate_states
+      - age_population
+      - age_group_lookup
+      - bin_widths
+      - check_lga_name
+      - check_state_name
       - unabbreviate_states
       
   - title: "Helpers for adding and joining data"
     desc: >
-      some works
+      For joining data and adding other features
     contents:
       - add_modelling_features
+      - add_offset
       - add_population_age_to
-      - add_rotated_ages
       - add_school_work_participation
+      - apply_vaccination
+      - generate_ngm
       - get_age_population_function
+      - get_data_abs_age_education
+      - get_data_abs_age_work
+      - get_household_size_distribution
+      - get_per_capita_household_size
       - get_polymod_contact_data
+      - get_polymod_per_capita_household_size
       - get_polymod_population
       - get_polymod_setting_data
+      - get_setting_transmission_matrices
+      - per_capita_household_size
 
 navbar:
   left:
