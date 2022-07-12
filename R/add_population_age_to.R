@@ -19,8 +19,9 @@ add_population_age_to <- function(contact_data, population = get_polymod_populat
 
   # add the population in each 'to' age for the survey context
   contact_data %>%
+    # add interpolated population to "age_to"
     dplyr::mutate(
-      pop_age_to = age_population_function(age_to)
+      pop_age_to = age_population_function(age_to) 
     ) %>%
     dplyr::group_by(age_from) %>%
     # normalise to get a relative population

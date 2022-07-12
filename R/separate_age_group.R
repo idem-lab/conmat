@@ -1,3 +1,7 @@
+
+# take the data frame and column name for the age variable 
+# separate age group into "lower.age.limit" & "upper.age.limit"
+
 separate_age_group <- function(.data, age_col) {
   return(
     .data %>%

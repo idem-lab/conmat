@@ -61,7 +61,7 @@ add_school_work_participation <- function(contact_data) {
       # that if the contact is in the same school year, the weight is 1, and
       # otherwise it is the population age fraction. this can be used as an
       # offset, so that population age distribution can be used outside the
-      # classroomm, but does not affect classroom contacts (which due to
+      # classroom, but does not affect classroom contacts (which due to
       # cohorting and regularised class sizes are unlikely to depend on the
       # population age distribution)
       school_weighted_pop_fraction = pop_age_to * (1 - school_year_probability) + 1 * school_year_probability
