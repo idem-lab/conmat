@@ -62,8 +62,11 @@ fit_single_contact_model <- function(contact_data, population) {
       family = stats::poisson,
       # add number of participants as a multilpicative offset here rather than in
       # the formula, so it is not needed for prediction,
+      # NOTE: the offset of participants allows us to get the rate per person
       # NOTE
       # is this offset here in addition to or replacement of `formula_offset`?
+      # It is unclear to me how this doesn't result in two offsets, which
+      # doesn't really seem possible/good?
       offset = log(participants),
       data = .
     )
