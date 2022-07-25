@@ -17,14 +17,16 @@ fit_single_contact_model <- function(contact_data, population) {
   # information about the setting, without us having to pass it through to the
   # prediction data
   formula_no_offset <- contacts ~
+    # Prem method did a post-hoc smoothing
     # deviation of contact age distribution from population age distribution
     s(age_to) +
     # number of contacts by age
     s(age_from) +
-    # intergenerational contact patterns
+    # intergenerational contact patterns - enables the off-diagonals
     s(abs(age_from - age_to)) +
     # interaction between intergenerational patterns and age_from, to remove
     # ridge for some ages and settings
+    # 
     s(abs(age_from - age_to), age_from) +
     # probabilities of both attending (any) school/work
     school_probability +
@@ -40,6 +42,9 @@ fit_single_contact_model <- function(contact_data, population) {
   
   # add multiplicative offset for population contactable, to enable
   # extrapolation to new demographies
+  # in mgcv, this part of the offset gets used in prediction, which 
+  # is what we want. Those are the "contactable" parts, which we use
+  # to extrapolate to new demographics.
   formula_offset <- sprintf("~. + offset(%s)", offset_variable)
   formula <- update(formula_no_offset, formula_offset)
   
@@ -63,10 +68,6 @@ fit_single_contact_model <- function(contact_data, population) {
       # add number of participants as a multilpicative offset here rather than in
       # the formula, so it is not needed for prediction,
       # NOTE: the offset of participants allows us to get the rate per person
-      # NOTE
-      # is this offset here in addition to or replacement of `formula_offset`?
-      # It is unclear to me how this doesn't result in two offsets, which
-      # doesn't really seem possible/good?
       offset = log(participants),
       data = .
     )
