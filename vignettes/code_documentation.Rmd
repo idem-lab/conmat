@@ -1,0 +1,247 @@
+---
+title: "Code documentation"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(conmat)
+```
+
+## About conmat
+
+We want to understand the spread of infectious diseases in a population. One approach to this is to use contact matrices. These give the number of expected contacts from one age group to another. For example, there might be a lot of contact between infants (ages 0-5) and parents (ages 25-45), and grandparents (age 55+) but not as much contact between teenagers and infants. The amount of contact also changes depending on the settings, such as home, school, and work. At work, age groups of ages 20 - 50, will have more contact with each other, and less / little contact with people aged 70+, and below the age of 20, as the number of people in those workforces is smaller.
+
+We have information, based on special surveys, which show the number of people who have contact with each other, in different settings, such as work, home, school, and other. These surveys have been conducted in different places in the world. Specifically, we have information on the amount of contact from a "polymod" survey, which surveyed the following countries:
+
+-   Italy, Germany, Luxembourg, Netherlands ,Poland, United Kingdom, Finland, and Belgium 
+
+However, this is only a small number of countries in the world! We could generalise this to other countries, but they will differ in a variety of ways. These can be hard to measure and adjust for. For example, it is very common in singapore for the elderley to live with their family, and so there will be more contact between the elderley and their children and grand children. This is less common is places like Australia, and the USA. And even within countries this can vary greatly. For example, looking at the age population structure of Alice Springs, compared to Sydney, we can see that they are very different.
+
+\
+
+![](https://lh4.googleusercontent.com/w6JIMK2uIt0IDk8GbB3KFc9G1Ce5Te6nevjIBTqwYSo0FlJtDJ8321L62oOSsSxaV00kMtMuPluOs4PVsveiqdwRDQ7hjkcEomOEmYytLtfgBPKuH1lM5f8glmtihzB_O6SyeVk6gtoSuz7hJdaiWw){width="391"}
+
+\
+If we assume the same amount of contact between Sydney and Alice Springs, based on the information that we have from a countries like Germany, or the UK, then we are ignoring the very heterogeneous population information of Australia. We would be saying that both Alice Springs, and Sydney have the same population structure. This would lead to very different estimates of the amount of contact between age groups. 
+
+So how do we correct for this difference in ages? Although it would be best to conduct separate surveys in each country, and within each part of a country, these surveys are expensive, and time consuming. 
+
+One way to adjust the contact surveys, is to use information on the age population of a given place. We can then use this information to appropriately increase or decrease the amount of contact between certain age groups. 
+
+As a simple example, if we find that Sydney has 4 times the number of 20-25 year olds, compared to the UK, then we might increase the estimate of the contacts between 20-25 year olds by 4.
+
+**- [ ] How do we use conmat?**
+
+Due to the lack of data from contact surveys in the majority of countries in the world, conmat uses a  generalised additive model (GAM) to project or extrapolate the POLYMOD data and to predict contact rates for any age groups and obtain the age and location specific contact patterns present in the local government areas or states. 
+
+\- **[ ] What is a contact matrix?**
+
+The risk of transmission between two individuals could be proportional to the amount or frequency of contact between them, therefore contact patterns play a tremendous role in decoding the transmission dynamics of an infectious disease and as well as employing effective public health safeguards such as imposing school closures or lockdown measures. These contact patterns can vary across different ages as well as different locations of interaction. One way to express these patterns are in matrices, in which each element indicates the estimated number of contacts between subgroups, such as age groups, which are represented as rows and columns. The location of interactions can also be taken into account by generating these contact matrices at different settings such as workplace, home, school and so on. For example, age based contact matrix at a school allow us to determine the average number of contacts an individual in age group, A, has with another individual of the same age group or another age group, B, at the location, school. 
+
+\
+
+![](https://lh4.googleusercontent.com/cL3q-2uVrY4jwXOXsWpQilQf1EkTadtHKs0iGD73Gw7Xi6f3xXLTrkuCgiBFy0pafidd3G_FsKRuyeRAWc2Z4SUyXJF2SKbVAh8vmhVUML0e-giiLa8dDwm6Eqekt4Vc-SGS-_MSqDVswcaH7hSufQ){width="414"}
+
+\
+**- [ ] Why are contact matrices used? Are there alternatives?**
+
+Can include discussion on alternative names - e.g., mixing matrices. Mossong et al., also discuss that sometimes instead of contact matrices they infer contacts through indirect observations, and were assumed to follow patterns, which were calibrated against data such as serological (lab tests - where they can tell who has been in contact with who based on the similarity of the virus DNA (I think...)), or case notification data (NOTE: I'm not really sure how they infer contact information this, do they infer that certain people visited the same place at around the same time, or do people provide information on who they have contacted recently?).
+
+You can also simulate disease spread without contact matrices, and make different assumptions based on how disease might spread - e.g., an agent based model might have different base assumptions on how people spread COVID.
+
+As stated in Mossong paper:
+
+> Until now, modellers have relied on proxy measures of contacts and calibration to epidemiological data. For instance, household size, class size, transport statistics, and workplace size distribution have been used in recent models to deﬁne the contact structure [2,3,33,34].
+
+\
+
+**[ ] What is a contact survey?**
+
+\
+Contact surveys track the number of contacts between individuals, as well as the nature (physical or non-physical, duration of contact etc.) and location of those contacts along with the survey respondent's socio demographic characteristics, such as work status, household size, age, and so on. One such survey is the POLYMOD contact pattern study which utilises respondent filed social contact diaries from 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands and Poland in an attempt to quantify social mixing patterns. Conmat retrieves the POLYMOD survey data primarily through two functions, \`get_polymod_setting_data()\` & \`get_polymod_population()\`. 
+
+## Helper Functions
+
+#### abbreviate_states
+
+-   produces the abbreviation of the state names in Australia.
+
+#### separate_age_group
+
+-   An internal function used within \`check_args_age_population_year()\` to separate age groups in a data set into two variables for the lower and upper age limit.
+
+#### check_args_age_population_year
+
+-   Internally used function within \`age_population()\` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location.
+
+#### bin_widths
+
+-   Internal function that takes in a numeric vector and return the differences between the values in the vector assumming the final value is the same as the penultimate value.
+
+#### check_lga_name & check_state_name
+
+-   Function, primarly used internally checks if the LGA/state name exists in Australia and errors if not valid.
+
+### Data
+
+#### abs_age_lga & abs_age_state
+
+-   Uses the data sourced from ABS on the state and LGA wise population for different age groups for the year 2020.
+
+-   The function first checks if the LGA/state name exists in Australia and later filters out the given LGA/ State and produces the lower limit of age group and the corresponding population in the region for the year 2020.
+
+#### **get_polymod_population()**
+
+-   uses the participant data from the polymod survey as well as the age specific population data from socialmixr r package to return the age specific average population of different countries weighted by the number of participants from those countries who participated in the polymod survey. 
+
+#### **get_polymod_contact_data()**
+
+-   uses the contact and participant data on the desired countries from the survey and impute the missing contact ages primarily through either of the three methods such as imputation of contact ages from a uniform distribution or using the average of the ages or through removal of those participants.
+
+-   The contact settings are then classified as "home", "school", "work" and "others" where "others" include locations such as leisure, transport or other places.
+
+-   The participants with missing contact ages or settings are removed and the number of contacts per participant and contact age from ages 0-100 are obtained for various countries and settings.
+
+#### get_polymod_setting_data
+
+-   get_polymod_setting_data acts as an extension of **get_polymod_contact_data** and extracts the setting wise contact data on the desired country as a list. 
+
+### Other Important stuff
+
+#### adjust_household_contact_matrix
+
+-   Used primarily inside the \`predict_setting_contacts()\` function.
+
+-   Uses the polymod per capita household size to adjust the number of household contact in the given list of 4 setting-specific synthetic contact matrices, to match the average household size in that region from the Australian Bureau of Statistics data.
+
+-   To do so, the function calculates the ratio between expected number of other household members for the desired region from ABS data (obtained by subtracting 1 from the household size), and the average per capita household size obtained from the polymod data which was used to train the model. This ratio is then multiplied to the "home" setting which then is reflected on to "all" settings, thereby forming a new set of setting-specific synthetic contact matrices.
+
+    > **Why is per-capita household size used?**
+    >
+    > We use Per-capita household size instead of mean household size in order to upweight larger household size, we need a household size that is averaged over all the people in the population rather than the mean household size which would be skewed towards extreme household sizes. We use per-capita household size as it is a more accurate reflection of the average number of household members a person in the population can have contact with.
+
+#### per_capita_household_size
+
+-   Uses the household size distributions on relevant state or LGA using the \`get_household_size_distribution()\` which has information on the number of people in the region with household sizes from 1 to 8.
+
+```{r}
+household_size_distribution_data <- get_household_size_distribution(lga = "Ballina (A)")
+
+household_size_distribution_data
+```
+
+-   Using the household size distributions , the fraction of population with a particular household size is obtained and multiplied with the household size to later produce the population-weighted average of household sizes or per capita household size.
+
+#### get_household_size_distribution
+
+-   The function uses \`abs_household_data\`, lga & state level data on the household size (1 to 8 ) and the number of households with that particular household size, obtained from Australian Bureau of Statistics.
+
+-   Depending on the region level that is nation wide , state or lga , the number of people in a household of a particular household size is calculated by multiplying the number of households of a size with the household size, thus producing the household size distributions of a particular region.
+
+> Note : Why group by state inside the switch() ?
+
+### Model fitting
+
+#### get_age_population_function
+
+> Returns an interpolating function to get populations in 1y age increments.
+
+-   The function first prepares the data to fit a smoothing spline to the data for ages below the maximum age. It takes the data, arranges the lower limit of the age group to obtain the bin width/differences of the lower age limits. The mid point of the bin width is later added to the ages and the population is scaled as per the bin widths.
+
+-   The maximum age is later obtained and the populations for different above and below are filtered out along with the sum of populations with and without maximum age.
+
+-   A cubic smoothing spline is then fitted to the data for ages below the maximum with predictor variable as the ages with the mid point of the bins added to it where as the response variable is the log-scaled population.
+
+-   Using the smoothing spline fit, the predicted population of ages 0 to 200 is obtained and the predicted population is adjusted further using a ratio of the sum of the population across all ages from the data and predicted population. The ratio is based on whether the ages are under the maximum age as the total population across all ages differs for ages above and below the maximum age. The maximum age population is adjusted further to drop off smoothly, based on the weights.
+
+-   The final population is then linearly extrapolated over years past the upper bound from the data. For ages above the maximum age from data, the population is calculated as a weighted population of the maximum age that depends on the years past the upper bound. Older ages would have lower weights, therefore lower population.
+
+-   The purpose of the function is to return a function that takes in a numeric vector and returns the interpolated population corresponding to the ages passed.
+
+#### add_modelling_features
+
+> Features like population distribution of contact ages, school work participation as well as the offset is added on to the data using this function
+
+-   The function takes the contact data which has information on the participants' age, contact ages, number of participants in that age group as well as the number of contacts the pair of individuals in the particular age group have. For example, below shown is the contact data in the setting "home"
+
+```{r}
+polymod_contact_data <- get_polymod_setting_data()
+polymod_contact_data$home
+```
+
+-   The modelling features like the population distribution of contact ages, fraction of population in each age group that attend school/work as well as the offset according to the settings are added on to the contact data through three internal functions shown below.
+
+##### add_population_age_to
+
+> use interpolated population of "age_to" (contact age) & get the relative population grouped by "age_from" or participant age.
+
+-   Function uses the \`get_population_function()\` to add the interpolated population for different contact ages based on the population data on the region provided, through which the population distribution of contact ages is obtained.
+
+##### add_school_work_participation
+
+-   adds new variables for
+
+    -    school & work going fraction for contact & participant ages
+
+    -   probability that a person of the other age goes to the same work/school
+
+    -   probability that a person of the other age would be in the same school year
+
+    -   weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
+
+##### add_offset
+
+-   Function defines the offset variable for the model to be fitted in \`fit_single_contact_model()\`.
+
+-   Sets separate offset for school setting when compared to the other settings such as home, work and other.
+
+-   log(population) for settings : home, work and other. The offset for school captures cohorting of students for schools and takes the logarithm of the weighted combination of contact population age distribution & school year probability calculated in the add_school_work_participation().
+
+-   The choice of the offset is set in the model formula.
+
+```{r, eval=FALSE,echo=TRUE}
+
+offset_variable <- switch(
+    setting,
+    school = "log_contactable_population_school",
+    "log_contactable_population"
+  )
+
+```
+
+#### fit_single_contact_model
+
+-   Conmat utilizes the contact data and the population data given to fit a GAM model which models the number of contacts using the age parameters of the participants as well the contacts and the intergenerational patterns while accounting for the probability that a person of the other age goes to the same school/work and the setting.
+
+-   To do this, conmat takes the contact data and uses the following functions to add modelling features like the population distribution of contact ages, fraction of population in each age group that attend school/work as well as the offset according to the settings.
+
+
+#### fit_setting_contacts
+
+#### predict_contacts
+
+#### aggregate_predicted_contacts
+
+#### predict_contacts_1y
+
+#### predict_setting_contacts
+
+#### predictions_to_matrix
+
+#### matrix_to_predictions
+
+#### extrapolate_polymod
+
+### Plotting
+
+#### plot_matrix
