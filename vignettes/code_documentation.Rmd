@@ -23,28 +23,81 @@ We want to understand the spread of infectious diseases in a population. One app
 
 We have information, based on special surveys, which show the number of people who have contact with each other, in different settings, such as work, home, school, and other. These surveys have been conducted in different places in the world. Specifically, we have information on the amount of contact from a "polymod" survey, which surveyed the following countries:
 
--   Italy, Germany, Luxembourg, Netherlands ,Poland, United Kingdom, Finland, and Belgium 
+-   Italy, Germany, Luxembourg, Netherlands ,Poland, United Kingdom, Finland, and Belgium
 
-However, this is only a small number of countries in the world! We could generalise this to other countries, but they will differ in a variety of ways. These can be hard to measure and adjust for. For example, it is very common in singapore for the elderley to live with their family, and so there will be more contact between the elderley and their children and grand children. This is less common is places like Australia, and the USA. And even within countries this can vary greatly. For example, looking at the age population structure of Alice Springs, compared to Sydney, we can see that they are very different.
+However, this is only a small number of countries in the world! We could generalise this to other countries, but they will differ in a variety of ways. These can be hard to measure and adjust for. For example, it is very common in Singapore for the elderly to live with their family, and so there will be more contact between the elderly and their children and grand children. This is less common is places like Australia, and the USA. And even within countries this can vary greatly. For example, looking at the age population structure of Alice Springs, compared to Sydney, we can see that they are very different.
 
-\
+```{r}
+#| label: figure-pyramid
+#| echo: FALSE
+data_age_transform <-  bind_rows(
+  abs_age_lga("Sydney (C)"),
+  abs_age_lga("Alice Springs (T)")
+) %>% 
+  group_by(lga) %>%
+  mutate(
+    age_multiplier = cur_group_id(),
+    age_multiplier = if_else(age_multiplier == 2,
+                             1,
+                             -1),
+    .after = lga
+  ) %>%
+  mutate(population_per_capita = population / sum(population)) %>% 
+  ungroup() %>%
+  mutate(age = as_factor(lower.age.limit),
+         population = (population * age_multiplier),
+         population_per_capita = (population_per_capita * age_multiplier))
 
-![](https://lh4.googleusercontent.com/w6JIMK2uIt0IDk8GbB3KFc9G1Ce5Te6nevjIBTqwYSo0FlJtDJ8321L62oOSsSxaV00kMtMuPluOs4PVsveiqdwRDQ7hjkcEomOEmYytLtfgBPKuH1lM5f8glmtihzB_O6SyeVk6gtoSuz7hJdaiWw){width="391"}
+pretty_symmetric <- function(range, n = 5){
+  range_1 <- c(-range[1], range[2])
+  range_2 <- c(range[1], -range[2])
+  
+  pretty_vec_1 <- pretty(range_1)
+  pretty_vec_2 <- pretty(range_2)
+  
+  pretty(
+    c(pretty_vec_1, pretty_vec_2), 
+    n = n
+  )
+  
+}
+  
+  # round to nearest 10
+  pop_range <- range(data_age_transform$population_per_capita)
+  
+  age_range_seq <- pretty_symmetric(pop_range, n = 5)
+  
+  
+   ggplot(data_age_transform,
+         aes(x = population_per_capita,
+             y = age,
+             fill = lga)) +
+    geom_col() +
+    scale_x_continuous(breaks  = age_range_seq,
+                       labels = abs(age_range_seq)) +
+    expand_limits(x = range(age_range_seq)) + 
+    scale_fill_brewer(palette = "Dark2",
+                      guide = guide_legend(
+                        title = ""
+                      )) +
+    theme_minimal() +
+    theme(legend.position = "top")
+```
 
-\
-If we assume the same amount of contact between Sydney and Alice Springs, based on the information that we have from a countries like Germany, or the UK, then we are ignoring the very heterogeneous population information of Australia. We would be saying that both Alice Springs, and Sydney have the same population structure. This would lead to very different estimates of the amount of contact between age groups. 
 
-So how do we correct for this difference in ages? Although it would be best to conduct separate surveys in each country, and within each part of a country, these surveys are expensive, and time consuming. 
+If we assume the same amount of contact between Sydney and Alice Springs, based on the information that we have from a countries like Germany, or the UK, then we are ignoring the very heterogeneous population information of Australia. We would be saying that both Alice Springs, and Sydney have the same population structure. This would lead to very different estimates of the amount of contact between age groups.
 
-One way to adjust the contact surveys, is to use information on the age population of a given place. We can then use this information to appropriately increase or decrease the amount of contact between certain age groups. 
+So how do we correct for this difference in ages? Although it would be best to conduct separate surveys in each country, and within each part of a country, these surveys are expensive, and time consuming.
+
+One way to adjust the contact surveys, is to use information on the age population of a given place. We can then use this information to appropriately increase or decrease the amount of contact between certain age groups.
 
 As a simple example, if we find that Sydney has 4 times the number of 20-25 year olds, compared to the UK, then we might increase the estimate of the contacts between 20-25 year olds by 4.
 
-**- [ ] How do we use conmat?**
+## How do we use conmat?
 
-Due to the lack of data from contact surveys in the majority of countries in the world, conmat uses a  generalised additive model (GAM) to project or extrapolate the POLYMOD data and to predict contact rates for any age groups and obtain the age and location specific contact patterns present in the local government areas or states. 
+Due to the lack of data from contact surveys in the majority of countries in the world, we need to use specialised techniques to project or extrapolate contact rates. conmat uses a different approach to previous methods, employing a generalised additive model (GAM) to project or extrapolate the POLYMOD data and to predict contact rates for any age groups and obtain the age and location specific contact patterns present in the local government areas or states.
 
-\- **[ ] What is a contact matrix?**
+## What is a contact matrix?
 
 The risk of transmission between two individuals could be proportional to the amount or frequency of contact between them, therefore contact patterns play a tremendous role in decoding the transmission dynamics of an infectious disease and as well as employing effective public health safeguards such as imposing school closures or lockdown measures. These contact patterns can vary across different ages as well as different locations of interaction. One way to express these patterns are in matrices, in which each element indicates the estimated number of contacts between subgroups, such as age groups, which are represented as rows and columns. The location of interactions can also be taken into account by generating these contact matrices at different settings such as workplace, home, school and so on. For example, age based contact matrix at a school allow us to determine the average number of contacts an individual in age group, A, has with another individual of the same age group or another age group, B, at the location, school. 
 
