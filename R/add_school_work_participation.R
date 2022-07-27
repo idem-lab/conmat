@@ -51,11 +51,20 @@ add_school_work_participation <- function(contact_data) {
       ),
       # the probability that a person of the other age other party goes to the
       # same school/work. May not be the same place. But proportional to the
-      # increase in contacts due to attendance
+      # increase in contacts due to attendance. So this helps
       school_probability = school_fraction_age_from * school_fraction_age_to,
       work_probability = work_fraction_age_from * work_fraction_age_to,
       # the probability that a person of the other age would be in the same
       # school year
+      # So, if ages are the same, we get (2 - 0) / 4 = 0.5
+      # if ages are one year apart we get (2 - 1) / 4 = 0.25
+      # if ages are 2 years apart or higher, we get (2 - 2) / 4 = 0
+      # so to adjust for the fraction of people who are in the same school year
+      # but might be different ages.
+      # If they're the same age, they have a 50% chance of being in the same
+      # year
+      # if they're one year apart, they have a 25% chance of being in the same year
+      # note - might change this to be an if else or case when
       school_year_probability = school_probability * (2 - pmin(2, abs(age_from - age_to))) / 4,
       # a weighted combination of this and the population age distribution, so
       # that if the contact is in the same school year, the weight is 1, and
