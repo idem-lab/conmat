@@ -100,11 +100,11 @@ Contact surveys track the number of contacts between individuals, as well as the
 
 -   The function first checks if the LGA/state name exists in Australia and later filters out the given LGA/ State and produces the lower limit of age group and the corresponding population in the region for the year 2020.
 
-#### **get_polymod_population()**
+#### get_polymod_population
 
--   uses the participant data from the polymod survey as well as the age specific population data from socialmixr r package to return the age specific average population of different countries weighted by the number of participants from those countries who participated in the polymod survey. 
+-   uses the participant data from the polymod survey as well as the age specific population data from socialmixr r package to return the age specific average population of different countries weighted by the number of participants from those countries who participated in the polymod survey.
 
-#### **get_polymod_contact_data()**
+#### get_polymod_contact_data
 
 -   uses the contact and participant data on the desired countries from the survey and impute the missing contact ages primarily through either of the three methods such as imputation of contact ages from a uniform distribution or using the average of the ages or through removal of those participants.
 
@@ -199,13 +199,15 @@ polymod_contact_data$home
 
     -   weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
 
+> more explanation
+
 ##### add_offset
 
 -   Function defines the offset variable for the model to be fitted in \`fit_single_contact_model()\`.
 
 -   Sets separate offset for school setting when compared to the other settings such as home, work and other.
 
--   log(population) for settings : home, work and other. The offset for school captures cohorting of students for schools and takes the logarithm of the weighted combination of contact population age distribution & school year probability calculated in the add_school_work_participation().
+-   log(population) for settings : home, work and other. The offset for school captures cohorting of students for schools and takes the logarithm of the weighted combination of contact population age distribution & school year probability calculated in the `add_school_work_participation()`.
 
 -   The choice of the offset is set in the model formula.
 
@@ -219,12 +221,19 @@ offset_variable <- switch(
 
 ```
 
+> why double offsets? : log(participants) & the setting specific offset
+
+
 #### fit_single_contact_model
 
--   Conmat utilizes the contact data and the population data given to fit a GAM model which models the number of contacts using the age parameters of the participants as well the contacts and the intergenerational patterns while accounting for the probability that a person of the other age goes to the same school/work and the setting.
 
--   To do this, conmat takes the contact data and uses the following functions to add modelling features like the population distribution of contact ages, fraction of population in each age group that attend school/work as well as the offset according to the settings.
+- The function takes the contact data of a particular setting at once and adds modelling features using `add_modelling_features()` like the population distribution of contact ages usin, fraction of population in each age group that attend school/work as well as the offset according to the settings.
 
+- The prepared data is then used to fit a GAM model models the number of contacts using the age parameters of the participants and the contacts.The inter generational age patterns are also taken into consideration while accounting for the probability that a person of the other age goes to the same school/work as well as the setting since the multiplicative offset for the contactable population varies for school and the rest of the settings. The gam model also uses a multiplicative offset on the number of participants.
+
+ $$ contacts \sim  s(age_{contact }) + s(age_{participant}) + s(abs(age_{participant} -age_{contact })) + s(abs(age_{participant} - age_{contact}), age_{participant}) + probability_{school} + probability_{work} + offset_{based on the setting} $$
+
+> why an interaction between intergenerational age patterns & participant age? Better explanation needed for model fit along with reasons for choosing this 
 
 #### fit_setting_contacts
 
