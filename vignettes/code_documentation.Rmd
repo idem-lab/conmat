@@ -19,7 +19,16 @@ library(conmat)
 
 ## About conmat
 
-We want to understand the spread of infectious diseases in a population. One approach to this is to use contact matrices. These give the number of expected contacts from one age group to another. For example, there might be a lot of contact between infants (ages 0-5) and parents (ages 25-45), and grandparents (age 55+) but not as much contact between teenagers and infants. The amount of contact also changes depending on the settings, such as home, school, and work. At work, age groups of ages 20 - 50, will have more contact with each other, and less / little contact with people aged 70+, and below the age of 20, as the number of people in those workforces is smaller.
+We want to understand the spread of infectious diseases in a population. One approach to this is to use contact matrices. These give the number of expected contacts from one age group to another. We can visualise this as a heatmap or matrix - see below:
+
+```{r}
+#| label: figure-example-heatmap
+#| echo: FALSE
+get_polymod_contact_data()
+```
+
+
+For example, there might be a lot of contact between infants (ages 0-5) and parents (ages 25-45), and grandparents (age 55+) but not as much contact between teenagers and infants. The amount of contact also changes depending on the settings, such as home, school, and work. At work, age groups of ages 20 - 50, will have more contact with each other, and less / little contact with people aged 70+, and below the age of 20, as the number of people in those workforces is smaller.
 
 We have information, based on special surveys, which show the number of people who have contact with each other, in different settings, such as work, home, school, and other. These surveys have been conducted in different places in the world. Specifically, we have information on the amount of contact from a "polymod" survey, which surveyed the following countries:
 
