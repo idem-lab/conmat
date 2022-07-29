@@ -169,7 +169,7 @@ Contact surveys track the number of contacts between individuals, as well as the
 
 #### get_polymod_setting_data
 
--   get_polymod_setting_data acts as an extension of **get_polymod_contact_data** and extracts the setting wise contact data on the desired country as a list. 
+-   get_polymod_setting_data acts as an extension of **get_polymod_contact_data** and extracts the setting wise contact data on the desired country as a list.
 
 ### Other Important stuff
 
@@ -185,31 +185,85 @@ Contact surveys track the number of contacts between individuals, as well as the
     >
     > We use Per-capita household size instead of mean household size in order to upweight larger household size, we need a household size that is averaged over all the people in the population rather than the mean household size which would be skewed towards extreme household sizes. We use per-capita household size as it is a more accurate reflection of the average number of household members a person in the population can have contact with.
 
-#### per_capita_household_size
-
--   Uses the household size distributions on relevant state or LGA using the \`get_household_size_distribution()\` which has information on the number of people in the region with household sizes from 1 to 8.
-
-```{r}
-household_size_distribution_data <- get_household_size_distribution(lga = "Ballina (A)")
-
-household_size_distribution_data
-```
-
--   Using the household size distributions , the fraction of population with a particular household size is obtained and multiplied with the household size to later produce the population-weighted average of household sizes or per capita household size.
-
 #### get_household_size_distribution
 
 -   The function uses \`abs_household_data\`, lga & state level data on the household size (1 to 8 ) and the number of households with that particular household size, obtained from Australian Bureau of Statistics.
 
 -   Depending on the region level that is nation wide , state or lga , the number of people in a household of a particular household size is calculated by multiplying the number of households of a size with the household size, thus producing the household size distributions of a particular region.
 
-> Note : Why group by state inside the switch() ?
+- It returns a dataframe with columns: year, state, lga, household_size, and n_people. So a given row represents the number of people with that household size. 
+
+- So running this for a given LGA returns a dataframe of the number of people in a given household size:
+
+```{r}
+hh_size_fairfield <- get_household_size_distribution(lga = "Fairfield (C)")
+hh_size_fairfield
+```
+
+- And running it for a given state returns each LGA for each state - so you will still need to summarise this to get it at the state level. NOTE: Shouldn't it just collapse across state without LGA info?
+
+```{r}
+get_household_size_distribution(state = "NSW")
+```
+
+> Note : Why group by state inside the switch() ? - I think we can leave this as is.
+
+#### per_capita_household_size
+
+-   Uses the household size distributions on relevant state or LGA using the \`get_household_size_distribution()\` which has information on the number of people in the region with household sizes from 1 to 8 - e.g. we can use the household size distribution for Fairfield from before:
+
+```{r}
+hh_size_fairfield
+```
+
+-   Using the household size distributions , the fraction of population with a particular household size is obtained and multiplied with the household size to later produce the population-weighted average of household sizes or per capita household size.
+
+```{r}
+per_capita_household_size(
+  household_data = hh_size_fairfield,
+  household_size_col = household_size,
+  n_people_col = n_people
+)
+
+```
+
+NOTE - check this: This household size per capita information can then be used to adjust estimates when say calculating the next generation matrix.
 
 ### Model fitting
 
 #### get_age_population_function
 
 > Returns an interpolating function to get populations in 1y age increments.
+
+-   The purpose of the function is to return a function that takes in a numeric vector and returns the interpolated population corresponding to the ages passed. For example, you can pass in an example population with the following structure - with a lower.age.limit and population column.
+
+```{r}
+example_pop <- get_polymod_population()
+example_pop
+```
+
+But these ages and populations are binned every 5 years. So we can now provide a specified age and get the estimated population for that 1 year age group. First we create the new function like so
+
+```{r}
+# get function to interpolate population age distributions to 1y bins
+age_population_function <- get_age_population_function(example_pop)
+```
+
+Then we can pass it a given year, or vector of years:
+
+```{r}
+age_population_function(age = 0)
+age_population_function(age = 5)
+sum(age_population_function(age = 0:4))
+```
+
+Notice that we get a pretty similar number of 0-4 if we sum it up, as the first row of the table:
+
+```{r}
+head(example_pop, 1)
+sum(age_population_function(age = 0:4))
+```
+
 
 -   The function first prepares the data to fit a smoothing spline to the data for ages below the maximum age. It takes the data, arranges the lower limit of the age group to obtain the bin width/differences of the lower age limits. The mid point of the bin width is later added to the ages and the population is scaled as per the bin widths.
 
@@ -221,7 +275,7 @@ household_size_distribution_data
 
 -   The final population is then linearly extrapolated over years past the upper bound from the data. For ages above the maximum age from data, the population is calculated as a weighted population of the maximum age that depends on the years past the upper bound. Older ages would have lower weights, therefore lower population.
 
--   The purpose of the function is to return a function that takes in a numeric vector and returns the interpolated population corresponding to the ages passed.
+
 
 #### add_modelling_features
 
@@ -240,19 +294,15 @@ polymod_contact_data$home
 
 > use interpolated population of "age_to" (contact age) & get the relative population grouped by "age_from" or participant age.
 
--   Function uses the \`get_population_function()\` to add the interpolated population for different contact ages based on the population data on the region provided, through which the population distribution of contact ages is obtained.
+- Function uses the `get_population_function()` to add the interpolated population for different contact ages based on the population data on the region provided, through which the population distribution of contact ages is obtained.
 
 ##### add_school_work_participation
 
--   adds new variables for
-
-    -    school & work going fraction for contact & participant ages
-
-    -   probability that a person of the other age goes to the same work/school
-
-    -   probability that a person of the other age would be in the same school year
-
-    -   weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
+- This function adds new variables for:
+    - school & work attending fraction for contact & participant ages
+    - probability that a person of the other age goes to the same work/school
+    - probability that a person of the other age would be in the same school year
+    - weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
 
 > more explanation
 
@@ -276,8 +326,7 @@ offset_variable <- switch(
 
 ```
 
-> why double offsets? : log(participants) & the setting specific offset
-
+> why double offsets? : The offsets get added together when the model first fit. In addition, the setting specific offset from `offset_variable`, which is included in the GAM model as `... + offset(log_contactable_population)` is used in prediction, whereas the other offset, included as an argument in the GAM as `offset = log(participants)` is only included when the model is initially created.
 
 #### fit_single_contact_model
 
