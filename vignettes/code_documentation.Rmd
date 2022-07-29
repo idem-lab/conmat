@@ -19,16 +19,9 @@ library(conmat)
 
 ## About conmat
 
-We want to understand the spread of infectious diseases in a population. One approach to this is to use contact matrices. These give the number of expected contacts from one age group to another. We can visualise this as a heatmap or matrix - see below:
+We want to understand the spread of infectious diseases in a population. One approach to this is to use contact matrices. These give the number of expected contacts from one age group to another. For example, there might be a lot of contact between infants (ages 0-5) and parents (ages 25-45), and grandparents (age 55+) but not as much contact between teenagers (age 11 - 19) and infants. 
 
-```{r}
-#| label: figure-example-heatmap
-#| echo: FALSE
-get_polymod_contact_data()
-```
-
-
-For example, there might be a lot of contact between infants (ages 0-5) and parents (ages 25-45), and grandparents (age 55+) but not as much contact between teenagers and infants. The amount of contact also changes depending on the settings, such as home, school, and work. At work, age groups of ages 20 - 50, will have more contact with each other, and less / little contact with people aged 70+, and below the age of 20, as the number of people in those workforces is smaller.
+The amount of contact also changes depending on the settings, such as home, school, and work. At work, age groups of ages 20 - 50, will have more contact with each other, and less / little contact with people aged 70+, and below the age of 20, as the number of people in those workforces is smaller.
 
 We have information, based on special surveys, which show the number of people who have contact with each other, in different settings, such as work, home, school, and other. These surveys have been conducted in different places in the world. Specifically, we have information on the amount of contact from a "polymod" survey, which surveyed the following countries:
 
@@ -288,14 +281,39 @@ offset_variable <- switch(
 
 #### fit_single_contact_model
 
+- This is the workhorse of the conmat R package. It predicts the contact rate between all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, and so on), for a specified setting, with specific terms being added for given settings.
+- The model fit is a Generalised Additive Model (GAM). To help account for assortativity with age, where people of similar ages have more contact with each other, we include predictors `age_from`, and `age_to`. To account for intergenerational contact patterns, where parents and grandparents will interact with their children and grand children, we include a term that is the absolute difference of age_from and age_to. We also include the interaction of intergenerational contact patterns with contacts from one age with the term that is the absolute difference of age_from and age_to, and age_from. These terms are fit with a smoothing function. Specifically, the relevant code looks like this:
 
-- The function takes the contact data of a particular setting at once and adds modelling features using `add_modelling_features()` like the population distribution of contact ages usin, fraction of population in each age group that attend school/work as well as the offset according to the settings.
+```r
+s(age_to) + 
+  s(age_from) + 
+  s(abs(age_from - age_to)) + 
+  s(abs(age_from - age_to), age_from)
+```
 
-- The prepared data is then used to fit a GAM model models the number of contacts using the age parameters of the participants and the contacts.The inter generational age patterns are also taken into consideration while accounting for the probability that a person of the other age goes to the same school/work as well as the setting since the multiplicative offset for the contactable population varies for school and the rest of the settings. The gam model also uses a multiplicative offset on the number of participants.
+- We also include predictors for the probability of attending school, and attending work. These are computed as the probability that a person goes to the same school/work, proportional to the increase in contacts due to attendance. These terms are calculated from estimated proportion of people in age groups attending school and work.
+      
+- Finally, we include two offset terms so that we estimate the contact rate, that is the contacts per capita, instead of the number of contacts. These offset terms are the `log(contactable_population)`, and `log(contactable_population_school)` when the model is fit to a school setting. The contactable population is estimated as the interpolated 1 year ages from the data. For schools this is the contactable population weighted by the proportion of the population attending school.
 
- $$ contacts \sim  s(age_{contact }) + s(age_{participant}) + s(abs(age_{participant} -age_{contact })) + s(abs(age_{participant} - age_{contact}), age_{participant}) + probability_{school} + probability_{work} + offset_{based on the setting} $$
+- This leaves us with a model that looks like so:
 
-> why an interaction between intergenerational age patterns & participant age? Better explanation needed for model fit along with reasons for choosing this 
+```r
+ mgcv::bam(
+  formula = contacts ~
+    s(age_to) +
+    s(age_from) +
+    s(abs(age_from - age_to)) +
+    s(abs(age_from - age_to), age_from) +
+    school_probability +
+    work_probability + 
+    offset(log_contactable_population) +
+    # or for school settings
+    # offset(log_contactable_population_school) 
+  family = stats::poisson,
+  offset = log(participants),
+  data = population_data
+    )
+```
 
 #### fit_setting_contacts
 
