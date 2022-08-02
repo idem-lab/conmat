@@ -49,7 +49,6 @@ data_age_transform <-  bind_rows(
   mutate(age = as_factor(lower.age.limit),
          population = (population * age_multiplier),
          population_per_capita = (population_per_capita * age_multiplier))
-
 pretty_symmetric <- function(range, n = 5){
   range_1 <- c(-range[1], range[2])
   range_2 <- c(range[1], -range[2])
@@ -101,7 +100,7 @@ Due to the lack of data from contact surveys in the majority of countries in the
 
 ## What is a contact matrix?
 
-The risk of transmission between two individuals could be proportional to the amount or frequency of contact between them, therefore contact patterns play a tremendous role in decoding the transmission dynamics of an infectious disease and as well as employing effective public health safeguards such as imposing school closures or lockdown measures. These contact patterns can vary across different ages as well as different locations of interaction. One way to express these patterns are in matrices, in which each element indicates the estimated number of contacts between subgroups, such as age groups, which are represented as rows and columns. The location of interactions can also be taken into account by generating these contact matrices at different settings such as workplace, home, school and so on. For example, age based contact matrix at a school allow us to determine the average number of contacts an individual in age group, A, has with another individual of the same age group or another age group, B, at the location, school. 
+The risk of transmission between two individuals could be proportional to the amount or frequency of contact between them, therefore contact patterns play a tremendous role in decoding the transmission dynamics of an infectious disease and as well as employing effective public health safeguards such as imposing school closures or lockdown measures. These contact patterns can vary across different ages as well as different locations of interaction. One way to express these patterns are in matrices, in which each element indicates the estimated number of contacts between subgroups, such as age groups, which are represented as rows and columns. The location of interactions can also be taken into account by generating these contact matrices at different settings such as workplace, home, school and so on. For example, age based contact matrix at a school allow us to determine the average number of contacts an individual in age group, A, has with another individual of the same age group or another age group, B, at the location, school. 
 
 \
 
@@ -117,13 +116,12 @@ You can also simulate disease spread without contact matrices, and make differen
 As stated in Mossong paper:
 
 > Until now, modellers have relied on proxy measures of contacts and calibration to epidemiological data. For instance, household size, class size, transport statistics, and workplace size distribution have been used in recent models to deﬁne the contact structure [2,3,33,34].
-
 \
 
 **[ ] What is a contact survey?**
 
 \
-Contact surveys track the number of contacts between individuals, as well as the nature (physical or non-physical, duration of contact etc.) and location of those contacts along with the survey respondent's socio demographic characteristics, such as work status, household size, age, and so on. One such survey is the POLYMOD contact pattern study which utilises respondent filed social contact diaries from 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands and Poland in an attempt to quantify social mixing patterns. Conmat retrieves the POLYMOD survey data primarily through two functions, \`get_polymod_setting_data()\` & \`get_polymod_population()\`. 
+Contact surveys track the number of contacts between individuals, as well as the nature (physical or non-physical, duration of contact etc.) and location of those contacts along with the survey respondent's socio demographic characteristics, such as work status, household size, age, and so on. One such survey is the POLYMOD contact pattern study which utilises respondent filed social contact diaries from 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands and Poland in an attempt to quantify social mixing patterns. Conmat retrieves the POLYMOD survey data primarily through two functions, \`get_polymod_setting_data()\` & \`get_polymod_population()\`. 
 
 ## Helper Functions
 
@@ -184,7 +182,6 @@ Contact surveys track the number of contacts between individuals, as well as the
     > **Why is per-capita household size used?**
     >
     > We use Per-capita household size instead of mean household size in order to upweight larger household size, we need a household size that is averaged over all the people in the population rather than the mean household size which would be skewed towards extreme household sizes. We use per-capita household size as it is a more accurate reflection of the average number of household members a person in the population can have contact with.
-
 #### get_household_size_distribution
 
 -   The function uses \`abs_household_data\`, lga & state level data on the household size (1 to 8 ) and the number of households with that particular household size, obtained from Australian Bureau of Statistics.
@@ -207,7 +204,6 @@ get_household_size_distribution(state = "NSW")
 ```
 
 > Note : Why group by state inside the switch() ? - I think we can leave this as is.
-
 #### per_capita_household_size
 
 -   Uses the household size distributions on relevant state or LGA using the \`get_household_size_distribution()\` which has information on the number of people in the region with household sizes from 1 to 8 - e.g. we can use the household size distribution for Fairfield from before:
@@ -224,7 +220,6 @@ per_capita_household_size(
   household_size_col = household_size,
   n_people_col = n_people
 )
-
 ```
 
 NOTE - check this: This household size per capita information can then be used to adjust estimates when say calculating the next generation matrix.
@@ -234,7 +229,6 @@ NOTE - check this: This household size per capita information can then be used t
 #### get_age_population_function
 
 > Returns an interpolating function to get populations in 1y age increments.
-
 -   The purpose of the function is to return a function that takes in a numeric vector and returns the interpolated population corresponding to the ages passed. For example, you can pass in an example population with the following structure - with a lower.age.limit and population column.
 
 ```{r}
@@ -280,7 +274,6 @@ sum(age_population_function(age = 0:4))
 #### add_modelling_features
 
 > Features like population distribution of contact ages, school work participation as well as the offset is added on to the data using this function
-
 -   The function takes the contact data which has information on the participants' age, contact ages, number of participants in that age group as well as the number of contacts the pair of individuals in the particular age group have. For example, below shown is the contact data in the setting "home"
 
 ```{r}
@@ -293,7 +286,6 @@ polymod_contact_data$home
 ##### add_population_age_to
 
 > use interpolated population of "age_to" (contact age) & get the relative population grouped by "age_from" or participant age.
-
 - Function uses the `get_population_function()` to add the interpolated population for different contact ages based on the population data on the region provided, through which the population distribution of contact ages is obtained.
 
 ##### add_school_work_participation
@@ -305,7 +297,6 @@ polymod_contact_data$home
     - weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
 
 > more explanation
-
 ##### add_offset
 
 -   Function defines the offset variable for the model to be fitted in \`fit_single_contact_model()\`.
@@ -317,17 +308,14 @@ polymod_contact_data$home
 -   The choice of the offset is set in the model formula.
 
 ```{r, eval=FALSE,echo=TRUE}
-
 offset_variable <- switch(
     setting,
     school = "log_contactable_population_school",
     "log_contactable_population"
   )
-
 ```
 
 > why double offsets? : The offsets get added together when the model first fit. In addition, the setting specific offset from `offset_variable`, which is included in the GAM model as `... + offset(log_contactable_population)` is used in prediction, whereas the other offset, included as an argument in the GAM as `offset = log(participants)` is only included when the model is initially created.
-
 #### fit_single_contact_model
 
 - This is the workhorse of the conmat R package. It predicts the contact rate between all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, and so on), for a specified setting, with specific terms being added for given settings.
@@ -363,23 +351,186 @@ s(age_to) +
   data = population_data
     )
 ```
-
 #### fit_setting_contacts
+
+-   fit_setting_contacts acts as an extension of fit_single_contact_model
+
+-   fits a gam model for each setting on the survey population data & the setting wise contact data.
+
+-   Returns a list of fitted gam models for each setting.
+
+> fit_setting_contacts is used to fit the contact model to the polymod data which includes the setting wise polymod contact data from `get_polymod_setting_data()` and the polymod population data from `get_polymod_population()`. The model is then used to extrapolate to the data on the desired LGA/state using the `predict_setting_contacts()`.
+
 
 #### predict_contacts
 
-#### aggregate_predicted_contacts
+> Using the fitted model from `fit_single_contact_model()`, `predict_contacts` predict the contact rate between two age groups of a desired population. 
 
-#### predict_contacts_1y
+For example, the average number of contacts between age groups 0-5 and 10-15 at the setting, "home" in Fairfield, NSW can be determined using the fitted contact model for the setting, "home", the age wise population of Fairfield, NSW as well as the specified age_breaks such as 5 year breaks from ages 0 to 85. 
+
+
+```{r}
+tibble::tribble(
+    ~age_group_from, ~age_group_to, ~contacts,
+  "[0,5)" ,          "[0,5)"   ,        "0.557",
+  "[0,5)" ,          "[5,10)"  ,        "0.449",
+  "[0,5)" ,          "[10,15)" ,        "0.275",
+  "[0,5)" ,          "[15,20)" ,        "0.230"
+  ) 
+```
+
+- The function accepts the model fit, population data on different ages in the desired region as well as the desired age breaks. 
+
+- Using the population data, the maximum and minimum ages for which contact rates are predicted is determined while accounting for the removal of ages with zero population so that predictions are not made for ages with zero populations. 
+
+- The function then uses `predict_contact_1y()` to obtain predictions for all ages between the these minimum and maximum and later on utilises `aggregate_predicted_contacts()` to predict number of contacts in all combinations of the age groups specified by age_breaks.
+
+
+
+##### predict_contacts_1y
+
+> Primary purpose of the function is to predict the number of contacts for all ages from the specified minimum to maximum ages in the desired region using it's population data obtained from `abs_age_lga()` & `abs_age_state()`.
+
+
+- Internally used within `predict_contacts()`. 
+
+-   Takes in the fitted model, population data of the region to be extrapolated on as well as the minimum and maximum ages as arguments.
+
+-   Prediction features to make predictions on the desired population are then added using the `add_modelling_features()`. These features include the population distribution of contact ages, fraction of population in each age group that attend school/work as well as the offset according to the settings on all combinations of the participant & contact ages.
+
+-   Uses `predict()` to make predictions as well as add the measure of uncertainty or standard error of predicted means, based on the fitted model and the data passed after adding the prediction features. 
+
+- Returns a data frame with all combinations of participant & contact ages from the minimum and maximum ages provided along with the predicted number of contacts and the level of uncertainty. For example,
+
+```{r}
+
+tibble::tribble(
+    ~age_from, ~age_to, ~contacts,~se_contacts,
+         0,   0,   0.113,      0.00812,
+         0,   1,   0.106,      0.00666,
+         0,   2,   0.0995,     0.00551,
+         0,   3,   0.0927,     0.00468,
+         0,   4,   0.0861,     0.00413,
+         0,   5,   0.0796,     0.00377,
+         0,   6,   0.0736,     0.00357,
+         0,   7,   0.0682,     0.00344,
+         0,   8,   0.0633,     0.00334,
+         0,   9,   0.0590,     0.00323
+  ) 
+```
+
+
+##### aggregate_predicted_contacts
+
+> Obtains the population weighted average contacts a particular age group has with another age group at a particular setting. These age groups are decided according to the age breaks passed through the function as arguments.   
+
+- Used internally within `predict_contacts()`. 
+
+- Uses the output from `predict_contacts_1y()` that is the predicted number of contacts for all combinations of participant & contact ages, to obtain the total number of predicted contacts each participant of a particular age has with a specific age group. This is then used to calculate average of the number of contacts the participant age group has with a specified age bracket, weighted by the population distribution of the participant age. 
+
+- Returns a data frame with all combinations of participant & contact age groups and the population weighted average number of contacts between each age groups. For example, 
+
+```{r}
+tibble::tribble(
+    ~age_group_from, ~age_group_to, ~contacts,
+  "[0,5)" ,          "[0,5)"   ,        "0.557",
+  "[0,5)" ,          "[5,10)"  ,        "0.449",
+  "[0,5)" ,          "[10,15)" ,        "0.275",
+  "[0,5)" ,          "[15,20)" ,        "0.230"
+  ) 
+```
+
 
 #### predict_setting_contacts
 
-#### predictions_to_matrix
+- Predicts contact rates for all combinations of age groups specified by the desired age breaks, in a desired population across settings such as "home","school", "work", "other" and the combination of all settings.
 
-#### matrix_to_predictions
+- These predictions are then converted to matrix format using `predictions_to_matrix()` to produce contact matrices for all age groups combinations across different settings or location of contact. 
+
+- Upon obtaining the contact matrices, the household contact matrix is consequently adjusted by the per capita household size of the region for which the predictions are made if provided , in order to in order to upweight larger household size. See `adjust_household_contact_matrix()` for more info.
+
+
+##### predictions_to_matrix
+
+- Helper function to convert predictions of contact rates in data frames to matrix format with the survey participant age groups as columns and contact age groups as rows.  
+
+##### matrix_to_predictions
+
+- Helper function to convert contact matrices to data frame format.
+
+##### Example pipeline 
+
+Let's predict the average contact rates for ages 0 to Inf in 5 year age breaks in all settings for the NSW LGA, Fairfield 
+
+
+- Extract the polymod survey population & contact data
+ 
+```{r, eval=FALSE}
+polymod_contact_data <- get_polymod_setting_data()
+polymod_survey_data <- get_polymod_population()
+```
+
+
+- Fit the contact model to the polymod data for all settings.
+
+```{r, eval=FALSE}
+set.seed(1100)
+ setting_models <- fit_setting_contacts(
+  contact_data_list = polymod_contact_data,
+   population = polymod_survey_data
+ )
+```
+
+- Obtain the age wise population of Fairfield.
+
+```{r}
+fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+fairfield_age_pop
+
+```
+
+- Obtain the per capita household size of Fairfield 
+
+```{r}
+
+fairfield_hh_size <- get_per_capita_household_size(lga = "Fairfield (C)")
+fairfield_hh_size
+```
+
+
+- Extrapolate the fitted model to the Fairfield population data. Predict the contact ages for all combinations of ages in 5 year ages breaks from 0 to 85-Inf. 
+
+
+```{r, eval=FALSE}
+
+synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
+  population = fairfield_age_pop,
+  contact_model = setting_models,
+  age_breaks = c(seq(0, 85, by = 5), Inf),
+  per_capita_household_size = fairfield_hh_size
+)
+```
+
 
 #### extrapolate_polymod
+
+> Allows to fit all-of-polymod model and extrapolate to a given population and age breaks with optional adjustment to the household contact matrix. 
+
+- Uses `estimate_setting_contacts()` to fit a contact model on the data from polymod and later extrapolate on to a desired population. 
+
+##### estimate_setting_contacts 
+
+- Utilises the inbuilt `fit_setting_contacts()` & polymod survey contact & population data to fit a contact model on the polymod data and extrapolate the fitted model to a desired population and age breaks using the `predict_setting_contacts()`. The predicted household contact matrix can also be adjusted optionally by the region's per-capita household size. 
+
+#### get_setting_transmission_matrices
+
+#### generate_ngm
+
+#### apply_vaccination
 
 ### Plotting
 
 #### plot_matrix
+
+#### plot_setting_matrices
+
