@@ -1,7 +1,7 @@
 #' aggregate predicted contacts from complete 1y resolution
 #'
 #' aggregate predicted contacts from complete 1y resolution to a stated
-#' resolution must pass in the population to do approppriate weighting of
+#' resolution must pass in the population to do appropriate weighting of
 #' 'from' age groups
 #' @param predicted_contacts_1y contacts in 1 year breaks
 #' @param population population

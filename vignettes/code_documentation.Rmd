@@ -364,28 +364,37 @@ s(age_to) +
 
 #### predict_contacts
 
-> Using the fitted model from `fit_single_contact_model()`, `predict_contacts` predict the contact rate between two age groups of a desired population. 
+>`predict_contacts()` predicts the contact rate between two age populations, given some setting-specific model of contact rate and population age structure. It takes three arguments: 1) model: A single fitted model of contact rate (say from `fit_single_contact_model()`), 2) population: a dataframe of age population information, with columns indicating some lower age limit, and population, and 3), age breaks - the ages to predict to. By default, the age breaks are O-75 in 5 year groups.
 
-For example, the average number of contacts between age groups 0-5 and 10-15 at the setting, "home" in Fairfield, NSW can be determined using the fitted contact model for the setting, "home", the age wise population of Fairfield, NSW as well as the specified age_breaks such as 5 year breaks from ages 0 to 85. 
-
+As an example, if we have a model of contact rate at home, and age population structure for an LGA, say, Fairfield, in NSW:
 
 ```{r}
-tibble::tribble(
-    ~age_group_from, ~age_group_to, ~contacts,
-  "[0,5)" ,          "[0,5)"   ,        "0.557",
-  "[0,5)" ,          "[5,10)"  ,        "0.449",
-  "[0,5)" ,          "[10,15)" ,        "0.275",
-  "[0,5)" ,          "[15,20)" ,        "0.230"
-  ) 
+polymod_setting_models$home
+
+fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+
+fairfield_abs_data
 ```
 
-- The function accepts the model fit, population data on different ages in the desired region as well as the desired age breaks. 
+Then we can predict the contact rate for Fairfield from the existing contact data, say, between the age groups of 0-15 in 5 year bins for school, like so:
 
-- Using the population data, the maximum and minimum ages for which contact rates are predicted is determined while accounting for the removal of ages with zero population so that predictions are not made for ages with zero populations. 
+```{r}
+fairfield_school_contacts <- predict_contacts(
+  model = polymod_setting_models$school,
+  population = fairfield_abs_data,
+  age_breaks = c(0, 5, 10, 15)
+)
 
-- The function then uses `predict_contact_1y()` to obtain predictions for all ages between the these minimum and maximum and later on utilises `aggregate_predicted_contacts()` to predict number of contacts in all combinations of the age groups specified by age_breaks.
+fairfield_school_contacts
+```
 
+Implementation details
 
+- This function, `predict_contacts` is used internally inside `predict_setting_contacts()`, which predicts for all settings (home, work, school, other) the expected contact rate for a given population age structure, and also optionally performs an adjustment for per capita household size. You can use `predict_contacts()` yourself, just be aware you will need to separately apply a per capita household size adjustment if you want to use that. See `adjust_household_contact_matrix` for more details.
+
+- The population data is used to determine age range to predict contact rates, and removes ages with zero population, so we do not make predictions for ages with zero populations.
+
+- Contact rates are predicted yearly between the age groups, using  `predict_contact_1y()`, then aggregates these predicted contacts using `aggregate_predicted_contacts()`, which aggregates the predictions back to the same resolution as the data, appropriately weighting the contact rate by the population. 
 
 ##### predict_contacts_1y
 
