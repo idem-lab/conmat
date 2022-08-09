@@ -84,16 +84,18 @@ fit_single_contact_model <- function(contact_data, population) {
   # prediction data
   formula_no_offset <- contacts ~
     # Prem method did a post-hoc smoothing
-    # deviation of contact age distribution from population age distribution
-    s(age_to) +
-    # number of contacts by age
-    s(age_from) +
-    # intergenerational contact patterns - enables the off-diagonals
-    s(abs(age_from - age_to)) +
-    # interaction between intergenerational patterns and age_from, to remove
-    # ridge for some ages and settings
-    # 
-    s(abs(age_from - age_to), age_from) +
+    # abs(age_from - age_to)
+      s(gam_age_offdiag) +
+    # abs(age_from - age_to)^2
+      s(gam_age_offdiag_2) +
+    # abs(age_from * age_to)
+      s(gam_age_diag_prod) +
+    # abs(age_from + age_to)
+      s(gam_age_diag_sum) +
+    # pmax(age_from, age_to)
+      s(gam_age_pmax) +
+    # pmin(age_from, age_to)
+      s(gam_age_pmin) +
     # probabilities of both attending (any) school/work
     school_probability +
     work_probability
