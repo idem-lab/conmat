@@ -639,4 +639,12 @@ Finally, the dataframe with the setting and age group specific relative per-cont
 
 #### generate_ngm
 
+Once infected, a person can transmit an infectious disease to another thereby creating generations of infected individuals. Certain characteristics such as age, sex etc can epidemiologically significant in estimating the expected number of these newly infected individuals. When the population is categorised based on these traits, one can define a matrix that related the number of newly infected individuals in these categories for the consecutive generations. This matrix is called a next generation matrix. Diekmann et al (2010) 
+
+Next generation matrix can be used to calculate the expected number of secondary infections in an age group,say 5-10 caused by an infected individual of same age group or another for example 10-15, assuming that the 5-10 population is entirely susceptible. [check with Nick]
+
+Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a desired reproduction number using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigen value of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
+
+
+> Why scale as per the target reproduction number ?
 #### apply_vaccination
