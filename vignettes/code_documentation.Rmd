@@ -389,9 +389,12 @@ Implementation details
 
 ##### predict_contacts_1y
 
-> Primary purpose of the function is to predict the number of contacts for all ages from the specified minimum to maximum ages in the desired region using it's population data obtained from `abs_age_lga()` & `abs_age_state()`.
+> Primary purpose of `predict_contacts_1y` is to use an already fitted model of contact rate and predict the estiamted contact rate and standard error for all combinations of the provided ages in 1 year increments. So if the minimum age is 5, and the maximum age is 10, then it will provide the estimated contact rate for all age combinations: 5 and 5, 5 and 6 ... 5 and 10, and so on.
 
--   Internally used within `predict_contacts()`.
+- This function is used internally within `predict_contacts()`.  
+
+- It takes four arguments: 1) model - the fitted statistical model of contact rate, 2) population - data with age and population information. It also takes 3) age_min, and 4) age_max arguments, which are used to specify the age range which will then be specified in years
+
 
 -   Takes in the fitted model, population data of the region to be extrapolated on as well as the minimum and maximum ages as arguments.
 
