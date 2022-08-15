@@ -373,7 +373,7 @@ Then we can predict the contact rate for Fairfield from the existing contact dat
 fairfield_school_contacts <- predict_contacts(
   model = polymod_setting_models$school,
   population = fairfield_abs_data,
-  age_breaks = c(0, 5, 10, 15)
+  age_breaks = c(0, 5, 10, 15,Inf)
 )
 
 fairfield_school_contacts
@@ -545,7 +545,7 @@ The clinical fraction and relative susceptibility parameters from Davies et al a
 
 -   `davies_original` : Age specific parameters of the relative susceptibility to infection inferred from a smoothing-spline estimate of the mean relative susceptibility estimate from Davies et al.
 
--   **`davies_updated` ? : Re-estimated parameter of the susceptibility profile for under-16s that is estimated in a similar way but to the age-distribution of infections in England from the UK ONS prevalence survey (rather than case counts with may undercount children)?**
+-   **`davies_updated` ? : Re-estimated parameter of the susceptibility profile for under-16s that is estimated in a similar way but to the age-distribution of infections in England from the UK ONS prevalence survey rather than case counts which may undercount children ?** 
 
 #### get_setting_transmission_matrices
 
@@ -646,8 +646,16 @@ Once infected, a person can transmit an infectious disease to another thereby cr
 
 Next generation matrix can be used to calculate the expected number of secondary infections in an age group,say 5-10 caused by an infected individual of same age group or another for example 10-15, assuming that the 5-10 population is entirely susceptible. [check with Nick]
 
-Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a desired reproduction number using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigen value of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
+Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a target reproduction number (which is provided as an argument) using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigen value of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
 
 
-> Why scale as per the target reproduction number ?
+> More notes on why scale as per the target reproduction number ?
+
+
 #### apply_vaccination
+
+By giving a person immunity from the disease, vaccination has consistently demonstrated to be one of the most effective strategies in the management and prevention of an infectious disease outbreak. When a sizable section of the population receives vaccinations or when vaccine coverage is sufficient enough, the likelihood that the unvaccinated population will contract the disease is decreased. This helps to slow infectious disease spread as well as lessen its severity. For this reason, it is important to understand how much of a reduction in probability of acquisition (the likelihood that an individual will contract the disease), and probability of transmission (the likelihood that an individual will spread the disease after contracting it), has occurred as an the effect of vaccination, in other words the effect of vaccination on the next generation of infections.
+
+Conmat applies vaccination effects to next generation matrices using the function `apply_vaccination` that leads to reduction of acquisition and transmission in each age group in the next generation matrices. `apply_vaccination` executes this by taking in the next generation matrices on certain age groups of a specified region obtained through `generate_ngm()` as well as a data set with information on the age group wise vaccine coverage, acquisition and transmission (probabilities?) of the region and age groups corresponding to given next generation matrices.
+
+The function then computes percentage reduction in acquisition and transmission in each age group. By taking the outer product of these reductions in acquisition and transmission by age group, a transmission reduction matrix is created. The next generation matrices with the vaccination effects applied on are then produced using the obtained transmission reduction matrix and the next generation matrices passed to the function as an argument.
