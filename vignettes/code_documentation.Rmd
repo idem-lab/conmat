@@ -641,17 +641,17 @@ The clinical fraction and relative susceptibility parameters from Davies et al a
 
 #### get_setting_transmission_matrices
 
-> Given some user specified age breaks, get_setting_transmission_matrices returns a named list of matrices containing age-specific relative per-contact transmission probability matrices for each of 4 settings: home, school, work, other while accounting for vaccination, reduced mixing, and reduced transmissibility in work and other settings due to hygiene behaviour. 
+> Given some user specified age breaks, `get_setting_transmission_matrices` returns a named list of matrices containing age-specific relative per-contact transmission probability matrices for each of 4 settings: home, school, work, and other. It accounts for vaccination, reduced mixing, and reduced transmissibility in work and other settings due to hygiene behaviour. 
 
 It takes three arguments : 
 
 - Age breaks
 
-- An assumption of 0.5 for the infectiousness of asymptomatic relative to symptomatic 
+- A default value of 0.5 for the infectiousness of asymptomatic relative to symptomatic 
 
-- The Davies et al age specific susceptibility parameter estimates  such as `davies_original` and `davies_updated`.
+- The Davies et al age specific susceptibility parameter estimates, currently either: `davies_original` or `davies_updated`.
 
-We use the age dependent clinical fraction from `davies_age_extended` and the assumed relative infectiousness of asymptomatics to symptomatics to obtain the age specific estimate of infectiousness for all age combinations along with the age specific susceptibility estimates.
+We obtain the age specific estimate of infectiousness for all age combinations. To do this we use the age dependent clinical fraction from `davies_age_extended` and the assumed relative infectiousness of asymptomatics to symptomatics.
 
 ```{r}
 age_breaks <-  c(seq(0, 80, by = 5), Inf)
@@ -669,7 +669,7 @@ age_effects <- davies_age_extended %>%
 age_effects
 ```
 
-These estimates are then averaged across settings (home, work etc) and age groups such as 0-5,5-10 and so on as per the age breaks specified. 
+We also obtain age specific susceptibility estimates, by taking all combinations of ages and joining the infectiousness and davies updated estimates, averaging across settings (home, work etc) and age groups such as 0-5,5-10 and so on, as per the specified age breaks.
 
 ```{r}
 setting_weights_tibble <- tibble::tibble(setting = names(setting_weights),
@@ -704,8 +704,9 @@ agg_infectiousness_suscpetibility <- tidyr::expand_grid(
 agg_infectiousness_suscpetibility
 ```
 
+UP TO HERE
 
-We calculate the estimates of the relative transmissibility in household vs non-household settings and use the `setting_weights` which hold the weights given to each setting regarding transmissibility to scale the probability linearly for non-household transmission and binomially for household transmission so that onward infections do not to exceed the number of other household members.
+We then estimate the relative transmissibility in household vs non-household settings and use the `setting_weights` which hold the weights given to each setting regarding transmissibility to scale the probability linearly for non-household transmission and binomially for household transmission so that onward infections do not to exceed the number of other household members.
 
 ```{r}
 agg_infectiousness_suscpetibility%>%
@@ -734,14 +735,17 @@ Finally, the dataframe with the setting and age group specific relative per-cont
 
 #### generate_ngm
 
-Once infected, a person can transmit an infectious disease to another thereby creating generations of infected individuals. Certain characteristics such as age, sex etc can epidemiologically significant in estimating the expected number of these newly infected individuals. When the population is categorised based on these traits, one can define a matrix that related the number of newly infected individuals in these categories for the consecutive generations. This matrix is called a next generation matrix. Diekmann et al (2010) 
+Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. One can define a matrix that conveys the number of newly infected individuals in given categories, such as age, for the consecutive generations. This matrix is called a next generation matrix, Diekmann et al (2010).
 
-Next generation matrix can be used to calculate the expected number of secondary infections in an age group,say 5-10 caused by an infected individual of same age group or another for example 10-15, assuming that the 5-10 population is entirely susceptible. [check with Nick]
+Next generation matrix can be used to calculate the expected number of secondary infections in a given age group.
 
+<<<<<<< Updated upstream
 Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a target reproduction number (which is provided as an argument) using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigen value of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
 
 
 > More notes on why scale as per the target reproduction number ?
+
+Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a desired reproduction number using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigenvalue of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
 
 
 #### apply_vaccination

@@ -66,9 +66,11 @@ generate_ngm <- function(state_name = NULL,
   setting_rel_ngms$all <- Reduce("+", setting_rel_ngms)
   
   # scale to a required R_target
+  # the eigenvalue is the R
   R_raw <- Re(eigen(setting_rel_ngms$all)$values[1])
   scaling <- R_target / R_raw
   
+  # could be lapply
   setting_ngms <- mapply("*",
                          setting_rel_ngms,
                          scaling,
