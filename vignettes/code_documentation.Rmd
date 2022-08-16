@@ -130,21 +130,36 @@ Contact surveys track the number of contacts between individuals, as well as the
 
 -   produces the abbreviation of the state names in Australia.
 
+#### unabbreviate_states
+
+-   produces the full names of states in Australia from its abbreviations.
+
+#### age_group_lookup
+
+- A lookup table for the age groups in 5 year bins that a particular age belong to. The dataset contains three variables: age group, its lower and upper limit. 
+
 #### separate_age_group
 
--   An internal function used within \`check_args_age_population_year()\` to separate age groups in a data set into two variables for the lower and upper age limit.
+-   An internal function used within `check_args_age_population_year()` to separate age groups in a data set into two variables for the lower and upper age limit.
 
 #### check_args_age_population_year
 
--   Internally used function within \`age_population()\` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location.
+-   Internally used function within `age_population()` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location.
+
+
+#### age_population_year
+
+- The function helps clean up data sets of population data,  similar to `socialmixr::wpp_age()` or any given data set with a structure that has information on, population, location, age or age groups, and year into a format that has information on the upper and lower limit of the age groups. It accepts a data set with variables age, country,year and the corresponding population, as an argument and checks the data type of the variable representing age. If it's numeric, the function proceeds to an additional stage of grouping ages into age groups with 5 year bins. The function uses `check_args_age_population_year()` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location. 
 
 #### bin_widths
 
--   Internal function that takes in a numeric vector and return the differences between the values in the vector assumming the final value is the same as the penultimate value.
+-   Internal function that takes in a numeric vector and return the differences between the values in the vector assuming the final value is the same as the penultimate value.
 
 #### check_lga_name & check_state_name
 
 -   Function, primarly used internally checks if the LGA/state name exists in Australia and errors if not valid.
+
+
 
 ### Data
 
@@ -153,6 +168,79 @@ Contact surveys track the number of contacts between individuals, as well as the
 -   Uses the data sourced from ABS on the state and LGA wise population for different age groups for the year 2020.
 
 -   The function first checks if the LGA/state name exists in Australia and later filters out the given LGA/ State and produces the lower limit of age group and the corresponding population in the region for the year 2020.
+
+#### abs_education_state_2020
+
+A data set containing the Australian Bureau of Statistics education data by state for 2020 which was interpolated into 1 year age bins.
+
+
+
+```{r}
+abs_education_state_2020
+```
+
+
+> Are we using this dataset in conmat?
+
+#### data_abs_education_state
+
+A data set containing the Australian Bureau of Statistics education data by state for years 2006 to 2020. 
+
+> Use case? example in get_age_population_function
+
+```{r}
+abs_education_state
+```
+
+#### abs_employ_age_lga
+
+> Use case? 
+
+A data set containing the Australian Bureau of Statistics employment data by state for the year 2016
+
+```{r}
+abs_employ_age_lga
+
+```
+
+>use case?
+
+#### data_abs_household_lga
+
+A data set containing state and LGA wise data from Australian Bureau of Statistics for the year 2016 which has information on the number of people typically in a residence in the region and the number of households associated with those number of residents. This data set is typically used to obtain the household size distributions to compute the per capita household size of a particular region. 
+
+The data frame has the following variables :
+
+  - year : depicts the year the census was taken
+  - state : Abbreviated Australian state name
+  - lga : Local government area 
+  - n_persons_usually_resident : Number of people who are in residence
+  - n_households : Number of households with the associated number of residents
+  
+```{r}
+abs_household_lga
+```
+
+
+#### data_abs_lga_education
+
+#### data_abs_lga_work
+
+#### data_abs_state_age
+
+#### data_abs_state_education
+
+
+#### data_abs_state_work
+
+#### data_eyre_transmission_probabilities
+
+#### get_data_abs_age_education
+
+#### get_data_abs_age_work
+
+
+
 
 #### get_polymod_population
 
@@ -352,6 +440,10 @@ s(age_to) +
 -   Returns a list of fitted gam models for each setting.
 
 > fit_setting_contacts is used to fit the contact model to the polymod data which includes the setting wise polymod contact data from `get_polymod_setting_data()` and the polymod population data from `get_polymod_population()`. The model is then used to extrapolate to the data on the desired LGA/state using the `predict_setting_contacts()`.
+
+#####  polymod_setting_models
+
+For convenience, the list of fitted gam models predicting the number of contacts in each of the four settings, "home","work","school" and "other" using the polymod data is stored in conmat as a data object named `polymod_setting_models`
 
 #### predict_contacts
 
