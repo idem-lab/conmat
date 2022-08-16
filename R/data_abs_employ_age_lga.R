@@ -1,7 +1,7 @@
 #' ABS employment by age and lga for 2016
 #'
 #' A dataset containing Australian Bureau of Statistics employment data by
-#'   state for 206
+#'   state for 2016
 #'
 #' @format A data frame with 4317 rows and 13 variables:
 #' \describe{
