@@ -647,11 +647,11 @@ It takes three arguments :
 
 - Age breaks
 
-- A default value of 0.5 for the infectiousness of asymptomatic relative to symptomatic 
+- Asymptomatic relative infectiousness. This represents the infectiousness of asymptomatic relative to symptomatic. Default value is 0.5. So the asymptomatic cases are 50% less infectious than symptomatic cases.
 
 - The Davies et al age specific susceptibility parameter estimates, currently either: `davies_original` or `davies_updated`.
 
-We obtain the age specific estimate of infectiousness for all age combinations. To do this we use the age dependent clinical fraction from `davies_age_extended` and the assumed relative infectiousness of asymptomatics to symptomatics.
+We obtain the age specific estimate of infectiousness for all age combinations. To do this we use the age dependent clinical fraction from the R object, `davies_age_extended`, and the assumed relative infectiousness of asymptomatics to symptomatics.
 
 ```{r}
 age_breaks <-  c(seq(0, 80, by = 5), Inf)
@@ -704,8 +704,6 @@ agg_infectiousness_suscpetibility <- tidyr::expand_grid(
 agg_infectiousness_suscpetibility
 ```
 
-UP TO HERE
-
 We then estimate the relative transmissibility in household vs non-household settings and use the `setting_weights` which hold the weights given to each setting regarding transmissibility to scale the probability linearly for non-household transmission and binomially for household transmission so that onward infections do not to exceed the number of other household members.
 
 ```{r}
@@ -735,16 +733,13 @@ Finally, the dataframe with the setting and age group specific relative per-cont
 
 #### generate_ngm
 
-Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. One can define a matrix that conveys the number of newly infected individuals in given categories, such as age, for the consecutive generations. This matrix is called a next generation matrix, Diekmann et al (2010).
+Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. One can define a matrix that conveys the number of newly infected individuals in given categories, such as age, for consecutive generations. This matrix is called a next generation matrix (NGM) (Diekmann et al (2010)).
 
 The next generation matrix can be used to calculate the expected number of secondary infections in a given age group.
 
 Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a target reproduction number (which is provided as an argument) using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigen value of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
 
-
 > More notes on why scale as per the target reproduction number ?
-
-Given certain age breaks and the desired region, conmat computes the unscaled next generation matrices for that location across different settings & age groups using the contact rates extrapolated from polymod survey data on the specified location, adjusted by the per capita household size and the setting-specific relative per-contact transmission probability matrices for the same age groups. These NGMs are then scaled according to a desired reproduction number using the ratio of the desired $R_0$ and the  $R_0$ of the NGM for the combination of all settings. The $R_0$ of the combination of all settings is obtained by calculating the unique, positive eigenvalue of the combination NGM. This ratio is then used to scale all the setting specific NGMs. 
 
 
 #### apply_vaccination
