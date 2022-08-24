@@ -22,7 +22,6 @@ extract_term_name <- function(x){
 # head(predict_gam_term(sim_m, sim_data, formula_terms[1]))
 # tail(predict_gam_term(sim_m, sim_data, formula_terms[1]))
 predict_gam_term <- function(model, data, terms){
-  
   c(
     predict(model,
             data, 
@@ -42,7 +41,6 @@ add_intercept <- function(data, model){
 tidy_predict_term <- function(data,
                               model,
                               term){
-  
   term_name <- extract_term_name(term)
   
   dat_term <- tibble::tibble(x = predict_gam_term(model, data, term))
@@ -64,10 +62,11 @@ add_fitted_overall <- function(data){
 
 add_gam_predictions <- function(data, model, term) {
   terms <- get_formulas_terms(model)
+  data_modelling <- add_modelling_features(data)
   predictions <- purrr::map_dfc(
     .x = terms,
     .f = tidy_predict_term,
-    data = data,
+    data = data_modelling,
     model = model
   )
   
