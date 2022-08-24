@@ -14,6 +14,7 @@ Builds contact matrices using GAMs and population data. This package incorporate
 Authors:
 \itemize{
   \item Nick Golding \email{nick.golding.research@gmail.com} (\href{https://orcid.org/0000-0001-8916-5570}{ORCID})
+  \item Aarathy Babu \email{aarathybabu907@gmail.com} (\href{https://orcid.org/0000-0002-6982-5989}{ORCID})
 }
 
 Other contributors:

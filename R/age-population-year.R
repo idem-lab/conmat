@@ -76,7 +76,7 @@ age_population <- function(data,
                         labels = label, right = FALSE)
       )
     
-    age_population_df <- check_args_age_population_year(
+    age_population_df <- clean_age_population_year(
       data = data,
       location_col = {{ location_col }},
       location = {{ location }},
@@ -87,7 +87,7 @@ age_population <- function(data,
     
     return(age_population_df)
   } else {
-    age_population_df <- check_args_age_population_year(
+    age_population_df <- clean_age_population_year(
       data = data,
       location_col = {{ location_col }},
       location = {{ location }},

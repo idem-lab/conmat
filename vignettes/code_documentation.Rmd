@@ -128,23 +128,24 @@ Contact surveys track the number of contacts between individuals, as well as the
 
 #### abbreviate_states
 
--   produces the abbreviation of the state names in Australia.
+-   produces the abbreviation of the state names in Australia. DONE
 
 #### unabbreviate_states
 
--   produces the full names of states in Australia from its abbreviations.
+-   produces the full names of states in Australia from its abbreviations. DONE
 
 #### age_group_lookup
 
-- A lookup table for the age groups in 5 year bins that a particular age belong to. The dataset contains three variables: age group, its lower and upper limit. 
+- A lookup table for the age groups in 5 year bins that a particular age belong to. The dataset contains three variables: age group, its lower and upper limit. DONE
 
 #### separate_age_group
 
--   An internal function used within `check_args_age_population_year()` to separate age groups in a data set into two variables for the lower and upper age limit.
+- An internal function used within `check_args_age_population_year()` to separate age groups in a data set into two variables for the lower and upper age limit. DONE
 
 #### check_args_age_population_year
 
--   Internally used function within `age_population()` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location.
+- Internally used function within `age_population()` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location.
+- renamed to `clean_age_population_year` DONE
 
 
 #### age_population_year

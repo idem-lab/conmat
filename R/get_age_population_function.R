@@ -3,13 +3,13 @@
 #' This function returns an interpolating function to get populations in 1y age increments
 #' from chunkier distributions produced by socialmixr::wpp_age()
 #'
-#' @param .data dataset containing information on population of a given age/age group
+#' @param data dataset containing information on population of a given age/age group
 #' @param age_col bare variable name for the column with age information 
 #' @param pop_col bare variable name for the column with population information
 #' @return An interpolating function to get populations in 1y age increments
 #' @examples
 #' polymod_pop <- get_polymod_population()
-#' age_pop_function <- get_age_population_function(.data=polymod_pop,
+#' age_pop_function <- get_age_population_function(data=polymod_pop,
 #'                                                  age_col = lower.age.limit,
 #'                                                  pop_col= population)
 #' # Estimated population for a particular age
@@ -25,13 +25,13 @@
 #' mutate(population_est = age_pop_function(age))
 #' 
 #' @export
-get_age_population_function <- function(.data = population, 
+get_age_population_function <- function(data = population, 
                                         age_col= lower.age.limit,
                                         pop_col= population) {
   
   
   # prepare population data for modelling
-  pop_model <- .data %>%
+  pop_model <- data %>%
     dplyr::arrange(
       {{ age_col }}
     ) %>%

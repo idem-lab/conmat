@@ -28,7 +28,7 @@ abs_employ_age_lga
 }
 \description{
 A dataset containing Australian Bureau of Statistics employment data by
-state for 206
+state for 2016
 }
 \note{
 still need to finalise these columns

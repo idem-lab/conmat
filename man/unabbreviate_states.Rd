@@ -2,7 +2,7 @@
 % Please edit documentation in R/unabbreviate_states.R
 \name{unabbreviate_states}
 \alias{unabbreviate_states}
-\title{Un-bbreviate Australian state names}
+\title{Un-abbreviate Australian state names}
 \usage{
 unabbreviate_states(state_names)
 }
@@ -13,8 +13,12 @@ unabbreviate_states(state_names)
 Longer state names
 }
 \description{
-Un-bbreviate Australian state names
+Un-abbreviate Australian state names
 }
 \examples{
-abbreviate_states("VIC")
+unabbreviate_states("VIC")
+unabbreviate_states(c("VIC", "QLD"))
+}
+\seealso{
+\code{\link[=abbreviate_states]{abbreviate_states()}}
 }

@@ -5,13 +5,13 @@
 \title{Return an interpolating function for populations in 1y age increments}
 \usage{
 get_age_population_function(
-  .data = population,
+  data = population,
   age_col = lower.age.limit,
   pop_col = population
 )
 }
 \arguments{
-\item{.data}{dataset containing information on population of a given age/age group}
+\item{data}{dataset containing information on population of a given age/age group}
 
 \item{age_col}{bare variable name for the column with age information}
 
@@ -26,7 +26,7 @@ from chunkier distributions produced by socialmixr::wpp_age()
 }
 \examples{
 polymod_pop <- get_polymod_population()
-age_pop_function <- get_age_population_function(.data=polymod_pop,
+age_pop_function <- get_age_population_function(data=polymod_pop,
                                                  age_col = lower.age.limit,
                                                  pop_col= population)
 # Estimated population for a particular age
