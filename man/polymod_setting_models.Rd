@@ -11,21 +11,22 @@ An object of class \code{list} of length 4.
 polymod_setting_models
 }
 \description{
-A data object containing a list of fitted gam models predicting the number of contacts in each of the four
-settings which are "home","work","school" and "other". For more details on model fitting, see \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}
+A data object containing a list of fitted gam models
+predicting the number of contacts in each of the four settings which are
+"home","work","school" and "other". For more details on model fitting,
+see \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}. This object has been provided as data to
 }
 \examples{
 \dontrun{
+# code used to produce this data
 library(conmat)
+set.seed(2022-08-26)
 polymod_contact_data <- get_polymod_setting_data()
 polymod_survey_data <- get_polymod_population()
 polymod_setting_models <- fit_setting_contacts(
  contact_data_list = polymod_contact_data,
 )
 }
-
-
-
 
 }
 \seealso{

@@ -8,7 +8,7 @@
 #'   is higher than the population of those people. Such cases have been 
 #'   flagged under the `anomaly_flag` variable.
 #'
-#' @format A data frame with 64,264 rows and 8 variables:
+#' @format A data frame with 64,496 rows and 8 variables:
 #' \describe{
 #'   \item{year}{A number denoting the year as 2016, since the data is based on
 #'     2016 Census of Population and Housing.}

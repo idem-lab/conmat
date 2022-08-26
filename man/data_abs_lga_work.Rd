@@ -5,7 +5,7 @@
 \alias{data_abs_lga_work}
 \title{LGA wise ABS work population data on different ages for year 2016}
 \format{
-A data frame with 64,264 rows and 8 variables:
+A data frame with 64,496 rows and 8 variables:
 \describe{
 \item{year}{A number denoting the year as 2016, since the data is based on
 2016 Census of Population and Housing.}
