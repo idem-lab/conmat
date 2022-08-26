@@ -150,14 +150,16 @@ Contact surveys track the number of contacts between individuals, as well as the
 
 #### age_population_year
 
+DONE
 - The function helps clean up data sets of population data,  similar to `socialmixr::wpp_age()` or any given data set with a structure that has information on, population, location, age or age groups, and year into a format that has information on the upper and lower limit of the age groups. It accepts a data set with variables age, country,year and the corresponding population, as an argument and checks the data type of the variable representing age. If it's numeric, the function proceeds to an additional stage of grouping ages into age groups with 5 year bins. The function uses `check_args_age_population_year()` to separate age groups into its lower & upper limit and to filter the data passed to the desired year and location. 
 
 #### bin_widths
 
+DONE
 -   Internal function that takes in a numeric vector and return the differences between the values in the vector assuming the final value is the same as the penultimate value.
 
 #### check_lga_name & check_state_name
-
+DONE
 -   Function, primarly used internally checks if the LGA/state name exists in Australia and errors if not valid.
 
 
@@ -165,13 +167,13 @@ Contact surveys track the number of contacts between individuals, as well as the
 ### Data
 
 #### abs_age_lga & abs_age_state
-
+DONE
 -   Uses the data sourced from ABS on the state and LGA wise population for different age groups for the year 2020.
 
 -   The function first checks if the LGA/state name exists in Australia and later filters out the given LGA/ State and produces the lower limit of age group and the corresponding population in the region for the year 2020.
 
 #### abs_education_state_2020
-
+DONE
 A data set containing the Australian Bureau of Statistics education data by state for 2020 which was interpolated into 1 year age bins.
 
 
@@ -181,10 +183,11 @@ abs_education_state_2020
 ```
 
 
-> Are we using this dataset in conmat?
+> Are we using this dataset in conmat? Unsure - but we should leave it here
+at the moment
 
 #### data_abs_education_state
-
+DONE
 A data set containing the Australian Bureau of Statistics education data by state for years 2006 to 2020. 
 
 > Use case? example in get_age_population_function
@@ -194,7 +197,7 @@ abs_education_state
 ```
 
 #### abs_employ_age_lga
-
+done
 > Use case? 
 
 A data set containing the Australian Bureau of Statistics employment data by state for the year 2016
@@ -207,7 +210,7 @@ abs_employ_age_lga
 >use case?
 
 #### data_abs_household_lga
-
+DONE
 A data set containing state and LGA wise data from Australian Bureau of Statistics for the year 2016 which has information on the number of people typically in a residence in the region and the number of households associated with those number of residents. This data set is typically used to obtain the household size distributions to compute the per capita household size of a particular region. 
 
 The data frame has the following variables :
@@ -224,31 +227,31 @@ abs_household_lga
 
 
 #### data_abs_lga_education
-
+DONE
 #### data_abs_lga_work
-
+DONE
 #### data_abs_state_age
-
+DONE
 #### data_abs_state_education
-
+DONE
 
 #### data_abs_state_work
-
+DONE
 #### data_eyre_transmission_probabilities
-
+DONE
 #### get_data_abs_age_education
-
+DONE
 #### get_data_abs_age_work
-
+DONE
 
 
 
 #### get_polymod_population
-
+DONE
 -   uses the participant data from the polymod survey as well as the age specific population data from socialmixr r package to return the age specific average population of different countries weighted by the number of participants from those countries who participated in the polymod survey.
 
 #### get_polymod_contact_data
-
+UP TO HERE
 -   uses the contact and participant data on the desired countries from the survey and impute the missing contact ages primarily through either of the three methods such as imputation of contact ages from a uniform distribution or using the average of the ages or through removal of those participants.
 
 -   The contact settings are then classified as "home", "school", "work" and "others" where "others" include locations such as leisure, transport or other places.
