@@ -75,38 +75,19 @@ separate_age_group <- function(data, age_col) {
   result
 }
 
-check_if_only_one_null <- function(x, y){
-  x_null <- is.null(x)
-  y_null <- is.null(y)
-  null_sum <- x_null + y_null
-  no_null <- null_sum == 0
-  one_null <- null_sum == 1
-  both_null <- null_sum == 2
+#' @title Return the widths of bins denoted by a sequence of lower bounds
+#' @description Return the widths of bins denoted by a sequence of lower 
+#'   bounds (assuming the final is the same as the `[penultimate]`).
+#' @param lower_bound lower bound value - a numeric vector
+#' @return vector
+#' @author Nick Golding
+#' @keywords internal
+#' @noRd
+bin_widths <- function(lower_bound) {
   
-  if (no_null){
-    return()
-  } 
-  
-  if (both_null){
-    return()
-  }
-  
-  if (one_null) {
-    msg <- cli::format_error(
-      c(
-        "Both variables need to be specified, only one is",
-        "i" = "{.var x} is {ifelse(is.null(x), 'NULL', x)}",
-        "i" = "{.var y} is {ifelse(is.null(y), 'NULL', y)}",
-        "You are seeing this error message because you need to specify both \\
-        of {.var location_col} & {.var location}, or {.var year_col} & \\
-        {.var year} as either NULL or with values"
-      )
-      
-    )
-    stop(
-      msg,
-      call. = FALSE
-    )
-  }
+  # return the widths of bins denoted by a sequence of lower bounds (assumming
+  # the final is the same as the [penultimate])
+  diffs <- diff(lower_bound)
+  c(diffs, diffs[length(diffs)])
   
 }
