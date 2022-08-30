@@ -436,7 +436,7 @@ s(age_to) +
 ```
 
 #### fit_setting_contacts
-UP TO HERE
+DONE
 -   fit_setting_contacts acts as an extension of fit_single_contact_model
 
 -   fits a gam model for each setting on the survey population data & the setting wise contact data.
@@ -446,7 +446,7 @@ UP TO HERE
 > fit_setting_contacts is used to fit the contact model to the polymod data which includes the setting wise polymod contact data from `get_polymod_setting_data()` and the polymod population data from `get_polymod_population()`. The model is then used to extrapolate to the data on the desired LGA/state using the `predict_setting_contacts()`.
 
 #####  polymod_setting_models
-
+DONE
 For convenience, the list of fitted gam models predicting the number of contacts in each of the four settings, "home","work","school" and "other" using the polymod data is stored in conmat as a data object named `polymod_setting_models`
 
 #### predict_contacts

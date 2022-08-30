@@ -15,6 +15,7 @@ A data object containing a list of fitted gam models
 predicting the number of contacts in each of the four settings which are
 "home","work","school" and "other". For more details on model fitting,
 see \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}. This object has been provided as data to
+avoid recomputing a relatively common type of model for use with \code{conmat}.
 }
 \examples{
 \dontrun{

@@ -7,22 +7,42 @@
 fit_setting_contacts(contact_data_list, population)
 }
 \arguments{
-\item{contact_data_list}{contact_data_list}
+\item{contact_data_list}{A list of dataframes, each containing informatio
+on the setting (home, work, school, other), age_from, age_to,
+the number of contacts, and the number of participants. Example data
+can be retrieved with \code{\link[=get_polymod_setting_data]{get_polymod_setting_data()}}.}
 
-\item{population}{survey_population}
+\item{population}{survey population data, containing columns
+\code{lower.age.limit} and \code{population}. Example data can be retrieved with
+\code{\link[=get_polymod_population]{get_polymod_population()}}.}
 }
 \value{
-list of fitted gam models
+list of fitted gam models - one for each setting provided
 }
 \description{
-Fit a contact model to a survey poulation
+fits a gam model for each setting on the survey population data & the
+setting wise contact data. The underlying method is described in more
+detail in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}. The models can be fit in parallel,
+see the examples.
 }
 \examples{
-# don't run as it takes too long to fit
+# These aren't being  run as they take too long to fit
 \dontrun{
 contact_model <- fit_setting_contacts(
   contact_data_list = get_polymod_setting_data(), 
   population = get_polymod_population()
+)
+
+# can fit the model in parallel
+library(future)
+plan(multisession, workers = 4)
+
+polymod_setting_data <- get_polymod_setting_data()
+polymod_population <- get_polymod_population()
+
+contact_model <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  population = polymod_population
 )
 }
 }
