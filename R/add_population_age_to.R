@@ -1,16 +1,29 @@
 #' Add the population distribution for contact ages.
-#'
-#' If 'polymod' then use the participant-weighted average of polymod
-#' country/year distributions
-#' @param contact_data contact data
-#' @param population Default: get_polymod_population()
+#' 
+#' Adds the population distribution of contact ages. Requires a column called 
+#'   "age_to", representing the contact age - the age of the person who had 
+#'   contact. It creates a column, `pop_age_to`. The `population` argument 
+#'   defaults to [get_polymod_population()], but can be any data frame with 
+#'   columns, `lower.age.limit`, and `population`. If population is 'polymod' 
+#'   then use the participant-weighted average of POLYMOD country/year 
+#'   distributions. It adds the population via interpolation, using 
+#'   [get_population_function()] to create a function that generates population
+#'   from ages.
+#' 
+#' @param contact_data contact data containing columns `age_to` and `age_from`
+#' @param population Defaults to [get_polymod_population()], but can be any 
+#'   data frame with columns, `lower.age.limit`, and `population`.
 #' @return data frame
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
+#' age_min <- 10
+#' age_max <- 15
+#' all_ages <- age_min:age_max
+#' library(tidyr)
+#' example_df <- expand_grid(
+#'    age_from = all_ages,
+#'    age_to = all_ages,
+#'    )
+#' add_population_age_to(example_df)
 #' @export
 add_population_age_to <- function(contact_data, population = get_polymod_population()) {
 

@@ -7,21 +7,33 @@
 add_population_age_to(contact_data, population = get_polymod_population())
 }
 \arguments{
-\item{contact_data}{contact data}
+\item{contact_data}{contact data containing columns \code{age_to} and \code{age_from}}
 
-\item{population}{Default: get_polymod_population()}
+\item{population}{Defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but can be any
+data frame with columns, \code{lower.age.limit}, and \code{population}.}
 }
 \value{
 data frame
 }
 \description{
-If 'polymod' then use the participant-weighted average of polymod
-country/year distributions
+Adds the population distribution of contact ages. Requires a column called
+"age_to", representing the contact age - the age of the person who had
+contact. It creates a column, \code{pop_age_to}. The \code{population} argument
+defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but can be any data frame with
+columns, \code{lower.age.limit}, and \code{population}. If population is 'polymod'
+then use the participant-weighted average of POLYMOD country/year
+distributions. It adds the population via interpolation, using
+\code{\link[=get_population_function]{get_population_function()}} to create a function that generates population
+from ages.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+age_min <- 10
+age_max <- 15
+all_ages <- age_min:age_max
+library(tidyr)
+example_df <- expand_grid(
+   age_from = all_ages,
+   age_to = all_ages,
+   )
+add_population_age_to(example_df)
 }

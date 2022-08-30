@@ -1,13 +1,15 @@
 #' Get polymod setting data
+#' 
+#' `get_polymod_setting_data()` acts as an extension of 
+#'   `get_polymod_contact_data()`, and extracts the setting wise contact data 
+#'   on the desired country, as a list.
 
 #' @param countries countries to extract data from
-#' @return polymod data
+#' @return A list of data frames, of the polymod data. One list per setting: 
+#'   "home", "work", "school", and "other".
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
+#' get_polymod_setting_data()
+#' get_polymod_setting_data("Belgium")
 #' @export
 get_polymod_setting_data <- function(countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands", 
                                                    "Poland", "United Kingdom")) {

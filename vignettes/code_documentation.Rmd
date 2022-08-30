@@ -251,7 +251,7 @@ DONE
 -   uses the participant data from the polymod survey as well as the age specific population data from socialmixr r package to return the age specific average population of different countries weighted by the number of participants from those countries who participated in the polymod survey.
 
 #### get_polymod_contact_data
-UP TO HERE
+DONE
 -   uses the contact and participant data on the desired countries from the survey and impute the missing contact ages primarily through either of the three methods such as imputation of contact ages from a uniform distribution or using the average of the ages or through removal of those participants.
 
 -   The contact settings are then classified as "home", "school", "work" and "others" where "others" include locations such as leisure, transport or other places.
@@ -259,7 +259,7 @@ UP TO HERE
 -   The participants with missing contact ages or settings are removed and the number of contacts per participant and contact age from ages 0-100 are obtained for various countries and settings.
 
 #### get_polymod_setting_data
-
+DONE
 -   get_polymod_setting_data acts as an extension of **get_polymod_contact_data** and extracts the setting wise contact data on the desired country as a list.
 
 ### Other Important stuff
@@ -271,10 +271,6 @@ UP TO HERE
 -   Uses the polymod per capita household size to adjust the number of household contact in the given list of 4 setting-specific synthetic contact matrices, to match the average household size in that region from the Australian Bureau of Statistics data.
 
 -   To do so, the function calculates the ratio between expected number of other household members for the desired region from ABS data (obtained by subtracting 1 from the household size), and the average per capita household size obtained from the polymod data which was used to train the model. This ratio is then multiplied to the "home" setting which then is reflected on to "all" settings, thereby forming a new set of setting-specific synthetic contact matrices.
-
-    > **Why is per-capita household size used?**
-    >
-    > We use Per-capita household size instead of mean household size in order to upweight larger household size, we need a household size that is averaged over all the people in the population rather than the mean household size which would be skewed towards extreme household sizes. We use per-capita household size as it is a more accurate reflection of the average number of household members a person in the population can have contact with. \#### get_household_size_distribution
 
 -   The function uses \`abs_household_data\`, lga & state level data on the household size (1 to 8 ) and the number of households with that particular household size, obtained from Australian Bureau of Statistics.
 
@@ -295,8 +291,10 @@ hh_size_fairfield
 get_household_size_distribution(state = "NSW")
 ```
 
-> Note : Why group by state inside the switch() ? - I think we can leave this as is. \#### per_capita_household_size
+> Note : Why group by state inside the switch() ? - I think we can leave this as is. 
 
+### per_capita_household_size
+DONE
 -   Uses the household size distributions on relevant state or LGA using the \`get_household_size_distribution()\` which has information on the number of people in the region with household sizes from 1 to 8 - e.g. we can use the household size distribution for Fairfield from before:
 
 ```{r}
@@ -318,7 +316,7 @@ NOTE - check this: This household size per capita information can then be used t
 ### Model fitting
 
 #### get_age_population_function
-
+DONE
 > Returns an interpolating function to get populations in 1y age increments. - The purpose of the function is to return a function that takes in a numeric vector and returns the interpolated population corresponding to the ages passed. For example, you can pass in an example population with the following structure - with a lower.age.limit and population column.
 
 ```{r}
@@ -359,7 +357,7 @@ sum(age_population_function(age = 0:4))
 -   The final population is then linearly extrapolated over years past the upper bound from the data. For ages above the maximum age from data, the population is calculated as a weighted population of the maximum age that depends on the years past the upper bound. Older ages would have lower weights, therefore lower population.
 
 #### add_modelling_features
-
+DONE
 > Features like population distribution of contact ages, school work participation as well as the offset is added on to the data using this function - The function takes the contact data which has information on the participants' age, contact ages, number of participants in that age group as well as the number of contacts the pair of individuals in the particular age group have. For example, below shown is the contact data in the setting "home"
 
 ```{r}
@@ -370,19 +368,19 @@ polymod_contact_data$home
 -   The modelling features like the population distribution of contact ages, fraction of population in each age group that attend school/work as well as the offset according to the settings are added on to the contact data through three internal functions shown below.
 
 ##### add_population_age_to
-
+DONE
 > use interpolated population of "age_to" (contact age) & get the relative population grouped by "age_from" or participant age. - Function uses the `get_population_function()` to add the interpolated population for different contact ages based on the population data on the region provided, through which the population distribution of contact ages is obtained.
 
 ##### add_school_work_participation
-
+DONE
 -   This function adds new variables for:
     -   school & work attending fraction for contact & participant ages
     -   probability that a person of the other age goes to the same work/school
     -   probability that a person of the other age would be in the same school year
     -   weighted combination of contact population age distribution & school year probability so that if the contact is in the same school year, the weight is 1, and otherwise it is the population age fraction. This can be used as an offset, so that population age distribution can be used outside the classroom, but does not affect classroom contacts (which due to cohorting and regularised class sizes are unlikely to depend on the population age distribution).
 
-> more explanation \##### add_offset
-
+##### add_offset
+DONE
 -   Function defines the offset variable for the model to be fitted in \`fit_single_contact_model()\`.
 
 -   Sets separate offset for school setting when compared to the other settings such as home, work and other.
@@ -399,7 +397,9 @@ offset_variable <- switch(
   )
 ```
 
-> why double offsets? : The offsets get added together when the model first fit. In addition, the setting specific offset from `offset_variable`, which is included in the GAM model as `... + offset(log_contactable_population)` is used in prediction, whereas the other offset, included as an argument in the GAM as `offset = log(participants)` is only included when the model is initially created. \#### fit_single_contact_model
+> why double offsets? : The offsets get added together when the model first fit. In addition, the setting specific offset from `offset_variable`, which is included in the GAM model as `... + offset(log_contactable_population)` is used in prediction, whereas the other offset, included as an argument in the GAM as `offset = log(participants)` is only included when the model is initially created. 
+
+#### fit_single_contact_model
 
 -   This is the workhorse of the conmat R package. It predicts the contact rate between all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, and so on), for a specified setting, with specific terms being added for given settings.
 -   The model fit is a Generalised Additive Model (GAM). To help account for assortativity with age, where people of similar ages have more contact with each other, we include predictors `age_from`, and `age_to`. To account for intergenerational contact patterns, where parents and grandparents will interact with their children and grand children, we include a term that is the absolute difference of age_from and age_to. We also include the interaction of intergenerational contact patterns with contacts from one age with the term that is the absolute difference of age_from and age_to, and age_from. These terms are fit with a smoothing function. Specifically, the relevant code looks like this:

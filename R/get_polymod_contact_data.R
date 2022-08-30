@@ -1,17 +1,41 @@
-#' Format polymod data and filter contacts to certain settings
+#' @title Format POLYMOD data and filter contacts to certain settings
+#' 
+#' @description Provides contact and participant POLYMOD data from selected
+#'   countries. It impute missing contact ages via one of three methods: 
+#'   1) imputing contact ages from a random uniform distribution from the range
+#'   of ages. 2) using the average of the ages, 3) removal of those 
+#'   participants. The contact  settings are then classified as "home", 
+#'   "school", "work" and "others", where "others" include locations such as
+#'   leisure, transport or other places. The participants with missing contact 
+#'   ages or settings are removed, and the number of contacts per participant 
+#'   and contact age from ages 0-100 are obtained for various countries and
+#'   settings.
 #'
-#' @param setting Default: c("all", "home", "work", "school", "other")
-#' @param countries countries to extract data from
-#' @param ages Default: 0:100
-#' @param contact_age_imputation Default: c("sample", "mean", "remove_participant")
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @param setting Which setting to extract data from. Default is all settings.
+#'    Options are: "all", "home", "work", "school", and "other".
+#' @param countries countries to extract data from. Default is all countries 
+#'   from this list: "Belgium", "Finland", "Germany", "Italy", "Luxembourg",
+#'   "Netherlands", "Poland", and "United Kingdom".
+#' @param ages Which ages to return. Default is ages 0 to 100.
+#' @param contact_age_imputation How to handle age when it is missing. Choose 
+#'   one of three methods: 1) "sample", which imputes contact ages from a 
+#'   random uniform distribution from the range of ages. 2) "mean", use the
+#'   average of the ages, 3) "remove_participant" removal of those 
+#'   participants. Default is "sample".
+#' @return A data.frame with columns: "setting" (all, work, home, etc. as
+#'   specified in "setting" argument); "age_from" - the age of the participant; 
+#'   "age_to" - the age of the person the participant had contact with; 
+#'   "contacts" the number of contacts that person had; "participants" the
+#'   number of participants in that row.
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
+#' get_polymod_contact_data()
+#' get_polymod_contact_data(setting = "home")
+#' get_polymod_contact_data(countries = "Belgium")
+#' get_polymod_contact_data(countries = c("Belgium", "Italy"))
+#' get_polymod_contact_data(ages = 0:50)
+#' get_polymod_contact_data(contact_age_imputation = "sample")
+#' get_polymod_contact_data(contact_age_imputation = "mean")
+#' get_polymod_contact_data(contact_age_imputation = "remove_participant")
 #' @export
 get_polymod_contact_data <- function(
   setting = c("all", "home", "work", "school", "other"),
