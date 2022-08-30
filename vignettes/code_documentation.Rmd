@@ -400,7 +400,7 @@ offset_variable <- switch(
 > why double offsets? : The offsets get added together when the model first fit. In addition, the setting specific offset from `offset_variable`, which is included in the GAM model as `... + offset(log_contactable_population)` is used in prediction, whereas the other offset, included as an argument in the GAM as `offset = log(participants)` is only included when the model is initially created. 
 
 #### fit_single_contact_model
-
+DONE
 -   This is the workhorse of the conmat R package. It predicts the contact rate between all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, and so on), for a specified setting, with specific terms being added for given settings.
 -   The model fit is a Generalised Additive Model (GAM). To help account for assortativity with age, where people of similar ages have more contact with each other, we include predictors `age_from`, and `age_to`. To account for intergenerational contact patterns, where parents and grandparents will interact with their children and grand children, we include a term that is the absolute difference of age_from and age_to. We also include the interaction of intergenerational contact patterns with contacts from one age with the term that is the absolute difference of age_from and age_to, and age_from. These terms are fit with a smoothing function. Specifically, the relevant code looks like this:
 
@@ -436,7 +436,7 @@ s(age_to) +
 ```
 
 #### fit_setting_contacts
-
+UP TO HERE
 -   fit_setting_contacts acts as an extension of fit_single_contact_model
 
 -   fits a gam model for each setting on the survey population data & the setting wise contact data.

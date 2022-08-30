@@ -1,15 +1,81 @@
-#' fit a single GAM contact model to a dataset
-#'
-#' @param contact_data PARAM_DESCRIPTION
-#' @param population PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @title Fit a single GAM contact model to a dataset
+#' 
+#' @description This is the workhorse of the `conmat` package, and is typically
+#'   used inside [fit_setting_contacts()]. It predicts the contact rate between 
+#'   all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, 
+#'   and so on), for a specified setting, with specific terms being added for 
+#'   given settings. See "details" for further information.
+#'   
+#' @details The model fit is a Generalised Additive Model (GAM). To help 
+#'   account for assortativity with age, where people of similar ages have 
+#'   more contact with each other, we include predictors `age_from`, and 
+#'   `age_to`. To account for intergenerational contact patterns, where 
+#'   parents and grandparents will interact with their children and grand 
+#'   children, we include a term that is the absolute difference of age_from 
+#'   and age_to. We also include the interaction of intergenerational contact 
+#'   patterns with contacts from one age with the term that is the absolute 
+#'   difference of age_from and age_to, and age_from. These terms are fit with 
+#'   a smoothing function. Specifically, the relevant code looks like this:
+#'   
+#'   ``` r
+#'   s(age_to) + 
+#'     s(age_from) + 
+#'     s(abs(age_from - age_to)) + 
+#'     s(abs(age_from - age_to), age_from)
+#'   ```
+#'   
+#'   We also include predictors for the probability of attending school, and 
+#'   attending work. These are computed as the probability that a person goes 
+#'   to the same school/work, proportional to the increase in contacts due to
+#'   attendance. These terms are calculated from estimated proportion of 
+#'   people in age groups attending school and work. See 
+#'   [add_modelling_features()] for more details.
+#'   
+#'   Finally, we include two offset terms so that we estimate the contact rate, 
+#'   that is the contacts per capita, instead of the number of contacts. These
+#'   offset terms are `log(contactable_population)`, and 
+#'   `log(contactable_population_school)` when the model is fit to a school 
+#'   setting. The contactable population is estimated as the interpolated 
+#'   1 year ages from the data. For schools this is the contactable population
+#'   weighted by the proportion of the population attending school.
+#'   
+#'   This leaves us with a model that looks like so:
+#'   
+#'   ``` r
+#'   mgcv::bam(
+#'     formula = contacts ~
+#'       s(age_to) +
+#'       s(age_from) +
+#'       s(abs(age_from - age_to)) +
+#'       s(abs(age_from - age_to), age_from) +
+#'       school_probability +
+#'       work_probability + 
+#'       offset(log_contactable_population) +
+#'       # or for school settings
+#'       # offset(log_contactable_population_school) 
+#'       family = stats::poisson,
+#'     offset = log(participants),
+#'     data = population_data
+#'   )
+#'   ```
+#' @param contact_data dataset with columns `age_to`, `age_from`, `setting`,
+#'  `contacts`, and `participants`. See [get_polymod_contact_data()] for
+#'   an example dataset - or the dataset in examples below.
+#' @param population population data, with columns `lower.age.limit` and 
+#'   `population`. See [get_polymod_population()] for an example.
+#' @return single model
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
+#' age_min <- 10
+#' age_max <- 15
+#' all_ages <- age_min:age_max
+#' library(tidyr)
+#' example_contact <- get_polymod_contact_data(setting = "home")
+#' example_contact
+#' example_population <- get_polymod_population()
+#' my_mod <- fit_single_contact_model(
+#'   contact_data = example_contact,
+#'   population = example_population
+#' )
 #' @export
 fit_single_contact_model <- function(contact_data, population) {
 

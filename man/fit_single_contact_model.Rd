@@ -2,28 +2,90 @@
 % Please edit documentation in R/fit_single_contact_model.R
 \name{fit_single_contact_model}
 \alias{fit_single_contact_model}
-\title{fit a single GAM contact model to a dataset}
+\title{Fit a single GAM contact model to a dataset}
 \usage{
 fit_single_contact_model(contact_data, population)
 }
 \arguments{
-\item{contact_data}{PARAM_DESCRIPTION}
+\item{contact_data}{dataset with columns \code{age_to}, \code{age_from}, \code{setting},
+\code{contacts}, and \code{participants}. See \code{\link[=get_polymod_contact_data]{get_polymod_contact_data()}} for
+an example dataset - or the dataset in examples below.}
 
-\item{population}{PARAM_DESCRIPTION}
+\item{population}{population data, with columns \code{lower.age.limit} and
+\code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for an example.}
 }
 \value{
-OUTPUT_DESCRIPTION
+single model
 }
 \description{
-fit a single GAM contact model to a dataset
+This is the workhorse of the \code{conmat} package, and is typically
+used inside \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}. It predicts the contact rate between
+all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3,
+and so on), for a specified setting, with specific terms being added for
+given settings. See "details" for further information.
 }
 \details{
-DETAILS
+The model fit is a Generalised Additive Model (GAM). To help
+account for assortativity with age, where people of similar ages have
+more contact with each other, we include predictors \code{age_from}, and
+\code{age_to}. To account for intergenerational contact patterns, where
+parents and grandparents will interact with their children and grand
+children, we include a term that is the absolute difference of age_from
+and age_to. We also include the interaction of intergenerational contact
+patterns with contacts from one age with the term that is the absolute
+difference of age_from and age_to, and age_from. These terms are fit with
+a smoothing function. Specifically, the relevant code looks like this:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{s(age_to) + 
+  s(age_from) + 
+  s(abs(age_from - age_to)) + 
+  s(abs(age_from - age_to), age_from)
+}\if{html}{\out{</div>}}
+
+We also include predictors for the probability of attending school, and
+attending work. These are computed as the probability that a person goes
+to the same school/work, proportional to the increase in contacts due to
+attendance. These terms are calculated from estimated proportion of
+people in age groups attending school and work. See
+\code{\link[=add_modelling_features]{add_modelling_features()}} for more details.
+
+Finally, we include two offset terms so that we estimate the contact rate,
+that is the contacts per capita, instead of the number of contacts. These
+offset terms are \code{log(contactable_population)}, and
+\code{log(contactable_population_school)} when the model is fit to a school
+setting. The contactable population is estimated as the interpolated
+1 year ages from the data. For schools this is the contactable population
+weighted by the proportion of the population attending school.
+
+This leaves us with a model that looks like so:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
+  formula = contacts ~
+    s(age_to) +
+    s(age_from) +
+    s(abs(age_from - age_to)) +
+    s(abs(age_from - age_to), age_from) +
+    school_probability +
+    work_probability + 
+    offset(log_contactable_population) +
+    # or for school settings
+    # offset(log_contactable_population_school) 
+    family = stats::poisson,
+  offset = log(participants),
+  data = population_data
+)
+}\if{html}{\out{</div>}}
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+age_min <- 10
+age_max <- 15
+all_ages <- age_min:age_max
+library(tidyr)
+example_contact <- get_polymod_contact_data(setting = "home")
+example_contact
+example_population <- get_polymod_population()
+my_mod <- fit_single_contact_model(
+  contact_data = example_contact,
+  population = example_population
+)
 }
