@@ -450,7 +450,7 @@ DONE
 For convenience, the list of fitted gam models predicting the number of contacts in each of the four settings, "home","work","school" and "other" using the polymod data is stored in conmat as a data object named `polymod_setting_models`
 
 #### predict_contacts
-
+DONE
 > `predict_contacts()` predicts the contact rate between two age populations, given some setting-specific model of contact rate and population age structure. It takes three arguments: 1) model: A single fitted model of contact rate (say from `fit_single_contact_model()`), 2) population: a dataframe of age population information, with columns indicating some lower age limit, and population, and 3), age breaks - the ages to predict to. By default, the age breaks are O-75 in 5 year groups.
 
 As an example, if we have a model of contact rate at home, and age population structure for an LGA, say, Fairfield, in NSW:
@@ -484,7 +484,7 @@ Implementation details
 -   Contact rates are predicted yearly between the age groups, using `predict_contact_1y()`, then aggregates these predicted contacts using `aggregate_predicted_contacts()`, which aggregates the predictions back to the same resolution as the data, appropriately weighting the contact rate by the population.
 
 ##### predict_contacts_1y
-
+DONE
 > Primary purpose of `predict_contacts_1y` is to use an already fitted model of contact rate and predict the estiamted contact rate and standard error for all combinations of the provided ages in 1 year increments. So if the minimum age is 5, and the maximum age is 10, then it will provide the estimated contact rate for all age combinations: 5 and 5, 5 and 6 ... 5 and 10, and so on.
 
 - This function is used internally within `predict_contacts()`.  
@@ -510,7 +510,7 @@ predict_contacts_1y(
 ```
 
 ##### aggregate_predicted_contacts
-
+DONE
 > Obtains the population weighted average contacts a particular age group has with another age group at a particular setting. These age groups are decided according to the age breaks passed through the function as arguments.
 
 -   Used internally within `predict_contacts()`.
@@ -525,7 +525,7 @@ fairfield_school_contacts
 ```
 
 #### predict_setting_contacts
-
+DONE
 -   Predicts contact rates for all combinations of age groups specified by the desired age breaks, in a desired population across settings such as "home","school", "work", "other" and the combination of all settings.
 
 -   These predictions are then converted to matrix format using `predictions_to_matrix()` to produce contact matrices for all age groups combinations across different settings or location of contact.
@@ -533,7 +533,7 @@ fairfield_school_contacts
 -   Upon obtaining the contact matrices, the household contact matrix is consequently adjusted by the per capita household size of the region for which the predictions are made if provided , in order to in order to upweight larger household size. See `adjust_household_contact_matrix()` for more info.
 
 ##### predictions_to_matrix
-
+UP TO HERE
 -   Helper function to convert predictions of contact rates in data frames to matrix format with the survey participant age groups as columns and contact age groups as rows.
 
 ##### matrix_to_predictions
