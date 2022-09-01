@@ -533,61 +533,12 @@ DONE
 -   Upon obtaining the contact matrices, the household contact matrix is consequently adjusted by the per capita household size of the region for which the predictions are made if provided , in order to in order to upweight larger household size. See `adjust_household_contact_matrix()` for more info.
 
 ##### predictions_to_matrix
-UP TO HERE
+DONE
 -   Helper function to convert predictions of contact rates in data frames to matrix format with the survey participant age groups as columns and contact age groups as rows.
 
 ##### matrix_to_predictions
-
+DONE
 -   Helper function to convert contact matrices to data frame format.
-
-##### Example pipeline
-
-Let's predict the average contact rates for ages 0 to Inf in 5 year age breaks in all settings for the NSW LGA, Fairfield
-
--   Extract the polymod survey population & contact data
-
-```{r}
-polymod_contact_data <- get_polymod_setting_data()
-polymod_survey_data <- get_polymod_population()
-```
-
--   Fit the contact model to the polymod data for all settings.
-
-```{r}
-set.seed(1100)
- setting_models <- fit_setting_contacts(
-  contact_data_list = polymod_contact_data,
-   population = polymod_survey_data
- )
-```
-
--   Obtain the age wise population of Fairfield.
-
-```{r}
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
-
-```
-
--   Obtain the per capita household size of Fairfield
-
-```{r}
-
-fairfield_hh_size <- get_per_capita_household_size(lga = "Fairfield (C)")
-fairfield_hh_size
-```
-
--   Extrapolate the fitted model to the Fairfield population data. Predict the contact ages for all combinations of ages in 5 year ages breaks from 0 to 85-Inf.
-
-```{r}
-
-synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
-  population = fairfield_age_pop,
-  contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf),
-  per_capita_household_size = fairfield_hh_size
-)
-```
 
 #### extrapolate_polymod
 
