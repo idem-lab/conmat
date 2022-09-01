@@ -204,3 +204,57 @@ bind_rows(
   theme_minimal()
 ```
 
+## Extra code
+
+This will get cleaned up when I re-write the vignettes for this package
+
+
+```{r example}
+# build synthetic age-structured contact matrices with GAMs
+# analysis of polymod data
+
+# set age breaks
+age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
+age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
+
+# fit a single overall contact model to polymod
+m_all <- fit_single_contact_model(
+  contact_data = get_polymod_contact_data("all"),
+  population = get_polymod_population()
+)
+
+m_all
+```
+
+
+```{r syn-all-5y}
+# predict contacts at 1y and 5y resolutions for inspection
+synthetic_all_5y <- predict_contacts(
+  model = m_all, 
+  population = get_polymod_population(),
+  age_breaks = age_breaks_5y
+) %>%
+  predictions_to_matrix()
+
+synthetic_all_5y
+```
+
+
+```{r matrix-plot}
+set.seed(2021-09-08)
+# predict contacts at 1y and 5y resolutions for inspection
+synthetic_all_5y <- predict_contacts(
+  model = m_all, 
+  population = get_polymod_population(),
+  age_breaks = age_breaks_5y
+) %>%
+  predictions_to_matrix()
+
+synthetic_all_5y
+
+library(ggplot2)
+plot_matrix(synthetic_all_5y) +
+  ggtitle("synthetic all at once")
+```
+
+
