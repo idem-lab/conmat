@@ -1,8 +1,31 @@
-#' Get next generation contact matrices
-#' @param state_name target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
-#' @param lga_name target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
-#'   [abs_lga_lookup()] for list of lga names
-#' @param age_breaks vector depicting age values with the highest age depicted as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
+#' @title Calculate next generation contact matrices
+#' 
+#' @description Once infected, a person can transmit an infectious disease to 
+#'   another, creating generations of infected individuals. We can define a 
+#'   matrix describing the number of newly infected individuals in given 
+#'   categories, such as age, for consecutive generations. This matrix is 
+#'   called a "next generation matrix" (NGM). 
+#'   
+#' @details The NGM can be used to calculate the expected number of secondary 
+#'   infections in a given age group. Given certain age breaks, we compute the 
+#'   unscaled next generation matrices for that location across different 
+#'   settings & age groups using the contact rates extrapolated from POLYMOD 
+#'   survey data on the specified location, adjusted by the per capita 
+#'   household size and the setting-specific relative per-contact transmission 
+#'   probability matrices for the same age groups. These NGMs are then scaled 
+#'   according to a target reproduction number (which is provided as an 
+#'   argument) using the ratio of the desired R0 and the R0 of the NGM 
+#'   for the combination of all settings. The R0 of the combination of all 
+#'   settings is obtained by calculating the unique, positive eigen value of 
+#'   the combination NGM. This ratio is then used to scale all the setting 
+#'   specific NGMs. 
+#' 
+#' @param state_name target Australian state name in abbreviated form, such 
+#'   as "QLD", "NSW", or "TAS"
+#' @param lga_name target Australian local government area (LGA) name, such 
+#'   as "Fairfield (C)".  See [abs_lga_lookup()] for list of lga names.
+#' @param age_breaks vector depicting age values with the highest age depicted 
+#'   as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
 #' @param R_target target reproduction number
 #'
 #' @export
@@ -20,7 +43,6 @@
 #'   R_target = 1.5
 #' )
 #' }
-
 generate_ngm <- function(state_name = NULL,
                          lga_name = NULL,
                          age_breaks,

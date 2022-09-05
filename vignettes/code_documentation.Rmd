@@ -541,19 +541,19 @@ DONE
 -   Helper function to convert contact matrices to data frame format.
 
 #### extrapolate_polymod
-
+DONE
 > Allows to fit all-of-polymod model and extrapolate to a given population and age breaks with optional adjustment to the household contact matrix.
 
 -   Uses `estimate_setting_contacts()` to fit a contact model on the data from polymod and later extrapolate on to a desired population.
 
 ##### estimate_setting_contacts
-
+DONE
 -   Utilises the inbuilt `fit_setting_contacts()` & polymod survey contact & population data to fit a contact model on the polymod data and extrapolate the fitted model to a desired population and age breaks using the `predict_setting_contacts()`. The predicted household contact matrix can also be adjusted optionally by the region's per-capita household size.
 
 ### Plotting
 
 #### plot_matrix
-
+DONE
 > The predicted contact rates in the form of contact matrix are best analysed through visualisations. This enables to undertsand the underlying patterns and relationships between age groups in different settings of contact such as workplace, home, school and others.
 
 Conmat uses `plot_matrix()` to visualise these contact matrices. The function accepts contact matrix as an argument, converts it to a data frame format and subsequently plots it with the x and y axes being different age groups.
@@ -566,7 +566,7 @@ plot_matrix(synthetic_settings_5y_fairfield_hh$home)+
 ```
 
 #### plot_setting_matrices
-
+DONE
 plot_setting_matrices acts as an extension of plot_matrix where the contact matrix for each setting is visualized as shown below,
 
 ```{r}
@@ -577,13 +577,13 @@ plot_setting_matrices(
 ```
 
 ### Transmission Matrices
-
+( DONE moved to "example pipeline" vignette)
 The initial phase of COVID-19 pandemic saw a significant age dependence in the distribution of confirmed cases with fewer confirmed cases among children. This might have been a result of younger ages being less susceptible to infection and/or less likely to exhibit clinical signs when infected [ [Davies et al](https://www.nature.com/articles/s41591-020-0962-9)] . A population's clinical fraction and age-varying susceptibility to infection both profoundly influence the likelihood that an infectious agent would spread there. This likelihood that an infectious agent would spread from an infected source to a new susceptible host and infect the host is known as transmission probability.
 
 The age and setting specific relative per-contact transmission probability matrices when combined with contact matrices could be used to produce the setting-specific relative next generation matrices (NGMs) which is used to obtain the distribution of numbers of new cases in each generation of infection from any arbitrary initial number of introduced infections. Conmat creates these age and setting specific relative per-contact transmission probability matrices through `get_setting_transmission_matrices()` by making use of clinical fraction and relative susceptibility parameters from Davies et al available through `davies_age_extended`. 
 
 ##### davies_age_extended
-
+DONE
 The clinical fraction and relative susceptibility parameters from Davies et al are presented in conmat through the dataset named \`davies_age_extended\` which has the following variables ,
 
 -  `age` : Ages from 0-101
@@ -595,7 +595,7 @@ The clinical fraction and relative susceptibility parameters from Davies et al a
 -   **`davies_updated` ? : Re-estimated parameter of the susceptibility profile for under-16s that is estimated in a similar way but to the age-distribution of infections in England from the UK ONS prevalence survey rather than case counts which may undercount children ?** 
 
 #### get_setting_transmission_matrices
-
+DONE
 > Given some user specified age breaks, `get_setting_transmission_matrices` returns a named list of matrices containing age-specific relative per-contact transmission probability matrices for each of 4 settings: home, school, work, and other. It accounts for vaccination, reduced mixing, and reduced transmissibility in work and other settings due to hygiene behaviour. 
 
 It takes three arguments : 
@@ -687,7 +687,7 @@ agg_infectiousness_suscpetibility%>%
 Finally, the dataframe with the setting and age group specific relative per-contact transmission probability is converted to matrix format. 
 
 #### generate_ngm
-
+DONE
 Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. One can define a matrix that conveys the number of newly infected individuals in given categories, such as age, for consecutive generations. This matrix is called a next generation matrix (NGM) (Diekmann et al (2010)).
 
 The next generation matrix can be used to calculate the expected number of secondary infections in a given age group.
@@ -698,7 +698,7 @@ Given certain age breaks and the desired region, conmat computes the unscaled ne
 
 
 #### apply_vaccination
-
+DONE 
 By improving a person's immunity from a disease, vaccination has consistently demonstrated to be one of the most effective strategies in the management and prevention of an infectious disease outbreak. When a sizable section of the population receives vaccinations or when vaccine coverage is sufficient enough, the likelihood that the unvaccinated population will contract the disease is decreased. This helps to slow infectious disease spread as well as lessen its severity. For this reason, it is important to understand how much of a reduction in probability of acquisition (the likelihood that an individual will contract the disease), and probability of transmission (the likelihood that an individual will spread the disease after contracting it), has occurred as an the effect of vaccination, in other words the effect of vaccination on the next generation of infections.
 
 Conmat applies vaccination effects to next generation matrices using the function `apply_vaccination` that leads to reduction of acquisition and transmission in each age group in the next generation matrices. `apply_vaccination` takes two main arguments: (1) the next generation matrices of specified age groups (from `generate_ngm()`), and (2) data containing vaccine coverage, acquisition, and transmission (probabilities?) for each age groups, corresponding to given next generation matrices.

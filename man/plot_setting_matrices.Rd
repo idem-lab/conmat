@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_setting_matrices.R
 \name{plot_setting_matrices}
 \alias{plot_setting_matrices}
-\title{Plot setting matrices using ggplot2}
+\title{Visualise predicted contact matrix for each setting}
 \usage{
 plot_setting_matrices(
   matrices,
@@ -10,20 +10,42 @@ plot_setting_matrices(
 )
 }
 \arguments{
-\item{matrices}{matrix}
+\item{matrices}{A list of square matrices, with row and column names
+indicating the age groups.}
 
-\item{title}{Title to give to plot setting matrices. Default value is: Setting-specific synthetic contact matrices (all polymod data)'}
+\item{title}{Title to give to plot setting matrices. Default value is:
+"Setting-specific synthetic contact matrices (all polymod data)'"}
 }
 \value{
-a ggplot
+ggplot visualisation of contact rates for each setting
 }
 \description{
-Plot setting matrices using ggplot2
+This is an extension of \code{\link[=plot_matrix]{plot_matrix()}}, which visualises the contact
+matrix for each setting. It uses \code{patchwork} to combine all the matrices
+together
 }
 \examples{
 \dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
+
+set.seed(2021-09-24)
+polymod_contact_data <- get_polymod_setting_data()
+polymod_survey_data <- get_polymod_population()
+
+setting_models <- fit_setting_contacts(
+  contact_data_list = polymod_contact_data,
+  population = polymod_survey_data
+)
+
+fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+
+fairfield_age_pop
+
+synthetic_settings_5y_fairfield <- predict_setting_contacts(
+  population = fairfield_age_pop,
+  contact_model = setting_models,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+
+plot_setting_matrix(synthetic_settings_5y_fairfield)
 }
 }

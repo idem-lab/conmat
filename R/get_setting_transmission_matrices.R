@@ -32,13 +32,17 @@
 #' transmission and control of COVID-19 epidemics. Nat Med 26, 1205–1211 (2020).
 #' https://doi.org/10.1038/s41591-020-0962-9
 #'
-#' @param age_breaks vector of age breaks, defaults to `c(seq(0, 80, by = 5),
-#'   Inf)`
+#' @param age_breaks vector of age breaks, defaults to 
+#'   `c(seq(0, 80, by = 5), Inf)`
 #' @param asymptomatic_relative_infectiousness the assumed ratio of onward
-#'   infectiousness between asymptomatic and symptomatic cases
-#' @param susceptibility_estimate which estimate to use for susceptibiloty by
-#'   age - the smoothed original Davies et al estimates, or the set updated to match UK
-#'   under-16 infections (the default)
+#'   infectiousness between asymptomatic and symptomatic cases. This represents 
+#'   the infectiousness of asymptomatic relative to symptomatic. 
+#'   Default value is 0.5, which means the asymptomatic cases are 50% less 
+#'   infectious than symptomatic cases.
+#' @param susceptibility_estimate Which estimate to use for susceptibility by
+#'   age. Either, the smoothed original Davies et al estimates, 
+#'   "davies_original" or, the set updated to match UK under-16 infections
+#'    (the default), "davies_updated".
 #'
 #' @return list of matrices, containing the relative per-contact transmission
 #'   probability for each setting

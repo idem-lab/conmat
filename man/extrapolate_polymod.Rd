@@ -2,7 +2,7 @@
 % Please edit documentation in R/extrapolate_polymod.R
 \name{extrapolate_polymod}
 \alias{extrapolate_polymod}
-\title{fit all-of-polymod model and extrapolate to a given population an age breaks}
+\title{Fit all-of-polymod model and extrapolate to a given population an age breaks}
 \usage{
 extrapolate_polymod(
   population,
@@ -11,9 +11,12 @@ extrapolate_polymod(
 )
 }
 \arguments{
-\item{population}{data set with information on the population of the desired location}
+\item{population}{data set with information on the population of the desired
+location - containing \code{lower.age.limit} and \code{population} columns. See
+\code{get_polymod_population()} for an example of this data.}
 
-\item{age_breaks}{vector depicting age values. Default value is c(seq(0, 75, by = 5), Inf)}
+\item{age_breaks}{vector depicting age values. Default value is
+\code{c(seq(0, 75, by = 5), Inf)}}
 
 \item{per_capita_household_size}{Optional (defaults to NULL). When set, it
 adjusts the household contact matrix by some per capita household size.
@@ -23,14 +26,18 @@ information is provided below in Details. See
 data with a workflow on how to get this number.}
 }
 \value{
-Returns setting-specific and combined contact matrices for the desired ages
+Returns setting-specific and combined contact matrices for the
+desired ages.
 }
 \description{
-fit all-of-polymod model and extrapolate to a given population an age breaks
+Uses \code{\link[=estimate_setting_contacts]{estimate_setting_contacts()}} to fit a contact model on the data from
+polymod and later extrapolate on to a desired population.
 }
 \examples{
 \dontrun{
 polymod_population <- get_polymod_population()
-synthetic_settings_5y_polymod <- extrapolate_polymod(population = polymod_population)
+synthetic_settings_5y_polymod <- extrapolate_polymod(
+  population = polymod_population
+)
 }
 }
