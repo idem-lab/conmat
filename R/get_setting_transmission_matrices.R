@@ -95,6 +95,12 @@ get_setting_transmission_matrices <- function(
   susceptibility_estimate = c("davies_updated", "davies_original")
   ) {
 
+  
+  if(!dplyr::last(is.infinite(age_breaks)))
+  {
+    age_breaks <- c(age_breaks, Inf)
+  }
+  
   # which parameter estimates to use for susceptibility by age 
   susceptibility_estimate <- rlang::arg_match(susceptibility_estimate)
   
@@ -108,7 +114,8 @@ get_setting_transmission_matrices <- function(
   
   # load the age-dependent susceptibility and clinical fraction parameters, and
   # convert into infectiousness and susceptibility
-  age_effects <- davies_age_extended %>%
+  age_effects <- davies_age_extended%>%
+    dplyr::filter(age<=max(age_breaks))%>%
     dplyr::mutate(
       infectiousness = clinical_fraction + (1 - clinical_fraction) *
         asymptomatic_relative_infectiousness
