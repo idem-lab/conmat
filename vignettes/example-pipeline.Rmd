@@ -25,18 +25,102 @@ This vignette outlines a basic workflow of:
 * Applying Vaccination Rates
 * Comparing R0 before and post vaccination rates
 
-## Create a new synthetic matrix by extrapolating from POLYMOD data to a new age distribution
+## Create a new synthetic matrix from all POLYMOD data
 
-We can do this by extrapolating 
+We can create a synthetic matrix from all POLYMOD data by using the `extrapolate_polymod` function. First, let's extract an age distribution from the ABS data.
 
-```{r}
+```{r fairfield}
 fairfield_population <- abs_age_lga("Fairfield (C)")
+fairfield_population
 ```
 
+The key features of this age distribution are the columns, `lower.age.limit`, and `population`.
+
+We then extrapolate this using the full POLYMOD data.
+
+```{r extrapolate-fairfield}
+synthetic_fairfield_5y <- extrapolate_polymod(
+  population = fairfield_population
+)
+```
+
+By full POLYMOD data, we mean these data:
+
+```{r polymod-setting-population}
+polymod_setting <- get_polymod_setting_data()
+
+polymod_population <- get_polymod_population()
+
+polymod_setting
+polymod_population
+```
+
+The `extrapolate_polymod()` function does the following:
+
+* Fits a model of the contact rate to the full POLYMOD data above
+* Predicts it to the provided fairfield population data
+
+It also has options to predict to specified age brackets, defaulting to 5 year age groups up to 75, then 75 and older.
+
+This object, `synthetic_fairfield_5y`, contains a matrix of predictions for each of the settings, home, work, school, other, and all settings.
+
+```{r}
+str(synthetic_fairfield_5y)
+```
 
 ## Generating a Next Generation Matrix
 
+Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. We can define a matrix describing the number of newly infected individuals in given categories, such as age, for consecutive generations. This matrix is called a "next generation matrix" (NGM).
+
+We can generate an NGM for Australian specific data like so (in a future release we will change this to work for any predicted population)
+
+```{r ngm-fairfield}
+ngm_fairfield <- generate_ngm(
+  lga_name = "Fairfield (C)",
+  age_breaks = c(seq(0, 85, by = 5), Inf),
+  R_target = 1.5
+)
+```
+
+The output of this is a matrix for each of the settings, where each value is the number of newly infected individuals
+
+```{r}
+ngm_fairfield$home
+str(ngm_fairfield)
+```
+
 ## Applying Vaccination Rates
+
+Vaccination improves a person's immunity from a disease. When a
+sizable section of the population receives vaccinations or when vaccine
+coverage is sufficient enough, the likelihood that the unvaccinated
+population will contract the disease is decreased. This helps to slow
+infectious disease spread as well as lessen its severity. For this reason,
+it is important to understand how much of a reduction in probability of
+acquisition (the likelihood that an individual will contract the disease),
+and probability of transmission (the likelihood that an individual will
+spread the disease after contracting it), has occurred as an the effect of
+vaccination, in other words the effect of vaccination on the next
+generation of infections.
+
+We can use `apply_vaccination()` to return the percentage reduction in acquisition and
+transmission in each age group. It does this by taking the outer product
+of these reductions in acquisition and transmission by age group, creating
+a transmission reduction matrix. The next generation matrices with the
+vaccination effects applied are then produced using the obtained
+transmission reduction matrix and the next generation matrices passed to
+the function as an argument.
+
+```{r}
+# Apply vaccination effect to next generation matrices
+ngm_nsw_vacc <- apply_vaccination(
+ ngm = ngm_fairfield,
+ data = vaccination_effect_example_data,
+ coverage_col = coverage,
+ acquisition_col = acquisition,
+ transmission_col = transmission
+)
+```
 
 ## Comparing R0 before and post vaccination rates
 
