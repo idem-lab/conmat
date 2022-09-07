@@ -146,9 +146,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.73 4.12 5.53 6.25 7.89 7.32  total = 35.84 
+#> 1.00 4.26 5.40 6.32 7.90 7.38  total = 35.26 
 #> 
-#> fREML score: 23875.8     rank: 55/57
+#> fREML score: 23815.8     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -200,16 +200,16 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00232
-#>  2 [0,5)          [5,10)        0.00362
-#>  3 [0,5)          [10,15)       0.00286
-#>  4 [0,5)          [15,20)       0.00420
-#>  5 [0,5)          [20,25)       0.0107 
-#>  6 [0,5)          [25,30)       0.0218 
+#>  1 [0,5)          [0,5)         0.00213
+#>  2 [0,5)          [5,10)        0.00361
+#>  3 [0,5)          [10,15)       0.00292
+#>  4 [0,5)          [15,20)       0.00419
+#>  5 [0,5)          [20,25)       0.0106 
+#>  6 [0,5)          [25,30)       0.0216 
 #>  7 [0,5)          [30,35)       0.0316 
 #>  8 [0,5)          [35,40)       0.0341 
-#>  9 [0,5)          [40,45)       0.0338 
-#> 10 [0,5)          [45,50)       0.0327 
+#>  9 [0,5)          [40,45)       0.0334 
+#> 10 [0,5)          [45,50)       0.0324 
 #> # … with 314 more rows
 #> # ℹ Use `print(n = ...)` to see more rows
 ```

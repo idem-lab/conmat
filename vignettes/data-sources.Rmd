@@ -1,8 +1,8 @@
 ---
-title: "data-sources"
+title: "Data Sources"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{data-sources}
+  %\VignetteIndexEntry{Data Sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,17 +14,120 @@ knitr::opts_chunk$set(
 )
 ```
 
+We provide access to a variety of different data sources in `conmat`. Most of these are centered around Australian data, as the package was initially created for disease modelling work in Australia. The aim of this vignette is to give a quick tour of the data sources available in `conmat`.
+
 ```{r setup}
 library(conmat)
 ```
 
-NOTE - these data sources will get cleaned up before submission to CRAN. These data are still being cleaned and processed, but their current forms are shown below:
+## Australian Bureau of Statistics (ABS) data
 
-### eyre_transmission_probabilities
+### Accessing Functions
+
+We provide two functions to access (Local Government Area) LGA and state level population age data, which are provided in 5 year age bins from 0, 5, up to 85+
+
+#### `abs_age_lga()`
+
+```{r abs-age-lga}
+abs_age_lga(lga_name = "Fairfield (C)")
+abs_age_lga(lga_name = "Brisbane (C)")
+```
+
+It requires you to know the exact name of the LGA, you can see them in the dataset, `abs_lga_lookup`
+
+```{r abs-lga-lookup}
+abs_lga_lookup
+```
+
+And if you're not sure about a particular name of a place, you can use `agrep` and `filter` like so:
+
+```{r abs-lga-lookup-filter}
+library(dplyr)
+abs_lga_lookup %>% 
+  filter(agrepl("Sydney", lga))
+```
+
+
+#### `abs_age_state()`
+
+This takes in the abbreviated state names
+
+```{r abs-age-state}
+abs_age_state(state_name = "NSW")
+```
+
+You can see these state names with:
+
+```{r}
+unique(abs_lga_lookup$state)
+```
+
+Note that "OT" stands for "other territories"
+
+### ABS data
+
+We provide other ABS data, listed now. You can read the full details of the data at their respective helpfiles, by writing, for example, `?abs_education_state`.
+
+#### Education by state data for 2006 -2020
+
+```{r abs-education-state}
+abs_education_state
+```
+
+#### Education by state data for 2020
+
+```{r abs-education-state-2020}
+abs_education_state_2020
+```
+
+
+#### Employment by LGA for 2016
+
+```{r abs-employ-age-lga}
+abs_employ_age_lga
+```
+
+
+#### Number of people in each household by LGA for 2016
+
+```{r abs-household-lga}
+abs_household_lga
+```
+
+
+#### LGA age population for 2016 for all states and LGAs
+
+```{r abs-pop-age-lga-2016}
+abs_pop_age_lga_2016
+```
+
+
+#### LGA age population for 2020 for all states and LGAs
+
+```{r abs-pop-age-lga-2020}
+abs_pop_age_lga_2020
+```
+
+#### State age population for 2020
+
+```{r abs-state-age}
+abs_state_age
+```
+
+
+## Epidemiology / disease modelling data
+
+### Transmission probabilities from Eyre
+
+A dataset containing data digitised from "The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission", by David W Eyre, Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels, A Sarah Walker, Tim EA Peto
 
 ```{r eyre-transmission-probabilities}
 eyre_transmission_probabilities
+```
 
+We can visualise the data like so:
+
+```{r eyre-transmission-probabilities-plot}
 library(ggplot2)
 library(stringr)
 library(dplyr)
@@ -72,52 +175,4 @@ eyre_transmission_probabilities %>%
      axis.text = element_text(angle = 45, hjust = 1)
    )
 
-```
-
-
-### abs_education_state
-
-```{r abs-education-state}
-abs_education_state
-```
-
-### abs_education_state_2020
-
-```{r abs-education-state-2020}
-abs_education_state_2020
-```
-
-
-### abs_employ_age_lga
-
-```{r abs-employ-age-lga}
-abs_employ_age_lga
-```
-
-
-### abs_household_lga
-
-```{r abs-household-lga}
-abs_household_lga
-```
-
-
-### abs_pop_age_lga_2016
-
-```{r abs-pop-age-lga-2016}
-abs_pop_age_lga_2016
-```
-
-
-### abs_pop_age_lga_2020
-
-```{r abs-pop-age-lga-2020}
-abs_pop_age_lga_2020
-```
-
-
-### abs_state_age
-
-```{r abs-state-age}
-abs_state_age
 ```

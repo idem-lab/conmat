@@ -39,5 +39,11 @@ polymod_population <- get_polymod_population()
 synthetic_settings_5y_polymod <- extrapolate_polymod(
   population = polymod_population
 )
+synthetic_settings_5y_polymod
+synthetic_settings_5y_fairfield <- extrapolate_polymod(
+  population = abs_age_lga("Fairfield (C)")
+)
+synthetic_settings_5y_fairfield
+)
 }
 }

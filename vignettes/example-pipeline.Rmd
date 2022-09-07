@@ -1,8 +1,8 @@
 ---
-title: "example-pipeline"
+title: "Example Pipeline"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{example-pipeline}
+  %\VignetteIndexEntry{Example Pipeline}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,6 +17,28 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(conmat)
 ```
+
+This vignette outlines a basic workflow of:
+
+* Create a new synthetic matrix by extrapolating from POLYMOD data to a new age distribution
+* Generating a Next Generation Matrix
+* Applying Vaccination Rates
+* Comparing R0 before and post vaccination rates
+
+## Create a new synthetic matrix by extrapolating from POLYMOD data to a new age distribution
+
+We can do this by extrapolating 
+
+```{r}
+fairfield_population <- abs_age_lga("Fairfield (C)")
+```
+
+
+## Generating a Next Generation Matrix
+
+## Applying Vaccination Rates
+
+## Comparing R0 before and post vaccination rates
 
 
 ##### Example pipeline
