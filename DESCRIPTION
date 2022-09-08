@@ -12,6 +12,11 @@ Authors@R: c(
              role = "aut",
              email = "nick.golding.research@gmail.com",
              comment = c(ORCID = "0000-0001-8916-5570")),
+     person(given = "Aarathy",
+             family = "Babu",
+             role = c("aut"),
+             email = "aarathybabu907@gmail.com",
+             comment = c(ORCID = "https://orcid.org/0000-0002-6982-5989")),
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
@@ -33,8 +38,9 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
+LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Imports: 
     mgcv,
     dplyr,

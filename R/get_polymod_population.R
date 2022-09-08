@@ -1,21 +1,35 @@
-#' return the polymod-average population age distribution in 5y
+#' @title Return the polymod-average population age distribution in 5y
 #'
-#' return the polymod-average population age distribution in 5y increments
-#' (weight country population distributions by number of participants)
-#' note that we don't want to weight by survey age distributions for this, since
-#' the total number of *participants* represents the sampling
+#' @description returns the polymod-average population age distribution in
+#'   5y increments (weight country population distributions by number of
+#'   participants). Note that we don't want to weight by survey age
+#'   distributions for this, since the total number of *participants*
+#'   represents the sampling. It uses the participant data from the polymod
+#'   survey as well as the age specific population data from `socialmixr` 
+#'   R package to return the age specific average population of different, 
+#'   countries weighted by the number of participants from those countries who 
+#'   participated in the polymod survey.
 #'
-#' @param countries countries to extract data from
-#' @return data frame
+#' @param countries countries to extract data from. Default is to get: Belgium,
+#'   Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and 
+#'   United Kingdom.
+#' @return data frame with two columns: `lower.age.limit` and `population`
 #' @examples
-#' \dontrun{
-#' if (interactive()) {
-#'   # EXAMPLE1
-#' }
-#' }
+#' get_polymod_population()
+#' get_polymod_population("Belgium") 
+#' get_polymod_population("United Kingdom") 
+#' get_polymod_population("Italy") 
 #' @export
-get_polymod_population <- function(countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands", 
-                                                 "Poland", "United Kingdom")) {
+get_polymod_population <- function(countries = c(
+    "Belgium",
+    "Finland",
+    "Germany",
+    "Italy",
+    "Luxembourg",
+    "Netherlands",
+    "Poland",
+    "United Kingdom"
+  )) {
   socialmixr::polymod$participants %>%
     dplyr::filter(
       !is.na(year),
@@ -30,7 +44,7 @@ get_polymod_population <- function(countries = c("Belgium", "Finland", "Germany"
       .groups = "drop"
     ) %>%
     dplyr::left_join(
-      socialmixr::wpp_age()%>% dplyr::filter(year == 2005),
+      socialmixr::wpp_age() %>% dplyr::filter(year == 2005),
       by = c("country")
     ) %>%
     dplyr::filter(

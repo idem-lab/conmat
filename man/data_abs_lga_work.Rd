@@ -5,25 +5,21 @@
 \alias{data_abs_lga_work}
 \title{LGA wise ABS work population data on different ages for year 2016}
 \format{
-A data frame with 64,264 rows and 8 variables:
+A data frame with 64,496 rows and 8 variables:
 \describe{
-\item{year}{A number denoting the year as 2016, since the data is based on
-2016 Census of Population and Housing.}
-\item{state}{a string denoting the abbreviated name of state or territory
-name such as 'NSW', 'VIC', 'QLD' and so on.}
-\item{lga}{a string denoting the official name of Local Government Area.
+\item{year}{2016, as data is from 2016 Census of Population and Housing.}
+\item{state}{String denoting the abbreviated name of state or territory
+name such as 'NSW', 'VIC', 'QLD' etc.}
+\item{lga}{String denoting the official name of Local Government Area.
 For example, 'Albury (C).'}
-\item{age}{a number denoting ages from 0 to 115.}
-\item{employed_population}{a number denoting number of people employed
-including people with full-time, part-time employment status.}
-\item{total_population}{a number depicting the total population belonging
-to the age.}
-\item{proportion}{a number denoting the measure of the ratio of employed
-population and total population belonging to the age i.e,
-employed_population/ total_population}
-\item{anomaly_flag}{a logical variable with values TRUE and FALSE that
-flags the abnormal observations in the data such as total population
-lesser than employed_population as TRUE.}
+\item{age}{Ages from 0 to 115.}
+\item{employed_population}{Number of people employed including people
+with full-time, part-time employment status.}
+\item{total_population}{Total population of age in row.}
+\item{proportion}{The ratio of employed population and total population
+belonging to the age i.e, employed_population/ total_population.}
+\item{anomaly_flag}{Logical variable flagging abnormal observations, such
+as total population lesser than employed_population as TRUE.}
 }
 }
 \source{

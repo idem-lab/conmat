@@ -2,23 +2,60 @@
 % Please edit documentation in R/plot_matrix.R
 \name{plot_matrix}
 \alias{plot_matrix}
-\title{Use ggplot to plot a matrix in the output format}
+\title{Visualise predicted contact matrix}
 \usage{
 plot_matrix(matrix)
 }
 \arguments{
-\item{matrix}{matrix}
+\item{matrix}{Square matrix with row and column names indicating the age
+groups}
 }
 \value{
-a ggplot object
+a ggplot visualisation of contact rates
 }
 \description{
-Use ggplot to plot a matrix in the output format
+Visualising the predicted contact rates facilitates understanding the
+underlying patterns and relationships between age groups in different
+settings (workplace, home, school, other). The \code{plot_matrix()} function
+takes a contact matrix and visualises it, with the x and y axes being
+different age groups.
 }
 \examples{
 \dontrun{
-if (interactive()) {
-  # EXAMPLE1
+
+set.seed(2021-09-24)
+polymod_contact_data <- get_polymod_setting_data()
+polymod_survey_data <- get_polymod_population()
+
+setting_models <- fit_setting_contacts(
+  contact_data_list = polymod_contact_data,
+  population = polymod_survey_data
+)
+
+fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+
+fairfield_age_pop
+
+synthetic_settings_5y_fairfield <- predict_setting_contacts(
+  population = fairfield_age_pop,
+  contact_model = setting_models,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+
+# Visualise the projected contact rates for "home" in the Fairfield LGA. The 
+# strong diagonal shows us that similar age groups typically have higher 
+# rates of home contact. We can also see parental links include middle-aged 
+# age groups having observable contact rates with younger age groups. 
+# For instance, ages between 25 and 45 have higher contact rates with 
+# newborns (0 to 5) and children (5 to 10), but older age groups, 
+# including those over 55, tend to have higher contact rates with age 
+# groups between 25 and 45, showing the interactions between parents and 
+# children. In addition to this, other patterns that indicates contact 
+# between children and their grandparents where higher contact rates between 
+# young children (years 0-5) and grandparents (age 55+) are present. 
+
+
+plot_matrix(synthetic_settings_5y_fairfield$home)
 }
-}
+
 }

@@ -13,13 +13,17 @@ estimate_setting_contacts(
 )
 }
 \arguments{
-\item{contact_data_list}{list of data sets with information on the contacts of individuals at different settings}
+\item{contact_data_list}{list of data sets with information on the contacts
+of individuals at different settings}
 
-\item{survey_population}{representative population distribution for the survey}
+\item{survey_population}{representative population distribution for the
+survey}
 
-\item{prediction_population}{population for prediction. The default value set is survey_population}
+\item{prediction_population}{population for prediction. The default value
+set is survey_population}
 
-\item{age_breaks}{vector depicting age values. For example, c(seq(0, 75, by = 5), Inf)}
+\item{age_breaks}{vector depicting age values. For example,
+\code{c(seq(0, 75, by = 5), Inf)}}
 
 \item{per_capita_household_size}{Optional (defaults to NULL). When set, it
 adjusts the household contact matrix by some per capita household size.
@@ -32,9 +36,23 @@ data with a workflow on how to get this number.}
 predicted setting specific contact matrices, and for all combined
 }
 \description{
-Given a named list of contact datasets (with names giving the setting, and
-assumed to together make up the full set of contacts for individuals in the
-survey), a representative population distribution for the survey, and a set
-of age breaks at which to aggregate contacts, return a set of predicted
-contact matrices for each setting, and for all combined.
+Given a named list of contact datasets (with names giving
+the setting, and assumed to together make up the full set of contacts for
+individuals in the survey), a representative population distribution for
+the survey, and a set of age breaks at which to aggregate contacts, return
+a set of predicted contact matrices for each setting, and for all combined.
+}
+\examples{
+
+\dontrun{
+# takes a long time to run
+settings_estimated_contacts <- estimate_setting_contacts(
+  contact_data_list = get_polymod_setting_data(),
+  survey_population = get_polymod_population(),
+  prediction_population = get_polymod_population(),
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  per_capita_household_size = NULL
+)
+
+}
 }

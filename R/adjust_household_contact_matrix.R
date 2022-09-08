@@ -1,4 +1,4 @@
-#' @title Adjust Household Contact Matrix.
+#' @title Adjust Household Contact Matrix
 #' 
 #' @description This function is used internally within 
 #'   [predict_setting_contacts()]. See details below for why we use the per 
@@ -22,7 +22,8 @@
 #'
 #' @return contact matrix that has household adjustment
 #' @author Nick Golding
-#' @export
+#' @keywords internal
+#' @noRd
 adjust_household_contact_matrix <- function(setting_matrices,
                                             per_capita_household_size,
                                             model_per_capita_household_size) {

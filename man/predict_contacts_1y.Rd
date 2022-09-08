@@ -2,29 +2,58 @@
 % Please edit documentation in R/predict_contacts_1y.R
 \name{predict_contacts_1y}
 \alias{predict_contacts_1y}
-\title{predict contacts to a given population at full 1y resolution}
+\title{Predict contact rate to a given population at full 1y resolution}
 \usage{
 predict_contacts_1y(model, population, age_min = 0, age_max = 100)
 }
 \arguments{
-\item{model}{PARAM_DESCRIPTION}
+\item{model}{A single fitted model of contact rate (e.g.,
+\code{\link[=fit_single_contact_model]{fit_single_contact_model()}})}
 
-\item{population}{PARAM_DESCRIPTION}
+\item{population}{a dataframe of age population information, with columns
+indicating some lower age limit, and population, (e.g.,
+\code{\link[=get_polymod_population]{get_polymod_population()}})}
 
-\item{age_min}{PARAM_DESCRIPTION, Default: 0}
+\item{age_min}{Age range minimum value. Default: 0}
 
-\item{age_max}{PARAM_DESCRIPTION, Default: 100}
+\item{age_max}{Age range maximum value, Default: 100}
 }
 \value{
-OUTPUT_DESCRIPTION
+Data frame with four columns: \code{age_from}, \code{age_to}, \code{contacts}, and
+\code{se_contacts}. This contains the participant & contact ages from the
+minimum and maximum ages provided along with the predicted rate of
+contacts and standard error around the prediction.
 }
 \description{
-predict contacts to a given population at full 1y resolution
+Provides a predicted rate of contacts for contact ages.
+Take an already fitted model of contact rate and predict the
+estimated contact rate, and standard error, for all combinations of the
+provided ages in 1 year increments. So if the minimum age is 5, and the
+maximum age is 10, it will provide the estimated contact rate for all age
+combinations: 5 and 5, 5 and 6 ... 5 and 10, and so on. This function is
+used internally within \code{\link[=predict_contacts]{predict_contacts()}}, and thus
+\code{\link[=predict_setting_contacts]{predict_setting_contacts()}} as well, although it can be used by itself.
+See examples for more details, and details for more information.
+}
+\details{
+Prediction features are added using \code{\link[=add_modelling_features]{add_modelling_features()}}.
+These features include the population distribution of contact ages,
+fraction of population in each age group that attend school/work as well
+as the offset according to the settings on all combinations of the
+participant & contact ages.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+
+fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+
+fairfield_abs_data
+
+# predict the contact rates in 1 year blocks to Fairfield data
+
+fairfield_contacts_1 <- predict_contacts_1y(
+  model = polymod_setting_models$home,
+  population = fairfield_abs_data,
+  age_min = 0,
+  age_max = 2
+)
 }

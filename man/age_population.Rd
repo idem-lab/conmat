@@ -18,60 +18,82 @@ age_population(
 country, and year}
 
 \item{location_col}{bare variable name for the column with location
-information}
+information. If using, both \code{location_col} & \code{location} must be specified.}
 
-\item{location}{character vector with location names}
+\item{location}{character vector with location names. If using, both
+\code{location_col} & \code{location} must be specified.}
 
 \item{age_col}{bare variable name for the column with age information}
 
-\item{year_col}{bare variable name for the column with year information}
+\item{year_col}{bare variable name for the column with year information. If
+using, both \code{year_col} & \code{year} must be specified.}
 
-\item{year}{numeric vector representing the desired year(s)}
+\item{year}{numeric vector representing the desired year(s). If using, both
+\code{year_col} & \code{year} must be specified.}
 }
 \value{
 tidy dataset with information on population of different age bands
 }
 \description{
-This function helps clean up datasets of population data,
-similar to \code{socialmixr::wpp_age()} or any given dataset with a structure
-that has information on, population, location, age, and year.
+This function helps clean up datasets of population data, which
+might be similar to \code{socialmixr::wpp_age()} or a dataset with columns
+representing: population, location, age, and year. If age is numeric, it
+groups ages into age groups with 5 year bins (0-4, 5-9, etc). It then
+separates age groups into two column of these lower and upper limits.
+Finally, it filters data passed to the specified year and location. If no
+year or location is provided then all years or locations are used.
 }
 \examples{
 world_data <- socialmixr::wpp_age()
+world_data
 # Tidy data for multiple locations across different years
 age_population(
-data = world_data,
-location_col = country,
-location = c("Asia","Afghanistan"),
-age_col = lower.age.limit,
-year_col = year,
-year = c(2010:2020)
+  data = world_data,
+  location_col = country,
+  location = c("Asia", "Afghanistan"),
+  age_col = lower.age.limit,
+  year_col = year,
+  year = c(2010:2020)
 )
 
 # Tidy data for a given location irrespective of year
 age_population(
- data = world_data,
-location_col = country,
- location = "Afghanistan",
- age_col = lower.age.limit
+  data = world_data,
+  location_col = country,
+  location = "Afghanistan",
+  age_col = lower.age.limit
+)
+
+# Tidy data for a given location irrespective of location
+age_population(
+  data = world_data,
+  age_col = lower.age.limit
+)
+age_population(
+  data = world_data,
+  age_col = lower.age.limit,
+  year_col = year,
+  year = c(2011:2015)
 )
 
 # Tidy datasets with age groups
 population_age_groups <- abs_pop_age_lga_2020
+population_age_groups
 age_population(
-data = population_age_groups,
-age_col = age_group,
-year_col = year,
-year = 2020
+  data = population_age_groups,
+  age_col = age_group,
+  year_col = year,
+  year = 2020
 )
 
 # Tidy datasets with numeric age
 population_numeric_age <- abs_age_state("WA")
+population_numeric_age
 age_population(
-data = population_numeric_age,
-age_col = lower.age.limit,
-year_col = year,
-year = 2020
+  data = population_numeric_age,
+  age_col = lower.age.limit,
+  year_col = year,
+  year = 2020
 )
 
 }

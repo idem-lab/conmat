@@ -16,11 +16,58 @@ knitr::opts_chunk$set(
 # conmat
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
 [![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
+[![Codecov test coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
 <!-- badges: end -->
 
-The goal of conmat is to provide methods for producing contact matrices.
+The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
+
+**What is a contact matrix?**
+
+Contact matrices describe the degree of contact between individuals of given age groups. 
+
+For example, this matrix describes the number of contacts between individuals
+
+```{r}
+#| label: show-contact
+#| echo: FALSE
+
+name_vec <- c("0-4", "5-9", "10-14")
+cmat <- matrix(
+  data = rep(NA, 9),
+  nrow = 3,
+  ncol = 3,
+  byrow = TRUE,
+  dimnames = list(
+    name_vec,
+    name_vec
+    )
+)
+
+diag(cmat) <- c(10,11,13)
+cmat[upper.tri(cmat)] <- 3:5
+cmat[lower.tri(cmat)] <- 3:5
+
+cmat
+```
+
+The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another.
+
+We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact. 
+
+**Why do we need _synthetic_ contact matrices?**
+
+Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day. 
+
+However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally. 
+
+We can use statistical methods to create _synthetic contact matrices_, which are new contact matrices that have been generalised to new countries based on existing surveys.
+
+**Why do we need `conmat`?**
+
+Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country. 
+
+We need methods that allow for flexibly creating synthetic contact matrices for a specified age population, as the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
 
 ## Installation
 
@@ -30,27 +77,93 @@ You can install the development version with:
 install.packages("conmat", repos = "https://njtierney.r-universe.dev")
 ```
 
-
-Or alternatively you can use `remotes` (although I recommend using the above code)
+Or alternatively you can use `remotes`
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("njtierney/conmat")
 ```
 
-
-## Note 
-
-The contact matrices created using this package are transposed when compared to the contact matrices discussed by [Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697) and [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074). That is, the rows are "age group to", and the columns are "age group from".
-
 ## Example
 
-We can extract out the ABS age population data using `abs_age_lga` like so:
+First we want to fit the model to the POLYMOD data, which contains various survey and population data.
 
-```{r get-syd}
+```{r get-polymod}
 library(conmat)
+polymod_contact_data <- get_polymod_contact_data(setting = "work")
+polymod_survey_data <- get_polymod_population()
+```
+
+The contact data is a data frame containing the age from and to, and the number of contacts for each of the specified settings, "home", "work", "school", "other", or "all" as well as the number of participants. By default, `polymod_contact_data` contains data from "all", but we're going to use the "work" set of data, as it produces an interesting looking dataset. Each row contains survey information of the number of contacts. Specifically, the number of contacts from one age group to another age group, and then the number of participants in that age group.
+
+The survey data, `polymod_survey_data` contains the lower age limit and the population in that age group.
+
+```{r show-polymod}
+polymod_survey_data
+```
+
+## Predicting the contact rate
+
+We can create a model of the contact *rate* with the function `fit_single_contact_model`
+
+```{r fit-polymod}
+set.seed(2022-09-06)
+contact_model <- fit_single_contact_model(
+  contact_data = polymod_contact_data,
+  population = polymod_survey_data
+  )
+```
+
+This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.
+
+```{r show-conctact-model}
+contact_model
+```
+
+We can use this contact model to then predict the contact rate in a new population.
+
+As a demonstration, let's take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).
+
+```{r fairfield}
 fairfield_age_pop <- abs_age_lga("Fairfield (C)")
 fairfield_age_pop
+```
+
+We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to.
+
+```{r predict-contacts}
+set.seed(2022-09-06)
+synthetic_contact_fairfield <- predict_contacts(
+  model = contact_model,
+  population = fairfield_age_pop,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+
+synthetic_contact_fairfield
+```
+
+## Plotting
+
+Let's visualise the matrix to get a sense of the predictions with `plot_matrix`. First we need to transform the predictions to a matrix:
+
+```{r plot-matrix-differents}
+synthetic_contact_fairfield %>% 
+  predictions_to_matrix() %>% 
+  plot_matrix()
+```
+
+## Applying the model across all settings.
+
+You can also fit a model for all of the settings all at once with a series of functions, `fit_setting_contacts`, and `predict_setting_contacts`.  This means we can do the above, but for each setting, "home", "work", "school", "other", and "all". We would recommend this when using conmat, as it is a pretty common use case. However for demonstration purposes we wanted to show how it works for a single matrix here first. We also provide details on how to fit the model to each of these settings in parallel. For more details on that workflow, see the "getting started" vignette.
+
+## Data sources
+
+This package provides data and helper functions for the data, for use in calculating contact matrices. The data sources are from the Australian Bureau of Statistics (ABS), as we were using these a lot when we created the package. In the future we might wrap these data sources and helpers into another package, but for the time being they are here. Below are a couple of examples of data provided, see the "data sources" vignette and helpful at the website for full details.
+
+You can extract the age population structure for the LGA, Brisbane, like so:
+
+```{r abs-age-lga}
+abs_age_lga("Brisbane (C)")
 ```
 
 Note that you need to use the exact LGA name - you can look up LGA names in the data set `abs_lga_lookup`:
@@ -59,236 +172,19 @@ Note that you need to use the exact LGA name - you can look up LGA names in the 
 abs_lga_lookup
 ```
 
-First we want to fit the model to the polymod data
+Or get the information for states like so:
 
-```{r fit-polymod}
-set.seed(2021-09-24)
-polymod_contact_data <- get_polymod_setting_data()
-polymod_survey_data <- get_polymod_population()
-
-setting_models <- fit_setting_contacts(
-  contact_data_list = polymod_contact_data,
-  population = polymod_survey_data
-  )
+```{r abs-age-state}
+abs_age_state(state_name = "QLD")
 ```
 
 
-Then we take this model and extrapolate to the fairfield data:
+## Note 
 
-```{r fairfield-synth-5}
-set.seed(2021-09-24)
-synthetic_settings_5y_fairfield <- predict_setting_contacts(
-  population = fairfield_age_pop,
-  contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf)
-  )
-```
-
-```{r fairfield-synth-5-plot}
-# this code is erroring for the moment - something to do with rendering a large plot I think.
-plot_setting_matrices(
-  synthetic_settings_5y_fairfield,
-  title = "Setting-specific synthetic contact matrices (fairfield 2020 projected)"
-)
-```
-
-```{r plot-matrix-differents}
-set.seed(2021-09-24)
-plot_matrix(synthetic_settings_5y_fairfield$home)
-plot_matrix(synthetic_settings_5y_fairfield$work)
-plot_matrix(synthetic_settings_5y_fairfield$school)
-plot_matrix(synthetic_settings_5y_fairfield$other)
-plot_matrix(synthetic_settings_5y_fairfield$all)
-```
-
-
-```{r example}
-# build synthetic age-structured contact matrices with GAMs
-# analysis of polymod data
-
-# set age breaks
-age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
-age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
-
-# fit a single overall contact model to polymod
-m_all <- fit_single_contact_model(
-  contact_data = get_polymod_contact_data("all"),
-  population = get_polymod_population()
-)
-
-m_all
-```
-
-
-```{r syn-all-5y}
-# predict contacts at 1y and 5y resolutions for inspection
-synthetic_all_5y <- predict_contacts(
-  model = m_all, 
-  population = get_polymod_population(),
-  age_breaks = age_breaks_5y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_5y
-```
-
-
-```{r matrix-plot}
-set.seed(2021-09-08)
-# predict contacts at 1y and 5y resolutions for inspection
-synthetic_all_5y <- predict_contacts(
-  model = m_all, 
-  population = get_polymod_population(),
-  age_breaks = age_breaks_5y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_5y
-
-library(ggplot2)
-plot_matrix(synthetic_all_5y) +
-  ggtitle("synthetic all at once")
-```
-
-## Speeding up computation with `future`
-
-`conmat` now supports parallelisation, which is useful in a couple of contexts with the model fitting, here is an example:
-
-```{r load-future}
-library(future)
-plan(multisession, workers = 4)
-```
-
-We set the future plan, saying multisession, with 4 workers.
-
-Then we run the code as normal:
-
-```{r show-off-furrr}
-polymod_setting_data <- get_polymod_setting_data()
-polymod_population <- get_polymod_population()
-
-contact_model <- fit_setting_contacts(
-  contact_data_list = polymod_setting_data,
-  population = polymod_population
-)
-
-contact_model_pred <- predict_setting_contacts(
-  population = polymod_population,
-  contact_model = contact_model,
-  age_breaks = c(seq(0, 75, by = 5), Inf)
-)
-```
-
-Notably this is about 3 times faster than without using that plan.
-
-## Data sources
-
-This package provides data for use in calculating contact matrices.
-
-These data are still being cleaned and processed, but their current forms are shown below:
-
-### eyre_transmission_probabilities
-
-```{r eyre-transmission-probabilities}
-eyre_transmission_probabilities
-
-library(ggplot2)
-library(stringr)
-library(dplyr)
-eyre_transmission_probabilities %>%
-   group_by(
-     setting,
-     case_age_5y,
-     contact_age_5y
-   ) %>%
-   summarise(
-     across(
-       probability,
-       mean
-     ),
-     .groups = "drop"
-   ) %>%
-   rename(
-     case_age = case_age_5y,
-     contact_age = contact_age_5y
-   ) %>%
-   mutate(
-     across(
-       ends_with("age"),
-       ~ factor(.x,
-                levels = str_sort(
-                  unique(.x),
-                  numeric = TRUE
-                )
-       )
-     )
-   ) %>%
-   ggplot(
-     aes(
-       x = case_age,
-       y = contact_age,
-       fill = probability
-     )
-   ) +
-   facet_wrap(~setting) +
-   geom_tile() +
-   scale_fill_viridis_c() +
-   coord_fixed() +
-   theme_minimal() +
-   theme(
-     axis.text = element_text(angle = 45, hjust = 1)
-   )
-
-```
-
-
-### abs_education_state
-
-```{r abs-education-state}
-abs_education_state
-```
-
-### abs_education_state_2020
-
-```{r abs-education-state-2020}
-abs_education_state_2020
-```
-
-
-### abs_employ_age_lga
-
-```{r abs-employ-age-lga}
-abs_employ_age_lga
-```
-
-
-### abs_household_lga
-
-```{r abs-household-lga}
-abs_household_lga
-```
-
-
-### abs_pop_age_lga_2016
-
-```{r abs-pop-age-lga-2016}
-abs_pop_age_lga_2016
-```
-
-
-### abs_pop_age_lga_2020
-
-```{r abs-pop-age-lga-2020}
-abs_pop_age_lga_2020
-```
-
-
-### abs_state_age
-
-```{r abs-state-age}
-abs_state_age
-```
+The contact matrices created using this package are transposed when compared to the contact matrices discussed by [Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697) and [Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074). That is, the rows are "age group to", and the columns are "age group from".
 
 ## Code of Conduct
 
 Please note that the conmat project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
+

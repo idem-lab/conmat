@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregate_predicted_contacts.R
 \name{aggregate_predicted_contacts}
 \alias{aggregate_predicted_contacts}
-\title{aggregate predicted contacts from complete 1y resolution}
+\title{Aggregate predicted contacts to specified age breaks}
 \usage{
 aggregate_predicted_contacts(
   predicted_contacts_1y,
@@ -11,24 +11,47 @@ aggregate_predicted_contacts(
 )
 }
 \arguments{
-\item{predicted_contacts_1y}{contacts in 1 year breaks}
+\item{predicted_contacts_1y}{contacts in 1 year breaks (could technically
+by in other year breaks). Data must contain columns, \code{age_from}, \code{age_to},
+\code{contacts}, and \code{se_contacts}, which is the same output as
+\code{\link[=predict_contacts_1y]{predict_contacts_1y()}} - see examples below.}
 
-\item{population}{population}
+\item{population}{population with columns \code{lower.age.limit}, and
+\code{population}. See examples below.}
 
-\item{age_breaks}{Default: c(seq(0, 75, by = 5), Inf)}
+\item{age_breaks}{vector of ages. Default: c(seq(0, 75, by = 5), Inf)}
 }
 \value{
-data frame
+data frame with columns, \code{age_group_from}, \code{age_group_to}, and
+\code{contacts}, which is the aggregated model.
 }
 \description{
-aggregate predicted contacts from complete 1y resolution to a stated
-resolution must pass in the population to do approppriate weighting of
-'from' age groups
+Aggregates contacts rate from, say, a 1 year level into
+provided age  breaks, weighting the contact rate by the specified age
+population. For example, if you specify breaks as c(0, 5, 10, 15, Inf),
+it will return age groups as 0-5, 5-10, 10-15, and 15+ (Inf). Used
+internally within \code{\link[=predict_contacts]{predict_contacts()}}, although can be used by users.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+ fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+ 
+ fairfield_abs_data
+ 
+ # We can predict the contact rate for Fairfield from the existing contact 
+ # data, say, between the age groups of 0-15 in 5 year bins for school:
+   
+fairfield_contacts_1 <- predict_contacts_1y(
+  model = polymod_setting_models$home,
+  population = fairfield_abs_data,
+  age_min = 0,
+  age_max = 15
+)
+ 
+ fairfield_contacts_1
+ 
+aggregated_fairfield <- aggregate_predicted_contacts(
+  predicted_contacts_1y = fairfield_contacts_1,
+  population = fairfield_abs_data,
+  age_breaks = c(0, 5, 10, 15,Inf)
+    )
 }

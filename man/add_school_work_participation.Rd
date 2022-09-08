@@ -2,29 +2,53 @@
 % Please edit documentation in R/add_school_work_participation.R
 \name{add_school_work_participation}
 \alias{add_school_work_participation}
-\title{Add fractions of the population in each age group that attend school/work
-(average FTE)}
+\title{Add columns describing the fractions of the population in each age group
+that attend school/work (average FTE)}
 \usage{
 add_school_work_participation(contact_data)
 }
 \arguments{
-\item{contact_data}{contact data}
+\item{contact_data}{contact data containing columns: \code{age_to}, \code{age_from},
+and \code{pop_age_to} (from \code{\link[=add_population_age_to]{add_population_age_to()}})}
 }
 \value{
-dataset
+dataset with 9 extra columns: school_fraction_age_from,
+work_fraction_age_from, school_fraction_age_to, work_fraction_age_to,
+school_probability, work_probability, school_year_probability, and
+school_weighted_pop_fraction.
 }
 \description{
 Add fractions of the population in each age group that attend school/work
 (average FTE) to compute the probability that both participant and
-contact attend school/work.
+contact attend school/work. Requires columns \code{age_to} and  \code{age_from}.
+Note that it will operate on any column starting with \code{age}. Adds columns:
+\code{school_probability}, \code{work_probability}, \code{school_year_probability}, and
+\code{school_weighted_pop_fraction}. The columns \code{school_probability} and
+\code{work_probability} represent the probability a person of the other age
+goes to the same work/school. \code{school_year_probability} represents the
+probability that a person of the other age would be in the same school
+year. \code{school_weighted_pop_fraction} represents the weighted combination
+of contact population age distribution & school year probability, so that
+if the contact is in the same school year, the weight is 1, and otherwise
+it is the population age fraction. This can be used as an offset, so that
+population age distribution can be used outside the classroom, but does
+not affect classroom contacts (which due to cohorting and regularised
+class sizes are unlikely to depend on the population age distribution).
 }
 \note{
-this is fake data that will get replaced with abs data soon
+this uses fake data that will get replaced with abs data input soon
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+age_min <- 10
+age_max <- 15
+all_ages <- age_min:age_max
+library(tidyr)
+example_df <- expand_grid(
+   age_from = all_ages,
+   age_to = all_ages,
+   )
+   
+example_df \%>\% 
+  add_population_age_to() \%>\% 
+  add_school_work_participation() 
 }
