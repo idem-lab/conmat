@@ -139,7 +139,7 @@ fairfield_age_pop <- abs_age_lga("Fairfield (C)")
 fairfield_age_pop
 ```
 
-We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to.
+We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to. Note that these age breaks could be any size, we just ahve them set to 5 year age brackets in most of the examples, but these could be 1 year, 2 year, or even sub year.
 
 ```{r predict-contacts}
 set.seed(2022-09-06)
@@ -174,13 +174,13 @@ Our experience has been that we would be fitting the same models to each setting
 
 We can create a model for each of the settings with `fit_setting_contacts()`.
 
-```{r fit-polymod}
+```{r fit-polymod-setting}
 set.seed(2021-09-24)
 
-polymod_contact_data <- get_polymod_contact_data()
+polymod_setting_data <- get_polymod_setting_data()
 
 setting_models <- fit_setting_contacts(
-  contact_data_list = polymod_contact_data,
+  contact_data_list = polymod_setting_data,
   population = polymod_survey_data
   )
 ```
@@ -320,60 +320,9 @@ italy_2005 <- wpp_age("Italy", "2005")
 italy_2005
 ```
 
+This italian population data could then be put into `extrapolate_polymod` as above.
 
-### Morgue
-
-```{r}
-# predict contacts at 1y and 5y resolutions for inspection
-# set age breaks
-age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
-
-synthetic_all_5y <- predict_contacts(
-  model = m_all, 
-  population = polymod_population,
-  age_breaks = age_breaks_5y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_5y
-```
-
-
-```{r}
-age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
-
-age_breaks_1y
-
-synthetic_all_1y <- predict_contacts(
-  model = m_all, 
-  population = polymod_population,
-  age_breaks = age_breaks_1y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_1y
-```
-
-
-```{r}
-# empirical_vs_synthetic.png
-# plot empirical vs synthetic matrices
-plot_matrix(empirical_all_5y) +
-  ggtitle("empirical (socialmixr)") +
-  plot_matrix(synthetic_settings_5y_polymod$all) +
-  ggtitle("synthetic by setting, combined") +
-  plot_matrix(synthetic_all_5y) +
-  ggtitle("synthetic all at once") +
-  plot_matrix(synthetic_all_1y) +
-  ggtitle("synthetic all at once (1y)") +
-  theme(axis.text = element_blank()) +
-  plot_layout(ncol = 2) +
-  plot_annotation(
-    title = "Empirical vs synthetic matrices (all polymod data)"
-  )
-```
-
-This will get cleaned up when I re-write the vignettes for this package
+## For interest's sake: visualising the empirical contact rate data
 
 ```{r}
 # visualise empirical contact rate estimates
@@ -419,54 +368,4 @@ bind_rows(
   ) +
   theme_minimal()
 ```
-
-
-```{r example}
-# build synthetic age-structured contact matrices with GAMs
-# analysis of polymod data
-
-# set age breaks
-age_breaks_5y <- c(seq(0, 75, by = 5), Inf)
-age_breaks_1y <- c(seq(0, 100, by = 1), Inf)
-
-# fit a single overall contact model to polymod
-m_all <- fit_single_contact_model(
-  contact_data = get_polymod_contact_data("all"),
-  population = get_polymod_population()
-)
-
-m_all
-```
-
-
-```{r syn-all-5y}
-# predict contacts at 1y and 5y resolutions for inspection
-synthetic_all_5y <- predict_contacts(
-  model = m_all, 
-  population = get_polymod_population(),
-  age_breaks = age_breaks_5y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_5y
-```
-
-
-```{r matrix-plot}
-set.seed(2021-09-08)
-# predict contacts at 1y and 5y resolutions for inspection
-synthetic_all_5y <- predict_contacts(
-  model = m_all, 
-  population = get_polymod_population(),
-  age_breaks = age_breaks_5y
-) %>%
-  predictions_to_matrix()
-
-synthetic_all_5y
-
-library(ggplot2)
-plot_matrix(synthetic_all_5y) +
-  ggtitle("synthetic all at once")
-```
-
 

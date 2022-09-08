@@ -23,8 +23,8 @@ defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but
 columns, \code{lower.age.limit}, and \code{population}. If population is 'polymod'
 then use the participant-weighted average of POLYMOD country/year
 distributions. It adds the population via interpolation, using
-\code{\link[=get_population_function]{get_population_function()}} to create a function that generates population
-from ages.
+\code{\link[=get_age_population_function]{get_age_population_function()}} to create a function that generates
+population from ages.
 }
 \examples{
 age_min <- 10

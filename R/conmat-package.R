@@ -92,6 +92,7 @@ globalVariables(
     "target_weight_sum",
     "transmission_multiplier",
     "update",
+    "upper.age.limit",
     "weight",
     "weight_sum",
     "work_education",

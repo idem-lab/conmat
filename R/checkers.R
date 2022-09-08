@@ -3,9 +3,21 @@
 #'   For example, 'Albury (C).'
 #' @param multiple_lga logical response that allows multiple lgas to be checked
 #'   if set to `TRUE`. Default is FALSE.
-#' @return errors if LGA name not in ABS data
-#' @keywords internal
-#' @noRd
+#' @return errors if LGA name not in ABS data, otherwise returns nothing
+#' @examples 
+#' # returns nothing
+#' check_lga_name("Fairfield (C)")
+#' # if you want to check multiple LGAs you must use the `multiple_lga` flag.
+#' check_lga_name(lga_name = c("Fairfield (C)", "Sydney (C)"), 
+#'                multiple_lga = TRUE)
+#' # this will error, so isn't run
+#' \dontrun{
+#' # don't set the `multiple_lga` flag
+#' check_lga_name(lga_name = c("Fairfield (C)", "Sydney (C)"))
+#' # not a fully specified LGA
+#' check_lga_name("Fairfield")
+#' }
+#' @export
 check_lga_name <- function(
     lga_name,
     multiple_lga = FALSE
@@ -72,41 +84,4 @@ check_state_name <- function(state_name) {
       )
     )
   }
-}
-
-
-check_if_only_one_null <- function(x, y){
-  x_null <- is.null(x)
-  y_null <- is.null(y)
-  null_sum <- x_null + y_null
-  no_null <- null_sum == 0
-  one_null <- null_sum == 1
-  both_null <- null_sum == 2
-  
-  if (no_null){
-    return()
-  } 
-  
-  if (both_null){
-    return()
-  }
-  
-  if (one_null) {
-    msg <- cli::format_error(
-      c(
-        "Both variables need to be specified, only one is",
-        "i" = "{.var x} is {ifelse(is.null(x), 'NULL', x)}",
-        "i" = "{.var y} is {ifelse(is.null(y), 'NULL', y)}",
-        "You are seeing this error message because you need to specify both \\
-        of {.var location_col} & {.var location}, or {.var year_col} & \\
-        {.var year} as either NULL or with values"
-      )
-      
-    )
-    stop(
-      msg,
-      call. = FALSE
-    )
-  }
-  
 }

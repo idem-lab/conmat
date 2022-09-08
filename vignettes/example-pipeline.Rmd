@@ -77,7 +77,7 @@ We can generate an NGM for Australian specific data like so (in a future release
 ```{r ngm-fairfield}
 ngm_fairfield <- generate_ngm(
   lga_name = "Fairfield (C)",
-  age_breaks = c(seq(0, 85, by = 5), Inf),
+  age_breaks = c(seq(0, 80, by = 5), Inf),
   R_target = 1.5
 )
 ```
@@ -91,25 +91,27 @@ str(ngm_fairfield)
 
 ## Applying Vaccination Rates
 
-Vaccination improves a person's immunity from a disease. When a
-sizable section of the population receives vaccinations or when vaccine
-coverage is sufficient enough, the likelihood that the unvaccinated
-population will contract the disease is decreased. This helps to slow
-infectious disease spread as well as lessen its severity. For this reason,
-it is important to understand how much of a reduction in probability of
-acquisition (the likelihood that an individual will contract the disease),
-and probability of transmission (the likelihood that an individual will
-spread the disease after contracting it), has occurred as an the effect of
-vaccination, in other words the effect of vaccination on the next
-generation of infections.
+It is important to understand the effect of vaccination on the next
+generation of infections. We can use `apply_vaccination()` to return the percentage reduction in acquisition and transmission in each age group. 
 
-We can use `apply_vaccination()` to return the percentage reduction in acquisition and
-transmission in each age group. It does this by taking the outer product
-of these reductions in acquisition and transmission by age group, creating
-a transmission reduction matrix. The next generation matrices with the
-vaccination effects applied are then produced using the obtained
-transmission reduction matrix and the next generation matrices passed to
-the function as an argument.
+It takes two key arguments:
+
+1. The next generation matrix
+2. The vaccination effect data
+
+The vaccination effect could look like the following:
+
+```{r print-vaccination-effect}
+vaccination_effect_example_data
+```
+
+Each row contains information, for each age band:
+
+* Coverage % vaccinated
+* Acquisition - probability of acquiring COVID
+* Transmission - the probability of transmission
+
+Then you need to specify the columns in the vaccination effect data frame related to covarege, acquisition, and transmission.
 
 ```{r}
 # Apply vaccination effect to next generation matrices
@@ -120,62 +122,15 @@ ngm_nsw_vacc <- apply_vaccination(
  acquisition_col = acquisition,
  transmission_col = transmission
 )
+
+ngm_nsw_vacc
 ```
 
-## Comparing R0 before and post vaccination rates
+<!-- ## Comparing R0 before and post vaccination rates -->
 
 
-##### Example pipeline
+<!-- ## A note on transmission matrices -->
 
-Let's predict the average contact rates for ages 0 to Inf in 5 year age breaks in all settings for the NSW LGA, Fairfield
+<!-- The initial phase of COVID-19 pandemic saw a significant age dependence in the distribution of confirmed cases with fewer confirmed cases among children. This might have been a result of younger ages being less susceptible to infection and/or less likely to exhibit clinical signs when infected [ [Davies et al](https://www.nature.com/articles/s41591-020-0962-9)] . A population's clinical fraction and age-varying susceptibility to infection both profoundly influence the likelihood that an infectious agent would spread there. This likelihood that an infectious agent would spread from an infected source to a new susceptible host and infect the host is known as transmission probability. -->
 
--   Extract the polymod survey population & contact data
-
-```{r}
-polymod_contact_data <- get_polymod_setting_data()
-polymod_survey_data <- get_polymod_population()
-```
-
--   Fit the contact model to the polymod data for all settings.
-
-```{r}
-set.seed(1100)
- setting_models <- fit_setting_contacts(
-  contact_data_list = polymod_contact_data,
-   population = polymod_survey_data
- )
-```
-
--   Obtain the age wise population of Fairfield.
-
-```{r}
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
-
-```
-
--   Obtain the per capita household size of Fairfield
-
-```{r}
-
-fairfield_hh_size <- get_per_capita_household_size(lga = "Fairfield (C)")
-fairfield_hh_size
-```
-
--   Extrapolate the fitted model to the Fairfield population data. Predict the contact ages for all combinations of ages in 5 year ages breaks from 0 to 85-Inf.
-
-```{r}
-
-synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
-  population = fairfield_age_pop,
-  contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf),
-  per_capita_household_size = fairfield_hh_size
-)
-```
-
-### Transmission Matrices
-
-The initial phase of COVID-19 pandemic saw a significant age dependence in the distribution of confirmed cases with fewer confirmed cases among children. This might have been a result of younger ages being less susceptible to infection and/or less likely to exhibit clinical signs when infected [ [Davies et al](https://www.nature.com/articles/s41591-020-0962-9)] . A population's clinical fraction and age-varying susceptibility to infection both profoundly influence the likelihood that an infectious agent would spread there. This likelihood that an infectious agent would spread from an infected source to a new susceptible host and infect the host is known as transmission probability.
-
-The age and setting specific relative per-contact transmission probability matrices when combined with contact matrices could be used to produce the setting-specific relative next generation matrices (NGMs) which is used to obtain the distribution of numbers of new cases in each generation of infection from any arbitrary initial number of introduced infections. Conmat creates these age and setting specific relative per-contact transmission probability matrices through `get_setting_transmission_matrices()` by making use of clinical fraction and relative susceptibility parameters from Davies et al available through `davies_age_extended`. 
+<!-- The age and setting specific relative per-contact transmission probability matrices when combined with contact matrices could be used to produce the setting-specific relative next generation matrices (NGMs) which is used to obtain the distribution of numbers of new cases in each generation of infection from any arbitrary initial number of introduced infections. Conmat creates these age and setting specific relative per-contact transmission probability matrices through `get_setting_transmission_matrices()` by making use of clinical fraction and relative susceptibility parameters from Davies et al available through `davies_age_extended`.  -->

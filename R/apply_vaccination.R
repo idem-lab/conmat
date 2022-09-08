@@ -50,6 +50,7 @@
 #' vaccination_effect_example_data
 #'
 #' # Generate next generation matrices
+#' # The number of age breaks must match the vaccination effect data
 #' ngm_nsw <- generate_ngm(
 #'   state_name = "NSW",
 #'   age_breaks = c(seq(0, 80, by = 5), Inf),

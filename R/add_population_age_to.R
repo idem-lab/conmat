@@ -7,8 +7,8 @@
 #'   columns, `lower.age.limit`, and `population`. If population is 'polymod' 
 #'   then use the participant-weighted average of POLYMOD country/year 
 #'   distributions. It adds the population via interpolation, using 
-#'   [get_population_function()] to create a function that generates population
-#'   from ages.
+#'   [get_age_population_function()] to create a function that generates 
+#'   population from ages.
 #' 
 #' @param contact_data contact data containing columns `age_to` and `age_from`
 #' @param population Defaults to [get_polymod_population()], but can be any 

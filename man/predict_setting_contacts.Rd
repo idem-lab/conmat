@@ -41,13 +41,13 @@ Predicts the expected contact rate across all settings ("home",
 "school", "work", and "other") over specified age breaks,
 given some model of contact rate and population age structure. Optionally
 performs an adjustment for per capita household size. See "details" for more
-information. \code{\link[=adjust_household_contact_matrix]{adjust_household_contact_matrix()}}
+information.
 }
 \details{
 The population data is used to determine age range to predict
 contact rates, and removes ages with zero population, so we do not
 make predictions for ages with zero populations. Contact rates are
-predicted yearly between the age groups, using \code{\link[=predict_contact_1y]{predict_contact_1y()}},
+predicted yearly between the age groups, using \code{\link[=predict_contacts_1y]{predict_contacts_1y()}},
 then aggregates these predicted contacts using
 \code{\link[=aggregate_predicted_contacts]{aggregate_predicted_contacts()}}, which aggregates the predictions back to
 the same resolution as the data, appropriately weighting the contact rate

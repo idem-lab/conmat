@@ -88,12 +88,6 @@ age_population <- function(
 
   age_var <- dplyr::pull(data, {{ age_col }})
   
-  # ugh tried to make some logic to capture if only one of location and year
-  # were specified instead of the additional column
-  # check_if_only_one_null({{ location_col }} , {{ location }})
-  # check_if_only_one_null({{ year_col }} , {{ year }})
-
-
   if (is.numeric(age_var)) {
     label <- c(paste(
       seq(0, max(age_var), by = 5),
