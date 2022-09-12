@@ -56,7 +56,8 @@ transmission reduction matrix and the next generation matrices passed to
 the function as an argument.
 }
 \examples{
-
+# examples take 20 second to run so skipping
+\dontrun{
 # example data frame with vaccine coverage, acquisition and transmission
 # efficacy of different age groups
 vaccination_effect_example_data
@@ -77,5 +78,5 @@ ngm_nsw_vacc <- apply_vaccination(
   acquisition_col = acquisition,
   transmission_col = transmission
 )
-
+}
 }

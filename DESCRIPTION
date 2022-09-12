@@ -56,4 +56,5 @@ Imports:
     glue,
     readr,
     furrr,
-    purrr
+    purrr,
+    tidyselect

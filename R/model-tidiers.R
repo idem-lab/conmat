@@ -10,7 +10,7 @@
 #' }
 
 get_formulas_terms <- function(model){
-  as.character(attr(terms(model$formula), "variables"))[-c(1,2)]
+  as.character(attr(stats::terms(model$formula), "variables"))[-c(1,2)]
 }
 
 # extract_term_name(formula_terms)
@@ -45,7 +45,7 @@ tidy_predict_term <- function(data,
   
   dat_term <- tibble::tibble(x = predict_gam_term(model, data, term))
   
-  setNames(dat_term, term_name)
+  stats::setNames(dat_term, term_name)
   
 }
 

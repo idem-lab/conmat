@@ -44,7 +44,8 @@
 #'   transmission matching the next generation matrices
 #'
 #' @examples
-#'
+#' # examples take 20 second to run so skipping
+#' \dontrun{
 #' # example data frame with vaccine coverage, acquisition and transmission
 #' # efficacy of different age groups
 #' vaccination_effect_example_data
@@ -65,7 +66,7 @@
 #'   acquisition_col = acquisition,
 #'   transmission_col = transmission
 #' )
-#'
+#'}
 #' @export
 apply_vaccination <- function(
   ngm,
