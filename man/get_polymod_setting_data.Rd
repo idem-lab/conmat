@@ -13,15 +13,15 @@ get_polymod_setting_data(
 \item{countries}{countries to extract data from}
 }
 \value{
-polymod data
+A list of data frames, of the polymod data. One list per setting:
+"home", "work", "school", and "other".
 }
 \description{
-Get polymod setting data
+\code{get_polymod_setting_data()} acts as an extension of
+\code{get_polymod_contact_data()}, and extracts the setting wise contact data
+on the desired country, as a list.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+get_polymod_setting_data()
+get_polymod_setting_data("Belgium")
 }

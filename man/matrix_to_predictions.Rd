@@ -2,28 +2,39 @@
 % Please edit documentation in R/matrix_to_predictions.R
 \name{matrix_to_predictions}
 \alias{matrix_to_predictions}
-\title{Convert a contact matrix as output by these functions (or socialmixr) into
-a long-form tibble}
+\title{Convert a contact matrix as output into a long-form tibble}
 \usage{
 matrix_to_predictions(contact_matrix)
 }
 \arguments{
-\item{contact_matrix}{PARAM_DESCRIPTION}
+\item{contact_matrix}{square matrix with age group to and from information
+in the row and column names.}
 }
 \value{
-OUTPUT_DESCRIPTION
+data.frame with columns \code{age_group_to}, \code{age_group_from}, and
+\code{contacts}.
 }
 \description{
-Convert a contact matrix as output by these functions (or socialmixr) into
-a long-form tibble
-}
-\details{
-DETAILS
+This function is the opposite of \code{\link[=predictions_to_matrix]{predictions_to_matrix()}}. It
+converts a wide matrix into a long data frame. It is mostly used within
+plotting functions.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+ fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+ 
+ # We can convert the predictions into a matrix
+   
+ fairfield_school_contacts <- predict_contacts(
+   model = polymod_setting_models$school,
+   population = fairfield_abs_data,
+   age_breaks = c(0, 5, 10, 15,Inf)
+ )
+ 
+ fairfield_school_contacts
+ 
+ fairfield_school_mat <- predictions_to_matrix(fairfield_school_contacts)
+ 
+ fairfield_school_mat
+ 
+ matrix_to_predictions(fairfield_school_mat)
 }

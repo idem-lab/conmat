@@ -2,19 +2,58 @@
 % Please edit documentation in R/add_offset.R
 \name{add_offset}
 \alias{add_offset}
-\title{Adds offset}
+\title{Adds offset variables}
 \usage{
 add_offset(contact_data)
 }
 \arguments{
-\item{contact_data}{contact_data}
+\item{contact_data}{contact data - must contain columns \code{age_to}, \code{age_from},
+\code{pop_age_to} (from \code{\link[=add_population_age_to]{add_population_age_to()}}, and
+\code{school_weighted_pop_fraction} (from \code{\link[=add_school_work_participation]{add_school_work_participation()}})).}
 }
 \value{
-contact data with two extra columns:
+data.frame of \code{contact_data} with two extra columns:
 \code{log_contactable_population_school} and \code{log_contactable_population}
 }
 \description{
-Adds offset
+Mostly used internally in \code{add_modelling_features()}. Adds two
+offset variables to be used in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}:
+\enumerate{
+\item \code{log_contactable_population_school}, and
+\item \code{log_contactable_population}.
+These two variables require variables \code{school_weighted_pop_fraction} (from
+\code{\link[=add_school_work_participation]{add_school_work_participation()}}) and \code{pop_age_to} (from
+\code{\link[=add_school_work_participation]{add_school_work_participation()}}). This provides separate offsets
+for school setting when compared to the other settings such as home,
+work and other. The offset for school captures cohorting of students
+for schools and takes the logarithm of the weighted combination of
+contact population age distribution & school year probability calculated
+in \code{\link[=add_school_work_participation]{add_school_work_participation()}}. See "details" for more information.
+}
+}
+\details{
+why double offsets? There are two offsets specified, once in the
+model formula, and once in the "offset" argument of \code{mgcv::bam}. The
+offsets get added together when the model first fit. In addition, the
+setting specific offset from  \code{offset_variable}, which is included in the
+GAM model as \code{... + offset(log_contactable_population)} is used in
+prediction, whereas the other offset, included as an argument in the GAM
+as \code{offset = log(participants)} is only included when the model is
+initially created. See more detail in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}.
+}
+\examples{
+age_min <- 10
+age_max <- 15
+all_ages <- age_min:age_max
+library(tidyr)
+example_df <- expand_grid(
+   age_from = all_ages,
+   age_to = all_ages,
+   )
+example_df \%>\% 
+ add_population_age_to() \%>\%
+ add_school_work_participation() \%>\%
+ add_offset() 
 }
 \author{
 Nick Golding

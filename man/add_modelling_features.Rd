@@ -7,23 +7,50 @@
 add_modelling_features(contact_data, ...)
 }
 \arguments{
-\item{contact_data}{contact data}
+\item{contact_data}{contact data with columns \code{age_to} and \code{age_from}}
 
-\item{...}{extra dots}
+\item{...}{extra dots passed to \code{population} argument of
+\code{\link[=add_population_age_to]{add_population_age_to()}}}
 }
 \value{
-data frame
+data frame with 11 extra columns - the contents of \code{contact_data},
+plus:  pop_age_to, school_fraction_age_from, work_fraction_age_from,
+school_fraction_age_to, work_fraction_age_to, school_probability,
+work_probability, school_year_probability, school_weighted_pop_fraction,
+log_contactable_population_school, and log_contactable_population.
 }
 \description{
-Add features required for modelling to the dataset
+This function adds three main groups of features to the data. It is used
+internally in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}} and \code{\link[=predict_contacts_1y]{predict_contacts_1y()}}.
+It requires columns named \code{age_to} and \code{age_from}. The three types of
+features it adds are described below:
+\enumerate{
+\item Population distribution of contact ages from the function
+\code{\link[=add_population_age_to]{add_population_age_to()}}, which requires a column called "age_to"
+representing the age of the person who had contact. It creates a column
+called \code{pop_age_to}. \code{\link[=add_population_age_to]{add_population_age_to()}} takes an extra argument
+for population, which defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but needs
+to be a data frame with columns, \code{lower.age.limit}, and \code{population}.
+\item School work participation, which is from the function
+\code{\link[=add_school_work_participation]{add_school_work_participation()}}. This requires columns \code{age_to} and
+\code{age_from}, but will operate on any column starting with \code{age} and adds
+columns: \code{school_probability}, \code{work_probability},
+\code{school_year_probability}, and \code{school_weighted_pop_fraction}.
+\item Offset is added on to the data using \code{\link[=add_offset]{add_offset()}}. This requires
+variables \code{school_weighted_pop_fraction} (from
+\code{\link[=add_school_work_participation]{add_school_work_participation()}}) and \code{pop_age_to} (from
+\code{\link[=add_school_work_participation]{add_school_work_participation()}}). It adds two columns,
+\code{log_contactable_population_school}, and \code{log_contactable_population}.
 }
-\note{
-internal
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+age_min <- 10
+age_max <- 15
+all_ages <- age_min:age_max
+library(tidyr)
+example_df <- expand_grid(
+   age_from = all_ages,
+   age_to = all_ages,
+   )
+add_modelling_features(example_df) 
 }

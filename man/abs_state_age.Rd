@@ -7,8 +7,8 @@
 \format{
 A data frame with 168 rows and 3 variables:
 \describe{
-\item{age_group}{age group in five year bins from 0 to 99, then 100+}
 \item{state}{state - short state or territory name}
+\item{age_group}{age group in five year bins from 0 to 99, then 100+}
 \item{population}{population size}
 }
 }
@@ -19,6 +19,7 @@ A data frame with 168 rows and 3 variables:
 abs_state_age
 }
 \description{
-A dataset containing Australian Bureau of Statistics state level population data for 2020
+Dataset containing Australian Bureau of Statistics state level population
+data for 2020
 }
 \keyword{datasets}

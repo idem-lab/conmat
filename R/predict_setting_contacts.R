@@ -1,3 +1,4 @@
+
 #' Predict setting contacts
 #' @param population population
 #' @param contact_model contact_model
@@ -57,8 +58,9 @@
 #'   per_capita_household_size = fairfield_hh_size
 #' )
 #' }
-predict_setting_contacts <- function(population,
-                                     contact_model,
+#' @export
+predict_setting_contacts <- function(population, 
+                                     contact_model, 
                                      age_breaks,
                                      per_capita_household_size = NULL,
                                      model_per_capita_household_size =

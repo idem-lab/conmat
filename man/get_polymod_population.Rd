@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_polymod_population.R
 \name{get_polymod_population}
 \alias{get_polymod_population}
-\title{return the polymod-average population age distribution in 5y}
+\title{Return the polymod-average population age distribution in 5y}
 \usage{
 get_polymod_population(
   countries = c("Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands",
@@ -10,21 +10,27 @@ get_polymod_population(
 )
 }
 \arguments{
-\item{countries}{countries to extract data from}
+\item{countries}{countries to extract data from. Default is to get: Belgium,
+Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and
+United Kingdom.}
 }
 \value{
-data frame
+data frame with two columns: \code{lower.age.limit} and \code{population}
 }
 \description{
-return the polymod-average population age distribution in 5y increments
-(weight country population distributions by number of participants)
-note that we don't want to weight by survey age distributions for this, since
-the total number of \emph{participants} represents the sampling
+returns the polymod-average population age distribution in
+5y increments (weight country population distributions by number of
+participants). Note that we don't want to weight by survey age
+distributions for this, since the total number of \emph{participants}
+represents the sampling. It uses the participant data from the polymod
+survey as well as the age specific population data from \code{socialmixr}
+R package to return the age specific average population of different,
+countries weighted by the number of participants from those countries who
+participated in the polymod survey.
 }
 \examples{
-\dontrun{
-if (interactive()) {
-  # EXAMPLE1
-}
-}
+get_polymod_population()
+get_polymod_population("Belgium") 
+get_polymod_population("United Kingdom") 
+get_polymod_population("Italy") 
 }

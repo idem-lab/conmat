@@ -1,12 +1,14 @@
-#' Un-bbreviate Australian state names
+#' Un-abbreviate Australian state names
 #'
 #' @param state_names vector of state names in short form
 #'
 #' @return Longer state names
-#' @export
+#' @seealso [abbreviate_states()]
 #'
 #' @examples
-#' abbreviate_states("VIC")
+#' unabbreviate_states("VIC")
+#' unabbreviate_states(c("VIC", "QLD"))
+#' @export
 unabbreviate_states <- function(state_names) {
   dplyr::case_when(
     state_names %in% c("Australian Capital Territory", "ACT") ~ "Australian Capital Territory",

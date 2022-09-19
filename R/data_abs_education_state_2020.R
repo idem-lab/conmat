@@ -1,9 +1,10 @@
-#' ABS education population data, interpolated into 1 year bins, by state for 2020
+#' @title 2020 ABS education population data, interpolated into 1 year bins, 
+#'   by state.
 #'
-#' A dataset containing Australian Bureau of Statistics education data by
-#'   state for 2020. These were interpolated into 1 year age bins. There are 
-#'   still some issued with the methods used, as the interpolated values are 
-#'   sometimes higher than the population
+#' @description A dataset containing Australian Bureau of Statistics education 
+#'   data by state for 2020. These were interpolated into 1 year age bins. 
+#'   There are still some issued with the methods used, as the interpolated 
+#'   values are sometimes higher than the population.
 #'
 #' @format A data frame with 808 rows and 6 variables:
 #' \describe{
