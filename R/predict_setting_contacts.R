@@ -81,6 +81,7 @@ predict_setting_contacts <- function(population,
   
   combination <- Reduce("+", setting_matrices)
   setting_matrices$all <- combination
+  setting_matrices$all <- new_prediction_matrix(setting_matrices$all)
   
   # if we haven't set anything for the per capita household size, return this
   # adjusted matrix
@@ -96,15 +97,7 @@ predict_setting_contacts <- function(population,
     )
   }
   
-  setting_matrices <- lapply(names(setting_matrices),
-                             function(x) {
-                               class(setting_matrices[[x]]) <-
-                                 c(class(setting_matrices[[x]]), "predicted_setting_contacts")
-                               setting_matrices[[x]]
-                             }) %>%
-    setNames(names(setting_matrices))
-  
-  class(setting_matrices) <- c("predicted_setting_contacts", class(setting_matrices))
+  setting_matrices <- new_setting_prediction_matrix(setting_matrices)
   
   return(setting_matrices)
   

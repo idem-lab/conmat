@@ -1,8 +1,10 @@
 #' Plot setting matrices using ggplot2
 #' 
-#' @param matrices matrix
+#' @param object matrix
 #' @param title Title to give to plot setting matrices
 #' @return a ggplot
+#' @importFrom ggplot2 autoplot
+#' @name autoplot-conmat
 #' @examples
 #' \dontrun{
 #' if (interactive()) {
@@ -36,53 +38,18 @@
 #' }
 #' }
 #' @export
-autoplot.predicted_setting_contacts <- function(object, ...,title="Contact Matrices") {
-  if (any(is.element(class(object), "matrix")))
-  {
-    object %>%
-      matrix_to_predictions() %>%
-      ggplot2::ggplot(ggplot2::aes(x = age_group_from,
-                                   y = age_group_to,
-                                   fill = contacts)) +
-      ggplot2::geom_tile() +
-      ggplot2::coord_fixed() +
-      ggplot2::scale_fill_distiller(direction = 1,
-                                    trans = "sqrt") +
-      ggplot2::theme_minimal() +
-      ggplot2::theme(axis.text = ggplot2::element_text(
-        size = 6,
-        angle = 45,
-        hjust = 1
-      ))+
+autoplot.conmat_prediction_matrix <- function(object, 
+                                              ...,
+                                              title="Contact Matrices") {
+    plot_matrix(object) +
       ggplot2::ggtitle(title)
-  }
-  else
-  {
-    do.call(patchwork::wrap_plots, lapply(names(object)[names(object) != "all"],
-                                          function (x)
-                                          {
-                                            object[[x]] %>%
-                                              matrix_to_predictions() %>%
-                                              ggplot2::ggplot(ggplot2::aes(x = age_group_from,
-                                                                           y = age_group_to,
-                                                                           fill = contacts)) +
-                                              ggplot2::geom_tile() +
-                                              ggplot2::coord_fixed() +
-                                              ggplot2::scale_fill_distiller(direction = 1,
-                                                                            trans = "sqrt") +
-                                              ggplot2::theme_minimal() +
-                                              ggplot2::theme(axis.text = ggplot2::element_text(
-                                                size = 6,
-                                                angle = 45,
-                                                hjust = 1
-                                              )) +
-                                              ggplot2::ggtitle(x)
-                                          })) -> plot
-    
-    plot +
-      patchwork::plot_annotation(
-        title = title
-      )
-  }
 }
 
+#' @rdname autoplot-conmat
+#' @export
+autoplot.conmat_setting_prediction_matrix <- function(object,
+                                                      ...,
+                                                      title = "Setting-specific synthetic contact matrices") {
+  plot_setting_matrices(object,
+                        title = title)
+}
