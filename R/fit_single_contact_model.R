@@ -89,11 +89,13 @@ fit_single_contact_model <- function(contact_data, population) {
     # number of contacts by age
     s(age_from) +
     # intergenerational contact patterns - enables the off-diagonals
-    s(abs(age_from - age_to)) +
+    # intergenerational is defined as:
+      # intergenerational = abs(age_from - age_to)
+    s(intergenerational) +
     # interaction between intergenerational patterns and age_from, to remove
     # ridge for some ages and settings
     # 
-    s(abs(age_from - age_to), age_from) +
+    s(intergenerational, age_from) +
     # probabilities of both attending (any) school/work
     school_probability +
     work_probability

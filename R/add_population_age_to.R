@@ -41,6 +41,9 @@ add_population_age_to <- function(contact_data, population = get_polymod_populat
     dplyr::mutate(
       pop_age_to = pop_age_to / sum(pop_age_to)
     ) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>% 
+    dplyr::mutate(
+      intergenerational = abs(age_from - age_to)
+    ) 
   
 }
