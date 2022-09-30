@@ -17,7 +17,6 @@
        9 all            0      8        7           92
       10 all            0      9        8           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
 
 # get_polymod_population() works
 
@@ -38,7 +37,6 @@
        9              40   3044427.
       10              45   2828202.
       # ... with 11 more rows
-      # i Use `print(n = ...)` to see more rows
 
 # get_polymod_setting_data() works
 
@@ -60,7 +58,6 @@
        9 home           0      8        6           92
       10 home           0      9        6           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $work
       # A tibble: 8,787 x 5
@@ -77,7 +74,6 @@
        9 work           0      8        0           92
       10 work           0      9        0           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $school
       # A tibble: 8,787 x 5
@@ -94,7 +90,6 @@
        9 school         0      8        0           92
       10 school         0      9        0           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $other
       # A tibble: 8,787 x 5
@@ -111,6 +106,5 @@
        9 other          0      8        2           92
       10 other          0      9        3           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
 
