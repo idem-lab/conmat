@@ -50,6 +50,7 @@ jobs:
           extra-packages: |
             local::.
             any::rcmdcheck
+            any::XML
 
       - name: Check
         env:
