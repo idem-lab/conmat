@@ -57,13 +57,13 @@ predict_contacts_1y <- function(model, population, age_min = 0, age_max = 100) {
     ) %>%
     dplyr::mutate(
       # prediction
-      contacts = predict(
+      contacts = mgcv::predict.bam(
         model,
         newdata = .,
         type = "response"
       ),
       # uncertainty
-      se_contacts = predict(
+      se_contacts = mgcv::predict.bam(
         model,
         newdata = .,
         type = "response",

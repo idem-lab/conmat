@@ -13,8 +13,14 @@
      8 Albury (C)              35  2020       3371
      9 Albury (C)              40  2020       3187
     10 Albury (C)              45  2020       3449
-    # ... with 8 more rows
-    # i Use `print(n = ...)` to see more rows
+    11 Albury (C)              50  2020       3297
+    12 Albury (C)              55  2020       3412
+    13 Albury (C)              60  2020       3368
+    14 Albury (C)              65  2020       2967
+    15 Albury (C)              70  2020       2602
+    16 Albury (C)              75  2020       1966
+    17 Albury (C)              80  2020       1254
+    18 Albury (C)              85  2020       1319
 
 # abs_age_lga() returns the right shape errors
 

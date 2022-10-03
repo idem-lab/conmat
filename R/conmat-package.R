@@ -69,6 +69,7 @@ globalVariables(
     "part_id",
     "participants",
     "per_capita_household_size",
+    "polymod_setting_models",
     "pop_age_from",
     "pop_age_to",
     "population",
