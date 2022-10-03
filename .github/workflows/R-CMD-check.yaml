@@ -51,23 +51,28 @@ jobs:
             local::.
             any::rcmdcheck
             any::XML
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
+          needs: check
+          
+      - uses: r-lib/actions/check-r-package@v2
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          upload-snapshots: true
+
+      # - name: Check
+      #   env:
+      #     _R_CHECK_CRAN_INCOMING_: false
+      #   run: |
+      #     options(crayon.enabled = TRUE)
+      #     rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+      #   shell: Rscript {0}
+      # 
+      # - name: Show testthat output
+      #   if: always()
+      #   run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+      #   shell: bash
+      # 
+      # - name: Upload check results
+      #   if: failure()
+      #   uses: actions/upload-artifact@main
+      #   with:
+      #     name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+      #     path: check
