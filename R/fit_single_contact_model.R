@@ -65,15 +65,18 @@
 #'   `population`. See [get_polymod_population()] for an example.
 #' @return single model
 #' @examples
-#' age_min <- 10
-#' age_max <- 15
-#' all_ages <- age_min:age_max
-#' library(tidyr)
 #' example_contact <- get_polymod_contact_data(setting = "home")
 #' example_contact
 #' example_population <- get_polymod_population()
+#' 
+#' library(dplyr)
+#' 
+#' example_contact_20 <- example_contact %>% 
+#'   filter(age_to <= 20,
+#'          age_from <= 20)
+#'          
 #' my_mod <- fit_single_contact_model(
-#'   contact_data = example_contact,
+#'   contact_data = example_contact_20,
 #'   population = example_population
 #' )
 #' @export
@@ -89,11 +92,13 @@ fit_single_contact_model <- function(contact_data, population) {
     # number of contacts by age
     s(age_from) +
     # intergenerational contact patterns - enables the off-diagonals
-    s(abs(age_from - age_to)) +
+    # intergenerational is defined as:
+      # intergenerational = abs(age_from - age_to)
+    s(intergenerational) +
     # interaction between intergenerational patterns and age_from, to remove
     # ridge for some ages and settings
     # 
-    s(abs(age_from - age_to), age_from) +
+    s(intergenerational, age_from) +
     # probabilities of both attending (any) school/work
     school_probability +
     work_probability

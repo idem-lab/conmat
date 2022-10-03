@@ -1,9 +1,5 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-#
-# NOTE: This workflow is overkill for most R packages and
-# check-standard.yaml is likely a better choice.
-# usethis::use_github_action("check-standard") will install it.
 on:
   push:
     branches: [main, master]
@@ -24,10 +20,9 @@ jobs:
         config:
           - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: '3.6'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel/1'}
+          - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -46,27 +41,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 2
           extra-packages: |
-            local::.
             any::rcmdcheck
+            any::XML
+          needs: check
 
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
+      - uses: r-lib/actions/check-r-package@v2
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          upload-snapshots: true
