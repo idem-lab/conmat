@@ -81,7 +81,6 @@
 #' )
 #' @export
 fit_single_contact_model <- function(contact_data, population) {
-
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data

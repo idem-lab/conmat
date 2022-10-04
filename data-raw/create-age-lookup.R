@@ -1,4 +1,5 @@
 library(dplyr)
+library(stringr)
 
 agebreaks <- seq(5, 95, by = 5)
 
@@ -17,4 +18,4 @@ age_group_lookup <- tibble(
   ) %>% 
   arrange(age_group)
 
-use_data(age_group_lookup, overwrite = TRUE)
+use_data(age_group_lookup, compress = "xz", overwrite = TRUE)

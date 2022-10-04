@@ -61,3 +61,27 @@ add_modelling_features <- function(contact_data, ...) {
     # `log_contactable_population_school`, and ` log_contactable_population`
     add_offset()
 }
+
+#' Add column, "intergenerational"
+#' 
+#' For modelling purposes it is useful to have a feature that is the absolute
+#'   difference between `age_from` and `age_to` columns.
+#'
+#' @param data data.frame with columns `age_from`, and `age_to`
+#'
+#' @return data.frame with extra column, `intergenerational`
+#'
+#' @examples
+#' 
+#' polymod_contact <- get_polymod_contact_data()
+#' 
+#' polymod_contact %>% add_intergenerational()
+#' 
+#' 
+#' @export
+add_intergenerational <- function(data){
+  data %>% 
+    dplyr::mutate(
+      intergenerational = abs(age_from - age_to)
+      ) 
+}

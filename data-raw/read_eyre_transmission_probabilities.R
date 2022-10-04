@@ -66,4 +66,4 @@ thing <- readr::read_csv("data-raw/eyre_transmission_probabilities.csv.gz")
 
 fs::file_delete("data-raw/eyre_transmission_probabilities.csv")
 
-use_data(eyre_transmission_probabilities, overwrite = TRUE)
+use_data(eyre_transmission_probabilities, compress = "xz", overwrite = TRUE)
