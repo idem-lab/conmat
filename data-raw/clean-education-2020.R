@@ -71,7 +71,7 @@ abs_education_state_2020_raw %>%
 
 abs_education_state_2020
 
-use_data(abs_education_state_2020, overwrite = TRUE)
+use_data(abs_education_state_2020, compress = "xz", overwrite = TRUE)
 
 abs_education_state_2020$population[[2]]
 

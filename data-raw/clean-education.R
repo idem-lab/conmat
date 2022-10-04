@@ -1,6 +1,7 @@
 library(readxl)
 library(janitor)
 library(tidyverse)
+library(here)
 abs_education_state_raw <- read_excel(
   here("data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"),
   sheet = "Table 2",
@@ -67,4 +68,4 @@ abs_education_state <- abs_education_state_raw %>%
   arrange(age) %>%
   ungroup()
 
-use_data(abs_education_state, overwrite = TRUE)
+use_data(abs_education_state, compress = "xz", overwrite = TRUE)
