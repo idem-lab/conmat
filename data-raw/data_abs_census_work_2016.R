@@ -44,7 +44,7 @@ get_data <- function(i){
 
 data_abs_state_work <- map_dfr(seq(1,113,14),get_data)
 
-use_data(data_abs_state_work, overwrite = TRUE)
+use_data(data_abs_state_work, compress = "xz", overwrite = TRUE)
 
 data_abs_state_work_2016%>%
   ggplot(aes(x = age, y = proportion)) +
