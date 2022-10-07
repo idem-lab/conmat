@@ -25,8 +25,8 @@ contact_model_pred <- predict_setting_contacts(
 )
 
 test_that("list names are kept", {
-  expect_snapshot(names(contact_model))
-  expect_snapshot(names(contact_model_pred))
+  expect_snapshot_output(names(contact_model))
+  expect_snapshot_output(names(contact_model_pred))
 })
 
 test_that("Model fits", {
@@ -37,12 +37,12 @@ test_that("Model fits", {
 })
 
 test_that("Model coefficients are the same", {
-  expect_snapshot(names(contact_model[[1]]$coefficients))
-  expect_snapshot(names(contact_model[[2]]$coefficients))
-  expect_snapshot(names(contact_model[[3]]$coefficients))
-  expect_snapshot(names(contact_model[[4]]$coefficients))
+  expect_snapshot_output(names(contact_model[[1]]$coefficients))
+  expect_snapshot_output(names(contact_model[[2]]$coefficients))
+  expect_snapshot_output(names(contact_model[[3]]$coefficients))
+  expect_snapshot_output(names(contact_model[[4]]$coefficients))
 })
 
 test_that("Matrix dims are kept", {
-  expect_snapshot(map(contact_model_pred, dim))
+  expect_snapshot_output(map(contact_model_pred, dim))
 })
