@@ -11,13 +11,13 @@
 #'   [get_household_size_distribution()].
 #' @param n_people_col bare variable name of the column depicting the total
 #'   number of people belonging to the respective household size. Default is
-#'   'n_people' from [get_household_size_distribution()]. 
+#'   'n_people' from [get_abs_household_size_distribution()]. 
 #' @return Numeric of length 1 - the per capita household size for a given 
 #'   state or LGA.
 #' @author Nick Golding
 #' @export
 #' @examples 
-#' demo_data <- get_household_size_distribution(lga = "Fairfield (C)")
+#' demo_data <- get_abs_household_size_distribution(lga = "Fairfield (C)")
 #' demo_data
 #' per_capita_household_size(household_data=demo_data,
 #'                           household_size_col=household_size,
