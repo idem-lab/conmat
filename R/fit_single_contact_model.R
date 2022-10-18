@@ -6,22 +6,32 @@
 #'   and so on), for a specified setting, with specific terms being added for 
 #'   given settings. See "details" for further information.
 #'   
-#' @details The model fit is a Generalised Additive Model (GAM). To help 
-#'   account for assortativity with age, where people of similar ages have 
-#'   more contact with each other, we include predictors `age_from`, and 
-#'   `age_to`. To account for intergenerational contact patterns, where 
-#'   parents and grandparents will interact with their children and grand 
-#'   children, we include a term that is the absolute difference of age_from 
-#'   and age_to. We also include the interaction of intergenerational contact 
-#'   patterns with contacts from one age with the term that is the absolute 
-#'   difference of age_from and age_to, and age_from. These terms are fit with 
-#'   a smoothing function. Specifically, the relevant code looks like this:
+#' @details The model fit is a Generalised Additive Model (GAM). We provide two 
+#'   "modes" for model fitting. Either using "symmetric" or "non-symmetric" 
+#'   model predictor terms with the logical variance "symmetrical", which is set
+#'   to TRUE by default. We recommend using the "symmetrical" terms as it 
+#'   reflects the fact that contacts are symmetric - person A having contact 
+#'   with person B means person B has had contact with person A. We've included
+#'   a variety of terms to account for assortativity with age, where people of 
+#'   similar ages have more contact with each other. And included terms to 
+#'   account for intergenerational contact patterns, where parents and 
+#'   grandparents will interact with their children and grand children.
+#'   These terms are fit with a smoothing function. Specifically, the relevant 
+#'   code looks like this:
 #'   
 #'   ``` r
-#'   s(age_to) + 
-#'     s(age_from) + 
-#'     s(abs(age_from - age_to)) + 
-#'     s(abs(age_from - age_to), age_from)
+#'   # abs(age_from - age_to)
+#'   s(gam_age_offdiag) +
+#'   # abs(age_from - age_to)^2
+#'   s(gam_age_offdiag_2) +
+#'   # abs(age_from * age_to)
+#'   s(gam_age_diag_prod) +
+#'   # abs(age_from + age_to)
+#'   s(gam_age_diag_sum) +
+#'   # pmax(age_from, age_to)
+#'   s(gam_age_pmax) +
+#'   # pmin(age_from, age_to)
+#'   s(gam_age_pmin)
 #'   ```
 #'   
 #'   We also include predictors for the probability of attending school, and 
@@ -44,6 +54,34 @@
 #'   ``` r
 #'   mgcv::bam(
 #'     formula = contacts ~
+#'       # abs(age_from - age_to)
+#'       s(gam_age_offdiag) +
+#'       # abs(age_from - age_to)^2
+#'       s(gam_age_offdiag_2) +
+#'       # abs(age_from * age_to)
+#'       s(gam_age_diag_prod) +
+#'       # abs(age_from + age_to)
+#'       s(gam_age_diag_sum) +
+#'       # pmax(age_from, age_to)
+#'       s(gam_age_pmax) +
+#'       # pmin(age_from, age_to)
+#'       s(gam_age_pmin) +
+#'       school_probability +
+#'       work_probability +
+#'       offset(log_contactable_population) +
+#'       # or for school settings
+#'       # offset(log_contactable_population_school) 
+#'       family = stats::poisson,
+#'     offset = log(participants),
+#'     data = population_data
+#'   )
+#'   ```
+#'   
+#'   But if the term `symmetrical = FALSE` is used, you get:
+#'   
+#'   ``` r
+#'   mgcv::bam(
+#'     formula = contacts ~
 #'       s(age_to) +
 #'       s(age_from) +
 #'       s(abs(age_from - age_to)) +
@@ -58,11 +96,14 @@
 #'     data = population_data
 #'   )
 #'   ```
+#'   
 #' @param contact_data dataset with columns `age_to`, `age_from`, `setting`,
 #'  `contacts`, and `participants`. See [get_polymod_contact_data()] for
 #'   an example dataset - or the dataset in examples below.
 #' @param population population data, with columns `lower.age.limit` and 
 #'   `population`. See [get_polymod_population()] for an example.
+#' @param symmetrical whether to enforce symmetrical terms in the model. 
+#'   Defaults to TRUE. See `details` for more information.
 #' @return single model
 #' @examples
 #' example_contact <- get_polymod_contact_data(setting = "home")
@@ -80,43 +121,48 @@
 #'   population = example_population
 #' )
 #' @export
-fit_single_contact_model <- function(contact_data, population) {
+fit_single_contact_model <- function(contact_data, 
+                                     population, 
+                                     symmetrical = TRUE) {
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data
-  formula_no_offset <- contacts ~
-    # Prem method did a post-hoc smoothing
-# <<<<<<< HEAD
-    # abs(age_from - age_to)
+  
+  if (symmetrical) {
+    formula_no_offset <- contacts ~
+      # Prem method did a post-hoc smoothing
+      # abs(age_from - age_to)
       s(gam_age_offdiag) +
-    # abs(age_from - age_to)^2
+      # abs(age_from - age_to)^2
       s(gam_age_offdiag_2) +
-    # abs(age_from * age_to)
+      # abs(age_from * age_to)
       s(gam_age_diag_prod) +
-    # abs(age_from + age_to)
+      # abs(age_from + age_to)
       s(gam_age_diag_sum) +
-    # pmax(age_from, age_to)
+      # pmax(age_from, age_to)
       s(gam_age_pmax) +
-    # pmin(age_from, age_to)
+      # pmin(age_from, age_to)
       s(gam_age_pmin) +
-        
-#--- need to provide a switch to change between symmetric and not
-    # # deviation of contact age distribution from population age distribution
-    # s(age_to) +
-    # # number of contacts by age
-    # s(age_from) +
-    # # intergenerational contact patterns - enables the off-diagonals
-    # # intergenerational is defined as:
-    #   # intergenerational = abs(age_from - age_to)
-    # s(intergenerational) +
-    # # interaction between intergenerational patterns and age_from, to remove
-    # # ridge for some ages and settings
-    # s(intergenerational, age_from) +
-    #     
-# --- /end of non-symmetric
-    # probabilities of both attending (any) school/work
-    school_probability +
-    work_probability
+      school_probability +
+      work_probability
+    
+  } else if (!symmetrical) {
+    formula_no_offset <- contacts ~
+      # # deviation of contact age distribution from population age distribution
+      s(age_to) +
+      # # number of contacts by age
+      s(age_from) +
+      # # intergenerational contact patterns - enables the off-diagonals
+      # # intergenerational is defined as:
+      #   # intergenerational = abs(age_from - age_to)
+      s(intergenerational) +
+      # # interaction between intergenerational patterns and age_from, to remove
+      # # ridge for some ages and settings
+      s(intergenerational, age_from) +
+      # probabilities of both attending (any) school/work
+      school_probability +
+      work_probability 
+  }
   
   # choose the offset variable based on the setting
   setting <- contact_data$setting[1]
@@ -143,9 +189,9 @@ fit_single_contact_model <- function(contact_data, population) {
     add_modelling_features(
       # NOTE
       # The modelling features added here are:
-        # the school and work offsets
-        # pop_age_to (interpolated population)
-        # `log_contactable_population_school`, and ` log_contactable_population`
+      # the school and work offsets
+      # pop_age_to (interpolated population)
+      # `log_contactable_population_school`, and ` log_contactable_population`
       population = population
     ) %>%
     mgcv::bam(
