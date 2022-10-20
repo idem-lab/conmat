@@ -17,7 +17,7 @@
 #' @author Nick Golding
 #' @export
 #' @examples 
-#' demo_data <- abs_per_capita_household_size_lga(lga = "Fairfield (C)")
+#' demo_data <- get_household_size_distribution(lga = "Fairfield (C)")
 #' demo_data
 #' per_capita_household_size(household_data=demo_data,
 #'                           household_size_col=household_size,
