@@ -57,7 +57,7 @@ polymod_population
 
 The `extrapolate_polymod()` function does the following:
 
-* Fits a model of the contact rate to the full POLYMOD data above
+* Uses an already fit model (`polymod_setting_models`) of the contact rate to the full POLYMOD data above
 * Predicts it to the provided fairfield population data
 
 It also has options to predict to specified age brackets, defaulting to 5 year age groups up to 75, then 75 and older.

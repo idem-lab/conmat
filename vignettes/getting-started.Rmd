@@ -79,7 +79,7 @@ First we want to fit the model to the POLYMOD data, which contains various surve
 
 ```{r get-polymod}
 library(conmat)
-polymod_contact_data_work <- get_polymod_contact_data(setting = "work")
+polymod_contact_data_home <- get_polymod_contact_data(setting = "home")
 polymod_survey_data <- get_polymod_population()
 ```
 
@@ -114,13 +114,20 @@ You can see the available countries in the helpfile with `?get_polymod_populatio
 
 ## Predicting the contact rate
 
-We can create a model of the contact *rate* with the function `fit_single_contact_model`
+We can create a model of the contact *rate* with the function `fit_single_contact_model`. We're first going to use some smaller sets of the data, to save on computation time.
 
 ```{r fit-polymod}
-set.seed(2022-09-06)
+set.seed(2022-10-04)
+polymod_contact_data_home_small <- polymod_contact_data_home %>% 
+  filter(age_from <= 30,
+         age_to <= 30)
+
+polymod_survey_data_small <- polymod_survey_data %>% 
+  filter(lower.age.limit <= 30)
+
 contact_model <- fit_single_contact_model(
-  contact_data = polymod_contact_data_work,
-  population = polymod_survey_data
+  contact_data = polymod_contact_data_home_small,
+  population = polymod_survey_data_small
   )
 ```
 
@@ -142,11 +149,11 @@ fairfield_age_pop
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to. Note that these age breaks could be any size, we just ahve them set to 5 year age brackets in most of the examples, but these could be 1 year, 2 year, or even sub year.
 
 ```{r predict-contacts}
-set.seed(2022-09-06)
+set.seed(2022-10-04)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
   population = fairfield_age_pop,
-  age_breaks = c(seq(0, 85, by = 5), Inf)
+  age_breaks = c(seq(0, 30, by = 5), Inf)
 )
 
 synthetic_contact_fairfield
@@ -179,8 +186,11 @@ set.seed(2021-09-24)
 
 polymod_setting_data <- get_polymod_setting_data()
 
+polymod_setting_data_small <- polymod_setting_data %>% 
+  lapply(FUN = function(x) x %>% filter(age_from <= 20, age_to <= 20))
+
 setting_models <- fit_setting_contacts(
-  contact_data_list = polymod_setting_data,
+  contact_data_list = polymod_setting_data_small,
   population = polymod_survey_data
   )
 ```
@@ -199,11 +209,11 @@ So this gives us our baseline model of a contact model. We have fit this model t
 Then we take the model we had earlier, and extrapolate to the fairfield data with `predict_setting_contacts`, also providing some age breaks we want to predict to
 
 ```{r fairfield-synth-5}
-set.seed(2021-09-24)
+set.seed(2021-10-04)
 synthetic_settings_5y_fairfield <- predict_setting_contacts(
   population = fairfield_age_pop,
   contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf)
+  age_breaks = c(seq(0, 20, by = 5), Inf)
   )
 ```
 
@@ -238,18 +248,15 @@ plan(multisession, workers = 4)
 We set the future plan, saying "multisession", with 4 workers. Then we run the same code as above (note that you must specify the plan, otherwise it does not know how to parallelise. See the [future package documentation](https://future.futureverse.org/reference/plan.html) for more details):
 
 ```{r show-off-furrr}
-polymod_setting_data <- get_polymod_setting_data()
-polymod_population <- get_polymod_population()
-
 contact_model <- fit_setting_contacts(
-  contact_data_list = polymod_setting_data,
-  population = polymod_population
+  contact_data_list = polymod_setting_data_small,
+  population = polymod_survey_data_small
 )
 
 contact_model_pred <- predict_setting_contacts(
-  population = polymod_population,
+  population = polymod_survey_data_small,
   contact_model = contact_model,
-  age_breaks = c(seq(0, 75, by = 5), Inf)
+  age_breaks = c(seq(0, 20, by = 5), Inf)
 )
 ```
 
@@ -276,6 +283,7 @@ We can also do the same, for the polymod data itself:
 
 ```{r}
 # compute setting-specific and combined age matrices for polymod
+polymod_population <- get_polymod_population()
 synthetic_settings_5y_polymod <- extrapolate_polymod(
   population = polymod_population
 )
