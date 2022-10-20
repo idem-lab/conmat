@@ -11,13 +11,12 @@ abs_per_capita_household_size_lga(lga = NULL)
 \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names}
 }
 \value{
-returns a data frame with household size distributions of a specific state or LGA.
-Data frame contains variables depicting the lga wise household size (number of people in a household) and the associated population.
+returns a numeric value depicting the per capita household size of the specified LGA
 }
 \description{
 Get household size distribution based on  LGA name
 }
 \examples{
-abs_per_capita_household_size_lga(lga = c("Fairfield (C)","Albury (C)"))
+abs_per_capita_household_size_lga(lga ="Fairfield (C)")
 
 }

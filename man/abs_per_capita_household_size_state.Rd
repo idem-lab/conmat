@@ -10,12 +10,11 @@ abs_per_capita_household_size_state(state = NULL)
 \item{state}{target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"}
 }
 \value{
-returns a data frame with household size distributions of a specific state.
-Data frame contains variables depicting the lga wise household size (number of people in a household) and the associated population.
+returns a numeric value depicting the per capita household size of the specified state
 }
 \description{
 Get household size distribution based on state name
 }
 \examples{
-abs_per_capita_household_size_state(state = c("NSW","TAS"))
+abs_per_capita_household_size_state(state = "NSW")
 }
