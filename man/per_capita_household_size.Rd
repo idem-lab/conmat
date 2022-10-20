@@ -32,7 +32,7 @@ its household size distribution. See \code{\link[=get_household_size_distributio
 function for retrieving household size distributions for a given place.
 }
 \examples{
-demo_data <- get_household_size_distribution(lga = "Fairfield (C)")
+demo_data <- abs_household_size_population(lga = "Fairfield (C)")
 demo_data
 per_capita_household_size(household_data=demo_data,
                           household_size_col=household_size,
