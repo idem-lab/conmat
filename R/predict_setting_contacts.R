@@ -87,12 +87,12 @@ predict_setting_contacts <- function(population,
                                      model_per_capita_household_size =
                                        get_polymod_per_capita_household_size()) {
 
-  setting_predictions <- furrr::future_map(
+  setting_predictions <- purrr::map(
     .x = contact_model,
     .f = predict_contacts,
     population = population,
-    age_breaks = age_breaks,
-    .options = furrr::furrr_options(seed = TRUE)
+    age_breaks = age_breaks
+    # .options = furrr::furrr_options(seed = TRUE)
   )
   
   setting_matrices <- furrr::future_map(

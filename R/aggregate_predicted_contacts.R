@@ -71,8 +71,8 @@ aggregate_predicted_contacts <- function(predicted_contacts_1y,
       .groups = "drop"
     ) %>%
     # *average* the total contacts within the 'from' contacts, weighted by the
-    # population distribution (to get contacts for the population-average ember of
-    # that age group)
+    # population distribution (to get contacts for the population-average 
+    # ember of that age group)
     dplyr::mutate(
       pop_age_from = age_population_function(age_from),
       age_group_from = cut(
