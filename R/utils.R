@@ -96,12 +96,11 @@ bin_widths <- function(lower_bound) {
 #' @title Check if data is a list
 #' @param contact_data data on the contacts between two ages at different settings
 #' @keywords internal
-
 check_if_list <- function(contact_data) {
   if (!inherits(contact_data, "list")) {
     stop(cli::format_error(
-      c("i" = "Function expects {.var contact_data_list} to be of class {.cls list}",
-        "x" = "We see {.var contact_data_list} is of class {.cls {class(contact_data_list)}}.")
+      c("i" = "Function expects {.var contact_data} to be of class {.cls list}",
+        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}.")
     ))
     
   }
