@@ -91,3 +91,30 @@ bin_widths <- function(lower_bound) {
   c(diffs, diffs[length(diffs)])
   
 }
+
+#'@title Check dimensions
+#' @description An internal function used within [apply_vaccination()] to warn users of incompatible dimensions of 
+#' data and the next generation matrices
+#'
+#' @param data data frame
+#' @param ngm  list with next generation matrices at different settings
+#' @keywords internal
+check_dimensions <- function(ngm, data){
+  
+  dim.match <- all(mapply(nrow(data),
+                          lapply(ngm,"ncol"),
+                          FUN="identical"))
+  
+  if(!dim.match)
+  {
+    stop(cli::format_error(
+      c("Non-conformable arrays present." ,
+        "i"= "The number of columns in {.var ngm} must match the number of rows in {.var data}. 
+         This can happen if {.var ngm} and {.var data} don't have the same number age bands.",
+        "x" = "Number of columns in {.var ngm} is {ncol(ngm$all)}.",
+        "x" = "Number of rows in {.var data} is {nrow(data)}."
+      )
+    ))
+    
+  }}
+
