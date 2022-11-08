@@ -99,22 +99,26 @@ bin_widths <- function(lower_bound) {
 #' @param data data frame
 #' @param ngm  list with next generation matrices at different settings
 #' @keywords internal
-check_dimensions <- function(ngm, data){
+check_dimensions <- function(ngm, data) {
   
-  dim.match <- all(mapply(nrow(data),
-                          lapply(ngm,"ncol"),
-                          FUN="identical"))
+  nrow_data <- nrow(data)
+  ngm_cols <- purrr::map_int(ngm, ncol)
+  dim.match <- all(nrow_data == ngm_cols)
+
+#   lapply(ngm, "ncol") %>%
+#     mapply(nrow(data), FUN = "identical") %>%
+#     all()
   
-  if(!dim.match)
+  if (!dim.match)
   {
     stop(cli::format_error(
-      c("Non-conformable arrays present." ,
-        "i"= "The number of columns in {.var ngm} must match the number of rows in {.var data}. 
-         This can happen if {.var ngm} and {.var data} don't have the same number age bands.",
-        "x" = "Number of columns in {.var ngm} is {ncol(ngm$all)}.",
+      c(
+        "Non-conformable arrays present." ,
+        "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
+        "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
         "x" = "Number of rows in {.var data} is {nrow(data)}."
       )
     ))
     
-  }}
-
+  }
+}
