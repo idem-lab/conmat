@@ -2,6 +2,7 @@
 
 
 
+
 test_that("check_dimensions() returns nothing when compatible dimensions",
           {
             list(matrix(1:6, nrow = 3, ncol = 2),
@@ -30,14 +31,22 @@ test_that("check_dimensions() returns error", {
 
 test_that("apply_vaccination gives error when incompatible dimensions present",
           {
-            ngm_fairfield_15_plus <- generate_ngm(
-              lga_name = "Fairfield (C)",
-              age_breaks = c(seq(0, 15, by = 5), Inf),
-              R_target = 1.5
-            )
+            matrix(1:16,
+                   nrow = 4,
+                   ncol = 4,
+                   dimnames = list(
+                     c("[0,5)",  "[5,10)" ,  "[10,15)",  "[15,Inf)"),
+                     c("[0,5)",  "[5,10)" ,  "[10,15)",  "[15,Inf)")
+                   )) -> demo_matrix
+            
+            demo_matrix <-  replicate(5, demo_matrix, simplify = FALSE)  
+            
+            names(demo_matrix) <- c("home"  , "school" , "work" ,  "other",  "all")
+            
+            
             expect_snapshot_error(
               apply_vaccination(
-                ngm = ngm_fairfield_15_plus,
+                ngm = demo_matrix,
                 data = vaccination_effect_example_data,
                 coverage_col = coverage,
                 acquisition_col = acquisition,
