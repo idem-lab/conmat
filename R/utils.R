@@ -109,7 +109,7 @@ check_dimensions <- function(ngm, data) {
 #     mapply(nrow(data), FUN = "identical") %>%
 #     all()
   
-  if (!dim.match)
+  if (!dim_match)
   {
     stop(cli::format_error(
       c(
