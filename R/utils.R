@@ -103,7 +103,7 @@ check_dimensions <- function(ngm, data) {
   
   nrow_data <- nrow(data)
   ngm_cols <- purrr::map_int(ngm, ncol)
-  dim.match <- all(nrow_data == ngm_cols)
+  dim_match <- all(nrow_data == ngm_cols)
 
 #   lapply(ngm, "ncol") %>%
 #     mapply(nrow(data), FUN = "identical") %>%
