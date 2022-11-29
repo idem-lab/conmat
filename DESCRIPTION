@@ -29,6 +29,7 @@ Depends:
 Suggests: 
     covr,
     knitr,
+    vdiffr,
     testthat (>= 3.0.0),
     rmarkdown,
     future
