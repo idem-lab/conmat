@@ -1,5 +1,7 @@
 
   test_that("autoplot works", {
+    skip_on_cran()
+    skip_on_ci()
     set.seed(2021-10-4)
     synthetic_settings_5y_fairfield <- extrapolate_polymod(
       age_breaks=seq(0, 15, by = 5),
