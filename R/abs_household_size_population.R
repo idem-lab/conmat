@@ -1,4 +1,7 @@
 #' @title Get population associated with each household size in an LGA or a state
+#' @param state target Australian state name in abbreviated form, such as "QLD", "NSW", or "TAS"
+#' @param lga target Australian local government area (LGA) name, such as "Fairfield (C)".  See 
+#'   [abs_lga_lookup()] for list of lga names
 #' @return returns a data frame with household size and the population associated with it in each LGA or state. 
 #' @export
 #' @examples 
