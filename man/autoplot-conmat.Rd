@@ -11,12 +11,16 @@
 \method{autoplot}{conmat_setting_prediction_matrix}(object, ..., title = "Setting-specific synthetic contact matrices")
 }
 \arguments{
-\item{object}{matrix}
+\item{object}{A matrix or a list of square matrices, with row and column names
+indicating the age groups.}
 
-\item{title}{Title to give to plot setting matrices}
+\item{...}{Other arguments passed on}
+
+\item{title}{Title to give to plot setting matrices. Default title for plotting a single contact matrix is "Contact Matrices" and for
+setting wise contact matrix it is "Setting-specific synthetic contact matrices".}
 }
 \value{
-a ggplot
+a ggplot visualisation of contact rates
 }
 \description{
 Plot setting matrices using ggplot2
