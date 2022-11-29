@@ -96,7 +96,7 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
         "The state name provided matches multiple states",
         i = "Specify the exact state name or set {.arg {multiple_state}} = \\
           `TRUE`. See {.code {abs_lga_lookup}} for a list of all states",
-        x = glue::glue("The state name '{state_name}' matched multiple LGAs:"),
+        x = glue::glue("The state name '{state_name}' matched multiple states:"),
         glue::glue("{ state_that_matches}")
       )
     )
