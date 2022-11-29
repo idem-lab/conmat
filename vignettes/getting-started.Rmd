@@ -154,12 +154,12 @@ synthetic_contact_fairfield
 
 ## Plotting
 
-Let's visualise the matrix to get a sense of the predictions with `plot_matrix`. First we need to transform the predictions to a matrix:
+Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
 ```{r plot-matrix-differents}
 synthetic_contact_fairfield %>% 
   predictions_to_matrix() %>% 
-  plot_matrix()
+  autoplot()
 ```
 
 ## Note 
@@ -215,11 +215,11 @@ synthetic_settings_5y_fairfield$home
 synthetic_settings_5y_fairfield$all
 ```
 
-We can use `plot_setting_matrix` to plot all at once
+We can use `autoplot` to plot all at once
 
 ```{r fairfield-synth-5-plot}
 # this code is erroring for the moment - something to do with rendering a large plot I think.
-plot_setting_matrices(
+autoplot(
   synthetic_settings_5y_fairfield,
   title = "Setting-specific synthetic contact matrices (fairfield 2020 projected)"
 )
@@ -269,7 +269,7 @@ synthetic_settings_5y_fairfield <- extrapolate_polymod(
   population = fairfield_age_pop
 )
 
-plot_setting_matrices(synthetic_settings_5y_fairfield)
+autoplot(synthetic_settings_5y_fairfield)
 ```
 
 We can also do the same, for the polymod data itself:
@@ -280,17 +280,17 @@ synthetic_settings_5y_polymod <- extrapolate_polymod(
   population = polymod_population
 )
 
-plot_setting_matrices(synthetic_settings_5y_polymod)
+autoplot(synthetic_settings_5y_polymod)
 ```
 
 And for fun we can compare some of the data together, say polymod data for home against fairfield home, using the `patchwork` package:
 
 ```{r}
 library(patchwork)
-gg_polymod_home <- plot_matrix(synthetic_settings_5y_polymod$home) + 
+gg_polymod_home <- autoplot(synthetic_settings_5y_polymod$home) + 
   labs(title = "polymod home")
 
-gg_fairfield_home <- plot_matrix(synthetic_settings_5y_fairfield$home) + 
+gg_fairfield_home <- autoplot(synthetic_settings_5y_fairfield$home) + 
   labs(title = "Fairfield home")
 
 gg_polymod_home + gg_fairfield_home
@@ -303,7 +303,7 @@ synthetic_settings_5y_alice <- extrapolate_polymod(
   population = abs_age_lga("Alice Springs (T)")
 )
 
-gg_alice_home <- plot_matrix(synthetic_settings_5y_alice$home) + 
+gg_alice_home <- autoplot(synthetic_settings_5y_alice$home) + 
   labs(title = "Alice Springs home")
 
 gg_polymod_home + gg_alice_home
