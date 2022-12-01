@@ -46,7 +46,7 @@ Imports:
     dplyr,
     stats,
     tidyr,
-    socialmixr,
+    socialmixr (>= 0.2.0),
     ggplot2,
     tibble,
     patchwork,
