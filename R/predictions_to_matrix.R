@@ -28,7 +28,8 @@
 #'  
 #' @export
 predictions_to_matrix <- function(contact_predictions) {
-  contact_predictions %>%
+  
+  prediction_matrix <- contact_predictions %>%
     tidyr::pivot_wider(
       names_from = age_group_from,
       values_from = contacts
@@ -36,5 +37,8 @@ predictions_to_matrix <- function(contact_predictions) {
     tibble::column_to_rownames(
       "age_group_to"
     ) %>%
-    as.matrix()
+    as.matrix() %>% 
+    new_prediction_matrix()
+  
+  prediction_matrix
 }

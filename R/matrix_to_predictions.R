@@ -34,6 +34,7 @@ matrix_to_predictions <- function(contact_matrix) {
     tibble::as_tibble(
       rownames = "age_group_to"
     ) %>%
+    dplyr::mutate(across(!age_group_to, as.double))%>%
     tidyr::pivot_longer(
       cols = -c(age_group_to),
       names_to = "age_group_from",
