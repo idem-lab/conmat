@@ -1,6 +1,6 @@
 #' @title Return Australian Bureau of Statistics (ABS) age population data for a
 #'   given Local Government Area (LGA) or state
-#' @param lga_name lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See [check_lga_name()] for more details.
+#' @param lga_name lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. 
 #' @return dataset of: `lga` (or `state`), `lower.age.limit`, `year`,
 #'   and `population`.
 #' @name abs_age_data

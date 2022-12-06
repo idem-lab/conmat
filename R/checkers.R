@@ -17,7 +17,8 @@
 #' # not a fully specified LGA
 #' check_lga_name("Fairfield")
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 check_lga_name <- function(
     lga_name,
     multiple_lga = FALSE
