@@ -102,3 +102,4 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
     )
   }
 }
+

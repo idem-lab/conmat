@@ -37,6 +37,9 @@
 #' }
 fit_setting_contacts <- function(contact_data_list, population) {
 
+  check_if_list(contact_data_list)
+  
+  
   furrr::future_map(
     .x = contact_data_list,
     .f = fit_single_contact_model,
