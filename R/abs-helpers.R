@@ -6,13 +6,13 @@
 #' @name abs_age_data
 #' @export
 #' @examples
-#' abs_age_lga("Albury (C)")
-#' abs_age_state("NSW")
+#' abs_age_lga(c("Albury (C)","Fairfield (C)"))
+#' abs_age_state(c("NSW","VIC"))
 abs_age_lga <- function(lga_name) {
-  check_lga_name(lga_name)
+  check_lga_name(lga_name,multiple_lga = TRUE)
 
   abs_pop_age_lga_2020 %>%
-    dplyr::filter(lga == lga_name) %>%
+    dplyr::filter(lga %in% lga_name) %>%
     dplyr::select(
       lga,
       age_group,
@@ -27,15 +27,10 @@ abs_age_lga <- function(lga_name) {
 #' @rdname abs_age_data
 #' @export
 abs_age_state <- function(state_name) {
-  check_state_name(state_name)
+  check_state_name(state_name,multiple_state = TRUE)
 
   abs_pop_age_lga_2020 %>%
-    dplyr::filter(
-      stringr::str_detect(
-        string = state,
-        pattern = state_name
-      )
-    ) %>%
+    dplyr::filter(state %in% state_name) %>%
     dplyr::select(
       state,
       age_group,

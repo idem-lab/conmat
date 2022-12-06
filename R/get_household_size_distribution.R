@@ -86,5 +86,3 @@ get_household_size_distribution <- function(state = NULL, lga = NULL) {
   }
   household_data
 }
-
-
