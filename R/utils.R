@@ -99,7 +99,7 @@ bin_widths <- function(lower_bound) {
 #' @param data data frame
 #' @param ngm  list with next generation matrices at different settings
 #' @keywords internal
-check_dimensions <- function(ngm, data) {
+check_dimensions <- function(ngm, data){
   
   nrow_data <- nrow(data)
   ngm_cols <- purrr::map_int(ngm, ncol)
@@ -116,12 +116,12 @@ check_dimensions <- function(ngm, data) {
         "Non-conformable arrays present." ,
         "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
         "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
-        "x" = "Number of rows in {.var data} is {nrow(data)}."
-      )
+        "x" = "Number of rows in {.var data} is {nrow(data)}.")
+      ))
 
 
-}
-}
+  }}
+
 #' 
 #' @title Check if data is a list
 #' @param contact_data data on the contacts between two ages at different settings
