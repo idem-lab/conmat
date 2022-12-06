@@ -69,7 +69,7 @@ data_abs_state_education %>%
   ggplot(aes(x = age, y = proportion)) +
   geom_point() + facet_wrap( ~ state)
 
-use_data(data_abs_state_education, overwrite = TRUE)
+use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 
 # 
 # data_census_education %>%

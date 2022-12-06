@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
 [![Codecov test coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
+[![R-CMD-check](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
@@ -144,12 +145,12 @@ synthetic_contact_fairfield
 
 ## Plotting
 
-Let's visualise the matrix to get a sense of the predictions with `plot_matrix`. First we need to transform the predictions to a matrix:
+Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
 ```{r plot-matrix-differents}
 synthetic_contact_fairfield %>% 
   predictions_to_matrix() %>% 
-  plot_matrix()
+  autoplot()
 ```
 
 ## Applying the model across all settings.

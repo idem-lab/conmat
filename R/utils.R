@@ -118,6 +118,20 @@ check_dimensions <- function(ngm, data) {
         "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
         "x" = "Number of rows in {.var data} is {nrow(data)}."
       )
+
+
+}
+}
+#' 
+#' @title Check if data is a list
+#' @param contact_data data on the contacts between two ages at different settings
+#' @keywords internal
+check_if_list <- function(contact_data) {
+  if (!inherits(contact_data, "list")) {
+    stop(cli::format_error(
+      c("i" = "Function expects {.var contact_data} to be of class {.cls list}",
+        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}.")
+
     ))
     
   }

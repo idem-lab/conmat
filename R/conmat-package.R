@@ -2,6 +2,12 @@
 #' @importFrom stats predict
 "_PACKAGE"
 
+# generics to re-export
+
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
+
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
@@ -69,6 +75,7 @@ globalVariables(
     "part_id",
     "participants",
     "per_capita_household_size",
+    "polymod_setting_models",
     "pop_age_from",
     "pop_age_to",
     "population",

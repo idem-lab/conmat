@@ -195,4 +195,4 @@ summary(data_abs_census_lga_education)
 
 skimr::skim(data_abs_lga_education)
 
-use_data(data_abs_lga_education, overwrite = TRUE)
+use_data(data_abs_lga_education, compress = "xz", overwrite = TRUE)

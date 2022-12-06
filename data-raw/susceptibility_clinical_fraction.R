@@ -105,4 +105,4 @@ davies_age_extended <- tibble::tribble(
   100L,  0.698453096414112,  0.71587836634111,  0.71587836634111
 )
 
-use_data(davies_age_extended, overwrite = TRUE)
+use_data(davies_age_extended, compress = "xz", overwrite = TRUE)

@@ -29,8 +29,10 @@ Depends:
 Suggests: 
     covr,
     knitr,
+    vdiffr,
     testthat (>= 3.0.0),
     rmarkdown,
+    stringr,
     future
 VignetteBuilder: 
     knitr
@@ -40,19 +42,18 @@ Language: en-GB
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 Imports: 
     mgcv,
     cli,
     dplyr,
     stats,
     tidyr,
-    socialmixr,
+    socialmixr (>= 0.2.0),
     ggplot2,
     tibble,
     patchwork,
     magrittr,
-    stringr,
     rlang,
     glue,
     readr,

@@ -20,7 +20,7 @@ get_data_abs_age_work <- function(age=NULL, state=NULL, lga=NULL) {
   # checks only for state 
   if (!is.null(state) & is.null(lga)) {
     
-    check_state_name(state)
+    check_state_name(state,multiple_state=TRUE)
     data_subset <- data_abs_state_work %>%
       dplyr::filter(state %in% {{ state }})
     
