@@ -42,15 +42,29 @@
 #'   age_max = 2
 #' )
 #' @export
-predict_contacts_1y <- function(model, population, age_min = 0, age_max = 100) {
-  
+predict_contacts_1y <- function(model, 
+                                population, 
+                                age_min = 0, 
+                                age_max = 100,
+                                age_breaks = NULL) {
   all_ages <- age_min:age_max
 
   # predict contacts to all integer years, adjusting for the population in a given place
-  tidyr::expand_grid(
-    age_from = all_ages,
-    age_to = all_ages,
-  ) %>%
+  
+  
+  if (!is.null(age_breaks)){
+    df_expanded <- tidyr::expand_grid(
+      age_from = age_breaks,
+      age_to = age_breaks
+      )
+  } else {
+    df_expanded <- tidyr::expand_grid(
+      age_from = all_ages,
+      age_to = all_ages,
+    )
+  }
+  
+  df_expanded %>% 
     # add on prediction features, setting the population to predict to
     add_modelling_features(
       population = population

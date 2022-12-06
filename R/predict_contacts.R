@@ -84,13 +84,15 @@ predict_contacts <- function(model,
   age_min_integration <- min(ages[valid])
   age_max_integration <- max(ages[valid])
   
+  # predicted contacts... - no longer at 1 year increments
   pred_1y <- predict_contacts_1y(
     model = model,
     population = population,
     # these two arguments could be changed by just taking in the age vector
     # and then doing that step above internally
     age_min = age_min_integration,
-    age_max = age_max_integration
+    age_max = age_max_integration,
+    age_breaks = age_breaks
   )
 
   pred_groups <- aggregate_predicted_contacts(
