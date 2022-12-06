@@ -186,20 +186,20 @@ details. Below is a brief example of this:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polymod_contact_data_belgium_0_10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,444 × 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,447 × 5</span></span></span>
 <span><span class="co">#&gt;    setting age_from age_to contacts participants</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> work           0      0        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> work           0      1        0            3</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> work           0      2        0            2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> work           0      4        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> work           0      5        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work           0      7        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work           0     10        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> work           0     11        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> work           0     12        0            1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,434 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,437 more rows</span></span></span></code></pre></div>
 <p>Similarly, you can control the population data, retrieving it only
 for certain countries:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -269,9 +269,9 @@ features of the contact rates.</p>
 <span><span class="co">#&gt;     age_from) + school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt;  7.97  5.25  7.32 13.53  total = 37.06 </span></span>
+<span><span class="co">#&gt;  7.91  5.54  7.41 13.12  total = 36.98 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 1640.116</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 1639.617</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a
 new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in
@@ -319,16 +319,16 @@ even sub year.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 3</span></span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to   contacts</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)            0.182 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)           0.173 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)          0.107 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)          0.067<span style="text-decoration: underline;">8</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)          0.107 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)            0.183 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)           0.174 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)          0.106 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)          0.067<span style="text-decoration: underline;">7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)          0.108 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)          0.201 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     <span style="text-decoration: underline;">48</span>477.    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     <span style="text-decoration: underline;">24</span>420.    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [5,10)         [0,5)            0.140 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)           0.253 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)          0.201 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)           0.256 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)          0.199 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -398,7 +398,7 @@ one, and get summary information out:</p>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
 <span><span class="co">#&gt;  5.37  2.67  6.29 10.31  total = 27.64 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 770.0161</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 770.016</span></span></code></pre></div>
 <p>So this gives us our baseline model of a contact model. We have fit
 this model to the existing contact survey data. We can now predict to
 another age population, to create our “synthetic” contact matrix.</p>
@@ -421,7 +421,7 @@ providing some age breaks we want to predict to</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
-<span><span class="co">#&gt;  $ home  : 'conmat_prediction_matrix' num [1:5, 1:5] 0.1187 0.1105 0.0703 0.0446 5.3976 ...</span></span>
+<span><span class="co">#&gt;  $ home  : 'conmat_prediction_matrix' num [1:5, 1:5] 0.1187 0.1105 0.0703 0.0446 5.3975 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
@@ -444,21 +444,21 @@ providing some age breaks we want to predict to</p>
 <span><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "conmat_setting_prediction_matrix" "list"</span></span>
 <span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">home</span></span>
 <span><span class="co">#&gt;               [0,5)     [5,10)    [10,15)    [15,20)  [20,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)    0.11866308 0.08873478 0.03840973 0.01893467 15.291527</span></span>
-<span><span class="co">#&gt; [5,10)   0.11051115 0.16179270 0.10517174 0.03730464  9.653209</span></span>
-<span><span class="co">#&gt; [10,15)  0.07032726 0.12917705 0.18778036 0.09968769  5.694196</span></span>
-<span><span class="co">#&gt; [15,20)  0.04457819 0.05049396 0.10398891 0.16937255  2.643817</span></span>
-<span><span class="co">#&gt; [20,Inf) 5.39757803 2.34532172 1.06663102 0.51955908  1.704077</span></span>
+<span><span class="co">#&gt; [0,5)    0.11866311 0.08873474 0.03840973 0.01893466 15.291916</span></span>
+<span><span class="co">#&gt; [5,10)   0.11051117 0.16179271 0.10517177 0.03730463  9.653469</span></span>
+<span><span class="co">#&gt; [10,15)  0.07032725 0.12917705 0.18778036 0.09968769  5.694360</span></span>
+<span><span class="co">#&gt; [15,20)  0.04457819 0.05049398 0.10398891 0.16937253  2.643900</span></span>
+<span><span class="co">#&gt; [20,Inf) 5.39752612 2.34530515 1.06663027 0.51955913  1.704139</span></span>
 <span><span class="co">#&gt; attr(,"class")</span></span>
 <span><span class="co">#&gt; [1] "conmat_prediction_matrix" "matrix"                  </span></span>
 <span><span class="co">#&gt; [3] "array"</span></span>
 <span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">all</span></span>
 <span><span class="co">#&gt;                  [0,5)        [5,10)       [10,15)      [15,20)     [20,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)     1.068001e+00  2.826596e-01  6.421769e-02 4.723619e-02 1.547773e+01</span></span>
-<span><span class="co">#&gt; [5,10)    3.953182e-01  4.751718e+00  4.123174e-01 9.434447e-02 9.810892e+00</span></span>
-<span><span class="co">#&gt; [10,15)   1.198883e-01  5.962353e-01  6.799272e+00 5.121477e-01 5.780309e+00</span></span>
-<span><span class="co">#&gt; [15,20)   8.904179e-02  1.042122e-01  7.011252e-01 4.942633e+00 2.721112e+00</span></span>
-<span><span class="co">#&gt; [20,Inf) 2.618233e+104 6.523254e+104 1.072654e+100 5.113059e+81 5.796951e+55</span></span>
+<span><span class="co">#&gt; [0,5)     1.068001e+00  2.826596e-01  6.421769e-02 4.723619e-02 1.547812e+01</span></span>
+<span><span class="co">#&gt; [5,10)    3.953182e-01  4.751718e+00  4.123174e-01 9.434447e-02 9.811152e+00</span></span>
+<span><span class="co">#&gt; [10,15)   1.198882e-01  5.962353e-01  6.799272e+00 5.121477e-01 5.780473e+00</span></span>
+<span><span class="co">#&gt; [15,20)   8.904179e-02  1.042122e-01  7.011252e-01 4.942633e+00 2.721195e+00</span></span>
+<span><span class="co">#&gt; [20,Inf) 2.618230e+104 6.523249e+104 1.072653e+100 5.113056e+81 5.796948e+55</span></span>
 <span><span class="co">#&gt; attr(,"class")</span></span>
 <span><span class="co">#&gt; [1] "conmat_prediction_matrix" "conmat_prediction_matrix"</span></span>
 <span><span class="co">#&gt; [3] "matrix"                   "array"</span></span></code></pre></div>
