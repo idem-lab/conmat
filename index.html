@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">conmat</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9004</span>
       </span>
     </div>
 
@@ -61,570 +63,307 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="conmat" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#conmat" class="anchor"></a>conmat</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="conmat">conmat<a class="anchor" aria-label="anchor" href="#conmat"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>The goal of conmat is to provide methods for producing contact matrices.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"conmat"</span>, repos <span class="op">=</span> <span class="st">"https://njtierney.r-universe.dev"</span><span class="op">)</span></code></pre></div>
-<p>Or alternatively you can use <code>remotes</code> (although I recommend using the above code)</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"njtierney/conmat"</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>We can extract out the ABS age population data using <code>abs_age_lga</code> like so:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">conmat</span><span class="op">)</span>
-<span class="va">fairfield_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/abs_age_lga.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span>
-<span class="va">fairfield_age_pop</span>
-<span class="co">#&gt; # A tibble: 18 × 4</span>
-<span class="co">#&gt;    lga           lower.age.limit  year population</span>
-<span class="co">#&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 Fairfield (C)               0  2020      12261</span>
-<span class="co">#&gt;  2 Fairfield (C)               5  2020      13093</span>
-<span class="co">#&gt;  3 Fairfield (C)              10  2020      13602</span>
-<span class="co">#&gt;  4 Fairfield (C)              15  2020      14323</span>
-<span class="co">#&gt;  5 Fairfield (C)              20  2020      15932</span>
-<span class="co">#&gt;  6 Fairfield (C)              25  2020      16190</span>
-<span class="co">#&gt;  7 Fairfield (C)              30  2020      14134</span>
-<span class="co">#&gt;  8 Fairfield (C)              35  2020      13034</span>
-<span class="co">#&gt;  9 Fairfield (C)              40  2020      12217</span>
-<span class="co">#&gt; 10 Fairfield (C)              45  2020      13449</span>
-<span class="co">#&gt; 11 Fairfield (C)              50  2020      13419</span>
-<span class="co">#&gt; 12 Fairfield (C)              55  2020      13652</span>
-<span class="co">#&gt; 13 Fairfield (C)              60  2020      12907</span>
-<span class="co">#&gt; 14 Fairfield (C)              65  2020      10541</span>
-<span class="co">#&gt; 15 Fairfield (C)              70  2020       8227</span>
-<span class="co">#&gt; 16 Fairfield (C)              75  2020       5598</span>
-<span class="co">#&gt; 17 Fairfield (C)              80  2020       4006</span>
-<span class="co">#&gt; 18 Fairfield (C)              85  2020       4240</span></code></pre></div>
-<p>Note that you need to use the exact LGA name - you can look up LGA names in the data set <code>abs_lga_lookup</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_lga_lookup</span>
-<span class="co">#&gt; # A tibble: 545 × 3</span>
-<span class="co">#&gt;    state lga_code lga                  </span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                </span>
-<span class="co">#&gt;  1 NSW      10050 Albury (C)           </span>
-<span class="co">#&gt;  2 NSW      10180 Armidale Regional (A)</span>
-<span class="co">#&gt;  3 NSW      10250 Ballina (A)          </span>
-<span class="co">#&gt;  4 NSW      10300 Balranald (A)        </span>
-<span class="co">#&gt;  5 NSW      10470 Bathurst Regional (A)</span>
-<span class="co">#&gt;  6 NSW      10500 Bayside (A)          </span>
-<span class="co">#&gt;  7 NSW      10550 Bega Valley (A)      </span>
-<span class="co">#&gt;  8 NSW      10600 Bellingen (A)        </span>
-<span class="co">#&gt;  9 NSW      10650 Berrigan (A)         </span>
-<span class="co">#&gt; 10 NSW      10750 Blacktown (C)        </span>
-<span class="co">#&gt; # … with 535 more rows</span></code></pre></div>
-<p>First we want to fit the model to the polymod data</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">24</span><span class="op">)</span>
-<span class="va">polymod_contact_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">polymod_survey_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">setting_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fit_setting_contacts.html">fit_setting_contacts</a></span><span class="op">(</span>
-  contact_data_list <span class="op">=</span> <span class="va">polymod_contact_data</span>,
-  population <span class="op">=</span> <span class="va">polymod_survey_data</span>
-  <span class="op">)</span></code></pre></div>
-<p>Then we take this model and extrapolate to the fairfield data:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">24</span><span class="op">)</span>
-<span class="va">synthetic_settings_5y_fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span>
-  population <span class="op">=</span> <span class="va">fairfield_age_pop</span>,
-  contact_model <span class="op">=</span> <span class="va">setting_models</span>,
-  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># this code is erroring for the moment - something to do with rendering a large plot I think.</span>
-<span class="fu"><a href="reference/plot_setting_matrices.html">plot_setting_matrices</a></span><span class="op">(</span>
-  <span class="va">synthetic_settings_5y_fairfield</span>,
-  title <span class="op">=</span> <span class="st">"Setting-specific synthetic contact matrices (fairfield 2020 projected)"</span>
-<span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-fairfield-synth-5-plot-1.png" width="100%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">24</span><span class="op">)</span>
-<span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">home</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-matrix-differents-1.png" width="100%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">work</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-matrix-differents-2.png" width="100%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">school</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-matrix-differents-3.png" width="100%"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">other</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-matrix-differents-4.png" width="100%"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">all</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-matrix-differents-5.png" width="100%"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># build synthetic age-structured contact matrices with GAMs</span>
-<span class="co"># analysis of polymod data</span>
-
-<span class="co"># set age breaks</span>
-<span class="va">age_breaks_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
-<span class="va">age_breaks_1y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
-
-<span class="co"># fit a single overall contact model to polymod</span>
-<span class="va">m_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fit_single_contact_model.html">fit_single_contact_model</a></span><span class="op">(</span>
-  contact_data <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span>,
-  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">m_all</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Family: poisson </span>
-<span class="co">#&gt; Link function: log </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Formula:</span>
-<span class="co">#&gt; contacts ~ offset(log(pop_age_to)) + s(age_to) + s(age_from) + </span>
-<span class="co">#&gt;     s(abs(age_from - age_to)) + s(abs(age_from - age_to), age_from) + </span>
-<span class="co">#&gt;     school_probability + work_probability</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Estimated degrees of freedom:</span>
-<span class="co">#&gt;  8.77  8.98  8.67 26.93  total = 56.35 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; fREML score: 21336.64</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
-<span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
-  model <span class="op">=</span> <span class="va">m_all</span>, 
-  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,
-  age_breaks <span class="op">=</span> <span class="va">age_breaks_5y</span>
-<span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">synthetic_all_5y</span>
-<span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
-<span class="co">#&gt; [0,5)    2.2961778 0.9841760 0.2665967 0.2436655 0.4263069 0.7686328 1.0457418</span>
-<span class="co">#&gt; [5,10)   0.9175304 5.9371406 1.6621643 0.3355184 0.3035360 0.5921631 1.1227155</span>
-<span class="co">#&gt; [10,15)  0.1560111 1.4031858 8.6739195 1.8637429 0.3277827 0.3409390 0.6454148</span>
-<span class="co">#&gt; [15,20)  0.1523118 0.2469108 1.5818971 7.7827790 1.7205829 0.4877014 0.5113751</span>
-<span class="co">#&gt; [20,25)  0.3093607 0.2952594 0.3694681 1.3860727 4.9504574 1.7040590 0.8051970</span>
-<span class="co">#&gt; [25,30)  0.4394524 0.5026583 0.5100119 0.5911413 1.2744947 2.7749975 1.6327936</span>
-<span class="co">#&gt; [30,35)  0.4783429 0.6128759 0.6709726 0.7279402 0.8997542 1.4076367 2.0034893</span>
-<span class="co">#&gt; [35,40)  0.4707160 0.7161894 0.7818917 0.7754519 0.8982554 1.2761030 1.8279342</span>
-<span class="co">#&gt; [40,45)  0.3585837 0.6616827 0.8958419 0.8786357 0.8075277 0.9583238 1.4669700</span>
-<span class="co">#&gt; [45,50)  0.2694747 0.4548469 0.7697744 1.0041722 0.9687434 0.8558886 0.9518309</span>
-<span class="co">#&gt; [50,55)  0.2688993 0.3315254 0.4888495 0.7979599 1.1016920 1.1536309 1.0257817</span>
-<span class="co">#&gt; [55,60)  0.2800674 0.3418540 0.3564905 0.4629270 0.7351270 1.0983144 1.2677984</span>
-<span class="co">#&gt; [60,65)  0.2047405 0.3530780 0.3664221 0.3391652 0.3958605 0.5933897 0.9004819</span>
-<span class="co">#&gt; [65,70)  0.1192766 0.2500690 0.3431780 0.3416790 0.3228740 0.3627953 0.4976479</span>
-<span class="co">#&gt; [70,75)  0.1102092 0.1645586 0.2203824 0.2729754 0.3113342 0.3471806 0.4138156</span>
-<span class="co">#&gt; [75,Inf) 0.2734595 0.3064248 0.2138374 0.1389023 0.1280255 0.1656627 0.2357608</span>
-<span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
-<span class="co">#&gt; [0,5)    0.9659428 0.6537108 0.4503856 0.3820578 0.3796647 0.3429701 0.2809982</span>
-<span class="co">#&gt; [5,10)   1.3931823 1.0130246 0.6007397 0.3900379 0.2974886 0.2380190 0.2138697</span>
-<span class="co">#&gt; [10,15)  1.1082553 1.1105445 0.7483189 0.4427546 0.2667620 0.1768716 0.1561535</span>
-<span class="co">#&gt; [15,20)  0.8083659 1.0268667 0.9122820 0.6187293 0.3494482 0.1847988 0.1349457</span>
-<span class="co">#&gt; [20,25)  0.8192829 0.9264065 0.9437859 0.7962770 0.5202391 0.2619769 0.1491834</span>
-<span class="co">#&gt; [25,30)  1.1249652 0.9842276 0.9420020 0.8757729 0.6833611 0.3932824 0.2097393</span>
-<span class="co">#&gt; [30,35)  1.6605228 1.1779630 0.9493098 0.8715278 0.7754303 0.5487952 0.3392793</span>
-<span class="co">#&gt; [35,40)  2.0005634 1.5807540 1.0701711 0.7972073 0.6849897 0.5760937 0.4745477</span>
-<span class="co">#&gt; [40,45)  2.0549419 1.9468994 1.4015427 0.8618834 0.5496203 0.4078352 0.4039658</span>
-<span class="co">#&gt; [45,50)  1.3628629 1.7679749 1.7637476 1.2197031 0.6354214 0.3185311 0.2542919</span>
-<span class="co">#&gt; [50,55)  0.9907296 1.1317668 1.4619191 1.5649061 1.0302608 0.4507559 0.2377263</span>
-<span class="co">#&gt; [55,60)  1.1376829 0.9357412 1.0062316 1.3095410 1.3229469 0.7646212 0.3689179</span>
-<span class="co">#&gt; [60,65)  1.0619998 0.9020357 0.7833675 0.8988580 1.1057568 0.9891921 0.5885683</span>
-<span class="co">#&gt; [65,70)  0.6801188 0.7100285 0.6374689 0.6220742 0.7079672 0.8097389 0.8743001</span>
-<span class="co">#&gt; [70,75)  0.5222652 0.5901288 0.5864612 0.5332604 0.4797534 0.4706634 0.6720563</span>
-<span class="co">#&gt; [75,Inf) 0.3193049 0.3745879 0.4244675 0.4438412 0.3674579 0.2390325 0.2078713</span>
-<span class="co">#&gt;             [70,75)  [75,Inf)</span>
-<span class="co">#&gt; [0,5)    0.16128692 0.1245205</span>
-<span class="co">#&gt; [5,10)   0.14870550 0.1298568</span>
-<span class="co">#&gt; [10,15)  0.12691810 0.1459016</span>
-<span class="co">#&gt; [15,20)  0.10982848 0.1812284</span>
-<span class="co">#&gt; [20,25)  0.09786404 0.1830864</span>
-<span class="co">#&gt; [25,30)  0.10476741 0.1656551</span>
-<span class="co">#&gt; [30,35)  0.15995892 0.1832448</span>
-<span class="co">#&gt; [35,40)  0.27327554 0.2746340</span>
-<span class="co">#&gt; [40,45)  0.33234102 0.4275889</span>
-<span class="co">#&gt; [45,50)  0.24550335 0.5154186</span>
-<span class="co">#&gt; [50,55)  0.17222193 0.4693506</span>
-<span class="co">#&gt; [55,60)  0.18382065 0.3847631</span>
-<span class="co">#&gt; [60,65)  0.26047764 0.3421757</span>
-<span class="co">#&gt; [65,70)  0.42438380 0.3736197</span>
-<span class="co">#&gt; [70,75)  0.82086074 0.5982686</span>
-<span class="co">#&gt; [75,Inf) 0.29256809 1.2298811</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">08</span><span class="op">)</span>
-<span class="co"># predict contacts at 1y and 5y resolutions for inspection</span>
-<span class="va">synthetic_all_5y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span>
-  model <span class="op">=</span> <span class="va">m_all</span>, 
-  population <span class="op">=</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,
-  age_breaks <span class="op">=</span> <span class="va">age_breaks_5y</span>
-<span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">synthetic_all_5y</span>
-<span class="co">#&gt;              [0,5)    [5,10)   [10,15)   [15,20)   [20,25)   [25,30)   [30,35)</span>
-<span class="co">#&gt; [0,5)    2.2961778 0.9841760 0.2665967 0.2436655 0.4263069 0.7686328 1.0457418</span>
-<span class="co">#&gt; [5,10)   0.9175304 5.9371406 1.6621643 0.3355184 0.3035360 0.5921631 1.1227155</span>
-<span class="co">#&gt; [10,15)  0.1560111 1.4031858 8.6739195 1.8637429 0.3277827 0.3409390 0.6454148</span>
-<span class="co">#&gt; [15,20)  0.1523118 0.2469108 1.5818971 7.7827790 1.7205829 0.4877014 0.5113751</span>
-<span class="co">#&gt; [20,25)  0.3093607 0.2952594 0.3694681 1.3860727 4.9504574 1.7040590 0.8051970</span>
-<span class="co">#&gt; [25,30)  0.4394524 0.5026583 0.5100119 0.5911413 1.2744947 2.7749975 1.6327936</span>
-<span class="co">#&gt; [30,35)  0.4783429 0.6128759 0.6709726 0.7279402 0.8997542 1.4076367 2.0034893</span>
-<span class="co">#&gt; [35,40)  0.4707160 0.7161894 0.7818917 0.7754519 0.8982554 1.2761030 1.8279342</span>
-<span class="co">#&gt; [40,45)  0.3585837 0.6616827 0.8958419 0.8786357 0.8075277 0.9583238 1.4669700</span>
-<span class="co">#&gt; [45,50)  0.2694747 0.4548469 0.7697744 1.0041722 0.9687434 0.8558886 0.9518309</span>
-<span class="co">#&gt; [50,55)  0.2688993 0.3315254 0.4888495 0.7979599 1.1016920 1.1536309 1.0257817</span>
-<span class="co">#&gt; [55,60)  0.2800674 0.3418540 0.3564905 0.4629270 0.7351270 1.0983144 1.2677984</span>
-<span class="co">#&gt; [60,65)  0.2047405 0.3530780 0.3664221 0.3391652 0.3958605 0.5933897 0.9004819</span>
-<span class="co">#&gt; [65,70)  0.1192766 0.2500690 0.3431780 0.3416790 0.3228740 0.3627953 0.4976479</span>
-<span class="co">#&gt; [70,75)  0.1102092 0.1645586 0.2203824 0.2729754 0.3113342 0.3471806 0.4138156</span>
-<span class="co">#&gt; [75,Inf) 0.2734595 0.3064248 0.2138374 0.1389023 0.1280255 0.1656627 0.2357608</span>
-<span class="co">#&gt;            [35,40)   [40,45)   [45,50)   [50,55)   [55,60)   [60,65)   [65,70)</span>
-<span class="co">#&gt; [0,5)    0.9659428 0.6537108 0.4503856 0.3820578 0.3796647 0.3429701 0.2809982</span>
-<span class="co">#&gt; [5,10)   1.3931823 1.0130246 0.6007397 0.3900379 0.2974886 0.2380190 0.2138697</span>
-<span class="co">#&gt; [10,15)  1.1082553 1.1105445 0.7483189 0.4427546 0.2667620 0.1768716 0.1561535</span>
-<span class="co">#&gt; [15,20)  0.8083659 1.0268667 0.9122820 0.6187293 0.3494482 0.1847988 0.1349457</span>
-<span class="co">#&gt; [20,25)  0.8192829 0.9264065 0.9437859 0.7962770 0.5202391 0.2619769 0.1491834</span>
-<span class="co">#&gt; [25,30)  1.1249652 0.9842276 0.9420020 0.8757729 0.6833611 0.3932824 0.2097393</span>
-<span class="co">#&gt; [30,35)  1.6605228 1.1779630 0.9493098 0.8715278 0.7754303 0.5487952 0.3392793</span>
-<span class="co">#&gt; [35,40)  2.0005634 1.5807540 1.0701711 0.7972073 0.6849897 0.5760937 0.4745477</span>
-<span class="co">#&gt; [40,45)  2.0549419 1.9468994 1.4015427 0.8618834 0.5496203 0.4078352 0.4039658</span>
-<span class="co">#&gt; [45,50)  1.3628629 1.7679749 1.7637476 1.2197031 0.6354214 0.3185311 0.2542919</span>
-<span class="co">#&gt; [50,55)  0.9907296 1.1317668 1.4619191 1.5649061 1.0302608 0.4507559 0.2377263</span>
-<span class="co">#&gt; [55,60)  1.1376829 0.9357412 1.0062316 1.3095410 1.3229469 0.7646212 0.3689179</span>
-<span class="co">#&gt; [60,65)  1.0619998 0.9020357 0.7833675 0.8988580 1.1057568 0.9891921 0.5885683</span>
-<span class="co">#&gt; [65,70)  0.6801188 0.7100285 0.6374689 0.6220742 0.7079672 0.8097389 0.8743001</span>
-<span class="co">#&gt; [70,75)  0.5222652 0.5901288 0.5864612 0.5332604 0.4797534 0.4706634 0.6720563</span>
-<span class="co">#&gt; [75,Inf) 0.3193049 0.3745879 0.4244675 0.4438412 0.3674579 0.2390325 0.2078713</span>
-<span class="co">#&gt;             [70,75)  [75,Inf)</span>
-<span class="co">#&gt; [0,5)    0.16128692 0.1245205</span>
-<span class="co">#&gt; [5,10)   0.14870550 0.1298568</span>
-<span class="co">#&gt; [10,15)  0.12691810 0.1459016</span>
-<span class="co">#&gt; [15,20)  0.10982848 0.1812284</span>
-<span class="co">#&gt; [20,25)  0.09786404 0.1830864</span>
-<span class="co">#&gt; [25,30)  0.10476741 0.1656551</span>
-<span class="co">#&gt; [30,35)  0.15995892 0.1832448</span>
-<span class="co">#&gt; [35,40)  0.27327554 0.2746340</span>
-<span class="co">#&gt; [40,45)  0.33234102 0.4275889</span>
-<span class="co">#&gt; [45,50)  0.24550335 0.5154186</span>
-<span class="co">#&gt; [50,55)  0.17222193 0.4693506</span>
-<span class="co">#&gt; [55,60)  0.18382065 0.3847631</span>
-<span class="co">#&gt; [60,65)  0.26047764 0.3421757</span>
-<span class="co">#&gt; [65,70)  0.42438380 0.3736197</span>
-<span class="co">#&gt; [70,75)  0.82086074 0.5982686</span>
-<span class="co">#&gt; [75,Inf) 0.29256809 1.2298811</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/plot_matrix.html">plot_matrix</a></span><span class="op">(</span><span class="va">synthetic_all_5y</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"synthetic all at once"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-matrix-plot-1.png" width="100%"></p>
-</div>
-<div id="speeding-up-computation-with-future" class="section level2">
-<h2 class="hasAnchor">
-<a href="#speeding-up-computation-with-future" class="anchor"></a>Speeding up computation with <code>future</code>
+<p>The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.</p>
+<p><strong>What is a contact matrix?</strong></p>
+<p>Contact matrices describe the degree of contact between individuals of given age groups.</p>
+<p>For example, this matrix describes the number of contacts between individuals</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       0-4 5-9 10-14</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0-4    10   3     4</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5-9     3  11     5</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10-14   4   5    13</span></span></code></pre></div>
+<p>The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another.</p>
+<p>We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact.</p>
+<p><strong>Why do we need <em>synthetic</em> contact matrices?</strong></p>
+<p>Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day.</p>
+<p>However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally.</p>
+<p>We can use statistical methods to create <em>synthetic contact matrices</em>, which are new contact matrices that have been generalised to new countries based on existing surveys.</p>
+<p><strong>Why do we need <code>conmat</code>?</strong></p>
+<p>Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country.</p>
+<p>We need methods that allow for flexibly creating synthetic contact matrices for a specified age population, as the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>conmat</code> now supports parallelisation, which is useful in a couple of contexts with the model fitting, here is an example:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span>
-<span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
-<p>We set the future plan, saying multisession, with 4 workers.</p>
-<p>Then we run the code as normal:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">polymod_setting_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">polymod_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">contact_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fit_setting_contacts.html">fit_setting_contacts</a></span><span class="op">(</span>
-  contact_data_list <span class="op">=</span> <span class="va">polymod_setting_data</span>,
-  population <span class="op">=</span> <span class="va">polymod_population</span>
-<span class="op">)</span>
-
-<span class="va">contact_model_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span>
-  population <span class="op">=</span> <span class="va">polymod_population</span>,
-  contact_model <span class="op">=</span> <span class="va">contact_model</span>,
-  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<p>Notably this is about 3 times faster than without using that plan.</p>
+<p>You can install the development version with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"conmat"</span>, repos <span class="op">=</span> <span class="st">"https://njtierney.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
+<p>Or alternatively you can use <code>remotes</code></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"njtierney/conmat"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-sources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-sources" class="anchor"></a>Data sources</h2>
-<p>This package provides data for use in calculating contact matrices.</p>
-<p>These data are still being cleaned and processed, but their current forms are shown below:</p>
-<div id="eyre_transmission_probabilities" class="section level3">
-<h3 class="hasAnchor">
-<a href="#eyre_transmission_probabilities" class="anchor"></a>eyre_transmission_probabilities</h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">eyre_transmission_probabilities</span>
-<span class="co">#&gt; # A tibble: 40,804 × 6</span>
-<span class="co">#&gt;    setting   case_age contact_age case_age_5y contact_age_5y probability</span>
-<span class="co">#&gt;    &lt;chr&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 household        0           0 0-4         0-4                  0.195</span>
-<span class="co">#&gt;  2 household        0           1 0-4         0-4                  0.195</span>
-<span class="co">#&gt;  3 household        0           2 0-4         0-4                  0.195</span>
-<span class="co">#&gt;  4 household        0           3 0-4         0-4                  0.195</span>
-<span class="co">#&gt;  5 household        0           4 0-4         0-4                  0.195</span>
-<span class="co">#&gt;  6 household        0           5 0-4         5-9                  0.196</span>
-<span class="co">#&gt;  7 household        0           6 0-4         5-9                  0.198</span>
-<span class="co">#&gt;  8 household        0           7 0-4         5-9                  0.198</span>
-<span class="co">#&gt;  9 household        0           8 0-4         5-9                  0.199</span>
-<span class="co">#&gt; 10 household        0           9 0-4         5-9                  0.201</span>
-<span class="co">#&gt; # … with 40,794 more rows</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org">stringr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-<span class="va">eyre_transmission_probabilities</span> <span class="op">%&gt;%</span>
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>
-     <span class="va">setting</span>,
-     <span class="va">case_age_5y</span>,
-     <span class="va">contact_age_5y</span>
-   <span class="op">)</span> <span class="op">%&gt;%</span>
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
-       <span class="va">probability</span>,
-       <span class="va">mean</span>
-     <span class="op">)</span>,
-     .groups <span class="op">=</span> <span class="st">"drop"</span>
-   <span class="op">)</span> <span class="op">%&gt;%</span>
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>
-     case_age <span class="op">=</span> <span class="va">case_age_5y</span>,
-     contact_age <span class="op">=</span> <span class="va">contact_age_5y</span>
-   <span class="op">)</span> <span class="op">%&gt;%</span>
-   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
-       <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>,
-       <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">.x</span>,
-                levels <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_order.html">str_sort</a></span><span class="op">(</span>
-                  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,
-                  numeric <span class="op">=</span> <span class="cn">TRUE</span>
-                <span class="op">)</span>
-       <span class="op">)</span>
-     <span class="op">)</span>
-   <span class="op">)</span> <span class="op">%&gt;%</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>
-     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>
-       x <span class="op">=</span> <span class="va">case_age</span>,
-       y <span class="op">=</span> <span class="va">contact_age</span>,
-       fill <span class="op">=</span> <span class="va">probability</span>
-     <span class="op">)</span>
-   <span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">setting</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
-     axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-   <span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-eyre-transmission-probabilities-1.png" width="100%"></p>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>First we want to fit the model to the POLYMOD data, which contains various survey and population data.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">conmat</span><span class="op">)</span></span>
+<span><span class="va">polymod_contact_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span>setting <span class="op">=</span> <span class="st">"work"</span><span class="op">)</span></span>
+<span><span class="va">polymod_survey_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The contact data is a data frame containing the age from and to, and the number of contacts for each of the specified settings, “home”, “work”, “school”, “other”, or “all” as well as the number of participants. By default, <code>polymod_contact_data</code> contains data from “all”, but we’re going to use the “work” set of data, as it produces an interesting looking dataset. Each row contains survey information of the number of contacts. Specifically, the number of contacts from one age group to another age group, and then the number of participants in that age group.</p>
+<p>The survey data, <code>polymod_survey_data</code> contains the lower age limit and the population in that age group.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">polymod_survey_data</span></span>
+<span><span class="co">#&gt; # A tibble: 21 × 2</span></span>
+<span><span class="co">#&gt;    lower.age.limit population</span></span>
+<span><span class="co">#&gt;              &lt;int&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1               0   1841420.</span></span>
+<span><span class="co">#&gt;  2               5   1950666.</span></span>
+<span><span class="co">#&gt;  3              10   2122856.</span></span>
+<span><span class="co">#&gt;  4              15   2323822.</span></span>
+<span><span class="co">#&gt;  5              20   2406141.</span></span>
+<span><span class="co">#&gt;  6              25   2377541.</span></span>
+<span><span class="co">#&gt;  7              30   2552587.</span></span>
+<span><span class="co">#&gt;  8              35   2982293.</span></span>
+<span><span class="co">#&gt;  9              40   3044427.</span></span>
+<span><span class="co">#&gt; 10              45   2828202.</span></span>
+<span><span class="co">#&gt; # … with 11 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 </div>
-<div id="abs_education_state" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_education_state" class="anchor"></a>abs_education_state</h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_education_state</span>
-<span class="co">#&gt; # A tibble: 4,194 × 5</span>
-<span class="co">#&gt;     year state aboriginal_and_torres_strait_islander_status   age n_full_and_part…</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                                        &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2006 ACT   Aboriginal and Torres Strait Islander            4                5</span>
-<span class="co">#&gt;  2  2006 ACT   Non-Indigenous                                   4              109</span>
-<span class="co">#&gt;  3  2006 NSW   Aboriginal and Torres Strait Islander            4              104</span>
-<span class="co">#&gt;  4  2006 NSW   Non-Indigenous                                   4             1870</span>
-<span class="co">#&gt;  5  2006 NT    Aboriginal and Torres Strait Islander            4              102</span>
-<span class="co">#&gt;  6  2006 NT    Non-Indigenous                                   4               63</span>
-<span class="co">#&gt;  7  2006 QLD   Aboriginal and Torres Strait Islander            4               37</span>
-<span class="co">#&gt;  8  2006 QLD   Non-Indigenous                                   4              740</span>
-<span class="co">#&gt;  9  2006 SA    Aboriginal and Torres Strait Islander            4               42</span>
-<span class="co">#&gt; 10  2006 SA    Non-Indigenous                                   4             1023</span>
-<span class="co">#&gt; # … with 4,184 more rows</span></code></pre></div>
+<div class="section level2">
+<h2 id="predicting-the-contact-rate">Predicting the contact rate<a class="anchor" aria-label="anchor" href="#predicting-the-contact-rate"></a>
+</h2>
+<p>We can create a model of the contact <em>rate</em> with the function <code>fit_single_contact_model</code></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">06</span><span class="op">)</span></span>
+<span><span class="va">contact_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fit_single_contact_model.html">fit_single_contact_model</a></span><span class="op">(</span></span>
+<span>  contact_data <span class="op">=</span> <span class="va">polymod_contact_data</span>,</span>
+<span>  population <span class="op">=</span> <span class="va">polymod_survey_data</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :</span></span>
+<span><span class="co">#&gt; fitted rates numerically 0 occurred</span></span></code></pre></div>
+<p>This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">contact_model</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Family: poisson </span></span>
+<span><span class="co">#&gt; Link function: log </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Formula:</span></span>
+<span><span class="co">#&gt; contacts ~ s(gam_age_offdiag) + s(gam_age_offdiag_2) + s(gam_age_diag_prod) + </span></span>
+<span><span class="co">#&gt;     s(gam_age_diag_sum) + s(gam_age_pmax) + s(gam_age_pmin) + </span></span>
+<span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
+<span><span class="co">#&gt; 1.00 4.26 5.40 6.32 7.90 7.38  total = 35.26 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; fREML score: 23815.8     rank: 55/57</span></span></code></pre></div>
+<p>We can use this contact model to then predict the contact rate in a new population.</p>
+<p>As a demonstration, let’s take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fairfield_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
+<span><span class="va">fairfield_age_pop</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<span><span class="co">#&gt;    lga           lower.age.limit  year population</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 Fairfield (C)               0  2020      12261</span></span>
+<span><span class="co">#&gt;  2 Fairfield (C)               5  2020      13093</span></span>
+<span><span class="co">#&gt;  3 Fairfield (C)              10  2020      13602</span></span>
+<span><span class="co">#&gt;  4 Fairfield (C)              15  2020      14323</span></span>
+<span><span class="co">#&gt;  5 Fairfield (C)              20  2020      15932</span></span>
+<span><span class="co">#&gt;  6 Fairfield (C)              25  2020      16190</span></span>
+<span><span class="co">#&gt;  7 Fairfield (C)              30  2020      14134</span></span>
+<span><span class="co">#&gt;  8 Fairfield (C)              35  2020      13034</span></span>
+<span><span class="co">#&gt;  9 Fairfield (C)              40  2020      12217</span></span>
+<span><span class="co">#&gt; 10 Fairfield (C)              45  2020      13449</span></span>
+<span><span class="co">#&gt; 11 Fairfield (C)              50  2020      13419</span></span>
+<span><span class="co">#&gt; 12 Fairfield (C)              55  2020      13652</span></span>
+<span><span class="co">#&gt; 13 Fairfield (C)              60  2020      12907</span></span>
+<span><span class="co">#&gt; 14 Fairfield (C)              65  2020      10541</span></span>
+<span><span class="co">#&gt; 15 Fairfield (C)              70  2020       8227</span></span>
+<span><span class="co">#&gt; 16 Fairfield (C)              75  2020       5598</span></span>
+<span><span class="co">#&gt; 17 Fairfield (C)              80  2020       4006</span></span>
+<span><span class="co">#&gt; 18 Fairfield (C)              85  2020       4240</span></span></code></pre></div>
+<p>We can then pass the contact model through to <code>predict_contacts</code>, along with the fairfield age population data, and some age breaks that we want to predict to.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2022</span><span class="op">-</span><span class="fl">09</span><span class="op">-</span><span class="fl">06</span><span class="op">)</span></span>
+<span><span class="va">synthetic_contact_fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span></span>
+<span>  model <span class="op">=</span> <span class="va">contact_model</span>,</span>
+<span>  population <span class="op">=</span> <span class="va">fairfield_age_pop</span>,</span>
+<span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">synthetic_contact_fairfield</span></span>
+<span><span class="co">#&gt; # A tibble: 324 × 3</span></span>
+<span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00213</span></span>
+<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00361</span></span>
+<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00292</span></span>
+<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00419</span></span>
+<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0106 </span></span>
+<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0216 </span></span>
+<span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0316 </span></span>
+<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0341 </span></span>
+<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0334 </span></span>
+<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0324 </span></span>
+<span><span class="co">#&gt; # … with 314 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 </div>
-<div id="abs_education_state_2020" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_education_state_2020" class="anchor"></a>abs_education_state_2020</h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_education_state_2020</span>
-<span class="co">#&gt; # A tibble: 808 × 6</span>
-<span class="co">#&gt;     year state   age population population_interpolated  prop</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;                   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2020 ACT       0          0                   5569. 0    </span>
-<span class="co">#&gt;  2  2020 ACT       1          0                   5702. 0    </span>
-<span class="co">#&gt;  3  2020 ACT       2          0                   5781. 0    </span>
-<span class="co">#&gt;  4  2020 ACT       3          0                   5814. 0    </span>
-<span class="co">#&gt;  5  2020 ACT       4          0                   5809. 0    </span>
-<span class="co">#&gt;  6  2020 ACT       5       4558                   5772. 0.790</span>
-<span class="co">#&gt;  7  2020 ACT       6       6161                   5710. 1.08 </span>
-<span class="co">#&gt;  8  2020 ACT       7       6163                   5623. 1.10 </span>
-<span class="co">#&gt;  9  2020 ACT       8       5881                   5510. 1.07 </span>
-<span class="co">#&gt; 10  2020 ACT       9       5921                   5370. 1.10 </span>
-<span class="co">#&gt; # … with 798 more rows</span></code></pre></div>
+<div class="section level2">
+<h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
+</h2>
+<p>Let’s visualise the matrix to get a sense of the predictions with <code>autoplot</code>. First we need to transform the predictions to a matrix:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">synthetic_contact_fairfield</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/predictions_to_matrix.html">predictions_to_matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot-matrix-differents-1.png" width="100%"></p>
 </div>
-<div id="abs_employ_age_lga" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_employ_age_lga" class="anchor"></a>abs_employ_age_lga</h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_employ_age_lga</span>
-<span class="co">#&gt; # A tibble: 5,600 × 8</span>
-<span class="co">#&gt;     year state lga    age_group total_employed total_unemployed total_labour_fo…</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;fct&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2016 NSW   Albur… 15-19               1527              300             1830</span>
-<span class="co">#&gt;  2  2016 NSW   Armid… 15-19                838              217             1055</span>
-<span class="co">#&gt;  3  2016 NSW   Balli… 15-19               1064              185             1255</span>
-<span class="co">#&gt;  4  2016 NSW   Balra… 15-19                 41                9               46</span>
-<span class="co">#&gt;  5  2016 NSW   Bathu… 15-19               1103              241             1341</span>
-<span class="co">#&gt;  6  2016 NSW   Bega … 15-19                801               97              897</span>
-<span class="co">#&gt;  7  2016 NSW   Belli… 15-19                241               42              281</span>
-<span class="co">#&gt;  8  2016 NSW   Berri… 15-19                168               16              181</span>
-<span class="co">#&gt;  9  2016 NSW   Black… 15-19               7534             2136             9670</span>
-<span class="co">#&gt; 10  2016 NSW   Bland… 15-19                124               14              140</span>
-<span class="co">#&gt; # … with 5,590 more rows, and 1 more variable: total &lt;dbl&gt;</span></code></pre></div>
+<div class="section level2">
+<h2 id="applying-the-model-across-all-settings">Applying the model across all settings.<a class="anchor" aria-label="anchor" href="#applying-the-model-across-all-settings"></a>
+</h2>
+<p>You can also fit a model for all of the settings all at once with a series of functions, <code>fit_setting_contacts</code>, and <code>predict_setting_contacts</code>. This means we can do the above, but for each setting, “home”, “work”, “school”, “other”, and “all”. We would recommend this when using conmat, as it is a pretty common use case. However for demonstration purposes we wanted to show how it works for a single matrix here first. We also provide details on how to fit the model to each of these settings in parallel. For more details on that workflow, see the “getting started” vignette.</p>
 </div>
-<div id="abs_household_lga" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_household_lga" class="anchor"></a>abs_household_lga</h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_household_lga</span>
-<span class="co">#&gt; # A tibble: 4,968 × 5</span>
-<span class="co">#&gt;     year state lga                   n_persons_usually_resident n_households</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                 &lt;chr&gt;                             &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2016 NSW   Albury (C)            total                             19495</span>
-<span class="co">#&gt;  2  2016 NSW   Albury (C)            1                                  6020</span>
-<span class="co">#&gt;  3  2016 NSW   Albury (C)            2                                  6738</span>
-<span class="co">#&gt;  4  2016 NSW   Albury (C)            3                                  2740</span>
-<span class="co">#&gt;  5  2016 NSW   Albury (C)            4                                  2541</span>
-<span class="co">#&gt;  6  2016 NSW   Albury (C)            5                                  1041</span>
-<span class="co">#&gt;  7  2016 NSW   Albury (C)            6                                   311</span>
-<span class="co">#&gt;  8  2016 NSW   Albury (C)            7                                    56</span>
-<span class="co">#&gt;  9  2016 NSW   Albury (C)            8+                                   42</span>
-<span class="co">#&gt; 10  2016 NSW   Armidale Regional (A) total                             10276</span>
-<span class="co">#&gt; # … with 4,958 more rows</span></code></pre></div>
+<div class="section level2">
+<h2 id="data-sources">Data sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
+</h2>
+<p>This package provides data and helper functions for the data, for use in calculating contact matrices. The data sources are from the Australian Bureau of Statistics (ABS), as we were using these a lot when we created the package. In the future we might wrap these data sources and helpers into another package, but for the time being they are here. Below are a couple of examples of data provided, see the “data sources” vignette and helpful at the website for full details.</p>
+<p>You can extract the age population structure for the LGA, Brisbane, like so:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Brisbane (C)"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<span><span class="co">#&gt;    lga          lower.age.limit  year population</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 Brisbane (C)               0  2020      72894</span></span>
+<span><span class="co">#&gt;  2 Brisbane (C)               5  2020      75933</span></span>
+<span><span class="co">#&gt;  3 Brisbane (C)              10  2020      73990</span></span>
+<span><span class="co">#&gt;  4 Brisbane (C)              15  2020      72010</span></span>
+<span><span class="co">#&gt;  5 Brisbane (C)              20  2020     104564</span></span>
+<span><span class="co">#&gt;  6 Brisbane (C)              25  2020     119000</span></span>
+<span><span class="co">#&gt;  7 Brisbane (C)              30  2020     110798</span></span>
+<span><span class="co">#&gt;  8 Brisbane (C)              35  2020     100493</span></span>
+<span><span class="co">#&gt;  9 Brisbane (C)              40  2020      86630</span></span>
+<span><span class="co">#&gt; 10 Brisbane (C)              45  2020      86791</span></span>
+<span><span class="co">#&gt; 11 Brisbane (C)              50  2020      76063</span></span>
+<span><span class="co">#&gt; 12 Brisbane (C)              55  2020      69273</span></span>
+<span><span class="co">#&gt; 13 Brisbane (C)              60  2020      59666</span></span>
+<span><span class="co">#&gt; 14 Brisbane (C)              65  2020      49134</span></span>
+<span><span class="co">#&gt; 15 Brisbane (C)              70  2020      42252</span></span>
+<span><span class="co">#&gt; 16 Brisbane (C)              75  2020      29927</span></span>
+<span><span class="co">#&gt; 17 Brisbane (C)              80  2020      20898</span></span>
+<span><span class="co">#&gt; 18 Brisbane (C)              85  2020      22683</span></span></code></pre></div>
+<p>Note that you need to use the exact LGA name - you can look up LGA names in the data set <code>abs_lga_lookup</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">abs_lga_lookup</span></span>
+<span><span class="co">#&gt; # A tibble: 544 × 3</span></span>
+<span><span class="co">#&gt;    state lga_code lga                  </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                </span></span>
+<span><span class="co">#&gt;  1 NSW      10050 Albury (C)           </span></span>
+<span><span class="co">#&gt;  2 NSW      10180 Armidale Regional (A)</span></span>
+<span><span class="co">#&gt;  3 NSW      10250 Ballina (A)          </span></span>
+<span><span class="co">#&gt;  4 NSW      10300 Balranald (A)        </span></span>
+<span><span class="co">#&gt;  5 NSW      10470 Bathurst Regional (A)</span></span>
+<span><span class="co">#&gt;  6 NSW      10500 Bayside (A)          </span></span>
+<span><span class="co">#&gt;  7 NSW      10550 Bega Valley (A)      </span></span>
+<span><span class="co">#&gt;  8 NSW      10600 Bellingen (A)        </span></span>
+<span><span class="co">#&gt;  9 NSW      10650 Berrigan (A)         </span></span>
+<span><span class="co">#&gt; 10 NSW      10750 Blacktown (C)        </span></span>
+<span><span class="co">#&gt; # … with 534 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<p>Or get the information for states like so:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/abs_age_data.html">abs_age_state</a></span><span class="op">(</span>state_name <span class="op">=</span> <span class="st">"QLD"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<span><span class="co">#&gt; # Groups:   year, state [1]</span></span>
+<span><span class="co">#&gt;     year state lower.age.limit population</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1  2020 QLD                 0     314602</span></span>
+<span><span class="co">#&gt;  2  2020 QLD                 5     339247</span></span>
+<span><span class="co">#&gt;  3  2020 QLD                10     345205</span></span>
+<span><span class="co">#&gt;  4  2020 QLD                15     319014</span></span>
+<span><span class="co">#&gt;  5  2020 QLD                20     338824</span></span>
+<span><span class="co">#&gt;  6  2020 QLD                25     370468</span></span>
+<span><span class="co">#&gt;  7  2020 QLD                30     362541</span></span>
+<span><span class="co">#&gt;  8  2020 QLD                35     354219</span></span>
+<span><span class="co">#&gt;  9  2020 QLD                40     325208</span></span>
+<span><span class="co">#&gt; 10  2020 QLD                45     348003</span></span>
+<span><span class="co">#&gt; 11  2020 QLD                50     321168</span></span>
+<span><span class="co">#&gt; 12  2020 QLD                55     317489</span></span>
+<span><span class="co">#&gt; 13  2020 QLD                60     288317</span></span>
+<span><span class="co">#&gt; 14  2020 QLD                65     254114</span></span>
+<span><span class="co">#&gt; 15  2020 QLD                70     226033</span></span>
+<span><span class="co">#&gt; 16  2020 QLD                75     156776</span></span>
+<span><span class="co">#&gt; 17  2020 QLD                80     100692</span></span>
+<span><span class="co">#&gt; 18  2020 QLD                85      94266</span></span></code></pre></div>
 </div>
-<div id="abs_pop_age_lga_2016" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_pop_age_lga_2016" class="anchor"></a>abs_pop_age_lga_2016</h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_pop_age_lga_2016</span>
-<span class="co">#&gt; # A tibble: 9,792 × 5</span>
-<span class="co">#&gt;     year state lga                age_group population</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              &lt;fct&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2016 ACT   Unincorporated ACT 0-4            28054</span>
-<span class="co">#&gt;  2  2016 ACT   Unincorporated ACT 5-9            25767</span>
-<span class="co">#&gt;  3  2016 ACT   Unincorporated ACT 10-14          22170</span>
-<span class="co">#&gt;  4  2016 ACT   Unincorporated ACT 15-19          24906</span>
-<span class="co">#&gt;  5  2016 ACT   Unincorporated ACT 20-24          32615</span>
-<span class="co">#&gt;  6  2016 ACT   Unincorporated ACT 25-29          34243</span>
-<span class="co">#&gt;  7  2016 ACT   Unincorporated ACT 30-34          34574</span>
-<span class="co">#&gt;  8  2016 ACT   Unincorporated ACT 35-39          30340</span>
-<span class="co">#&gt;  9  2016 ACT   Unincorporated ACT 40-44          28387</span>
-<span class="co">#&gt; 10  2016 ACT   Unincorporated ACT 45-49          26431</span>
-<span class="co">#&gt; # … with 9,782 more rows</span></code></pre></div>
+<div class="section level2">
+<h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
+</h2>
+<p>The contact matrices created using this package are transposed when compared to the contact matrices discussed by <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697" class="external-link">Prem</a> and <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074" class="external-link">Mossong</a>. That is, the rows are “age group to”, and the columns are “age group from”.</p>
 </div>
-<div id="abs_pop_age_lga_2020" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_pop_age_lga_2020" class="anchor"></a>abs_pop_age_lga_2020</h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_pop_age_lga_2020</span>
-<span class="co">#&gt; # A tibble: 9,774 × 5</span>
-<span class="co">#&gt;     year state lga                age_group population</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;              &lt;fct&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1  2020 ACT   Unincorporated ACT 0-4            27861</span>
-<span class="co">#&gt;  2  2020 ACT   Unincorporated ACT 5-9            28871</span>
-<span class="co">#&gt;  3  2020 ACT   Unincorporated ACT 10-14          26015</span>
-<span class="co">#&gt;  4  2020 ACT   Unincorporated ACT 15-19          23867</span>
-<span class="co">#&gt;  5  2020 ACT   Unincorporated ACT 20-24          32626</span>
-<span class="co">#&gt;  6  2020 ACT   Unincorporated ACT 25-29          33992</span>
-<span class="co">#&gt;  7  2020 ACT   Unincorporated ACT 30-34          35734</span>
-<span class="co">#&gt;  8  2020 ACT   Unincorporated ACT 35-39          35354</span>
-<span class="co">#&gt;  9  2020 ACT   Unincorporated ACT 40-44          30155</span>
-<span class="co">#&gt; 10  2020 ACT   Unincorporated ACT 45-49          29103</span>
-<span class="co">#&gt; # … with 9,764 more rows</span></code></pre></div>
-</div>
-<div id="abs_state_age" class="section level3">
-<h3 class="hasAnchor">
-<a href="#abs_state_age" class="anchor"></a>abs_state_age</h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">abs_state_age</span>
-<span class="co">#&gt; # A tibble: 168 × 3</span>
-<span class="co">#&gt;    state age_group population</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;fct&gt;          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 NSW   0-4           495060</span>
-<span class="co">#&gt;  2 VIC   0-4           401992</span>
-<span class="co">#&gt;  3 QLD   0-4           314592</span>
-<span class="co">#&gt;  4 SA    0-4            98400</span>
-<span class="co">#&gt;  5 WA    0-4           171531</span>
-<span class="co">#&gt;  6 TAS   0-4            29258</span>
-<span class="co">#&gt;  7 NT    0-4            17766</span>
-<span class="co">#&gt;  8 ACT   0-4            27846</span>
-<span class="co">#&gt;  9 NSW   5-9           512687</span>
-<span class="co">#&gt; 10 VIC   5-9           416633</span>
-<span class="co">#&gt; # … with 158 more rows</span></code></pre></div>
-</div>
-</div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the conmat project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the conmat project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Learn more at <br><a href="https://github.com/njtierney/conmat">https://​github.com/​njtierney/​conmat</a>
-</li>
+<li><a href="https://github.com/njtierney/conmat" class="external-link">Learn more</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Nicholas Tierney <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/https://orcid.org/0000-0003-1460-8722" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Nick Golding <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8916-5570" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing conmat</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://codecov.io/gh/njtierney/conmat?branch=master"><img src="https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/njtierney/conmat/actions"><img src="https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li>Nicholas Tierney <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/https://orcid.org/0000-0003-1460-8722" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nick Golding <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8916-5570" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Aarathy Babu <br><small class="roles"> Author </small> <a href="https://orcid.org/https://orcid.org/0000-0002-6982-5989" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/njtierney/conmat/actions" class="external-link"><img src="https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/njtierney/conmat?branch=master" class="external-link"><img src="https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Nicholas Tierney, Nick Golding.</p>
+  <p></p>
+<p>Developed by Nicholas Tierney, Nick Golding, Aarathy Babu.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -632,6 +371,8 @@
 
   
 
+
+  
 
   </body>
 </html>
