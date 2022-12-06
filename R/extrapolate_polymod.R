@@ -33,11 +33,16 @@
 extrapolate_polymod <- function(population,
                                 age_breaks = c(seq(0, 75, by = 5), Inf),
                                 per_capita_household_size = NULL) {
-  estimate_setting_contacts(
-    contact_data_list = get_polymod_setting_data(),
-    survey_population = get_polymod_population(),
-    prediction_population = population,
+  
+  contact_model_pred <- predict_setting_contacts(
+    population = population,
+    # using already fit polymod_setting_models object 
+    # from `create-polymod-model.R`
+    contact_model = polymod_setting_models,
     age_breaks = age_breaks,
     per_capita_household_size = per_capita_household_size
   )
+  
+  contact_model_pred
+  
 }

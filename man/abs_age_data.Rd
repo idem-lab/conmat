@@ -25,6 +25,6 @@ Return Australian Bureau of Statistics (ABS) age population data for a
 given Local Government Area (LGA) or state
 }
 \examples{
-abs_age_lga("Albury (C)")
-abs_age_state("NSW")
+abs_age_lga(c("Albury (C)","Fairfield (C)"))
+abs_age_state(c("NSW","VIC"))
 }

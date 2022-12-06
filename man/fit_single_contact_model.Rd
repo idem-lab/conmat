@@ -77,15 +77,18 @@ This leaves us with a model that looks like so:
 }\if{html}{\out{</div>}}
 }
 \examples{
-age_min <- 10
-age_max <- 15
-all_ages <- age_min:age_max
-library(tidyr)
 example_contact <- get_polymod_contact_data(setting = "home")
 example_contact
 example_population <- get_polymod_population()
+
+library(dplyr)
+
+example_contact_20 <- example_contact \%>\% 
+  filter(age_to <= 20,
+         age_from <= 20)
+         
 my_mod <- fit_single_contact_model(
-  contact_data = example_contact,
+  contact_data = example_contact_20,
   population = example_population
 )
 }

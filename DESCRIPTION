@@ -29,8 +29,10 @@ Depends:
 Suggests: 
     covr,
     knitr,
+    vdiffr,
     testthat (>= 3.0.0),
     rmarkdown,
+    stringr,
     future
 VignetteBuilder: 
     knitr
@@ -51,7 +53,6 @@ Imports:
     tibble,
     patchwork,
     magrittr,
-    stringr,
     rlang,
     glue,
     readr,

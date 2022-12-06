@@ -47,7 +47,8 @@
 #' plot_matrix(synthetic_settings_5y_fairfield$home)
 #' }
 #' 
-#' @export
+#' @noRd
+#' @note internal
 plot_matrix <- function(matrix) {
   matrix %>%
     matrix_to_predictions() %>%

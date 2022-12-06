@@ -3,4 +3,4 @@ setting_weights <- c(home = 0.732154285228522,
                      work = 0.286882796193768, 
                      other = 0.286882796193768)
 
-use_data(setting_weights, overwrite = TRUE)
+use_data(setting_weights, compress = "xz", overwrite = TRUE)

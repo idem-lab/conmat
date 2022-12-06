@@ -25,7 +25,8 @@
 #'    )
 #' add_population_age_to(example_df)
 #' @export
-add_population_age_to <- function(contact_data, population = get_polymod_population()) {
+add_population_age_to <- function(contact_data, 
+                                  population = get_polymod_population()) {
 
   # get function to interpolate population age distributions to 1y bins
   age_population_function <- get_age_population_function(population)
@@ -41,6 +42,7 @@ add_population_age_to <- function(contact_data, population = get_polymod_populat
     dplyr::mutate(
       pop_age_to = pop_age_to / sum(pop_age_to)
     ) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>% 
+    add_intergenerational()
   
 }
