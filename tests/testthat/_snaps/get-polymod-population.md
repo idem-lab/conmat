@@ -17,7 +17,6 @@
        9 all            0      8        7           92
       10 all            0      9        8           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
 
 # get_polymod_population() works
 
@@ -27,18 +26,17 @@
       # A tibble: 21 x 2
          lower.age.limit population
                    <int>      <dbl>
-       1               0   1841420.
-       2               5   1950666.
-       3              10   2122856.
-       4              15   2323822.
-       5              20   2406141.
-       6              25   2377541.
-       7              30   2552587.
-       8              35   2982293.
-       9              40   3044427.
-      10              45   2828202.
+       1               0   1852682.
+       2               5   1968449.
+       3              10   2138897.
+       4              15   2312032.
+       5              20   2407486.
+       6              25   2423602.
+       7              30   2585137.
+       8              35   2969393.
+       9              40   3041663.
+      10              45   2809154.
       # ... with 11 more rows
-      # i Use `print(n = ...)` to see more rows
 
 # get_polymod_setting_data() works
 
@@ -60,7 +58,6 @@
        9 home           0      8        6           92
       10 home           0      9        6           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $work
       # A tibble: 8,787 x 5
@@ -77,7 +74,6 @@
        9 work           0      8        0           92
       10 work           0      9        0           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $school
       # A tibble: 8,787 x 5
@@ -94,7 +90,6 @@
        9 school         0      8        0           92
       10 school         0      9        0           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
       $other
       # A tibble: 8,787 x 5
@@ -111,6 +106,5 @@
        9 other          0      8        2           92
       10 other          0      9        3           92
       # ... with 8,777 more rows
-      # i Use `print(n = ...)` to see more rows
       
 
