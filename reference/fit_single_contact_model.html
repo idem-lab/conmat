@@ -58,7 +58,7 @@ given settings. See "details" for further information.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_single_contact_model</span><span class="op">(</span><span class="va">contact_data</span>, <span class="va">population</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_single_contact_model</span><span class="op">(</span><span class="va">contact_data</span>, <span class="va">population</span>, symmetrical <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,6 +73,11 @@ an example dataset - or the dataset in examples below.</p></dd>
 <dd><p>population data, with columns <code>lower.age.limit</code> and
 <code>population</code>. See <code><a href="get_polymod_population.html">get_polymod_population()</a></code> for an example.</p></dd>
 
+
+<dt>symmetrical</dt>
+<dd><p>whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See <code>details</code> for more information.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -82,20 +87,30 @@ an example dataset - or the dataset in examples below.</p></dd>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>The model fit is a Generalised Additive Model (GAM). To help
-account for assortativity with age, where people of similar ages have
-more contact with each other, we include predictors <code>age_from</code>, and
-<code>age_to</code>. To account for intergenerational contact patterns, where
-parents and grandparents will interact with their children and grand
-children, we include a term that is the absolute difference of age_from
-and age_to. We also include the interaction of intergenerational contact
-patterns with contacts from one age with the term that is the absolute
-difference of age_from and age_to, and age_from. These terms are fit with
-a smoothing function. Specifically, the relevant code looks like this:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu">s</span><span class="op">(</span><span class="va">age_to</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">s</span><span class="op">(</span><span class="va">age_from</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">s</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">age_from</span> <span class="op">-</span> <span class="va">age_to</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">s</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">age_from</span> <span class="op">-</span> <span class="va">age_to</span><span class="op">)</span>, <span class="va">age_from</span><span class="op">)</span></span></code></pre><p></p></div>
+    <p>The model fit is a Generalised Additive Model (GAM). We provide two
+"modes" for model fitting. Either using "symmetric" or "non-symmetric"
+model predictor terms with the logical variance "symmetrical", which is set
+to TRUE by default. We recommend using the "symmetrical" terms as it
+reflects the fact that contacts are symmetric - person A having contact
+with person B means person B has had contact with person A. We've included
+a variety of terms to account for assortativity with age, where people of
+similar ages have more contact with each other. And included terms to
+account for intergenerational contact patterns, where parents and
+grandparents will interact with their children and grand children.
+These terms are fit with a smoothing function. Specifically, the relevant
+code looks like this:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="co"># abs(age_from - age_to)</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_offdiag</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># abs(age_from - age_to)^2</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_offdiag_2</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># abs(age_from * age_to)</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_diag_prod</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># abs(age_from + age_to)</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_diag_sum</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># pmax(age_from, age_to)</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_pmax</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># pmin(age_from, age_to)</span></span>
+<span><span class="fu">s</span><span class="op">(</span><span class="va">gam_age_pmin</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>We also include predictors for the probability of attending school, and
 attending work. These are computed as the probability that a person goes
 to the same school/work, proportional to the increase in contacts due to
@@ -110,6 +125,31 @@ setting. The contactable population is estimated as the interpolated
 1 year ages from the data. For schools this is the contactable population
 weighted by the proportion of the population attending school.</p>
 <p>This leaves us with a model that looks like so:</p>
+<p></p><div class="sourceCode r"><pre><code>mgcv::bam(
+  formula = contacts ~
+    # abs(age_from - age_to)
+    s(gam_age_offdiag) +
+    # abs(age_from - age_to)^2
+    s(gam_age_offdiag_2) +
+    # abs(age_from * age_to)
+    s(gam_age_diag_prod) +
+    # abs(age_from + age_to)
+    s(gam_age_diag_sum) +
+    # pmax(age_from, age_to)
+    s(gam_age_pmax) +
+    # pmin(age_from, age_to)
+    s(gam_age_pmin) +
+    school_probability +
+    work_probability +
+    offset(log_contactable_population) +
+    # or for school settings
+    # offset(log_contactable_population_school) 
+    family = stats::poisson,
+  offset = log(participants),
+  data = population_data
+)
+</code></pre><p></p></div>
+<p>But if the term <code>symmetrical = FALSE</code> is used, you get:</p>
 <p></p><div class="sourceCode r"><pre><code>mgcv::bam(
   formula = contacts ~
     s(age_to) +
@@ -137,11 +177,11 @@ weighted by the proportion of the population attending school.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> home           0      0       10           92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> home           0      1        7           92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> home           0      2       11           92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> home           0      3       15           92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> home           0      2       12           92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> home           0      3       14           92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> home           0      4       11           92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> home           0      5        7           92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> home           0      6        8           92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> home           0      5        6           92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> home           0      6        9           92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> home           0      7        9           92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> home           0      8        6           92</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> home           0      9        6           92</span>

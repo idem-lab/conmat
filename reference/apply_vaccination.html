@@ -118,30 +118,11 @@ the function as an argument.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># examples take 20 second to run so skipping</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># example data frame with vaccine coverage, acquisition and transmission</span></span></span>
 <span class="r-in"><span><span class="co"># efficacy of different age groups</span></span></span>
 <span class="r-in"><span><span class="va">vaccination_effect_example_data</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    age_band coverage acquisition transmission</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0-4         0           0            0    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 5-11        0.782       0.583        0.254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 12-15       0.997       0.631        0.295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 16-19       0.965       0.786        0.469</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 20-24       0.861       0.774        0.453</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25-29       0.997       0.778        0.458</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 30-34       0.998       0.803        0.493</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 35-39       0.998       0.829        0.533</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 40-44       0.999       0.841        0.551</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 45-49       0.993       0.847        0.562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 50-54       0.999       0.857        0.579</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 55-59       0.996       0.864        0.591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 60-64       0.998       0.858        0.581</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 65-69       0.999       0.864        0.591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 70-74       0.999       0.867        0.597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 75-79       0.999       0.866        0.595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 80+         0.999       0.844        0.556</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Generate next generation matrices</span></span></span>
 <span class="r-in"><span><span class="co"># The number of age breaks must match the vaccination effect data</span></span></span>
@@ -159,7 +140,7 @@ the function as an argument.</p>
 <span class="r-in"><span>  acquisition_col <span class="op">=</span> <span class="va">acquisition</span>,</span></span>
 <span class="r-in"><span>  transmission_col <span class="op">=</span> <span class="va">transmission</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

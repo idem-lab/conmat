@@ -56,7 +56,7 @@ see the examples.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_setting_contacts</span><span class="op">(</span><span class="va">contact_data_list</span>, <span class="va">population</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_setting_contacts</span><span class="op">(</span><span class="va">contact_data_list</span>, <span class="va">population</span>, symmetrical <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,6 +72,12 @@ can be retrieved with <code><a href="get_polymod_setting_data.html">get_polymod_
 <dd><p>survey population data, containing columns
 <code>lower.age.limit</code> and <code>population</code>. Example data can be retrieved with
 <code><a href="get_polymod_population.html">get_polymod_population()</a></code>.</p></dd>
+
+
+<dt>symmetrical</dt>
+<dd><p>whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See <code>details</code> of <code>fit_single_contact_model</code> for more
+information.</p></dd>
 
 </dl></div>
     <div id="value">
