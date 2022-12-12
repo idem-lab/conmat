@@ -46,7 +46,6 @@ RoxygenNote: 7.2.2
 Imports: 
     mgcv,
     dplyr (>= 1.0.9),
-    stats,
     tidyr (>= 1.2.0),
     cli,
     stats,
@@ -55,7 +54,6 @@ Imports:
     tibble (>= 3.1.8),
     patchwork,
     magrittr,
-    stringr,
     rlang (>= 1.0.4),
     glue (>= 1.6.2),
     readr,
