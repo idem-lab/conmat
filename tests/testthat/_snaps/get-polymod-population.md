@@ -17,23 +17,20 @@
 
 # get_polymod_population() works
 
-    Code
-      get_polymod_population()
-    Output
-      # A tibble: 21 x 2
-         lower.age.limit population
-                   <int>      <dbl>
-       1               0   1852682.
-       2               5   1968449.
-       3              10   2138897.
-       4              15   2312032.
-       5              20   2407486.
-       6              25   2423602.
-       7              30   2585137.
-       8              35   2969393.
-       9              40   3041663.
-      10              45   2809154.
-      # ... with 11 more rows
+    # A tibble: 21 x 2
+       lower.age.limit population
+                 <int>      <dbl>
+     1               0   1852682.
+     2               5   1968449.
+     3              10   2138897.
+     4              15   2312032.
+     5              20   2407486.
+     6              25   2423602.
+     7              30   2585137.
+     8              35   2969393.
+     9              40   3041663.
+    10              45   2809154.
+    # ... with 11 more rows
 
 # get_polymod_setting_data() works
 
