@@ -12,6 +12,9 @@
 #' @param population survey population data, containing columns 
 #'   `lower.age.limit` and `population`. Example data can be retrieved with
 #'   [get_polymod_population()].
+#' @param symmetrical whether to enforce symmetrical terms in the model. 
+#'   Defaults to TRUE. See `details` of `fit_single_contact_model` for more 
+#'   information.
 #' @return list of fitted gam models - one for each setting provided
 #' @author Nicholas Tierney
 #' @export
@@ -35,7 +38,9 @@
 #'   population = polymod_population
 #' )
 #' }
-fit_setting_contacts <- function(contact_data_list, population) {
+fit_setting_contacts <- function(contact_data_list, 
+                                 population,
+                                 symmetrical = TRUE) {
 
   check_if_list(contact_data_list)
   
@@ -44,6 +49,7 @@ fit_setting_contacts <- function(contact_data_list, population) {
     .x = contact_data_list,
     .f = fit_single_contact_model,
     population = population,
+    symmetrical = symmetrical,
     .options = furrr::furrr_options(seed = TRUE)
   )
 

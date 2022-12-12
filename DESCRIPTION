@@ -45,17 +45,18 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
 Imports: 
     mgcv,
+    dplyr (>= 1.0.9),
+    tidyr (>= 1.2.0),
     cli,
-    dplyr,
     stats,
-    tidyr,
     socialmixr (>= 0.2.0),
     ggplot2,
-    tibble,
+    tibble (>= 3.1.8),
     patchwork,
     magrittr,
-    rlang,
-    glue,
+    rlang (>= 1.0.4),
+    glue (>= 1.6.2),
     readr,
     furrr,
-    purrr
+    purrr,
+    tidyselect
