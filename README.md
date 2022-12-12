@@ -217,12 +217,12 @@ synthetic_contact_fairfield
 ## Plotting
 
 Let’s visualise the matrix to get a sense of the predictions with
-`plot_matrix`. First we need to transform the predictions to a matrix:
+`autoplot`. First we need to transform the predictions to a matrix:
 
 ``` r
 synthetic_contact_fairfield %>% 
   predictions_to_matrix() %>% 
-  plot_matrix()
+  autoplot()
 ```
 
 <img src="man/figures/README-plot-matrix-differents-1.png" width="100%" />

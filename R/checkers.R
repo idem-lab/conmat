@@ -17,7 +17,8 @@
 #' # not a fully specified LGA
 #' check_lga_name("Fairfield")
 #' }
-#' @export
+#' @keywords internal
+#' @noRd
 check_lga_name <- function(
     lga_name,
     multiple_lga = FALSE
@@ -67,21 +68,39 @@ check_lga_name <- function(
 #' @return errors if state name not in ABS data
 #' @keywords internal
 #' @noRd
-check_state_name <- function(state_name) {
-  state_match <- stringr::str_detect(
-    string = abs_pop_age_lga_2020$state,
-    pattern = state_name
-  )
+check_state_name <- function(state_name, multiple_state = FALSE) {
+  state_that_matches <-  abs_pop_age_lga_2020 %>%
+    dplyr::select(state) %>%
+    dplyr::distinct() %>%
+    dplyr::filter(state %in% state_name) %>%
+    dplyr::pull(state)
   
-  does_state_match <- !any(state_match)
+  state_match <- is.element(state_name, state_that_matches)
   
-  if (does_state_match) {
+  all_match <- all(state_match)
+  state_that_doesnt_match <- setdiff(state_name, state_that_matches)
+  
+  
+  if (!all_match) {
     rlang::abort(
       message = c(
         "The state name provided does not match states in Australia",
-        x = glue::glue("The state name '{state_name}' did not match"),
+        x = glue::glue("The state name '{state_that_doesnt_match}' did not match"),
         i = "See `abs_lga_lookup` for a list of all states"
       )
     )
   }
+  more_than_one_state <- length(state_that_matches) > 1
+  if (more_than_one_state & !multiple_state) {
+    rlang::abort(
+      message = c(
+        "The state name provided matches multiple states",
+        i = "Specify the exact state name or set {.arg {multiple_state}} = \\
+          `TRUE`. See {.code {abs_lga_lookup}} for a list of all states",
+        x = glue::glue("The state name '{state_name}' matched multiple states:"),
+        glue::glue("{ state_that_matches}")
+      )
+    )
+  }
 }
+

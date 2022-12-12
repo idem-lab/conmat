@@ -80,8 +80,8 @@ get_per_capita_household_size <- function(state = NULL, lga = NULL) {
   
   if (nrow(household_data) == 0) {
     stop(
-        glue::glue("{level} '{paste(get(level))[2]}' not found")
-      )
+      glue::glue("{level} '{paste(get(level))[2]}' not found")
+    )
   }
   
   # aggregate and average household sizes

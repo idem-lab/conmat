@@ -33,7 +33,8 @@
 #' 
 #' plot_setting_matrix(synthetic_settings_5y_fairfield)
 #' }
-#' @export
+#' @noRd
+#' @note internal
 plot_setting_matrices <- function(matrices,
                                   title = "Setting-specific synthetic contact matrices") {
   
