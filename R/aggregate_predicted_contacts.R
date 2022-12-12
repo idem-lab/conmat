@@ -16,8 +16,6 @@
 #' @return data frame with columns, `age_group_from`, `age_group_to`, and
 #'  `contacts`, which is the aggregated model.
 #' @examples
-#' \dontrun{
-#' # not run as there is a strange CRAN check error
 #'  fairfield_abs_data <- abs_age_lga("Fairfield (C)")
 #'  
 #'  fairfield_abs_data
@@ -39,7 +37,6 @@
 #'   population = fairfield_abs_data,
 #'   age_breaks = c(0, 5, 10, 15,Inf)
 #'     )
-#'     }
 #' @export
 aggregate_predicted_contacts <- function(predicted_contacts_1y,
                                          population,
