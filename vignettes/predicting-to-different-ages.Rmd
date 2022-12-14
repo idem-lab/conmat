@@ -1,0 +1,67 @@
+---
+title: "predicting-to-different-ages"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{predicting-to-different-ages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+For this example we want to explore creating contact matrices for people of different ages. By default conmat predicts to 5 year ages. So taking some example data from Perth, we could extrapolate the following contact rates.
+
+```{r}
+perth_city <- abs_age_lga("Perth (C)")
+
+perth_city
+
+synthetic_settings_5y_perth <- extrapolate_polymod(
+  population = perth_city
+)
+
+synthetic_settings_5y_perth$home
+```
+
+But what if instead you wanted to predict to different ages? Say for example if you were just interested in 0-5 year olds, but at a 6 monthly interval?
+
+```{r}
+six_monthly <- c(
+  seq(from = 0, 
+      to = 5, 
+      by = 1/2)
+)
+
+six_monthly
+```
+
+```{r}
+synthetic_settings_perth_6m <- extrapolate_polymod(
+  population = perth_city,
+  age_breaks = six_monthly
+)
+```
+
+```{r}
+synthetic_settings_perth_6m$home
+```
+
+```{r}
+raw_mat <- predict_setting_contacts(
+  population = perth_city,
+  contact_model = polymod_setting_models,
+  age_breaks = six_monthly
+)
+
+raw_mat
+```
+
