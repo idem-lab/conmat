@@ -111,18 +111,17 @@
 <span><span class="co">#&gt; # A tibble: 21 × 2</span></span>
 <span><span class="co">#&gt;    lower.age.limit population</span></span>
 <span><span class="co">#&gt;              &lt;int&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1               0   1841420.</span></span>
-<span><span class="co">#&gt;  2               5   1950666.</span></span>
-<span><span class="co">#&gt;  3              10   2122856.</span></span>
-<span><span class="co">#&gt;  4              15   2323822.</span></span>
-<span><span class="co">#&gt;  5              20   2406141.</span></span>
-<span><span class="co">#&gt;  6              25   2377541.</span></span>
-<span><span class="co">#&gt;  7              30   2552587.</span></span>
-<span><span class="co">#&gt;  8              35   2982293.</span></span>
-<span><span class="co">#&gt;  9              40   3044427.</span></span>
-<span><span class="co">#&gt; 10              45   2828202.</span></span>
-<span><span class="co">#&gt; # … with 11 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;  1               0   1852682.</span></span>
+<span><span class="co">#&gt;  2               5   1968449.</span></span>
+<span><span class="co">#&gt;  3              10   2138897.</span></span>
+<span><span class="co">#&gt;  4              15   2312032.</span></span>
+<span><span class="co">#&gt;  5              20   2407486.</span></span>
+<span><span class="co">#&gt;  6              25   2423602.</span></span>
+<span><span class="co">#&gt;  7              30   2585137.</span></span>
+<span><span class="co">#&gt;  8              35   2969393.</span></span>
+<span><span class="co">#&gt;  9              40   3041663.</span></span>
+<span><span class="co">#&gt; 10              45   2809154.</span></span>
+<span><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="predicting-the-contact-rate">Predicting the contact rate<a class="anchor" aria-label="anchor" href="#predicting-the-contact-rate"></a>
@@ -134,6 +133,8 @@
 <span>  contact_data <span class="op">=</span> <span class="va">polymod_contact_data</span>,</span>
 <span>  population <span class="op">=</span> <span class="va">polymod_survey_data</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :</span></span>
+<span><span class="co">#&gt; algorithm did not converge</span></span>
 <span><span class="co">#&gt; Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :</span></span>
 <span><span class="co">#&gt; fitted rates numerically 0 occurred</span></span></code></pre></div>
 <p>This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.</p>
@@ -149,9 +150,9 @@
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 1.00 4.26 5.40 6.32 7.90 7.38  total = 35.26 </span></span>
+<span><span class="co">#&gt; 1.00 4.45 5.50 6.25 7.89 7.33  total = 35.43 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 23815.8     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 23951.94     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -191,18 +192,17 @@
 <span><span class="co">#&gt; # A tibble: 324 × 3</span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00213</span></span>
-<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00361</span></span>
-<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00292</span></span>
-<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00419</span></span>
-<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0106 </span></span>
-<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0216 </span></span>
-<span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0316 </span></span>
-<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0341 </span></span>
-<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0334 </span></span>
-<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0324 </span></span>
-<span><span class="co">#&gt; # … with 314 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00280</span></span>
+<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00392</span></span>
+<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00277</span></span>
+<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00396</span></span>
+<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0104 </span></span>
+<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0218 </span></span>
+<span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0322 </span></span>
+<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0348 </span></span>
+<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0339 </span></span>
+<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0327 </span></span>
+<span><span class="co">#&gt; # … with 314 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
@@ -263,8 +263,7 @@
 <span><span class="co">#&gt;  8 NSW      10600 Bellingen (A)        </span></span>
 <span><span class="co">#&gt;  9 NSW      10650 Berrigan (A)         </span></span>
 <span><span class="co">#&gt; 10 NSW      10750 Blacktown (C)        </span></span>
-<span><span class="co">#&gt; # … with 534 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # … with 534 more rows</span></span></code></pre></div>
 <p>Or get the information for states like so:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/abs_age_data.html">abs_age_state</a></span><span class="op">(</span>state_name <span class="op">=</span> <span class="st">"QLD"</span><span class="op">)</span></span>
@@ -347,7 +346,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/njtierney/conmat/actions" class="external-link"><img src="https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/gh/njtierney/conmat?branch=master" class="external-link"><img src="https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>

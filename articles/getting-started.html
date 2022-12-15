@@ -186,20 +186,20 @@ details. Below is a brief example of this:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polymod_contact_data_belgium_0_10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,430 × 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,434 × 5</span></span></span>
 <span><span class="co">#&gt;    setting age_from age_to contacts participants</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> work           0      0        0            5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> work           0      1        0            3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> work           0      1        0            2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> work           0      2        0            2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> work           0      4        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> work           0      5        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work           0      7        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work           0     10        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> work           0     11        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> work           0     12        0            1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,420 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,424 more rows</span></span></span></code></pre></div>
 <p>Similarly, you can control the population data, retrieving it only
 for certain countries:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -270,9 +270,9 @@ features of the contact rates.</p>
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 7.08 1.00 4.80 1.00 5.57 4.57  total = 27.02 </span></span>
+<span><span class="co">#&gt; 7.10 1.00 4.87 1.00 5.63 4.25  total = 26.86 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 1642.181     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 1648.48     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a
 new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in
@@ -320,13 +320,13 @@ even sub year.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 3</span></span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.79<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)       1.62<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.57<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.62<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.67<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)      1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     2.35<span style="color: #949494;">e</span>+19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)       1.61<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.56<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.65<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.68<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)      1.79<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     5.21<span style="color: #949494;">e</span>+18</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [5,10)         [0,5)        1.53<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)       2.51<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)      1.88<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
@@ -453,19 +453,13 @@ providing some age breaks we want to predict to</p>
 <span><span class="co">#&gt; [10,15)  5.731958e-02 1.201933e-01 1.887684e-01 9.963227e-02 9.813571e+20</span></span>
 <span><span class="co">#&gt; [15,20)  3.517148e-02 4.590661e-02 1.063090e-01 1.658309e-01 2.277138e+16</span></span>
 <span><span class="co">#&gt; [20,Inf) 2.210238e+33 1.115678e+27 1.133332e+22 2.464616e+17 4.391374e+12</span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "conmat_prediction_matrix" "matrix"                  </span></span>
-<span><span class="co">#&gt; [3] "array"</span></span>
 <span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">all</span></span>
 <span><span class="co">#&gt;               [0,5)    [5,10)   [10,15)    [15,20) [20,Inf)</span></span>
 <span><span class="co">#&gt; [0,5)    1.05181207 0.3328449 0.0951143 0.06069717      Inf</span></span>
 <span><span class="co">#&gt; [5,10)   0.35087372 4.6920504 0.5251319 0.09017305      Inf</span></span>
 <span><span class="co">#&gt; [10,15)  0.10589455 0.5507981 6.7431490 0.57914280      Inf</span></span>
 <span><span class="co">#&gt; [15,20)  0.07210516 0.1013027 0.6145379 4.91889407      Inf</span></span>
-<span><span class="co">#&gt; [20,Inf)        Inf       Inf       Inf        Inf      Inf</span></span>
-<span><span class="co">#&gt; attr(,"class")</span></span>
-<span><span class="co">#&gt; [1] "conmat_prediction_matrix" "conmat_prediction_matrix"</span></span>
-<span><span class="co">#&gt; [3] "matrix"                   "array"</span></span></code></pre></div>
+<span><span class="co">#&gt; [20,Inf)        Inf       Inf       Inf        Inf      Inf</span></span></code></pre></div>
 <p>We can use <code>autoplot</code> to plot all at once</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this code is erroring for the moment - something to do with rendering a large plot I think.</span></span>
