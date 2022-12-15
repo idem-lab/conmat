@@ -30,8 +30,9 @@
 
     Code
       abs_age_state("Imaginary World")
-    Error <rlang_error>
-      The state name provided does not match states in Australia
+    Condition
+      Error in `check_state_name()`:
+      ! The state name provided does not match states in Australia
       x The state name 'Imaginary World' did not match
       i See `abs_lga_lookup` for a list of all states
 

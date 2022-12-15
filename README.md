@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
+[![R-CMD-check](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
 <!-- badges: end -->
@@ -101,18 +101,17 @@ polymod_survey_data
 #> # A tibble: 21 × 2
 #>    lower.age.limit population
 #>              <int>      <dbl>
-#>  1               0   1841420.
-#>  2               5   1950666.
-#>  3              10   2122856.
-#>  4              15   2323822.
-#>  5              20   2406141.
-#>  6              25   2377541.
-#>  7              30   2552587.
-#>  8              35   2982293.
-#>  9              40   3044427.
-#> 10              45   2828202.
+#>  1               0   1852682.
+#>  2               5   1968449.
+#>  3              10   2138897.
+#>  4              15   2312032.
+#>  5              20   2407486.
+#>  6              25   2423602.
+#>  7              30   2585137.
+#>  8              35   2969393.
+#>  9              40   3041663.
+#> 10              45   2809154.
 #> # … with 11 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 ```
 
 ## Predicting the contact rate
@@ -126,6 +125,8 @@ contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
   )
+#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
+#> algorithm did not converge
 #> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
 #> fitted rates numerically 0 occurred
 ```
@@ -146,9 +147,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.26 5.40 6.32 7.90 7.38  total = 35.26 
+#> 1.00 4.45 5.50 6.25 7.89 7.33  total = 35.43 
 #> 
-#> fREML score: 23815.8     rank: 55/57
+#> fREML score: 23951.94     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -200,29 +201,28 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00213
-#>  2 [0,5)          [5,10)        0.00361
-#>  3 [0,5)          [10,15)       0.00292
-#>  4 [0,5)          [15,20)       0.00419
-#>  5 [0,5)          [20,25)       0.0106 
-#>  6 [0,5)          [25,30)       0.0216 
-#>  7 [0,5)          [30,35)       0.0316 
-#>  8 [0,5)          [35,40)       0.0341 
-#>  9 [0,5)          [40,45)       0.0334 
-#> 10 [0,5)          [45,50)       0.0324 
+#>  1 [0,5)          [0,5)         0.00280
+#>  2 [0,5)          [5,10)        0.00392
+#>  3 [0,5)          [10,15)       0.00277
+#>  4 [0,5)          [15,20)       0.00396
+#>  5 [0,5)          [20,25)       0.0104 
+#>  6 [0,5)          [25,30)       0.0218 
+#>  7 [0,5)          [30,35)       0.0322 
+#>  8 [0,5)          [35,40)       0.0348 
+#>  9 [0,5)          [40,45)       0.0339 
+#> 10 [0,5)          [45,50)       0.0327 
 #> # … with 314 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 ```
 
 ## Plotting
 
 Let’s visualise the matrix to get a sense of the predictions with
-`plot_matrix`. First we need to transform the predictions to a matrix:
+`autoplot`. First we need to transform the predictions to a matrix:
 
 ``` r
 synthetic_contact_fairfield %>% 
   predictions_to_matrix() %>% 
-  plot_matrix()
+  autoplot()
 ```
 
 <img src="man/figures/README-plot-matrix-differents-1.png" width="100%" />
@@ -296,7 +296,6 @@ abs_lga_lookup
 #>  9 NSW      10650 Berrigan (A)         
 #> 10 NSW      10750 Blacktown (C)        
 #> # … with 534 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 ```
 
 Or get the information for states like so:

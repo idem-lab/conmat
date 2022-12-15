@@ -12,7 +12,7 @@ abs_age_lga(lga_name)
 abs_age_state(state_name)
 }
 \arguments{
-\item{lga_name}{lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine. It must also match exactly one LGA. See \code{\link[=check_lga_name]{check_lga_name()}} for more details.}
+\item{lga_name}{lga name - can be a partial match, e.g.,  although the official name might be "Albury (C)", "Albury" is fine.}
 
 \item{state_name}{shortened state name}
 }
@@ -25,6 +25,6 @@ Return Australian Bureau of Statistics (ABS) age population data for a
 given Local Government Area (LGA) or state
 }
 \examples{
-abs_age_lga("Albury (C)")
-abs_age_state("NSW")
+abs_age_lga(c("Albury (C)","Fairfield (C)"))
+abs_age_state(c("NSW","VIC"))
 }

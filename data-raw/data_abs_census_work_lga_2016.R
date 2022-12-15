@@ -224,7 +224,7 @@ data_abs_lga_work %>%
 # check_lga%>%
 # anti_join(all_lga)%>%filter(is.na(official_name_state))->c
 
-use_data(data_abs_lga_work, overwrite = TRUE)
+use_data(data_abs_lga_work, compress = "xz", overwrite = TRUE)
 
 visdat::vis_miss(data_abs_lga_work)
 

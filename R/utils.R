@@ -91,3 +91,73 @@ bin_widths <- function(lower_bound) {
   c(diffs, diffs[length(diffs)])
   
 }
+
+#'@title Check dimensions
+#' @description An internal function used within [apply_vaccination()] to warn users of incompatible dimensions of 
+#' data and the next generation matrices
+#'
+#' @param data data frame
+#' @param ngm  list with next generation matrices at different settings
+#' @keywords internal
+check_dimensions <- function(ngm, data){
+  
+  nrow_data <- nrow(data)
+  ngm_cols <- purrr::map_int(ngm, ncol)
+  dim_match <- all(nrow_data == ngm_cols)
+
+#   lapply(ngm, "ncol") %>%
+#     mapply(nrow(data), FUN = "identical") %>%
+#     all()
+  
+  if (!dim_match)
+  {
+    stop(cli::format_error(
+      c(
+        "Non-conformable arrays present." ,
+        "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
+        "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
+        "x" = "Number of rows in {.var data} is {nrow(data)}.")
+      ))
+
+
+  }}
+
+#' 
+#' @title Check if data is a list
+#' @param contact_data data on the contacts between two ages at different settings
+#' @keywords internal
+check_if_list <- function(contact_data) {
+  if (!inherits(contact_data, "list")) {
+    stop(cli::format_error(
+      c("i" = "Function expects {.var contact_data} to be of class {.cls list}",
+        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}.")
+
+    ))
+    
+  }
+}
+
+#' @export
+print.conmat_prediction_matrix <- function(x, ...) {
+  print(unclass(x), ...)
+  return(invisible(x))
+}
+
+#' @export
+print.conmat_setting_prediction_matrix <- function(x, ...) {
+  n_matrices <- length(names(x))
+  cli::cli_h1("Setting Prediction Matrices:")
+  dim_char <- purrr::map_chr(
+    x,
+    ~paste(dim(.x), collapse = "x")
+  )
+  names_x <- glue::glue(
+    "{.strong [names(dim_char)]}: {.val [dim_char]} matrix",
+    .open = "[",
+    .close = "]")
+  cli::cli_li(names_x)
+  cli::cli_alert_info("Access each matrix with {.code x$name}")
+  cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
+  # print(unclass(x), ...)
+  return(invisible(x))
+}

@@ -4,7 +4,7 @@
 \alias{fit_setting_contacts}
 \title{Fit a contact model to a survey poulation}
 \usage{
-fit_setting_contacts(contact_data_list, population)
+fit_setting_contacts(contact_data_list, population, symmetrical = TRUE)
 }
 \arguments{
 \item{contact_data_list}{A list of dataframes, each containing informatio
@@ -15,6 +15,10 @@ can be retrieved with \code{\link[=get_polymod_setting_data]{get_polymod_setting
 \item{population}{survey population data, containing columns
 \code{lower.age.limit} and \code{population}. Example data can be retrieved with
 \code{\link[=get_polymod_population]{get_polymod_population()}}.}
+
+\item{symmetrical}{whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See \code{details} of \code{fit_single_contact_model} for more
+information.}
 }
 \value{
 list of fitted gam models - one for each setting provided

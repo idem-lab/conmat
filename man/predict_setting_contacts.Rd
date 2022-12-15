@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_setting_contacts.R
 \name{predict_setting_contacts}
 \alias{predict_setting_contacts}
-\title{Predict contact rate between age groups across all settings}
+\title{Predict setting contacts}
 \usage{
 predict_setting_contacts(
   population,
@@ -13,13 +13,11 @@ predict_setting_contacts(
 )
 }
 \arguments{
-\item{population}{a dataframe of age population information, with columns
-indicating some lower age limit, and population, (e.g., \code{\link[=get_polymod_population]{get_polymod_population()}})}
+\item{population}{population}
 
-\item{contact_model}{A list of GAM models for each setting. See example
-output from \code{fit_setting_contact} below}
+\item{contact_model}{contact_model}
 
-\item{age_breaks}{A vector of age breaks.}
+\item{age_breaks}{age_breaks}
 
 \item{per_capita_household_size}{Optional (defaults to NULL). When set, it
 adjusts the household contact matrix by some per capita household size.
@@ -33,28 +31,12 @@ Default values for this are from
 \code{\link[=get_polymod_per_capita_household_size]{get_polymod_per_capita_household_size()}}, which ends up being 3.248971}
 }
 \value{
-List of contact rate of matrices for each setting: ("home", "work",
-"school", "other").
+List of setting matrices
 }
 \description{
-Predicts the expected contact rate across all settings ("home",
-"school", "work", and "other") over specified age breaks,
-given some model of contact rate and population age structure. Optionally
-performs an adjustment for per capita household size. See "details" for more
-information.
+Predict setting contacts
 }
 \details{
-The population data is used to determine age range to predict
-contact rates, and removes ages with zero population, so we do not
-make predictions for ages with zero populations. Contact rates are
-predicted yearly between the age groups, using \code{\link[=predict_contacts_1y]{predict_contacts_1y()}},
-then aggregates these predicted contacts using
-\code{\link[=aggregate_predicted_contacts]{aggregate_predicted_contacts()}}, which aggregates the predictions back to
-the same resolution as the data, appropriately weighting the contact rate
-by the population. Predictions are converted to matrix format using
-\code{\link[=predictions_to_matrix]{predictions_to_matrix()}} to produce contact matrices for all age groups
-combinations across different settings or location of contact.
-
 We use Per-capita household size instead of mean household size.
 Per-capita household size is different to mean household size, as the
 household size averaged over \strong{people} in the population, not over
