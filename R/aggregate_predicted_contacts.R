@@ -60,6 +60,7 @@ aggregate_predicted_contacts <- function(predicted_contacts_1y,
     dplyr::filter(
       !is.na(age_group_to)
     ) %>%
+    # TODO: This is where we need to fix how these new differences are reconciled
     # sum the number of contacts to the 'to' age groups, for each integer
     # participant age
     dplyr::group_by(
