@@ -104,3 +104,23 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
   }
 }
 
+check_if_var_numeric <- function(data, var, attribute){
+  var_val <- data[[var]]
+  
+  if (!is.numeric(var_val)){
+    cli::cli_abort(
+      c("{.var {attribute}} must be {.cls numeric}",
+        "{.var {var_lab}} has been entered to represent {.var {attribute}}",
+        "But {.var {var_lab}} is of class {.cls {class(var_val)}}")
+    )
+  }
+}
+
+check_if_data_frame <- function(x){
+  if (!is.data.frame(x)){
+    cli::cli_abort(
+      c("x must be a {.cls data.frame}",
+        "x is {.cls {class(x)}}")
+    )
+  }
+}
