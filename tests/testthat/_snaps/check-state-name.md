@@ -4,7 +4,6 @@
       abs_age_state("NSW")
     Output
       # A tibble: 18 x 4
-      # Groups:   year, state [1]
           year state lower.age.limit population
          <dbl> <chr>           <dbl>      <dbl>
        1  2020 NSW                 0     495091

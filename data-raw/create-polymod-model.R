@@ -1,5 +1,5 @@
 library(conmat)
-set.seed(2022 - 09 - 10)
+set.seed(2022 - 12 - 19)
 polymod_contact_data <- get_polymod_setting_data()
 polymod_survey_data <- get_polymod_population()
 polymod_setting_models <- fit_setting_contacts(

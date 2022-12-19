@@ -1,8 +1,8 @@
-# new_population works
+# conmat_population works
 
     # A tibble: 18 x 4
        lga           lower.age.limit  year population
-     * <chr>                   <dbl> <dbl>      <dbl>
+       <chr>                   <dbl> <dbl>      <dbl>
      1 Fairfield (C)               0  2020      12261
      2 Fairfield (C)               5  2020      13093
      3 Fairfield (C)              10  2020      13602

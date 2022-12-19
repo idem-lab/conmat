@@ -55,5 +55,9 @@ get_polymod_population <- function(countries = c(
     ) %>%
     dplyr::summarise(
       population = stats::weighted.mean(population, participants)
+    ) %>% 
+    conmat_population(
+      age = lower.age.limit,
+      population = population
     )
 }
