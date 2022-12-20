@@ -32,8 +32,8 @@ age_max <- 15
 all_ages <- age_min:age_max
 library(tidyr)
 example_df <- expand_grid(
-   age_from = all_ages,
-   age_to = all_ages,
-   )
+  age_from = all_ages,
+  age_to = all_ages,
+)
 add_population_age_to(example_df)
 }

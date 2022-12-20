@@ -30,7 +30,7 @@ participated in the polymod survey.
 }
 \examples{
 get_polymod_population()
-get_polymod_population("Belgium") 
-get_polymod_population("United Kingdom") 
-get_polymod_population("Italy") 
+get_polymod_population("Belgium")
+get_polymod_population("United Kingdom")
+get_polymod_population("Italy")
 }

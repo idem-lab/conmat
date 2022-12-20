@@ -1,9 +1,11 @@
 library(dplyr)
-contact_data <- get_polymod_contact_data("all")  %>% 
-  filter(age_from <= 20,
-         age_to <= 20)
+contact_data <- get_polymod_contact_data("all") %>%
+  filter(
+    age_from <= 20,
+    age_to <= 20
+  )
 
-population <- get_polymod_population() %>% 
+population <- get_polymod_population() %>%
   filter(lower.age.limit <= 20)
 
 m_all <- fit_single_contact_model(

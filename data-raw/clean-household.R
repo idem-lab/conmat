@@ -41,10 +41,10 @@ abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_060920211607
       n_persons_usually_resident == "Eight or more persons" ~ "8+"
     )
   ) %>%
-  filter(household_composition == "Total Households") %>% 
-  select( - household_composition) %>% 
-  mutate(state = abbreviate_states(state))  %>% 
-  drop_na() %>% 
+  filter(household_composition == "Total Households") %>%
+  select(-household_composition) %>%
+  mutate(state = abbreviate_states(state)) %>%
+  drop_na() %>%
   rename(lga = lga_name) %>%
   # renaming LGAs according to abs_lga_lookup & abs_pop_age_lga_2020
   mutate(

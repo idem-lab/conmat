@@ -66,19 +66,15 @@
 #'   acquisition_col = acquisition,
 #'   transmission_col = transmission
 #' )
-#'}
+#' }
 #' @export
-apply_vaccination <- function(
-  ngm,
-  data,
-  coverage_col,
-  acquisition_col,
-  transmission_col
-) {
-  
-  
-  check_dimensions(ngm,data)
-  
+apply_vaccination <- function(ngm,
+                              data,
+                              coverage_col,
+                              acquisition_col,
+                              transmission_col) {
+  check_dimensions(ngm, data)
+
   transmission_reduction_matrix <- data %>%
     # compute percentage reduction in acquisition and transmission in each age group
     dplyr::mutate(

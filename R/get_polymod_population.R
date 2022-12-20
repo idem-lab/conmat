@@ -5,31 +5,31 @@
 #'   participants). Note that we don't want to weight by survey age
 #'   distributions for this, since the total number of *participants*
 #'   represents the sampling. It uses the participant data from the polymod
-#'   survey as well as the age specific population data from `socialmixr` 
-#'   R package to return the age specific average population of different, 
-#'   countries weighted by the number of participants from those countries who 
+#'   survey as well as the age specific population data from `socialmixr`
+#'   R package to return the age specific average population of different,
+#'   countries weighted by the number of participants from those countries who
 #'   participated in the polymod survey.
 #'
 #' @param countries countries to extract data from. Default is to get: Belgium,
-#'   Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and 
+#'   Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and
 #'   United Kingdom.
 #' @return data frame with two columns: `lower.age.limit` and `population`
 #' @examples
 #' get_polymod_population()
-#' get_polymod_population("Belgium") 
-#' get_polymod_population("United Kingdom") 
-#' get_polymod_population("Italy") 
+#' get_polymod_population("Belgium")
+#' get_polymod_population("United Kingdom")
+#' get_polymod_population("Italy")
 #' @export
 get_polymod_population <- function(countries = c(
-    "Belgium",
-    "Finland",
-    "Germany",
-    "Italy",
-    "Luxembourg",
-    "Netherlands",
-    "Poland",
-    "United Kingdom"
-  )) {
+                                     "Belgium",
+                                     "Finland",
+                                     "Germany",
+                                     "Italy",
+                                     "Luxembourg",
+                                     "Netherlands",
+                                     "Poland",
+                                     "United Kingdom"
+                                   )) {
   socialmixr::polymod$participants %>%
     dplyr::filter(
       !is.na(year),
@@ -55,7 +55,7 @@ get_polymod_population <- function(countries = c(
     ) %>%
     dplyr::summarise(
       population = stats::weighted.mean(population, participants)
-    ) %>% 
+    ) %>%
     conmat_population(
       age = lower.age.limit,
       population = population

@@ -90,7 +90,7 @@ This leaves us with a model that looks like so:
     work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -106,10 +106,10 @@ But if the term \code{symmetrical = FALSE} is used, you get:
     s(abs(age_from - age_to)) +
     s(abs(age_from - age_to), age_from) +
     school_probability +
-    work_probability + 
+    work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -123,10 +123,12 @@ example_population <- get_polymod_population()
 
 library(dplyr)
 
-example_contact_20 <- example_contact \%>\% 
-  filter(age_to <= 20,
-         age_from <= 20)
-         
+example_contact_20 <- example_contact \%>\%
+  filter(
+    age_to <= 20,
+    age_from <= 20
+  )
+
 my_mod <- fit_single_contact_model(
   contact_data = example_contact_20,
   population = example_population

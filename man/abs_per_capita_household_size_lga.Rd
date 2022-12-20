@@ -17,6 +17,6 @@ returns a numeric value depicting the per capita household size of the specified
 Get household size distribution based on  LGA name
 }
 \examples{
-abs_per_capita_household_size_lga(lga ="Fairfield (C)")
+abs_per_capita_household_size_lga(lga = "Fairfield (C)")
 
 }

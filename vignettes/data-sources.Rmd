@@ -43,7 +43,7 @@ And if you're not sure about a particular name of a place, you can use `agrep` a
 
 ```{r abs-lga-lookup-filter}
 library(dplyr)
-abs_lga_lookup %>% 
+abs_lga_lookup %>%
   filter(agrepl("Sydney", lga))
 ```
 
@@ -132,47 +132,46 @@ library(ggplot2)
 library(stringr)
 library(dplyr)
 eyre_transmission_probabilities %>%
-   group_by(
-     setting,
-     case_age_5y,
-     contact_age_5y
-   ) %>%
-   summarise(
-     across(
-       probability,
-       mean
-     ),
-     .groups = "drop"
-   ) %>%
-   rename(
-     case_age = case_age_5y,
-     contact_age = contact_age_5y
-   ) %>%
-   mutate(
-     across(
-       ends_with("age"),
-       ~ factor(.x,
-                levels = str_sort(
-                  unique(.x),
-                  numeric = TRUE
-                )
-       )
-     )
-   ) %>%
-   ggplot(
-     aes(
-       x = case_age,
-       y = contact_age,
-       fill = probability
-     )
-   ) +
-   facet_wrap(~setting) +
-   geom_tile() +
-   scale_fill_viridis_c() +
-   coord_fixed() +
-   theme_minimal() +
-   theme(
-     axis.text = element_text(angle = 45, hjust = 1)
-   )
-
+  group_by(
+    setting,
+    case_age_5y,
+    contact_age_5y
+  ) %>%
+  summarise(
+    across(
+      probability,
+      mean
+    ),
+    .groups = "drop"
+  ) %>%
+  rename(
+    case_age = case_age_5y,
+    contact_age = contact_age_5y
+  ) %>%
+  mutate(
+    across(
+      ends_with("age"),
+      ~ factor(.x,
+        levels = str_sort(
+          unique(.x),
+          numeric = TRUE
+        )
+      )
+    )
+  ) %>%
+  ggplot(
+    aes(
+      x = case_age,
+      y = contact_age,
+      fill = probability
+    )
+  ) +
+  facet_wrap(~setting) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  coord_fixed() +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(angle = 45, hjust = 1)
+  )
 ```

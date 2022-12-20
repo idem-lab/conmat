@@ -5,8 +5,10 @@ test_that("refactored code works", {
 })
 
 test_that("refactored code works with lga", {
-  expect_equal(abs_per_capita_household_size_lga(unique(abs_lga_lookup$lga)[1]),
-               get_per_capita_household_size(lga=unique(abs_lga_lookup$lga)[1]))
+  expect_equal(
+    abs_per_capita_household_size_lga(unique(abs_lga_lookup$lga)[1]),
+    get_per_capita_household_size(lga = unique(abs_lga_lookup$lga)[1])
+  )
 })
 
 

@@ -36,7 +36,7 @@ abs_pop_age_lga_2016_raw <- file_path %>%
     state = `S/T name`,
     LGA_NAME19 = `LGA name`,
     LGA_CODE19 = `LGA code`
-  ) %>% 
+  ) %>%
   pivot_longer(
     cols = -c(state, LGA_NAME19, LGA_CODE19),
     names_to = "age",
@@ -53,25 +53,30 @@ abs_pop_age_lga_2016_raw <- file_path %>%
     lga_code = lga_code19,
     lga = lga_name19
   ) %>%
-  mutate(state = abbreviate_states(state)) %>% 
-  select(-lga_code) %>% 
-  rename(age_group = age) %>% 
+  mutate(state = abbreviate_states(state)) %>%
+  select(-lga_code) %>%
+  rename(age_group = age) %>%
   # replace emdash
   mutate(
-    age_group = str_replace_all(age_group,
-                                "–",
-                                "-"),
+    age_group = str_replace_all(
+      age_group,
+      "–",
+      "-"
+    ),
     age_group = factor(age_group,
-                       levels = str_sort(unique(age_group), numeric = TRUE))
-  ) %>% 
-  arrange(state,
-          age_group)
-  
+      levels = str_sort(unique(age_group), numeric = TRUE)
+    )
+  ) %>%
+  arrange(
+    state,
+    age_group
+  )
+
 # there's about 1% missing...
-abs_pop_age_lga_2016_raw %>% 
+abs_pop_age_lga_2016_raw %>%
   naniar::miss_var_summary()
 
-abs_pop_age_lga_2016 <- abs_pop_age_lga_2016_raw %>% 
+abs_pop_age_lga_2016 <- abs_pop_age_lga_2016_raw %>%
   drop_na()
 
 use_data(abs_pop_age_lga_2016, overwrite = TRUE)

@@ -116,11 +116,11 @@ Then you need to specify the columns in the vaccination effect data frame relate
 ```{r}
 # Apply vaccination effect to next generation matrices
 ngm_nsw_vacc <- apply_vaccination(
- ngm = ngm_fairfield,
- data = vaccination_effect_example_data,
- coverage_col = coverage,
- acquisition_col = acquisition,
- transmission_col = transmission
+  ngm = ngm_fairfield,
+  data = vaccination_effect_example_data,
+  coverage_col = coverage,
+  acquisition_col = acquisition,
+  transmission_col = transmission
 )
 
 ngm_nsw_vacc

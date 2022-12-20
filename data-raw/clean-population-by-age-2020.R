@@ -49,29 +49,34 @@ abs_pop_age_lga_2020_raw <- file_path %>%
   rename(
     lga_code = lga_code19,
     lga = lga_name19
-  ) %>% 
-  mutate(state = abbreviate_states(state)) %>% 
-  select(-lga_code) %>% 
-  rename(age_group = age) %>% 
+  ) %>%
+  mutate(state = abbreviate_states(state)) %>%
+  select(-lga_code) %>%
+  rename(age_group = age) %>%
   # replace emdash
   mutate(
-    age_group = str_replace_all(age_group,
-                                "–",
-                                "-"),
+    age_group = str_replace_all(
+      age_group,
+      "–",
+      "-"
+    ),
     age_group = factor(age_group,
-                       levels = str_sort(unique(age_group), numeric = TRUE))
-  ) %>% 
-  arrange(state,
-          age_group)
+      levels = str_sort(unique(age_group), numeric = TRUE)
+    )
+  ) %>%
+  arrange(
+    state,
+    age_group
+  )
 
 # about 1% missing data for state, lga, and population
-abs_pop_age_lga_2020_raw %>% 
+abs_pop_age_lga_2020_raw %>%
   naniar::miss_var_summary()
 
-abs_pop_age_lga_2020_raw %>% 
+abs_pop_age_lga_2020_raw %>%
   naniar::gg_miss_var(facet = state)
 
-abs_pop_age_lga_2020 <- abs_pop_age_lga_2020_raw %>% 
+abs_pop_age_lga_2020 <- abs_pop_age_lga_2020_raw %>%
   drop_na()
 
 use_data(abs_pop_age_lga_2020, overwrite = TRUE)

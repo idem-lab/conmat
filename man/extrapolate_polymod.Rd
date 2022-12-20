@@ -44,6 +44,5 @@ synthetic_settings_5y_fairfield <- extrapolate_polymod(
   population = abs_age_lga("Fairfield (C)")
 )
 synthetic_settings_5y_fairfield
-)
 }
 }

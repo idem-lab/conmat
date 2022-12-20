@@ -59,8 +59,8 @@
 #' )
 #' }
 #' @export
-predict_setting_contacts <- function(population, 
-                                     contact_model, 
+predict_setting_contacts <- function(population,
+                                     contact_model,
                                      age_breaks,
                                      per_capita_household_size = NULL,
                                      model_per_capita_household_size =
@@ -72,17 +72,17 @@ predict_setting_contacts <- function(population,
     age_breaks = age_breaks,
     .options = furrr::furrr_options(seed = TRUE)
   )
-  
+
   setting_matrices <- furrr::future_map(
     .x = setting_predictions,
     .f = predictions_to_matrix,
     .options = furrr::furrr_options(seed = TRUE)
   )
-  
+
   combination <- Reduce("+", setting_matrices)
   setting_matrices$all <- combination
   setting_matrices$all <- new_prediction_matrix(setting_matrices$all)
-  
+
   # if we haven't set anything for the per capita household size, return this
   # adjusted matrix
   # otherwise we want to adjust the household contact matrix (which also
@@ -96,9 +96,8 @@ predict_setting_contacts <- function(population,
       model_per_capita_household_size = model_per_capita_household_size
     )
   }
-  
+
   setting_matrices <- new_setting_prediction_matrix(setting_matrices)
-  
+
   return(setting_matrices)
-  
 }

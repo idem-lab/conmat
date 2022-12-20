@@ -44,11 +44,11 @@ age_max <- 15
 all_ages <- age_min:age_max
 library(tidyr)
 example_df <- expand_grid(
-   age_from = all_ages,
-   age_to = all_ages,
-   )
-   
-example_df \%>\% 
-  add_population_age_to() \%>\% 
-  add_school_work_participation() 
+  age_from = all_ages,
+  age_to = all_ages,
+)
+
+example_df \%>\%
+  add_population_age_to() \%>\%
+  add_school_work_participation()
 }

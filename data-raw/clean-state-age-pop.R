@@ -27,25 +27,28 @@ abs_state_age <- read_excel(
   filter(
     age_group != "All ages",
     state != "Australia"
-  ) %>% 
-  mutate(state = abbreviate_states(state)) %>% 
+  ) %>%
+  mutate(state = abbreviate_states(state)) %>%
   relocate(
-    state, 
+    state,
     age_group,
     population
-  ) %>% 
+  ) %>%
   mutate(
     # replace emdash.
-    age_group = str_replace_all(age_group,
-                                "–",
-                                "-"),
-  age_group = case_when(
-    age_group == "100 and over" ~ "100+",
-    TRUE ~ age_group
-  ),
+    age_group = str_replace_all(
+      age_group,
+      "–",
+      "-"
+    ),
+    age_group = case_when(
+      age_group == "100 and over" ~ "100+",
+      TRUE ~ age_group
+    ),
     age_group = factor(age_group,
-                       levels = str_sort(unique(age_group), numeric = TRUE))
+      levels = str_sort(unique(age_group), numeric = TRUE)
     )
+  )
 
 abs_state_age
 

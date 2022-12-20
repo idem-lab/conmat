@@ -1,24 +1,24 @@
 #' @title Fit a single GAM contact model to a dataset
-#' 
+#'
 #' @description This is the workhorse of the `conmat` package, and is typically
-#'   used inside [fit_setting_contacts()]. It predicts the contact rate between 
-#'   all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3, 
-#'   and so on), for a specified setting, with specific terms being added for 
+#'   used inside [fit_setting_contacts()]. It predicts the contact rate between
+#'   all age bands (the contact rate between ages 0 and 1, 0 and 2, 0 and 3,
+#'   and so on), for a specified setting, with specific terms being added for
 #'   given settings. See "details" for further information.
-#'   
-#' @details The model fit is a Generalised Additive Model (GAM). We provide two 
-#'   "modes" for model fitting. Either using "symmetric" or "non-symmetric" 
+#'
+#' @details The model fit is a Generalised Additive Model (GAM). We provide two
+#'   "modes" for model fitting. Either using "symmetric" or "non-symmetric"
 #'   model predictor terms with the logical variance "symmetrical", which is set
-#'   to TRUE by default. We recommend using the "symmetrical" terms as it 
-#'   reflects the fact that contacts are symmetric - person A having contact 
+#'   to TRUE by default. We recommend using the "symmetrical" terms as it
+#'   reflects the fact that contacts are symmetric - person A having contact
 #'   with person B means person B has had contact with person A. We've included
-#'   a variety of terms to account for assortativity with age, where people of 
-#'   similar ages have more contact with each other. And included terms to 
-#'   account for intergenerational contact patterns, where parents and 
+#'   a variety of terms to account for assortativity with age, where people of
+#'   similar ages have more contact with each other. And included terms to
+#'   account for intergenerational contact patterns, where parents and
 #'   grandparents will interact with their children and grand children.
-#'   These terms are fit with a smoothing function. Specifically, the relevant 
+#'   These terms are fit with a smoothing function. Specifically, the relevant
 #'   code looks like this:
-#'   
+#'
 #'   ``` r
 #'   # abs(age_from - age_to)
 #'   s(gam_age_offdiag) +
@@ -33,24 +33,24 @@
 #'   # pmin(age_from, age_to)
 #'   s(gam_age_pmin)
 #'   ```
-#'   
-#'   We also include predictors for the probability of attending school, and 
-#'   attending work. These are computed as the probability that a person goes 
+#'
+#'   We also include predictors for the probability of attending school, and
+#'   attending work. These are computed as the probability that a person goes
 #'   to the same school/work, proportional to the increase in contacts due to
-#'   attendance. These terms are calculated from estimated proportion of 
-#'   people in age groups attending school and work. See 
+#'   attendance. These terms are calculated from estimated proportion of
+#'   people in age groups attending school and work. See
 #'   [add_modelling_features()] for more details.
-#'   
-#'   Finally, we include two offset terms so that we estimate the contact rate, 
+#'
+#'   Finally, we include two offset terms so that we estimate the contact rate,
 #'   that is the contacts per capita, instead of the number of contacts. These
-#'   offset terms are `log(contactable_population)`, and 
-#'   `log(contactable_population_school)` when the model is fit to a school 
-#'   setting. The contactable population is estimated as the interpolated 
+#'   offset terms are `log(contactable_population)`, and
+#'   `log(contactable_population_school)` when the model is fit to a school
+#'   setting. The contactable population is estimated as the interpolated
 #'   1 year ages from the data. For schools this is the contactable population
 #'   weighted by the proportion of the population attending school.
-#'   
+#'
 #'   This leaves us with a model that looks like so:
-#'   
+#'
 #'   ``` r
 #'   mgcv::bam(
 #'     formula = contacts ~
@@ -70,15 +70,15 @@
 #'       work_probability +
 #'       offset(log_contactable_population) +
 #'       # or for school settings
-#'       # offset(log_contactable_population_school) 
+#'       # offset(log_contactable_population_school)
 #'       family = stats::poisson,
 #'     offset = log(participants),
 #'     data = population_data
 #'   )
 #'   ```
-#'   
+#'
 #'   But if the term `symmetrical = FALSE` is used, you get:
-#'   
+#'
 #'   ``` r
 #'   mgcv::bam(
 #'     formula = contacts ~
@@ -87,47 +87,49 @@
 #'       s(abs(age_from - age_to)) +
 #'       s(abs(age_from - age_to), age_from) +
 #'       school_probability +
-#'       work_probability + 
+#'       work_probability +
 #'       offset(log_contactable_population) +
 #'       # or for school settings
-#'       # offset(log_contactable_population_school) 
+#'       # offset(log_contactable_population_school)
 #'       family = stats::poisson,
 #'     offset = log(participants),
 #'     data = population_data
 #'   )
 #'   ```
-#'   
+#'
 #' @param contact_data dataset with columns `age_to`, `age_from`, `setting`,
 #'  `contacts`, and `participants`. See [get_polymod_contact_data()] for
 #'   an example dataset - or the dataset in examples below.
-#' @param population population data, with columns `lower.age.limit` and 
+#' @param population population data, with columns `lower.age.limit` and
 #'   `population`. See [get_polymod_population()] for an example.
-#' @param symmetrical whether to enforce symmetrical terms in the model. 
+#' @param symmetrical whether to enforce symmetrical terms in the model.
 #'   Defaults to TRUE. See `details` for more information.
 #' @return single model
 #' @examples
 #' example_contact <- get_polymod_contact_data(setting = "home")
 #' example_contact
 #' example_population <- get_polymod_population()
-#' 
+#'
 #' library(dplyr)
-#' 
-#' example_contact_20 <- example_contact %>% 
-#'   filter(age_to <= 20,
-#'          age_from <= 20)
-#'          
+#'
+#' example_contact_20 <- example_contact %>%
+#'   filter(
+#'     age_to <= 20,
+#'     age_from <= 20
+#'   )
+#'
 #' my_mod <- fit_single_contact_model(
 #'   contact_data = example_contact_20,
 #'   population = example_population
 #' )
 #' @export
-fit_single_contact_model <- function(contact_data, 
-                                     population, 
+fit_single_contact_model <- function(contact_data,
+                                     population,
                                      symmetrical = TRUE) {
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data
-  
+
   if (symmetrical) {
     formula_no_offset <- contacts ~
       # Prem method did a post-hoc smoothing
@@ -145,7 +147,6 @@ fit_single_contact_model <- function(contact_data,
       s(gam_age_pmin) +
       school_probability +
       work_probability
-    
   } else if (!symmetrical) {
     formula_no_offset <- contacts ~
       # # deviation of contact age distribution from population age distribution
@@ -161,25 +162,24 @@ fit_single_contact_model <- function(contact_data,
       s(intergenerational, age_from) +
       # probabilities of both attending (any) school/work
       school_probability +
-      work_probability 
+      work_probability
   }
-  
+
   # choose the offset variable based on the setting
   setting <- contact_data$setting[1]
-  offset_variable <- switch(
-    setting,
+  offset_variable <- switch(setting,
     school = "log_contactable_population_school",
     "log_contactable_population"
   )
-  
+
   # add multiplicative offset for population contactable, to enable
   # extrapolation to new demographies
-  # in mgcv, this part of the offset gets used in prediction, which 
+  # in mgcv, this part of the offset gets used in prediction, which
   # is what we want. Those are the "contactable" parts, which we use
   # to extrapolate to new demographics.
   formula_offset <- sprintf("~. + offset(%s)", offset_variable)
   formula <- update(formula_no_offset, formula_offset)
-  
+
   # contact model for all locations together
   contact_data %>%
     # NOTE
@@ -203,5 +203,4 @@ fit_single_contact_model <- function(contact_data,
       offset = log(participants),
       data = .
     )
-  
 }

@@ -58,9 +58,11 @@ polymod_pop
 # provide a specified age and get the estimated population for that 1 year
 # age group. First we create the new function like so
 
-age_pop_function <- get_age_population_function(data=polymod_pop,
-                                                 age_col = lower.age.limit,
-                                                 pop_col= population)
+age_pop_function <- get_age_population_function(
+  data = polymod_pop,
+  age_col = lower.age.limit,
+  pop_col = population
+)
 # Then we pass it a year to get the estimated population for a particular age
 age_pop_function(4)
 
@@ -68,15 +70,15 @@ age_pop_function(4)
 # range
 age_pop_function(1:4)
 
-# Notice that we get a _pretty similar_ number of 0-4 if we sum it up, as 
+# Notice that we get a _pretty similar_ number of 0-4 if we sum it up, as
 # the first row of the table:
 head(polymod_pop, 1)
 sum(age_pop_function(age = 0:4))
 
-# Usage in dplyr 
+# Usage in dplyr
 library(dplyr)
 example_df <- slice_head(abs_education_state, n = 5)
 example_df \%>\%
-mutate(population_est = age_pop_function(age))
+  mutate(population_est = age_pop_function(age))
 
 }

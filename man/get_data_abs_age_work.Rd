@@ -27,8 +27,9 @@ Return  data on employed population for a given age and state or
 lga of Australia
 }
 \examples{
-get_data_abs_age_work(state="NSW")
-get_data_abs_age_work(state="WA",lga="Albany (C)",age=1:5)
-get_data_abs_age_work(state=c("QLD","TAS"),age=5)
-get_data_abs_age_work(lga=c("Albury (C)","Barcoo (S)"),age=39)
+get_data_abs_age_work(state = "NSW")
+get_data_abs_age_work(state = "WA", lga = "Albany (C)", age = 1:5)
+get_data_abs_age_work(state = c("QLD", "TAS"), age = 5)
+get_data_abs_age_work(lga = c("Albury (C)", "Barcoo (S)"), age = 39)
+
 }

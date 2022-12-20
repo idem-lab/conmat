@@ -41,10 +41,10 @@ cmat <- matrix(
   dimnames = list(
     name_vec,
     name_vec
-    )
+  )
 )
 
-diag(cmat) <- c(10,11,13)
+diag(cmat) <- c(10, 11, 13)
 cmat[upper.tri(cmat)] <- 3:5
 cmat[lower.tri(cmat)] <- 3:5
 
@@ -107,11 +107,11 @@ polymod_survey_data
 We can create a model of the contact *rate* with the function `fit_single_contact_model`
 
 ```{r fit-polymod}
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
-  )
+)
 ```
 
 This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.
@@ -132,7 +132,7 @@ fairfield_age_pop
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to.
 
 ```{r predict-contacts}
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
   population = fairfield_age_pop,
@@ -147,8 +147,8 @@ synthetic_contact_fairfield
 Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
 ```{r plot-matrix-differents}
-synthetic_contact_fairfield %>% 
-  predictions_to_matrix() %>% 
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
   autoplot()
 ```
 

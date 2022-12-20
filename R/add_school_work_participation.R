@@ -1,24 +1,24 @@
-#' Add columns describing the fractions of the population in each age group 
+#' Add columns describing the fractions of the population in each age group
 #'   that attend school/work (average FTE)
 #'
 #' Add fractions of the population in each age group that attend school/work
 #'   (average FTE) to compute the probability that both participant and
-#'   contact attend school/work. Requires columns `age_to` and  `age_from`. 
-#'   Note that it will operate on any column starting with `age`. Adds columns: 
-#'   `school_probability`, `work_probability`, `school_year_probability`, and 
-#'   `school_weighted_pop_fraction`. The columns `school_probability` and 
-#'   `work_probability` represent the probability a person of the other age 
-#'   goes to the same work/school. `school_year_probability` represents the 
-#'   probability that a person of the other age would be in the same school 
-#'   year. `school_weighted_pop_fraction` represents the weighted combination 
-#'   of contact population age distribution & school year probability, so that 
-#'   if the contact is in the same school year, the weight is 1, and otherwise 
-#'   it is the population age fraction. This can be used as an offset, so that 
-#'   population age distribution can be used outside the classroom, but does 
-#'   not affect classroom contacts (which due to cohorting and regularised 
+#'   contact attend school/work. Requires columns `age_to` and  `age_from`.
+#'   Note that it will operate on any column starting with `age`. Adds columns:
+#'   `school_probability`, `work_probability`, `school_year_probability`, and
+#'   `school_weighted_pop_fraction`. The columns `school_probability` and
+#'   `work_probability` represent the probability a person of the other age
+#'   goes to the same work/school. `school_year_probability` represents the
+#'   probability that a person of the other age would be in the same school
+#'   year. `school_weighted_pop_fraction` represents the weighted combination
+#'   of contact population age distribution & school year probability, so that
+#'   if the contact is in the same school year, the weight is 1, and otherwise
+#'   it is the population age fraction. This can be used as an offset, so that
+#'   population age distribution can be used outside the classroom, but does
+#'   not affect classroom contacts (which due to cohorting and regularised
 #'   class sizes are unlikely to depend on the population age distribution).
-#'   
-#' @param contact_data contact data containing columns: `age_to`, `age_from`, 
+#'
+#' @param contact_data contact data containing columns: `age_to`, `age_from`,
 #'   and `pop_age_to` (from [add_population_age_to()])
 #' @return dataset with 9 extra columns: school_fraction_age_from,
 #'   work_fraction_age_from, school_fraction_age_to, work_fraction_age_to,
@@ -31,13 +31,13 @@
 #' all_ages <- age_min:age_max
 #' library(tidyr)
 #' example_df <- expand_grid(
-#'    age_from = all_ages,
-#'    age_to = all_ages,
-#'    )
-#'    
-#' example_df %>% 
-#'   add_population_age_to() %>% 
-#'   add_school_work_participation() 
+#'   age_from = all_ages,
+#'   age_to = all_ages,
+#' )
+#'
+#' example_df %>%
+#'   add_population_age_to() %>%
+#'   add_school_work_participation()
 #' @export
 add_school_work_participation <- function(contact_data) {
   contact_data %>%

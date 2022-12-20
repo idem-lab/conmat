@@ -1,3 +1,4 @@
+# need to remove the conmat_population class
 fairfield <- abs_age_lga("Fairfield (C)")
 class(fairfield) <- class(fairfield)[-1]
 
@@ -7,7 +8,7 @@ test_that("conmat_population works", {
       data = fairfield,
       age = lower.age.limit,
       population = population
-      )
+    )
   )
 })
 

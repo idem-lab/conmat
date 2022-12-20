@@ -43,7 +43,6 @@ the survey, and a set of age breaks at which to aggregate contacts, return
 a set of predicted contact matrices for each setting, and for all combined.
 }
 \examples{
-
 \dontrun{
 # takes a long time to run
 settings_estimated_contacts <- estimate_setting_contacts(
@@ -53,6 +52,5 @@ settings_estimated_contacts <- estimate_setting_contacts(
   age_breaks = c(seq(0, 75, by = 5), Inf),
   per_capita_household_size = NULL
 )
-
 }
 }

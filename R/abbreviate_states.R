@@ -1,6 +1,6 @@
 #' Abbreviate Australian State Names
-#' 
-#' Given a full name (Title Case) of an Australian State or Territory, produces 
+#'
+#' Given a full name (Title Case) of an Australian State or Territory, produces
 #'   the abbreviated state name.
 #'
 #' @param state_names vector of state names in long form
