@@ -2,7 +2,8 @@ new_conmat_population <- function(data, age, population) {
   label_age <- as_name(age)
   label_population <- as_name(population)
 
-  tibble::new_tibble(data,
+  tibble::new_tibble(
+    data,
     nrow = vctrs::vec_size(data),
     "age" = label_age,
     "population" = label_population,
@@ -105,4 +106,26 @@ population_label.conmat_population <- function(x) {
 #' @export
 population <- function(x) {
   sym(population_label(x))
+}
+
+#' @export
+print.conmat_population <- function(x, ...) {
+  txt <- glue::glue("({class(x)[[1]]})")
+  out <- cli::col_red(txt)
+  age_txt <- glue::glue(
+    "- age: {cli::style_bold(age_label(x))}"
+  )
+  population_txt <- glue::glue(
+    "- population: {cli::style_bold(population_label(x))}"
+  )
+  age_out <- cli::col_grey(age_txt)
+  population_out <- cli::col_grey(population_txt)
+  # adds to the top of the tibble
+  msg <- sprintf(
+    "%s %s\n %s\n %s\n", format(x)[1], out,
+    age_out,
+    population_out
+  )
+  cat(msg)
+  cli::cat_line(format(x)[-1])
 }

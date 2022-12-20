@@ -17,7 +17,9 @@
 
 # get_polymod_population() works
 
-    # A tibble: 21 x 2
+    # A tibble: 21 x 2 (conmat_population)
+     - age: lower.age.limit
+     - population: population
        lower.age.limit population
                  <int>      <dbl>
      1               0   1852682.

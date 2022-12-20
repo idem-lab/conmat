@@ -1,6 +1,8 @@
 # abs_age_lga() returns the right shape works
 
-    # A tibble: 18 x 4
+    # A tibble: 18 x 4 (conmat_population)
+     - age: lower.age.limit
+     - population: population
        lga        lower.age.limit  year population
        <chr>                <dbl> <dbl>      <dbl>
      1 Albury (C)               0  2020       3764

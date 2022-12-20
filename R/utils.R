@@ -101,10 +101,6 @@ check_dimensions <- function(ngm, data) {
   ngm_cols <- purrr::map_int(ngm, ncol)
   dim_match <- all(nrow_data == ngm_cols)
 
-  #   lapply(ngm, "ncol") %>%
-  #     mapply(nrow(data), FUN = "identical") %>%
-  #     all()
-
   if (!dim_match) {
     cli::cli_abort(
       c(
@@ -154,6 +150,5 @@ print.conmat_setting_prediction_matrix <- function(x, ...) {
   cli::cli_li(names_x)
   cli::cli_alert_info("Access each matrix with {.code x$name}")
   cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
-  # print(unclass(x), ...)
   return(invisible(x))
 }

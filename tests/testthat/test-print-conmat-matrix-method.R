@@ -4,9 +4,6 @@ synthetic_settings_5y_perth <- extrapolate_polymod(
   population = perth_city
 )
 
-class(synthetic_settings_5y_perth)
-class(synthetic_settings_5y_perth$home)
-
 test_that("Print method for setting prediction matrices works", {
   expect_snapshot_output(synthetic_settings_5y_perth)
   expect_snapshot_output(synthetic_settings_5y_perth$home)
