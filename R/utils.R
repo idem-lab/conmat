@@ -13,8 +13,8 @@
 #'
 #' @keywords internal
 #'
-#' @return data frame with lower.age.limit and upper.age.limit and optionally
-#'   filtered down to specific location or year.
+#' @return data frame with `lower.age.limit` and `upper.age.limit` and
+#'   optionally filtered down to specific location or year.
 clean_age_population_year <- function(data,
                                       location_col = NULL,
                                       location = NULL,

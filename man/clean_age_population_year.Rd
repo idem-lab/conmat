@@ -27,8 +27,8 @@ clean_age_population_year(
 \item{year}{year to filter to. If not specified, gives all years.}
 }
 \value{
-data frame with lower.age.limit and upper.age.limit and optionally
-filtered down to specific location or year.
+data frame with \code{lower.age.limit} and \code{upper.age.limit} and
+optionally filtered down to specific location or year.
 }
 \description{
 Internally used function within \code{\link[=age_population]{age_population()}} to separate age groups

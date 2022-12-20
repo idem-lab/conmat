@@ -15,7 +15,8 @@ Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and
 United Kingdom.}
 }
 \value{
-data frame with two columns: \code{lower.age.limit} and \code{population}
+A \code{conmat_population} data frame with two columns: \code{lower.age.limit}
+and \code{population}
 }
 \description{
 returns the polymod-average population age distribution in

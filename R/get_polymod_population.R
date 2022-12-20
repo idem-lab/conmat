@@ -13,7 +13,8 @@
 #' @param countries countries to extract data from. Default is to get: Belgium,
 #'   Finland, Germany, Italy, Luxembourg, Netherlands, Poland, and
 #'   United Kingdom.
-#' @return data frame with two columns: `lower.age.limit` and `population`
+#' @return A `conmat_population` data frame with two columns: `lower.age.limit`
+#'   and `population`
 #' @examples
 #' get_polymod_population()
 #' get_polymod_population("Belgium")
