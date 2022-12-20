@@ -46,20 +46,24 @@ conmat_population <- function(data, age, population) {
 
 #' @title Convert to conmat population
 #' @param data data.frame
-#' @param age age column - numeric
-#' @param population population column - numeric
+#' @param ... extra arguments
+#' @rdname as_conmat_population
 #'
 #' @export
 as_conmat_population <- function(data, ...){
   UseMethod("as_conmat_population")
 }
 
+#' @name as_conmat_population
 #' @export
 as_conmat_population.default <- function(data, ...){
   abort("Cannot currently convert object of class {.cls {class(data)}} into \\
         a {.cls conmat_population} object.")
 }
 
+#' @param age age column - numeric
+#' @param population population column - numeric
+#' @name as_conmat_population
 #' @export
 as_conmat_population.data.frame <- function(data, age, population, ...){
   conmat_population(data,

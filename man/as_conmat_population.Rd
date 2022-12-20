@@ -2,12 +2,20 @@
 % Please edit documentation in R/conmat-population.R
 \name{as_conmat_population}
 \alias{as_conmat_population}
+\alias{as_conmat_population.default}
+\alias{as_conmat_population.data.frame}
 \title{Convert to conmat population}
 \usage{
 as_conmat_population(data, ...)
+
+\method{as_conmat_population}{default}(data, ...)
+
+\method{as_conmat_population}{data.frame}(data, age, population, ...)
 }
 \arguments{
 \item{data}{data.frame}
+
+\item{...}{extra arguments}
 
 \item{age}{age column - numeric}
 
