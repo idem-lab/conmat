@@ -59,4 +59,5 @@ Imports:
     readr,
     furrr,
     purrr,
-    tidyselect
+    tidyselect,
+    vctrs
