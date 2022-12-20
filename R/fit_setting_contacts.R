@@ -9,7 +9,7 @@
 #'   on the setting (home, work, school, other), age_from, age_to,
 #'   the number of contacts, and the number of participants. Example data
 #'   can be retrieved with [get_polymod_setting_data()].
-#' @param population survey population data, containing columns
+#' @param population `conmat_population` object or dataset with columns
 #'   `lower.age.limit` and `population`. Example data can be retrieved with
 #'   [get_polymod_population()].
 #' @param symmetrical whether to enforce symmetrical terms in the model.

@@ -100,8 +100,9 @@
 #' @param contact_data dataset with columns `age_to`, `age_from`, `setting`,
 #'  `contacts`, and `participants`. See [get_polymod_contact_data()] for
 #'   an example dataset - or the dataset in examples below.
-#' @param population population data, with columns `lower.age.limit` and
-#'   `population`. See [get_polymod_population()] for an example.
+#' @param population `conmat_population` object, or data frame with columns
+#'   `lower.age.limit` and `population`. See [get_polymod_population()] for
+#'   an example.
 #' @param symmetrical whether to enforce symmetrical terms in the model.
 #'   Defaults to TRUE. See `details` for more information.
 #' @return single model

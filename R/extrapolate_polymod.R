@@ -3,9 +3,10 @@
 #' Uses [estimate_setting_contacts()] to fit a contact model on the data from
 #'   polymod and later extrapolate on to a desired population.
 #'
-#' @param population data set with information on the population of the desired
-#'   location - containing `lower.age.limit` and `population` columns. See
-#'   `get_polymod_population()` for an example of this data.
+#' @param population a `conmat_population` object, specifying the `age`
+#'   and `population` characteristics. Or a data frame with `lower.age.limit`
+#'   and `population` columns. See `get_polymod_population()` for an example
+#'   of this data.
 #' @param age_breaks vector depicting age values. Default value is
 #'   `c(seq(0, 75, by = 5), Inf)`
 #' @param per_capita_household_size Optional (defaults to NULL). When set, it

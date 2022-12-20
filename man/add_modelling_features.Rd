@@ -30,7 +30,9 @@ features it adds are described below:
 representing the age of the person who had contact. It creates a column
 called \code{pop_age_to}. \code{\link[=add_population_age_to]{add_population_age_to()}} takes an extra argument
 for population, which defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but needs
-to be a data frame with columns, \code{lower.age.limit}, and \code{population}.
+to be a \code{conmat_population} object, which specifies the \code{age} and
+\code{population} characteristics, or a data frame with columns,
+\code{lower.age.limit}, and \code{population}.
 \item School work participation, which is from the function
 \code{\link[=add_school_work_participation]{add_school_work_participation()}}. This requires columns \code{age_to} and
 \code{age_from}, but will operate on any column starting with \code{age} and adds

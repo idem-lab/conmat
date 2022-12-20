@@ -3,16 +3,19 @@
 #' Adds the population distribution of contact ages. Requires a column called
 #'   "age_to", representing the contact age - the age of the person who had
 #'   contact. It creates a column, `pop_age_to`. The `population` argument
-#'   defaults to [get_polymod_population()], but can be any data frame with
-#'   columns, `lower.age.limit`, and `population`. If population is 'polymod'
-#'   then use the participant-weighted average of POLYMOD country/year
-#'   distributions. It adds the population via interpolation, using
-#'   [get_age_population_function()] to create a function that generates
-#'   population from ages.
+#'   defaults to [get_polymod_population()], which is a `conmat_population`
+#'   object, which has `age` and `population` specified. But this can also be
+#'   a data frame with columns, `lower.age.limit`, and `population`. If
+#'   population is 'polymod' then use the participant-weighted average of
+#'   POLYMOD country/year distributions. It adds the population via
+#'   interpolation, using [get_age_population_function()] to create a
+#'   function that generates population from ages.
 #'
 #' @param contact_data contact data containing columns `age_to` and `age_from`
-#' @param population Defaults to [get_polymod_population()], but can be any
-#'   data frame with columns, `lower.age.limit`, and `population`.
+#' @param population Defaults to [get_polymod_population()], a
+#'  `conmat_population` object, which specifies the `age` and `population`
+#'  columns. But it can optionally be any data frame with columns,
+#'  `lower.age.limit`, and `population`.
 #' @return data frame
 #' @examples
 #' age_min <- 10

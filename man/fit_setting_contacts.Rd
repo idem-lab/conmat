@@ -12,7 +12,7 @@ on the setting (home, work, school, other), age_from, age_to,
 the number of contacts, and the number of participants. Example data
 can be retrieved with \code{\link[=get_polymod_setting_data]{get_polymod_setting_data()}}.}
 
-\item{population}{survey population data, containing columns
+\item{population}{\code{conmat_population} object or dataset with columns
 \code{lower.age.limit} and \code{population}. Example data can be retrieved with
 \code{\link[=get_polymod_population]{get_polymod_population()}}.}
 

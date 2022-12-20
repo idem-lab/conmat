@@ -10,8 +10,9 @@
 #'   by in other year breaks). Data must contain columns, `age_from`, `age_to`,
 #'   `contacts`, and `se_contacts`, which is the same output as
 #'   [predict_contacts_1y()] - see examples below.
-#' @param population population with columns `lower.age.limit`, and
-#'   `population`. See examples below.
+#' @param population a `conmat_population` object, which has the `age` and
+#'   `population` columns specified, or a dataframe with columns
+#'   `lower.age.limit`, and `population`. See examples below.
 #' @param age_breaks vector of ages. Default: c(seq(0, 75, by = 5), Inf)
 #' @return data frame with columns, `age_group_from`, `age_group_to`, and
 #'  `contacts`, which is the aggregated model.

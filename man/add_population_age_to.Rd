@@ -9,8 +9,10 @@ add_population_age_to(contact_data, population = get_polymod_population())
 \arguments{
 \item{contact_data}{contact data containing columns \code{age_to} and \code{age_from}}
 
-\item{population}{Defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but can be any
-data frame with columns, \code{lower.age.limit}, and \code{population}.}
+\item{population}{Defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, a
+\code{conmat_population} object, which specifies the \code{age} and \code{population}
+columns. But it can optionally be any data frame with columns,
+\code{lower.age.limit}, and \code{population}.}
 }
 \value{
 data frame
@@ -19,12 +21,13 @@ data frame
 Adds the population distribution of contact ages. Requires a column called
 "age_to", representing the contact age - the age of the person who had
 contact. It creates a column, \code{pop_age_to}. The \code{population} argument
-defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, but can be any data frame with
-columns, \code{lower.age.limit}, and \code{population}. If population is 'polymod'
-then use the participant-weighted average of POLYMOD country/year
-distributions. It adds the population via interpolation, using
-\code{\link[=get_age_population_function]{get_age_population_function()}} to create a function that generates
-population from ages.
+defaults to \code{\link[=get_polymod_population]{get_polymod_population()}}, which is a \code{conmat_population}
+object, which has \code{age} and \code{population} specified. But this can also be
+a data frame with columns, \code{lower.age.limit}, and \code{population}. If
+population is 'polymod' then use the participant-weighted average of
+POLYMOD country/year distributions. It adds the population via
+interpolation, using \code{\link[=get_age_population_function]{get_age_population_function()}} to create a
+function that generates population from ages.
 }
 \examples{
 age_min <- 10

@@ -110,8 +110,6 @@ age_population <- function(data,
       year_col = {{ year_col }},
       year = {{ year }}
     )
-
-    return(age_population_df)
   } else {
     age_population_df <- clean_age_population_year(
       data = data,
@@ -121,7 +119,11 @@ age_population <- function(data,
       year_col = {{ year_col }},
       year = {{ year }}
     )
-
-    return(age_population_df)
   }
+  age_population_df <- conmat_population(
+    data = age_population_df,
+    age = lower.age.limit,
+    population = population
+  )
+  return(age_population_df)
 }

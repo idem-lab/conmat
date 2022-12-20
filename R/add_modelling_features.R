@@ -9,7 +9,9 @@
 #'     representing the age of the person who had contact. It creates a column
 #'     called `pop_age_to`. [add_population_age_to()] takes an extra argument
 #'     for population, which defaults to [get_polymod_population()], but needs
-#'     to be a data frame with columns, `lower.age.limit`, and `population`.
+#'     to be a `conmat_population` object, which specifies the `age` and
+#'     `population` characteristics, or a data frame with columns,
+#'     `lower.age.limit`, and `population`.
 #'   2) School work participation, which is from the function
 #'     [add_school_work_participation()]. This requires columns `age_to` and
 #'     `age_from`, but will operate on any column starting with `age` and adds

@@ -2,17 +2,26 @@
 % Please edit documentation in R/get_age_population_function.R
 \name{get_age_population_function}
 \alias{get_age_population_function}
+\alias{get_age_population_function.conmat_population}
+\alias{get_age_population_function.data.frame}
 \title{Return an interpolating function for populations in 1y age increments}
 \usage{
-get_age_population_function(
+get_age_population_function(data, ...)
+
+\method{get_age_population_function}{conmat_population}(data = population, ...)
+
+\method{get_age_population_function}{data.frame}(
   data = population,
   age_col = lower.age.limit,
-  pop_col = population
+  pop_col = population,
+  ...
 )
 }
 \arguments{
 \item{data}{dataset containing information on population of a given
 age/age group}
+
+\item{...}{extra arguments}
 
 \item{age_col}{bare variable name for the column with age information}
 
@@ -59,9 +68,7 @@ polymod_pop
 # age group. First we create the new function like so
 
 age_pop_function <- get_age_population_function(
-  data = polymod_pop,
-  age_col = lower.age.limit,
-  pop_col = population
+  data = polymod_pop
 )
 # Then we pass it a year to get the estimated population for a particular age
 age_pop_function(4)

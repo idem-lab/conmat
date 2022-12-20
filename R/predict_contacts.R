@@ -66,7 +66,6 @@
 predict_contacts <- function(model,
                              population,
                              age_breaks = c(seq(0, 75, by = 5), Inf)) {
-  # NOTE - need to remove / upgrade fragile use of `lower.age.limit`
   age <- age(population)
   age_var <- age_label(population)
   population <- population %>%

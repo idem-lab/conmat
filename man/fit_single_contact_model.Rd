@@ -11,8 +11,9 @@ fit_single_contact_model(contact_data, population, symmetrical = TRUE)
 \code{contacts}, and \code{participants}. See \code{\link[=get_polymod_contact_data]{get_polymod_contact_data()}} for
 an example dataset - or the dataset in examples below.}
 
-\item{population}{population data, with columns \code{lower.age.limit} and
-\code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for an example.}
+\item{population}{\code{conmat_population} object, or data frame with columns
+\code{lower.age.limit} and \code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for
+an example.}
 
 \item{symmetrical}{whether to enforce symmetrical terms in the model.
 Defaults to TRUE. See \code{details} for more information.}

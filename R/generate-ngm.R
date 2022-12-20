@@ -50,7 +50,6 @@ generate_ngm <- function(state_name = NULL,
   # pull out the age distribution of the target population &
   # the per-capita (ie. averaged over people, not households) household
   # size in this population
-
   if (!is.null(state_name)) {
     population <- abs_age_state(state_name = {{ state_name }})
     household_size <- get_per_capita_household_size(state = {{ state_name }})

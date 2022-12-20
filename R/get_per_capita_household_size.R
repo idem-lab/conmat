@@ -21,11 +21,11 @@ get_per_capita_household_size <- function(state = NULL, lga = NULL) {
   )
 
   if (level == "erroneous") {
-    stop("only one of state and lga may be specified")
+    abort("only one of state and lga may be specified")
   }
 
   if (length(state) > 1 | length(lga) > 1) {
-    stop("only one state or LGA at a time, please")
+    abort("only one state or LGA at a time, please")
   }
 
   if (!is.null(state)) {
@@ -72,8 +72,8 @@ get_per_capita_household_size <- function(state = NULL, lga = NULL) {
   )
 
   if (nrow(household_data) == 0) {
-    stop(
-      glue::glue("{level} '{paste(get(level))[2]}' not found")
+    cli::cli_abort(
+      "{level} '{paste(get(level))[2]}' not found"
     )
   }
 

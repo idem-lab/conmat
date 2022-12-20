@@ -11,9 +11,10 @@ extrapolate_polymod(
 )
 }
 \arguments{
-\item{population}{data set with information on the population of the desired
-location - containing \code{lower.age.limit} and \code{population} columns. See
-\code{get_polymod_population()} for an example of this data.}
+\item{population}{a \code{conmat_population} object, specifying the \code{age}
+and \code{population} characteristics. Or a data frame with \code{lower.age.limit}
+and \code{population} columns. See \code{get_polymod_population()} for an example
+of this data.}
 
 \item{age_breaks}{vector depicting age values. Default value is
 \code{c(seq(0, 75, by = 5), Inf)}}

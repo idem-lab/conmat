@@ -16,8 +16,9 @@ by in other year breaks). Data must contain columns, \code{age_from}, \code{age_
 \code{contacts}, and \code{se_contacts}, which is the same output as
 \code{\link[=predict_contacts_1y]{predict_contacts_1y()}} - see examples below.}
 
-\item{population}{population with columns \code{lower.age.limit}, and
-\code{population}. See examples below.}
+\item{population}{a \code{conmat_population} object, which has the \code{age} and
+\code{population} columns specified, or a dataframe with columns
+\code{lower.age.limit}, and \code{population}. See examples below.}
 
 \item{age_breaks}{vector of ages. Default: c(seq(0, 75, by = 5), Inf)}
 }
