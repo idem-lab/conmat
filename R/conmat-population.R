@@ -1,3 +1,11 @@
+#' Create a new `conmat_population` class object
+#'
+#' @param data data.frame
+#' @param age bare column name of numeric data on age
+#' @param population bare column name of numeric data on population
+#'
+#' @return object with class `conmat_population`
+#' @keywords internal
 new_conmat_population <- function(data, age, population) {
   label_age <- as_name(age)
   label_population <- as_name(population)
@@ -21,9 +29,9 @@ validate_conmat_population <- function(x) {
 #'
 #' A conmat population is a dataframe that stores which columns represent the
 #'   age and population information. This is useful as it means we can refer
-#'   to this information throughout other functions in the package without
-#'   needing to specify or hard code which columns represent the age and
-#'   population information.
+#'   to this information throughout other functions in the conmat package
+#'   without needing to specify or hard code which columns represent the age 
+#'   and population information.
 #'
 #' @param data data.frame
 #' @param age bare name representing the age column

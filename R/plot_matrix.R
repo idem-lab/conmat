@@ -48,7 +48,7 @@
 #' }
 #'
 #' @noRd
-#' @note internal
+#' @keywords internal
 plot_matrix <- function(matrix) {
   matrix %>%
     matrix_to_predictions() %>%

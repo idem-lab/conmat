@@ -61,6 +61,16 @@ reference:
       - generate_ngm
       - starts_with("get_")
       - per_capita_household_size
+      
+  - title: "Creating and accessing information on `conmat_population` objects"
+    desc: >
+      Store age and population information in a dataframe for use in other 
+      functions in conmat.
+    contents:
+      - conmat_population
+      - as_conmat_population
+      - age
+      - population
 
 navbar:
   left:

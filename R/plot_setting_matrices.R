@@ -34,7 +34,7 @@
 #' plot_setting_matrix(synthetic_settings_5y_fairfield)
 #' }
 #' @noRd
-#' @note internal
+#' @keywords internal
 plot_setting_matrices <- function(matrices,
                                   title = "Setting-specific synthetic contact matrices") {
   plot_home <- plot_matrix(matrices$home) + ggplot2::ggtitle("home")

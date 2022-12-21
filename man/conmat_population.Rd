@@ -19,9 +19,9 @@ a data frame with age and population attributes
 \description{
 A conmat population is a dataframe that stores which columns represent the
 age and population information. This is useful as it means we can refer
-to this information throughout other functions in the package without
-needing to specify or hard code which columns represent the age and
-population information.
+to this information throughout other functions in the conmat package
+without needing to specify or hard code which columns represent the age
+and population information.
 }
 \examples{
 perth <- abs_age_lga("Perth (C)")

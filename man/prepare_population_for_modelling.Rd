@@ -32,9 +32,7 @@ list of objects, \code{max_bound} \code{pop_model_bounded} \code{bounded_pop} \c
 \description{
 Prepares objects for use in \code{\link[=get_age_population_function]{get_age_population_function()}}.
 }
-\note{
-internal
-}
 \author{
 njtierney
 }
+\keyword{internal}

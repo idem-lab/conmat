@@ -6,7 +6,7 @@
 #' @param ... extra arguments
 #' @return list of objects, `max_bound` `pop_model_bounded` `bounded_pop` `unbounded_pop` for use in [get_age_population_function()]
 #' @author njtierney
-#' @note internal
+#' @keywords internal
 #' @name prepare_population_for_modelling
 #' @export
 prepare_population_for_modelling <- function(data, ...) {
@@ -105,7 +105,7 @@ prepare_population_for_modelling.data.frame <- function(data = data,
 #' @return function with age input, returning population estimate
 #' @author njtierney
 #' @noRd
-#' @note internal
+#' @keywords internal
 return_age_population_function <- function(pop_model) {
   fit <- fit_bounded_age_groups(pop_model$pop_model_bounded)
 
@@ -125,7 +125,7 @@ return_age_population_function <- function(pop_model) {
 #'   `midpoint`, and log population (`log_pop`).
 #' @return model with predictions for log population
 #' @author njtierney
-#' @note internal
+#' @keywords internal
 #' @noRd
 fit_bounded_age_groups <- function(pop_model_bounded) {
   pop_model_bounded %>%
@@ -147,7 +147,7 @@ fit_bounded_age_groups <- function(pop_model_bounded) {
 #' @return tibble with predicted population to various ages
 #' @author njtierney
 #' @noRd
-#' @note internal
+#' @keywords internal
 predict_to_long_age_ranges <- function(pop_model, fit) {
   max_bound <- pop_model$max_bound
   bounded_pop <- pop_model$bounded_pop
@@ -219,7 +219,7 @@ predict_to_long_age_ranges <- function(pop_model, fit) {
 #' @return tibble with population information for age ranges
 #' @author njtierney
 #' @noRd
-#' @note internal
+#' @keywords internal
 build_lookup_populations <- function(age, pred) {
   tibble::tibble(
     age = age
