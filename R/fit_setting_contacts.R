@@ -44,11 +44,13 @@ fit_setting_contacts <- function(contact_data_list,
   check_if_list(contact_data_list)
 
 
-  furrr::future_map(
+  fitted_setting_contacts <- furrr::future_map(
     .x = contact_data_list,
     .f = fit_single_contact_model,
     population = population,
     symmetrical = symmetrical,
     .options = furrr::furrr_options(seed = TRUE)
   )
+
+  new_setting_contact_model(fitted_setting_contacts)
 }

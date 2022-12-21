@@ -99,5 +99,5 @@ generate_ngm <- function(state_name = NULL,
     SIMPLIFY = FALSE
   )
 
-  setting_ngms
+  new_ngm_setting_matrix(setting_ngms)
 }

@@ -60,4 +60,5 @@ Imports:
     furrr,
     purrr,
     tidyselect,
-    vctrs
+    vctrs,
+    scales

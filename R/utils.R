@@ -128,6 +128,49 @@ check_if_list <- function(contact_data) {
   }
 }
 
+print_list_dim <- function(x, object_class) {
+  dim_char <- purrr::map_chr(
+    x,
+    ~ paste(scales::comma(dim(.x)), collapse = "x")
+  )
+  names_x <- glue::glue(
+    "{.strong [names(dim_char)]}: a [dim_char] {.cls [object_class]}",
+    .open = "[",
+    .close = "]"
+  )
+  cli::cli_li(names_x)
+}
+
+print_model_info <- function(x, object_class) {
+  dim_char <- purrr::map_chr(
+    x,
+    ~ scales::comma(summary(.x)$n)
+  )
+  names_x <- glue::glue(
+    "{.strong [names(dim_char)]}: a {.cls [object_class]} model ([dim_char] obs)",
+    .open = "[",
+    .close = "]"
+  )
+  cli::cli_li(names_x)
+}
+
+print_setting_info <- function(x,
+                               heading,
+                               description = NULL,
+                               list_print_fun = print_list_dim(x, object_class),
+                               object_class) {
+  cli::cli_h1(heading)
+  cli::cat_line()
+  cli::cli_text(cli::style_italic(description))
+  cli::cat_line()
+
+  list_print_fun
+
+  cli::cli_alert_info("Access each {.cls {object_class}} with {.code x$name}")
+  cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
+  return(invisible(x))
+}
+
 #' @export
 print.conmat_prediction_matrix <- function(x, ...) {
   print(unclass(x), ...)
@@ -136,19 +179,41 @@ print.conmat_prediction_matrix <- function(x, ...) {
 
 #' @export
 print.conmat_setting_prediction_matrix <- function(x, ...) {
-  n_matrices <- length(names(x))
-  cli::cli_h1("Setting Prediction Matrices:")
-  dim_char <- purrr::map_chr(
-    x,
-    ~ paste(dim(.x), collapse = "x")
+  print_setting_info(
+    x = x,
+    heading = "Setting Prediction Matrices",
+    description = "A list of matrices containing the model predicted contact rate between ages in each setting.",
+    object_class = "matrix"
   )
-  names_x <- glue::glue(
-    "{.strong [names(dim_char)]}: {.val [dim_char]} matrix",
-    .open = "[",
-    .close = "]"
+}
+
+#' @export
+print.setting_data <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "Setting Data",
+    description = "A list of {.cls data.frame}s containing the number of contacts between ages in each setting.",
+    object_class = "data.frame"
   )
-  cli::cli_li(names_x)
-  cli::cli_alert_info("Access each matrix with {.code x$name}")
-  cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
-  return(invisible(x))
+}
+
+#' @export
+print.ngm_setting_matrix <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "NGM Setting Matrices",
+    description = "A list of matrices {.cls matrix} containing the number of newly infected individuals for a specified age group.",
+    object_class = "matrix"
+  )
+}
+
+#' @export
+print.setting_contact_model <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "Fitted Setting Contact Models",
+    description = "A list of fitted {.cls bam} models for each setting. Each {.cls bam} model predicts the contact rate between ages, for that setting.",
+    list_print_fun = print_model_info(x, "bam"),
+    object_class = "bam"
+  )
 }

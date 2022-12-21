@@ -5,6 +5,6 @@ synthetic_settings_5y_perth <- extrapolate_polymod(
 )
 
 test_that("Print method for setting prediction matrices works", {
-  expect_snapshot_output(synthetic_settings_5y_perth)
-  expect_snapshot_output(synthetic_settings_5y_perth$home)
+  expect_snapshot(synthetic_settings_5y_perth)
+  expect_snapshot(synthetic_settings_5y_perth$home)
 })

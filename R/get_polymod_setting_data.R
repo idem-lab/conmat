@@ -32,5 +32,6 @@ get_polymod_setting_data <- function(countries = c(
       setting = "other",
       countries = countries
     )
-  )
+  ) %>%
+    new_setting_data()
 }
