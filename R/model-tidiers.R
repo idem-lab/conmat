@@ -3,6 +3,7 @@
 #' @param model model object
 #'
 #' @name formula-terms
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' formula_terms <- get_formulas_terms(sim_m)

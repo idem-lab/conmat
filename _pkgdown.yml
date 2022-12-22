@@ -60,6 +60,7 @@ reference:
       - predictions_to_matrix
       - matrix_to_predictions
       - get_age_population_function
+      - per_capita_household_size
       - starts_with("add_")
       
   - title: "Creating and accessing information on `conmat_population` objects"
