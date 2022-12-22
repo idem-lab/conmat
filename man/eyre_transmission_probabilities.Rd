@@ -59,10 +59,10 @@ eyre_transmission_probabilities \%>\%
     across(
       ends_with("age"),
       ~ factor(.x,
-               levels = str_sort(
-                 unique(.x),
-                 numeric = TRUE
-               )
+        levels = str_sort(
+          unique(.x),
+          numeric = TRUE
+        )
       )
     )
   ) \%>\%
@@ -81,7 +81,6 @@ eyre_transmission_probabilities \%>\%
   theme(
     axis.text = element_text(angle = 45, hjust = 1)
   )
-
 }
 }
 \keyword{datasets}

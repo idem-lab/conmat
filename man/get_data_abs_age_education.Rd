@@ -27,8 +27,9 @@ Return  data on educated population for a given age and state or
 lga of Australia.
 }
 \examples{
-get_data_abs_age_education(state="VIC")
-get_data_abs_age_education(state="WA",lga="Albany (C)",age=1:5)
-get_data_abs_age_education(state=c("QLD","TAS"),age=5)
-get_data_abs_age_education(lga=c("Albury (C)","Barcoo (S)"),age=10)
+get_data_abs_age_education(state = "VIC")
+get_data_abs_age_education(state = "WA", lga = "Albany (C)", age = 1:5)
+get_data_abs_age_education(state = c("QLD", "TAS"), age = 5)
+get_data_abs_age_education(lga = c("Albury (C)", "Barcoo (S)"), age = 10)
+
 }

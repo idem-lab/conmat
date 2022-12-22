@@ -11,8 +11,9 @@ fit_single_contact_model(contact_data, population, symmetrical = TRUE)
 \code{contacts}, and \code{participants}. See \code{\link[=get_polymod_contact_data]{get_polymod_contact_data()}} for
 an example dataset - or the dataset in examples below.}
 
-\item{population}{population data, with columns \code{lower.age.limit} and
-\code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for an example.}
+\item{population}{\code{conmat_population} object, or data frame with columns
+\code{lower.age.limit} and \code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for
+an example.}
 
 \item{symmetrical}{whether to enforce symmetrical terms in the model.
 Defaults to TRUE. See \code{details} for more information.}
@@ -90,7 +91,7 @@ This leaves us with a model that looks like so:
     work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -106,10 +107,10 @@ But if the term \code{symmetrical = FALSE} is used, you get:
     s(abs(age_from - age_to)) +
     s(abs(age_from - age_to), age_from) +
     school_probability +
-    work_probability + 
+    work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -123,10 +124,12 @@ example_population <- get_polymod_population()
 
 library(dplyr)
 
-example_contact_20 <- example_contact \%>\% 
-  filter(age_to <= 20,
-         age_from <= 20)
-         
+example_contact_20 <- example_contact \%>\%
+  filter(
+    age_to <= 20,
+    age_from <= 20
+  )
+
 my_mod <- fit_single_contact_model(
   contact_data = example_contact_20,
   population = example_population

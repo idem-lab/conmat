@@ -120,13 +120,11 @@ We can create a model of the contact *rate* with the function
 `fit_single_contact_model`
 
 ``` r
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
-  )
-#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
-#> algorithm did not converge
+)
 #> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
 #> fitted rates numerically 0 occurred
 ```
@@ -147,9 +145,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.45 5.50 6.25 7.89 7.33  total = 35.43 
+#> 1.68 4.19 5.55 6.28 7.90 7.39  total = 35.99 
 #> 
-#> fREML score: 23951.94     rank: 55/57
+#> fREML score: 23784.14     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -190,27 +188,46 @@ with the fairfield age population data, and some age breaks that we want
 to predict to.
 
 ``` r
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
   population = fairfield_age_pop,
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
+#> Called from: predict_contacts(model = contact_model, population = fairfield_age_pop, 
+#>     age_breaks = c(seq(0, 85, by = 5), Inf))
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#71: age <- age(population)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#72: age_var <- age_label(population)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#73: population <- population %>% dplyr::arrange(!!age)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#77: age_min_integration <- min(population[[age_var]])
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#78: bin_widths <- diff(population[[age_var]])
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#79: final_bin_width <- bin_widths[length(bin_widths)]
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#80: age_max_integration <- max(population[[age_var]]) + final_bin_width
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#84: pop_fun <- get_age_population_function(population)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#85: ages <- age_min_integration:age_max_integration
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#86: valid <- pop_fun(ages) > 0
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#87: age_min_integration <- min(ages[valid])
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#88: age_max_integration <- max(ages[valid])
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#90: pred_1y <- predict_contacts_1y(model = model, population = population, 
+#>     age_min = age_min_integration, age_max = age_max_integration)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#99: pred_groups <- aggregate_predicted_contacts(predicted_contacts_1y = pred_1y, 
+#>     population = population, age_breaks = age_breaks)
+#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#105: pred_groups
 
 synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00280
-#>  2 [0,5)          [5,10)        0.00392
-#>  3 [0,5)          [10,15)       0.00277
-#>  4 [0,5)          [15,20)       0.00396
-#>  5 [0,5)          [20,25)       0.0104 
-#>  6 [0,5)          [25,30)       0.0218 
-#>  7 [0,5)          [30,35)       0.0322 
-#>  8 [0,5)          [35,40)       0.0348 
-#>  9 [0,5)          [40,45)       0.0339 
-#> 10 [0,5)          [45,50)       0.0327 
+#>  1 [0,5)          [0,5)         0.00224
+#>  2 [0,5)          [5,10)        0.00361
+#>  3 [0,5)          [10,15)       0.00280
+#>  4 [0,5)          [15,20)       0.00410
+#>  5 [0,5)          [20,25)       0.0107 
+#>  6 [0,5)          [25,30)       0.0220 
+#>  7 [0,5)          [30,35)       0.0317 
+#>  8 [0,5)          [35,40)       0.0336 
+#>  9 [0,5)          [40,45)       0.0331 
+#> 10 [0,5)          [45,50)       0.0325 
 #> # … with 314 more rows
 ```
 
@@ -220,8 +237,8 @@ Let’s visualise the matrix to get a sense of the predictions with
 `autoplot`. First we need to transform the predictions to a matrix:
 
 ``` r
-synthetic_contact_fairfield %>% 
-  predictions_to_matrix() %>% 
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
   autoplot()
 ```
 
@@ -303,7 +320,6 @@ Or get the information for states like so:
 ``` r
 abs_age_state(state_name = "QLD")
 #> # A tibble: 18 × 4
-#> # Groups:   year, state [1]
 #>     year state lower.age.limit population
 #>    <dbl> <chr>           <dbl>      <dbl>
 #>  1  2020 QLD                 0     314602

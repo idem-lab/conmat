@@ -4,12 +4,14 @@
 #' @param multiple_lga logical response that allows multiple lgas to be checked
 #'   if set to `TRUE`. Default is FALSE.
 #' @return errors if LGA name not in ABS data, otherwise returns nothing
-#' @examples 
+#' @examples
 #' # returns nothing
 #' check_lga_name("Fairfield (C)")
 #' # if you want to check multiple LGAs you must use the `multiple_lga` flag.
-#' check_lga_name(lga_name = c("Fairfield (C)", "Sydney (C)"), 
-#'                multiple_lga = TRUE)
+#' check_lga_name(
+#'   lga_name = c("Fairfield (C)", "Sydney (C)"),
+#'   multiple_lga = TRUE
+#' )
 #' # this will error, so isn't run
 #' \dontrun{
 #' # don't set the `multiple_lga` flag
@@ -19,17 +21,15 @@
 #' }
 #' @keywords internal
 #' @noRd
-check_lga_name <- function(
-    lga_name,
-    multiple_lga = FALSE
-) {
+check_lga_name <- function(lga_name,
+                           multiple_lga = FALSE) {
   lga_match <- dplyr::filter(
     abs_pop_age_lga_2020,
     lga %in% lga_name
   )
-  
+
   does_lga_match <- nrow(lga_match) > 1
-  
+
   if (!does_lga_match) {
     rlang::abort(
       message = c(
@@ -40,15 +40,15 @@ check_lga_name <- function(
       )
     )
   }
-  
+
   if (does_lga_match) {
     unique_lga_names <- abs_pop_age_lga_2020 %>%
       dplyr::filter(lga %in% lga_name) %>%
       dplyr::pull(lga) %>%
       unique()
-    
+
     more_than_one_lga <- length(unique_lga_names) > 1
-    
+
     if (more_than_one_lga & !multiple_lga) {
       rlang::abort(
         message = c(
@@ -69,18 +69,18 @@ check_lga_name <- function(
 #' @keywords internal
 #' @noRd
 check_state_name <- function(state_name, multiple_state = FALSE) {
-  state_that_matches <-  abs_pop_age_lga_2020 %>%
+  state_that_matches <- abs_pop_age_lga_2020 %>%
     dplyr::select(state) %>%
     dplyr::distinct() %>%
     dplyr::filter(state %in% state_name) %>%
     dplyr::pull(state)
-  
+
   state_match <- is.element(state_name, state_that_matches)
-  
+
   all_match <- all(state_match)
   state_that_doesnt_match <- setdiff(state_name, state_that_matches)
-  
-  
+
+
   if (!all_match) {
     rlang::abort(
       message = c(
@@ -104,3 +104,27 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
   }
 }
 
+check_if_var_numeric <- function(data, var, attribute) {
+  var_val <- data[[var]]
+
+  if (!is.numeric(var_val)) {
+    cli::cli_abort(
+      c(
+        "{.var {attribute}} must be {.cls numeric}",
+        "{.var {var_lab}} has been entered to represent {.var {attribute}}",
+        "But {.var {var_lab}} is of class {.cls {class(var_val)}}"
+      )
+    )
+  }
+}
+
+check_if_data_frame <- function(x) {
+  if (!is.data.frame(x)) {
+    cli::cli_abort(
+      c(
+        "x must be a {.cls data.frame}",
+        "x is {.cls {class(x)}}"
+      )
+    )
+  }
+}

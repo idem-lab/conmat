@@ -34,10 +34,11 @@ function for retrieving household size distributions for a given place.
 \examples{
 demo_data <- abs_household_size_population(lga = "Fairfield (C)")
 demo_data
-per_capita_household_size(household_data=demo_data,
-                          household_size_col=household_size,
-                          n_people_col=n_people)
-
+per_capita_household_size(
+  household_data = demo_data,
+  household_size_col = household_size,
+  n_people_col = n_people
+)
 
 }
 \author{

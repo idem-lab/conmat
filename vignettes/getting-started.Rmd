@@ -24,13 +24,11 @@ library(mgcv)
 library(patchwork)
 ```
 
-The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
+The goal of conmat is to simplify the process of generating synthetic contact matrices for a given age population.
 
 **What is a contact matrix?**
 
-Contact matrices describe the degree of contact between individuals of given age groups. 
-
-For example, this matrix describes the number of contacts between individuals
+Contact matrices describe the degree of contact between individuals of given age groups. For example, this matrix describes the number of contacts between individuals.
 
 ```{r}
 #| label: show-contact
@@ -45,35 +43,110 @@ cmat <- matrix(
   dimnames = list(
     name_vec,
     name_vec
-    )
+  )
 )
 
-diag(cmat) <- c(10,11,13)
+diag(cmat) <- c(10, 11, 13)
 cmat[upper.tri(cmat)] <- 3:5
 cmat[lower.tri(cmat)] <- 3:5
 
 cmat
 ```
 
-The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another.
-
-We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact. 
+The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another. We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact. 
 
 **Why do we need _synthetic_ contact matrices?**
 
-Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day. 
-
-However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally. 
+Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day.  However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally. 
 
 We can use statistical methods to create _synthetic contact matrices_, which are new contact matrices that have been generalised to new countries based on existing surveys.
 
 **Why do we need `conmat`?**
 
-Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country. 
+Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country. We need methods that allow for flexibly creating synthetic contact matrices for a specified age population. This is because the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
 
-We need methods that allow for flexibly creating synthetic contact matrices for a specified age population, as the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
+## Quick example using Australian data
 
-## Example
+Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
+
+```{r}
+perth <- abs_age_lga("Perth (C)")
+perth
+```
+
+(You can learn more about the data sources we provide in `data-sources.Rmd`)
+
+We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
+
+```{r}
+perth_contact <- extrapolate_polymod(
+  population = perth
+)
+
+perth_contact
+```
+
+We can plot this with `autoplot`
+
+```{r}
+autoplot(perth_contact)
+```
+
+And you can see each contact matrix in a setting by referring to its name - for example, the "home" setting contact matrix:
+
+```{r}
+perth_contact$home
+```
+
+These contact matrices could then be used in subsequent modelling, such as the input in a SIR (Suscepible, Infected, Recovered) model.
+
+## Quick example using world data
+
+Similarly to above, we can access some world data from another data source - we have some helpers to pull data from the world population:
+
+```{r}
+world_data <- socialmixr::wpp_age()
+
+head(world_data)
+```
+
+We can tidy the data up, filtering down to a specified location and year with the `age_population` function:
+
+```{r}
+nz_2015 <- age_population(
+  data = world_data,
+  location_col = country,
+  location = "New Zealand",
+  age_col = lower.age.limit,
+  year_col = year,
+  year = 2015
+)
+
+nz_2015
+```
+
+Then we could create a contact matrix for NZ population data for 2015 like so:
+
+```{r}
+nz_contact <- extrapolate_polymod(
+  population = nz_2015
+)
+autoplot(nz_contact)
+nz_contact$home
+```
+
+## What next?
+
+From here you might want to:
+
+- Create a next generation matrix (NGM)
+- Apply vaccination to an NGM
+
+See the vignette, "example pipeline" for more details.
+
+# A More in depth example
+
+The above example showed how we might extract a contact matrix based on the polymod data - this example now shows all the steps that can be taken for full flexibility, and provides amore detail on the initial datasets that could be used.
 
 First we want to fit the model to the POLYMOD data, which contains various survey and population data.
 
@@ -97,7 +170,7 @@ We also provide control over the POLYMOD data retrieved from `get_polymod_contac
 polymod_contact_data_belgium_0_10 <- get_polymod_contact_data(
   setting = "work",
   countries = "Belgium",
-  ages = c(0,5,10)
+  ages = c(0, 5, 10)
 )
 
 polymod_contact_data_belgium_0_10
@@ -117,18 +190,20 @@ You can see the available countries in the helpfile with `?get_polymod_populatio
 We can create a model of the contact *rate* with the function `fit_single_contact_model`. We're first going to use some smaller sets of the data, to save on computation time.
 
 ```{r fit-polymod}
-set.seed(2022-10-04)
-polymod_contact_data_home_small <- polymod_contact_data_home %>% 
-  filter(age_from <= 30,
-         age_to <= 30)
+set.seed(2022 - 10 - 04)
+polymod_contact_data_home_small <- polymod_contact_data_home %>%
+  filter(
+    age_from <= 30,
+    age_to <= 30
+  )
 
-polymod_survey_data_small <- polymod_survey_data %>% 
+polymod_survey_data_small <- polymod_survey_data %>%
   filter(lower.age.limit <= 30)
 
 contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data_home_small,
   population = polymod_survey_data_small
-  )
+)
 ```
 
 This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.
@@ -149,7 +224,7 @@ fairfield_age_pop
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to. Note that these age breaks could be any size, we just ahve them set to 5 year age brackets in most of the examples, but these could be 1 year, 2 year, or even sub year.
 
 ```{r predict-contacts}
-set.seed(2022-10-04)
+set.seed(2022 - 10 - 04)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
   population = fairfield_age_pop,
@@ -164,8 +239,8 @@ synthetic_contact_fairfield
 Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
 ```{r plot-matrix-differents}
-synthetic_contact_fairfield %>% 
-  predictions_to_matrix() %>% 
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
   autoplot()
 ```
 
@@ -182,17 +257,17 @@ Our experience has been that we would be fitting the same models to each setting
 We can create a model for each of the settings with `fit_setting_contacts()`.
 
 ```{r fit-polymod-setting}
-set.seed(2021-09-24)
+set.seed(2021 - 09 - 24)
 
 polymod_setting_data <- get_polymod_setting_data()
 
-polymod_setting_data_small <- polymod_setting_data %>% 
+polymod_setting_data_small <- polymod_setting_data %>%
   lapply(FUN = function(x) x %>% filter(age_from <= 20, age_to <= 20))
 
 setting_models <- fit_setting_contacts(
   contact_data_list = polymod_setting_data_small,
   population = polymod_survey_data
-  )
+)
 ```
 
 This contains a list of models, one for each setting. We can look at one, and get summary information out:
@@ -209,12 +284,12 @@ So this gives us our baseline model of a contact model. We have fit this model t
 Then we take the model we had earlier, and extrapolate to the fairfield data with `predict_setting_contacts`, also providing some age breaks we want to predict to
 
 ```{r fairfield-synth-5}
-set.seed(2021-10-04)
+set.seed(2021 - 10 - 04)
 synthetic_settings_5y_fairfield <- predict_setting_contacts(
   population = fairfield_age_pop,
   contact_model = setting_models,
   age_breaks = c(seq(0, 20, by = 5), Inf)
-  )
+)
 ```
 
 This then returns a list of synthetic matrices, "home", "work", "school", "other", and "all", which is the sum of all matrices.
@@ -295,10 +370,10 @@ And for fun we can compare some of the data together, say polymod data for home 
 
 ```{r}
 library(patchwork)
-gg_polymod_home <- autoplot(synthetic_settings_5y_polymod$home) + 
+gg_polymod_home <- autoplot(synthetic_settings_5y_polymod$home) +
   labs(title = "polymod home")
 
-gg_fairfield_home <- autoplot(synthetic_settings_5y_fairfield$home) + 
+gg_fairfield_home <- autoplot(synthetic_settings_5y_fairfield$home) +
   labs(title = "Fairfield home")
 
 gg_polymod_home + gg_fairfield_home
@@ -311,7 +386,7 @@ synthetic_settings_5y_alice <- extrapolate_polymod(
   population = abs_age_lga("Alice Springs (T)")
 )
 
-gg_alice_home <- autoplot(synthetic_settings_5y_alice$home) + 
+gg_alice_home <- autoplot(synthetic_settings_5y_alice$home) +
   labs(title = "Alice Springs home")
 
 gg_polymod_home + gg_alice_home
@@ -365,7 +440,7 @@ bind_rows(
     )
   ) +
   facet_wrap(
-    ~ setting,
+    ~setting,
     ncol = 2,
     scales = "free"
   ) +

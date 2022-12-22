@@ -20,19 +20,19 @@ frames to matrix format with the survey participant age groups as columns
 and contact age groups as rows.
 }
 \examples{
- fairfield_abs_data <- abs_age_lga("Fairfield (C)")
- 
- # We can convert the predictions into a matrix
-   
- fairfield_school_contacts <- predict_contacts(
-   model = polymod_setting_models$school,
-   population = fairfield_abs_data,
-   age_breaks = c(0, 5, 10, 15,Inf)
- )
- 
- fairfield_school_contacts
- 
- # convert them back to a matrix
- predictions_to_matrix(fairfield_school_contacts)
- 
+fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+
+# We can convert the predictions into a matrix
+
+fairfield_school_contacts <- predict_contacts(
+  model = polymod_setting_models$school,
+  population = fairfield_abs_data,
+  age_breaks = c(0, 5, 10, 15, Inf)
+)
+
+fairfield_school_contacts
+
+# convert them back to a matrix
+predictions_to_matrix(fairfield_school_contacts)
+
 }

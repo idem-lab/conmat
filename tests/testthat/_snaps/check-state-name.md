@@ -3,8 +3,9 @@
     Code
       abs_age_state("NSW")
     Output
-      # A tibble: 18 x 4
-      # Groups:   year, state [1]
+      # A tibble: 18 x 4 (conmat_population)
+       - age: lower.age.limit
+       - population: population
           year state lower.age.limit population
          <dbl> <chr>           <dbl>      <dbl>
        1  2020 NSW                 0     495091

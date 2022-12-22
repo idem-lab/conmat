@@ -30,18 +30,20 @@ This vignette outlines a basic workflow of:
 We can create a synthetic matrix from all POLYMOD data by using the `extrapolate_polymod` function. First, let's extract an age distribution from the ABS data.
 
 ```{r fairfield}
-fairfield_population <- abs_age_lga("Fairfield (C)")
-fairfield_population
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
 ```
 
-The key features of this age distribution are the columns, `lower.age.limit`, and `population`.
+Note that this is a `conmat_population` object, which is just a data frame that knows which columns represent the `age` and `population` information.
 
-We then extrapolate this using the full POLYMOD data.
+We then extrapolate this to home, work, school, other and all settings, using the full POLYMOD data. This gives us a setting prediction matrix.
 
 ```{r extrapolate-fairfield}
 synthetic_fairfield_5y <- extrapolate_polymod(
-  population = fairfield_population
+  population = fairfield
 )
+synthetic_fairfield_5y
+synthetic_fairfield_5y$home
 ```
 
 By full POLYMOD data, we mean these data:
@@ -52,6 +54,7 @@ polymod_setting <- get_polymod_setting_data()
 polymod_population <- get_polymod_population()
 
 polymod_setting
+polymod_setting$home
 polymod_population
 ```
 
@@ -62,7 +65,13 @@ The `extrapolate_polymod()` function does the following:
 
 It also has options to predict to specified age brackets, defaulting to 5 year age groups up to 75, then 75 and older.
 
-This object, `synthetic_fairfield_5y`, contains a matrix of predictions for each of the settings, home, work, school, other, and all settings.
+This object, `synthetic_fairfield_5y`, contains a matrix of predictions for each of the settings, home, work, school, other, and all settings, which is summarised when you print the object to the console:
+
+```{r}
+synthetic_fairfield_5y
+```
+
+You can see more detail by using `str` if you like:
 
 ```{r}
 str(synthetic_fairfield_5y)
@@ -116,11 +125,11 @@ Then you need to specify the columns in the vaccination effect data frame relate
 ```{r}
 # Apply vaccination effect to next generation matrices
 ngm_nsw_vacc <- apply_vaccination(
- ngm = ngm_fairfield,
- data = vaccination_effect_example_data,
- coverage_col = coverage,
- acquisition_col = acquisition,
- transmission_col = transmission
+  ngm = ngm_fairfield,
+  data = vaccination_effect_example_data,
+  coverage_col = coverage,
+  acquisition_col = acquisition,
+  transmission_col = transmission
 )
 
 ngm_nsw_vacc

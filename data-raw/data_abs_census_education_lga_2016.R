@@ -5,7 +5,7 @@ library(conmat)
 
 data_abs_lga_education <- list()
 for (i in 1:6)
-  
+
 {
   abs_lga_education_df <-
     read_excel(
@@ -14,12 +14,12 @@ for (i in 1:6)
       skip = 7,
       n_max = 566
     )
-  
+
   df <- abs_lga_education_df %>%
     row_to_names(1)
   colnames(df)[2] <- "lga"
   df <- df[-1, ]
-  
+
   data_abs_lga_education[[i]] <- df %>%
     select(-c(Total, `AGEP Age`)) %>%
     filter(lga != "Total") %>%
@@ -53,12 +53,13 @@ data_abs_census_lga_education <- data_abs_lga_education %>%
     anomaly_flag = as.logical(anomaly_flag)
   ) %>%
   select(year,
-         lga,
-         age,
-         population_educated,
-         total_population = total,
-         proportion,
-         anomaly_flag)%>%
+    lga,
+    age,
+    population_educated,
+    total_population = total,
+    proportion,
+    anomaly_flag
+  ) %>%
   mutate(
     lga = case_when(
       lga == "Botany Bay (C)" ~ "Bayside (A)",
@@ -83,9 +84,11 @@ summary(data_abs_census_lga_education$anomaly_flag)
 
 
 data_lga_state <- read_csv("data-raw/2011_lga_state.csv") %>%
-  select(state = STATE_NAME_2011,
-         lga_code = LGA_CODE_2011,
-         lga = LGA_NAME_2011) %>%
+  select(
+    state = STATE_NAME_2011,
+    lga_code = LGA_CODE_2011,
+    lga = LGA_NAME_2011
+  ) %>%
   mutate(state = abbreviate_states(state)) %>%
   distinct_all() %>%
   dplyr::mutate(state = replace_na(state, "Other Territories")) %>%
@@ -165,32 +168,31 @@ lga_state <- lgas_in_education_census %>%
 
 data_abs_census_lga_education %>%
   left_join(lga_state, by = "lga") %>%
-  relocate(year, state, everything())%>%
-  filter(!str_detect(lga,"No usual address"))%>%
+  relocate(year, state, everything()) %>%
+  filter(!str_detect(lga, "No usual address")) %>%
   mutate(lga = case_when(
     (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
     (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
     (state == "QLD" & lga == "Central Highlands (R)") ~ "Central Highlands (R) (Qld)",
     (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
     (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
-    
     (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
     (state == "TAS" & lga == "Central Coast (M)") ~ "Central Coast (M) (Tas.)",
     (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
     (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
     (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
     TRUE ~ as.character(lga)
-  ))-> data_abs_lga_education
-  # mutate(lga = case_when(
-  #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
-  #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
-  # ))
+  )) -> data_abs_lga_education
+# mutate(lga = case_when(
+#   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+#   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+# ))
 
 
-data_abs_lga_education%>%
-  select(lga)%>%
-  distinct()%>%
-  left_join(conmat_abs_household_data)-> check_lga
+data_abs_lga_education %>%
+  select(lga) %>%
+  distinct() %>%
+  left_join(conmat_abs_household_data) -> check_lga
 summary(data_abs_census_lga_education)
 
 skimr::skim(data_abs_lga_education)

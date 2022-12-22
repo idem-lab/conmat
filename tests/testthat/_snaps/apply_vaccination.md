@@ -4,3 +4,27 @@
     Caused by error:
     ! object 'acquisition_column' not found
 
+# apply_vaccination() produces expected output
+
+    Code
+      ngm_VIC_vacc
+    Message
+      
+      -- Vaccination Setting Matrices ------------------------------------------------
+    Output
+      
+    Message
+      A list of matrices, each <matrix> containing the adjusted number of newly
+      infected individuals for age groups. These numbers have been adjusted based on
+      proposed vaccination rates in age groups
+    Output
+      
+    Message
+      * home: a 17x17 <matrix>
+      * school: a 17x17 <matrix>
+      * work: a 17x17 <matrix>
+      * other: a 17x17 <matrix>
+      * all: a 17x17 <matrix>
+      i Access each <matrix> with `x$name`
+      i e.g., `x$home`
+

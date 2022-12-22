@@ -18,4 +18,6 @@ Extract out formula terms
 formula_terms <- get_formulas_terms(sim_m)
 formula_terms
 }
+
 }
+\keyword{internal}

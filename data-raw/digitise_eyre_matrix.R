@@ -8,28 +8,25 @@
 #' @return
 #' @author Nick Golding
 #' @export
-digitise_eyre_matrix <- function(
-  matrix_file,
-  legend_file = "data-raw/eyre_legend_raw.png",
-  matrix_age_range = c(4.5, 70.5),
-  legend_probability_range = c(0.16, 0.8),
-  age_breaks = seq(0, 100)
-) {
-  
+digitise_eyre_matrix <- function(matrix_file,
+                                 legend_file = "data-raw/eyre_legend_raw.png",
+                                 matrix_age_range = c(4.5, 70.5),
+                                 legend_probability_range = c(0.16, 0.8),
+                                 age_breaks = seq(0, 100)) {
   # load the rasters
   matrix <- png::readPNG(matrix_file)[, , 1:3]
   legend <- png::readPNG(legend_file)[, , 1:3]
-  
+
   # bounds of the age matrix
   n_contact_pixels <- dim(matrix)[1]
   n_case_pixels <- dim(matrix)[2]
   min_age <- min(matrix_age_range)
   max_age <- max(matrix_age_range)
-  
+
   # ages for intereger-year summary and aggregation
   age_breaks_1y <- 0:100
   max_age_aggregate <- max(age_breaks)
-  
+
   # convert legend into 3 channel lookup
   legend_vals <- legend[75, , ] %>%
     `colnames<-`(c("R", "G", "B")) %>%
@@ -41,7 +38,7 @@ digitise_eyre_matrix <- function(
         length.out = n()
       )
     )
-  
+
   # convert matrix into tibble with age labels
   case_ages <- seq(min_age, max_age, length.out = n_case_pixels)
   contact_ages <- seq(min_age, max_age, length.out = n_contact_pixels)
@@ -54,18 +51,20 @@ digitise_eyre_matrix <- function(
       contact_age = rep(rev(contact_ages), n_case_pixels),
       .before = everything()
     )
-  
+
   # interpolate linearly from colours to probabilities, based on the legend
   mod <- lm(probability ~ R + G + B,
-            data = legend_vals)
-  
+    data = legend_vals
+  )
+
   matrix_vals_prob <- matrix_vals %>%
     mutate(
       probability = predict(
         object = mod,
-        newdata = .)
+        newdata = .
+      )
     )
-  
+
   # aggregate to 1y resolution
   matrix_vals_prob_1y <- matrix_vals_prob %>%
     mutate(
@@ -84,7 +83,7 @@ digitise_eyre_matrix <- function(
       ),
       .groups = "drop"
     )
-  
+
   # extrapolate to all ages, filling in the value for the nearest age pair
   matrix_vals_prob_1y_all <- expand_grid(
     case_age = age_breaks_1y,
@@ -93,19 +92,16 @@ digitise_eyre_matrix <- function(
     euclidean_join(
       matrix_vals_prob_1y
     )
-  
+
   # optionally aggregate up to the specified age breaks
   if (identical(age_breaks, age_breaks_1y)) {
-    
     matrix_vals_prob_agg <- matrix_vals_prob_1y_all
-    
   } else {
-    
     age_group_lookup <- get_age_group_lookup(
       age_breaks,
       age_breaks_1y
     )
-    
+
     matrix_vals_prob_agg <- matrix_vals_prob_1y_all %>%
       left_join(
         age_group_lookup,
@@ -115,7 +111,7 @@ digitise_eyre_matrix <- function(
         -case_age
       ) %>%
       rename(
-        case_age = age_group, 
+        case_age = age_group,
       ) %>%
       left_join(
         age_group_lookup,
@@ -135,10 +131,10 @@ digitise_eyre_matrix <- function(
         across(
           ends_with("age"),
           ~ factor(.x,
-                   levels = str_sort(
-                     unique(.x),
-                     numeric = TRUE
-                   )
+            levels = str_sort(
+              unique(.x),
+              numeric = TRUE
+            )
           )
         )
       ) %>%
@@ -153,9 +149,7 @@ digitise_eyre_matrix <- function(
         ),
         .groups = "drop"
       )
-    
   }
-  
+
   matrix_vals_prob_agg
-  
 }

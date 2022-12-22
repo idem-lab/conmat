@@ -1,11 +1,11 @@
 #' @title Transmission probabilities of COVID19 from Eyre et al.
 #'
-#' @description A dataset containing data digitised from "The impact of 
-#'  SARS-CoV-2 vaccination on Alpha & Delta variant transmission", by David W 
+#' @description A dataset containing data digitised from "The impact of
+#'  SARS-CoV-2 vaccination on Alpha & Delta variant transmission", by David W
 #'  Eyre, Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels,
-#'  A Sarah Walker, Tim EA Peto 
+#'  A Sarah Walker, Tim EA Peto
 #'  (\doi{https://doi.org/10.1101/2021.09.28.21264260}. The figures were taken
-#'  from 
+#'  from
 #'  \url{https://www.medrxiv.org/content/10.1101/2021.09.28.21264260v1.full-text},
 #'  and the code to digitise these figures is in `data-raw` under
 #'  "read_eyre_transmission_probabilities.R". When using this data, ensure that
@@ -18,13 +18,13 @@
 #'   \item{case_age}{from 0 to 100}
 #'   \item{contact_age}{from ages 0 to 100}
 #'   \item{case_age_5y}{If case is between ages 0-4, in 5 year bins up to 100}
-#'   \item{contact_age_5y}{If contact is between ages 0-4, in 5 year bins up 
+#'   \item{contact_age_5y}{If contact is between ages 0-4, in 5 year bins up
 #'      to 100}
 #'   \item{probability}{probability of transmission. Value is 0 - 1}
 #' }
-#' @examples 
+#' @examples
 #' \dontrun{
-#' 
+#'
 #' # plot this
 #' library(ggplot2)
 #' library(stringr)
@@ -49,10 +49,10 @@
 #'     across(
 #'       ends_with("age"),
 #'       ~ factor(.x,
-#'                levels = str_sort(
-#'                  unique(.x),
-#'                  numeric = TRUE
-#'                )
+#'         levels = str_sort(
+#'           unique(.x),
+#'           numeric = TRUE
+#'         )
 #'       )
 #'     )
 #'   ) %>%
@@ -71,6 +71,5 @@
 #'   theme(
 #'     axis.text = element_text(angle = 45, hjust = 1)
 #'   )
-#' 
 #' }
 "eyre_transmission_probabilities"

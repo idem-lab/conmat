@@ -56,24 +56,24 @@ number of household members a person in the population can have contact
 with.
 }
 \examples{
- # If we have a model of contact rate at home, and age population structure 
- # for an LGA, say, Fairfield, in NSW:
- 
- polymod_setting_models$home
- 
- fairfield_abs_data <- abs_age_lga("Fairfield (C)")
- 
- fairfield_abs_data
- 
- # We can predict the contact rate for Fairfield from the existing contact 
- # data, say, between the age groups of 0-15 in 5 year bins for school:
-   
- fairfield_school_contacts <- predict_contacts(
-   model = polymod_setting_models$school,
-   population = fairfield_abs_data,
-   age_breaks = c(0, 5, 10, 15,Inf)
- )
- 
- fairfield_school_contacts
- 
+# If we have a model of contact rate at home, and age population structure
+# for an LGA, say, Fairfield, in NSW:
+
+polymod_setting_models$home
+
+fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+
+fairfield_abs_data
+
+# We can predict the contact rate for Fairfield from the existing contact
+# data, say, between the age groups of 0-15 in 5 year bins for school:
+
+fairfield_school_contacts <- predict_contacts(
+  model = polymod_setting_models$school,
+  population = fairfield_abs_data,
+  age_breaks = c(0, 5, 10, 15, Inf)
+)
+
+fairfield_school_contacts
+
 }
