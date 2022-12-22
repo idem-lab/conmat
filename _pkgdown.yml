@@ -9,63 +9,63 @@ home:
     
 reference:
 
-  - title: "Data"
-    desc: >
-      Data provided with the package to assist with model fitting
+  - title: "Core functions"
+    desc: > 
+      These are the core functions that we intend users to interface with
+    contents:
+      - extrapolate_polymod
+      - apply_vaccination
+      - generate_ngm
+      - autoplot
+      - autoplot-conmat
+      
+  - title: "ABS Data accessors and helpers"
+    desc: > 
+      Functions and data objects to access data from the Australian Bureau of Statistics
     contents:
       - starts_with("abs_")
-      - starts_with("data_")
+      - starts_with("data_abs_")
+      - starts_with("get_data_abs_")
+      - get_household_size_distribution
+      - get_per_capita_household_size
+      - abbreviate_states
+      - unabbreviate_states
+
+  - title: "Data and model objects"
+    desc: >
+      Functions and objects for accessing data, models, and assisting with model fitting.
+    contents:
+      - starts_with("get_polymod")
+      - age_population
       - vaccination_effect_example_data
       - polymod_setting_models
       - davies_age_extended
       - eyre_transmission_probabilities
       - polymod
       - setting_weights
+      - age_group_lookup
+      - get_setting_transmission_matrices
 
-  - title: "Model fitting and predictions"
+  - title: "Extra functions for model fitting and prediction"
     desc: >
-      Functions for model fitting and predictions
+      Functions for model fitting and predictions - for more advanced use
     contents:
       - fit_single_contact_model
       - fit_setting_contacts
       - aggregate_predicted_contacts
       - estimate_setting_contacts
-      - extrapolate_polymod
       - predict_contacts
       - predict_contacts_1y
       - predict_setting_contacts
       - predictions_to_matrix
       - matrix_to_predictions
-      
-  - title: "Plotting"
-    desc: >
-      For plotting the matrix outputs
-    contents:
-      - autoplot-conmat
-      
-  - title: "Helper functions"
-    desc: >
-      For dealing with ABS data and other features
-    contents:
-      - abbreviate_states
-      - age_population
-      - age_group_lookup
-      - unabbreviate_states
-      
-  - title: "Helpers for adding and joining data"
-    desc: >
-      For joining data and adding other features
-    contents:
+      - get_age_population_function
       - starts_with("add_")
-      - apply_vaccination
-      - generate_ngm
-      - starts_with("get_")
-      - per_capita_household_size
       
   - title: "Creating and accessing information on `conmat_population` objects"
     desc: >
-      Store age and population information in a dataframe for use in other 
-      functions in conmat.
+      Store and use age and population information in a dataframe for use in 
+      other functions in conmat.
     contents:
       - conmat_population
       - as_conmat_population
@@ -76,6 +76,10 @@ navbar:
   left:
   - text: Getting Started
     href: articles/getting-started.html
+  - text: Example Pipeline
+    href: articles/example-pipeline.Rmd
+  - text: Data Sources
+    href: articles/data-sources.Rmd
   - text: Reference
     href: reference/index.html
   - text: News
