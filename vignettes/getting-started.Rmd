@@ -24,13 +24,11 @@ library(mgcv)
 library(patchwork)
 ```
 
-The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
+The goal of conmat is to simplify the process of generating synthetic contact matrices for a given age population.
 
 **What is a contact matrix?**
 
-Contact matrices describe the degree of contact between individuals of given age groups. 
-
-For example, this matrix describes the number of contacts between individuals
+Contact matrices describe the degree of contact between individuals of given age groups. For example, this matrix describes the number of contacts between individuals.
 
 ```{r}
 #| label: show-contact
@@ -55,25 +53,100 @@ cmat[lower.tri(cmat)] <- 3:5
 cmat
 ```
 
-The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another.
-
-We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact. 
+The rows and columns represent the age groups of the people. On the main diagonal we see that we have a higher number of contacts - showing that people of similar ages tend to interact more with one another. We can use the information in these matrices to model how diseases such as COVID-19 spread in a population through social contact. 
 
 **Why do we need _synthetic_ contact matrices?**
 
-Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day. 
-
-However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally. 
+Contact matrices are produced from empirical data resulting from a contact survey, which requires individuals to diary the amount and manner of contact a person has in a day.  However, these surveys are highly time-consuming and expensive to run, meaning that only a handful of these empirical datasets exist globally. 
 
 We can use statistical methods to create _synthetic contact matrices_, which are new contact matrices that have been generalised to new countries based on existing surveys.
 
 **Why do we need `conmat`?**
 
-Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country. 
+Existing methods only provide outputs of the contact matrices for each country, or at best, for urban and rural areas for a given country. We need methods that allow for flexibly creating synthetic contact matrices for a specified age population. This is because the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
 
-We need methods that allow for flexibly creating synthetic contact matrices for a specified age population, as the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
+## Quick example using Australian data
 
-## Example
+Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
+
+```{r}
+perth <- abs_age_lga("Perth (C)")
+perth
+```
+
+(You can learn more about the data sources we provide in `data-sources.Rmd`)
+
+We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
+
+```{r}
+perth_contact <- extrapolate_polymod(
+  population = perth
+)
+
+perth_contact
+```
+
+We can plot this with `autoplot`
+
+```{r}
+autoplot(perth_contact)
+```
+
+And you can see each contact matrix in a setting by referring to its name - for example, the "home" setting contact matrix:
+
+```{r}
+perth_contact$home
+```
+
+These contact matrices could then be used in subsequent modelling, such as the input in a SIR (Suscepible, Infected, Recovered) model.
+
+## Quick example using world data
+
+Similarly to above, we can access some world data from another data source - we have some helpers to pull data from the world population:
+
+```{r}
+world_data <- socialmixr::wpp_age()
+
+head(world_data)
+```
+
+We can tidy the data up, filtering down to a specified location and year with the `age_population` function:
+
+```{r}
+nz_2015 <- age_population(
+  data = world_data,
+  location_col = country,
+  location = "New Zealand",
+  age_col = lower.age.limit,
+  year_col = year,
+  year = 2015
+)
+
+nz_2015
+```
+
+Then we could create a contact matrix for NZ population data for 2015 like so:
+
+```{r}
+nz_contact <- extrapolate_polymod(
+  population = nz_2015
+)
+autoplot(nz_contact)
+nz_contact$home
+```
+
+## What next?
+
+From here you might want to:
+
+- Create a next generation matrix (NGM)
+- Apply vaccination to an NGM
+
+See the vignette, "example pipeline" for more details.
+
+# A More in depth example
+
+The above example showed how we might extract a contact matrix based on the polymod data - this example now shows all the steps that can be taken for full flexibility, and provides amore detail on the initial datasets that could be used.
 
 First we want to fit the model to the POLYMOD data, which contains various survey and population data.
 

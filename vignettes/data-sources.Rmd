@@ -20,26 +20,55 @@ We provide access to a variety of different data sources in `conmat`. Most of th
 library(conmat)
 ```
 
+## World data
+
+We provide functions to clean up world population data from `socialmixr`.
+
+```{r}
+world_data <- socialmixr::wpp_age()
+
+head(world_data)
+```
+
+We can tidy the data up, filtering down to a specified location and year with the `age_population` function:
+
+```{r}
+nz_2015 <- age_population(
+  data = world_data,
+  location_col = country,
+  location = "New Zealand",
+  age_col = lower.age.limit,
+  year_col = year,
+  year = 2015
+)
+
+nz_2015
+```
+
+This returns a `conmat_population` object, which is a data frame that knows which columns represent `age` and `population` information. This is useful for other modelling parts of the `conmat` package.
+
 ## Australian Bureau of Statistics (ABS) data
 
 ### Accessing Functions
 
-We provide two functions to access (Local Government Area) LGA and state level population age data, which are provided in 5 year age bins from 0, 5, up to 85+
+We provide two functions to access LGA  (Local Government Area), and state level population age data, which are provided in 5 year age bins from 0, 5, up to 85+. These data are `conmat_population` tibbles, which means that they know which columns represent the `age` and `population` information. This means that functions inside of `conmat` can work a bit smoother as we refer to these columns frequently.
 
 #### `abs_age_lga()`
 
 ```{r abs-age-lga}
-abs_age_lga(lga_name = "Fairfield (C)")
-abs_age_lga(lga_name = "Brisbane (C)")
+fairfield <- abs_age_lga(lga_name = "Fairfield (C)")
+fairfield
 ```
 
-It requires you to know the exact name of the LGA, you can see them in the dataset, `abs_lga_lookup`
+Note that this is a `conmat_population` object, which prints in red at the top of the data frame. This provides the information on the `age` and `population` columns, stating: `age: lower.age.limit`, and `population: population`, indicating which columns refer to the appropriate variables.
+
+Also note that `abs_age_lga` requires you to know the exact name of the LGA, you can see them in the dataset, `abs_lga_lookup`
 
 ```{r abs-lga-lookup}
 abs_lga_lookup
 ```
 
-And if you're not sure about a particular name of a place, you can use `agrep` and `filter` like so:
+And if you're not sure about a particular name of a place, you can use `agrep` and `filter`, to match on similar-ish characters, like so:
 
 ```{r abs-lga-lookup-filter}
 library(dplyr)
@@ -47,10 +76,9 @@ abs_lga_lookup %>%
   filter(agrepl("Sydney", lga))
 ```
 
-
 #### `abs_age_state()`
 
-This takes in the abbreviated state names
+This takes in the abbreviated state names, and is also a `conmat_population` object.
 
 ```{r abs-age-state}
 abs_age_state(state_name = "NSW")

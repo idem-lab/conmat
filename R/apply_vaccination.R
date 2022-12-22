@@ -73,6 +73,10 @@ apply_vaccination <- function(ngm,
                               coverage_col,
                               acquisition_col,
                               transmission_col) {
+  # NOTE
+  # `apply_vaccination` should accept an ngm class object otherwise
+  # give an error maybe?
+  # also should it be `vaccination_data` not `data`, so it is more descriptive?
   check_dimensions(ngm, data)
 
   transmission_reduction_matrix <- data %>%

@@ -166,7 +166,9 @@ print_setting_info <- function(x,
 
   list_print_fun
 
-  cli::cli_alert_info("Access each {.cls {object_class}} with {.code x$name}")
+  cli::cli_alert_info(
+    "Access each {.cls {object_class}} with {.code x$name}"
+    )
   cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
   return(invisible(x))
 }
