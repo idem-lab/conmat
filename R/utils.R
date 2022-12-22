@@ -204,7 +204,7 @@ print.ngm_setting_matrix <- function(x, ...) {
   print_setting_info(
     x = x,
     heading = "NGM Setting Matrices",
-    description = "A list of matrices {.cls matrix} containing the number of newly infected individuals for a specified age group.",
+    description = "A list of matrices, each {.cls matrix} containing the number of newly infected individuals for a specified age group.",
     object_class = "matrix"
   )
 }
@@ -217,5 +217,15 @@ print.setting_contact_model <- function(x, ...) {
     description = "A list of fitted {.cls bam} models for each setting. Each {.cls bam} model predicts the contact rate between ages, for that setting.",
     list_print_fun = print_model_info(x, "bam"),
     object_class = "bam"
+  )
+}
+
+#' @export
+print.setting_vaccination_matrix <- function(x, ...){
+  print_setting_info(
+    x = x,
+    heading = "Vaccination Setting Matrices",
+    description = "A list of matrices, each {.cls matrix} containing the {.strong adjusted} number of newly infected individuals for age groups. These numbers have been adjusted based on proposed vaccination rates in age groups",
+    object_class = "matrix"
   )
 }

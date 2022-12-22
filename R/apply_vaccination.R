@@ -107,5 +107,6 @@ apply_vaccination <- function(ngm,
     dplyr::pull(transmission_reduction_matrix)
 
   ngm_vaccinated <- Map("*", ngm, transmission_reduction_matrix)
+  ngm_vaccinated <- new_setting_vaccination_matrix(ngm_vaccinated)
   return(ngm_vaccinated)
 }

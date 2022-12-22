@@ -38,3 +38,9 @@ test_that("apply_vaccination() errors when there's an incorrect variable name", 
     )
   )
 })
+
+test_that("apply_vaccination() produces expected output", {
+  expect_snapshot(
+    ngm_VIC_vacc
+  )
+})
