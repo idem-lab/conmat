@@ -34,7 +34,9 @@ Default values for this are from
 List of setting matrices
 }
 \description{
-Predict setting contacts
+Predict contact rate for each setting. Note that this function is
+parallelisable with \code{future}, and will be impacted by any \code{future} plans
+provided.
 }
 \details{
 We use Per-capita household size instead of mean household size.

@@ -41,6 +41,8 @@ the setting, and assumed to together make up the full set of contacts for
 individuals in the survey), a representative population distribution for
 the survey, and a set of age breaks at which to aggregate contacts, return
 a set of predicted contact matrices for each setting, and for all combined.
+Note that this function is parallelisable with \code{future}, and will be
+impacted by any \code{future} plans provided.
 }
 \examples{
 \dontrun{

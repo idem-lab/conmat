@@ -1,5 +1,10 @@
 
 #' Predict setting contacts
+#' 
+#' Predict contact rate for each setting. Note that this function is
+#' parallelisable with `future`, and will be impacted by any `future` plans
+#' provided.
+#' 
 #' @param population population
 #' @param contact_model contact_model
 #' @param age_breaks age_breaks
