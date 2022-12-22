@@ -1,14 +1,35 @@
-template:
-  params:
-    bootswatch: flatly
-
 home:
-  links:
-  - text: Learn more
-    href: https://github.com/njtierney/conmat
-    
-reference:
+  title: Create Synthetic Contact Matrices
 
+authors:
+  Nick Tierney:
+    href: https://njtierney.com/
+  Nick Golding:
+    href: https://www.telethonkids.org.au/contact-us/our-people/g/nick-golding/
+  Aarathy Babu: 
+    href: https://aarathybabu.netlify.app/
+
+template:
+  bootstrap: 5
+  bootswatch: litera
+  
+development:
+  mode: auto
+# 
+# navbar:
+#   left:
+#   - text: Getting Started
+#     href: articles/getting-started.html
+#   - text: Example Pipeline
+#     href: articles/example-pipeline.Rmd
+#   - text: Data Sources
+#     href: articles/data-sources.Rmd
+#   - text: Reference
+#     href: reference/index.html
+#   - text: News
+#     href: news/index.html
+
+reference:
   - title: "Core functions"
     desc: > 
       These are the core functions that we intend users to interface with
@@ -73,15 +94,3 @@ reference:
       - age
       - population
 
-navbar:
-  left:
-  - text: Getting Started
-    href: articles/getting-started.html
-  - text: Example Pipeline
-    href: articles/example-pipeline.Rmd
-  - text: Data Sources
-    href: articles/data-sources.Rmd
-  - text: Reference
-    href: reference/index.html
-  - text: News
-    href: news/index.html
