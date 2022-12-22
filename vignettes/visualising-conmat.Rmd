@@ -1,0 +1,68 @@
+---
+title: "visualising-conmat"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualising-conmat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+
+## For interest's sake: visualising the empirical contact rate data
+
+```{r}
+# visualise empirical contact rate estimates
+bind_rows(
+  home = get_polymod_contact_data("home"),
+  school = get_polymod_contact_data("school"),
+  work = get_polymod_contact_data("work"),
+  other = get_polymod_contact_data("other"),
+  .id = "setting"
+) %>%
+  mutate(
+    rate = contacts / participants,
+    setting = factor(
+      setting,
+      levels = c(
+        "home", "school", "work", "other"
+      )
+    )
+  ) %>%
+  group_by(
+    setting
+  ) %>%
+  mutate(
+    `relative contact rate` = rate / max(rate)
+  ) %>%
+  ungroup() %>%
+  ggplot(
+    aes(
+      x = age_from,
+      y = age_to,
+      fill = `relative contact rate`
+    )
+  ) +
+  facet_wrap(
+    ~setting,
+    ncol = 2,
+    scales = "free"
+  ) +
+  geom_tile() +
+  scale_fill_distiller(
+    direction = 1,
+    trans = "sqrt"
+  ) +
+  theme_minimal()
+```
+

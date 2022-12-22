@@ -1,0 +1,47 @@
+---
+title: "parallel-computing"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{parallel-computing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+
+
+### Speeding up computation with `future`
+
+`conmat` supports parallelisation, which is useful in a couple of contexts with the model fitting, here is an example:
+
+```{r load-future}
+library(future)
+plan(multisession, workers = 4)
+```
+
+We set the future plan, saying "multisession", with 4 workers. Then we run the same code as above (note that you must specify the plan, otherwise it does not know how to parallelise. See the [future package documentation](https://future.futureverse.org/reference/plan.html) for more details):
+
+```{r show-off-furrr}
+contact_model <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data_small,
+  population = polymod_survey_data_small
+)
+
+contact_model_pred <- predict_setting_contacts(
+  population = polymod_survey_data_small,
+  contact_model = contact_model,
+  age_breaks = c(seq(0, 20, by = 5), Inf)
+)
+```
+
+Notably this is about 3 times faster than without using that plan.
