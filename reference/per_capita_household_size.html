@@ -28,6 +28,12 @@ function for retrieving household size distributions for a given place."><!-- ma
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -107,11 +113,12 @@ state or LGA.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>016 NSW   Fairfield (C)              6    <span style="text-decoration: underline;">21</span>216</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>016 NSW   Fairfield (C)              7     <span style="text-decoration: underline;">9</span>800</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>016 NSW   Fairfield (C)              8    <span style="text-decoration: underline;">10</span>976</span>
-<span class="r-in"><span><span class="fu">per_capita_household_size</span><span class="op">(</span>household_data<span class="op">=</span><span class="va">demo_data</span>,</span></span>
-<span class="r-in"><span>                          household_size_col<span class="op">=</span><span class="va">household_size</span>,</span></span>
-<span class="r-in"><span>                          n_people_col<span class="op">=</span><span class="va">n_people</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">per_capita_household_size</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  household_data <span class="op">=</span> <span class="va">demo_data</span>,</span></span>
+<span class="r-in"><span>  household_size_col <span class="op">=</span> <span class="va">household_size</span>,</span></span>
+<span class="r-in"><span>  n_people_col <span class="op">=</span> <span class="va">n_people</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.199372</span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -127,7 +134,7 @@ state or LGA.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

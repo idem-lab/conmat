@@ -34,6 +34,12 @@ participated in the polymod survey."><!-- mathjax --><script src="https://cdnjs.
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -84,7 +90,10 @@ United Kingdom.</p></dd>
     <h2>Value</h2>
     
 
-<p>data frame with two columns: <code>lower.age.limit</code> and <code>population</code></p>
+<p>A <code>conmat_population</code> data frame with two columns: <code>lower.age.limit</code></p>
+
+
+<p>and <code>population</code></p>
 
 
     </div>
@@ -92,7 +101,9 @@ United Kingdom.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>               0   1<span style="text-decoration: underline;">852</span>682.</span>
@@ -106,8 +117,10 @@ United Kingdom.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>              40   3<span style="text-decoration: underline;">041</span>663.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>              45   2<span style="text-decoration: underline;">809</span>154.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more rows</span></span>
-<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"Belgium"</span><span class="op">)</span> </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"Belgium"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>               0     <span style="text-decoration: underline;">583</span>492</span>
@@ -121,8 +134,10 @@ United Kingdom.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>              40     <span style="text-decoration: underline;">823</span>305</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>              45     <span style="text-decoration: underline;">779</span>436</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more rows</span></span>
-<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"United Kingdom"</span><span class="op">)</span> </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"United Kingdom"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>               0    3<span style="text-decoration: underline;">453</span>670</span>
@@ -136,8 +151,10 @@ United Kingdom.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>              40    4<span style="text-decoration: underline;">655</span>093</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>              45    3<span style="text-decoration: underline;">989</span>175</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more rows</span></span>
-<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"Italy"</span><span class="op">)</span> </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="r-in"><span><span class="fu">get_polymod_population</span><span class="op">(</span><span class="st">"Italy"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>               0    2<span style="text-decoration: underline;">758</span>749</span>
@@ -165,7 +182,7 @@ United Kingdom.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

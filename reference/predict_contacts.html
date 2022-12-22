@@ -33,6 +33,12 @@ details below on adjust_household_contact_matrix for more information."><!-- mat
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -119,28 +125,30 @@ with.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="co"># If we have a model of contact rate at home, and age population structure </span></span></span>
-<span class="r-in"><span> <span class="co"># for an LGA, say, Fairfield, in NSW:</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">home</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># If we have a model of contact rate at home, and age population structure</span></span></span>
+<span class="r-in"><span><span class="co"># for an LGA, say, Fairfield, in NSW:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">home</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Family: poisson </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Link function: log </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> contacts ~ s(age_to) + s(age_from) + s(abs(age_from - age_to)) + </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     s(abs(age_from - age_to), age_from) + school_probability + </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     work_probability + offset(log_contactable_population)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> contacts ~ s(gam_age_offdiag) + s(gam_age_offdiag_2) + s(gam_age_diag_prod) + </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     s(gam_age_diag_sum) + s(gam_age_pmax) + s(gam_age_pmin) + </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     school_probability + work_probability + offset(log_contactable_population)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated degrees of freedom:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7.94  7.43  8.01 24.47  total = 50.85 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.74 1.00 6.29 2.96 8.50 3.10  total = 32.6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fREML score: 13692.64     </span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="va">fairfield_abs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="va">fairfield_abs_data</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fREML score: 14701.28     rank: 55/57</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fairfield_abs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fairfield_abs_data</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 4</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lga           lower.age.limit  year population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Fairfield (C)               0  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">12</span>261</span>
@@ -161,37 +169,37 @@ with.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Fairfield (C)              75  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">5</span>598</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Fairfield (C)              80  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">4</span>006</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> Fairfield (C)              85  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">4</span>240</span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="co"># We can predict the contact rate for Fairfield from the existing contact </span></span></span>
-<span class="r-in"><span> <span class="co"># data, say, between the age groups of 0-15 in 5 year bins for school:</span></span></span>
-<span class="r-in"><span>   </span></span>
-<span class="r-in"><span> <span class="va">fairfield_school_contacts</span> <span class="op">&lt;-</span> <span class="fu">predict_contacts</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   model <span class="op">=</span> <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">school</span>,</span></span>
-<span class="r-in"><span>   population <span class="op">=</span> <span class="va">fairfield_abs_data</span>,</span></span>
-<span class="r-in"><span>   age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>,<span class="cn">Inf</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="va">fairfield_school_contacts</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># We can predict the contact rate for Fairfield from the existing contact</span></span></span>
+<span class="r-in"><span><span class="co"># data, say, between the age groups of 0-15 in 5 year bins for school:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fairfield_school_contacts</span> <span class="op">&lt;-</span> <span class="fu">predict_contacts</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  model <span class="op">=</span> <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">school</span>,</span></span>
+<span class="r-in"><span>  population <span class="op">=</span> <span class="va">fairfield_abs_data</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fairfield_school_contacts</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    age_group_from age_group_to contacts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)          1.24  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)         0.317 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)        0.075<span style="text-decoration: underline;">7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,Inf)       0.660 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> [5,10)         [0,5)          0.249 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> [5,10)         [5,10)         4.49  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> [5,10)         [10,15)        0.414 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> [5,10)         [15,Inf)       1.14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> [10,15)        [0,5)          0.032<span style="text-decoration: underline;">4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> [10,15)        [5,10)         0.341 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> [10,15)        [10,15)        6.60  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> [10,15)        [15,Inf)       1.84  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> [15,Inf)       [0,5)          0.049<span style="text-decoration: underline;">6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> [15,Inf)       [5,10)         0.094<span style="text-decoration: underline;">0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)          1.20  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)         0.335 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)        0.055<span style="text-decoration: underline;">5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,Inf)       0.630 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> [5,10)         [0,5)          0.319 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> [5,10)         [5,10)         4.42  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> [5,10)         [10,15)        0.395 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> [5,10)         [15,Inf)       1.26  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> [10,15)        [0,5)          0.049<span style="text-decoration: underline;">9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> [10,15)        [5,10)         0.378 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> [10,15)        [10,15)        6.59  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> [10,15)        [15,Inf)       1.71  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> [15,Inf)       [0,5)          0.044<span style="text-decoration: underline;">9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> [15,Inf)       [5,10)         0.094<span style="text-decoration: underline;">5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> [15,Inf)       [10,15)        0.136 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> [15,Inf)       [15,Inf)       1.06  </span>
-<span class="r-in"><span> </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> [15,Inf)       [15,Inf)       1.07  </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -206,7 +214,7 @@ with.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -30,6 +30,12 @@ given settings. See "details" for further information.'><!-- mathjax --><script 
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -70,8 +76,9 @@ an example dataset - or the dataset in examples below.</p></dd>
 
 
 <dt>population</dt>
-<dd><p>population data, with columns <code>lower.age.limit</code> and
-<code>population</code>. See <code><a href="get_polymod_population.html">get_polymod_population()</a></code> for an example.</p></dd>
+<dd><p><code>conmat_population</code> object, or data frame with columns
+<code>lower.age.limit</code> and <code>population</code>. See <code><a href="get_polymod_population.html">get_polymod_population()</a></code> for
+an example.</p></dd>
 
 
 <dt>symmetrical</dt>
@@ -143,7 +150,7 @@ weighted by the proportion of the population attending school.</p>
     work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -157,10 +164,10 @@ weighted by the proportion of the population attending school.</p>
     s(abs(age_from - age_to)) +
     s(abs(age_from - age_to), age_from) +
     school_probability +
-    work_probability + 
+    work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -198,10 +205,12 @@ weighted by the proportion of the population attending school.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">example_contact_20</span> <span class="op">&lt;-</span> <span class="va">example_contact</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> </span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">age_to</span> <span class="op">&lt;=</span> <span class="fl">20</span>,</span></span>
-<span class="r-in"><span>         <span class="va">age_from</span> <span class="op">&lt;=</span> <span class="fl">20</span><span class="op">)</span></span></span>
-<span class="r-in"><span>         </span></span>
+<span class="r-in"><span><span class="va">example_contact_20</span> <span class="op">&lt;-</span> <span class="va">example_contact</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">age_to</span> <span class="op">&lt;=</span> <span class="fl">20</span>,</span></span>
+<span class="r-in"><span>    <span class="va">age_from</span> <span class="op">&lt;=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">my_mod</span> <span class="op">&lt;-</span> <span class="fu">fit_single_contact_model</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_data <span class="op">=</span> <span class="va">example_contact_20</span>,</span></span>
 <span class="r-in"><span>  population <span class="op">=</span> <span class="va">example_population</span></span></span>
@@ -220,7 +229,7 @@ weighted by the proportion of the population attending school.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

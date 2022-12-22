@@ -30,6 +30,12 @@ a set of predicted contact matrices for each setting, and for all combined."><!-
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -107,8 +113,7 @@ data with a workflow on how to get this number.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># takes a long time to run</span></span></span>
 <span class="r-in"><span><span class="va">settings_estimated_contacts</span> <span class="op">&lt;-</span> <span class="fu">estimate_setting_contacts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
@@ -117,7 +122,6 @@ data with a workflow on how to get this number.</p></dd>
 <span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
@@ -133,7 +137,7 @@ data with a workflow on how to get this number.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -27,6 +27,12 @@ polymod and later extrapolate on to a desired population."><!-- mathjax --><scri
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -62,9 +68,10 @@ polymod and later extrapolate on to a desired population.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>population</dt>
-<dd><p>data set with information on the population of the desired
-location - containing <code>lower.age.limit</code> and <code>population</code> columns. See
-<code><a href="get_polymod_population.html">get_polymod_population()</a></code> for an example of this data.</p></dd>
+<dd><p>a <code>conmat_population</code> object, specifying the <code>age</code>
+and <code>population</code> characteristics. Or a data frame with <code>lower.age.limit</code>
+and <code>population</code> columns. See <code><a href="get_polymod_population.html">get_polymod_population()</a></code> for an example
+of this data.</p></dd>
 
 
 <dt>age_breaks</dt>
@@ -91,7 +98,18 @@ desired ages.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">polymod_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">synthetic_settings_5y_polymod</span> <span class="op">&lt;-</span> <span class="fu">extrapolate_polymod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  population <span class="op">=</span> <span class="va">polymod_population</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">synthetic_settings_5y_polymod</span></span></span>
+<span class="r-in"><span><span class="va">synthetic_settings_5y_fairfield</span> <span class="op">&lt;-</span> <span class="fu">extrapolate_polymod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  population <span class="op">=</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">synthetic_settings_5y_fairfield</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -105,7 +123,7 @@ desired ages.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

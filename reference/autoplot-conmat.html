@@ -26,6 +26,12 @@
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -84,33 +90,38 @@ setting wise contact matrix it is "Setting-specific synthetic contact matrices".
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">polymod_contact_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">polymod_survey_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="va">polymod_contact_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">polymod_survey_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">setting_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_setting_contacts.html">fit_setting_contacts</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    contact_data_list <span class="op">=</span> <span class="va">polymod_contact_data</span>,</span></span>
+<span class="r-in"><span>    population <span class="op">=</span> <span class="va">polymod_survey_data</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">setting_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit_setting_contacts.html">fit_setting_contacts</a></span><span class="op">(</span>contact_data_list <span class="op">=</span> <span class="va">polymod_contact_data</span>,</span></span>
-<span class="r-in"><span>                       population <span class="op">=</span> <span class="va">polymod_survey_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">fairfield_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">fairfield_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">fairfield_hh_size</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="get_per_capita_household_size.html">get_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">fairfield_hh_size</span> <span class="op">&lt;-</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="get_per_capita_household_size.html">get_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">synthetic_settings_5y_fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    population <span class="op">=</span> <span class="va">fairfield_age_pop</span>,</span></span>
+<span class="r-in"><span>    contact_model <span class="op">=</span> <span class="va">setting_models</span>,</span></span>
+<span class="r-in"><span>    age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh_size</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">synthetic_settings_5y_fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  population <span class="op">=</span> <span class="va">fairfield_age_pop</span>,</span></span>
-<span class="r-in"><span>  contact_model <span class="op">=</span> <span class="va">setting_models</span>,</span></span>
-<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh_size</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Plotting synthetic contact matrices across all settings</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Plotting synthetic contact matrices across all settings</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    object <span class="op">=</span> <span class="va">synthetic_settings_5y_fairfield_hh</span>,</span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Setting specific synthetic contact matrices"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span>object <span class="op">=</span>  <span class="va">synthetic_settings_5y_fairfield_hh</span>,</span></span>
-<span class="r-in"><span>          title<span class="op">=</span><span class="st">"Setting specific synthetic contact matrices"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span><span class="co"># Work setting specific synthetic contact matrices</span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span>object <span class="op">=</span>  <span class="va">synthetic_settings_5y_fairfield_hh</span><span class="op">$</span><span class="va">work</span>,</span></span>
-<span class="r-in"><span>          title<span class="op">=</span><span class="st">"Work"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Work setting specific synthetic contact matrices</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    object <span class="op">=</span> <span class="va">synthetic_settings_5y_fairfield_hh</span><span class="op">$</span><span class="va">work</span>,</span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Work"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
@@ -127,7 +138,7 @@ setting wise contact matrix it is "Setting-specific synthetic contact matrices".
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

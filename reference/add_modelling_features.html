@@ -8,7 +8,9 @@ add_population_age_to(), which requires a column called "age_to"
 representing the age of the person who had contact. It creates a column
 called pop_age_to. add_population_age_to() takes an extra argument
 for population, which defaults to get_polymod_population(), but needs
-to be a data frame with columns, lower.age.limit, and population.
+to be a conmat_population object, which specifies the age and
+population characteristics, or a data frame with columns,
+lower.age.limit, and population.
 School work participation, which is from the function
 add_school_work_participation(). This requires columns age_to and
 age_from, but will operate on any column starting with age and adds
@@ -47,6 +49,12 @@ log_contactable_population_school, and log_contactable_population.
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -75,7 +83,9 @@ features it adds are described below:</p><ol><li><p>Population distribution of c
 representing the age of the person who had contact. It creates a column
 called <code>pop_age_to</code>. <code><a href="add_population_age_to.html">add_population_age_to()</a></code> takes an extra argument
 for population, which defaults to <code><a href="get_polymod_population.html">get_polymod_population()</a></code>, but needs
-to be a data frame with columns, <code>lower.age.limit</code>, and <code>population</code>.</p></li>
+to be a <code>conmat_population</code> object, which specifies the <code>age</code> and
+<code>population</code> characteristics, or a data frame with columns,
+<code>lower.age.limit</code>, and <code>population</code>.</p></li>
 <li><p>School work participation, which is from the function
 <code><a href="add_school_work_participation.html">add_school_work_participation()</a></code>. This requires columns <code>age_to</code> and
 <code>age_from</code>, but will operate on any column starting with <code>age</code> and adds
@@ -121,10 +131,10 @@ log_contactable_population_school, and log_contactable_population.</p>
 <span class="r-in"><span><span class="va">all_ages</span> <span class="op">&lt;-</span> <span class="va">age_min</span><span class="op">:</span><span class="va">age_max</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">example_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>   age_from <span class="op">=</span> <span class="va">all_ages</span>,</span></span>
-<span class="r-in"><span>   age_to <span class="op">=</span> <span class="va">all_ages</span>,</span></span>
-<span class="r-in"><span>   <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">add_modelling_features</span><span class="op">(</span><span class="va">example_df</span><span class="op">)</span> </span></span>
+<span class="r-in"><span>  age_from <span class="op">=</span> <span class="va">all_ages</span>,</span></span>
+<span class="r-in"><span>  age_to <span class="op">=</span> <span class="va">all_ages</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_modelling_features</span><span class="op">(</span><span class="va">example_df</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 36 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    age_from age_to pop_age_to intergen…¹ gam_a…² gam_a…³ gam_a…⁴ gam_a…⁵ gam_a…⁶</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -159,7 +169,7 @@ log_contactable_population_school, and log_contactable_population.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

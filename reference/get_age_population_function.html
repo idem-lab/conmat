@@ -28,6 +28,12 @@ socialmixr::wpp_age()."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -54,10 +60,17 @@ populations in 1y age increments from chunkier distributions produced by
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_age_population_function</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_age_population_function</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for conmat_population</span></span>
+<span><span class="fu">get_age_population_function</span><span class="op">(</span>data <span class="op">=</span> <span class="va">population</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">get_age_population_function</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">population</span>,</span>
 <span>  age_col <span class="op">=</span> <span class="va">lower.age.limit</span>,</span>
-<span>  pop_col <span class="op">=</span> <span class="va">population</span></span>
+<span>  pop_col <span class="op">=</span> <span class="va">population</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -66,6 +79,10 @@ populations in 1y age increments from chunkier distributions produced by
     <dl><dt>data</dt>
 <dd><p>dataset containing information on population of a given
 age/age group</p></dd>
+
+
+<dt>...</dt>
+<dd><p>extra arguments</p></dd>
 
 
 <dt>age_col</dt>
@@ -112,7 +129,9 @@ bound. Older ages would have lower weights, therefore lower population.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">polymod_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">polymod_pop</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>               0   1<span style="text-decoration: underline;">852</span>682.</span>
@@ -131,9 +150,9 @@ bound. Older ages would have lower weights, therefore lower population.</p>
 <span class="r-in"><span><span class="co"># provide a specified age and get the estimated population for that 1 year</span></span></span>
 <span class="r-in"><span><span class="co"># age group. First we create the new function like so</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">age_pop_function</span> <span class="op">&lt;-</span> <span class="fu">get_age_population_function</span><span class="op">(</span>data<span class="op">=</span><span class="va">polymod_pop</span>,</span></span>
-<span class="r-in"><span>                                                 age_col <span class="op">=</span> <span class="va">lower.age.limit</span>,</span></span>
-<span class="r-in"><span>                                                 pop_col<span class="op">=</span> <span class="va">population</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">age_pop_function</span> <span class="op">&lt;-</span> <span class="fu">get_age_population_function</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">polymod_pop</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Then we pass it a year to get the estimated population for a particular age</span></span></span>
 <span class="r-in"><span><span class="fu">age_pop_function</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 375940</span>
@@ -143,21 +162,23 @@ bound. Older ages would have lower weights, therefore lower population.</p>
 <span class="r-in"><span><span class="fu">age_pop_function</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 360379.5 365489.5 370672.4 375940.0</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Notice that we get a _pretty similar_ number of 0-4 if we sum it up, as </span></span></span>
+<span class="r-in"><span><span class="co"># Notice that we get a _pretty similar_ number of 0-4 if we sum it up, as</span></span></span>
 <span class="r-in"><span><span class="co"># the first row of the table:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">polymod_pop</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   lower.age.limit population</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>               0   1<span style="text-decoration: underline;">852</span>682.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu">age_pop_function</span><span class="op">(</span>age <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1827822</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Usage in dplyr </span></span></span>
+<span class="r-in"><span><span class="co"># Usage in dplyr</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">example_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="va">abs_education_state</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">example_df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>population_est <span class="op">=</span> <span class="fu">age_pop_function</span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>population_est <span class="op">=</span> <span class="fu">age_pop_function</span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year state aboriginal_and_torres_strait_islander_status   age n_ful…¹ popul…²</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -182,7 +203,7 @@ bound. Older ages would have lower weights, therefore lower population.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

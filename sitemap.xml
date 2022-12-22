@@ -73,6 +73,9 @@
     <loc>/reference/abs_state_age.html</loc>
   </url>
   <url>
+    <loc>/reference/accessors.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_intergenerational.html</loc>
   </url>
   <url>
@@ -103,6 +106,9 @@
     <loc>/reference/apply_vaccination.html</loc>
   </url>
   <url>
+    <loc>/reference/as_conmat_population.html</loc>
+  </url>
+  <url>
     <loc>/reference/autoplot-conmat.html</loc>
   </url>
   <url>
@@ -116,6 +122,9 @@
   </url>
   <url>
     <loc>/reference/conmat-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/conmat_population.html</loc>
   </url>
   <url>
     <loc>/reference/data_abs_lga_education.html</loc>
@@ -190,6 +199,9 @@
     <loc>/reference/matrix_to_predictions.html</loc>
   </url>
   <url>
+    <loc>/reference/new_conmat_population.html</loc>
+  </url>
+  <url>
     <loc>/reference/per_capita_household_size.html</loc>
   </url>
   <url>
@@ -212,6 +224,9 @@
   </url>
   <url>
     <loc>/reference/predictions_to_matrix.html</loc>
+  </url>
+  <url>
+    <loc>/reference/prepare_population_for_modelling.html</loc>
   </url>
   <url>
     <loc>/reference/reexports.html</loc>

@@ -29,6 +29,12 @@ lga of Australia."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -86,7 +92,7 @@ to a particular age, its total population and the corresponding proportion.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state<span class="op">=</span><span class="st">"VIC"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"VIC"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 116 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     year state   age population_educated total_population proportion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -101,7 +107,7 @@ to a particular age, its total population and the corresponding proportion.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>016 VIC       8               <span style="text-decoration: underline;">69</span>673            <span style="text-decoration: underline;">73</span>373      0.950</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>016 VIC       9               <span style="text-decoration: underline;">69</span>894            <span style="text-decoration: underline;">73</span>627      0.949</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 106 more rows</span></span>
-<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state<span class="op">=</span><span class="st">"WA"</span>,lga<span class="op">=</span><span class="st">"Albany (C)"</span>,age<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"WA"</span>, lga <span class="op">=</span> <span class="st">"Albany (C)"</span>, age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year state lga          age population_educated total_popul…¹ propo…² anoma…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
@@ -112,13 +118,13 @@ to a particular age, its total population and the corresponding proportion.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>016 WA    Albany (C)     5                 355           376   0.944 FALSE  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​total_population, ²​proportion,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​anomaly_flag</span></span>
-<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"QLD"</span>,<span class="st">"TAS"</span><span class="op">)</span>,age<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"QLD"</span>, <span class="st">"TAS"</span><span class="op">)</span>, age <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year state   age population_educated total_population proportion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>016 QLD       5               <span style="text-decoration: underline;">55</span>416            <span style="text-decoration: underline;">61</span>981      0.894</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>016 TAS       5                <span style="text-decoration: underline;">5</span>745             <span style="text-decoration: underline;">6</span>132      0.937</span>
-<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>lga<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Albury (C)"</span>,<span class="st">"Barcoo (S)"</span><span class="op">)</span>,age<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_data_abs_age_education</span><span class="op">(</span>lga <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Albury (C)"</span>, <span class="st">"Barcoo (S)"</span><span class="op">)</span>, age <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year state lga          age population_educated total_popul…¹ propo…² anoma…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
@@ -126,6 +132,7 @@ to a particular age, its total population and the corresponding proportion.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>016 QLD   Barcoo (S)    10                   7             7   1     FALSE  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​total_population, ²​proportion,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​anomaly_flag</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -140,7 +147,7 @@ to a particular age, its total population and the corresponding proportion.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

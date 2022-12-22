@@ -43,6 +43,12 @@
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -80,21 +86,78 @@ sources available in <code>conmat</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">conmat</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
+<h2 id="world-data">World data<a class="anchor" aria-label="anchor" href="#world-data"></a>
+</h2>
+<p>We provide functions to clean up world population data from
+<code>socialmixr</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">world_data</span> <span class="op">&lt;-</span> <span class="fu">socialmixr</span><span class="fu">::</span><span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/wpp_age.html" class="external-link">wpp_age</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">world_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   country lower.age.limit year population</span></span>
+<span><span class="co">#&gt; 1  AFRICA               0 1950   38705049</span></span>
+<span><span class="co">#&gt; 2  AFRICA               0 1955   44304214</span></span>
+<span><span class="co">#&gt; 3  AFRICA               0 1960   50491493</span></span>
+<span><span class="co">#&gt; 4  AFRICA               0 1965   57690110</span></span>
+<span><span class="co">#&gt; 5  AFRICA               0 1970   65452837</span></span>
+<span><span class="co">#&gt; 6  AFRICA               0 1975   75017430</span></span></code></pre></div>
+<p>We can tidy the data up, filtering down to a specified location and
+year with the <code>age_population</code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nz_2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/age_population.html">age_population</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">world_data</span>,</span>
+<span>  location_col <span class="op">=</span> <span class="va">country</span>,</span>
+<span>  location <span class="op">=</span> <span class="st">"New Zealand"</span>,</span>
+<span>  age_col <span class="op">=</span> <span class="va">lower.age.limit</span>,</span>
+<span>  year_col <span class="op">=</span> <span class="va">year</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2015</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">nz_2015</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 5</span> <span style="color: #BB0000;">(conmat_population)</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span></span>
+<span><span class="co">#&gt;    country      year population lower.age.limit upper.age.limit</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">308</span>681               0               4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">315</span>632               5               9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">297</span>247              10              14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">318</span>932              15              19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">339</span>362              20              24</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">315</span>914              25              29</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">287</span>537              30              34</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">273</span>539              35              39</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">312</span>245              40              44</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">313</span>312              45              49</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></span></code></pre></div>
+<p>This returns a <code>conmat_population</code> object, which is a data
+frame that knows which columns represent <code>age</code> and
+<code>population</code> information. This is useful for other modelling
+parts of the <code>conmat</code> package.</p>
+</div>
+<div class="section level2">
 <h2 id="australian-bureau-of-statistics-abs-data">Australian Bureau of Statistics (ABS) data<a class="anchor" aria-label="anchor" href="#australian-bureau-of-statistics-abs-data"></a>
 </h2>
 <div class="section level3">
 <h3 id="accessing-functions">Accessing Functions<a class="anchor" aria-label="anchor" href="#accessing-functions"></a>
 </h3>
-<p>We provide two functions to access (Local Government Area) LGA and
+<p>We provide two functions to access LGA (Local Government Area), and
 state level population age data, which are provided in 5 year age bins
-from 0, 5, up to 85+</p>
+from 0, 5, up to 85+. These data are <code>conmat_population</code>
+tibbles, which means that they know which columns represent the
+<code>age</code> and <code>population</code> information. This means
+that functions inside of <code>conmat</code> can work a bit smoother as
+we refer to these columns frequently.</p>
 <div class="section level4">
 <h4 id="abs_age_lga">
 <code>abs_age_lga()</code><a class="anchor" aria-label="anchor" href="#abs_age_lga"></a>
 </h4>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span>lga_name <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span></span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span>lga_name <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
+<span><span class="va">fairfield</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span> <span style="color: #BB0000;">(conmat_population)</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span></span>
 <span><span class="co">#&gt;    lga           lower.age.limit  year population</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Fairfield (C)               0  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">12</span>261</span></span>
@@ -114,32 +177,17 @@ from 0, 5, up to 85+</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Fairfield (C)              70  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">8</span>227</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Fairfield (C)              75  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">5</span>598</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> Fairfield (C)              80  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">4</span>006</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> Fairfield (C)              85  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">4</span>240</span></span>
-<span><span class="fu"><a href="../reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span>lga_name <span class="op">=</span> <span class="st">"Brisbane (C)"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span></span></span>
-<span><span class="co">#&gt;    lga          lower.age.limit  year population</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Brisbane (C)               0  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">72</span>894</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Brisbane (C)               5  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">75</span>933</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Brisbane (C)              10  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">73</span>990</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Brisbane (C)              15  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">72</span>010</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Brisbane (C)              20  <span style="text-decoration: underline;">2</span>020     <span style="text-decoration: underline;">104</span>564</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Brisbane (C)              25  <span style="text-decoration: underline;">2</span>020     <span style="text-decoration: underline;">119</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Brisbane (C)              30  <span style="text-decoration: underline;">2</span>020     <span style="text-decoration: underline;">110</span>798</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Brisbane (C)              35  <span style="text-decoration: underline;">2</span>020     <span style="text-decoration: underline;">100</span>493</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Brisbane (C)              40  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">86</span>630</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Brisbane (C)              45  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">86</span>791</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> Brisbane (C)              50  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">76</span>063</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Brisbane (C)              55  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">69</span>273</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> Brisbane (C)              60  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">59</span>666</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> Brisbane (C)              65  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">49</span>134</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Brisbane (C)              70  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">42</span>252</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> Brisbane (C)              75  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">29</span>927</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> Brisbane (C)              80  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">20</span>898</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> Brisbane (C)              85  <span style="text-decoration: underline;">2</span>020      <span style="text-decoration: underline;">22</span>683</span></span></code></pre></div>
-<p>It requires you to know the exact name of the LGA, you can see them
-in the dataset, <code>abs_lga_lookup</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> Fairfield (C)              85  <span style="text-decoration: underline;">2</span>020       <span style="text-decoration: underline;">4</span>240</span></span></code></pre></div>
+<p>Note that this is a <code>conmat_population</code> object, which
+prints in red at the top of the data frame. This provides the
+information on the <code>age</code> and <code>population</code> columns,
+stating: <code>age: lower.age.limit</code>, and
+<code>population: population</code>, indicating which columns refer to
+the appropriate variables.</p>
+<p>Also note that <code>abs_age_lga</code> requires you to know the
+exact name of the LGA, you can see them in the dataset,
+<code>abs_lga_lookup</code></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_lga_lookup</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 544 × 3</span></span></span>
 <span><span class="co">#&gt;    state lga_code lga                  </span></span>
@@ -156,8 +204,9 @@ in the dataset, <code>abs_lga_lookup</code></p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NSW      <span style="text-decoration: underline;">10</span>750 Blacktown (C)        </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 534 more rows</span></span></span></code></pre></div>
 <p>And if you’re not sure about a particular name of a place, you can
-use <code>agrep</code> and <code>filter</code> like so:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+use <code>agrep</code> and <code>filter</code>, to match on similar-ish
+characters, like so:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
@@ -167,7 +216,7 @@ use <code>agrep</code> and <code>filter</code> like so:</p>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="va">abs_lga_lookup</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">abs_lga_lookup</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/agrep.html" class="external-link">agrepl</a></span><span class="op">(</span><span class="st">"Sydney"</span>, <span class="va">lga</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
 <span><span class="co">#&gt;   state lga_code lga             </span></span>
@@ -179,11 +228,13 @@ use <code>agrep</code> and <code>filter</code> like so:</p>
 <h4 id="abs_age_state">
 <code>abs_age_state()</code><a class="anchor" aria-label="anchor" href="#abs_age_state"></a>
 </h4>
-<p>This takes in the abbreviated state names</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>This takes in the abbreviated state names, and is also a
+<code>conmat_population</code> object.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/abs_age_data.html">abs_age_state</a></span><span class="op">(</span>state_name <span class="op">=</span> <span class="st">"NSW"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   year, state [1]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 4</span> <span style="color: #BB0000;">(conmat_population)</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span></span>
+<span><span class="co">#&gt;  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span></span>
 <span><span class="co">#&gt;     year state lower.age.limit population</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>020 NSW                 0     <span style="text-decoration: underline;">495</span>091</span></span>
@@ -205,7 +256,7 @@ use <code>agrep</code> and <code>filter</code> like so:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>020 NSW                80     <span style="text-decoration: underline;">174</span>990</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>  <span style="text-decoration: underline;">2</span>020 NSW                85     <span style="text-decoration: underline;">179</span>095</span></span></code></pre></div>
 <p>You can see these state names with:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">abs_lga_lookup</span><span class="op">$</span><span class="va">state</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "NSW" "VIC" "QLD" "SA"  "WA"  "TAS" "NT"  "ACT" "OT"</span></span></code></pre></div>
 <p>Note that “OT” stands for “other territories”</p>
@@ -220,7 +271,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="education-by-state-data-for-2006--2020">Education by state data for 2006 -2020<a class="anchor" aria-label="anchor" href="#education-by-state-data-for-2006--2020"></a>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_education_state</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,194 × 5</span></span></span>
 <span><span class="co">#&gt;     year state aboriginal_and_torres_strait_islander_status   age n_full_and_p…¹</span></span>
@@ -240,7 +291,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="education-by-state-data-for-2020">Education by state data for 2020<a class="anchor" aria-label="anchor" href="#education-by-state-data-for-2020"></a>
 </h4>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_education_state_2020</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 808 × 6</span></span></span>
 <span><span class="co">#&gt;     year state   age population population_interpolated  prop</span></span>
@@ -260,7 +311,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="employment-by-lga-for-2016">Employment by LGA for 2016<a class="anchor" aria-label="anchor" href="#employment-by-lga-for-2016"></a>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_employ_age_lga</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5,600 × 8</span></span></span>
 <span><span class="co">#&gt;     year state lga                   age_group total_emp…¹ total…² total…³ total</span></span>
@@ -281,7 +332,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="number-of-people-in-each-household-by-lga-for-2016">Number of people in each household by LGA for 2016<a class="anchor" aria-label="anchor" href="#number-of-people-in-each-household-by-lga-for-2016"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_household_lga</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4,968 × 5</span></span></span>
 <span><span class="co">#&gt;     year state lga                   n_persons_usually_resident n_households</span></span>
@@ -301,7 +352,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="lga-age-population-for-2016-for-all-states-and-lgas">LGA age population for 2016 for all states and LGAs<a class="anchor" aria-label="anchor" href="#lga-age-population-for-2016-for-all-states-and-lgas"></a>
 </h4>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_pop_age_lga_2016</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9,792 × 5</span></span></span>
 <span><span class="co">#&gt;     year state lga                age_group population</span></span>
@@ -321,7 +372,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="lga-age-population-for-2020-for-all-states-and-lgas">LGA age population for 2020 for all states and LGAs<a class="anchor" aria-label="anchor" href="#lga-age-population-for-2020-for-all-states-and-lgas"></a>
 </h4>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_pop_age_lga_2020</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9,774 × 5</span></span></span>
 <span><span class="co">#&gt;     year state lga                age_group population</span></span>
@@ -341,7 +392,7 @@ of the data at their respective helpfiles, by writing, for example,
 <div class="section level4">
 <h4 id="state-age-population-for-2020">State age population for 2020<a class="anchor" aria-label="anchor" href="#state-age-population-for-2020"></a>
 </h4>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abs_state_age</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 168 × 3</span></span></span>
 <span><span class="co">#&gt;    state age_group population</span></span>
@@ -370,7 +421,7 @@ of the data at their respective helpfiles, by writing, for example,
 vaccination on Alpha &amp; Delta variant transmission”, by David W Eyre,
 Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels, A
 Sarah Walker, Tim EA Peto</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eyre_transmission_probabilities</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 40,804 × 6</span></span></span>
 <span><span class="co">#&gt;    setting   case_age contact_age case_age_5y contact_age_5y probability</span></span>
@@ -387,53 +438,53 @@ Sarah Walker, Tim EA Peto</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> household        0           9 0-4         5-9                  0.201</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 40,794 more rows</span></span></span></code></pre></div>
 <p>We can visualise the data like so:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">eyre_transmission_probabilities</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span></span>
-<span>     <span class="va">setting</span>,</span>
-<span>     <span class="va">case_age_5y</span>,</span>
-<span>     <span class="va">contact_age_5y</span></span>
-<span>   <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span>       <span class="va">probability</span>,</span>
-<span>       <span class="va">mean</span></span>
-<span>     <span class="op">)</span>,</span>
-<span>     .groups <span class="op">=</span> <span class="st">"drop"</span></span>
-<span>   <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
-<span>     case_age <span class="op">=</span> <span class="va">case_age_5y</span>,</span>
-<span>     contact_age <span class="op">=</span> <span class="va">contact_age_5y</span></span>
-<span>   <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
-<span>       <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>,</span>
-<span>       <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">.x</span>,</span>
-<span>                levels <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_order.html" class="external-link">str_sort</a></span><span class="op">(</span></span>
-<span>                  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>                  numeric <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>                <span class="op">)</span></span>
-<span>       <span class="op">)</span></span>
-<span>     <span class="op">)</span></span>
-<span>   <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
-<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>       x <span class="op">=</span> <span class="va">case_age</span>,</span>
-<span>       y <span class="op">=</span> <span class="va">contact_age</span>,</span>
-<span>       fill <span class="op">=</span> <span class="va">probability</span></span>
-<span>     <span class="op">)</span></span>
-<span>   <span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">setting</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>     axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>   <span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span></span>
+<span>    <span class="va">setting</span>,</span>
+<span>    <span class="va">case_age_5y</span>,</span>
+<span>    <span class="va">contact_age_5y</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
+<span>      <span class="va">probability</span>,</span>
+<span>      <span class="va">mean</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
+<span>    case_age <span class="op">=</span> <span class="va">case_age_5y</span>,</span>
+<span>    contact_age <span class="op">=</span> <span class="va">contact_age_5y</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"age"</span><span class="op">)</span>,</span>
+<span>      <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">.x</span>,</span>
+<span>        levels <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_order.html" class="external-link">str_sort</a></span><span class="op">(</span></span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
+<span>          numeric <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="va">case_age</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">contact_age</span>,</span>
+<span>      fill <span class="op">=</span> <span class="va">probability</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">setting</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_fill_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="data-sources_files/figure-html/eyre-transmission-probabilities-plot-1.png" width="700"></p>
 </div>
 </div>
@@ -456,7 +507,7 @@ Sarah Walker, Tim EA Peto</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

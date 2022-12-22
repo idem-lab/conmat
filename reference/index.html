@@ -26,6 +26,12 @@
   <a href="../articles/getting-started.html">Getting Started</a>
 </li>
 <li>
+  <a href="../articles/example-pipeline.Rmd">Example Pipeline</a>
+</li>
+<li>
+  <a href="../articles/data-sources.Rmd">Data Sources</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -44,8 +50,32 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="data">Data <a href="#data" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Data provided with the package to assist with model fitting</p>
+          <h2 id="core-functions">Core functions <a href="#core-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>These are the core functions that we intend users to interface with</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="extrapolate_polymod.html">extrapolate_polymod()</a></code> </p>
+        </td>
+        <td><p>Fit all-of-polymod model and extrapolate to a given population an age breaks</p></td>
+      </tr><tr><td>
+          <p><code><a href="apply_vaccination.html">apply_vaccination()</a></code> </p>
+        </td>
+        <td><p>Apply vaccination effects to next generation contact matrices</p></td>
+      </tr><tr><td>
+          <p><code><a href="generate_ngm.html">generate_ngm()</a></code> </p>
+        </td>
+        <td><p>Calculate next generation contact matrices</p></td>
+      </tr><tr><td>
+          <p><code><a href="reexports.html">reexports</a></code> <code><a href="reexports.html">autoplot</a></code> </p>
+        </td>
+        <td><p>Objects exported from other packages</p></td>
+      </tr><tr><td>
+          <p><code><a href="autoplot-conmat.html">autoplot(<i>&lt;conmat_prediction_matrix&gt;</i>)</a></code> <code><a href="autoplot-conmat.html">autoplot(<i>&lt;conmat_setting_prediction_matrix&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Plot setting matrices using ggplot2</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="abs-data-accessors-and-helpers">ABS Data accessors and helpers <a href="#abs-data-accessors-and-helpers" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions and data objects to access data from the Australian Bureau of Statistics</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="abs_age_data.html">abs_age_lga()</a></code> <code><a href="abs_age_data.html">abs_age_state()</a></code> </p>
@@ -114,6 +144,56 @@ by state.</p></td>
         </td>
         <td><p>State wise ABS work population data on different ages for year 2016</p></td>
       </tr><tr><td>
+          <p><code><a href="get_data_abs_age_education.html">get_data_abs_age_education()</a></code> </p>
+        </td>
+        <td><p>Return  data on educated population for a given age and state or
+lga of Australia.</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_data_abs_age_work.html">get_data_abs_age_work()</a></code> </p>
+        </td>
+        <td><p>Return  data on employed population for a given age and state or
+lga of Australia</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_household_size_distribution.html">get_household_size_distribution()</a></code> </p>
+        </td>
+        <td><p>Get household size distribution based on state or LGA name</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_per_capita_household_size.html">get_per_capita_household_size()</a></code> </p>
+        </td>
+        <td><p>Get per capita household size based on state or LGA name</p></td>
+      </tr><tr><td>
+          <p><code><a href="abbreviate_states.html">abbreviate_states()</a></code> </p>
+        </td>
+        <td><p>Abbreviate Australian State Names</p></td>
+      </tr><tr><td>
+          <p><code><a href="unabbreviate_states.html">unabbreviate_states()</a></code> </p>
+        </td>
+        <td><p>Un-abbreviate Australian state names</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="data-and-model-objects">Data and model objects <a href="#data-and-model-objects" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions and objects for accessing data, models, and assisting with model fitting.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="get_polymod_contact_data.html">get_polymod_contact_data()</a></code> </p>
+        </td>
+        <td><p>Format POLYMOD data and filter contacts to certain settings</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_polymod_per_capita_household_size.html">get_polymod_per_capita_household_size()</a></code> </p>
+        </td>
+        <td><p>Get polymod per capita houshold size.</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_polymod_population.html">get_polymod_population()</a></code> </p>
+        </td>
+        <td><p>Return the polymod-average population age distribution in 5y</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_polymod_setting_data.html">get_polymod_setting_data()</a></code> </p>
+        </td>
+        <td><p>Get polymod setting data</p></td>
+      </tr><tr><td>
+          <p><code><a href="age_population.html">age_population()</a></code> </p>
+        </td>
+        <td><p>Get cleaned population data with lower and upper limits of age.</p></td>
+      </tr><tr><td>
           <p><code><a href="vaccination_effect_example_data.html">vaccination_effect_example_data</a></code> </p>
         </td>
         <td><p>Example dataset with information on age based vaccination coverage,
@@ -138,9 +218,17 @@ acquisition and transmission</p></td>
           <p><code><a href="setting_weights.html">setting_weights</a></code> </p>
         </td>
         <td><p>Setting weights computed for transmission probabilities.</p></td>
+      </tr><tr><td>
+          <p><code><a href="age_group_lookup.html">age_group_lookup</a></code> </p>
+        </td>
+        <td><p>Lookup table of age groups in 5 year bins</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_setting_transmission_matrices.html">get_setting_transmission_matrices()</a></code> </p>
+        </td>
+        <td><p>Get Setting Transmission Matrices</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="model-fitting-and-predictions">Model fitting and predictions <a href="#model-fitting-and-predictions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for model fitting and predictions</p>
+          <h2 id="extra-functions-for-model-fitting-and-prediction">Extra functions for model fitting and prediction <a href="#extra-functions-for-model-fitting-and-prediction" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions for model fitting and predictions - for more advanced use</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="fit_single_contact_model.html">fit_single_contact_model()</a></code> </p>
@@ -158,10 +246,6 @@ acquisition and transmission</p></td>
           <p><code><a href="estimate_setting_contacts.html">estimate_setting_contacts()</a></code> </p>
         </td>
         <td><p>Get predicted setting specific as well as combined contact matrices</p></td>
-      </tr><tr><td>
-          <p><code><a href="extrapolate_polymod.html">extrapolate_polymod()</a></code> </p>
-        </td>
-        <td><p>Fit all-of-polymod model and extrapolate to a given population an age breaks</p></td>
       </tr><tr><td>
           <p><code><a href="predict_contacts.html">predict_contacts()</a></code> </p>
         </td>
@@ -182,39 +266,15 @@ acquisition and transmission</p></td>
           <p><code><a href="matrix_to_predictions.html">matrix_to_predictions()</a></code> </p>
         </td>
         <td><p>Convert a contact matrix as output into a long-form tibble</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="plotting">Plotting <a href="#plotting" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>For plotting the matrix outputs</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="autoplot-conmat.html">autoplot(<i>&lt;conmat_prediction_matrix&gt;</i>)</a></code> <code><a href="autoplot-conmat.html">autoplot(<i>&lt;conmat_setting_prediction_matrix&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Plot setting matrices using ggplot2</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="helper-functions">Helper functions <a href="#helper-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>For dealing with ABS data and other features</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="abbreviate_states.html">abbreviate_states()</a></code> </p>
-        </td>
-        <td><p>Abbreviate Australian State Names</p></td>
       </tr><tr><td>
-          <p><code><a href="age_population.html">age_population()</a></code> </p>
+          <p><code><a href="get_age_population_function.html">get_age_population_function()</a></code> </p>
         </td>
-        <td><p>Get cleaned population data with lower and upper limits of age.</p></td>
+        <td><p>Return an interpolating function for populations in 1y age increments</p></td>
       </tr><tr><td>
-          <p><code><a href="age_group_lookup.html">age_group_lookup</a></code> </p>
+          <p><code><a href="per_capita_household_size.html">per_capita_household_size()</a></code> </p>
         </td>
-        <td><p>Lookup table of age groups in 5 year bins</p></td>
+        <td><p>Get per capita household size with household size distribution</p></td>
       </tr><tr><td>
-          <p><code><a href="unabbreviate_states.html">unabbreviate_states()</a></code> </p>
-        </td>
-        <td><p>Un-abbreviate Australian state names</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="helpers-for-adding-and-joining-data">Helpers for adding and joining data <a href="#helpers-for-adding-and-joining-data" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>For joining data and adding other features</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
           <p><code><a href="add_intergenerational.html">add_intergenerational()</a></code> </p>
         </td>
         <td><p>Add column, "intergenerational"</p></td>
@@ -239,64 +299,22 @@ that attend school/work (average FTE)</p></td>
           <p><code><a href="add_symmetrical_features.html">add_symmetrical_features()</a></code> </p>
         </td>
         <td><p>Add symmetrical, age based features</p></td>
-      </tr><tr><td>
-          <p><code><a href="apply_vaccination.html">apply_vaccination()</a></code> </p>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="creating-and-accessing-information-on-conmat-population-objects">Creating and accessing information on <code>conmat_population</code> objects <a href="#creating-and-accessing-information-on-conmat-population-objects" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Store and use age and population information in a dataframe for use in other functions in conmat.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="conmat_population.html">conmat_population()</a></code> </p>
         </td>
-        <td><p>Apply vaccination effects to next generation contact matrices</p></td>
+        <td><p>Define a conmat population</p></td>
       </tr><tr><td>
-          <p><code><a href="generate_ngm.html">generate_ngm()</a></code> </p>
+          <p><code><a href="as_conmat_population.html">as_conmat_population()</a></code> </p>
         </td>
-        <td><p>Calculate next generation contact matrices</p></td>
+        <td><p>Convert to conmat population</p></td>
       </tr><tr><td>
-          <p><code><a href="formula-terms.html">get_formulas_terms()</a></code> </p>
+          <p><code><a href="accessors.html">age()</a></code> <code><a href="accessors.html">age_label()</a></code> <code><a href="accessors.html">population_label()</a></code> <code><a href="accessors.html">population()</a></code> </p>
         </td>
-        <td><p>Extract out formula terms</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_age_population_function.html">get_age_population_function()</a></code> </p>
-        </td>
-        <td><p>Return an interpolating function for populations in 1y age increments</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_data_abs_age_education.html">get_data_abs_age_education()</a></code> </p>
-        </td>
-        <td><p>Return  data on educated population for a given age and state or
-lga of Australia.</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_data_abs_age_work.html">get_data_abs_age_work()</a></code> </p>
-        </td>
-        <td><p>Return  data on employed population for a given age and state or
-lga of Australia</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_household_size_distribution.html">get_household_size_distribution()</a></code> </p>
-        </td>
-        <td><p>Get household size distribution based on state or LGA name</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_per_capita_household_size.html">get_per_capita_household_size()</a></code> </p>
-        </td>
-        <td><p>Get per capita household size based on state or LGA name</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_polymod_contact_data.html">get_polymod_contact_data()</a></code> </p>
-        </td>
-        <td><p>Format POLYMOD data and filter contacts to certain settings</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_polymod_per_capita_household_size.html">get_polymod_per_capita_household_size()</a></code> </p>
-        </td>
-        <td><p>Get polymod per capita houshold size.</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_polymod_population.html">get_polymod_population()</a></code> </p>
-        </td>
-        <td><p>Return the polymod-average population age distribution in 5y</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_polymod_setting_data.html">get_polymod_setting_data()</a></code> </p>
-        </td>
-        <td><p>Get polymod setting data</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_setting_transmission_matrices.html">get_setting_transmission_matrices()</a></code> </p>
-        </td>
-        <td><p>Get Setting Transmission Matrices</p></td>
-      </tr><tr><td>
-          <p><code><a href="per_capita_household_size.html">per_capita_household_size()</a></code> </p>
-        </td>
-        <td><p>Get per capita household size with household size distribution</p></td>
+        <td><p>Accessing conmat attributes</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -310,7 +328,7 @@ lga of Australia</p></td>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
