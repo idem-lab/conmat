@@ -11,7 +11,7 @@ authors:
 
 template:
   bootstrap: 5
-  bootswatch: litera
+  bootswatch: flatly
   
 development:
   mode: auto
