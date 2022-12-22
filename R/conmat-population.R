@@ -1,5 +1,5 @@
 #' Create a new `conmat_population` class object
-#'
+#' 
 #' @param data data.frame
 #' @param age bare column name of numeric data on age
 #' @param population bare column name of numeric data on population
@@ -74,6 +74,8 @@ as_conmat_population.default <- function(data, ...) {
 #' @name as_conmat_population
 #' @export
 as_conmat_population.data.frame <- function(data, age, population, ...) {
+  # strip any existing classes
+  data <- as.data.frame(data)
   conmat_population(
     data,
     age,
