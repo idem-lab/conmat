@@ -9,7 +9,6 @@
 new_conmat_population <- function(data, age, population) {
   label_age <- as_name(age)
   label_population <- as_name(population)
-
   tibble::new_tibble(
     data,
     nrow = vctrs::vec_size(data),
@@ -55,14 +54,14 @@ conmat_population <- function(data, age, population) {
 #' @title Convert to conmat population
 #' @param data data.frame
 #' @param ... extra arguments
-#' @rdname as_conmat_population
+#' @name as_conmat_population
 #'
 #' @export
 as_conmat_population <- function(data, ...) {
   UseMethod("as_conmat_population")
 }
 
-#' @name as_conmat_population
+#' @rdname as_conmat_population
 #' @export
 as_conmat_population.default <- function(data, ...) {
   abort("Cannot currently convert object of class {.cls {class(data)}} into \\
@@ -71,16 +70,32 @@ as_conmat_population.default <- function(data, ...) {
 
 #' @param age age column - numeric
 #' @param population population column - numeric
-#' @name as_conmat_population
+#' @rdname as_conmat_population
 #' @export
 as_conmat_population.data.frame <- function(data, age, population, ...) {
   # strip any existing classes
   data <- as.data.frame(data)
+  age <- enquo(age)
+  population <- enquo(population)
   conmat_population(
-    data,
-    age,
-    population
+    data = data,
+    age = !!age,
+    population = !!population
   )
+}
+
+#' @rdname as_conmat_population
+#' @export
+as_conmat_population.list <- as_conmat_population.data.frame
+
+#' @rdname as_conmat_population
+#' @export
+as_conmat_population.grouped_df <- as_conmat_population.data.frame
+
+#' @keywords internal
+#' @export
+as_conmat_population.NULL <- function(x, ...){
+  abort("A {conmat_population} must not be NULL")
 }
 
 #' Accessing conmat attributes
