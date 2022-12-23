@@ -1,5 +1,5 @@
 ---
-title: "visualising-conmat"
+title: "Visualisation Gallery"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{visualising-conmat}
@@ -10,14 +10,31 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 8,
+  dev = "png"
 )
 ```
 
 ```{r setup}
 library(conmat)
+library(tidyverse)
 ```
 
+This vignette will contain various visualisations that you can perform with `conmat`. For the most part we have tried to make `autoplot` work for most of the matrix type objects. As time goes on we will include other visualisations here.
+
+# extrapolate polymod
+
+```{r}
+perth <- abs_age_lga("Perth (C)")
+
+perth_contact <- extrapolate_polymod(
+  perth
+)
+
+autoplot(perth_contact)
+```
 
 ## For interest's sake: visualising the empirical contact rate data
 

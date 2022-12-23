@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(conmat)
 ```
 
-`conmat` supports parallelisation via the [`future`]() and [`furrr`]() R packages. The functions that will be impacted by this are:
+`conmat` supports parallelisation via the [`future`](https://future.futureverse.org/) and [`furrr`](https://furrr.futureverse.org/) R packages. The functions that will be impacted by this are:
 
 * extrapolate_polymod
 * estimate_setting_contacts

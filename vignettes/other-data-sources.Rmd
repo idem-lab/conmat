@@ -18,70 +18,44 @@ knitr::opts_chunk$set(
 library(conmat)
 ```
 
-### Extrapolate from all POLYMOD data
+The primary goal of the conmat package is to be able to get a contact matrix for a given age population. It was initially written for work done in Australia, and so the initial focus was on cleaning and extracting data from the Australian Bureau of Statistics. 
 
-The above model fitting and prediction steps are all done on the full POLYMOD data. But you could modify the polymod data used in the model, to say be only for Finland, or Germany, or a specific age group.
-
-However, if you want to predict to all settings, using the full POLYMOD data, to a specific new age population, you can use `extrapolate_polymod`, which takes arguments for a new population, age breaks, and optionally household per capita size. By default it uses 5 year age breaks from 0-75, then 75 and above.
-
-We can demonstrate fitting a model using just Fairfield data, like so:
-
-```{r}
-# compute setting-specific and combined age matrices for polymod
-synthetic_settings_5y_fairfield <- extrapolate_polymod(
-  population = fairfield_age_pop
-)
-
-autoplot(synthetic_settings_5y_fairfield)
-```
-
-We can also do the same, for the polymod data itself:
-
-```{r}
-# compute setting-specific and combined age matrices for polymod
-polymod_population <- get_polymod_population()
-synthetic_settings_5y_polymod <- extrapolate_polymod(
-  population = polymod_population
-)
-
-autoplot(synthetic_settings_5y_polymod)
-```
-
-And for fun we can compare some of the data together, say polymod data for home against fairfield home, using the `patchwork` package:
-
-```{r}
-library(patchwork)
-gg_polymod_home <- autoplot(synthetic_settings_5y_polymod$home) +
-  labs(title = "polymod home")
-
-gg_fairfield_home <- autoplot(synthetic_settings_5y_fairfield$home) +
-  labs(title = "Fairfield home")
-
-gg_polymod_home + gg_fairfield_home
-```
-
-This might not look that different, but we can compare this to Alice Springs
-
-```{r}
-synthetic_settings_5y_alice <- extrapolate_polymod(
-  population = abs_age_lga("Alice Springs (T)")
-)
-
-gg_alice_home <- autoplot(synthetic_settings_5y_alice$home) +
-  labs(title = "Alice Springs home")
-
-gg_polymod_home + gg_alice_home
-gg_polymod_home + gg_fairfield_home
-```
+This vignette focusses on using other data sources with conmat.
 
 We can use some other functions from `socialmixr` to extract similar estimates for different populations in different countries.
+
+We could extract some data from Italy using the [`socialmixr`](https://epiforecasts.io/socialmixr/) R package
 
 ```{r}
 library(socialmixr)
 
 italy_2005 <- wpp_age("Italy", "2005")
 
-italy_2005
+head(italy_2005)
 ```
 
-This italian population data could then be put into `extrapolate_polymod` as above.
+We can then convert this data into a `conmat_population` object and use it in `extrapolate_polymod`
+
+```{r}
+italy_2005_pop <- as_conmat_population(
+  data = italy_2005,
+  age = lower.age.limit,
+  population = population
+)
+```
+
+```{r}
+italy_contact <- extrapolate_polymod(
+  italy_2005_pop
+)
+
+italy_contact
+```
+
+# Creating a next generation matrix (NGM)
+
+TBC
+
+# Applying vaccination to an NGM
+
+TBC
