@@ -94,7 +94,7 @@ as_conmat_population.grouped_df <- as_conmat_population.data.frame
 
 #' @keywords internal
 #' @export
-as_conmat_population.NULL <- function(x, ...){
+as_conmat_population.NULL <- function(data, ...){
   abort("A {conmat_population} must not be NULL")
 }
 
