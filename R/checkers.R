@@ -128,3 +128,35 @@ check_if_data_frame <- function(x) {
     )
   }
 }
+
+error_old_ngm_arg <- function(arg) {
+  cli::cli_abort(
+    c(
+      "{arg} is no longer used in {.code generate_ngm}",
+      "Please use {.code generate_ngm_oz} instead"
+    )
+  )
+}
+
+check_if_age_breaks_match <- function(x,y){
+  # from age breaks
+  # from setting_rel_tranmission_probs
+  age_breaks <- rownames(x[[1]])
+  # from setting_prediction_matrix
+  prediction_ages <- rownames(y[[1]])
+  
+  which_breaks <- age_breaks %in% prediction_ages
+  
+  if (!all(which_breaks)) {
+    cli::cli_abort(
+      c(
+        "Age breaks do not match the setting predictions",
+        "We see these extra age breaks: {age_breaks[!which_breaks]}",
+        "Please ensure that the age breaks in the {.arg age_breaks} match \\
+        the number of age breaks in the setting prediction matrix"
+      )
+    )
+  }
+  
+}
+

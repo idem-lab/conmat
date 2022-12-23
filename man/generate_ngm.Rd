@@ -2,24 +2,59 @@
 % Please edit documentation in R/generate-ngm.R
 \name{generate_ngm}
 \alias{generate_ngm}
+\alias{generate_ngm.conmat_setting_prediction_matrix}
+\alias{generate_ngm.conmat_population}
 \title{Calculate next generation contact matrices}
 \usage{
 generate_ngm(x, age_breaks, R_target, ...)
+
+\method{generate_ngm}{conmat_setting_prediction_matrix}(
+  x,
+  age_breaks,
+  R_target,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+)
+
+\method{generate_ngm}{conmat_population}(
+  x,
+  age_breaks,
+  R_target,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+)
 }
 \arguments{
-\item{x}{data input - could be a \code{conmat_population} object or a \code{conmat_setting_preduction_matrix}.}
+\item{x}{data input - could be a \code{conmat_population} (such as the output from
+\code{\link[=abs_age_lga]{abs_age_lga()}}), or a \code{conmat_setting_prediction_matrix}, which is the
+output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.}
 
 \item{age_breaks}{vector depicting age values with the highest age depicted
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
+
+\item{...}{extra arguments, currently not used}
+
+\item{per_capita_household_size}{default is NULL - which defaults to \code{\link[=get_polymod_per_capita_household_size]{get_polymod_per_capita_household_size()}}, which gives 3.248971}
+
+\item{lga_name}{now defunct, but capturing arguments for informative error}
+
+\item{state_name}{now defunct, but capturing arguments for informative error}
 }
 \description{
 Once infected, a person can transmit an infectious disease to
 another, creating generations of infected individuals. We can define a
 matrix describing the number of newly infected individuals in given
 categories, such as age, for consecutive generations. This matrix is
-called a "next generation matrix" (NGM).
+called a "next generation matrix" (NGM). We can generate an NGM from two
+sources - a \code{conmat_population} object (such as the output from
+\code{\link[=abs_age_lga]{abs_age_lga()}}), or a \code{conmat_setting_prediction_matrix}, which is the
+output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.
 }
 \details{
 The NGM can be used to calculate the expected number of secondary
@@ -35,4 +70,33 @@ for the combination of all settings. The R0 of the combination of all
 settings is obtained by calculating the unique, positive eigen value of
 the combination NGM. This ratio is then used to scale all the setting
 specific NGMs.
+}
+\examples{
+\dontrun{
+ perth <- abs_age_lga("Perth (C)")
+ perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+ 
+ # you can also run this without `per_capita_household_size`
+ perth_ngm_lga <- generate_ngm(perth,
+                               age_breaks = c(seq(0, 75, by = 5), Inf),
+                               per_capita_household_size = perth_hh,
+                               R_target = 1.5)
+ 
+                           
+ perth_contact <- extrapolate_polymod(
+   perth,
+   per_capita_household_size = perth_hh
+ )
+ 
+ perth_ngm <- generate_ngm(perth_contact,
+                           age_breaks = c(seq(0, 75, by = 5), Inf),
+                           R_target = 1.5)
+                           
+ }
+# examples not run as they take a long time
+\dontrun{
+ perth <- abs_age_lga("Perth (C)")
+ perth_contact <- extrapolate_polymod(perth)
+ generate_ngm(perth_contact, age_breaks = c(seq(0, 85, by = 5), Inf))
+}
 }

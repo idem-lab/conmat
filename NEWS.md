@@ -1,3 +1,12 @@
+# conmat 0.0.1.9000
+
+## Breaking Changes
+
+* `generate_ngm` no longer accepts LGA or state inputs, which now occurs in `generate_ngm_oz`. The `generate_ngm` function has had S3 methods created for it,
+ so it can take input from `conmat_population` (such as the output from 
+ [abs_age_lga()]), or a `conmat_setting_prediction_matrix`, which is the
+ output from [extrapolate_polymod()] or [predict_setting_contacts()].
+
 # conmat 0.0.0.9004
 
 * Added a `NEWS.md` file to track changes to the package.
