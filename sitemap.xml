@@ -13,6 +13,9 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/conmat-population.html</loc>
+  </url>
+  <url>
     <loc>/articles/data-sources.html</loc>
   </url>
   <url>
@@ -23,6 +26,15 @@
   </url>
   <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/other-data-sources.html</loc>
+  </url>
+  <url>
+    <loc>/articles/parallel-computing.html</loc>
+  </url>
+  <url>
+    <loc>/articles/visualising-conmat.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>

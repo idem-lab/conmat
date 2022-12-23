@@ -2,8 +2,12 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  conmat-population: conmat-population.html
   data-sources: data-sources.html
   example-pipeline: example-pipeline.html
   getting-started: getting-started.html
-last_built: 2022-12-22T07:23Z
+  other-data-sources: other-data-sources.html
+  parallel-computing: parallel-computing.html
+  visualising-conmat: visualising-conmat.html
+last_built: 2022-12-23T01:27Z
 

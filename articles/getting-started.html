@@ -41,9 +41,13 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/conmat-population.html">conmat-population</a>
     <a class="dropdown-item" href="../articles/data-sources.html">Data Sources</a>
     <a class="dropdown-item" href="../articles/example-pipeline.html">Example Pipeline</a>
     <a class="dropdown-item" href="../articles/getting-started.html">Getting Started</a>
+    <a class="dropdown-item" href="../articles/other-data-sources.html">Using other data soruces</a>
+    <a class="dropdown-item" href="../articles/parallel-computing.html">parallel-computing</a>
+    <a class="dropdown-item" href="../articles/visualising-conmat.html">Visualisation Gallery</a>
   </div>
 </li>
 <li class="nav-item">
@@ -425,20 +429,20 @@ details. Below is a brief example of this:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polymod_contact_data_belgium_0_10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,456 × 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,447 × 5</span></span></span>
 <span><span class="co">#&gt;    setting age_from age_to contacts participants</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> work           0      0        0            5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> work           0      1        0            3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> work           0      1        0            2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> work           0      2        0            2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> work           0      3        0            2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> work           0      4        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> work           0      5        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work           0      7        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work           0     10        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> work           0     11        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> work           0     12        0            1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,446 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,437 more rows</span></span></span></code></pre></div>
 <p>Similarly, you can control the population data, retrieving it only
 for certain countries:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -514,9 +518,9 @@ features of the contact rates.</p>
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 7.13 1.00 5.13 1.00 5.68 4.42  total = 27.35 </span></span>
+<span><span class="co">#&gt; 7.14 1.00 5.23 1.00 5.62 4.50  total = 27.48 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 1658.318     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 1643.134     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a
 new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in
@@ -566,16 +570,16 @@ even sub year.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 3</span></span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.79<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)       1.62<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.52<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.64<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.63<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)      1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     3.04<span style="color: #949494;">e</span>+21</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.58<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.62<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.60<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)      1.81<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     2.33<span style="color: #949494;">e</span>+21</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [5,10)         [0,5)        1.53<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)       2.51<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)      1.88<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)      1.89<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -713,174 +717,6 @@ providing some age breaks we want to predict to</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="getting-started_files/figure-html/fairfield-synth-5-plot-1.png" width="700"></p>
 </div>
-<div class="section level4">
-<h4 id="speeding-up-computation-with-future">Speeding up computation with <code>future</code><a class="anchor" aria-label="anchor" href="#speeding-up-computation-with-future"></a>
-</h4>
-<p><code>conmat</code> supports parallelisation, which is useful in a
-couple of contexts with the model fitting, here is an example:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org" class="external-link">future</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p>We set the future plan, saying “multisession”, with 4 workers. Then
-we run the same code as above (note that you must specify the plan,
-otherwise it does not know how to parallelise. See the <a href="https://future.futureverse.org/reference/plan.html" class="external-link">future package
-documentation</a> for more details):</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">contact_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_setting_contacts.html">fit_setting_contacts</a></span><span class="op">(</span></span>
-<span>  contact_data_list <span class="op">=</span> <span class="va">polymod_setting_data_small</span>,</span>
-<span>  population <span class="op">=</span> <span class="va">polymod_survey_data_small</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">contact_model_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span></span>
-<span>  population <span class="op">=</span> <span class="va">polymod_survey_data_small</span>,</span>
-<span>  contact_model <span class="op">=</span> <span class="va">contact_model</span>,</span>
-<span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>Notably this is about 3 times faster than without using that
-plan.</p>
-</div>
-<div class="section level4">
-<h4 id="extrapolate-from-all-polymod-data">Extrapolate from all POLYMOD data<a class="anchor" aria-label="anchor" href="#extrapolate-from-all-polymod-data"></a>
-</h4>
-<p>The above model fitting and prediction steps are all done on the full
-POLYMOD data. But you could modify the polymod data used in the model,
-to say be only for Finland, or Germany, or a specific age group.</p>
-<p>However, if you want to predict to all settings, using the full
-POLYMOD data, to a specific new age population, you can use
-<code>extrapolate_polymod</code>, which takes arguments for a new
-population, age breaks, and optionally household per capita size. By
-default it uses 5 year age breaks from 0-75, then 75 and above.</p>
-<p>We can demonstrate fitting a model using just Fairfield data, like
-so:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># compute setting-specific and combined age matrices for polymod</span></span>
-<span><span class="va">synthetic_settings_5y_fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span>
-<span>  population <span class="op">=</span> <span class="va">fairfield_age_pop</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-<p>We can also do the same, for the polymod data itself:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># compute setting-specific and combined age matrices for polymod</span></span>
-<span><span class="va">polymod_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">synthetic_settings_5y_polymod</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span>
-<span>  population <span class="op">=</span> <span class="va">polymod_population</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_polymod</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>And for fun we can compare some of the data together, say polymod
-data for home against fairfield home, using the <code>patchwork</code>
-package:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
-<span><span class="va">gg_polymod_home</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_polymod</span><span class="op">$</span><span class="va">home</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"polymod home"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gg_fairfield_home</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">home</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Fairfield home"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gg_polymod_home</span> <span class="op">+</span> <span class="va">gg_fairfield_home</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
-<p>This might not look that different, but we can compare this to Alice
-Springs</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">synthetic_settings_5y_alice</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span>
-<span>  population <span class="op">=</span> <span class="fu"><a href="../reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Alice Springs (T)"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gg_alice_home</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_alice</span><span class="op">$</span><span class="va">home</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Alice Springs home"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gg_polymod_home</span> <span class="op">+</span> <span class="va">gg_alice_home</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg_polymod_home</span> <span class="op">+</span> <span class="va">gg_fairfield_home</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-13-2.png" width="700"></p>
-<p>We can use some other functions from <code>socialmixr</code> to
-extract similar estimates for different populations in different
-countries.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">italy_2005</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/wpp_age.html" class="external-link">wpp_age</a></span><span class="op">(</span><span class="st">"Italy"</span>, <span class="st">"2005"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">italy_2005</span></span>
-<span><span class="co">#&gt;    country lower.age.limit year population</span></span>
-<span><span class="co">#&gt; 1    Italy               0 2005    2758749</span></span>
-<span><span class="co">#&gt; 2    Italy               5 2005    2712790</span></span>
-<span><span class="co">#&gt; 3    Italy              10 2005    2815246</span></span>
-<span><span class="co">#&gt; 4    Italy              15 2005    2917476</span></span>
-<span><span class="co">#&gt; 5    Italy              20 2005    3168918</span></span>
-<span><span class="co">#&gt; 6    Italy              25 2005    3786584</span></span>
-<span><span class="co">#&gt; 7    Italy              30 2005    4553115</span></span>
-<span><span class="co">#&gt; 8    Italy              35 2005    4797005</span></span>
-<span><span class="co">#&gt; 9    Italy              40 2005    4701976</span></span>
-<span><span class="co">#&gt; 10   Italy              45 2005    4136438</span></span>
-<span><span class="co">#&gt; 11   Italy              50 2005    3827458</span></span>
-<span><span class="co">#&gt; 12   Italy              55 2005    3877700</span></span>
-<span><span class="co">#&gt; 13   Italy              60 2005    3261850</span></span>
-<span><span class="co">#&gt; 14   Italy              65 2005    3322436</span></span>
-<span><span class="co">#&gt; 15   Italy              70 2005    2858787</span></span>
-<span><span class="co">#&gt; 16   Italy              75 2005    2379461</span></span>
-<span><span class="co">#&gt; 17   Italy              80 2005    1740071</span></span>
-<span><span class="co">#&gt; 18   Italy              85 2005     709878</span></span>
-<span><span class="co">#&gt; 19   Italy              90 2005     392976</span></span>
-<span><span class="co">#&gt; 20   Italy              95 2005      82042</span></span>
-<span><span class="co">#&gt; 21   Italy             100 2005       7525</span></span></code></pre></div>
-<p>This italian population data could then be put into
-<code>extrapolate_polymod</code> as above.</p>
-</div>
-</div>
-<div class="section level3">
-<h3 id="for-interests-sake-visualising-the-empirical-contact-rate-data">For interest’s sake: visualising the empirical contact rate
-data<a class="anchor" aria-label="anchor" href="#for-interests-sake-visualising-the-empirical-contact-rate-data"></a>
-</h3>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># visualise empirical contact rate estimates</span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
-<span>  home <span class="op">=</span> <span class="fu"><a href="../reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"home"</span><span class="op">)</span>,</span>
-<span>  school <span class="op">=</span> <span class="fu"><a href="../reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"school"</span><span class="op">)</span>,</span>
-<span>  work <span class="op">=</span> <span class="fu"><a href="../reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"work"</span><span class="op">)</span>,</span>
-<span>  other <span class="op">=</span> <span class="fu"><a href="../reference/get_polymod_contact_data.html">get_polymod_contact_data</a></span><span class="op">(</span><span class="st">"other"</span><span class="op">)</span>,</span>
-<span>  .id <span class="op">=</span> <span class="st">"setting"</span></span>
-<span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    rate <span class="op">=</span> <span class="va">contacts</span> <span class="op">/</span> <span class="va">participants</span>,</span>
-<span>    setting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span></span>
-<span>      <span class="va">setting</span>,</span>
-<span>      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>        <span class="st">"home"</span>, <span class="st">"school"</span>, <span class="st">"work"</span>, <span class="st">"other"</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span></span>
-<span>    <span class="va">setting</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    `relative contact rate` <span class="op">=</span> <span class="va">rate</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">rate</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">age_from</span>,</span>
-<span>      y <span class="op">=</span> <span class="va">age_to</span>,</span>
-<span>      fill <span class="op">=</span> <span class="va">`relative contact rate`</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span></span>
-<span>    <span class="op">~</span><span class="va">setting</span>,</span>
-<span>    ncol <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    scales <span class="op">=</span> <span class="st">"free"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_distiller</a></span><span class="op">(</span></span>
-<span>    direction <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>    trans <span class="op">=</span> <span class="st">"sqrt"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="getting-started_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
