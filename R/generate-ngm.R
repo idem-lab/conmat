@@ -20,33 +20,99 @@
 #'   the combination NGM. This ratio is then used to scale all the setting
 #'   specific NGMs.
 #'
+#' @param x data input - could be a `conmat_population` object or a `conmat_setting_preduction_matrix`.
+#' @param age_breaks vector depicting age values with the highest age depicted
+#'   as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
+#' @param R_target target reproduction number
+#' @param ... extra arguments
+#' @export
+#' @examples
+generate_ngm <- function(
+  x,
+  age_breaks,
+  R_target,
+  ...
+) {
+  # detect if state_name or lga_name are used
+  # then give an informative error that the user should use
+  # `generate_ngm_oz`
+  # instead
+  # state_name
+  # lga_name
+  UseMethod("generate_ngm")
+}
+
+generate_ngm.conmat_setting_prediction_matrix <- function(
+  x,
+  age_breaks,
+  R_target,
+  per_capita_household_size = NULL,
+  ...
+) {
+  calculate_ngm(
+    setting_prediction_matrix = x,
+    age_breaks,
+    R_target
+  )
+}
+
+#' @param per_capita_household_size default is NULL - which defaults to [get_polymod_per_capita_household_size()], which gives 3.248971
+#' @export
+#' @examples
+#' 
+generate_ngm.conmat_population <- function(
+  x,
+  age_breaks,
+  R_target,
+  per_capita_household_size,
+  ...
+) {
+  setting_contact_rates <- extrapolate_polymod(
+    population = x,
+    age_breaks = age_breaks,
+    per_capita_household_size = per_capita_household_size
+  )
+
+  calculate_ngm(
+    setting_prediction_matrix = ,
+    age_breaks,
+    R_target
+  )
+}
+
+#' @title Calculate next generation contact matrices from ABS data
+#'
+#' @description This function calculates a next generation matrix (NGM)
+#'   based on state or LGA data from the Australian Bureau of Statistics (ABS).
+#'   For full details see [generate_ngm()].
+#
 #' @param state_name target Australian state name in abbreviated form, such
 #'   as "QLD", "NSW", or "TAS"
 #' @param lga_name target Australian local government area (LGA) name, such
 #'   as "Fairfield (C)".  See [abs_lga_lookup()] for list of lga names.
-#' @param age_breaks vector depicting age values with the highest age depicted
-#'   as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
-#' @param R_target target reproduction number
+#' @inheritParams generate_ngm
 #'
 #' @export
 #' @examples
 #' # don't run as both together takes a long time to run
 #' \dontrun{
-#' ngm_nsw <- generate_ngm(
+#' ngm_nsw <- generate_ngm_oz(
 #'   state_name = "NSW",
 #'   age_breaks = c(seq(0, 85, by = 5), Inf),
 #'   R_target = 1.5
 #' )
-#' ngm_fairfield <- generate_ngm(
+#' ngm_fairfield <- generate_ngm_oz(
 #'   lga_name = "Fairfield (C)",
 #'   age_breaks = c(seq(0, 85, by = 5), Inf),
 #'   R_target = 1.5
 #' )
 #' }
-generate_ngm <- function(state_name = NULL,
-                         lga_name = NULL,
-                         age_breaks,
-                         R_target) {
+generate_ngm_oz <- function(
+  state_name = NULL,
+  lga_name = NULL,
+  age_breaks,
+  R_target
+) {
   # pull out the age distribution of the target population &
   # the per-capita (ie. averaged over people, not households) household
   # size in this population
@@ -57,14 +123,29 @@ generate_ngm <- function(state_name = NULL,
     population <- abs_age_lga(lga_name = {{ lga_name }})
     household_size <- get_per_capita_household_size(lga = {{ lga_name }})
   }
-  # predict from the model to contact rates for a population with these characteristics,
-  # and for these age breaks
 
-  setting_contact_rates <- extrapolate_polymod(population,
+  # predict from the model to contact rates for a population with these
+  # characteristics, and for these age breaks
+
+  setting_contact_rates <- extrapolate_polymod(
+    population,
     age_breaks = age_breaks,
     per_capita_household_size = household_size
   )
 
+  calculate_ngm(
+    setting_prediction_matrix = setting_contact_rates,
+    age_breaks = age_breaks,
+    R_target = R_target
+  )
+}
+
+
+calculate_ngm <- function(
+  setting_prediction_matrix,
+  age_breaks,
+  R_target
+) {
   # get relative (ie. needing to be scaled to a given R) transmission
   # probabilities between pairs of ages in different settings - these incorporate
   # relative infectiousness by age (based on symptomatic fraction), relative
@@ -72,14 +153,17 @@ generate_ngm <- function(state_name = NULL,
   # transmission probabilities in different settings, calibrated to UK infection
   # survey data.
 
-  setting_rel_transmission_probs <- get_setting_transmission_matrices(age_breaks = age_breaks)
+  setting_rel_transmission_probs <- get_setting_transmission_matrices(
+    age_breaks = age_breaks
+  )
 
   # combine to get relative setting-specific NGMs - keeping the four settings in
   # the right order
 
   settings <- names(setting_rel_transmission_probs)
-  setting_rel_ngms <- mapply("*",
-    setting_contact_rates[settings],
+  setting_rel_ngms <- mapply(
+    "*",
+    setting_prediction_matrix[settings],
     setting_rel_transmission_probs[settings],
     SIMPLIFY = FALSE
   )
@@ -93,7 +177,8 @@ generate_ngm <- function(state_name = NULL,
   scaling <- R_target / R_raw
 
   # could be lapply
-  setting_ngms <- mapply("*",
+  setting_ngms <- mapply(
+    "*",
     setting_rel_ngms,
     scaling,
     SIMPLIFY = FALSE

@@ -1,7 +1,7 @@
 library(dplyr)
 set.seed(2022)
 
-ngm_VIC <- generate_ngm(
+ngm_VIC <- generate_ngm_oz(
   state_name = "VIC",
   age_breaks = c(seq(0, 80, by = 5), Inf),
   R_target = 1.5

@@ -4,14 +4,10 @@
 \alias{generate_ngm}
 \title{Calculate next generation contact matrices}
 \usage{
-generate_ngm(state_name = NULL, lga_name = NULL, age_breaks, R_target)
+generate_ngm(x, age_breaks, R_target, ...)
 }
 \arguments{
-\item{state_name}{target Australian state name in abbreviated form, such
-as "QLD", "NSW", or "TAS"}
-
-\item{lga_name}{target Australian local government area (LGA) name, such
-as "Fairfield (C)".  See \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names.}
+\item{x}{data input - could be a \code{conmat_population} object or a \code{conmat_setting_preduction_matrix}.}
 
 \item{age_breaks}{vector depicting age values with the highest age depicted
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
@@ -39,19 +35,4 @@ for the combination of all settings. The R0 of the combination of all
 settings is obtained by calculating the unique, positive eigen value of
 the combination NGM. This ratio is then used to scale all the setting
 specific NGMs.
-}
-\examples{
-# don't run as both together takes a long time to run
-\dontrun{
-ngm_nsw <- generate_ngm(
-  state_name = "NSW",
-  age_breaks = c(seq(0, 85, by = 5), Inf),
-  R_target = 1.5
-)
-ngm_fairfield <- generate_ngm(
-  lga_name = "Fairfield (C)",
-  age_breaks = c(seq(0, 85, by = 5), Inf),
-  R_target = 1.5
-)
-}
 }
