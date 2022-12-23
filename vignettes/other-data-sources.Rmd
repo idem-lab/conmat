@@ -1,0 +1,61 @@
+---
+title: "Using other data soruces"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{other-data-sources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+The primary goal of the conmat package is to be able to get a contact matrix for a given age population. It was initially written for work done in Australia, and so the initial focus was on cleaning and extracting data from the Australian Bureau of Statistics. 
+
+This vignette focusses on using other data sources with conmat.
+
+We can use some other functions from `socialmixr` to extract similar estimates for different populations in different countries.
+
+We could extract some data from Italy using the [`socialmixr`](https://epiforecasts.io/socialmixr/) R package
+
+```{r}
+library(socialmixr)
+
+italy_2005 <- wpp_age("Italy", "2005")
+
+head(italy_2005)
+```
+
+We can then convert this data into a `conmat_population` object and use it in `extrapolate_polymod`
+
+```{r}
+italy_2005_pop <- as_conmat_population(
+  data = italy_2005,
+  age = lower.age.limit,
+  population = population
+)
+```
+
+```{r}
+italy_contact <- extrapolate_polymod(
+  italy_2005_pop
+)
+
+italy_contact
+```
+
+# Creating a next generation matrix (NGM)
+
+TBC
+
+# Applying vaccination to an NGM
+
+TBC

@@ -4,6 +4,8 @@
 \alias{as_conmat_population}
 \alias{as_conmat_population.default}
 \alias{as_conmat_population.data.frame}
+\alias{as_conmat_population.list}
+\alias{as_conmat_population.grouped_df}
 \title{Convert to conmat population}
 \usage{
 as_conmat_population(data, ...)
@@ -11,6 +13,10 @@ as_conmat_population(data, ...)
 \method{as_conmat_population}{default}(data, ...)
 
 \method{as_conmat_population}{data.frame}(data, age, population, ...)
+
+\method{as_conmat_population}{list}(data, age, population, ...)
+
+\method{as_conmat_population}{grouped_df}(data, age, population, ...)
 }
 \arguments{
 \item{data}{data.frame}

@@ -27,7 +27,8 @@ list of fitted gam models - one for each setting provided
 fits a gam model for each setting on the survey population data & the
 setting wise contact data. The underlying method is described in more
 detail in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}. The models can be fit in parallel,
-see the examples.
+see the examples. Note that this function is parallelisable with \code{future},
+and will be impacted by any \code{future} plans provided.
 }
 \examples{
 # These aren't being  run as they take too long to fit

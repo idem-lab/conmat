@@ -3,7 +3,8 @@
 #' fits a gam model for each setting on the survey population data & the
 #'   setting wise contact data. The underlying method is described in more
 #'   detail in [fit_single_contact_model()]. The models can be fit in parallel,
-#'   see the examples.
+#'   see the examples. Note that this function is parallelisable with `future`, 
+#'   and will be impacted by any `future` plans provided.
 #'
 #' @param contact_data_list A list of dataframes, each containing informatio
 #'   on the setting (home, work, school, other), age_from, age_to,

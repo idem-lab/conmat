@@ -1,7 +1,9 @@
 #' Fit all-of-polymod model and extrapolate to a given population an age breaks
 #'
 #' Uses [estimate_setting_contacts()] to fit a contact model on the data from
-#'   polymod and later extrapolate on to a desired population.
+#'   polymod and later extrapolate on to a desired population. Note that this
+#'   function is parallelisable with `future`, and will be impacted by any
+#'   `future` plans provided.
 #'
 #' @param population a `conmat_population` object, specifying the `age`
 #'   and `population` characteristics. Or a data frame with `lower.age.limit`

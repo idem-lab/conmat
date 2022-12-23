@@ -32,11 +32,6 @@
     Code
       as_conmat_population(data = fairfield, age = lower.age.limit, population = population)
     Output
-      Called from: as_conmat_population.data.frame(data = fairfield, age = lower.age.limit, 
-          population = population)
-      debug at /Users/nick/github/njtierney/conmat/R/conmat-population.R#79: age <- enquo(age)
-      debug at /Users/nick/github/njtierney/conmat/R/conmat-population.R#80: population <- enquo(population)
-      debug at /Users/nick/github/njtierney/conmat/R/conmat-population.R#81: conmat_population(data = data, age = !!age, population = !!population)
       # A tibble: 18 x 4 (conmat_population)
        - age: lower.age.limit
        - population: population

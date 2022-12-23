@@ -32,7 +32,9 @@ desired ages.
 }
 \description{
 Uses \code{\link[=estimate_setting_contacts]{estimate_setting_contacts()}} to fit a contact model on the data from
-polymod and later extrapolate on to a desired population.
+polymod and later extrapolate on to a desired population. Note that this
+function is parallelisable with \code{future}, and will be impacted by any
+\code{future} plans provided.
 }
 \examples{
 \dontrun{

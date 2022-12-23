@@ -2,8 +2,11 @@
 
 S3method(age_label,conmat_population)
 S3method(age_label,default)
+S3method(as_conmat_population,"NULL")
 S3method(as_conmat_population,data.frame)
 S3method(as_conmat_population,default)
+S3method(as_conmat_population,grouped_df)
+S3method(as_conmat_population,list)
 S3method(autoplot,conmat_prediction_matrix)
 S3method(autoplot,conmat_setting_prediction_matrix)
 S3method(get_age_population_function,conmat_population)
