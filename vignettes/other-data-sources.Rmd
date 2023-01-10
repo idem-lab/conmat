@@ -1,8 +1,8 @@
 ---
-title: "Using other data soruces"
+title: "Using other data sources"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{other-data-sources}
+  %\VignetteIndexEntry{Using-other-data-sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -45,8 +45,10 @@ italy_2005_pop <- as_conmat_population(
 ```
 
 ```{r}
+age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
 italy_contact <- extrapolate_polymod(
-  italy_2005_pop
+  population = italy_2005_pop,
+  age_breaks = age_breaks_0_80_plus
 )
 
 italy_contact
@@ -54,8 +56,47 @@ italy_contact
 
 # Creating a next generation matrix (NGM)
 
-TBC
+To create a next generation matrix, you can use either a conmat population
+object, or setting prediction matrices, like so:
+
+```{r}
+# using a conmat population object
+italy_2005_ngm <- generate_ngm(
+  italy_2005_pop,
+  age_breaks = age_breaks_0_80_plus,
+  R_target = 1.5
+)
+
+italy_2005_ngm
+
+# using a setting prediction matrix
+italy_2005_ngm_polymod <- generate_ngm(
+  italy_contact,
+  age_breaks = age_breaks_0_80_plus,
+  R_target = 1.5
+)
+
+italy_2005_ngm_polymod
+
+# these are the same
+identical(italy_2005_ngm,italy_2005_ngm_polymod)
+```
 
 # Applying vaccination to an NGM
 
-TBC
+We can then take a next generation matrix and apply vaccination data, such as the provided `vaccination_effect_example_data` dataset.
+
+```{r}
+vaccination_effect_example_data
+
+ngm_italy_vacc <- apply_vaccination(
+  ngm = italy_2005_ngm,
+  data = vaccination_effect_example_data,
+  coverage_col = coverage,
+  acquisition_col = acquisition,
+  transmission_col = transmission
+)
+
+ngm_italy_vacc
+```
+

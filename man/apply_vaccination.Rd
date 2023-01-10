@@ -63,8 +63,36 @@ the function as an argument.
 vaccination_effect_example_data
 
 # Generate next generation matrices
+
+perth <- abs_age_lga("Perth (C)")
+perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+
+age_breaks_0_80 <- c(seq(0, 80, by = 5), Inf)
+
+# refit the model - note that the default if age_breaks isn't specified is 
+# 0 to 75
+perth_contact_0_80 <- extrapolate_polymod(
+  perth,
+  per_capita_household_size = perth_hh,
+  age_breaks = age_breaks_0_80
+)
+
+perth_ngm_0_80 <- generate_ngm(perth_contact_0_80,
+                               age_breaks = age_breaks_0_80,
+                               per_capita_household_size = perth_hh,
+                               R_target = 1.5)
+
+# In the old way we used to be able to pass age_breaks_0_80 along
+generate_ngm_oz(
+  lga_name = "Perth (C)",
+  age_breaks = age_breaks_0_80,
+  R_target = 1.5
+)
+
+
+# another way to do this using the previous method for generating NGMs
 # The number of age breaks must match the vaccination effect data
-ngm_nsw <- generate_ngm(
+ngm_nsw <- generate_ngm_oz(
   state_name = "NSW",
   age_breaks = c(seq(0, 80, by = 5), Inf),
   R_target = 1.5
