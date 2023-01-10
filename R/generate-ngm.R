@@ -23,6 +23,12 @@
 #'   the combination NGM. This ratio is then used to scale all the setting
 #'   specific NGMs.
 #'
+#' @note When using a setting prediction contact matrix (such as one generated 
+#'   by `extrapolate_polymod`, with class `conmat_setting_prediction_matrix`),
+#'   the age breaks specified in `generate_ngm` must be the same as the age 
+#'   breaks specified in the synthetic contact matrix, otherwise it will error 
+#'   as it is trying to multiple incompatible matrices.
+#'
 #' @param x data input - could be a `conmat_population` (such as the output from 
 #'   [abs_age_lga()]), or a `conmat_setting_prediction_matrix`, which is the
 #'   output from [extrapolate_polymod()] or [predict_setting_contacts()].

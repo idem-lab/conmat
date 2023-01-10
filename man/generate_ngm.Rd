@@ -71,6 +71,13 @@ settings is obtained by calculating the unique, positive eigen value of
 the combination NGM. This ratio is then used to scale all the setting
 specific NGMs.
 }
+\note{
+When using a setting prediction contact matrix (such as one generated
+by \code{extrapolate_polymod}, with class \code{conmat_setting_prediction_matrix}),
+the age breaks specified in \code{generate_ngm} must be the same as the age
+breaks specified in the synthetic contact matrix, otherwise it will error
+as it is trying to multiple incompatible matrices.
+}
 \examples{
 \dontrun{
  perth <- abs_age_lga("Perth (C)")

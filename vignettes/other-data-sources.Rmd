@@ -1,8 +1,8 @@
 ---
-title: "Using other data soruces"
+title: "Using other data sources"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{other-data-sources}
+  %\VignetteIndexEntry{Using-other-data-sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

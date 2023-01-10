@@ -1,8 +1,8 @@
 ---
-title: "Visualisation Gallery"
+title: "Visualisation gallery"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{visualising-conmat}
+  %\VignetteIndexEntry{Visualisation-gallery}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

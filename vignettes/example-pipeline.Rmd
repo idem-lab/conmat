@@ -39,8 +39,10 @@ Note that this is a `conmat_population` object, which is just a data frame that 
 We then extrapolate this to home, work, school, other and all settings, using the full POLYMOD data. This gives us a setting prediction matrix.
 
 ```{r extrapolate-fairfield}
+age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
 synthetic_fairfield_5y <- extrapolate_polymod(
-  population = fairfield
+  population = fairfield,
+  age_breaks = age_breaks_0_80_plus
 )
 synthetic_fairfield_5y
 synthetic_fairfield_5y$home
@@ -81,35 +83,38 @@ str(synthetic_fairfield_5y)
 
 Once infected, a person can transmit an infectious disease to another, creating generations of infected individuals. We can define a matrix describing the number of newly infected individuals in given categories, such as age, for consecutive generations. This matrix is called a "next generation matrix" (NGM).
 
-We can generate an NGM using the previously fit settings contact matrices
-
-```{r}
-fairfield_ngm <- generate_ngm(
-  synthetic_fairfield_5y,
-  age_breaks = c(seq(0, 80, by = 5), Inf),
-  R_target = 1.5
-)
-```
-
-Or even the population data
+We can generate an NGM using the population data
 
 ```{r}
 fairfield_ngm_age_data <- generate_ngm(
   fairfield,
-  age_breaks = c(seq(0, 80, by = 5), Inf),
+  age_breaks = age_breaks_0_80_plus,
   R_target = 1.5
 )
 ```
 
-We can also generate an NGM for Australian specific data like so:
+Or if you've already got the fitted settings contact matrices, then you can pass that to `generate_ngm` instead:
+
+```{r}
+fairfield_ngm <- generate_ngm(
+  synthetic_fairfield_5y,
+  age_breaks = age_breaks_0_80_plus,
+  R_target = 1.5
+)
+```
+
+However, note in these cases the age breaks specified in `generate_ngm` must be the same as the age breaks specified in the synthetic contact matrix, otherwise it will error as it is trying to multiple incompatible matrices.
+
+We can also generate an NGM for Australian specific data like so, which refits and extrapolates the data based on the Australian state or LGA provided.
 
 ```{r ngm-fairfield}
 ngm_fairfield <- generate_ngm_oz(
   lga_name = "Fairfield (C)",
-  age_breaks = c(seq(0, 80, by = 5), Inf),
+  age_breaks = age_breaks_0_80_plus,
   R_target = 1.5
 )
 ```
+
 
 The output of this is a matrix for each of the settings, where each value is the number of newly infected individuals
 
@@ -117,6 +122,8 @@ The output of this is a matrix for each of the settings, where each value is the
 ngm_fairfield$home
 str(ngm_fairfield)
 ```
+
+Note that if you want to 
 
 ## Applying Vaccination Rates
 
@@ -140,7 +147,7 @@ Each row contains information, for each age band:
 * Acquisition - probability of acquiring COVID
 * Transmission - the probability of transmission
 
-Then you need to specify the columns in the vaccination effect data frame related to covarege, acquisition, and transmission.
+Then you need to specify the columns in the vaccination effect data frame related to coverege, acquisition, and transmission.
 
 ```{r}
 # Apply vaccination effect to next generation matrices

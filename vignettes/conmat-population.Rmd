@@ -1,8 +1,8 @@
 ---
-title: "conmat-population"
+title: "Conmat Population Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{conmat-population}
+  %\VignetteIndexEntry{conmat-population-data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
