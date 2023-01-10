@@ -37,6 +37,7 @@ reference:
       - extrapolate_polymod
       - apply_vaccination
       - generate_ngm
+      - generate_ngm_oz
       - autoplot
       - autoplot-conmat
       
