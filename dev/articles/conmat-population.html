@@ -202,17 +202,17 @@ summarise it, for example:</p>
 <span><span class="co">#&gt; [1] 22.44994</span></span></code></pre></div>
 <p>You could then wrap this in a function if you like:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">summary_pop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">summary_pop</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">pop_var</span><span class="op">]</span><span class="op">]</span></span>
-<span>  <span class="va">mean_pop</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">pop_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="va">sd_pop</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">pop_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
+<span>  <span class="va">mean_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">pop_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">sd_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">pop_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="va">age_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">population_label</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">age_var</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">mean_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">age_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">sd_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">[[</span><span class="va">age_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>      <span class="va">mean_pop</span>,</span>
@@ -221,7 +221,6 @@ summarise it, for example:</p>
 <span>      <span class="va">sd_age</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span>  </span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">summary_pop</span><span class="op">(</span><span class="va">dat_age_pop</span><span class="op">)</span></span>
@@ -243,9 +242,9 @@ the symbols and then evaluate them with <code>!!</code>, like so:</p>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="va">my_age_summary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="va">my_age_summary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">age_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">age</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>      mean_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">age_col</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
@@ -258,15 +257,16 @@ the symbols and then evaluate them with <code>!!</code>, like so:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     12.5</span></span></code></pre></div>
 <p>And for a slightly more complex use case</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_age_pop_summary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">my_age_pop_summary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">age_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">age</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span>  <span class="va">pop_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">population</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span></span>
+<span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">age_col</span>, <span class="op">!</span><span class="op">!</span><span class="va">pop_col</span><span class="op">)</span>,</span>
-<span>             <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>,</span>
-<span>             .names <span class="op">=</span> <span class="st">"{.fn}_{.col}"</span><span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>,</span>
+<span>        .names <span class="op">=</span> <span class="st">"{.fn}_{.col}"</span></span>
+<span>      <span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -283,11 +283,11 @@ the symbols and then evaluate them with <code>!!</code>, like so:</p>
 to know the midpoint of the ages, and a coupld of other bits - here’s an
 example of how we write that code now:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">add_modelling_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">add_modelling_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">age_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">age</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span>  <span class="va">age_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">age_label</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span>  <span class="va">pop_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/accessors.html">population</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">diffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="va">data</span><span class="op">[[</span><span class="va">age_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">bin_widths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">diffs</span>, <span class="va">diffs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">diffs</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
