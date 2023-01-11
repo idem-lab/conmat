@@ -6,13 +6,14 @@
 \alias{generate_ngm.conmat_population}
 \title{Calculate next generation contact matrices}
 \usage{
-generate_ngm(x, age_breaks, R_target, ...)
+generate_ngm(x, age_breaks, R_target, transmission_matrix = NULL, ...)
 
 \method{generate_ngm}{conmat_setting_prediction_matrix}(
   x,
   age_breaks,
   R_target,
   per_capita_household_size = NULL,
+  transmission_matrix = NULL,
   ...,
   lga_name,
   state_name
@@ -23,6 +24,7 @@ generate_ngm(x, age_breaks, R_target, ...)
   age_breaks,
   R_target,
   per_capita_household_size = NULL,
+  transmission_matrix = NULL,
   ...,
   lga_name,
   state_name
@@ -37,6 +39,14 @@ output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
+
+\item{transmission_matrix}{default is NULL, which calculates the transmission
+matrix using \code{get_setting_transmission_matrices(age_breaks)}. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for \code{get_setting_transmission_matrices(age_breaks)}
+to get a sense of the structure. See \code{\link[=get_setting_transmission_matrices]{get_setting_transmission_matrices()}}
+for more detail.}
 
 \item{...}{extra arguments, currently not used}
 
@@ -83,22 +93,38 @@ as it is trying to multiple incompatible matrices.
  perth <- abs_age_lga("Perth (C)")
  perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
  
+ age_breaks_0_80 <- c(seq(0, 80, by = 5), Inf)
  # you can also run this without `per_capita_household_size`
  perth_ngm_lga <- generate_ngm(perth,
-                               age_breaks = c(seq(0, 75, by = 5), Inf),
+                               age_breaks = age_breaks_0_80,
                                per_capita_household_size = perth_hh,
                                R_target = 1.5)
  
                            
- perth_contact <- extrapolate_polymod(
+ perth_contact_0_80 <- extrapolate_polymod(
    perth,
-   per_capita_household_size = perth_hh
+   per_capita_household_size = perth_hh,
+   age_breaks = age_breaks_0_80
  )
  
- perth_ngm <- generate_ngm(perth_contact,
-                           age_breaks = c(seq(0, 75, by = 5), Inf),
+ perth_ngm <- generate_ngm(perth_contact_0_80,
+                           age_breaks = age_breaks_0_80,
                            R_target = 1.5)
                            
+# using our own transmission matrix
+new_transmission_matrix <- get_setting_transmission_matrices(
+  age_breaks = age_breaks_0_80,
+  # is normally 0.5
+  asymptomatic_relative_infectiousness = 0.75
+)
+
+perth_ngm_0_80_new_tmat <- generate_ngm(
+  perth_contact_0_80,
+  age_breaks = age_breaks_0_80,
+  per_capita_household_size = perth_hh,
+  R_target = 1.5,
+  transmission_matrix = new_transmission_matrix
+)
  }
 # examples not run as they take a long time
 \dontrun{

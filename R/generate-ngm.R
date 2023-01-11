@@ -35,6 +35,13 @@
 #' @param age_breaks vector depicting age values with the highest age depicted
 #'   as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
 #' @param R_target target reproduction number
+#' @param transmission_matrix default is NULL, which calculates the transmission
+#'   matrix using `get_setting_transmission_matrices(age_breaks)`. You can 
+#'   provide your own transmission matrix, but its rows and columns must match
+#'   the number of rows and columns, and must be a list of one matrix for each 
+#'   setting. See the output for `get_setting_transmission_matrices(age_breaks)`
+#'   to get a sense of the structure. See [get_setting_transmission_matrices()] 
+#'   for more detail.
 #' @param ... extra arguments, currently not used
 #' @name generate_ngm
 #' @examples
@@ -42,28 +49,45 @@
 #'  perth <- abs_age_lga("Perth (C)")
 #'  perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
 #'  
+#'  age_breaks_0_80 <- c(seq(0, 80, by = 5), Inf)
 #'  # you can also run this without `per_capita_household_size`
 #'  perth_ngm_lga <- generate_ngm(perth,
-#'                                age_breaks = c(seq(0, 75, by = 5), Inf),
+#'                                age_breaks = age_breaks_0_80,
 #'                                per_capita_household_size = perth_hh,
 #'                                R_target = 1.5)
 #'  
 #'                            
-#'  perth_contact <- extrapolate_polymod(
+#'  perth_contact_0_80 <- extrapolate_polymod(
 #'    perth,
-#'    per_capita_household_size = perth_hh
+#'    per_capita_household_size = perth_hh,
+#'    age_breaks = age_breaks_0_80
 #'  )
 #'  
-#'  perth_ngm <- generate_ngm(perth_contact,
-#'                            age_breaks = c(seq(0, 75, by = 5), Inf),
+#'  perth_ngm <- generate_ngm(perth_contact_0_80,
+#'                            age_breaks = age_breaks_0_80,
 #'                            R_target = 1.5)
 #'                            
+#' # using our own transmission matrix
+#' new_transmission_matrix <- get_setting_transmission_matrices(
+#'   age_breaks = age_breaks_0_80,
+#'   # is normally 0.5
+#'   asymptomatic_relative_infectiousness = 0.75
+#' )
+#' 
+#' perth_ngm_0_80_new_tmat <- generate_ngm(
+#'   perth_contact_0_80,
+#'   age_breaks = age_breaks_0_80,
+#'   per_capita_household_size = perth_hh,
+#'   R_target = 1.5,
+#'   transmission_matrix = new_transmission_matrix
+#' )
 #'  }
 #' @export
 generate_ngm <- function(
   x,
   age_breaks,
   R_target,
+  transmission_matrix = NULL,
   ...
 ) {
   # detect if state_name or lga_name are used
@@ -91,6 +115,7 @@ generate_ngm.conmat_setting_prediction_matrix <- function(
   age_breaks,
   R_target,
   per_capita_household_size = NULL,
+  transmission_matrix = NULL,
   ...,
   lga_name,
   state_name
@@ -106,7 +131,8 @@ generate_ngm.conmat_setting_prediction_matrix <- function(
   calculate_ngm(
     setting_prediction_matrix = x,
     age_breaks,
-    R_target
+    R_target,
+    transmission_matrix = NULL
   )
 }
 
@@ -118,6 +144,7 @@ generate_ngm.conmat_population <- function(
   age_breaks,
   R_target,
   per_capita_household_size = NULL,
+  transmission_matrix = NULL,
   ...,
   lga_name,
   state_name
@@ -131,7 +158,8 @@ generate_ngm.conmat_population <- function(
   calculate_ngm(
     setting_prediction_matrix = setting_contact_rates,
     age_breaks = age_breaks,
-    R_target = R_target
+    R_target = R_target,
+    transmission_matrix = transmission_matrix
   )
 }
 
@@ -166,7 +194,8 @@ generate_ngm_oz <- function(
   state_name = NULL,
   lga_name = NULL,
   age_breaks,
-  R_target
+  R_target,
+  transmission_matrix = NULL
 ) {
   # pull out the age distribution of the target population &
   # the per-capita (ie. averaged over people, not households) household
@@ -191,7 +220,8 @@ generate_ngm_oz <- function(
   calculate_ngm(
     setting_prediction_matrix = setting_contact_rates,
     age_breaks = age_breaks,
-    R_target = R_target
+    R_target = R_target,
+    transmission_matrix = transmission_matrix
   )
 }
 
@@ -199,18 +229,23 @@ generate_ngm_oz <- function(
 calculate_ngm <- function(
   setting_prediction_matrix,
   age_breaks,
-  R_target
+  R_target,
+  transmission_matrix = NULL
 ) {
-  # get relative (ie. needing to be scaled to a given R) transmission
+  # get relative (i.e. needing to be scaled to a given R) transmission
   # probabilities between pairs of ages in different settings - these incorporate
   # relative infectiousness by age (based on symptomatic fraction), relative
   # susceptibility by age, and setting-specific weights to account for different
   # transmission probabilities in different settings, calibrated to UK infection
   # survey data.
-
-  setting_rel_transmission_probs <- get_setting_transmission_matrices(
-    age_breaks = age_breaks
-  )
+  
+  if (is.null(transmission_matrix)) {
+    setting_rel_transmission_probs <- get_setting_transmission_matrices(
+      age_breaks = age_breaks
+    )
+  } else if (!is.null(transmission_matrix)) {
+    setting_rel_transmission_probs <- transmission_matrix
+  }
   
   # Need to double check that the ages match in each
   # in previous versions this would work
