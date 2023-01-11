@@ -21,7 +21,7 @@ library(conmat)
 The main goal of conmat is to estimate contact rates between age groups. This means we require data describing the age population distribution. Effectively this is data that has a column describing age, and a column describing population, like this:
 
 ```{r}
-library(tidyverse)
+library(tibble)
 
 dat_age <- tibble(
   age = seq(0, 25, by = 5),
@@ -48,7 +48,7 @@ estimation(
 )
 ```
 
-While there isn't anything particularly wrong about this, it does mean repetition in arguments, and the code could instead look like this:
+The issue with repeating arguments is that it is unnecessary and sometimes leads to forgetting to include them, or including them erroneously. The code could instead look like this:
 
 ```{r}
 #| eval: false
@@ -129,7 +129,7 @@ summary_pop <- function(data){
   sd_age <- sd(dat_age_pop[[age_var]])
   
   return(
-    tibble::tibble(
+    tibble(
       mean_pop,
       sd_pop,
       mean_age,
@@ -146,6 +146,7 @@ summary_pop(dat_age_pop)
 However if you would like to program with these variables, for example write a function that uses functions like `mutate` and `arrange`, from `dplyr`, you would need to get the symbols and then evaluate them with `!!`, like so:
 
 ```{r}
+library(dplyr)
 my_age_summary <- function(data){
   age_col <- age(data)
   data %>% 
