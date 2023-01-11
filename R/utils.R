@@ -168,7 +168,7 @@ print_setting_info <- function(x,
 
   cli::cli_alert_info(
     "Access each {.cls {object_class}} with {.code x$name}"
-    )
+  )
   cli::cli_alert_info("e.g., {.code x${names(x)[1]}}")
   return(invisible(x))
 }
@@ -221,11 +221,21 @@ print.setting_contact_model <- function(x, ...) {
 }
 
 #' @export
-print.setting_vaccination_matrix <- function(x, ...){
+print.setting_vaccination_matrix <- function(x, ...) {
   print_setting_info(
     x = x,
     heading = "Vaccination Setting Matrices",
     description = "A list of matrices, each {.cls matrix} containing the {.strong adjusted} number of newly infected individuals for age groups. These numbers have been adjusted based on proposed vaccination rates in age groups",
+    object_class = "matrix"
+  )
+}
+
+#' @export
+print.transmission_probability_matrix <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "Transmission Probability Matrices",
+    description = "A list of matrices, each {.cls matrix} containing the {.strong relative} probability of individuals in a given age group infecting an individual in another age group, for that setting.",
     object_class = "matrix"
   )
 }

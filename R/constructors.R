@@ -23,6 +23,10 @@ new_setting_contact_model <- function(list_model) {
   add_new_class(list_model, "setting_contact_model")
 }
 
-new_setting_vaccination_matrix <- function(list_matrix){
+new_setting_vaccination_matrix <- function(list_matrix) {
   add_new_class(list_matrix, "setting_vaccination_matrix")
+}
+
+new_transmission_probability_matrix <- function(list_matrix) {
+  add_new_class(list_matrix, "transmission_probability_matrix")
 }
