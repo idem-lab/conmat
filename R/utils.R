@@ -234,7 +234,7 @@ print.setting_vaccination_matrix <- function(x, ...) {
 print.transmission_probability_matrix <- function(x, ...) {
   print_setting_info(
     x = x,
-    heading = "Vaccination Setting Matrices",
+    heading = "Transmission Probability Matrices",
     description = "A list of matrices, each {.cls matrix} containing the {.strong relative} probability of individuals in a given age group infecting an individual in another age group, for that setting.",
     object_class = "matrix"
   )

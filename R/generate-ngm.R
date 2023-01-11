@@ -89,7 +89,7 @@ generate_ngm.conmat_setting_prediction_matrix <- function(x,
                                                           age_breaks,
                                                           R_target,
                                                           per_capita_household_size = NULL,
-                                                          setting_relative_transmission_probabilities = NULL,
+                                                          setting_transmission_matrix = NULL,
                                                           ...,
                                                           lga_name,
                                                           state_name) {
@@ -100,8 +100,8 @@ generate_ngm.conmat_setting_prediction_matrix <- function(x,
     error_old_ngm_arg(lga_name)
   }
 
-  setting_relative_transmission_probabilities <- check_transmission_probabilities(
-    setting_relative_transmission_probabilities,
+  setting_transmission_matrix <- check_transmission_probabilities(
+    setting_transmission_matrix,
     age_breaks = age_breaks
   )
 
@@ -109,7 +109,7 @@ generate_ngm.conmat_setting_prediction_matrix <- function(x,
     setting_prediction_matrix = x,
     age_breaks,
     R_target,
-    setting_relative_transmission_probabilities = setting_relative_transmission_probabilities
+    setting_transmission_matrix = setting_transmission_matrix
   )
 }
 
@@ -120,7 +120,7 @@ generate_ngm.conmat_population <- function(x,
                                            age_breaks,
                                            R_target,
                                            per_capita_household_size = NULL,
-                                           setting_relative_transmission_probabilities = NULL,
+                                           setting_transmission_matrix = NULL,
                                            ...,
                                            lga_name,
                                            state_name) {
@@ -130,8 +130,8 @@ generate_ngm.conmat_population <- function(x,
     per_capita_household_size = per_capita_household_size
   )
 
-  setting_relative_transmission_probabilities <- check_transmission_probabilities(
-    setting_relative_transmission_probabilities,
+  setting_transmission_matrix <- check_transmission_probabilities(
+    setting_transmission_matrix,
     age_breaks = age_breaks
   )
 
@@ -139,7 +139,7 @@ generate_ngm.conmat_population <- function(x,
     setting_prediction_matrix = setting_contact_rates,
     age_breaks = age_breaks,
     R_target = R_target,
-    setting_relative_transmission_probabilities = setting_relative_transmission_probabilities
+    setting_transmission_matrix = setting_transmission_matrix
   )
 }
 
@@ -174,7 +174,7 @@ generate_ngm_oz <- function(state_name = NULL,
                             lga_name = NULL,
                             age_breaks,
                             R_target,
-                            setting_relative_transmission_probabilities = NULL) {
+                            setting_transmission_matrix = NULL) {
   # pull out the age distribution of the target population &
   # the per-capita (ie. averaged over people, not households) household
   # size in this population
@@ -195,8 +195,8 @@ generate_ngm_oz <- function(state_name = NULL,
     per_capita_household_size = household_size
   )
 
-  setting_relative_transmission_probabilities <- check_transmission_probabilities(
-    setting_relative_transmission_probabilities,
+  setting_transmission_matrix <- check_transmission_probabilities(
+    setting_transmission_matrix,
     age_breaks = age_breaks
   )
 
@@ -204,7 +204,7 @@ generate_ngm_oz <- function(state_name = NULL,
     setting_prediction_matrix = setting_contact_rates,
     age_breaks = age_breaks,
     R_target = R_target,
-    setting_relative_transmission_probabilities = setting_relative_transmission_probabilities
+    setting_transmission_matrix = setting_transmission_matrix
   )
 }
 
@@ -212,7 +212,7 @@ generate_ngm_oz <- function(state_name = NULL,
 calculate_ngm <- function(setting_prediction_matrix,
                           age_breaks,
                           R_target,
-                          setting_relative_transmission_probabilities) {
+                          setting_transmission_matrix) {
   # get relative (ie. needing to be scaled to a given R) transmission
   # probabilities between pairs of ages in different settings - these incorporate
   # relative infectiousness by age (based on symptomatic fraction), relative
@@ -222,16 +222,16 @@ calculate_ngm <- function(setting_prediction_matrix,
 
   # Need to double check that the ages match in each
   # in previous versions this would work
-  # check_if_age_breaks_match(setting_relative_transmission_probabilities,
+  # check_if_age_breaks_match(setting_transmission_matrix,
   #                           setting_prediction_matrix)
 
   # combine to get relative setting-specific NGMs - keeping the four settings in
   # the right order
-  settings <- names(setting_relative_transmission_probabilities)
+  settings <- names(setting_transmission_matrix)
   setting_rel_ngms <- mapply(
     "*",
     setting_prediction_matrix[settings],
-    setting_relative_transmission_probabilities[settings],
+    setting_transmission_matrix[settings],
     SIMPLIFY = FALSE
   )
 
