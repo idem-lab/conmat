@@ -138,15 +138,15 @@ error_old_ngm_arg <- function(arg) {
   )
 }
 
-check_if_age_breaks_match <- function(x,y){
+check_if_age_breaks_match <- function(x, y) {
   # from age breaks
   # from setting_rel_tranmission_probs
   age_breaks <- rownames(x[[1]])
   # from setting_prediction_matrix
   prediction_ages <- rownames(y[[1]])
-  
+
   which_breaks <- age_breaks %in% prediction_ages
-  
+
   if (!all(which_breaks)) {
     cli::cli_abort(
       c(
@@ -157,6 +157,4 @@ check_if_age_breaks_match <- function(x,y){
       )
     )
   }
-  
 }
-

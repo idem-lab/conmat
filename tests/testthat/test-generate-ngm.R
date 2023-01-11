@@ -1,19 +1,21 @@
- perth <- abs_age_lga("Perth (C)")
- perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
- 
- perth_contact <- extrapolate_polymod(
-   perth,
-   per_capita_household_size = perth_hh
- )
- 
- perth_ngm_lga <- generate_ngm(perth,
-                               age_breaks = c(seq(0, 75, by = 5), Inf),
-                               per_capita_household_size = perth_hh,
-                               R_target = 1.5)
- 
- perth_ngm <- generate_ngm(perth_contact,
-                           age_breaks = c(seq(0, 75, by = 5), Inf),
-                           R_target = 1.5)
+perth <- abs_age_lga("Perth (C)")
+perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+
+perth_contact <- extrapolate_polymod(
+  perth,
+  per_capita_household_size = perth_hh
+)
+
+perth_ngm_lga <- generate_ngm(perth,
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  per_capita_household_size = perth_hh,
+  R_target = 1.5
+)
+
+perth_ngm <- generate_ngm(perth_contact,
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  R_target = 1.5
+)
 
 perth_ngm_oz <- generate_ngm_oz(
   lga_name = "Perth (C)",

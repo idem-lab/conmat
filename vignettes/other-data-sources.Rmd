@@ -79,7 +79,7 @@ italy_2005_ngm_polymod <- generate_ngm(
 italy_2005_ngm_polymod
 
 # these are the same
-identical(italy_2005_ngm,italy_2005_ngm_polymod)
+identical(italy_2005_ngm, italy_2005_ngm_polymod)
 ```
 
 # Applying vaccination to an NGM

@@ -9,7 +9,6 @@ test_that("conmat_population works", {
       population = population
     )
   )
-  
 })
 
 test_that("as_conmat_population works", {
