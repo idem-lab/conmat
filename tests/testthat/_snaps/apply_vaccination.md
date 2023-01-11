@@ -1,6 +1,8 @@
 # apply_vaccination() errors when there's an incorrect variable name
 
-    Problem while computing `acquisition_multiplier = 1 - acquisition_column * coverage`.
+    Problem with `mutate()` column `acquisition_multiplier`.
+    i `acquisition_multiplier = 1 - acquisition_column * coverage`.
+    x object 'acquisition_column' not found
     Caused by error:
     ! object 'acquisition_column' not found
 
@@ -8,18 +10,18 @@
 
     Code
       ngm_VIC_vacc
-    Message
+    Message <cliMessage>
       
       -- Vaccination Setting Matrices ------------------------------------------------
     Output
       
-    Message
+    Message <cliMessage>
       A list of matrices, each <matrix> containing the adjusted number of newly
       infected individuals for age groups. These numbers have been adjusted based on
       proposed vaccination rates in age groups
     Output
       
-    Message
+    Message <cliMessage>
       * home: a 17x17 <matrix>
       * school: a 17x17 <matrix>
       * work: a 17x17 <matrix>
