@@ -5,7 +5,7 @@
 #'   individuals in the survey), a representative population distribution for
 #'   the survey, and a set of age breaks at which to aggregate contacts, return
 #'   a set of predicted contact matrices for each setting, and for all combined.
-#'   Note that this function is parallelisable with `future`, and will be 
+#'   Note that this function is parallelisable with `future`, and will be
 #'   impacted by any `future` plans provided.
 #'
 #' @param contact_data_list list of data sets with information on the contacts

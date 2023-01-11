@@ -113,7 +113,7 @@ new_transmission_matrix <- get_setting_transmission_matrices(
   age_breaks = age_breaks_0_80_plus,
   # is normally 0.5
   asymptomatic_relative_infectiousness = 0.75
-  )
+)
 
 new_transmission_matrix
 

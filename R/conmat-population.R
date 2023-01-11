@@ -1,5 +1,5 @@
 #' Create a new `conmat_population` class object
-#' 
+#'
 #' @param data data.frame
 #' @param age bare column name of numeric data on age
 #' @param population bare column name of numeric data on population
@@ -94,7 +94,7 @@ as_conmat_population.grouped_df <- as_conmat_population.data.frame
 
 #' @keywords internal
 #' @export
-as_conmat_population.NULL <- function(data, ...){
+as_conmat_population.NULL <- function(data, ...) {
   abort("A {conmat_population} must not be NULL")
 }
 

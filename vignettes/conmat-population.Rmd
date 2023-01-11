@@ -117,17 +117,17 @@ sd(dat_age_pop[[age_var]])
 You could then wrap this in a function if you like:
 
 ```{r}
-summary_pop <- function(data){
+summary_pop <- function(data) {
   dat_age_pop[[pop_var]]
-  mean_pop <-mean(dat_age_pop[[pop_var]])
-  sd_pop <-sd(dat_age_pop[[pop_var]])
-  
+  mean_pop <- mean(dat_age_pop[[pop_var]])
+  sd_pop <- sd(dat_age_pop[[pop_var]])
+
   age_var <- population_label(dat_age_pop)
-  
+
   dat_age_pop[[age_var]]
   mean_age <- mean(dat_age_pop[[age_var]])
   sd_age <- sd(dat_age_pop[[age_var]])
-  
+
   return(
     tibble(
       mean_pop,
@@ -136,7 +136,6 @@ summary_pop <- function(data){
       sd_age
     )
   )
-  
 }
 
 summary_pop(dat_age_pop)
@@ -147,9 +146,9 @@ However if you would like to program with these variables, for example write a f
 
 ```{r}
 library(dplyr)
-my_age_summary <- function(data){
+my_age_summary <- function(data) {
   age_col <- age(data)
-  data %>% 
+  data %>%
     summarise(
       mean_age = mean(!!age_col)
     )
@@ -161,15 +160,16 @@ my_age_summary(dat_age_pop)
 And for a slightly more complex use case
 
 ```{r}
-my_age_pop_summary <- function(data){
+my_age_pop_summary <- function(data) {
   age_col <- age(data)
   pop_col <- population(data)
-  
-  data %>% 
+
+  data %>%
     summarise(
       across(c(!!age_col, !!pop_col),
-             c(mean = mean, sd = sd),
-             .names = "{.fn}_{.col}")
+        c(mean = mean, sd = sd),
+        .names = "{.fn}_{.col}"
+      )
     )
 }
 
@@ -181,11 +181,11 @@ my_age_pop_summary(dat_age_pop)
 Internally within conmat we do some modelling work that requires us to know the midpoint of the ages, and a coupld of other bits - here's an example of how we write that code now:
 
 ```{r}
-add_modelling_info <- function(data){
+add_modelling_info <- function(data) {
   age_col <- age(data)
   age_var <- age_label(data)
   pop_col <- population(data)
-  
+
   diffs <- diff(data[[age_var]])
   bin_widths <- c(diffs, diffs[length(diffs)])
 
@@ -203,7 +203,6 @@ add_modelling_info <- function(data){
 }
 
 add_modelling_info(dat_age_pop)
- 
 ```
 
 # Using these as S3 methods in an R package
