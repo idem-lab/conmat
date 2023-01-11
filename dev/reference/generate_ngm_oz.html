@@ -63,7 +63,13 @@ For full details see <code><a href="generate_ngm.html">generate_ngm()</a></code>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_ngm_oz</span><span class="op">(</span>state_name <span class="op">=</span> <span class="cn">NULL</span>, lga_name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">age_breaks</span>, <span class="va">R_target</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_ngm_oz</span><span class="op">(</span></span>
+<span>  state_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lga_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">age_breaks</span>,</span>
+<span>  <span class="va">R_target</span>,</span>
+<span>  setting_transmission_matrix <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -85,6 +91,16 @@ as <code>Inf</code>. For example, c(seq(0, 85, by = 5), Inf)</p></dd>
 
 <dt>R_target</dt>
 <dd><p>target reproduction number</p></dd>
+
+
+<dt>setting_transmission_matrix</dt>
+<dd><p>default is NULL, which calculates the transmission
+matrix using <code>get_setting_transmission_matrices(age_breaks)</code>. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for <code>get_setting_transmission_matrices(age_breaks)</code>
+to get a sense of the structure. See <code><a href="get_setting_transmission_matrices.html">get_setting_transmission_matrices()</a></code>
+for more detail.</p></dd>
 
 </dl></div>
 

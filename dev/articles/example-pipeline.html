@@ -226,8 +226,8 @@ prediction matrix.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> home           0      1        7           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> home           0      2       12           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> home           0      3       14           92</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> home           0      4       12           92</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> home           0      5        6           92</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> home           0      4       11           92</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> home           0      5        7           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> home           0      6        8           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> home           0      7        9           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> home           0      8        6           92</span></span>
@@ -329,10 +329,38 @@ you can pass that to <code>generate_ngm</code> instead:</p>
 <code>generate_ngm</code> must be the same as the age breaks specified
 in the synthetic contact matrix, otherwise it will error as it is trying
 to multiple incompatible matrices.</p>
+<p>You can also specify your own transmission matrix, like so:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># using our own transmission matrix</span></span>
+<span><span class="va">new_transmission_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_setting_transmission_matrices.html">get_setting_transmission_matrices</a></span><span class="op">(</span></span>
+<span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span>
+<span>  <span class="co"># is normally 0.5</span></span>
+<span>  asymptomatic_relative_infectiousness <span class="op">=</span> <span class="fl">0.75</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">new_transmission_matrix</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Transmission Probability Matrices</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">A list of matrices, each </span><span style="color: #0000BB; font-style: italic;">&lt;matrix&gt;</span><span style="font-style: italic;"> containing the </span><span style="font-weight: bold; font-style: italic;">relative</span><span style="font-style: italic;"> probability of</span></span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">individuals in a given age group infecting an individual in another age group,</span></span></span>
+<span><span class="co">#&gt; <span style="font-style: italic;">for that setting.</span></span></span>
+<span><span class="co">#&gt; • <span style="font-weight: bold;">home</span>: a 17x17 <span style="color: #0000BB;">&lt;matrix&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="font-weight: bold;">school</span>: a 17x17 <span style="color: #0000BB;">&lt;matrix&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="font-weight: bold;">work</span>: a 17x17 <span style="color: #0000BB;">&lt;matrix&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="font-weight: bold;">other</span>: a 17x17 <span style="color: #0000BB;">&lt;matrix&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Access each <span style="color: #0000BB;">&lt;matrix&gt;</span> with `x$name`</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> e.g., `x$home`</span></span>
+<span></span>
+<span><span class="va">fairfield_ngm_0_80_new_tmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate_ngm.html">generate_ngm</a></span><span class="op">(</span></span>
+<span>  <span class="va">synthetic_fairfield_5y</span>,</span>
+<span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span>
+<span>  R_target <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  setting_transmission_matrix <span class="op">=</span> <span class="va">new_transmission_matrix</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>We can also generate an NGM for Australian specific data like so,
 which refits and extrapolates the data based on the Australian state or
 LGA provided.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ngm_fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate_ngm_oz.html">generate_ngm_oz</a></span><span class="op">(</span></span>
 <span>  lga_name <span class="op">=</span> <span class="st">"Fairfield (C)"</span>,</span>
 <span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span>
@@ -340,7 +368,7 @@ LGA provided.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The output of this is a matrix for each of the settings, where each
 value is the number of newly infected individuals</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ngm_fairfield</span><span class="op">$</span><span class="va">home</span></span>
 <span><span class="co">#&gt;                [0,5)      [5,10)     [10,15)     [15,20)     [20,25)</span></span>
 <span><span class="co">#&gt; [0,5)    0.046932897 0.037728586 0.018246153 0.012332791 0.018264934</span></span>
@@ -419,7 +447,6 @@ value is the number of newly infected individuals</p>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "ngm_setting_matrix" "list"</span></span></code></pre></div>
-<p>Note that if you want to</p>
 </div>
 <div class="section level2">
 <h2 id="applying-vaccination-rates">Applying Vaccination Rates<a class="anchor" aria-label="anchor" href="#applying-vaccination-rates"></a>
@@ -434,7 +461,7 @@ age group.</p>
 <li>The vaccination effect data</li>
 </ol>
 <p>The vaccination effect could look like the following:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vaccination_effect_example_data</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 4</span></span></span>
 <span><span class="co">#&gt;    age_band coverage acquisition transmission</span></span>
@@ -464,7 +491,7 @@ age group.</p>
 </ul>
 <p>Then you need to specify the columns in the vaccination effect data
 frame related to coverege, acquisition, and transmission.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Apply vaccination effect to next generation matrices</span></span>
 <span><span class="va">ngm_nsw_vacc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_vaccination.html">apply_vaccination</a></span><span class="op">(</span></span>
 <span>  ngm <span class="op">=</span> <span class="va">ngm_fairfield</span>,</span>

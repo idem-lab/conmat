@@ -78,13 +78,14 @@ output from <code><a href="extrapolate_polymod.html">extrapolate_polymod()</a></
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_ngm</span><span class="op">(</span><span class="va">x</span>, <span class="va">age_breaks</span>, <span class="va">R_target</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_ngm</span><span class="op">(</span><span class="va">x</span>, <span class="va">age_breaks</span>, <span class="va">R_target</span>, <span class="va">setting_transmission_matrix</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for conmat_setting_prediction_matrix</span></span>
 <span><span class="fu">generate_ngm</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">age_breaks</span>,</span>
 <span>  <span class="va">R_target</span>,</span>
+<span>  setting_transmission_matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">lga_name</span>,</span>
@@ -96,6 +97,7 @@ output from <code><a href="extrapolate_polymod.html">extrapolate_polymod()</a></
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">age_breaks</span>,</span>
 <span>  <span class="va">R_target</span>,</span>
+<span>  setting_transmission_matrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">lga_name</span>,</span>
@@ -118,6 +120,16 @@ as <code>Inf</code>. For example, c(seq(0, 85, by = 5), Inf)</p></dd>
 
 <dt>R_target</dt>
 <dd><p>target reproduction number</p></dd>
+
+
+<dt>setting_transmission_matrix</dt>
+<dd><p>default is NULL, which calculates the transmission
+matrix using <code>get_setting_transmission_matrices(age_breaks)</code>. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for <code>get_setting_transmission_matrices(age_breaks)</code>
+to get a sense of the structure. See <code><a href="get_setting_transmission_matrices.html">get_setting_transmission_matrices()</a></code>
+for more detail.</p></dd>
 
 
 <dt>...</dt>
@@ -164,31 +176,52 @@ as it is trying to multiple incompatible matrices.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="va">perth</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="va">perth_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_per_capita_household_size.html">get_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="co"># you can also run this without `per_capita_household_size`</span></span></span>
-<span class="r-in"><span> <span class="va">perth_ngm_lga</span> <span class="op">&lt;-</span> <span class="fu">generate_ngm</span><span class="op">(</span><span class="va">perth</span>,</span></span>
-<span class="r-in"><span>                               age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                               per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span>,</span></span>
-<span class="r-in"><span>                               R_target <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span>                           </span></span>
-<span class="r-in"><span> <span class="va">perth_contact</span> <span class="op">&lt;-</span> <span class="fu"><a href="extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="va">perth</span>,</span></span>
-<span class="r-in"><span>   per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
-<span class="r-in"><span> </span></span>
-<span class="r-in"><span> <span class="va">perth_ngm</span> <span class="op">&lt;-</span> <span class="fu">generate_ngm</span><span class="op">(</span><span class="va">perth_contact</span>,</span></span>
-<span class="r-in"><span>                           age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                           R_target <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span>                           </span></span>
-<span class="r-in"><span> <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">perth</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">perth_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_per_capita_household_size.html">get_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">age_breaks_0_80_plus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># you can also run this without `per_capita_household_size`</span></span></span>
+<span class="r-in"><span><span class="va">perth_ngm_lga</span> <span class="op">&lt;-</span> <span class="fu">generate_ngm</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">perth</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span>,</span></span>
+<span class="r-in"><span>  R_target <span class="op">=</span> <span class="fl">1.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">perth_contact</span> <span class="op">&lt;-</span> <span class="fu"><a href="extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">perth</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">perth_ngm</span> <span class="op">&lt;-</span> <span class="fu">generate_ngm</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">perth_contact</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span></span>
+<span class="r-in"><span>  R_target <span class="op">=</span> <span class="fl">1.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># using our own transmission matrix</span></span></span>
+<span class="r-in"><span><span class="va">new_transmission_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_setting_transmission_matrices.html">get_setting_transmission_matrices</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># is normally 0.5</span></span></span>
+<span class="r-in"><span>  asymptomatic_relative_infectiousness <span class="op">=</span> <span class="fl">0.75</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">new_transmission_matrix</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">perth_ngm_0_80_new_tmat</span> <span class="op">&lt;-</span> <span class="fu">generate_ngm</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">perth_contact</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80_plus</span>,</span></span>
+<span class="r-in"><span>  R_target <span class="op">=</span> <span class="fl">1.5</span>,</span></span>
+<span class="r-in"><span>  setting_transmission_matrix <span class="op">=</span> <span class="va">new_transmission_matrix</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="co"># examples not run as they take a long time</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="va">perth</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="va">perth_contact</span> <span class="op">&lt;-</span> <span class="fu"><a href="extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span><span class="va">perth</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu">generate_ngm</span><span class="op">(</span><span class="va">perth_contact</span>, age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">perth</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Perth (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">perth_contact</span> <span class="op">&lt;-</span> <span class="fu"><a href="extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span><span class="va">perth</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">generate_ngm</span><span class="op">(</span><span class="va">perth_contact</span>, age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
