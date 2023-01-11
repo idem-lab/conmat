@@ -40,7 +40,9 @@ similar ages have more contact with each other. And included terms to
 account for intergenerational contact patterns, where parents and
 grandparents will interact with their children and grand children.
 These terms are fit with a smoothing function. Specifically, the relevant
-code looks like this:\if{html}{\out{<div class="sourceCode r">}}\preformatted{# abs(age_from - age_to)
+code looks like this:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# abs(age_from - age_to)
 s(gam_age_offdiag) +
 # abs(age_from - age_to)^2
 s(gam_age_offdiag_2) +
@@ -69,7 +71,9 @@ setting. The contactable population is estimated as the interpolated
 1 year ages from the data. For schools this is the contactable population
 weighted by the proportion of the population attending school.
 
-This leaves us with a model that looks like so:\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
+This leaves us with a model that looks like so:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
   formula = contacts ~
     # abs(age_from - age_to)
     s(gam_age_offdiag) +
@@ -94,7 +98,9 @@ This leaves us with a model that looks like so:\if{html}{\out{<div class="source
 )
 }\if{html}{\out{</div>}}
 
-But if the term \code{symmetrical = FALSE} is used, you get:\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
+But if the term \code{symmetrical = FALSE} is used, you get:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
   formula = contacts ~
     s(age_to) +
     s(age_from) +

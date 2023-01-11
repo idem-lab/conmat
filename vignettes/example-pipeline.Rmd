@@ -105,6 +105,26 @@ fairfield_ngm <- generate_ngm(
 
 However, note in these cases the age breaks specified in `generate_ngm` must be the same as the age breaks specified in the synthetic contact matrix, otherwise it will error as it is trying to multiple incompatible matrices.
 
+You can also specify your own transmission matrix, like so:
+
+```{r}
+# using our own transmission matrix
+new_transmission_matrix <- get_setting_transmission_matrices(
+  age_breaks = age_breaks_0_80_plus,
+  # is normally 0.5
+  asymptomatic_relative_infectiousness = 0.75
+  )
+
+new_transmission_matrix
+
+fairfield_ngm_0_80_new_tmat <- generate_ngm(
+  synthetic_fairfield_5y,
+  age_breaks = age_breaks_0_80_plus,
+  R_target = 1.5,
+  setting_transmission_matrix = new_transmission_matrix
+)
+```
+
 We can also generate an NGM for Australian specific data like so, which refits and extrapolates the data based on the Australian state or LGA provided.
 
 ```{r ngm-fairfield}
@@ -115,7 +135,6 @@ ngm_fairfield <- generate_ngm_oz(
 )
 ```
 
-
 The output of this is a matrix for each of the settings, where each value is the number of newly infected individuals
 
 ```{r}
@@ -123,7 +142,6 @@ ngm_fairfield$home
 str(ngm_fairfield)
 ```
 
-Note that if you want to 
 
 ## Applying Vaccination Rates
 

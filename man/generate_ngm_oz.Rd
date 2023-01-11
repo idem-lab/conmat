@@ -4,7 +4,13 @@
 \alias{generate_ngm_oz}
 \title{Calculate next generation contact matrices from ABS data}
 \usage{
-generate_ngm_oz(state_name = NULL, lga_name = NULL, age_breaks, R_target)
+generate_ngm_oz(
+  state_name = NULL,
+  lga_name = NULL,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL
+)
 }
 \arguments{
 \item{state_name}{target Australian state name in abbreviated form, such
