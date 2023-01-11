@@ -2,17 +2,17 @@
 
     Code
       perth_ngm_lga
-    Message <cliMessage>
+    Message
       
       -- NGM Setting Matrices --------------------------------------------------------
     Output
       
-    Message <cliMessage>
+    Message
       A list of matrices, each <matrix> containing the number of newly infected
       individuals for a specified age group.
     Output
       
-    Message <cliMessage>
+    Message
       * home: a 16x16 <matrix>
       * school: a 16x16 <matrix>
       * work: a 16x16 <matrix>
@@ -25,17 +25,17 @@
 
     Code
       perth_ngm
-    Message <cliMessage>
+    Message
       
       -- NGM Setting Matrices --------------------------------------------------------
     Output
       
-    Message <cliMessage>
+    Message
       A list of matrices, each <matrix> containing the number of newly infected
       individuals for a specified age group.
     Output
       
-    Message <cliMessage>
+    Message
       * home: a 16x16 <matrix>
       * school: a 16x16 <matrix>
       * work: a 16x16 <matrix>
@@ -48,17 +48,17 @@
 
     Code
       perth_ngm_oz
-    Message <cliMessage>
+    Message
       
       -- NGM Setting Matrices --------------------------------------------------------
     Output
       
-    Message <cliMessage>
+    Message
       A list of matrices, each <matrix> containing the number of newly infected
       individuals for a specified age group.
     Output
       
-    Message <cliMessage>
+    Message
       * home: a 16x16 <matrix>
       * school: a 16x16 <matrix>
       * work: a 16x16 <matrix>
