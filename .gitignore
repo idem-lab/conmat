@@ -7,3 +7,4 @@ inst/doc
 docs
 README_cache
 .Rprofile
+.vscode/launch.json
