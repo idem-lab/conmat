@@ -23,6 +23,14 @@ as "Fairfield (C)".  See \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for lis
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
+
+\item{setting_transmission_matrix}{default is NULL, which calculates the transmission
+matrix using \code{get_setting_transmission_matrices(age_breaks)}. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for \code{get_setting_transmission_matrices(age_breaks)}
+to get a sense of the structure. See \code{\link[=get_setting_transmission_matrices]{get_setting_transmission_matrices()}}
+for more detail.}
 }
 \description{
 This function calculates a next generation matrix (NGM)

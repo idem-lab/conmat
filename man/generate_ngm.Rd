@@ -6,14 +6,14 @@
 \alias{generate_ngm.conmat_population}
 \title{Calculate next generation contact matrices}
 \usage{
-generate_ngm(x, age_breaks, R_target, ...)
+generate_ngm(x, age_breaks, R_target, setting_transmission_matrix, ...)
 
 \method{generate_ngm}{conmat_setting_prediction_matrix}(
   x,
   age_breaks,
   R_target,
-  per_capita_household_size = NULL,
   setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
   ...,
   lga_name,
   state_name
@@ -23,8 +23,8 @@ generate_ngm(x, age_breaks, R_target, ...)
   x,
   age_breaks,
   R_target,
-  per_capita_household_size = NULL,
   setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
   ...,
   lga_name,
   state_name
@@ -39,6 +39,14 @@ output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
+
+\item{setting_transmission_matrix}{default is NULL, which calculates the transmission
+matrix using \code{get_setting_transmission_matrices(age_breaks)}. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for \code{get_setting_transmission_matrices(age_breaks)}
+to get a sense of the structure. See \code{\link[=get_setting_transmission_matrices]{get_setting_transmission_matrices()}}
+for more detail.}
 
 \item{...}{extra arguments, currently not used}
 

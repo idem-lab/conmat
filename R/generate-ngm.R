@@ -35,6 +35,13 @@
 #' @param age_breaks vector depicting age values with the highest age depicted
 #'   as `Inf`. For example, c(seq(0, 85, by = 5), Inf)
 #' @param R_target target reproduction number
+#' @param setting_transmission_matrix default is NULL, which calculates the transmission
+#'   matrix using `get_setting_transmission_matrices(age_breaks)`. You can 
+#'   provide your own transmission matrix, but its rows and columns must match
+#'   the number of rows and columns, and must be a list of one matrix for each 
+#'   setting. See the output for `get_setting_transmission_matrices(age_breaks)`
+#'   to get a sense of the structure. See [get_setting_transmission_matrices()] 
+#'   for more detail.
 #' @param ... extra arguments, currently not used
 #' @name generate_ngm
 #' @examples
@@ -85,6 +92,7 @@ generate_ngm <- function(
   x,
   age_breaks,
   R_target,
+  setting_transmission_matrix,
   ...
 ) {
   # detect if state_name or lga_name are used
@@ -111,8 +119,8 @@ generate_ngm.conmat_setting_prediction_matrix <- function(
   x,
   age_breaks,
   R_target,
-  per_capita_household_size = NULL,
   setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
   ...,
   lga_name,
   state_name
@@ -144,8 +152,8 @@ generate_ngm.conmat_population <- function(
   x,
   age_breaks,
   R_target,
-  per_capita_household_size = NULL,
   setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
   ...,
   lga_name,
   state_name
