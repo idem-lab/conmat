@@ -94,4 +94,6 @@ reference:
       - as_conmat_population
       - age
       - population
-
+      - age_breaks
+      - raw_eigenvalue
+      - new_age_matrix

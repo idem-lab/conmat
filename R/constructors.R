@@ -4,7 +4,7 @@ add_new_class <- function(x, new_class) {
 }
 
 #' Build new age matrix
-#' 
+#'
 #' A matrix that knows about its age breaks - which are by default provided as
 #'   its rownames. Mostly intended for internal use.
 #'
@@ -24,11 +24,13 @@ add_new_class <- function(x, new_class) {
 #'     age_break_names
 #'   )
 #' )
-#' 
+#'
 #' new_age_matrix(age_mat)
-#' new_age_matrix(age_mat,
-#'                age_breaks = age_break_names)
-#' 
+#' new_age_matrix(
+#'   age_mat,
+#'   age_breaks = age_break_names
+#' )
+#'
 #' @export
 new_age_matrix <- function(matrix, age_breaks = rownames(matrix)) {
   stopifnot(is.character(age_breaks))
@@ -55,18 +57,25 @@ new_age_matrix <- function(matrix, age_breaks = rownames(matrix)) {
 #'     age_break_names
 #'   )
 #' )
-#' 
+#'
 #' age_mat <- new_age_matrix(age_mat)
-#' 
+#'
 #' age_breaks(age_mat)
 #' @export
-age_breaks <- function(matrix){
+age_breaks <- function(matrix) {
   UseMethod("age_breaks")
 }
 
 #' @describeIn age_breaks Get age break information
-age_breaks.conmat_age_matrix <- function(matrix){
+#' @export
+age_breaks.conmat_age_matrix <- function(matrix) {
   attr(matrix, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.default <- function(matrix) {
+  cli::cli_abort("no method for {.code age_breaks()} defined yet")
 }
 
 new_setting_prediction_matrix <- function(list_matrix) {
@@ -77,8 +86,36 @@ new_setting_data <- function(list_df) {
   add_new_class(list_df, "setting_data")
 }
 
-new_ngm_setting_matrix <- function(list_matrix) {
-  add_new_class(list_matrix, "ngm_setting_matrix")
+new_ngm_setting_matrix <- function(list_matrix,
+                                   raw_eigenvalue) {
+  structure(
+    list_matrix,
+    raw_eigenvalue = raw_eigenvalue,
+    class = c("ngm_setting_matrix", class(list_matrix))
+  )
+}
+
+
+#' Get raw eigvenvalue from NGM matrix
+#'
+#' @param list_matrix object of class `ngm_setting_matrix`
+#'
+#' @return raw eigenvalue
+#'
+#' @examples
+#' # examples not run as they take a long time
+#' \dontrun{
+#' perth <- abs_age_lga("Perth (C)")
+#' perth_contact <- extrapolate_polymod(perth)
+#' perth_ngm <- generate_ngm(
+#'   perth_contact,
+#'   age_breaks = c(seq(0, 85, by = 5), Inf)
+#' )
+#' raw_eigenvalue(perth_ngm)
+#' }
+#' @export
+raw_eigenvalue <- function(list_matrix) {
+  attr(list_matrix, "raw_eigenvalue")
 }
 
 new_setting_contact_model <- function(list_model) {
