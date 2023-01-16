@@ -29,7 +29,7 @@ Extract age break attribute information
 
 }}
 \examples{
-#' age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
+age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
 age_mat <- matrix(
   runif(9),
   nrow = 3,
