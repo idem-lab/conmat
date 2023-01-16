@@ -37,7 +37,7 @@ predictions_to_matrix <- function(contact_predictions) {
       "age_group_to"
     ) %>%
     as.matrix() %>%
-    new_prediction_matrix()
+    new_age_matrix()
 
   prediction_matrix
 }

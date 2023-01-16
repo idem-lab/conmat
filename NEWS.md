@@ -1,5 +1,11 @@
 # conmat 0.0.1.9000
 
+## Changes
+
+* new `conmat_age_matrix` class, replaces `conmat_prediction_matrix`, knows about its age breaks
+* accessor method, `age_breaks()`, which accesses age break information
+* updated autoplot method for `conmat_age_matrix`
+
 ## Breaking Changes
 
 * `generate_ngm` no longer accepts LGA or state inputs, which now occurs in `generate_ngm_oz`. The `generate_ngm` function has had S3 methods created for it,
