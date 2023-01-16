@@ -87,10 +87,12 @@ new_setting_data <- function(list_df) {
 }
 
 new_ngm_setting_matrix <- function(list_matrix,
-                                   raw_eigenvalue) {
+                                   raw_eigenvalue,
+                                   scaling) {
   structure(
     list_matrix,
     raw_eigenvalue = raw_eigenvalue,
+    scaling = scaling,
     class = c("ngm_setting_matrix", class(list_matrix))
   )
 }
@@ -116,6 +118,32 @@ new_ngm_setting_matrix <- function(list_matrix,
 #' @export
 raw_eigenvalue <- function(list_matrix) {
   attr(list_matrix, "raw_eigenvalue")
+}
+
+#' Get the scaling from NGM matrix
+#'
+#' This value is `scaling <- R_target / R_raw`, where `R_target` is the target
+#'   R value provided to the NGM, and `R_raw` is the raw eigenvalue.
+#'
+#' @param list_matrix object of class `ngm_setting_matrix`
+#'
+#' @return scaling
+#'
+#' @examples
+#' # examples not run as they take a long time
+#' \dontrun{
+#' perth <- abs_age_lga("Perth (C)")
+#' perth_contact <- extrapolate_polymod(perth)
+#' perth_ngm <- generate_ngm(
+#'   perth_contact,
+#'   age_breaks = c(seq(0, 85, by = 5), Inf)
+#' )
+#' raw_eigenvalue(perth_ngm)
+#' scaling(perth_ngm)
+#' }
+#' @export
+scaling <- function(list_matrix) {
+  attr(list_matrix, "scaling")
 }
 
 new_setting_contact_model <- function(list_model) {

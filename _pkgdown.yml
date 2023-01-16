@@ -96,4 +96,5 @@ reference:
       - population
       - age_breaks
       - raw_eigenvalue
+      - scaling
       - new_age_matrix

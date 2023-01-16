@@ -6,7 +6,7 @@
 * accessor method, `age_breaks()`, which accesses age break information
 * updated autoplot method for `conmat_age_matrix`
 * accessor method, `raw_eigenvalue()` for getting the raw eigenvalue from a next generation matrix, "ngm_setting_matrix".
-* tidying method for the age breaks to get out a data frame (currently) of the age breaks
+* accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
 
 ## Breaking Changes
 
