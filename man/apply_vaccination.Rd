@@ -36,7 +36,7 @@ transmission in each age group.
 }
 \details{
 Vaccination improves a person's immunity from a disease. When a
-sizable section of the population receives vaccinations or when vaccine
+sizeable section of the population receives vaccinations or when vaccine
 coverage is sufficient enough, the likelihood that the unvaccinated
 population will contract the disease is decreased. This helps to slow
 infectious disease spread as well as lessen its severity. For this reason,

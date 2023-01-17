@@ -194,33 +194,12 @@ print.conmat_setting_prediction_matrix <- function(x, ...) {
 }
 
 #' @export
-print.setting_data <- function(x, ...) {
-  print_setting_info(
-    x = x,
-    heading = "Setting Data",
-    description = "A list of {.cls data.frame}s containing the number of contacts between ages in each setting.",
-    object_class = "data.frame"
-  )
-}
-
-#' @export
 print.ngm_setting_matrix <- function(x, ...) {
   print_setting_info(
     x = x,
     heading = "NGM Setting Matrices",
     description = "A list of matrices, each {.cls matrix} containing the number of newly infected individuals for a specified age group.",
     object_class = "matrix"
-  )
-}
-
-#' @export
-print.setting_contact_model <- function(x, ...) {
-  print_setting_info(
-    x = x,
-    heading = "Fitted Setting Contact Models",
-    description = "A list of fitted {.cls bam} models for each setting. Each {.cls bam} model predicts the contact rate between ages, for that setting.",
-    list_print_fun = print_model_info(x, "bam"),
-    object_class = "bam"
   )
 }
 
@@ -241,5 +220,26 @@ print.transmission_probability_matrix <- function(x, ...) {
     heading = "Transmission Probability Matrices",
     description = "A list of matrices, each {.cls matrix} containing the {.strong relative} probability of individuals in a given age group infecting an individual in another age group, for that setting.",
     object_class = "matrix"
+  )
+}
+
+#' @export
+print.setting_contact_model <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "Fitted Setting Contact Models",
+    description = "A list of fitted {.cls bam} models for each setting. Each {.cls bam} model predicts the contact rate between ages, for that setting.",
+    list_print_fun = print_model_info(x, "bam"),
+    object_class = "bam"
+  )
+}
+
+#' @export
+print.setting_data <- function(x, ...) {
+  print_setting_info(
+    x = x,
+    heading = "Setting Data",
+    description = "A list of {.cls data.frame}s containing the number of contacts between ages in each setting.",
+    object_class = "data.frame"
   )
 }
