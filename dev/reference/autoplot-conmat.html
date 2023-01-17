@@ -61,7 +61,20 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="st">"Contact Matrices"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for conmat_setting_prediction_matrix</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="st">"Setting-specific synthetic contact matrices"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="st">"Setting-specific synthetic contact matrices"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for transmission_probability_matrix</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"Setting-specific transmission probability matrices"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ngm_setting_matrix</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="st">"Setting-specific NGM matrices"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for setting_vaccination_matrix</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, title <span class="op">=</span> <span class="st">"Setting-specific vaccination matrices"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,8 +89,7 @@ indicating the age groups.</p></dd>
 
 
 <dt>title</dt>
-<dd><p>Title to give to plot setting matrices. Default title for plotting a single contact matrix is "Contact Matrices" and for
-setting wise contact matrix it is "Setting-specific synthetic contact matrices".</p></dd>
+<dd><p>Title to give to plot setting matrices. Defaults are provided for certain objects</p></dd>
 
 </dl></div>
     <div class="section level2">
