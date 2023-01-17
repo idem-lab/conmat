@@ -1,5 +1,13 @@
 # conmat 0.0.1.9000
 
+## Changes
+
+* new `conmat_age_matrix` class, replaces `conmat_prediction_matrix`, knows about its age breaks
+* accessor method, `age_breaks()`, which accesses age break information
+* updated autoplot method for `conmat_age_matrix`
+* accessor method, `raw_eigenvalue()` for getting the raw eigenvalue from a next generation matrix, "ngm_setting_matrix".
+* accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
+
 ## Breaking Changes
 
 * `generate_ngm` no longer accepts LGA or state inputs, which now occurs in `generate_ngm_oz`. The `generate_ngm` function has had S3 methods created for it,
@@ -22,4 +30,3 @@
 * Data from `get_polymod_population` has been revised as a result of the [socialmixr package](https://github.com/epiforecasts/socialmixr/blob/main/NEWS.md) being updated to version 0.2.0, where the world population data has been updated to 2017 by switching from the wpp2015 to wpp2017 package. We have explored the new data and found it to be very similar and should not introduce any errant errors. See the exploration [here](https://gist.github.com/njtierney/4862fa73abab97093d779fa7f2904d11).
 * Added new print methods for: `conmat_setting_prediction_matrix`, `conmat_prediction_matrix`, `ngm_setting_matrix`, `setting_contact_model`, `setting_vaccination_matrix`, and `setting_data`, see #116. Main change is that list objects don't return the entire list and output but a summary of the list contents and details on what that object contains.
 * Added a new S3 method for `conmat_population` to avoid fragile use of the `lower.age.limit` variable name. This resolves #77.
-

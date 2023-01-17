@@ -174,8 +174,12 @@ print_setting_info <- function(x,
 }
 
 #' @export
-print.conmat_prediction_matrix <- function(x, ...) {
-  print(unclass(x), ...)
+print.conmat_age_matrix <- function(x, ...) {
+  # remove class and attributes in printing as they
+  # appear at the end of the object when printing
+  x_copy <- x
+  attr(x_copy, "age_breaks") <- NULL
+  print(unclass(x_copy))
   return(invisible(x))
 }
 

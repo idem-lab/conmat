@@ -278,7 +278,10 @@ calculate_ngm <- function(setting_prediction_matrix,
     SIMPLIFY = FALSE
   )
 
-  new_ngm_setting_matrix(setting_ngms)
+  new_ngm_setting_matrix(setting_ngms,
+    raw_eigenvalue = R_raw,
+    scaling = scaling
+  )
 }
 
 check_transmission_probabilities <- function(input_transmission_probs, age_breaks) {

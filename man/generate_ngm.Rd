@@ -129,7 +129,6 @@ perth_ngm_0_80_new_tmat <- generate_ngm(
   R_target = 1.5,
   setting_transmission_matrix = new_transmission_matrix
 )
-
 }
 # examples not run as they take a long time
 \dontrun{

@@ -46,7 +46,7 @@
 #' }
 #' }
 #' @export
-autoplot.conmat_prediction_matrix <- function(object,
+autoplot.conmat_age_matrix <- function(object,
                                               ...,
                                               title = "Contact Matrices") {
   plot_matrix(object) +

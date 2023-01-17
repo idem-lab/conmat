@@ -2,11 +2,11 @@
 % Please edit documentation in R/autoplot.R
 \name{autoplot-conmat}
 \alias{autoplot-conmat}
-\alias{autoplot.conmat_prediction_matrix}
+\alias{autoplot.conmat_age_matrix}
 \alias{autoplot.conmat_setting_prediction_matrix}
 \title{Plot setting matrices using ggplot2}
 \usage{
-\method{autoplot}{conmat_prediction_matrix}(object, ..., title = "Contact Matrices")
+\method{autoplot}{conmat_age_matrix}(object, ..., title = "Contact Matrices")
 
 \method{autoplot}{conmat_setting_prediction_matrix}(object, ..., title = "Setting-specific synthetic contact matrices")
 }
