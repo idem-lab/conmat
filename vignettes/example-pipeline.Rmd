@@ -180,6 +180,86 @@ ngm_nsw_vacc <- apply_vaccination(
 ngm_nsw_vacc
 ```
 
+# Fitting a new model with asymmetric terms
+
+In the examples so far we have focussed on using `extrapolate_polymod` to fit the contact model - this is very useful because it doesn't involve many lines of code to fit:
+
+```{r}
+#| eval: FALSE
+fairfield <- abs_age_lga("Fairfield (C)")
+age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
+synthetic_fairfield_5y <- extrapolate_polymod(
+  population = fairfield,
+  age_breaks = age_breaks_0_80_plus
+)
+```
+
+It also fits quite quickly, since it uses a pre-computed model, `polymod_setting_models`, (See `?polymod_setting_models` for more details).
+
+Under the hood of `extrapolate_polymod`, this uses this already fit model for each setting (home, work, school, other), and then predicts using that model, and the provided data, to predict the new contact rates.
+
+So the process is:
+
+1. Create a model that predicts contact rate for each setting
+2. Predict to a new population using that model
+
+Let's show each step and unpack them.
+
+First let's create a model that predicts contact rate for each setting:
+
+```{r}
+polymod_setting_data <- get_polymod_setting_data()
+polymod_population <- get_polymod_population()
+
+contact_setting_model_not_sym <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  population = polymod_population,
+  symmetrical = FALSE
+)
+```
+
+Here, we first get the polymod setting data (`polymod_setting_data`), and the polymod population (`polymod_population`), to create a model for each setting. These data look like this, if you are interested.
+
+```{r}
+polymod_setting_data
+polymod_population
+```
+
+We also specify the `symmetrical = FALSE` option - by default this is TRUE. Briefly, this changes some of the terms we use in creating the model, to use terms that aren't strictly symmetric. 
+
+Now that we've got our model, we can predict to our fairfield data, like so:
+
+```{r}
+fairfield_hh <- get_per_capita_household_size(lga = "Fairfield (C)")
+fairfield_hh
+contact_model_pred <- predict_setting_contacts(
+  population = fairfield,
+  contact_model = contact_setting_model_not_sym,
+  age_breaks = age_breaks_0_80_plus,
+  per_capita_household_size = fairfield_hh
+)
+```
+
+* `population` is our population to predict to
+* `contact_model` is our contact rate model for each setting
+* `age_breaks` are our age breaks to predict to
+* `per_capita_household_size` is the household size for that population, in our case we have a helper function, `get_per_capita_household_size` which works for each LGA in Australia.
+
+alternatively, you can use the `estimate_setting_contacts` function to do a similar task:
+
+```{r}
+contact_model_pred_est <- estimate_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  survey_population = polymod_population,
+  prediction_population = fairfield,
+  age_breaks = age_breaks_0_80_plus,
+  per_capita_household_size = fairfield_hh,
+  symmetrical = FALSE
+)
+```
+
+This is a bit briefer than the two step process, and might be preferable to creating a separate model.
+
 <!-- ## Comparing R0 before and post vaccination rates -->
 
 

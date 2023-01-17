@@ -54,8 +54,10 @@ with.
 \examples{
 # don't run as it takes too long to fit
 \dontrun{
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
+
+age_break_0_85_plus <- c(seq(0, 85, by = 5), Inf)
 
 polymod_contact_data <- get_polymod_setting_data()
 polymod_survey_data <- get_polymod_population()
@@ -66,18 +68,18 @@ setting_models <- fit_setting_contacts(
 )
 
 synthetic_settings_5y_fairfield <- predict_setting_contacts(
-  population = fairfield_age_pop,
+  population = fairfield,
   contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf)
+  age_breaks = age_break_0_85_plus
 )
 
 fairfield_hh_size <- get_per_capita_household_size(lga = "Fairfield (C)")
 fairfield_hh_size
 
 synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
-  population = fairfield_age_pop,
+  population = fairfield,
   contact_model = setting_models,
-  age_breaks = c(seq(0, 85, by = 5), Inf),
+  age_breaks = age_break_0_85_plus,
   per_capita_household_size = fairfield_hh_size
 )
 }

@@ -217,8 +217,8 @@ We can use this contact model to then predict the contact rate in a new populati
 As a demonstration, let's take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).
 
 ```{r fairfield}
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
 ```
 
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to. Note that these age breaks could be any size, we just ahve them set to 5 year age brackets in most of the examples, but these could be 1 year, 2 year, or even sub year.
@@ -227,7 +227,7 @@ We can then pass the contact model through to `predict_contacts`, along with the
 set.seed(2022 - 10 - 04)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
-  population = fairfield_age_pop,
+  population = fairfield,
   age_breaks = c(seq(0, 30, by = 5), Inf)
 )
 
@@ -286,7 +286,7 @@ Then we take the model we had earlier, and extrapolate to the fairfield data wit
 ```{r fairfield-synth-5}
 set.seed(2021 - 10 - 04)
 synthetic_settings_5y_fairfield <- predict_setting_contacts(
-  population = fairfield_age_pop,
+  population = fairfield,
   contact_model = setting_models,
   age_breaks = c(seq(0, 20, by = 5), Inf)
 )
@@ -309,4 +309,3 @@ autoplot(
   title = "Setting-specific synthetic contact matrices (fairfield 2020 projected)"
 )
 ```
-

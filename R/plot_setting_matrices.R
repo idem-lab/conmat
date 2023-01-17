@@ -21,12 +21,12 @@
 #'   population = polymod_survey_data
 #' )
 #'
-#' fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+#' fairfield <- abs_age_lga("Fairfield (C)")
 #'
-#' fairfield_age_pop
+#' fairfield
 #'
 #' synthetic_settings_5y_fairfield <- predict_setting_contacts(
-#'   population = fairfield_age_pop,
+#'   population = fairfield,
 #'   contact_model = setting_models,
 #'   age_breaks = c(seq(0, 85, by = 5), Inf)
 #' )

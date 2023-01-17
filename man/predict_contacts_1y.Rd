@@ -44,15 +44,15 @@ participant & contact ages.
 }
 \examples{
 
-fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+fairfield <- abs_age_lga("Fairfield (C)")
 
-fairfield_abs_data
+fairfield
 
 # predict the contact rates in 1 year blocks to Fairfield data
 
 fairfield_contacts_1 <- predict_contacts_1y(
   model = polymod_setting_models$home,
-  population = fairfield_abs_data,
+  population = fairfield,
   age_min = 0,
   age_max = 2
 )
