@@ -46,6 +46,8 @@ homogeneous_contact <- extrapolate_polymod(
     population = homogeneous_population,
     age_breaks = age_breaks_0_80_plus
 )
+# Relative number of contacts between individuals in 2 age categories
+# Think of as P(contact)
 homogeneous_contact$home <- matrix(1, nrow = 9, ncol = 9)
 homogeneous_contact$work <- matrix(1, nrow = 9, ncol = 9)
 homogeneous_contact$school <- matrix(1, nrow = 9, ncol = 9)
@@ -65,7 +67,7 @@ transmission_matrix$other <- matrix(0.5, nrow = 9, ncol = 9)
 We also need to set up our population structures. We'll have all the S states, then I, then R. Since we're using `deSolve` to solve this system, we need to make sure this order stays the same throughout!
 
 ```{r initial-condition}
-S0 <- rep(99, times = 9)
+S0 <- rep(999, times = 9)
 I0 <- rep(1, times = 9)
 R0 <- rep(0, times = 9)
 initial_condition <- c(S0, I0, R0)
@@ -88,6 +90,8 @@ parameters <- list(
 
 agestructured_sir <- function(time, state, parameters) {
     # Calculate the force of infection for each setting:
+    # unstructured SIR beta is age_group_n / pop_n
+    #
     lambda_home <- (parameters[["transmission_matrix"]]$home * parameters[["homogeneous_contact"]]$home) %*% state[parameters[["i_indexes"]]]
 
     lambda_work <- (parameters[["transmission_matrix"]]$work * parameters[["homogeneous_contact"]]$work) %*% state[parameters[["i_indexes"]]]
@@ -102,7 +106,7 @@ agestructured_sir <- function(time, state, parameters) {
     N <- sum(state)
 
     # Don't forget to normalise your infection rate by the population!
-    dSdt <- -lambda_total / N * state[parameters[["s_indexes"]]]
+    dSdt <- -lambda_total * state[parameters[["s_indexes"]]] / N
     dIdt <- lambda_total / N * state[parameters[["s_indexes"]]] - parameters[["gamma"]] * state[parameters[["i_indexes"]]]
     dRdt <- parameters[["gamma"]] * state[parameters[["i_indexes"]]]
 
@@ -124,11 +128,12 @@ Now, let's compare this to an SIR model with no stratification:
 
 ```{r standard-sir}
 parameters_sir <- c("beta" = 2, "gamma" = 1)
-initial_condition_sir <- c("S" = 891, "I" = 9, "R" = 0)
+initial_condition_sir <- c("S" = 8991, "I" = 9, "R" = 0)
 
 sir <- function(time, state, parameters) {
     N <- sum(state)
-    dSdt <- -parameters["beta"] / N * state["S"] * state["I"]
+    lambda_total <- parameters["beta"] * state["I"]
+    dSdt <- -lambda_total / N * state["S"]
     dIdt <- parameters["beta"] / N * state["S"] * state["I"] - parameters["gamma"] * state["I"]
     dRdt <- parameters["gamma"] * state["I"]
 
