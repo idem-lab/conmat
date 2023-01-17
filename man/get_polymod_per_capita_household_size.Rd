@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_polymod_per_capita_household_size.R
 \name{get_polymod_per_capita_household_size}
 \alias{get_polymod_per_capita_household_size}
-\title{Get polymod per capita houshold size.}
+\title{Get polymod per capita household size.}
 \usage{
 get_polymod_per_capita_household_size()
 }

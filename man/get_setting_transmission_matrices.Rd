@@ -53,7 +53,7 @@ estimates, and accounting for vaccination, reduced mixing, and reduced
 transmissibility in work and other settings due to hygiene behaviour; and
 estimates of the relative transmissibility in household vs non-household
 settings - scaled linearly for non-household transmission and binomially for
-household transmission (so that onward onfections do not to exceed the number
+household transmission (so that onward infections do not to exceed the number
 of other household members).
 
 When using this data, ensure that you cite this package, and the original

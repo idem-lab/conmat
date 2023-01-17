@@ -86,7 +86,7 @@ predict_setting_contacts <- function(population,
 
   combination <- Reduce("+", setting_matrices)
   setting_matrices$all <- combination
-  setting_matrices$all <- new_prediction_matrix(setting_matrices$all)
+  setting_matrices$all <- new_age_matrix(setting_matrices$all)
 
   # if we haven't set anything for the per capita household size, return this
   # adjusted matrix
