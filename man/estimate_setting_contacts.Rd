@@ -9,7 +9,8 @@ estimate_setting_contacts(
   survey_population,
   prediction_population = survey_population,
   age_breaks,
-  per_capita_household_size = NULL
+  per_capita_household_size = NULL,
+  symmetrical = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,10 @@ To set it, provide a single number, the per capita household size. More
 information is provided below in Details. See
 \code{\link[=get_per_capita_household_size]{get_per_capita_household_size()}} function for a helper for Australian
 data with a workflow on how to get this number.}
+
+\item{symmetrical}{whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See \code{details} of \code{fit_single_contact_model} for more
+information.}
 }
 \value{
 predicted setting specific contact matrices, and for all combined

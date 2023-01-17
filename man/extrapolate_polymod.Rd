@@ -35,6 +35,12 @@ Uses \code{\link[=estimate_setting_contacts]{estimate_setting_contacts()}} to fi
 polymod and later extrapolate on to a desired population. Note that this
 function is parallelisable with \code{future}, and will be impacted by any
 \code{future} plans provided.
+
+Also note that since this model uses the already fit \code{polymod_setting_models}
+data, which has been fit using symmetrical model terms, if you want to
+fit a model with asymmetric model terms, you will need to go through
+the full process of building new models. You can find this detail in last
+section of the vignette "example pipeline".
 }
 \examples{
 \dontrun{

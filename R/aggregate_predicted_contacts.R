@@ -17,16 +17,16 @@
 #' @return data frame with columns, `age_group_from`, `age_group_to`, and
 #'  `contacts`, which is the aggregated model.
 #' @examples
-#' fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+#' fairfield <- abs_age_lga("Fairfield (C)")
 #'
-#' fairfield_abs_data
+#' fairfield
 #'
 #' # We can predict the contact rate for Fairfield from the existing contact
 #' # data, say, between the age groups of 0-15 in 5 year bins for school:
 #'
 #' fairfield_contacts_1 <- predict_contacts_1y(
 #'   model = polymod_setting_models$home,
-#'   population = fairfield_abs_data,
+#'   population = fairfield,
 #'   age_min = 0,
 #'   age_max = 15
 #' )
@@ -35,7 +35,7 @@
 #'
 #' aggregated_fairfield <- aggregate_predicted_contacts(
 #'   predicted_contacts_1y = fairfield_contacts_1,
-#'   population = fairfield_abs_data,
+#'   population = fairfield,
 #'   age_breaks = c(0, 5, 10, 15, Inf)
 #' )
 #' @export

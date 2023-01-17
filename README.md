@@ -98,7 +98,9 @@ the population in that age group.
 
 ``` r
 polymod_survey_data
-#> # A tibble: 21 × 2
+#> # A tibble: 21 × 2 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lower.age.limit population
 #>              <int>      <dbl>
 #>  1               0   1852682.
@@ -145,9 +147,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.68 4.19 5.55 6.28 7.90 7.39  total = 35.99 
+#> 1.00 4.27 5.51 6.23 7.89 7.36  total = 35.26 
 #> 
-#> fREML score: 23784.14     rank: 55/57
+#> fREML score: 24060.58     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -158,9 +160,11 @@ Australia (this was the initial motivation for the package, so there are
 some helper functions for Australian specific data).
 
 ``` r
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
-#> # A tibble: 18 × 4
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lga           lower.age.limit  year population
 #>    <chr>                   <dbl> <dbl>      <dbl>
 #>  1 Fairfield (C)               0  2020      12261
@@ -191,43 +195,24 @@ to predict to.
 set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
-  population = fairfield_age_pop,
+  population = fairfield,
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
-#> Called from: predict_contacts(model = contact_model, population = fairfield_age_pop, 
-#>     age_breaks = c(seq(0, 85, by = 5), Inf))
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#71: age <- age(population)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#72: age_var <- age_label(population)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#73: population <- population %>% dplyr::arrange(!!age)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#77: age_min_integration <- min(population[[age_var]])
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#78: bin_widths <- diff(population[[age_var]])
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#79: final_bin_width <- bin_widths[length(bin_widths)]
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#80: age_max_integration <- max(population[[age_var]]) + final_bin_width
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#84: pop_fun <- get_age_population_function(population)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#85: ages <- age_min_integration:age_max_integration
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#86: valid <- pop_fun(ages) > 0
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#87: age_min_integration <- min(ages[valid])
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#88: age_max_integration <- max(ages[valid])
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#90: pred_1y <- predict_contacts_1y(model = model, population = population, 
-#>     age_min = age_min_integration, age_max = age_max_integration)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#99: pred_groups <- aggregate_predicted_contacts(predicted_contacts_1y = pred_1y, 
-#>     population = population, age_breaks = age_breaks)
-#> debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#105: pred_groups
 
 synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00224
-#>  2 [0,5)          [5,10)        0.00361
-#>  3 [0,5)          [10,15)       0.00280
-#>  4 [0,5)          [15,20)       0.00410
-#>  5 [0,5)          [20,25)       0.0107 
-#>  6 [0,5)          [25,30)       0.0220 
+#>  1 [0,5)          [0,5)         0.00213
+#>  2 [0,5)          [5,10)        0.00360
+#>  3 [0,5)          [10,15)       0.00305
+#>  4 [0,5)          [15,20)       0.00444
+#>  5 [0,5)          [20,25)       0.0110 
+#>  6 [0,5)          [25,30)       0.0218 
 #>  7 [0,5)          [30,35)       0.0317 
-#>  8 [0,5)          [35,40)       0.0336 
-#>  9 [0,5)          [40,45)       0.0331 
-#> 10 [0,5)          [45,50)       0.0325 
+#>  8 [0,5)          [35,40)       0.0345 
+#>  9 [0,5)          [40,45)       0.0341 
+#> 10 [0,5)          [45,50)       0.0330 
 #> # … with 314 more rows
 ```
 
@@ -271,7 +256,9 @@ so:
 
 ``` r
 abs_age_lga("Brisbane (C)")
-#> # A tibble: 18 × 4
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lga          lower.age.limit  year population
 #>    <chr>                  <dbl> <dbl>      <dbl>
 #>  1 Brisbane (C)               0  2020      72894
@@ -319,7 +306,9 @@ Or get the information for states like so:
 
 ``` r
 abs_age_state(state_name = "QLD")
-#> # A tibble: 18 × 4
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>     year state lower.age.limit population
 #>    <dbl> <chr>           <dbl>      <dbl>
 #>  1  2020 QLD                 0     314602

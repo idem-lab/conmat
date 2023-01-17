@@ -5,6 +5,12 @@
 #'   function is parallelisable with `future`, and will be impacted by any
 #'   `future` plans provided.
 #'
+#' Also note that since this model uses the already fit `polymod_setting_models`
+#'   data, which has been fit using symmetrical model terms, if you want to
+#'   fit a model with asymmetric model terms, you will need to go through
+#'   the full process of building new models. You can find this detail in last
+#'   section of the vignette "example pipeline".
+#'
 #' @param population a `conmat_population` object, specifying the `age`
 #'   and `population` characteristics. Or a data frame with `lower.age.limit`
 #'   and `population` columns. See `get_polymod_population()` for an example
