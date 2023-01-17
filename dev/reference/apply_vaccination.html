@@ -140,7 +140,7 @@ the function as an argument.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">age_breaks_0_80</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">80</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># refit the model - note that the default if age_breaks isn't specified is </span></span></span>
+<span class="r-in"><span><span class="co"># refit the model - note that the default if age_breaks isn't specified is</span></span></span>
 <span class="r-in"><span><span class="co"># 0 to 75</span></span></span>
 <span class="r-in"><span><span class="va">perth_contact_0_80</span> <span class="op">&lt;-</span> <span class="fu"><a href="extrapolate_polymod.html">extrapolate_polymod</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">perth</span>,</span></span>
@@ -149,9 +149,10 @@ the function as an argument.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">perth_ngm_0_80</span> <span class="op">&lt;-</span> <span class="fu"><a href="generate_ngm.html">generate_ngm</a></span><span class="op">(</span><span class="va">perth_contact_0_80</span>,</span></span>
-<span class="r-in"><span>                               age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80</span>,</span></span>
-<span class="r-in"><span>                               per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span>,</span></span>
-<span class="r-in"><span>                               R_target <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_breaks_0_80</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">perth_hh</span>,</span></span>
+<span class="r-in"><span>  R_target <span class="op">=</span> <span class="fl">1.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># In the old way we used to be able to pass age_breaks_0_80 along</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="generate_ngm_oz.html">generate_ngm_oz</a></span><span class="op">(</span></span></span>

@@ -53,6 +53,15 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1.9000" id="conmat-0019000">conmat 0.0.1.9000<a class="anchor" aria-label="anchor" href="#conmat-0019000"></a></h2>
 <div class="section level3">
+<h3 id="changes-0-0-1-9000">Changes<a class="anchor" aria-label="anchor" href="#changes-0-0-1-9000"></a></h3>
+<ul><li>new <code>conmat_age_matrix</code> class, replaces <code>conmat_prediction_matrix</code>, knows about its age breaks</li>
+<li>accessor method, <code><a href="../reference/age_breaks.html">age_breaks()</a></code>, which accesses age break information</li>
+<li>updated autoplot method for <code>conmat_age_matrix</code>
+</li>
+<li>accessor method, <code><a href="../reference/raw_eigenvalue.html">raw_eigenvalue()</a></code> for getting the raw eigenvalue from a next generation matrix, “ngm_setting_matrix”.</li>
+<li>accessor method, <code>scaling</code> for getting the value of R_target/raw eigenvalue.</li>
+</ul></div>
+<div class="section level3">
 <h3 id="breaking-changes-0-0-1-9000">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-1-9000"></a></h3>
 <ul><li>
 <code>generate_ngm</code> no longer accepts LGA or state inputs, which now occurs in <code>generate_ngm_oz</code>. The <code>generate_ngm</code> function has had S3 methods created for it, so it can take input from <code>conmat_population</code> (such as the output from [abs_age_lga()]), or a <code>conmat_setting_prediction_matrix</code>, which is the output from [extrapolate_polymod()] or [predict_setting_contacts()].</li>

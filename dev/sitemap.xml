@@ -103,6 +103,9 @@
     <loc>/dev/reference/add_symmetrical_features.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/age_breaks.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/age_group_lookup.html</loc>
   </url>
   <url>
@@ -211,6 +214,9 @@
     <loc>/dev/reference/matrix_to_predictions.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/new_age_matrix.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/new_conmat_population.html</loc>
   </url>
   <url>
@@ -241,7 +247,13 @@
     <loc>/dev/reference/prepare_population_for_modelling.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/raw_eigenvalue.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/scaling.html</loc>
   </url>
   <url>
     <loc>/dev/reference/separate_age_group.html</loc>

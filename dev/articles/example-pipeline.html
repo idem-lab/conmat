@@ -227,8 +227,8 @@ prediction matrix.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> home           0      2       11           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> home           0      3       15           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> home           0      4       11           92</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> home           0      5        6           92</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> home           0      6        9           92</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> home           0      5        7           92</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> home           0      6        8           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> home           0      7        9           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> home           0      8        6           92</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> home           0      9        6           92</span></span>
@@ -280,23 +280,28 @@ console:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">synthetic_fairfield_5y</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
-<span><span class="co">#&gt;  $ home  : 'conmat_prediction_matrix' num [1:17, 1:17] 0.519 0.45 0.237 0.171 0.267 ...</span></span>
+<span><span class="co">#&gt;  $ home  : 'conmat_age_matrix' num [1:17, 1:17] 0.519 0.45 0.237 0.171 0.267 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ work  : 'conmat_prediction_matrix' num [1:17, 1:17] 0.00251 0.00376 0.00289 0.00414 0.01044 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
+<span><span class="co">#&gt;  $ work  : 'conmat_age_matrix' num [1:17, 1:17] 0.00251 0.00376 0.00289 0.00414 0.01044 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ school: 'conmat_prediction_matrix' num [1:17, 1:17] 1.2044 0.335 0.0555 0.0335 0.0522 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
+<span><span class="co">#&gt;  $ school: 'conmat_age_matrix' num [1:17, 1:17] 1.2044 0.335 0.0555 0.0335 0.0522 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ other : 'conmat_prediction_matrix' num [1:17, 1:17] 0.757 0.414 0.157 0.102 0.136 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
+<span><span class="co">#&gt;  $ other : 'conmat_age_matrix' num [1:17, 1:17] 0.757 0.414 0.157 0.102 0.136 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ all   : 'conmat_prediction_matrix' num [1:17, 1:17] 2.482 1.203 0.452 0.311 0.465 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
+<span><span class="co">#&gt;  $ all   : 'conmat_age_matrix' num [1:17, 1:17] 2.482 1.203 0.452 0.311 0.465 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
@@ -426,26 +431,33 @@ value is the number of newly infected individuals</p>
 <span><span class="co">#&gt; [80,Inf) 0.03196516 0.02498789 0.01544015 0.015436882 0.03379784 0.053720539</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ngm_fairfield</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
-<span><span class="co">#&gt;  $ home  : 'conmat_prediction_matrix' num [1:17, 1:17] 0.0469 0.0498 0.0308 0.0272 0.0613 ...</span></span>
+<span><span class="co">#&gt;  $ home  : 'conmat_age_matrix' num [1:17, 1:17] 0.0469 0.0498 0.0308 0.0272 0.0613 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ school: 'conmat_prediction_matrix' num [1:17, 1:17] 0.02924 0.00987 0.00192 0.0014 0.00308 ...</span></span>
+<span><span class="co">#&gt;  $ school: 'conmat_age_matrix' num [1:17, 1:17] 0.02924 0.00987 0.00192 0.0014 0.00308 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ work  : 'conmat_prediction_matrix' num [1:17, 1:17] 6.10e-05 1.11e-04 9.98e-05 1.73e-04 6.15e-04 ...</span></span>
+<span><span class="co">#&gt;  $ work  : 'conmat_age_matrix' num [1:17, 1:17] 6.10e-05 1.11e-04 9.98e-05 1.73e-04 6.15e-04 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ other : 'conmat_prediction_matrix' num [1:17, 1:17] 0.01837 0.0122 0.00543 0.00426 0.00801 ...</span></span>
+<span><span class="co">#&gt;  $ other : 'conmat_age_matrix' num [1:17, 1:17] 0.01837 0.0122 0.00543 0.00426 0.00801 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
-<span><span class="co">#&gt;  $ all   : 'conmat_prediction_matrix' num [1:17, 1:17] 0.0946 0.0719 0.0383 0.0331 0.073 ...</span></span>
+<span><span class="co">#&gt;  $ all   : 'conmat_age_matrix' num [1:17, 1:17] 0.0946 0.0719 0.0383 0.0331 0.073 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "age_breaks")= chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:17] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "raw_eigenvalue")= num 3.24</span></span>
+<span><span class="co">#&gt;  - attr(*, "scaling")= num 0.463</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "ngm_setting_matrix" "list"</span></span></code></pre></div>
 </div>
 <div class="section level2">
