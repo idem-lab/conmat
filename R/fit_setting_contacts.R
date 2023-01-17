@@ -1,4 +1,4 @@
-#' Fit a contact model to a survey poulation
+#' Fit a contact model to a survey population
 #'
 #' fits a gam model for each setting on the survey population data & the
 #'   setting wise contact data. The underlying method is described in more
@@ -6,7 +6,7 @@
 #'   see the examples. Note that this function is parallelisable with `future`,
 #'   and will be impacted by any `future` plans provided.
 #'
-#' @param contact_data_list A list of dataframes, each containing informatio
+#' @param contact_data_list A list of dataframes, each containing information
 #'   on the setting (home, work, school, other), age_from, age_to,
 #'   the number of contacts, and the number of participants. Example data
 #'   can be retrieved with [get_polymod_setting_data()].

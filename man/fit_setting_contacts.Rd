@@ -2,12 +2,12 @@
 % Please edit documentation in R/fit_setting_contacts.R
 \name{fit_setting_contacts}
 \alias{fit_setting_contacts}
-\title{Fit a contact model to a survey poulation}
+\title{Fit a contact model to a survey population}
 \usage{
 fit_setting_contacts(contact_data_list, population, symmetrical = TRUE)
 }
 \arguments{
-\item{contact_data_list}{A list of dataframes, each containing informatio
+\item{contact_data_list}{A list of dataframes, each containing information
 on the setting (home, work, school, other), age_from, age_to,
 the number of contacts, and the number of participants. Example data
 can be retrieved with \code{\link[=get_polymod_setting_data]{get_polymod_setting_data()}}.}

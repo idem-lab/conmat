@@ -17,7 +17,7 @@ abs_age_state(state_name)
 \item{state_name}{shortened state name}
 }
 \value{
-a \code{conmat_population} dataset containig: \code{lga} (or \code{state}),
+a \code{conmat_population} dataset containing: \code{lga} (or \code{state}),
 \code{lower.age.limit}, \code{year}, and \code{population}.
 }
 \description{

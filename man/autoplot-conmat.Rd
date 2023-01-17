@@ -4,11 +4,24 @@
 \alias{autoplot-conmat}
 \alias{autoplot.conmat_age_matrix}
 \alias{autoplot.conmat_setting_prediction_matrix}
+\alias{autoplot.transmission_probability_matrix}
+\alias{autoplot.ngm_setting_matrix}
+\alias{autoplot.setting_vaccination_matrix}
 \title{Plot setting matrices using ggplot2}
 \usage{
 \method{autoplot}{conmat_age_matrix}(object, ..., title = "Contact Matrices")
 
 \method{autoplot}{conmat_setting_prediction_matrix}(object, ..., title = "Setting-specific synthetic contact matrices")
+
+\method{autoplot}{transmission_probability_matrix}(
+  object,
+  ...,
+  title = "Setting-specific transmission probability matrices"
+)
+
+\method{autoplot}{ngm_setting_matrix}(object, ..., title = "Setting-specific NGM matrices")
+
+\method{autoplot}{setting_vaccination_matrix}(object, ..., title = "Setting-specific vaccination matrices")
 }
 \arguments{
 \item{object}{A matrix or a list of square matrices, with row and column names
@@ -16,8 +29,7 @@ indicating the age groups.}
 
 \item{...}{Other arguments passed on}
 
-\item{title}{Title to give to plot setting matrices. Default title for plotting a single contact matrix is "Contact Matrices" and for
-setting wise contact matrix it is "Setting-specific synthetic contact matrices".}
+\item{title}{Title to give to plot setting matrices. Defaults are provided for certain objects}
 }
 \value{
 a ggplot visualisation of contact rates

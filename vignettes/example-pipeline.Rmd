@@ -165,7 +165,7 @@ Each row contains information, for each age band:
 * Acquisition - probability of acquiring COVID
 * Transmission - the probability of transmission
 
-Then you need to specify the columns in the vaccination effect data frame related to coverege, acquisition, and transmission.
+Then you need to specify the columns in the vaccination effect data frame related to coverage, acquisition, and transmission.
 
 ```{r}
 # Apply vaccination effect to next generation matrices

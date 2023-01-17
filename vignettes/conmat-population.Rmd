@@ -178,7 +178,7 @@ my_age_pop_summary(dat_age_pop)
 
 # An example use from the package
 
-Internally within conmat we do some modelling work that requires us to know the midpoint of the ages, and a coupld of other bits - here's an example of how we write that code now:
+Internally within conmat we do some modelling work that requires us to know the midpoint of the ages, and a couple of other bits - here's an example of how we write that code now:
 
 ```{r}
 add_modelling_info <- function(data) {

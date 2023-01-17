@@ -7,6 +7,7 @@
 * updated autoplot method for `conmat_age_matrix`
 * accessor method, `raw_eigenvalue()` for getting the raw eigenvalue from a next generation matrix, "ngm_setting_matrix".
 * accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
+* add `autoplot` methods for ngm, vaccination, and transmission probability
 
 ## Breaking Changes
 

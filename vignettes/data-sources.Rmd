@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-We provide access to a variety of different data sources in `conmat`. Most of these are centered around Australian data, as the package was initially created for disease modelling work in Australia. The aim of this vignette is to give a quick tour of the data sources available in `conmat`.
+We provide access to a variety of different data sources in `conmat`. Most of these are centred around Australian data, as the package was initially created for disease modelling work in Australia. The aim of this vignette is to give a quick tour of the data sources available in `conmat`.
 
 ```{r setup}
 library(conmat)
