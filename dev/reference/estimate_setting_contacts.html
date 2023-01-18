@@ -80,7 +80,8 @@ impacted by any <code>future</code> plans provided.</p>
 <span>  <span class="va">survey_population</span>,</span>
 <span>  prediction_population <span class="op">=</span> <span class="va">survey_population</span>,</span>
 <span>  <span class="va">age_breaks</span>,</span>
-<span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  symmetrical <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -113,6 +114,12 @@ To set it, provide a single number, the per capita household size. More
 information is provided below in Details. See
 <code><a href="get_per_capita_household_size.html">get_per_capita_household_size()</a></code> function for a helper for Australian
 data with a workflow on how to get this number.</p></dd>
+
+
+<dt>symmetrical</dt>
+<dd><p>whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See <code>details</code> of <code>fit_single_contact_model</code> for more
+information.</p></dd>
 
 </dl></div>
     <div class="section level2">

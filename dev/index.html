@@ -115,7 +115,9 @@
 <p>The survey data, <code>polymod_survey_data</code> contains the lower age limit and the population in that age group.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">polymod_survey_data</span></span>
-<span><span class="co">#&gt; # A tibble: 21 × 2</span></span>
+<span><span class="co">#&gt; # A tibble: 21 × 2 (conmat_population)</span></span>
+<span><span class="co">#&gt;  - age: lower.age.limit</span></span>
+<span><span class="co">#&gt;  - population: population</span></span>
 <span><span class="co">#&gt;    lower.age.limit population</span></span>
 <span><span class="co">#&gt;              &lt;int&gt;      &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1               0   1852682.</span></span>
@@ -155,15 +157,17 @@
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 1.68 4.19 5.55 6.28 7.90 7.39  total = 35.99 </span></span>
+<span><span class="co">#&gt; 1.00 4.27 5.51 6.23 7.89 7.36  total = 35.26 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 23784.14     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 24060.58     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fairfield_age_pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
-<span><span class="va">fairfield_age_pop</span></span>
-<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<code class="sourceCode R"><span><span class="va">fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
+<span><span class="va">fairfield</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4 (conmat_population)</span></span>
+<span><span class="co">#&gt;  - age: lower.age.limit</span></span>
+<span><span class="co">#&gt;  - population: population</span></span>
 <span><span class="co">#&gt;    lga           lower.age.limit  year population</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 Fairfield (C)               0  2020      12261</span></span>
@@ -189,43 +193,24 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2022</span> <span class="op">-</span> <span class="fl">09</span> <span class="op">-</span> <span class="fl">06</span><span class="op">)</span></span>
 <span><span class="va">synthetic_contact_fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/predict_contacts.html">predict_contacts</a></span><span class="op">(</span></span>
 <span>  model <span class="op">=</span> <span class="va">contact_model</span>,</span>
-<span>  population <span class="op">=</span> <span class="va">fairfield_age_pop</span>,</span>
+<span>  population <span class="op">=</span> <span class="va">fairfield</span>,</span>
 <span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Called from: predict_contacts(model = contact_model, population = fairfield_age_pop, </span></span>
-<span><span class="co">#&gt;     age_breaks = c(seq(0, 85, by = 5), Inf))</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#71: age &lt;- age(population)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#72: age_var &lt;- age_label(population)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#73: population &lt;- population %&gt;% dplyr::arrange(!!age)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#77: age_min_integration &lt;- min(population[[age_var]])</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#78: bin_widths &lt;- diff(population[[age_var]])</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#79: final_bin_width &lt;- bin_widths[length(bin_widths)]</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#80: age_max_integration &lt;- max(population[[age_var]]) + final_bin_width</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#84: pop_fun &lt;- get_age_population_function(population)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#85: ages &lt;- age_min_integration:age_max_integration</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#86: valid &lt;- pop_fun(ages) &gt; 0</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#87: age_min_integration &lt;- min(ages[valid])</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#88: age_max_integration &lt;- max(ages[valid])</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#90: pred_1y &lt;- predict_contacts_1y(model = model, population = population, </span></span>
-<span><span class="co">#&gt;     age_min = age_min_integration, age_max = age_max_integration)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#99: pred_groups &lt;- aggregate_predicted_contacts(predicted_contacts_1y = pred_1y, </span></span>
-<span><span class="co">#&gt;     population = population, age_breaks = age_breaks)</span></span>
-<span><span class="co">#&gt; debug at /Users/nick/github/njtierney/conmat/R/predict_contacts.R#105: pred_groups</span></span>
 <span></span>
 <span><span class="va">synthetic_contact_fairfield</span></span>
 <span><span class="co">#&gt; # A tibble: 324 × 3</span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00224</span></span>
-<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00361</span></span>
-<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00280</span></span>
-<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00410</span></span>
-<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0107 </span></span>
-<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0220 </span></span>
+<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00213</span></span>
+<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00360</span></span>
+<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00305</span></span>
+<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00444</span></span>
+<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0110 </span></span>
+<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0218 </span></span>
 <span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0317 </span></span>
-<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0336 </span></span>
-<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0331 </span></span>
-<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0325 </span></span>
+<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0345 </span></span>
+<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0341 </span></span>
+<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0330 </span></span>
 <span><span class="co">#&gt; # … with 314 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -250,7 +235,9 @@
 <p>You can extract the age population structure for the LGA, Brisbane, like so:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Brisbane (C)"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4 (conmat_population)</span></span>
+<span><span class="co">#&gt;  - age: lower.age.limit</span></span>
+<span><span class="co">#&gt;  - population: population</span></span>
 <span><span class="co">#&gt;    lga          lower.age.limit  year population</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 Brisbane (C)               0  2020      72894</span></span>
@@ -291,7 +278,9 @@
 <p>Or get the information for states like so:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/abs_age_data.html">abs_age_state</a></span><span class="op">(</span>state_name <span class="op">=</span> <span class="st">"QLD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 18 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 4 (conmat_population)</span></span>
+<span><span class="co">#&gt;  - age: lower.age.limit</span></span>
+<span><span class="co">#&gt;  - population: population</span></span>
 <span><span class="co">#&gt;     year state lower.age.limit population</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1  2020 QLD                 0     314602</span></span>

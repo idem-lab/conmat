@@ -151,9 +151,9 @@ with.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> fREML score: 14701.28     rank: 55/57</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">fairfield_abs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fairfield</span> <span class="op">&lt;-</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">fairfield_abs_data</span></span></span>
+<span class="r-in"><span><span class="va">fairfield</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 4</span> <span style="color: #BB0000;">(conmat_population)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span>
@@ -183,7 +183,7 @@ with.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">fairfield_school_contacts</span> <span class="op">&lt;-</span> <span class="fu">predict_contacts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  model <span class="op">=</span> <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">school</span>,</span></span>
-<span class="r-in"><span>  population <span class="op">=</span> <span class="va">fairfield_abs_data</span>,</span></span>
+<span class="r-in"><span>  population <span class="op">=</span> <span class="va">fairfield</span>,</span></span>
 <span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="cn">Inf</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
