@@ -20,13 +20,13 @@ converts a wide matrix into a long data frame. It is mostly used within
 plotting functions.
 }
 \examples{
-fairfield_abs_data <- abs_age_lga("Fairfield (C)")
+fairfield <- abs_age_lga("Fairfield (C)")
 
 # We can convert the predictions into a matrix
 
 fairfield_school_contacts <- predict_contacts(
   model = polymod_setting_models$school,
-  population = fairfield_abs_data,
+  population = fairfield,
   age_breaks = c(0, 5, 10, 15, Inf)
 )
 

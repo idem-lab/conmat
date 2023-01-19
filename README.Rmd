@@ -125,8 +125,8 @@ We can use this contact model to then predict the contact rate in a new populati
 As a demonstration, let's take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).
 
 ```{r fairfield}
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
 ```
 
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to.
@@ -135,7 +135,7 @@ We can then pass the contact model through to `predict_contacts`, along with the
 set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
-  population = fairfield_age_pop,
+  population = fairfield,
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 
@@ -186,5 +186,3 @@ The contact matrices created using this package are transposed when compared to 
 ## Code of Conduct
 
 Please note that the conmat project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
-
-

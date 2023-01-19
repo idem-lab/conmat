@@ -60,11 +60,11 @@
 #' age_breaks <- c(seq(0, 80, by = 5), Inf)
 #'
 #' # define a new population age distribution to predict to
-#' fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+#' fairfield <- abs_age_lga("Fairfield (C)")
 #'
 #' # predict setting-specific contact matrices to a new population
 #' contact_matrices <- predict_setting_contacts(
-#'   population = fairfield_age_pop,
+#'   population = fairfield,
 #'   contact_model = setting_models,
 #'   age_breaks = age_breaks
 #' )

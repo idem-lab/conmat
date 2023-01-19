@@ -48,13 +48,13 @@ if (interactive()) {
     population = polymod_survey_data
   )
 
-  fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+  fairfield <- abs_age_lga("Fairfield (C)")
 
   fairfield_hh_size <-
     get_per_capita_household_size(lga = "Fairfield (C)")
 
   synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
-    population = fairfield_age_pop,
+    population = fairfield,
     contact_model = setting_models,
     age_breaks = c(seq(0, 85, by = 5), Inf),
     per_capita_household_size = fairfield_hh_size
