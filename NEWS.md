@@ -1,3 +1,17 @@
+# conmat 0.0.2.9000
+
+## Breaking changes
+
+* change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
+* change `get_data_abs_age_work` to `abs_age_work`
+* change `get_data_abs_age_education` to `abs_age_education`
+* change `get_household_size_distribution` -> `get_abs_household_size_distribution`
+* change `abs_household_size_population` -> `get_abs_household_size_population`
+* change `abs_per_capita_household_size_lga` -> `get_abs_per_capita_household_size_lga`
+* change `abs_per_capita_household_size_state` -> `get_abs_per_capita_household_size_state`
+* `abbreviate_states` -> `abs_abbreviate_states`
+* `unabbreviate_states` -> `abs_unabbreviate_states`
+
 # conmat 0.0.1.9000
 
 ## Changes
@@ -8,15 +22,7 @@
 * accessor method, `raw_eigenvalue()` for getting the raw eigenvalue from a next generation matrix, "ngm_setting_matrix".
 * accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
 * add `autoplot` methods for ngm, vaccination, and transmission probability
-* change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
-* change `get_data_abs_age_work` to `abs_age_work`
-* change `get_data_abs_age_education` to `abs_age_education`
-* change `get_household_size_distribution` -> `get_abs_household_size_distribution`
-* change `abs_household_size_population` -> `get_abs_household_size_population`
-* change `abs_per_capita_household_size_lga` -> `get_abs_per_capita_household_size_lga`
-* change `abs_per_capita_household_size_state` -> `get_abs_per_capita_household_size_state`
-* `abbreviate_states` -> `abs_abbreviate_states`
-* `unabbreviate_states` -> `abs_unabbreviate_states`
+
 
 ## Breaking Changes
 
