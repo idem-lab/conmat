@@ -220,10 +220,10 @@ transmission_matrix <- get_setting_transmission_matrices(
 )
 
 n_finite_states <- length(age_breaks_socialmixr) - 1
-transmission_matrix$home <- matrix(4, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$work <- matrix(4, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$school <- matrix(4, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$other <- matrix(4, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$home <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$work <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$school <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$other <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
 
 parameters <- list(
     "transmission_matrix" = transmission_matrix,
@@ -242,7 +242,7 @@ names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = n_finite_state
 ```
 
 ```{r solve-ode-germany}
-times <- seq(0, 100, by = 0.1)
+times <- seq(0, 25, by = 0.1)
 germany_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters)
 
 # Have to convert ode output to a data frame to do any plotting
@@ -319,4 +319,22 @@ conmat_prem_soln
 ggplot(conmat_prem_soln, aes(x = time, y = value, colour = name, linetype = type)) +
     geom_line() +
     labs(x = "Time", y = "Value", colour = "State", linetype = "Model")
+```
+
+Here is a rough schematic of calculating the R0 for both of these models. This only works because the recovery rate is 1 and doesn't vary by age, and the transmission rate doesn't vary by age.
+
+```{r play-with-R0}
+total_matrix <- transmission_matrix$home * germany_contacts$home +
+    transmission_matrix$work * germany_contacts$work +
+    transmission_matrix$school * germany_contacts$school +
+    transmission_matrix$other * germany_contacts$other
+
+Re(eigen(total_matrix)$values[1])
+
+total_matrix_prem <- transmission_matrix$home * prem_germany_contact_matrices$home +
+    transmission_matrix$work * prem_germany_contact_matrices$work +
+    transmission_matrix$school * prem_germany_contact_matrices$school +
+    transmission_matrix$other * prem_germany_contact_matrices$other
+
+Re(eigen(total_matrix_prem)$values[1])
 ```
