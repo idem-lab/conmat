@@ -5,8 +5,8 @@
 #' @return returns a data frame with household size and the population associated with it in each LGA or state.
 #' @export
 #' @examples
-#' abs_household_size_population(state = "NSW")
-abs_household_size_population <- function(state = NULL, lga = NULL) {
+#' get_abs_household_size_population(state = "NSW")
+get_abs_household_size_population <- function(state = NULL, lga = NULL) {
   level <- dplyr::case_when(
     is.null(state) & is.null(lga) ~ "national",
     !is.null(state) & is.null(lga) ~ "state",

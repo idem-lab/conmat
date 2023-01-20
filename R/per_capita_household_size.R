@@ -1,23 +1,23 @@
 #' @title Get per capita household size with household size distribution
 #'
 #' @description Returns the per capita household size for a location given
-#'   its household size distribution. See [get_household_size_distribution()]
+#'   its household size distribution. See [get_abs_household_size_distribution()]
 #'   function for retrieving household size distributions for a given place.
 #'
 #' @param household_data data set with information on the household size
 #'   distribution of specific state or LGA.
 #' @param household_size_col bare variable name of the column depicting the
 #'   household size. Default is 'household_size' from
-#'   [abs_per_capita_household_size_lga()].
+#'   [get_abs_per_capita_household_size_lga()].
 #' @param n_people_col bare variable name of the column depicting the total
 #'   number of people belonging to the respective household size. Default is
-#'   'n_people' from [abs_per_capita_household_size_lga()].
+#'   'n_people' from [get_abs_per_capita_household_size_lga()].
 #' @return Numeric of length 1 - the per capita household size for a given
 #'   state or LGA.
 #' @author Nick Golding
 #' @export
 #' @examples
-#' demo_data <- abs_household_size_population(lga = "Fairfield (C)")
+#' demo_data <- get_abs_household_size_population(lga = "Fairfield (C)")
 #' demo_data
 #' per_capita_household_size(
 #'   household_data = demo_data,

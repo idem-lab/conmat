@@ -48,7 +48,7 @@ reference:
       - starts_with("abs_")
       - starts_with("data_abs_")
       - starts_with("get_abs_")
-      - get_household_size_distribution
+      - get_abs_household_size_distribution
       - get_abs_per_capita_household_size
       - abbreviate_states
       - unabbreviate_states

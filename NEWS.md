@@ -10,6 +10,11 @@
 * add `autoplot` methods for ngm, vaccination, and transmission probability
 * change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
 * change `get_data_abs_age_work` to `abs_age_work`
+* change `get_data_abs_age_education` to `abs_age_education`
+* change `get_household_size_distribution` -> `get_abs_household_size_distribution`
+* change `abs_household_size_population` -> `get_abs_household_size_population`
+* change `abs_per_capita_household_size_lga` -> `get_abs_per_capita_household_size_lga`
+* change `abs_per_capita_household_size_state` -> `get_abs_per_capita_household_size_state`
 
 ## Breaking Changes
 
