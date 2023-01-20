@@ -58,10 +58,10 @@ homogeneous_contact$other <- matrix(1, nrow = 9, ncol = 9)
 transmission_matrix <- get_setting_transmission_matrices(
     age_breaks = age_breaks_0_80_plus
 )
-transmission_matrix$home <- matrix(0.5, nrow = 9, ncol = 9)
-transmission_matrix$work <- matrix(0.5, nrow = 9, ncol = 9)
-transmission_matrix$school <- matrix(0.5, nrow = 9, ncol = 9)
-transmission_matrix$other <- matrix(0.5, nrow = 9, ncol = 9)
+transmission_matrix$home <- matrix(0.05, nrow = 9, ncol = 9)
+transmission_matrix$work <- matrix(0.05, nrow = 9, ncol = 9)
+transmission_matrix$school <- matrix(0.05, nrow = 9, ncol = 9)
+transmission_matrix$other <- matrix(0.05, nrow = 9, ncol = 9)
 ```
 
 We also need to set up our population structures. We'll have all the S states, then I, then R. Since we're using `deSolve` to solve this system, we need to make sure this order stays the same throughout!
@@ -92,22 +92,30 @@ agestructured_sir <- function(time, state, parameters) {
     # Calculate the force of infection for each setting:
     # unstructured SIR beta is age_group_n / pop_n
     #
-    lambda_home <- (parameters[["transmission_matrix"]]$home * parameters[["homogeneous_contact"]]$home) %*% state[parameters[["i_indexes"]]]
+    N_by_age <- vapply(parameters[["s_indexes"]], function(i) {
+        current_indexes_to_sum <- c(
+            parameters[["s_indexes"]][i],
+            parameters[["i_indexes"]][i],
+            parameters[["r_indexes"]][i]
+        )
+        sum(state[current_indexes_to_sum])
+    }, FUN.VALUE = 0.0)
 
-    lambda_work <- (parameters[["transmission_matrix"]]$work * parameters[["homogeneous_contact"]]$work) %*% state[parameters[["i_indexes"]]]
+    lambda_home <- (parameters[["transmission_matrix"]]$home * parameters[["homogeneous_contact"]]$home) %*% state[parameters[["i_indexes"]]] / N_by_age
 
-    lambda_school <- (parameters[["transmission_matrix"]]$school * parameters[["homogeneous_contact"]]$school) %*% state[parameters[["i_indexes"]]]
+    lambda_work <- (parameters[["transmission_matrix"]]$work * parameters[["homogeneous_contact"]]$work) %*% state[parameters[["i_indexes"]]] / N_by_age
 
-    lambda_other <- (parameters[["transmission_matrix"]]$other * parameters[["homogeneous_contact"]]$other) %*% state[parameters[["i_indexes"]]]
+    lambda_school <- (parameters[["transmission_matrix"]]$school * parameters[["homogeneous_contact"]]$school) %*% state[parameters[["i_indexes"]]] / N_by_age
+
+    lambda_other <- (parameters[["transmission_matrix"]]$other * parameters[["homogeneous_contact"]]$other) %*% state[parameters[["i_indexes"]]] / N_by_age
 
     # Combine them all into one term for ease of computation
     lambda_total <- lambda_home + lambda_work + lambda_school + lambda_other
 
-    N <- sum(state)
 
     # Don't forget to normalise your infection rate by the population!
-    dSdt <- -lambda_total * state[parameters[["s_indexes"]]] / N
-    dIdt <- lambda_total / N * state[parameters[["s_indexes"]]] - parameters[["gamma"]] * state[parameters[["i_indexes"]]]
+    dSdt <- -lambda_total * state[parameters[["s_indexes"]]]
+    dIdt <- lambda_total * state[parameters[["s_indexes"]]] - parameters[["gamma"]] * state[parameters[["i_indexes"]]]
     dRdt <- parameters[["gamma"]] * state[parameters[["i_indexes"]]]
 
     return(list(c(dSdt, dIdt, dRdt)))
@@ -127,7 +135,7 @@ head(homogeneous_soln)
 Now, let's compare this to an SIR model with no stratification:
 
 ```{r standard-sir}
-parameters_sir <- c("beta" = 2, "gamma" = 1)
+parameters_sir <- c("beta" = 1.8, "gamma" = 1)
 initial_condition_sir <- c("S" = 8991, "I" = 9, "R" = 0)
 
 sir <- function(time, state, parameters) {
