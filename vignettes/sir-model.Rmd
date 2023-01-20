@@ -190,7 +190,7 @@ Now that we've established an age-structured SIR model, we can repeat the proces
 ```{r setup-aus-matrices}
 world_data <- socialmixr::wpp_age() %>%
     mutate(
-        new_lower_age = if_else(lower.age.limit >= 80, 80L, lower.age.limit)
+        new_lower_age = if_else(lower.age.limit >= 75, 75L, lower.age.limit)
     ) %>%
     group_by(new_lower_age, country, year) %>%
     summarise(
@@ -220,10 +220,10 @@ transmission_matrix <- get_setting_transmission_matrices(
 )
 
 n_finite_states <- length(age_breaks_socialmixr) - 1
-transmission_matrix$home <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$work <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$school <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$other <- matrix(0.1, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$home <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$work <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$school <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
+transmission_matrix$other <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
 
 parameters <- list(
     "transmission_matrix" = transmission_matrix,
@@ -234,7 +234,7 @@ parameters <- list(
     "r_indexes" = (2 * n_finite_states + 1):(3 * n_finite_states)
 )
 
-S0 <- rep(999, times = n_finite_states)
+S0 <- germany_2015$population
 I0 <- rep(1, times = n_finite_states)
 R0 <- rep(0, times = n_finite_states)
 initial_condition <- c(S0, I0, R0)
@@ -242,7 +242,7 @@ names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = n_finite_state
 ```
 
 ```{r solve-ode-germany}
-times <- seq(0, 25, by = 0.1)
+times <- seq(0, 100, by = 0.1)
 germany_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters)
 
 # Have to convert ode output to a data frame to do any plotting
@@ -316,9 +316,10 @@ conmat_prem_soln
 ```
 
 ```{r plot-conmat-prem}
-ggplot(conmat_prem_soln, aes(x = time, y = value, colour = name, linetype = type)) +
+ggplot(conmat_prem_soln, aes(x = time, y = value, colour = type)) +
     geom_line() +
-    labs(x = "Time", y = "Value", colour = "State", linetype = "Model")
+    labs(x = "Time", y = "Value", colour = "Model") +
+    facet_wrap(~name, nrow=1)
 ```
 
 Here is a rough schematic of calculating the R0 for both of these models. This only works because the recovery rate is 1 and doesn't vary by age, and the transmission rate doesn't vary by age.
@@ -337,4 +338,23 @@ total_matrix_prem <- transmission_matrix$home * prem_germany_contact_matrices$ho
     transmission_matrix$other * prem_germany_contact_matrices$other
 
 Re(eigen(total_matrix_prem)$values[1])
+```
+
+```{r}
+calculate_R0_prem <- function(multiplier) {
+    total_matrix_prem <- transmission_matrix$home * prem_germany_contact_matrices$home +
+        transmission_matrix$work * prem_germany_contact_matrices$work +
+        transmission_matrix$school * prem_germany_contact_matrices$school +
+        transmission_matrix$other * prem_germany_contact_matrices$other
+
+    abs(Re(eigen(total_matrix_prem * multiplier)$values[1]) - 1.5)
+}
+
+optimize(f = calculate_R0_prem, interval = c(1, 5))
+```
+
+```{r}
+nprem <- nrow(prem_soln)
+a <- prem_soln[nprem, parameters[["r_indexes"]]+1]
+barplot(as.numeric(a))
 ```
