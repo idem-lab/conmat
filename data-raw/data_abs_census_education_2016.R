@@ -24,7 +24,7 @@ data_abs_state_education <-
   ) %>%
   # Institution (TYPP) stated, full-time/part-time status (STUP) not stated -> considered
   mutate(
-    state = abbreviate_states(`STATE (UR)`),
+    state = abs_abbreviate_states(`STATE (UR)`),
     state = replace_na(state, "OT")
   ) %>%
   rename(
@@ -121,7 +121,7 @@ use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 #   # Type of Educational Institution Attending (TYPP). Definition in below link
 #   # https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/by%20Subject/2900.0~2016~Main%20Features~TYPP%20Type%20of%20Educational%20Institution%20Attending~10086
 #   # Institution (TYPP) stated, full-time/part-time status (STUP) not stated -> Not considered
-#   mutate(state = abbreviate_states(`STATE (UR)`)) %>%
+#   mutate(state = abs_abbreviate_states(`STATE (UR)`)) %>%
 #   rename(age = "AGEP Age",
 #          student_type = "STUP Full-Time/Part-Time Student Status") %>%
 #   select(state, age, student_type, Count) %>%

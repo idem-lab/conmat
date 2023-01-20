@@ -12,7 +12,7 @@
 #'   adjusts the household contact matrix by some per capita household size.
 #'   To set it, provide a single number, the per capita household size. More
 #'   information is provided below in Details. See
-#'   [get_per_capita_household_size()] function for a helper for Australian
+#'   [get_abs_per_capita_household_size()] function for a helper for Australian
 #'    data with a workflow on how to get this number.
 #' @param model_per_capita_household_size modelled per capita household size.
 #'     Default values for this are from
@@ -55,7 +55,7 @@
 #'   age_breaks = age_break_0_85_plus
 #' )
 #'
-#' fairfield_hh_size <- get_per_capita_household_size(lga = "Fairfield (C)")
+#' fairfield_hh_size <- get_abs_per_capita_household_size(lga = "Fairfield (C)")
 #' fairfield_hh_size
 #'
 #' synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(

@@ -38,7 +38,7 @@ abs_education_state_2020_aggregated %>%
 abs_state_age_lookup <- abs_state_age %>%
   mutate(
     lower.age.limit = parse_number(as.character(age_group)),
-    state = abbreviate_states(state)
+    state = abs_abbreviate_states(state)
   ) %>%
   select(
     state,

@@ -51,7 +51,7 @@ if (interactive()) {
   fairfield <- abs_age_lga("Fairfield (C)")
 
   fairfield_hh_size <-
-    get_per_capita_household_size(lga = "Fairfield (C)")
+    get_abs_per_capita_household_size(lga = "Fairfield (C)")
 
   synthetic_settings_5y_fairfield_hh <- predict_setting_contacts(
     population = fairfield,

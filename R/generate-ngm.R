@@ -47,7 +47,7 @@
 #' @examples
 #' \dontrun{
 #' perth <- abs_age_lga("Perth (C)")
-#' perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+#' perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 #'
 #' age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
 #'
@@ -207,10 +207,10 @@ generate_ngm_oz <- function(state_name = NULL,
   # size in this population
   if (!is.null(state_name)) {
     population <- abs_age_state(state_name = {{ state_name }})
-    household_size <- get_per_capita_household_size(state = {{ state_name }})
+    household_size <- get_abs_per_capita_household_size(state = {{ state_name }})
   } else {
     population <- abs_age_lga(lga_name = {{ lga_name }})
-    household_size <- get_per_capita_household_size(lga = {{ lga_name }})
+    household_size <- get_abs_per_capita_household_size(lga = {{ lga_name }})
   }
 
   # predict from the model to contact rates for a population with these

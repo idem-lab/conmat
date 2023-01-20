@@ -16,11 +16,11 @@ distribution of specific state or LGA.}
 
 \item{household_size_col}{bare variable name of the column depicting the
 household size. Default is 'household_size' from
-\code{\link[=abs_per_capita_household_size_lga]{abs_per_capita_household_size_lga()}}.}
+\code{\link[=get_abs_per_capita_household_size_lga]{get_abs_per_capita_household_size_lga()}}.}
 
 \item{n_people_col}{bare variable name of the column depicting the total
 number of people belonging to the respective household size. Default is
-'n_people' from \code{\link[=abs_per_capita_household_size_lga]{abs_per_capita_household_size_lga()}}.}
+'n_people' from \code{\link[=get_abs_per_capita_household_size_lga]{get_abs_per_capita_household_size_lga()}}.}
 }
 \value{
 Numeric of length 1 - the per capita household size for a given
@@ -28,11 +28,11 @@ state or LGA.
 }
 \description{
 Returns the per capita household size for a location given
-its household size distribution. See \code{\link[=get_household_size_distribution]{get_household_size_distribution()}}
+its household size distribution. See \code{\link[=get_abs_household_size_distribution]{get_abs_household_size_distribution()}}
 function for retrieving household size distributions for a given place.
 }
 \examples{
-demo_data <- abs_household_size_population(lga = "Fairfield (C)")
+demo_data <- get_abs_household_size_population(lga = "Fairfield (C)")
 demo_data
 per_capita_household_size(
   household_data = demo_data,

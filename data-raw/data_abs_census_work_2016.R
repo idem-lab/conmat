@@ -37,7 +37,7 @@ get_data <- function(i) {
       state = abs_census_labour_status$...1[[i]]
     ) %>%
     mutate(
-      state = conmat::abbreviate_states(state),
+      state = conmat::abs_abbreviate_states(state),
       state = replace_na(state, "OT")
     ) %>%
     select(year, state, age, employed_population, total_population = total, proportion) %>%

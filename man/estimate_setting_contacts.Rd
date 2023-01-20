@@ -30,7 +30,7 @@ set is survey_population}
 adjusts the household contact matrix by some per capita household size.
 To set it, provide a single number, the per capita household size. More
 information is provided below in Details. See
-\code{\link[=get_per_capita_household_size]{get_per_capita_household_size()}} function for a helper for Australian
+\code{\link[=get_abs_per_capita_household_size]{get_abs_per_capita_household_size()}} function for a helper for Australian
 data with a workflow on how to get this number.}
 
 \item{symmetrical}{whether to enforce symmetrical terms in the model.
@@ -56,8 +56,28 @@ settings_estimated_contacts <- estimate_setting_contacts(
   contact_data_list = get_polymod_setting_data(),
   survey_population = get_polymod_population(),
   prediction_population = get_polymod_population(),
-  age_breaks = c(seq(0, 75, by = 5), Inf),
+  age_breaks = c(seq(0, 85, by = 5), Inf),
   per_capita_household_size = NULL
+)
+
+# or predict to fairfield
+fairfield_hh <- get_abs_per_capita_household_size(lga = "Fairfield (C)")
+contact_model_pred_est <- estimate_setting_contacts(
+  contact_data_list = get_polymod_setting_data(),
+  survey_population = get_polymod_population(),
+  prediction_population = abs_age_lga("Fairfield (C)"),
+  age_breaks = c(seq(0, 85, by = 5), Inf),
+  per_capita_household_size = fairfield_hh
+)
+
+# or use non-symmetric model terms
+contact_model_pred_est <- estimate_setting_contacts(
+  contact_data_list = get_polymod_setting_data(),
+  survey_population = get_polymod_population(),
+  prediction_population = abs_age_lga("Fairfield (C)"),
+  age_breaks = c(seq(0, 85, by = 5), Inf),
+  per_capita_household_size = fairfield_hh,
+  symmetrical = FALSE
 )
 }
 }
