@@ -9,6 +9,7 @@
 * accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
 * add `autoplot` methods for ngm, vaccination, and transmission probability
 * change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
+* change `get_data_abs_age_work` to `abs_age_work`
 
 ## Breaking Changes
 
