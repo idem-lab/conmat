@@ -15,6 +15,8 @@
 * change `abs_household_size_population` -> `get_abs_household_size_population`
 * change `abs_per_capita_household_size_lga` -> `get_abs_per_capita_household_size_lga`
 * change `abs_per_capita_household_size_state` -> `get_abs_per_capita_household_size_state`
+* `abbreviate_states` -> `abs_abbreviate_states`
+* `unabbreviate_states` -> `abs_unabbreviate_states`
 
 ## Breaking Changes
 

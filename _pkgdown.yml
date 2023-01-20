@@ -50,8 +50,8 @@ reference:
       - starts_with("get_abs_")
       - get_abs_household_size_distribution
       - get_abs_per_capita_household_size
-      - abbreviate_states
-      - unabbreviate_states
+      - abs_abbreviate_states
+      - abs_unabbreviate_states
 
   - title: "Data and model objects"
     desc: >

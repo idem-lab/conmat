@@ -53,7 +53,7 @@ abs_pop_age_lga_2016_raw <- file_path %>%
     lga_code = lga_code19,
     lga = lga_name19
   ) %>%
-  mutate(state = abbreviate_states(state)) %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   select(-lga_code) %>%
   rename(age_group = age) %>%
   # replace emdash

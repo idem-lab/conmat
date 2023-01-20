@@ -76,7 +76,7 @@ abs_employ_age_lga <- abs_employment_raw %>%
     values_from = persons
   ) %>%
   clean_names() %>%
-  mutate(state = abbreviate_states(state)) %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   # drop "other territories"
   drop_na() %>%
   select(-lga_code) %>%
