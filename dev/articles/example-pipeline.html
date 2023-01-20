@@ -27,7 +27,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">conmat</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.0.2.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -603,7 +603,7 @@ creating the model, to use terms that aren’t strictly symmetric.</p>
 <p>Now that we’ve got our model, we can predict to our fairfield data,
 like so:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_per_capita_household_size.html">get_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_abs_per_capita_household_size.html">get_abs_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span>
 <span><span class="va">fairfield_hh</span></span>
 <span><span class="co">#&gt; [1] 4.199372</span></span>
 <span><span class="va">contact_model_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predict_setting_contacts.html">predict_setting_contacts</a></span><span class="op">(</span></span>
@@ -623,8 +623,8 @@ setting</li>
 <li>
 <code>per_capita_household_size</code> is the household size for
 that population, in our case we have a helper function,
-<code>get_per_capita_household_size</code> which works for each LGA in
-Australia.</li>
+<code>get_abs_per_capita_household_size</code> which works for each LGA
+in Australia.</li>
 </ul>
 <p>alternatively, you can use the <code>estimate_setting_contacts</code>
 function to do a similar task:</p>

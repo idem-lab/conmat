@@ -43,10 +43,16 @@
     <loc>/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>/dev/reference/abbreviate_states.html</loc>
+    <loc>/dev/reference/abs_abbreviate_states.html</loc>
   </url>
   <url>
     <loc>/dev/reference/abs_age_data.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/abs_age_education.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/abs_age_work.html</loc>
   </url>
   <url>
     <loc>/dev/reference/abs_education_state.html</loc>
@@ -61,16 +67,7 @@
     <loc>/dev/reference/abs_household_lga.html</loc>
   </url>
   <url>
-    <loc>/dev/reference/abs_household_size_population.html</loc>
-  </url>
-  <url>
     <loc>/dev/reference/abs_lga_lookup.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/abs_per_capita_household_size_lga.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/abs_per_capita_household_size_state.html</loc>
   </url>
   <url>
     <loc>/dev/reference/abs_pop_age_lga_2016.html</loc>
@@ -80,6 +77,9 @@
   </url>
   <url>
     <loc>/dev/reference/abs_state_age.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/abs_unabbreviate_states.html</loc>
   </url>
   <url>
     <loc>/dev/reference/accessors.html</loc>
@@ -178,19 +178,22 @@
     <loc>/dev/reference/generate_ngm_oz.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/get_abs_household_size_distribution.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/get_abs_household_size_population.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/get_abs_per_capita_household_size.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/get_abs_per_capita_household_size_lga.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/get_abs_per_capita_household_size_state.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/get_age_population_function.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/get_data_abs_age_education.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/get_data_abs_age_work.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/get_household_size_distribution.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/get_per_capita_household_size.html</loc>
   </url>
   <url>
     <loc>/dev/reference/get_polymod_contact_data.html</loc>
@@ -260,9 +263,6 @@
   </url>
   <url>
     <loc>/dev/reference/setting_weights.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/unabbreviate_states.html</loc>
   </url>
   <url>
     <loc>/dev/reference/vaccination_effect_example_data.html</loc>

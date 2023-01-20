@@ -22,7 +22,7 @@ impacted by any future plans provided."><meta name="robots" content="noindex"><!
     
     <a class="navbar-brand me-2" href="../index.html">conmat</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.0.2.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,7 +112,7 @@ set is survey_population</p></dd>
 adjusts the household contact matrix by some per capita household size.
 To set it, provide a single number, the per capita household size. More
 information is provided below in Details. See
-<code><a href="get_per_capita_household_size.html">get_per_capita_household_size()</a></code> function for a helper for Australian
+<code><a href="get_abs_per_capita_household_size.html">get_abs_per_capita_household_size()</a></code> function for a helper for Australian
 data with a workflow on how to get this number.</p></dd>
 
 
@@ -137,8 +137,28 @@ information.</p></dd>
 <span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  survey_population <span class="op">=</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  prediction_population <span class="op">=</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">75</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># or predict to fairfield</span></span></span>
+<span class="r-in"><span><span class="va">fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_abs_per_capita_household_size.html">get_abs_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">contact_model_pred_est</span> <span class="op">&lt;-</span> <span class="fu">estimate_setting_contacts</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  survey_population <span class="op">=</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  prediction_population <span class="op">=</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># or use non-symmetric model terms</span></span></span>
+<span class="r-in"><span><span class="va">contact_model_pred_est</span> <span class="op">&lt;-</span> <span class="fu">estimate_setting_contacts</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  survey_population <span class="op">=</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  prediction_population <span class="op">=</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh</span>,</span></span>
+<span class="r-in"><span>  symmetrical <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
