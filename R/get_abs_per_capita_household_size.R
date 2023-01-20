@@ -6,13 +6,13 @@
 #' @author Nick Golding
 #' @export
 #' @examples
-#' get_per_capita_household_size(lga = "Fairfield (C)")
-#' get_per_capita_household_size(state = "NSW")
+#' get_abs_per_capita_household_size(lga = "Fairfield (C)")
+#' get_abs_per_capita_household_size(state = "NSW")
 #' \dontrun{
 #' # cannot specify both state and LGA
-#' get_per_capita_household_size(state = "NSW", lga = "Fairfield (C)")
+#' get_abs_per_capita_household_size(state = "NSW", lga = "Fairfield (C)")
 #' }
-get_per_capita_household_size <- function(state = NULL, lga = NULL) {
+get_abs_per_capita_household_size <- function(state = NULL, lga = NULL) {
   level <- dplyr::case_when(
     is.null(state) & is.null(lga) ~ "national",
     !is.null(state) & is.null(lga) ~ "state",

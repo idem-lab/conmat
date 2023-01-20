@@ -28,7 +28,7 @@ abs_state_age <- read_excel(
     age_group != "All ages",
     state != "Australia"
   ) %>%
-  mutate(state = abbreviate_states(state)) %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   relocate(
     state,
     age_group,

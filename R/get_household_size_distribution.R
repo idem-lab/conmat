@@ -5,13 +5,13 @@
 #' @return returns a data frame with household size distributions of a specific state or LGA
 #' @export
 #' @examples
-#' get_household_size_distribution(lga = "Fairfield (C)")
-#' get_household_size_distribution(state = "NSW")
+#' get_abs_household_size_distribution(lga = "Fairfield (C)")
+#' get_abs_household_size_distribution(state = "NSW")
 #' \dontrun{
 #' # cannot specify both state and LGA
-#' get_household_size_distribution(state = "NSW", lga = "Fairfield (C)")
+#' get_abs_household_size_distribution(state = "NSW", lga = "Fairfield (C)")
 #' }
-get_household_size_distribution <- function(state = NULL, lga = NULL) {
+get_abs_household_size_distribution <- function(state = NULL, lga = NULL) {
   level <- dplyr::case_when(
     is.null(state) & is.null(lga) ~ "national",
     !is.null(state) & is.null(lga) ~ "state",

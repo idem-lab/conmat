@@ -65,7 +65,7 @@ vaccination_effect_example_data
 # Generate next generation matrices
 
 perth <- abs_age_lga("Perth (C)")
-perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 
 age_breaks_0_80 <- c(seq(0, 80, by = 5), Inf)
 

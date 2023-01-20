@@ -9,7 +9,7 @@ data_lga_state <- read_csv("data-raw/2011_lga_state.csv") %>%
     lga_code = LGA_CODE_2011,
     lga = LGA_NAME_2011
   ) %>%
-  mutate(state = abbreviate_states(state)) %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   distinct_all() %>%
   dplyr::mutate(state = replace_na(state, "Other Territories")) %>%
   mutate(

@@ -4,9 +4,9 @@
 #' @return returns a numeric value depicting the per capita household size of the specified LGA
 #' @export
 #' @examples
-#' abs_per_capita_household_size_lga(lga = "Fairfield (C)")
+#' get_abs_per_capita_household_size_lga(lga = "Fairfield (C)")
 #'
-abs_per_capita_household_size_lga <- function(lga = NULL) {
+get_abs_per_capita_household_size_lga <- function(lga = NULL) {
   check_lga_name(lga, multiple_lga = FALSE)
 
   # given ABS data on household sizes for a *single location*, get average
@@ -18,7 +18,7 @@ abs_per_capita_household_size_lga <- function(lga = NULL) {
 
   lga <- rlang::enquo(lga)
 
-  household_data <- abs_household_size_population(lga = lga)
+  household_data <- get_abs_household_size_population(lga = lga)
   # set up aggregation
   household_data <- household_data %>%
     dplyr::filter(lga == !!lga) %>%

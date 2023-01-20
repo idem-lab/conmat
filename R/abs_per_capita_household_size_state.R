@@ -3,8 +3,8 @@
 #' @return returns a numeric value depicting the per capita household size of the specified state
 #' @export
 #' @examples
-#' abs_per_capita_household_size_state(state = "NSW")
-abs_per_capita_household_size_state <- function(state = NULL) {
+#' get_abs_per_capita_household_size_state(state = "NSW")
+get_abs_per_capita_household_size_state <- function(state = NULL) {
   check_state_name(state, multiple_state = FALSE)
 
   # given ABS data on household sizes for a *single location*, get average
@@ -16,7 +16,7 @@ abs_per_capita_household_size_state <- function(state = NULL) {
 
   state <- rlang::enquo(state)
   # get state mean household sizes
-  household_data <- abs_household_size_population(state = state)
+  household_data <- get_abs_household_size_population(state = state)
 
 
 

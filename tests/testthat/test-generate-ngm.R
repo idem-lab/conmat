@@ -1,5 +1,5 @@
 perth <- abs_age_lga("Perth (C)")
-perth_hh <- get_per_capita_household_size(lga = "Perth (C)")
+perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 
 perth_contact <- extrapolate_polymod(
   perth,

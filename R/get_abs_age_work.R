@@ -11,12 +11,12 @@
 #'   to a particular age, its total population and the corresponding proportion.
 #' @export
 #' @examples
-#' get_data_abs_age_work(state = "NSW")
-#' get_data_abs_age_work(state = "WA", lga = "Albany (C)", age = 1:5)
-#' get_data_abs_age_work(state = c("QLD", "TAS"), age = 5)
-#' get_data_abs_age_work(lga = c("Albury (C)", "Barcoo (S)"), age = 39)
+#' abs_age_work(state = "NSW")
+#' abs_age_work(state = "WA", lga = "Albany (C)", age = 1:5)
+#' abs_age_work(state = c("QLD", "TAS"), age = 5)
+#' abs_age_work(lga = c("Albury (C)", "Barcoo (S)"), age = 39)
 #'
-get_data_abs_age_work <- function(age = NULL, state = NULL, lga = NULL) {
+abs_age_work <- function(age = NULL, state = NULL, lga = NULL) {
   # checks only for state
   if (!is.null(state) & is.null(lga)) {
     check_state_name(state, multiple_state = TRUE)
