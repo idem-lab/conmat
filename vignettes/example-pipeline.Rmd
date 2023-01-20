@@ -230,7 +230,7 @@ We also specify the `symmetrical = FALSE` option - by default this is TRUE. Brie
 Now that we've got our model, we can predict to our fairfield data, like so:
 
 ```{r}
-fairfield_hh <- get_per_capita_household_size(lga = "Fairfield (C)")
+fairfield_hh <- get_abs_per_capita_household_size(lga = "Fairfield (C)")
 fairfield_hh
 contact_model_pred <- predict_setting_contacts(
   population = fairfield,
@@ -243,7 +243,7 @@ contact_model_pred <- predict_setting_contacts(
 * `population` is our population to predict to
 * `contact_model` is our contact rate model for each setting
 * `age_breaks` are our age breaks to predict to
-* `per_capita_household_size` is the household size for that population, in our case we have a helper function, `get_per_capita_household_size` which works for each LGA in Australia.
+* `per_capita_household_size` is the household size for that population, in our case we have a helper function, `get_abs_per_capita_household_size` which works for each LGA in Australia.
 
 alternatively, you can use the `estimate_setting_contacts` function to do a similar task:
 

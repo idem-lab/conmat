@@ -8,6 +8,7 @@
 * accessor method, `raw_eigenvalue()` for getting the raw eigenvalue from a next generation matrix, "ngm_setting_matrix".
 * accessor method, `scaling` for getting the value of R_target/raw eigenvalue.
 * add `autoplot` methods for ngm, vaccination, and transmission probability
+* change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
 
 ## Breaking Changes
 

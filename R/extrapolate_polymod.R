@@ -21,7 +21,7 @@
 #'   adjusts the household contact matrix by some per capita household size.
 #'   To set it, provide a single number, the per capita household size. More
 #'   information is provided below in Details. See
-#'   [get_per_capita_household_size()] function for a helper for Australian
+#'   [get_abs_per_capita_household_size()] function for a helper for Australian
 #'    data with a workflow on how to get this number.
 #' @return Returns setting-specific and combined contact matrices for the
 #'   desired ages.

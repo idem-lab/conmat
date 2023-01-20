@@ -24,7 +24,7 @@
 #'   adjusts the household contact matrix by some per capita household size.
 #'   To set it, provide a single number, the per capita household size. More
 #'   information is provided below in Details. See
-#'   [get_per_capita_household_size()] function for a helper for Australian
+#'   [get_abs_per_capita_household_size()] function for a helper for Australian
 #'    data with a workflow on how to get this number.
 #'
 #' @param symmetrical whether to enforce symmetrical terms in the model.
@@ -45,7 +45,7 @@
 #' )
 #'
 #' # or predict to fairfield
-#' fairfield_hh <- get_per_capita_household_size(lga = "Fairfield (C)")
+#' fairfield_hh <- get_abs_per_capita_household_size(lga = "Fairfield (C)")
 #' contact_model_pred_est <- estimate_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(),
 #'   survey_population = get_polymod_population(),
