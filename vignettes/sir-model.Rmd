@@ -28,40 +28,50 @@ We start with a complicated version of a relatively simple model: an age-stratif
 We will use 17 age groups, each in 5 year age bands, and turn these into a `conmat_population` object.
 
 ```{r}
+#| label: create-population
 homogeneous_population <- data.frame(
-  population = rep(100, times = 9),
-  age = seq(0, 80, by = 10)
+  age = seq(0, 80, by = 10),
+  population = rep(100, times = 9)
 ) |>
   as_conmat_population(
     age = age,
     population = population
   )
+
+homogeneous_population
 ```
 
-Then, we extrapolate these into a set of contact matrices, but instead of using the estimates from POLYMOD, we overwrite them so all the entries are exactly the same.
+Then, we extrapolate these into a set of contact matrices, which we can construct using `setting_prediction_matrix`, ensuring all the entries are exactly the same.
 
 ```{r}
+#| homogenous-contact
 age_breaks_0_80_plus <- c(seq(0, 80, by = 10), Inf)
-homogeneous_contact <- extrapolate_polymod(
-  population = homogeneous_population,
-  age_breaks = age_breaks_0_80_plus
-)
+mat_ones <- matrix(1, nrow = 9, ncol = 9)
+
 # Relative number of contacts between individuals in 2 age categories
 # Think of as P(contact)
-homogeneous_contact$home <- matrix(1, nrow = 9, ncol = 9)
-homogeneous_contact$work <- matrix(1, nrow = 9, ncol = 9)
-homogeneous_contact$school <- matrix(1, nrow = 9, ncol = 9)
-homogeneous_contact$other <- matrix(1, nrow = 9, ncol = 9)
-```
-
-```{r}
-transmission_matrix <- get_setting_transmission_matrices(
+homogeneous_contact <- setting_prediction_matrix(
+  home = mat_ones,
+  work = mat_ones,
+  school = mat_ones,
+  other = mat_ones,
   age_breaks = age_breaks_0_80_plus
 )
-transmission_matrix$home <- matrix(0.05, nrow = 9, ncol = 9)
-transmission_matrix$work <- matrix(0.05, nrow = 9, ncol = 9)
-transmission_matrix$school <- matrix(0.05, nrow = 9, ncol = 9)
-transmission_matrix$other <- matrix(0.05, nrow = 9, ncol = 9)
+
+homogeneous_contact
+```
+
+Similarly we construct a set of transmission matrices using `transmission_probability_matrix`
+
+```{r}
+mat_05 <- matrix(0.05, nrow = 9, ncol = 9)
+transmission_matrix <- transmission_probability_matrix(
+  home = mat_05,
+  work = mat_05,
+  school = mat_05,
+  other = mat_05,
+  age_breaks = age_breaks_0_80_plus
+)
 ```
 
 We also need to set up our population structures. We'll have all the S states, then I, then R. Since we're using `deSolve` to solve this system, we need to make sure this order stays the same throughout!

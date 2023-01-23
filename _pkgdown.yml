@@ -67,6 +67,7 @@ reference:
       - setting_weights
       - age_group_lookup
       - get_setting_transmission_matrices
+      - prem_germany_contact_matrices
 
   - title: "Extra functions for model fitting and prediction"
     desc: >
@@ -98,3 +99,5 @@ reference:
       - raw_eigenvalue
       - scaling
       - new_age_matrix
+      - setting_prediction_matrix
+      - transmission_probability_matrix

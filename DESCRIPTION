@@ -34,7 +34,8 @@ Suggests:
     rmarkdown,
     stringr,
     future,
-    spelling
+    spelling,
+    deSolve
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
@@ -62,4 +63,5 @@ Imports:
     purrr,
     tidyselect,
     vctrs,
-    scales
+    scales,
+    english

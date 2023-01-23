@@ -243,3 +243,104 @@ print.setting_data <- function(x, ...) {
     object_class = "data.frame"
   )
 }
+
+group_age_breaks <- function(x, pad_inf = TRUE) {
+  # don't add extra Inf values
+  if (any(is.infinite(x))) {
+    pad_inf <- FALSE
+  }
+  pad_value <- ifelse(pad_inf, Inf, NA)
+  from <- stats::na.omit(dplyr::lag(x))
+  to <- stats::na.omit(dplyr::lead(x))
+
+  if (pad_inf) {
+    last_to <- to[length(to)]
+    from <- c(from, last_to)
+    to <- c(to, Inf)
+  }
+
+  glue::glue("[{from},{to})")
+}
+
+ungroup_age_breaks <- function(x) {
+  strsplit(
+    x = x,
+    # remove , and ) and [
+    split = ",|\\)|\\["
+  ) %>%
+    unlist() %>%
+    as.numeric() %>%
+    na.omit() %>%
+    unique() %>%
+    sort()
+}
+#
+# group_age_breaks(1:10, pad_inf = FALSE)
+# group_age_breaks(1:10, pad_inf = FALSE) %>% ungroup_age_breaks()
+# group_age_breaks(1:10, pad_inf = TRUE)
+# group_age_breaks(1:10, pad_inf = TRUE) %>% ungroup_age_breaks()
+#
+# group_age_breaks(c(1:10, Inf), pad_inf = TRUE)
+# group_age_breaks(c(1:10, Inf), pad_inf = TRUE) %>% ungroup_age_breaks()
+#
+# group_age_breaks(c(1:10, Inf), pad_inf = FALSE)
+# group_age_breaks(c(1:10, Inf), pad_inf = FALSE) %>% ungroup_age_breaks()
+#
+# group_age_breaks(age_breaks_0_80_plus)
+# group_age_breaks(1:10, pad_inf = FALSE)
+# group_age_breaks(1:9, pad_inf = FALSE)
+# group_age_breaks(1:8, pad_inf = FALSE)
+# group_age_breaks(1:10)
+# group_age_breaks(1:9)
+# group_age_breaks(1:8)
+
+all_matrix <- function(x) {
+  all(vapply(
+    X = x,
+    inherits,
+    what = "matrix",
+    FUN.VALUE = logical(1)
+  ))
+}
+
+name_list <- function(list) {
+  n_list <- length(list)
+  names(list) <- english::english(seq_len(n_list))
+}
+
+
+check_if_all_matrix <- function(x) {
+  if (!all_matrix(x)) {
+    cli::cli_abort(
+      c("Inputs must all be of class {.cls matrix}")
+    )
+  }
+}
+
+prepare_list_matrix <- function(...) {
+  list_matrix <- list(...)
+  check_if_all_matrix(list_matrix)
+
+  # do something if ... doesn't have any names
+  if (is.null(names(list_matrix))) {
+    list_matrix <- name_list(list_matrix)
+  }
+  list_matrix
+}
+
+
+set_age_breaks_matrix <- function(matrix, age_breaks) {
+  dimnames(matrix) <- list(
+    group_age_breaks(age_breaks),
+    group_age_breaks(age_breaks)
+  )
+  matrix
+}
+
+set_age_breaks_matrices <- function(list_matrix, age_breaks) {
+  lapply(
+    list_matrix,
+    set_age_breaks_matrix,
+    age_breaks
+  )
+}
