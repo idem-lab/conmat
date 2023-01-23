@@ -19,6 +19,7 @@ library(deSolve)
 library(tidyr)
 library(ggplot2)
 library(dplyr)
+library(purrr)
 ```
 
 # An SIR Model with homogenous mixing
@@ -72,6 +73,8 @@ transmission_matrix <- transmission_probability_matrix(
   other = mat_05,
   age_breaks = age_breaks_0_80_plus
 )
+
+transmission_matrix
 ```
 
 We also need to set up our population structures. We'll have all the S states, then I, then R. Since we're using `deSolve` to solve this system, we need to make sure this order stays the same throughout!
@@ -81,7 +84,12 @@ S0 <- rep(999, times = 9)
 I0 <- rep(1, times = 9)
 R0 <- rep(0, times = 9)
 initial_condition <- c(S0, I0, R0)
-names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = 9), age_breaks_0_80_plus[1:9], sep = "_")
+names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = 9),
+  age_breaks_0_80_plus[1:9],
+  sep = "_"
+)
+
+initial_condition
 ```
 
 
@@ -98,48 +106,84 @@ parameters <- list(
   "r_indexes" = 19:27
 )
 
+parameters
+```
+
+
+```{r}
 agestructured_sir <- function(time, state, parameters) {
   # Calculate the force of infection for each setting:
   # unstructured SIR beta is age_group_n / pop_n
-  #
-  N_by_age <- vapply(parameters[["s_indexes"]], function(i) {
-    current_indexes_to_sum <- c(
-      parameters[["s_indexes"]][i],
-      parameters[["i_indexes"]][i],
-      parameters[["r_indexes"]][i]
-    )
-    sum(state[current_indexes_to_sum])
-  }, FUN.VALUE = 0.0)
 
-  lambda_home <- (parameters[["transmission_matrix"]]$home * parameters[["homogeneous_contact"]]$home) %*% state[parameters[["i_indexes"]]] / N_by_age
+  N_by_age <- map_dbl(
+    .x = parameters[["s_indexes"]],
+    .f = function(i) {
+      current_indexes_to_sum <- c(
+        parameters[["s_indexes"]][i],
+        parameters[["i_indexes"]][i],
+        parameters[["r_indexes"]][i]
+      )
+      sum(state[current_indexes_to_sum])
+    }
+  )
 
-  lambda_work <- (parameters[["transmission_matrix"]]$work * parameters[["homogeneous_contact"]]$work) %*% state[parameters[["i_indexes"]]] / N_by_age
+  lambda_home <- (
+    parameters$transmission_matrix$home * parameters$homogeneous_contact$home
+  ) %*%
+    state[parameters$i_indexes] / N_by_age
 
-  lambda_school <- (parameters[["transmission_matrix"]]$school * parameters[["homogeneous_contact"]]$school) %*% state[parameters[["i_indexes"]]] / N_by_age
+  lambda_work <- (
+    parameters$transmission_matrix$work * parameters$homogeneous_contact$work
+  ) %*%
+    state[parameters$i_indexes] / N_by_age
 
-  lambda_other <- (parameters[["transmission_matrix"]]$other * parameters[["homogeneous_contact"]]$other) %*% state[parameters[["i_indexes"]]] / N_by_age
+  lambda_school <- (
+    parameters$transmission_matrix$school * parameters$homogeneous_contact$school
+  ) %*%
+    state[parameters$i_indexes] / N_by_age
+
+  lambda_other <- (
+    parameters$transmission_matrix$other * parameters$homogeneous_contact$other
+  ) %*%
+    state[parameters$i_indexes] / N_by_age
 
   # Combine them all into one term for ease of computation
   lambda_total <- lambda_home + lambda_work + lambda_school + lambda_other
 
 
   # Don't forget to normalise your infection rate by the population!
-  dSdt <- -lambda_total * state[parameters[["s_indexes"]]]
-  dIdt <- lambda_total * state[parameters[["s_indexes"]]] - parameters[["gamma"]] * state[parameters[["i_indexes"]]]
-  dRdt <- parameters[["gamma"]] * state[parameters[["i_indexes"]]]
+  dSdt <- -lambda_total * state[parameters$s_indexes]
 
-  return(list(c(dSdt, dIdt, dRdt)))
+  dIdt <- lambda_total * state[parameters$s_indexes] -
+    parameters$gamma * state[parameters$i_indexes]
+
+  dRdt <- parameters$gamma * state[parameters$i_indexes]
+
+  return(
+    list(
+      c(
+        dSdt,
+        dIdt,
+        dRdt
+      )
+    )
+  )
 }
 ```
 
 ```{r solve-ode-homogeneous}
 times <- seq(0, 20, by = 0.1)
-homogeneous_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters)
+homogeneous_soln <- ode(
+  y = initial_condition,
+  times = times,
+  func = agestructured_sir,
+  parms = parameters
+)
 
 # Have to convert ode output to a data frame to do any plotting
-homogeneous_soln <- as.data.frame(homogeneous_soln)
+homogeneous_soln <- tibble(homogeneous_soln)
 
-head(homogeneous_soln)
+homogeneous_soln
 ```
 
 Now, let's compare this to an SIR model with no stratification:
@@ -158,10 +202,15 @@ sir <- function(time, state, parameters) {
   return(list(c(dSdt, dIdt, dRdt)))
 }
 
-sir_soln <- ode(y = initial_condition_sir, times = times, func = sir, parms = parameters_sir)
-sir_soln <- as.data.frame(sir_soln)
+sir_soln <- ode(
+  y = initial_condition_sir,
+  times = times,
+  func = sir,
+  parms = parameters_sir
+)
 
-head(sir_soln)
+sir_soln <- tibble(sir_soln)
+sir_soln
 ```
 
 ```{r plot-standard-sir}
@@ -220,20 +269,21 @@ germany_2015
 
 ```{r conmat-germany}
 age_breaks_socialmixr <- c(seq(0, 75, by = 5), Inf)
+
+n_finite_states <- length(age_breaks_socialmixr) - 1
+socialmixr_matrix <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
+
+transmission_matrix <- transmission_probability_matrix(
+  home = socialmixr_matrix,
+  work = socialmixr_matrix,
+  school = socialmixr_matrix,
+  other = socialmixr_matrix,
+  age_breaks = age_breaks_socialmixr
+)
 germany_contacts <- extrapolate_polymod(
   population = germany_2015,
   age_breaks = age_breaks_socialmixr
 )
-
-transmission_matrix <- get_setting_transmission_matrices(
-  age_breaks = age_breaks_socialmixr
-)
-
-n_finite_states <- length(age_breaks_socialmixr) - 1
-transmission_matrix$home <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$work <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$school <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
-transmission_matrix$other <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
 
 parameters <- list(
   "transmission_matrix" = transmission_matrix,
@@ -256,7 +306,7 @@ times <- seq(0, 100, by = 0.1)
 germany_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters)
 
 # Have to convert ode output to a data frame to do any plotting
-germany_soln <- as.data.frame(germany_soln)
+germany_soln <- tibble(germany_soln)
 
 tail(germany_soln)
 ```
@@ -277,6 +327,7 @@ germany_soln %>%
 
 Let's compare to the Prem matrices. Prem only has 16 age classes so we do need to re-do our population.
 ```{r load-prem}
+# NOTE - how to present this data nicer
 str(prem_germany_contact_matrices)
 ```
 
@@ -294,7 +345,7 @@ parameters_prem <- list(
 prem_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters_prem)
 
 # Have to convert ode output to a data frame to do any plotting
-prem_soln <- as.data.frame(prem_soln)
+prem_soln <- tibble(prem_soln)
 
 tail(prem_soln)
 ```
