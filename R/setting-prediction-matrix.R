@@ -49,6 +49,8 @@ setting_prediction_matrix <- function(...,
     age_breaks
   )
 
+  setting_pred_matrix$all <- Reduce("+", setting_pred_matrix)
+
   new_setting_prediction_matrix(
     list_matrix = setting_pred_matrix,
     age_breaks = group_age_breaks(age_breaks)
