@@ -397,17 +397,17 @@ tail(prem_soln)
 ```
 
 ```{r conmat-prem-plot}
-germany_aggregated <- germany_soln %>%
-  tidy_ode() %>%
-  mutate(type = "conmat")
+germany_aggregated <- tidy_ode(germany_soln)
 
 # For the stratified model, we have to add up all the age categories together for a fair comparison.
-prem_aggregated <- prem_soln %>%
-  tidy_ode() %>%
-  mutate(type = "Prem")
+prem_aggregated <- tidy_ode(prem_soln)
 
-conmat_prem_soln <- rbind(germany_aggregated, prem_aggregated)
-conmat_prem_soln$name <- factor(conmat_prem_soln$name, levels = c("S", "I", "R"))
+conmat_prem_soln <- bind_rows(
+  conmat = germany_aggregated,
+  prem = prem_aggregated,
+  .id = "type"
+) %>%
+  mutate(name = factor(name, levels = c("S", "I", "R")))
 
 conmat_prem_soln
 ```
