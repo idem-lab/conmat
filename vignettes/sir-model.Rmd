@@ -84,7 +84,8 @@ S0 <- rep(999, times = 9)
 I0 <- rep(1, times = 9)
 R0 <- rep(0, times = 9)
 initial_condition <- c(S0, I0, R0)
-names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = 9),
+names(initial_condition) <- paste(
+  rep(c("S0", "I0", "R0"), each = 9),
   age_breaks_0_80_plus[1:9],
   sep = "_"
 )
@@ -94,7 +95,7 @@ initial_condition
 
 
 For an SIR model, we need to compute the *force of infection*, which is
-$$\lambda(t) = \beta I(t).$$ The $\beta$ term is the product of the probability of infection given contact, and the probability of contact, for which we can use the matrices we have just defined.
+$$\lambda(t) = \beta I(t).$$ The $\beta$ term is the product of the probability of infection given contact, and the probability of contact, for which we can use the matrices we have just defined:
 
 ```{r}
 parameters <- list(
@@ -109,47 +110,49 @@ parameters <- list(
 parameters
 ```
 
-
 ```{r}
 agestructured_sir <- function(time, state, parameters) {
   # Calculate the force of infection for each setting:
   # unstructured SIR beta is age_group_n / pop_n
 
   N_by_age <- map_dbl(
-    .x = parameters[["s_indexes"]],
+    .x = parameters$s_indexes,
     .f = function(i) {
       current_indexes_to_sum <- c(
-        parameters[["s_indexes"]][i],
-        parameters[["i_indexes"]][i],
-        parameters[["r_indexes"]][i]
+        parameters$s_indexes[i],
+        parameters$i_indexes[i],
+        parameters$r_indexes[i]
       )
       sum(state[current_indexes_to_sum])
     }
   )
 
-  lambda_home <- (
-    parameters$transmission_matrix$home * parameters$homogeneous_contact$home
-  ) %*%
-    state[parameters$i_indexes] / N_by_age
+  N_infected_by_age <- state[parameters$i_indexes] / N_by_age
 
-  lambda_work <- (
-    parameters$transmission_matrix$work * parameters$homogeneous_contact$work
-  ) %*%
-    state[parameters$i_indexes] / N_by_age
+  product <- function(transmission, contact) {
+    # product of the two matrices
+    map2(transmission, contact, `*`)
+  }
 
-  lambda_school <- (
-    parameters$transmission_matrix$school * parameters$homogeneous_contact$school
-  ) %*%
-    state[parameters$i_indexes] / N_by_age
+  age_normalise <- function(beta) {
+    # matrix multiply by infected and normalise by age population
+    map(beta, function(beta) {
+      beta %*% N_infected_by_age
+    })
+  }
 
-  lambda_other <- (
-    parameters$transmission_matrix$other * parameters$homogeneous_contact$other
-  ) %*%
-    state[parameters$i_indexes] / N_by_age
+  lambdas <- tibble(
+    setting = names(parameters$transmission_matrix),
+    transmission_matrix = parameters$transmission_matrix,
+    homogeneous_contact = parameters$homogeneous_contact[1:4]
+  ) %>%
+    mutate(
+      beta = product(transmission_matrix, homogeneous_contact),
+      lambda = age_normalise(beta)
+    )
 
   # Combine them all into one term for ease of computation
-  lambda_total <- lambda_home + lambda_work + lambda_school + lambda_other
-
+  lambda_total <- Reduce("+", lambdas$lambda)
 
   # Don't forget to normalise your infection rate by the population!
   dSdt <- -lambda_total * state[parameters$s_indexes]
@@ -181,9 +184,7 @@ homogeneous_soln <- ode(
 )
 
 # Have to convert ode output to a data frame to do any plotting
-homogeneous_soln <- tibble(homogeneous_soln)
-
-homogeneous_soln
+homogeneous_soln <- as.data.frame(homogeneous_soln) %>% as_tibble()
 ```
 
 Now, let's compare this to an SIR model with no stratification:
@@ -209,38 +210,65 @@ sir_soln <- ode(
   parms = parameters_sir
 )
 
-sir_soln <- tibble(sir_soln)
-sir_soln
+sir_soln <- as_tibble(as.data.frame(sir_soln))
 ```
 
 ```{r plot-standard-sir}
 ungrouped_structure <- sir_soln %>%
-  pivot_longer(!time) %>%
-  mutate(type = "Non-structured")
+  pivot_longer(cols = -time)
 
 # For the stratified model, we have to add up all the age categories together for a fair comparison.
 grouped_structure <- homogeneous_soln %>%
-  pivot_longer(!time) %>%
+  pivot_longer(cols = -time) %>%
   mutate(parent_state = substr(name, 1, 1)) %>%
   group_by(time, parent_state) %>%
   summarise(value = sum(value)) %>%
   ungroup() %>%
-  rename(name = parent_state) %>%
-  mutate(type = "Age structured")
+  rename(name = parent_state)
 
-combined_solutions <- rbind(ungrouped_structure, grouped_structure)
-combined_solutions$name <- factor(combined_solutions$name, levels = c("S", "I", "R"))
+# we are going to do this a few times so lets wrap that up into a function:
+
+tidy_ode <- function(ode_soln) {
+  ode_soln %>%
+    pivot_longer(cols = -time) %>%
+    mutate(parent_state = substr(name, 1, 1)) %>%
+    group_by(time, parent_state) %>%
+    summarise(value = sum(value)) %>%
+    ungroup() %>%
+    rename(name = parent_state)
+}
+
+combined_solutions <- bind_rows(
+  "non_structured" = ungrouped_structure,
+  "age_structured" = grouped_structure,
+  .id = "type"
+) %>%
+  mutate(
+    name = factor(name, levels = c("S", "I", "R"))
+  )
 
 combined_solutions
 ```
 
 ```{r plot-both-models}
-ggplot(combined_solutions, aes(x = time, y = value, colour = name, linetype = type)) +
+gg_combined_solutions <- ggplot(
+  combined_solutions,
+  aes(x = time, y = value, colour = name, linetype = type)
+) +
   geom_line() +
   labs(x = "Time", y = "Value", colour = "State", linetype = "Model")
+
+gg_combined_solutions
 ```
 
-Voila! These lines are the same. So, we have successfully collapsed our stratified model down to the non-stratified model, which is a great sense check for every time you write out a complicated model.
+Voila! These lines are the same - we can double check this by plotting them as facets:
+
+```{r}
+gg_combined_solutions +
+  facet_wrap(~type)
+```
+
+So, we have successfully collapsed our stratified model down to the non-stratified model, which is a great sense check for every time you write out a complicated model.
 
 # Comparison to other age matrices
 
@@ -298,29 +326,40 @@ S0 <- germany_2015$population
 I0 <- rep(1, times = n_finite_states)
 R0 <- rep(0, times = n_finite_states)
 initial_condition <- c(S0, I0, R0)
-names(initial_condition) <- paste(rep(c("S0", "I0", "R0"), each = n_finite_states), age_breaks_socialmixr[1:n_finite_states], sep = "_")
+names(initial_condition) <- paste(
+  rep(c("S0", "I0", "R0"), each = n_finite_states),
+  age_breaks_socialmixr[1:n_finite_states],
+  sep = "_"
+)
 ```
 
 ```{r solve-ode-germany}
 times <- seq(0, 100, by = 0.1)
-germany_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters)
+germany_soln <- ode(
+  y = initial_condition,
+  times = times,
+  func = agestructured_sir,
+  parms = parameters
+)
 
 # Have to convert ode output to a data frame to do any plotting
-germany_soln <- tibble(germany_soln)
+germany_soln <- as_tibble(as.data.frame(germany_soln))
 
+head(germany_soln)
 tail(germany_soln)
 ```
 
 ```{r germany-sir-plot}
-germany_soln %>%
-  pivot_longer(!time) %>%
-  mutate(parent_state = substr(name, 1, 1)) %>%
-  group_by(time, parent_state) %>%
-  summarise(value = sum(value)) %>%
-  ungroup() %>%
-  rename(name = parent_state) %>%
-  mutate(type = "Age structured") %>%
-  ggplot(aes(x = time, y = value / sum(initial_condition), colour = name)) +
+germany_soln_long <- germany_soln %>%
+  tidy_ode() %>%
+  mutate(type = "age_structured")
+
+germany_soln_long
+
+ggplot(
+  germany_soln_long,
+  aes(x = time, y = value / sum(initial_condition), colour = name)
+) +
   geom_line() +
   labs(x = "Time", y = "Proportion")
 ```
@@ -328,6 +367,8 @@ germany_soln %>%
 Let's compare to the Prem matrices. Prem only has 16 age classes so we do need to re-do our population.
 ```{r load-prem}
 # NOTE - how to present this data nicer
+# `as_setting_prediction_matrix` ?
+# prem_germany_contact_matrices
 str(prem_germany_contact_matrices)
 ```
 
@@ -342,32 +383,27 @@ parameters_prem <- list(
   "r_indexes" = (2 * n_finite_states + 1):(3 * n_finite_states)
 )
 
-prem_soln <- ode(y = initial_condition, times = times, func = agestructured_sir, parms = parameters_prem)
+prem_soln <- ode(
+  y = initial_condition,
+  times = times,
+  func = agestructured_sir,
+  parms = parameters_prem
+)
 
 # Have to convert ode output to a data frame to do any plotting
-prem_soln <- tibble(prem_soln)
+prem_soln <- as_tibble(as.data.frame(prem_soln))
 
 tail(prem_soln)
 ```
 
 ```{r conmat-prem-plot}
 germany_aggregated <- germany_soln %>%
-  pivot_longer(!time) %>%
-  mutate(parent_state = substr(name, 1, 1)) %>%
-  group_by(time, parent_state) %>%
-  summarise(value = sum(value)) %>%
-  ungroup() %>%
-  rename(name = parent_state) %>%
+  tidy_ode() %>%
   mutate(type = "conmat")
 
 # For the stratified model, we have to add up all the age categories together for a fair comparison.
 prem_aggregated <- prem_soln %>%
-  pivot_longer(!time) %>%
-  mutate(parent_state = substr(name, 1, 1)) %>%
-  group_by(time, parent_state) %>%
-  summarise(value = sum(value)) %>%
-  ungroup() %>%
-  rename(name = parent_state) %>%
+  tidy_ode() %>%
   mutate(type = "Prem")
 
 conmat_prem_soln <- rbind(germany_aggregated, prem_aggregated)
