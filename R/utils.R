@@ -244,21 +244,9 @@ print.setting_data <- function(x, ...) {
   )
 }
 
-group_age_breaks <- function(x, pad_inf = TRUE) {
-  # don't add extra Inf values
-  if (any(is.infinite(x))) {
-    pad_inf <- FALSE
-  }
-  pad_value <- ifelse(pad_inf, Inf, NA)
+group_age_breaks <- function(x) {
   from <- stats::na.omit(dplyr::lag(x))
   to <- stats::na.omit(dplyr::lead(x))
-
-  if (pad_inf) {
-    last_to <- to[length(to)]
-    from <- c(from, last_to)
-    to <- c(to, Inf)
-  }
-
   glue::glue("[{from},{to})")
 }
 
@@ -270,7 +258,7 @@ ungroup_age_breaks <- function(x) {
   ) %>%
     unlist() %>%
     as.numeric() %>%
-    na.omit() %>%
+    stats::na.omit() %>%
     unique() %>%
     sort()
 }
@@ -306,6 +294,7 @@ all_matrix <- function(x) {
 name_list <- function(list) {
   n_list <- length(list)
   names(list) <- english::english(seq_len(n_list))
+  list
 }
 
 
@@ -317,17 +306,27 @@ check_if_all_matrix <- function(x) {
   }
 }
 
-prepare_list_matrix <- function(...) {
-  list_matrix <- list(...)
-  check_if_all_matrix(list_matrix)
-
-  # do something if ... doesn't have any names
+repair_list_matrix_names <- function(list_matrix) {
   if (is.null(names(list_matrix))) {
     list_matrix <- name_list(list_matrix)
   }
   list_matrix
 }
 
+prepare_list_matrix <- function(...) {
+  list_matrix <- list(...)
+  check_if_all_matrix(list_matrix)
+
+  # do something if ... doesn't have any names
+  repair_list_matrix_names(list_matrix)
+}
+
+add_all_setting <- function(list_matrix) {
+  if (!("all" %in% names(list_matrix))) {
+    list_matrix$all <- Reduce("+", list_matrix)
+  }
+  list_matrix
+}
 
 set_age_breaks_matrix <- function(matrix, age_breaks) {
   dimnames(matrix) <- list(
