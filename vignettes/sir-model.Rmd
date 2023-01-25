@@ -370,6 +370,11 @@ Let's compare to the Prem matrices. Prem only has 16 age classes so we do need t
 # `as_setting_prediction_matrix` ?
 # prem_germany_contact_matrices
 str(prem_germany_contact_matrices)
+
+as_setting_prediction_matrix(
+  prem_germany_contact_matrices,
+  age_breaks = seq(0, 80, by = 5)
+)
 ```
 
 ```{r setup-prem}
