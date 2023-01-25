@@ -1,4 +1,3 @@
-
 new_transmission_probability_matrix <- function(list_matrix,
                                                 age_breaks = NULL) {
   structure(

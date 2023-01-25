@@ -60,7 +60,7 @@ Imports:
     glue (>= 1.6.2),
     readr,
     furrr,
-    purrr,
+    purrr (>= 1.0.1),
     tidyselect,
     vctrs,
     scales,

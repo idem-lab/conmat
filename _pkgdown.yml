@@ -100,4 +100,5 @@ reference:
       - scaling
       - new_age_matrix
       - setting_prediction_matrix
+      - as_setting_prediction_matrix
       - transmission_probability_matrix

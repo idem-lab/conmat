@@ -3,12 +3,15 @@
 \name{age_breaks}
 \alias{age_breaks}
 \alias{age_breaks.conmat_age_matrix}
+\alias{age_breaks.conmat_setting_prediction_matrix}
 \alias{age_breaks.default}
 \title{Extract age break attribute information}
 \usage{
 age_breaks(matrix)
 
 \method{age_breaks}{conmat_age_matrix}(matrix)
+
+\method{age_breaks}{conmat_setting_prediction_matrix}(matrix)
 
 \method{age_breaks}{default}(matrix)
 }
@@ -24,6 +27,8 @@ Extract age break attribute information
 \section{Methods (by class)}{
 \itemize{
 \item \code{age_breaks(conmat_age_matrix)}: Get age break information
+
+\item \code{age_breaks(conmat_setting_prediction_matrix)}: Get age break information
 
 \item \code{age_breaks(default)}: Get age break information
 

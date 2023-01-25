@@ -74,6 +74,12 @@ age_breaks.conmat_age_matrix <- function(matrix) {
 
 #' @describeIn age_breaks Get age break information
 #' @export
+age_breaks.conmat_setting_prediction_matrix <- function(matrix) {
+  attr(matrix, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
 age_breaks.default <- function(matrix) {
   cli::cli_abort("no method for {.code age_breaks()} defined yet")
 }
