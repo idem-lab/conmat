@@ -1,5 +1,14 @@
 # conmat 0.0.2.9000
 
+## Changes
+
+* Adds new functions:
+  * `age_breaks()` accessor function for `conmat_setting_prediction_matrix`
+  * `setting_prediction_matrix()` 
+  * `as_setting_prediction_matrix()` for coercing lists into a `setting_prediction_matrix`
+  * `transmission_probability_matrix()` for creating new transmission probability
+  matrices
+
 ## Breaking changes
 
 * change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
