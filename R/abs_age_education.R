@@ -34,7 +34,7 @@ abs_age_education_state <- function(state = NULL, age = NULL) {
 abs_age_education_lga <- function(lga = NULL, age = NULL) {
   check_lga_name(lga, multiple_lga = TRUE)
 
-  data_subset <- data_abs_state_education %>%
+  data_subset <- data_abs_lga_education %>%
     dplyr::filter(lga %in% {{ lga }})
 
   if (!is.null(age)) {
