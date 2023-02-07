@@ -17,6 +17,11 @@ Authors@R: c(
              role = c("aut"),
              email = "aarathybabu907@gmail.com",
              comment = c(ORCID = "https://orcid.org/0000-0002-6982-5989")),
+      person(given = "Michael",
+             family = "Lydeamore",
+             role = "aut",
+             email = "michael.lydeamore@monash.edu",
+             comment = c(ORCID = "https://orcid.org/0000-0001-6515-827X")),
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
@@ -34,7 +39,8 @@ Suggests:
     rmarkdown,
     stringr,
     future,
-    spelling
+    spelling,
+    deSolve
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
@@ -59,7 +65,8 @@ Imports:
     glue (>= 1.6.2),
     readr,
     furrr,
-    purrr,
+    purrr (>= 1.0.1),
     tidyselect,
     vctrs,
-    scales
+    scales,
+    english

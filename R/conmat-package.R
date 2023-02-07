@@ -70,6 +70,7 @@ globalVariables(
     "missing_any_contact_setting",
     "model_per_capita_household_size",
     "modelled_pop",
+    "na.omit",
     "n_households",
     "n_people",
     "n_persons_usually_resident",

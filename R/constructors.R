@@ -74,12 +74,14 @@ age_breaks.conmat_age_matrix <- function(matrix) {
 
 #' @describeIn age_breaks Get age break information
 #' @export
-age_breaks.default <- function(matrix) {
-  cli::cli_abort("no method for {.code age_breaks()} defined yet")
+age_breaks.conmat_setting_prediction_matrix <- function(matrix) {
+  attr(matrix, "age_breaks")
 }
 
-new_setting_prediction_matrix <- function(list_matrix) {
-  add_new_class(list_matrix, "conmat_setting_prediction_matrix")
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.default <- function(matrix) {
+  cli::cli_abort("no method for {.code age_breaks()} defined yet")
 }
 
 new_setting_data <- function(list_df) {
@@ -152,8 +154,4 @@ new_setting_contact_model <- function(list_model) {
 
 new_setting_vaccination_matrix <- function(list_matrix) {
   add_new_class(list_matrix, "setting_vaccination_matrix")
-}
-
-new_transmission_probability_matrix <- function(list_matrix) {
-  add_new_class(list_matrix, "transmission_probability_matrix")
 }
