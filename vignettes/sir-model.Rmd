@@ -1,8 +1,8 @@
 ---
-title: "SIR modelling with `conmat`"
+title: "SIR modelling with conmat"
 output: rmarkdown::html_vignette
 vignette: >
-    %\VignetteIndexEntry{sir-model}
+    %\VignetteIndexEntry{SIR modelling with conmat}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
 ---
@@ -22,11 +22,29 @@ library(dplyr)
 library(purrr)
 ```
 
+# Introduction: What is an SIR model?
+
+SIR (Susceptible, Infected, Recovered) models, sometimes known as [compartmental models](https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology), are a mathematical modelling technique used to understand facets of an epidemic. They can help answer questions like:
+
+* What is the duration of an epidemic?
+* What is the total number of infected people?
+* How does the disease spread?
+* What is the reproductive number?
+* What is the impact of a public health intervention?
+
+The **SIR** refers to the number of:
+
+* S: *s*usceptible
+* I: *i*nfected
+* R: *r*ecovered / *r*emoved
+
+people at a given time point. We can model how these numbers change at each time step, based on initial population numbers, and other parameters like how infection spreads (is it more likely to infect younger or older people?), 
+
 # An SIR Model with homogenous mixing
 
 We start with a complicated version of a relatively simple model: an age-stratified SIR Model, but with all age groups acting exactly the same.
 
-We will use 17 age groups, each in 5 year age bands, and turn these into a `conmat_population` object.
+We will use 17 age groups, each in 5 year age bands, and turn these into a `conmat_population` object. This is an object that knows which columns represent age and population, which is used by other functions within `conmat`.
 
 ```{r}
 #| label: create-population
@@ -42,10 +60,10 @@ homogeneous_population <- data.frame(
 homogeneous_population
 ```
 
-Then, we extrapolate these into a set of contact matrices, which we can construct using `setting_prediction_matrix`, ensuring all the entries are exactly the same.
+Then, we extrapolate these into a set of contact matrices, which we can construct using `setting_prediction_matrix`. We set these as matrices of 1 - the contact rate is homogenous and exactly the same.
 
 ```{r}
-#| homogenous-contact
+#| label: homogenous-contact
 age_breaks_0_80_plus <- c(seq(0, 80, by = 10), Inf)
 mat_ones <- matrix(1, nrow = 9, ncol = 9)
 
@@ -62,9 +80,10 @@ homogeneous_contact <- setting_prediction_matrix(
 homogeneous_contact
 ```
 
-Similarly we construct a set of transmission matrices using `transmission_probability_matrix`
+Similarly, we construct a set of transmission matrices, which provide the probability of transmission for each age group, using `transmission_probability_matrix`. These all have the same transmission probability - 0.05 (1 in 20).
 
 ```{r}
+#| label: homogenous-transmission
 mat_05 <- matrix(0.05, nrow = 9, ncol = 9)
 transmission_matrix <- transmission_probability_matrix(
   home = mat_05,
@@ -79,7 +98,8 @@ transmission_matrix
 
 We also need to set up our population structures. We'll have all the S states, then I, then R. Since we're using `deSolve` to solve this system, we need to make sure this order stays the same throughout!
 
-```{r initial-condition}
+```{r}
+#| label: initial-condition
 S0 <- rep(999, times = 9)
 I0 <- rep(1, times = 9)
 R0 <- rep(0, times = 9)
@@ -93,11 +113,11 @@ names(initial_condition) <- paste(
 initial_condition
 ```
 
-
 For an SIR model, we need to compute the *force of infection*, which is
 $$\lambda(t) = \beta I(t).$$ The $\beta$ term is the product of the probability of infection given contact, and the probability of contact, for which we can use the matrices we have just defined:
 
 ```{r}
+#| label: parameters
 parameters <- list(
   "transmission_matrix" = transmission_matrix,
   "homogeneous_contact" = homogeneous_contact,
@@ -110,8 +130,10 @@ parameters <- list(
 parameters
 ```
 
+Now we construct a function for the age structured SIR model, to pass to deSolve. This calculates the force of infection for each setting.
+
 ```{r}
-agestructured_sir <- function(time, state, parameters) {
+age_structured_sir <- function(time, state, parameters) {
   # Calculate the force of infection for each setting:
   # unstructured SIR beta is age_group_n / pop_n
 
@@ -127,10 +149,11 @@ agestructured_sir <- function(time, state, parameters) {
     }
   )
 
+  # normalise by the age population
   N_infected_by_age <- state[parameters$i_indexes] / N_by_age
 
+  # functional method for takign the product of two matrices
   product <- function(transmission, contact) {
-    # product of the two matrices
     map2(transmission, contact, `*`)
   }
 
@@ -174,12 +197,15 @@ agestructured_sir <- function(time, state, parameters) {
 }
 ```
 
-```{r solve-ode-homogeneous}
+Then we solve the ODE like so:
+
+```{r}
+#| label: solve-ode-homogeneous
 times <- seq(0, 20, by = 0.1)
 homogeneous_soln <- ode(
   y = initial_condition,
   times = times,
-  func = agestructured_sir,
+  func = age_structured_sir,
   parms = parameters
 )
 
@@ -187,9 +213,10 @@ homogeneous_soln <- ode(
 homogeneous_soln <- as.data.frame(homogeneous_soln) %>% as_tibble()
 ```
 
-Now, let's compare this to an SIR model with no stratification:
+Now, let's compare this to an SIR model with no stratification - as in, no age groups:
 
-```{r standard-sir}
+```{r}
+#| label: standard-sir
 parameters_sir <- c("beta" = 1.8, "gamma" = 1)
 initial_condition_sir <- c("S" = 8991, "I" = 9, "R" = 0)
 
@@ -213,21 +240,14 @@ sir_soln <- ode(
 sir_soln <- as_tibble(as.data.frame(sir_soln))
 ```
 
-```{r plot-standard-sir}
+
+
+```{r}
+#| label: plot-standard-sir
 ungrouped_structure <- sir_soln %>%
   pivot_longer(cols = -time)
 
-# For the stratified model, we have to add up all the age categories together for a fair comparison.
-grouped_structure <- homogeneous_soln %>%
-  pivot_longer(cols = -time) %>%
-  mutate(parent_state = substr(name, 1, 1)) %>%
-  group_by(time, parent_state) %>%
-  summarise(value = sum(value)) %>%
-  ungroup() %>%
-  rename(name = parent_state)
-
-# we are going to do this a few times so lets wrap that up into a function:
-
+# we are going to tidy up ODE output a few times, so wrap it into a function:
 tidy_ode <- function(ode_soln) {
   ode_soln %>%
     pivot_longer(cols = -time) %>%
@@ -237,6 +257,9 @@ tidy_ode <- function(ode_soln) {
     ungroup() %>%
     rename(name = parent_state)
 }
+
+# For the stratified model, we have to add up all the age categories together for a fair comparison.
+grouped_structure <- tidy_ode(homogeneous_soln)
 
 combined_solutions <- bind_rows(
   "non_structured" = ungrouped_structure,
@@ -250,7 +273,10 @@ combined_solutions <- bind_rows(
 combined_solutions
 ```
 
-```{r plot-both-models}
+Now let's plot these two models approaches - the age structure and the non age structured:
+
+```{r}
+#| label: plot-both-models
 gg_combined_solutions <- ggplot(
   combined_solutions,
   aes(x = time, y = value, colour = name, linetype = type)
@@ -261,18 +287,18 @@ gg_combined_solutions <- ggplot(
 gg_combined_solutions
 ```
 
-Voila! These lines are the same - we can double check this by plotting them as facets:
+Voila! These lines are the same! We can double check this by plotting them as facets:
 
 ```{r}
-gg_combined_solutions +
-  facet_wrap(~type)
+#| label: facetted-sir
+gg_combined_solutions + facet_wrap(~type)
 ```
 
 So, we have successfully collapsed our stratified model down to the non-stratified model, which is a great sense check for every time you write out a complicated model.
 
 # Comparison to other age matrices
 
-Now that we've established an age-structured SIR model, we can repeat the process with `conmat` matrices. This process is the same as in the Data Sources vignette.
+Now that we've established an age-structured SIR model, we can repeat the process with `conmat` matrices. This process is the same as in the vignette, "Data Sources".
 
 ```{r setup-aus-matrices}
 world_data <- socialmixr::wpp_age() %>%
@@ -295,8 +321,15 @@ germany_2015 <- age_population(
 germany_2015
 ```
 
+Now let's construct a non-homogenous contact matrix, and transmission probability matrix from the data we have on Germany.
+
 ```{r conmat-germany}
 age_breaks_socialmixr <- c(seq(0, 75, by = 5), Inf)
+
+germany_contacts <- extrapolate_polymod(
+  population = germany_2015,
+  age_breaks = age_breaks_socialmixr
+)
 
 n_finite_states <- length(age_breaks_socialmixr) - 1
 socialmixr_matrix <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
@@ -306,10 +339,6 @@ transmission_matrix <- transmission_probability_matrix(
   work = socialmixr_matrix,
   school = socialmixr_matrix,
   other = socialmixr_matrix,
-  age_breaks = age_breaks_socialmixr
-)
-germany_contacts <- extrapolate_polymod(
-  population = germany_2015,
   age_breaks = age_breaks_socialmixr
 )
 
@@ -333,12 +362,14 @@ names(initial_condition) <- paste(
 )
 ```
 
+Then, similar to above, we solve the ODE
+
 ```{r solve-ode-germany}
 times <- seq(0, 100, by = 0.1)
 germany_soln <- ode(
   y = initial_condition,
   times = times,
-  func = agestructured_sir,
+  func = age_structured_sir,
   parms = parameters
 )
 
@@ -347,38 +378,39 @@ germany_soln <- as_tibble(as.data.frame(germany_soln))
 
 head(germany_soln)
 tail(germany_soln)
-```
 
-```{r germany-sir-plot}
 germany_soln_long <- germany_soln %>%
   tidy_ode() %>%
   mutate(type = "age_structured")
 
 germany_soln_long
+```
 
-ggplot(
+```{r germany-sir-plot}
+gg_germany_sir <- ggplot(
   germany_soln_long,
   aes(x = time, y = value / sum(initial_condition), colour = name)
 ) +
   geom_line() +
   labs(x = "Time", y = "Proportion")
+
+gg_germany_sir
 ```
 
 Let's compare to the Prem matrices. Prem only has 16 age classes so we do need to re-do our population.
-```{r load-prem}
-# NOTE - how to present this data nicer
-# `as_setting_prediction_matrix` ?
-# prem_germany_contact_matrices
-str(prem_germany_contact_matrices)
 
+```{r load-prem}
+# NOTE - consider ways to present this data nicer
+# str(prem_germany_contact_matrices)
 as_setting_prediction_matrix(
   prem_germany_contact_matrices,
   age_breaks = seq(0, 80, by = 5)
 )
 ```
 
-```{r setup-prem}
+So we go through a similar process, setting up parameters, and solving the ODE
 
+```{r setup-prem}
 parameters_prem <- list(
   "transmission_matrix" = transmission_matrix,
   "homogeneous_contact" = prem_germany_contact_matrices,
@@ -391,7 +423,7 @@ parameters_prem <- list(
 prem_soln <- ode(
   y = initial_condition,
   times = times,
-  func = agestructured_sir,
+  func = age_structured_sir,
   parms = parameters_prem
 )
 
@@ -414,7 +446,8 @@ conmat_prem_soln <- bind_rows(
 ) %>%
   mutate(name = factor(name, levels = c("S", "I", "R")))
 
-conmat_prem_soln
+head(conmat_prem_soln)
+tail(conmat_prem_soln)
 ```
 
 ```{r plot-conmat-prem}
@@ -423,6 +456,8 @@ ggplot(conmat_prem_soln, aes(x = time, y = value, colour = type)) +
   labs(x = "Time", y = "Value", colour = "Model") +
   facet_wrap(~name, nrow = 1)
 ```
+
+## Calculating reproductive number - R0
 
 Here is a rough schematic of calculating the R0 for both of these models. This only works because the recovery rate is 1 and doesn't vary by age, and the transmission rate doesn't vary by age.
 
@@ -442,7 +477,7 @@ total_matrix_prem <- transmission_matrix$home * prem_germany_contact_matrices$ho
 Re(eigen(total_matrix_prem)$values[1])
 ```
 
-```{r}
+```{r calculate-r0-prem-fun}
 calculate_R0_prem <- function(multiplier) {
   total_matrix_prem <- transmission_matrix$home * prem_germany_contact_matrices$home +
     transmission_matrix$work * prem_germany_contact_matrices$work +
@@ -455,8 +490,28 @@ calculate_R0_prem <- function(multiplier) {
 optimize(f = calculate_R0_prem, interval = c(1, 5))
 ```
 
-```{r}
-nprem <- nrow(prem_soln)
-a <- prem_soln[nprem, parameters[["r_indexes"]] + 1]
-barplot(as.numeric(a))
+For interests sake, let's plot the number of recovered at the final time point
+
+```{r show-recovered}
+prem_soln_all_times_recovered <- prem_soln %>%
+  select(time, starts_with("R")) %>%
+  pivot_longer(
+    cols = starts_with("R"),
+    names_to = "recovered",
+    values_to = "value"
+  ) %>%
+  mutate(age = as.numeric(
+    stringr::str_remove(recovered, "R0_"),
+    .after = recovered
+  ))
+
+prem_soln_all_times_recovered %>%
+  filter(time == 100) %>%
+  ggplot(aes(
+    x = age,
+    y = value
+  )) +
+  geom_col() +
+  scale_x_continuous(n.breaks = 8) +
+  scale_y_continuous(labels = scales::label_number())
 ```

@@ -17,6 +17,11 @@ Authors@R: c(
              role = c("aut"),
              email = "aarathybabu907@gmail.com",
              comment = c(ORCID = "https://orcid.org/0000-0002-6982-5989")),
+      person(given = "Michael",
+             family = "Lydeamore",
+             role = "aut",
+             email = "michael.lydeamore@monash.edu",
+             comment = c(ORCID = "https://orcid.org/0000-0001-6515-827X"))
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
