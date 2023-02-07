@@ -31,6 +31,9 @@
     <loc>/dev/articles/parallel-computing.html</loc>
   </url>
   <url>
+    <loc>/dev/articles/sir-model.html</loc>
+  </url>
+  <url>
     <loc>/dev/articles/visualising-conmat.html</loc>
   </url>
   <url>
@@ -119,6 +122,9 @@
   </url>
   <url>
     <loc>/dev/reference/as_conmat_population.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/as_setting_prediction_matrix.html</loc>
   </url>
   <url>
     <loc>/dev/reference/autoplot-conmat.html</loc>
@@ -247,6 +253,9 @@
     <loc>/dev/reference/predictions_to_matrix.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/prem_germany_contact_matrices.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/prepare_population_for_modelling.html</loc>
   </url>
   <url>
@@ -262,7 +271,13 @@
     <loc>/dev/reference/separate_age_group.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/setting_prediction_matrix.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/setting_weights.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/transmission_probability_matrix.html</loc>
   </url>
   <url>
     <loc>/dev/reference/vaccination_effect_example_data.html</loc>
