@@ -46,7 +46,8 @@ get_polymod_population <- function(countries = c(
     ) %>%
     dplyr::left_join(
       socialmixr::wpp_age() %>% dplyr::filter(year == 2005),
-      by = c("country")
+      by = c("country"),
+      multiple = "all"
     ) %>%
     dplyr::filter(
       !is.na(lower.age.limit)

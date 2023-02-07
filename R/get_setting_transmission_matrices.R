@@ -134,7 +134,8 @@ get_setting_transmission_matrices <- function(age_breaks = c(seq(0, 80, by = 5),
         age_from = age,
         infectiousness
       ),
-      by = "age_from"
+      by = "age_from",
+      multiple = "all"
     ) %>%
     dplyr::left_join(
       dplyr::select(
@@ -142,7 +143,8 @@ get_setting_transmission_matrices <- function(age_breaks = c(seq(0, 80, by = 5),
         age_to = age,
         susceptibility
       ),
-      by = "age_to"
+      by = "age_to",
+      multiple = "all"
     ) %>%
     # aggregate them to the required age ranges
     dplyr::mutate(
@@ -165,7 +167,8 @@ get_setting_transmission_matrices <- function(age_breaks = c(seq(0, 80, by = 5),
     # attach and apply the weights
     dplyr::left_join(
       setting_weights_tibble,
-      by = "setting"
+      by = "setting",
+      multiple = "all"
     ) %>%
     dplyr::mutate(
       relative_probability = infectiousness * susceptibility,

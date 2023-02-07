@@ -18,7 +18,8 @@ abs_education_state_2020_raw <- abs_education_state %>%
 abs_education_state_2020_aggregated <- abs_education_state_2020_raw %>%
   left_join(
     age_group_lookup,
-    by = c("age" = "lower")
+    by = c("age" = "lower"),
+    multiple = "all"
   ) %>%
   select(-upper) %>%
   fill(age_group) %>%
@@ -31,7 +32,8 @@ abs_education_state_2020_aggregated %>%
     by = c(
       "state",
       "age_group"
-    )
+    ),
+    multiple = "all"
   ) %>%
   mutate(prop = population_educated / population)
 

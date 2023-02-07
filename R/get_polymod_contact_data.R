@@ -59,7 +59,8 @@ get_polymod_contact_data <- function(setting = c("all", "home", "work", "school"
     ) %>%
     dplyr::left_join(
       socialmixr::polymod$contacts,
-      by = "part_id"
+      by = "part_id",
+      multiple = "all"
     )
 
   # impute contact ages according to the required method
