@@ -43,16 +43,16 @@
     <loc>/dev/news/index.html</loc>
   </url>
   <url>
+    <loc>/dev/reference/abs-age-education.html</loc>
+  </url>
+  <url>
+    <loc>/dev/reference/abs-age-work.html</loc>
+  </url>
+  <url>
     <loc>/dev/reference/abs_abbreviate_states.html</loc>
   </url>
   <url>
     <loc>/dev/reference/abs_age_data.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/abs_age_education.html</loc>
-  </url>
-  <url>
-    <loc>/dev/reference/abs_age_work.html</loc>
   </url>
   <url>
     <loc>/dev/reference/abs_education_state.html</loc>
