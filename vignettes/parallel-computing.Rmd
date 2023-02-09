@@ -1,8 +1,8 @@
 ---
-title: "parallel-computing"
+title: "Parallel Computing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{parallel-computing}
+  %\VignetteIndexEntry{Parallel Computing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -70,4 +70,3 @@ synthetic_settings_5y_perth <- predict_setting_contacts(
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 ```
-
