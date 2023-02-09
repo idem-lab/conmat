@@ -1,5 +1,11 @@
 home:
-  title: Create Synthetic Contact Matrices
+  title: An R Package For Creating Synthetic Contact Matrices
+  description: >
+    Builds synthetic contact matrices using Generalised Additive Models,
+    the POLYMOD contact survey data, you just provide the population data. 
+    This package also incorporates data that is copyright Commonwealth of 
+    Australia (Australian Electoral Commission and Australian Bureau of 
+    Statistics) 2020.
 
 authors:
   Nick Tierney:
