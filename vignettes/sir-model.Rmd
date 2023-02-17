@@ -541,3 +541,4 @@ ggplot(conmat_prem_soln, aes(x = time, y = value, colour = type)) +
   facet_wrap(~name, nrow = 1)
 ```
 
+So now we have as fair of a comparison of the two matrices as we will get, and yet, there are significant differences in the dynamics of the two models.
