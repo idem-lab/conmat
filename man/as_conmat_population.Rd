@@ -23,10 +23,24 @@ as_conmat_population(data, ...)
 
 \item{...}{extra arguments}
 
-\item{age}{age column - numeric}
+\item{age}{age column - an unquoted variable of numeric integer ages}
 
-\item{population}{population column - numeric}
+\item{population}{population column - an unquoted variable, numeric value}
 }
 \description{
 Convert to conmat population
+}
+\examples{
+some_age_pop <- data.frame(
+  age = 1:10,
+  pop = 101:110
+)
+
+some_age_pop
+
+as_conmat_population(
+  some_age_pop,
+  age = age,
+  population = pop
+)
 }

@@ -332,7 +332,10 @@ germany_contacts <- extrapolate_polymod(
 )
 
 n_finite_states <- length(age_breaks_socialmixr) - 1
-socialmixr_matrix <- matrix(0.1761765, nrow = n_finite_states, ncol = n_finite_states)
+socialmixr_matrix <- matrix(0.1761765,
+  nrow = n_finite_states,
+  ncol = n_finite_states
+)
 
 transmission_matrix <- transmission_probability_matrix(
   home = socialmixr_matrix,

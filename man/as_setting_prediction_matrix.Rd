@@ -39,5 +39,4 @@ mat_set <- as_setting_prediction_matrix(
 
 mat_set
 
-
 }

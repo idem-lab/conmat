@@ -68,10 +68,23 @@ as_conmat_population.default <- function(data, ...) {
         a {.cls conmat_population} object.")
 }
 
-#' @param age age column - numeric
-#' @param population population column - numeric
+#' @param age age column - an unquoted variable of numeric integer ages
+#' @param population population column - an unquoted variable, numeric value
 #' @rdname as_conmat_population
 #' @export
+#' @examples
+#' some_age_pop <- data.frame(
+#'   age = 1:10,
+#'   pop = 101:110
+#' )
+#'
+#' some_age_pop
+#'
+#' as_conmat_population(
+#'   some_age_pop,
+#'   age = age,
+#'   population = pop
+#' )
 as_conmat_population.data.frame <- function(data, age, population, ...) {
   # strip any existing classes
   data <- as.data.frame(data)
