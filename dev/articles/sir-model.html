@@ -511,7 +511,10 @@ probability matrix from the data we have on Germany.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">n_finite_states</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">age_breaks_socialmixr</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span><span class="va">socialmixr_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0.1761765</span>, nrow <span class="op">=</span> <span class="va">n_finite_states</span>, ncol <span class="op">=</span> <span class="va">n_finite_states</span><span class="op">)</span></span>
+<span><span class="va">socialmixr_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0.1761765</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="va">n_finite_states</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="va">n_finite_states</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">transmission_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/transmission_probability_matrix.html">transmission_probability_matrix</a></span><span class="op">(</span></span>
 <span>  home <span class="op">=</span> <span class="va">socialmixr_matrix</span>,</span>
