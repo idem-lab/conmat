@@ -486,19 +486,17 @@ calculate_R0 <- function(multiplier, transmission_matrices, contact_matrices) {
   abs(Re(eigen(total_matrix * multiplier)$values[1]) - 1.5)
 }
 
-scaling_factor_prem <- optimize(
-  f = calculate_R0,
-  interval = c(0.001, 5),
-  transmission_matrices = transmission_matrix,
-  contact_matrices = prem_germany_contact_matrices
-)
+scaling_factor <- function(contact_matrix) {
+  optimize(
+    f = calculate_R0,
+    interval = c(0.001, 5),
+    transmission_matrices = transmission_matrix,
+    contact_matrices = contact_matrix
+  )
+}
 
-scaling_factor_socialmixr <- optimize(
-  f = calculate_R0,
-  interval = c(0.001, 5),
-  transmission_matrices = transmission_matrix,
-  contact_matrices = germany_contacts
-)
+scaling_factor_prem <- scaling_factor(prem_germany_contact_matrices)
+scaling_factor_socialmixr <- scaling_factor(germany_contacts)
 
 scaling_factor_prem$minimum
 scaling_factor_socialmixr$minimum
@@ -537,11 +535,32 @@ conmat_prem_soln <- bind_rows(
   mutate(name = factor(name, levels = c("S", "I", "R")))
 ```
 
-```{r plot-conmat-prem2}
-ggplot(conmat_prem_soln, aes(x = time, y = value, colour = type)) +
+
+```{r}
+library(scales)
+conmat_prem_soln %>%
+  filter(time <= 50) %>%
+  ggplot(aes(x = time, y = value, colour = type)) +
   geom_line() +
-  labs(x = "Time", y = "Value", colour = "Model") +
-  facet_wrap(~name, nrow = 1)
+  facet_wrap(~name,
+    ncol = 1,
+    scales = "free_y",
+    labeller = labeller(
+      name = c(
+        S = "Susceptible",
+        I = "Infected",
+        R = "Recovered"
+      )
+    )
+  ) +
+  scale_y_continuous(
+    labels = label_number(scale_cut = cut_si("")),
+    n.breaks = 3
+  ) +
+  scale_colour_brewer(palette = "Dark2") +
+  labs(x = "Time", y = "Population", colour = "Model") +
+  theme_minimal()
 ```
+
 
 So now we have as fair of a comparison of the two matrices as we will get, and yet, there are significant differences in the dynamics of the two models.
