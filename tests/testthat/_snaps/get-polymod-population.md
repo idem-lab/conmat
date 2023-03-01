@@ -55,6 +55,11 @@
     Output
       
     Message
+      There are 86 age breaks, ranging 0-90 years, with an irregular year interval,
+      (on average, 1.05 years)
+    Output
+      
+    Message
       * home: a 8,787x5 <data.frame>
       * work: a 8,787x5 <data.frame>
       * school: a 8,787x5 <data.frame>

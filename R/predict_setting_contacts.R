@@ -104,7 +104,9 @@ predict_setting_contacts <- function(population,
     )
   }
 
-  setting_matrices <- new_setting_prediction_matrix(setting_matrices)
+  setting_matrices <- new_setting_prediction_matrix(setting_matrices,
+    age_breaks = age_breaks
+  )
 
   return(setting_matrices)
 }

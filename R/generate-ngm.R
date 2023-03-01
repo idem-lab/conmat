@@ -280,7 +280,8 @@ calculate_ngm <- function(setting_prediction_matrix,
 
   new_ngm_setting_matrix(setting_ngms,
     raw_eigenvalue = R_raw,
-    scaling = scaling
+    scaling = scaling,
+    age_breaks = age_breaks
   )
 }
 

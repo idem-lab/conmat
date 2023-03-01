@@ -159,9 +159,12 @@ print_setting_info <- function(x,
                                description = NULL,
                                list_print_fun = print_list_dim(x, object_class),
                                object_class) {
+  age_breaks <- age_breaks(x)
   cli::cli_h1(heading)
   cli::cat_line()
   cli::cli_text(cli::style_italic(description))
+  cli::cat_line()
+  print_age_breaks(age_breaks)
   cli::cat_line()
 
   list_print_fun
@@ -341,5 +344,67 @@ set_age_breaks_matrices <- function(list_matrix, age_breaks) {
     list_matrix,
     set_age_breaks_matrix,
     age_breaks
+  )
+}
+
+# age_breaks(perth_contact_0_75)
+
+remove_inf <- function(x) {
+  x_inf <- is.infinite(x)
+  if (!any(x_inf)) {
+    return(x)
+  } else if (any(x_inf)) {
+    inf_index <- which(x_inf)
+    return(x[-inf_index])
+  }
+}
+
+is_equally_spaced <- function(x) {
+  double_diff <- remove_inf(x) %>%
+    diff() %>%
+    diff()
+  all(double_diff == 0)
+}
+
+age_interval <- function(x) {
+  if (is_equally_spaced(x)) {
+    age_int <- remove_inf(x) %>%
+      diff() %>%
+      unique()
+  } else if (!is_equally_spaced(x)) {
+    age_int <- remove_inf(x) %>%
+      diff() %>%
+      mean() %>%
+      round(2)
+  }
+  age_int
+}
+
+print_age_breaks <- function(age_breaks) {
+  has_inf <- any(is.infinite(age_breaks))
+  n_age_breaks <- length(age_breaks) - 1
+  age_range <- range(age_breaks, finite = TRUE)
+  min_age <- age_range[1]
+  max_age <- age_range[2]
+
+  equally_spaced <- is_equally_spaced(age_breaks)
+  year_gap <- age_interval(age_breaks)
+
+  if (has_inf) {
+    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age}+ years, ")
+  } else if (!has_inf) {
+    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age} years, ")
+  }
+  if (equally_spaced) {
+    age_gap_info <- glue::glue("with a regular {year_gap} year interval")
+  } else if (!equally_spaced) {
+    age_gap_info <- glue::glue("with an irregular year interval, (on average, {year_gap} years)")
+  }
+
+  cli::cli_text(
+    cli::style_italic(
+      age_info,
+      age_gap_info
+    )
   )
 }

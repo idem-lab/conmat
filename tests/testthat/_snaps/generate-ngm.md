@@ -13,6 +13,10 @@
     Output
       
     Message
+      There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
+    Output
+      
+    Message
       * home: a 16x16 <matrix>
       * school: a 16x16 <matrix>
       * work: a 16x16 <matrix>
@@ -36,6 +40,10 @@
     Output
       
     Message
+      There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
+    Output
+      
+    Message
       * home: a 16x16 <matrix>
       * school: a 16x16 <matrix>
       * work: a 16x16 <matrix>
@@ -56,6 +64,10 @@
     Message
       A list of matrices, each <matrix> containing the number of newly infected
       individuals for a specified age group.
+    Output
+      
+    Message
+      There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
     Output
       
     Message

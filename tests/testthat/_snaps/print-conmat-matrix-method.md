@@ -13,6 +13,10 @@
     Output
       
     Message
+      There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
+    Output
+      
+    Message
       * home: a 16x16 <matrix>
       * work: a 16x16 <matrix>
       * school: a 16x16 <matrix>
