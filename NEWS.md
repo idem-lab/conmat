@@ -10,7 +10,7 @@
   * `transmission_probability_matrix()` for creating new transmission probability
   matrices
 
-* there is now a print method for setting matrices - [#139](https://github.com/njtierney/conmat/issues/139)
+* there is now a print method for age group information in setting matrices - [#139](https://github.com/njtierney/conmat/issues/139)
 
 ## Breaking changes
 
