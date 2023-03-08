@@ -1,3 +1,4 @@
+
 # conmat 0.0.2.9000
 
 ## Changes
@@ -8,6 +9,10 @@
   * `as_setting_prediction_matrix()` for coercing lists into a `setting_prediction_matrix`
   * `transmission_probability_matrix()` for creating new transmission probability
   matrices
+
+* there is now a print method for age group information in setting matrices - [#139](https://github.com/njtierney/conmat/issues/139)
+
+* improved age break checking [#138](https://github.com/njtierney/conmat/issues/138)
 
 ## Breaking changes
 

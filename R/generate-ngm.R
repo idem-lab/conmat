@@ -127,6 +127,13 @@ generate_ngm.conmat_setting_prediction_matrix <- function(x,
     error_old_ngm_arg(lga_name)
   }
 
+  check_age_breaks(
+    x = age_breaks(x),
+    y = age_breaks,
+    x_arg = "x",
+    y_arg = "age_breaks"
+  )
+
   setting_transmission_matrix <- check_transmission_probabilities(
     setting_transmission_matrix,
     age_breaks = age_breaks
@@ -155,6 +162,13 @@ generate_ngm.conmat_population <- function(x,
     population = x,
     age_breaks = age_breaks,
     per_capita_household_size = per_capita_household_size
+  )
+
+  check_age_breaks(
+    x = age_breaks(setting_contact_rates),
+    y = age_breaks,
+    x_arg = "x",
+    y_arg = "age_breaks"
   )
 
   setting_transmission_matrix <- check_transmission_probabilities(
@@ -280,7 +294,8 @@ calculate_ngm <- function(setting_prediction_matrix,
 
   new_ngm_setting_matrix(setting_ngms,
     raw_eigenvalue = R_raw,
-    scaling = scaling
+    scaling = scaling,
+    age_breaks = age_breaks
   )
 }
 

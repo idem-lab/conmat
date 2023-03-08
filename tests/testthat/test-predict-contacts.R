@@ -21,8 +21,6 @@ synthetic_pred <- predict_contacts(
   age_breaks = age_breaks_5y
 )
 
-synthetic_pred
-
 test_that("predict_contacts() works", {
   expect_s3_class(synthetic_pred, "tbl_df")
   expect_snapshot(names(synthetic_pred))

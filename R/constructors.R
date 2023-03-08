@@ -25,15 +25,13 @@ add_new_class <- function(x, new_class) {
 #'   )
 #' )
 #'
-#' new_age_matrix(age_mat)
 #' new_age_matrix(
 #'   age_mat,
 #'   age_breaks = age_break_names
 #' )
 #'
 #' @export
-new_age_matrix <- function(matrix, age_breaks = rownames(matrix)) {
-  stopifnot(is.character(age_breaks))
+new_age_matrix <- function(matrix, age_breaks) {
   structure(
     matrix,
     age_breaks = age_breaks,
@@ -43,10 +41,11 @@ new_age_matrix <- function(matrix, age_breaks = rownames(matrix)) {
 
 #' Extract age break attribute information
 #'
-#' @param matrix a `conmat_age_matrix` matrix
+#' @param x an object containing age break information
 #'
 #' @return age breaks character vector
 #' @examples
+#' age_breaks <- c(0, 5, 19, 15)
 #' age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
 #' age_mat <- matrix(
 #'   runif(9),
@@ -58,43 +57,103 @@ new_age_matrix <- function(matrix, age_breaks = rownames(matrix)) {
 #'   )
 #' )
 #'
-#' age_mat <- new_age_matrix(age_mat)
+#' age_mat <- new_age_matrix(age_mat, age_breaks)
 #'
 #' age_breaks(age_mat)
 #' @export
-age_breaks <- function(matrix) {
+age_breaks <- function(x) {
   UseMethod("age_breaks")
 }
 
 #' @describeIn age_breaks Get age break information
 #' @export
-age_breaks.conmat_age_matrix <- function(matrix) {
-  attr(matrix, "age_breaks")
+age_breaks.conmat_age_matrix <- function(x) {
+  attr(x, "age_breaks")
 }
 
 #' @describeIn age_breaks Get age break information
 #' @export
-age_breaks.conmat_setting_prediction_matrix <- function(matrix) {
-  attr(matrix, "age_breaks")
+age_breaks.conmat_setting_prediction_matrix <- function(x) {
+  attr(x, "age_breaks")
 }
 
 #' @describeIn age_breaks Get age break information
 #' @export
-age_breaks.default <- function(matrix) {
-  cli::cli_abort("no method for {.code age_breaks()} defined yet")
+age_breaks.setting_data <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.ngm_setting_matrix <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.setting_vaccination_matrix <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.numeric <- function(x) {
+  x
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.matrix <- function(x) {
+  cli::cli_abort(
+    "no method for {.code age_breaks()} defined for object of class {.cls {class(x)}} yet"
+  )
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.array <- function(x) {
+  cli::cli_abort(
+    "no method for {.code age_breaks()} defined for object of class {.cls {class(x)}} yet"
+  )
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.predicted_contacts <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.transmission_probability_matrix <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.default <- function(x) {
+  cli::cli_abort(
+    "no method for {.code age_breaks()} defined for object of class {.cls {class(x)}} yet"
+  )
 }
 
 new_setting_data <- function(list_df) {
-  add_new_class(list_df, "setting_data")
+  structure(
+    list_df,
+    age_breaks = unique(list_df$home$age_from),
+    class = c("setting_data", class(list_df))
+  )
 }
 
 new_ngm_setting_matrix <- function(list_matrix,
                                    raw_eigenvalue,
-                                   scaling) {
+                                   scaling,
+                                   age_breaks) {
   structure(
     list_matrix,
     raw_eigenvalue = raw_eigenvalue,
     scaling = scaling,
+    age_breaks = age_breaks,
     class = c("ngm_setting_matrix", class(list_matrix))
   )
 }
@@ -152,6 +211,19 @@ new_setting_contact_model <- function(list_model) {
   add_new_class(list_model, "setting_contact_model")
 }
 
-new_setting_vaccination_matrix <- function(list_matrix) {
-  add_new_class(list_matrix, "setting_vaccination_matrix")
+new_setting_vaccination_matrix <- function(list_matrix,
+                                           age_breaks) {
+  structure(
+    list_matrix,
+    age_breaks = age_breaks,
+    class = c("setting_vaccination_matrix", class(list_matrix))
+  )
+}
+
+new_predicted_contacts <- function(df, age_breaks) {
+  tibble::new_tibble(
+    x = df,
+    age_breaks = age_breaks,
+    class = "predicted_contacts"
+  )
 }

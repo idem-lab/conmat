@@ -4,19 +4,43 @@
 \alias{age_breaks}
 \alias{age_breaks.conmat_age_matrix}
 \alias{age_breaks.conmat_setting_prediction_matrix}
+\alias{age_breaks.setting_data}
+\alias{age_breaks.ngm_setting_matrix}
+\alias{age_breaks.setting_vaccination_matrix}
+\alias{age_breaks.numeric}
+\alias{age_breaks.matrix}
+\alias{age_breaks.array}
+\alias{age_breaks.predicted_contacts}
+\alias{age_breaks.transmission_probability_matrix}
 \alias{age_breaks.default}
 \title{Extract age break attribute information}
 \usage{
-age_breaks(matrix)
+age_breaks(x)
 
-\method{age_breaks}{conmat_age_matrix}(matrix)
+\method{age_breaks}{conmat_age_matrix}(x)
 
-\method{age_breaks}{conmat_setting_prediction_matrix}(matrix)
+\method{age_breaks}{conmat_setting_prediction_matrix}(x)
 
-\method{age_breaks}{default}(matrix)
+\method{age_breaks}{setting_data}(x)
+
+\method{age_breaks}{ngm_setting_matrix}(x)
+
+\method{age_breaks}{setting_vaccination_matrix}(x)
+
+\method{age_breaks}{numeric}(x)
+
+\method{age_breaks}{matrix}(x)
+
+\method{age_breaks}{array}(x)
+
+\method{age_breaks}{predicted_contacts}(x)
+
+\method{age_breaks}{transmission_probability_matrix}(x)
+
+\method{age_breaks}{default}(x)
 }
 \arguments{
-\item{matrix}{a \code{conmat_age_matrix} matrix}
+\item{x}{an object containing age break information}
 }
 \value{
 age breaks character vector
@@ -30,10 +54,27 @@ Extract age break attribute information
 
 \item \code{age_breaks(conmat_setting_prediction_matrix)}: Get age break information
 
+\item \code{age_breaks(setting_data)}: Get age break information
+
+\item \code{age_breaks(ngm_setting_matrix)}: Get age break information
+
+\item \code{age_breaks(setting_vaccination_matrix)}: Get age break information
+
+\item \code{age_breaks(numeric)}: Get age break information
+
+\item \code{age_breaks(matrix)}: Get age break information
+
+\item \code{age_breaks(array)}: Get age break information
+
+\item \code{age_breaks(predicted_contacts)}: Get age break information
+
+\item \code{age_breaks(transmission_probability_matrix)}: Get age break information
+
 \item \code{age_breaks(default)}: Get age break information
 
 }}
 \examples{
+age_breaks <- c(0,5,19,15)
 age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
 age_mat <- matrix(
   runif(9),
@@ -45,7 +86,7 @@ age_mat <- matrix(
   )
 )
 
-age_mat <- new_age_matrix(age_mat)
+age_mat <- new_age_matrix(age_mat, age_breaks)
 
 age_breaks(age_mat)
 }

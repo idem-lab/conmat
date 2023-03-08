@@ -100,5 +100,8 @@ predict_contacts <- function(model,
     age_breaks = age_breaks
   )
 
-  pred_groups
+  new_predicted_contacts(
+    pred_groups,
+    age_breaks = age_breaks
+  )
 }

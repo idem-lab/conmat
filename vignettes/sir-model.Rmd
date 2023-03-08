@@ -464,7 +464,7 @@ These are really different, but we have to be careful about why. The contact mat
 
 ## Calculating reproductive number - R0
 
-To fairly compare a dynamic disease model that differs _only_ by it's contact marices, it's important to remember that the $(i,j)$th element of one of these matrices is the *relative* number of contacts between individuals of age $i$ and age $j$. But, what the number is relative to might be different, and this will lead to different basic reproduction numbers, which will give misleading model conclusions.
+To fairly compare a dynamic disease model that differs _only_ by it's contact matrices, it's important to remember that the $(i,j)$th element of one of these matrices is the *relative* number of contacts between individuals of age $i$ and age $j$. But, what the number is relative to might be different, and this will lead to different basic reproduction numbers, which will give misleading model conclusions.
 
 At this point, it is important to point out the two definitions of a next generation matrix.
 

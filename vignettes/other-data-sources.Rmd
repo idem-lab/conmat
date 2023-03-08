@@ -2,7 +2,7 @@
 title: "Using other data sources"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using-other-data-sources}
+  %\VignetteIndexEntry{Using other data sources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -99,4 +99,3 @@ ngm_italy_vacc <- apply_vaccination(
 
 ngm_italy_vacc
 ```
-

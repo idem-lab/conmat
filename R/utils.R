@@ -89,45 +89,6 @@ bin_widths <- function(lower_bound) {
   c(diffs, diffs[length(diffs)])
 }
 
-#' @title Check dimensions
-#' @description An internal function used within [apply_vaccination()] to warn users of incompatible dimensions of
-#' data and the next generation matrices
-#'
-#' @param data data frame
-#' @param ngm  list with next generation matrices at different settings
-#' @keywords internal
-check_dimensions <- function(ngm, data) {
-  nrow_data <- nrow(data)
-  ngm_cols <- purrr::map_int(ngm, ncol)
-  dim_match <- all(nrow_data == ngm_cols)
-
-  if (!dim_match) {
-    cli::cli_abort(
-      c(
-        "Non-conformable arrays present.",
-        "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
-        "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
-        "x" = "Number of rows in {.var data} is {nrow(data)}."
-      )
-    )
-  }
-}
-
-#'
-#' @title Check if data is a list
-#' @param contact_data data on the contacts between two ages at different settings
-#' @keywords internal
-check_if_list <- function(contact_data) {
-  if (!inherits(contact_data, "list")) {
-    cli::cli_abort(
-      c(
-        "i" = "Function expects {.var contact_data} to be of class {.cls list}",
-        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}."
-      )
-    )
-  }
-}
-
 print_list_dim <- function(x, object_class) {
   dim_char <- purrr::map_chr(
     x,
@@ -159,9 +120,12 @@ print_setting_info <- function(x,
                                description = NULL,
                                list_print_fun = print_list_dim(x, object_class),
                                object_class) {
+  age_breaks <- age_breaks(x)
   cli::cli_h1(heading)
   cli::cat_line()
   cli::cli_text(cli::style_italic(description))
+  cli::cat_line()
+  print_age_breaks(age_breaks)
   cli::cat_line()
 
   list_print_fun
@@ -298,14 +262,6 @@ name_list <- function(list) {
 }
 
 
-check_if_all_matrix <- function(x) {
-  if (!all_matrix(x)) {
-    cli::cli_abort(
-      c("Inputs must all be of class {.cls matrix}")
-    )
-  }
-}
-
 repair_list_matrix_names <- function(list_matrix) {
   if (is.null(names(list_matrix))) {
     list_matrix <- name_list(list_matrix)
@@ -341,5 +297,67 @@ set_age_breaks_matrices <- function(list_matrix, age_breaks) {
     list_matrix,
     set_age_breaks_matrix,
     age_breaks
+  )
+}
+
+# age_breaks(perth_contact_0_75)
+
+remove_inf <- function(x) {
+  x_inf <- is.infinite(x)
+  if (!any(x_inf)) {
+    return(x)
+  } else if (any(x_inf)) {
+    inf_index <- which(x_inf)
+    return(x[-inf_index])
+  }
+}
+
+is_equally_spaced <- function(x) {
+  double_diff <- remove_inf(x) %>%
+    diff() %>%
+    diff()
+  all(double_diff == 0)
+}
+
+age_interval <- function(x) {
+  if (is_equally_spaced(x)) {
+    age_int <- remove_inf(x) %>%
+      diff() %>%
+      unique()
+  } else if (!is_equally_spaced(x)) {
+    age_int <- remove_inf(x) %>%
+      diff() %>%
+      mean() %>%
+      round(2)
+  }
+  age_int
+}
+
+print_age_breaks <- function(age_breaks) {
+  has_inf <- any(is.infinite(age_breaks))
+  n_age_breaks <- length(age_breaks) - 1
+  age_range <- range(age_breaks, finite = TRUE)
+  min_age <- age_range[1]
+  max_age <- age_range[2]
+
+  equally_spaced <- is_equally_spaced(age_breaks)
+  year_gap <- age_interval(age_breaks)
+
+  if (has_inf) {
+    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age}+ years, ")
+  } else if (!has_inf) {
+    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age} years, ")
+  }
+  if (equally_spaced) {
+    age_gap_info <- glue::glue("with a regular {year_gap} year interval")
+  } else if (!equally_spaced) {
+    age_gap_info <- glue::glue("with an irregular year interval, (on average, {year_gap} years)")
+  }
+
+  cli::cli_text(
+    cli::style_italic(
+      age_info,
+      age_gap_info
+    )
   )
 }

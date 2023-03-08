@@ -51,6 +51,6 @@ transmission_probability_matrix <- function(...,
 
   new_transmission_probability_matrix(
     list_matrix = setting_transmission_mat,
-    age_breaks = group_age_breaks(age_breaks)
+    age_breaks = age_breaks
   )
 }

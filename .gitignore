@@ -9,3 +9,4 @@ README_cache
 .Rprofile
 .vscode/launch.json
 .pre-commit-config.yaml
+tests/README.md

@@ -4,7 +4,7 @@
 \alias{new_age_matrix}
 \title{Build new age matrix}
 \usage{
-new_age_matrix(matrix, age_breaks = rownames(matrix))
+new_age_matrix(matrix, age_breaks)
 }
 \arguments{
 \item{matrix}{numeric matrix}
@@ -30,7 +30,6 @@ age_mat <- matrix(
   )
 )
 
-new_age_matrix(age_mat)
 new_age_matrix(
   age_mat,
   age_breaks = age_break_names
