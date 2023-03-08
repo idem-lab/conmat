@@ -12,6 +12,8 @@
 
 * there is now a print method for age group information in setting matrices - [#139](https://github.com/njtierney/conmat/issues/139)
 
+* improved age break checking [#138](https://github.com/njtierney/conmat/issues/138)
+
 ## Breaking changes
 
 * change `get_per_capita_household_size` to `get_abs_per_capita_household_size`
