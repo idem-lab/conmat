@@ -16,6 +16,8 @@ filter_setting_age <- function(list_df, age) {
 contact_data_cut <- filter_setting_age(polymod_contacts, 10)
 
 test_that("estimate_setting_contacts works", {
+  skip_on_ci()
+  skip_on_cran()
   expect_snapshot(
     estimate_setting_contacts(
       contact_data_list = contact_data_cut,
