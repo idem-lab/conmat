@@ -413,7 +413,7 @@ check_age_breaks <- function(x,
                              y,
                              x_arg = "old",
                              y_arg = "new") {
-  if (!identical(age_breaks_0_75, age_breaks_0_80)) {
+  if (!identical(x, y)) {
     compare_res <- waldo::compare(
       x = x,
       y = y,
@@ -421,11 +421,11 @@ check_age_breaks <- function(x,
       y_arg = y_arg
     )
 
-    cli::cli_abort(
+    rlang::abort(
       c(
-        "The age breaks of these objects are not the same:",
-        "{compare_res}",
-        "check the age breaks or dimensions of your objects."
+        "Age breaks must be the same, but they are different:",
+        compare_res,
+        i = "You can check the age breaks using `age_breaks(<object>)`"
       )
     )
   }

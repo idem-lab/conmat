@@ -27,7 +27,12 @@
 #' predictions_to_matrix(fairfield_school_contacts)
 #'
 #' @export
-predictions_to_matrix <- function(contact_predictions) {
+predictions_to_matrix <- function(contact_predictions, ...) {
+  UseMethod("predictions_to_matrix")
+}
+
+#' @export
+predictions_to_matrix.predicted_contacts <- function(contact_predictions, ...) {
   prediction_matrix <- contact_predictions %>%
     tidyr::pivot_wider(
       names_from = age_group_from,
@@ -37,7 +42,23 @@ predictions_to_matrix <- function(contact_predictions) {
       "age_group_to"
     ) %>%
     as.matrix() %>%
-    new_age_matrix()
+    new_age_matrix(age_breaks = age_breaks(contact_predictions))
+
+  prediction_matrix
+}
+
+#' @export
+predictions_to_matrix.default <- function(contact_predictions, age_breaks, ...) {
+  prediction_matrix <- contact_predictions %>%
+    tidyr::pivot_wider(
+      names_from = age_group_from,
+      values_from = contacts
+    ) %>%
+    tibble::column_to_rownames(
+      "age_group_to"
+    ) %>%
+    as.matrix() %>%
+    new_age_matrix(age_breaks = age_breaks)
 
   prediction_matrix
 }

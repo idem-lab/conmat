@@ -4,7 +4,7 @@
 \alias{predictions_to_matrix}
 \title{Convert dataframe of predicted contacts into matrix}
 \usage{
-predictions_to_matrix(contact_predictions)
+predictions_to_matrix(contact_predictions, ...)
 }
 \arguments{
 \item{contact_predictions}{data frame with columns \code{age_group_from},
