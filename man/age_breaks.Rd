@@ -11,6 +11,7 @@
 \alias{age_breaks.matrix}
 \alias{age_breaks.array}
 \alias{age_breaks.predicted_contacts}
+\alias{age_breaks.transmission_probability_matrix}
 \alias{age_breaks.default}
 \title{Extract age break attribute information}
 \usage{
@@ -33,6 +34,8 @@ age_breaks(x)
 \method{age_breaks}{array}(x)
 
 \method{age_breaks}{predicted_contacts}(x)
+
+\method{age_breaks}{transmission_probability_matrix}(x)
 
 \method{age_breaks}{default}(x)
 }
@@ -65,10 +68,13 @@ Extract age break attribute information
 
 \item \code{age_breaks(predicted_contacts)}: Get age break information
 
+\item \code{age_breaks(transmission_probability_matrix)}: Get age break information
+
 \item \code{age_breaks(default)}: Get age break information
 
 }}
 \examples{
+age_breaks <- c(0,5,19,15)
 age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
 age_mat <- matrix(
   runif(9),
@@ -80,7 +86,7 @@ age_mat <- matrix(
   )
 )
 
-age_mat <- new_age_matrix(age_mat)
+age_mat <- new_age_matrix(age_mat, age_breaks)
 
 age_breaks(age_mat)
 }

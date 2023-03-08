@@ -89,45 +89,6 @@ bin_widths <- function(lower_bound) {
   c(diffs, diffs[length(diffs)])
 }
 
-#' @title Check dimensions
-#' @description An internal function used within [apply_vaccination()] to warn users of incompatible dimensions of
-#' data and the next generation matrices
-#'
-#' @param data data frame
-#' @param ngm  list with next generation matrices at different settings
-#' @keywords internal
-check_dimensions <- function(ngm, data) {
-  nrow_data <- nrow(data)
-  ngm_cols <- purrr::map_int(ngm, ncol)
-  dim_match <- all(nrow_data == ngm_cols)
-
-  if (!dim_match) {
-    cli::cli_abort(
-      c(
-        "Non-conformable arrays present.",
-        "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
-        "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
-        "x" = "Number of rows in {.var data} is {nrow(data)}."
-      )
-    )
-  }
-}
-
-#'
-#' @title Check if data is a list
-#' @param contact_data data on the contacts between two ages at different settings
-#' @keywords internal
-check_if_list <- function(contact_data) {
-  if (!inherits(contact_data, "list")) {
-    cli::cli_abort(
-      c(
-        "i" = "Function expects {.var contact_data} to be of class {.cls list}",
-        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}."
-      )
-    )
-  }
-}
-
 print_list_dim <- function(x, object_class) {
   dim_char <- purrr::map_chr(
     x,
@@ -301,14 +262,6 @@ name_list <- function(list) {
 }
 
 
-check_if_all_matrix <- function(x) {
-  if (!all_matrix(x)) {
-    cli::cli_abort(
-      c("Inputs must all be of class {.cls matrix}")
-    )
-  }
-}
-
 repair_list_matrix_names <- function(list_matrix) {
   if (is.null(names(list_matrix))) {
     list_matrix <- name_list(list_matrix)
@@ -407,26 +360,4 @@ print_age_breaks <- function(age_breaks) {
       age_gap_info
     )
   )
-}
-
-check_age_breaks <- function(x,
-                             y,
-                             x_arg = "old",
-                             y_arg = "new") {
-  if (!identical(x, y)) {
-    compare_res <- waldo::compare(
-      x = x,
-      y = y,
-      x_arg = x_arg,
-      y_arg = y_arg
-    )
-
-    rlang::abort(
-      c(
-        "Age breaks must be the same, but they are different:",
-        compare_res,
-        i = "You can check the age breaks using `age_breaks(<object>)`"
-      )
-    )
-  }
 }

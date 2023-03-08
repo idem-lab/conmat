@@ -25,7 +25,6 @@ add_new_class <- function(x, new_class) {
 #'   )
 #' )
 #'
-#' new_age_matrix(age_mat)
 #' new_age_matrix(
 #'   age_mat,
 #'   age_breaks = age_break_names
@@ -46,6 +45,7 @@ new_age_matrix <- function(matrix, age_breaks) {
 #'
 #' @return age breaks character vector
 #' @examples
+#' age_breaks <- c(0, 5, 19, 15)
 #' age_break_names <- c("[0,5)", "[5,10)", "[10, 15)")
 #' age_mat <- matrix(
 #'   runif(9),
@@ -57,7 +57,7 @@ new_age_matrix <- function(matrix, age_breaks) {
 #'   )
 #' )
 #'
-#' age_mat <- new_age_matrix(age_mat)
+#' age_mat <- new_age_matrix(age_mat, age_breaks)
 #'
 #' age_breaks(age_mat)
 #' @export
@@ -120,6 +120,12 @@ age_breaks.array <- function(x) {
 #' @describeIn age_breaks Get age break information
 #' @export
 age_breaks.predicted_contacts <- function(x) {
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
+age_breaks.transmission_probability_matrix <- function(x) {
   attr(x, "age_breaks")
 }
 

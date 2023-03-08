@@ -104,6 +104,31 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
   }
 }
 
+
+#' @title Check dimensions
+#' @description An internal function used within [apply_vaccination()] to warn users of incompatible dimensions of
+#' data and the next generation matrices
+#'
+#' @param data data frame
+#' @param ngm  list with next generation matrices at different settings
+#' @keywords internal
+check_dimensions <- function(ngm, data) {
+  nrow_data <- nrow(data)
+  ngm_cols <- purrr::map_int(ngm, ncol)
+  dim_match <- all(nrow_data == ngm_cols)
+
+  if (!dim_match) {
+    cli::cli_abort(
+      c(
+        "Non-conformable arrays present.",
+        "i" = "The number of columns in {.var ngm} must match the number of rows in {.var data}.",
+        "x" = "Number of columns in {.var ngm} for the settings: {names(ngm)} are {purrr::map_int(ngm, ncol)} respectively.",
+        "x" = "Number of rows in {.var data} is {nrow(data)}."
+      )
+    )
+  }
+}
+
 check_if_var_numeric <- function(data, var, attribute) {
   var_val <- data[[var]]
 
@@ -123,7 +148,7 @@ check_if_data_frame <- function(x) {
     cli::cli_abort(
       c(
         "x must be a {.cls data.frame}",
-        "x is {.cls {class(x)}}"
+        i = "x is {.cls {class(x)}}"
       )
     )
   }
@@ -133,27 +158,52 @@ error_old_ngm_arg <- function(arg) {
   cli::cli_abort(
     c(
       "{arg} is no longer used in {.code generate_ngm}",
-      "Please use {.code generate_ngm_oz} instead"
+      i = "Please use {.code generate_ngm_oz} instead"
     )
   )
 }
 
-check_if_age_breaks_match <- function(x, y) {
-  # from age breaks
-  # from setting_rel_tranmission_probs
-  age_breaks <- rownames(x[[1]])
-  # from setting_prediction_matrix
-  prediction_ages <- rownames(y[[1]])
 
-  which_breaks <- age_breaks %in% prediction_ages
-
-  if (!all(which_breaks)) {
+#'
+#' @title Check if data is a list
+#' @param contact_data data on the contacts between two ages at different settings
+#' @keywords internal
+check_if_list <- function(contact_data) {
+  if (!inherits(contact_data, "list")) {
     cli::cli_abort(
       c(
-        "Age breaks do not match the setting predictions",
-        "We see these extra age breaks: {age_breaks[!which_breaks]}",
-        "Please ensure that the age breaks in the {.arg age_breaks} match \\
-        the number of age breaks in the setting prediction matrix"
+        "i" = "Function expects {.var contact_data} to be of class {.cls list}",
+        "x" = "We see {.var contact_data} is of class {.cls {class(contact_data)}}."
+      )
+    )
+  }
+}
+
+check_if_all_matrix <- function(x) {
+  if (!all_matrix(x)) {
+    cli::cli_abort(
+      c("Inputs must all be of class {.cls matrix}")
+    )
+  }
+}
+
+check_age_breaks <- function(x,
+                             y,
+                             x_arg = "old",
+                             y_arg = "new") {
+  if (!identical(x, y)) {
+    compare_res <- waldo::compare(
+      x = x,
+      y = y,
+      x_arg = x_arg,
+      y_arg = y_arg
+    )
+
+    rlang::abort(
+      c(
+        "Age breaks must be the same, but they are different:",
+        compare_res,
+        i = "You can check the age breaks using `age_breaks(<object>)`"
       )
     )
   }

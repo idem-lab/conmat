@@ -54,7 +54,7 @@ setting_prediction_matrix <- function(...,
 
   new_setting_prediction_matrix(
     list_matrix = setting_pred_matrix,
-    age_breaks = group_age_breaks(age_breaks)
+    age_breaks = age_breaks
   )
 }
 
@@ -134,6 +134,6 @@ as_setting_prediction_matrix.list <- function(list_matrix,
 
   new_setting_prediction_matrix(
     list_matrix = setting_pred_matrix,
-    age_breaks = group_age_breaks(age_breaks)
+    age_breaks = age_breaks
   )
 }

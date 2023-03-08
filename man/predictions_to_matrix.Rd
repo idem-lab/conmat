@@ -9,6 +9,8 @@ predictions_to_matrix(contact_predictions, ...)
 \arguments{
 \item{contact_predictions}{data frame with columns \code{age_group_from},
 \code{age_group_to}, and \code{contacts}.}
+
+\item{...}{extra arguments}
 }
 \value{
 Square matrix with the unique age groups from \code{age_group_from/to}

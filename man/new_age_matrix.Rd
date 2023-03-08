@@ -30,7 +30,6 @@ age_mat <- matrix(
   )
 )
 
-new_age_matrix(age_mat)
 new_age_matrix(
   age_mat,
   age_breaks = age_break_names
