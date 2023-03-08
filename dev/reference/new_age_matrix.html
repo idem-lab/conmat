@@ -61,7 +61,7 @@ its rownames. Mostly intended for internal use.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_age_matrix</span><span class="op">(</span><span class="va">matrix</span>, age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">matrix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_age_matrix</span><span class="op">(</span><span class="va">matrix</span>, <span class="va">age_breaks</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -94,19 +94,14 @@ its rownames. Mostly intended for internal use.</p>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">new_age_matrix</span><span class="op">(</span><span class="va">age_mat</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [0,5)    [5,10)   [10, 15)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [0,5)    0.9246128 0.6577886 0.04306617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,10)   0.7130910 0.6664709 0.90324093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10, 15) 0.4462694 0.5663656 0.14432764</span>
 <span class="r-in"><span><span class="fu">new_age_matrix</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">age_mat</span>,</span></span>
 <span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="va">age_break_names</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              [0,5)    [5,10)   [10, 15)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [0,5)    0.9246128 0.6577886 0.04306617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,10)   0.7130910 0.6664709 0.90324093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10, 15) 0.4462694 0.5663656 0.14432764</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               [0,5)    [5,10)  [10, 15)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [0,5)    0.24808784 0.7416940 0.7667074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,10)   0.19521973 0.8656020 0.7790989</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10, 15) 0.06511799 0.5754064 0.8223328</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
