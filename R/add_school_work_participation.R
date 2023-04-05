@@ -42,8 +42,17 @@
 add_school_work_participation <- function(contact_data) {
   contact_data %>%
     dplyr::mutate(
+      # ok so this could perhaps instead be the "default" action
+      # and the alternative could be to pass some data that has a class in
+      # it that contains school and work data and also names of the
+      # columns that contain the relevant information.
+      # so as a first pass we can leave it as is
+      # and then we can develop an approach with polymod
+      # or perhaps have ABS as another default
+      # so the overall outcome is either that you provide this data
+      # or we provide some assumptions
       dplyr::across(
-        dplyr::starts_with("age"),
+        c("age_from", "age_to"),
         .fns = list(
           # made up example - replace with education statistics
           school_fraction = ~ dplyr::case_when(
