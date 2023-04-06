@@ -15,7 +15,19 @@ add_modelling_features(
 \item{contact_data}{contact data with columns \code{age_to} and \code{age_from}}
 
 \item{...}{extra dots passed to \code{population} argument of
-\code{\link[=add_population_age_to]{add_population_age_to()}}}
+\code{\link[=add_population_age_to]{add_population_age_to()}}
+@param school_demographics (optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See \code{abs_avg_school} for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_school_demographics}.
+@param work_demographics (optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+\code{abs_avg_work} for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_work_demographics}.}
 }
 \value{
 data frame with 11 extra columns - the contents of \code{contact_data},

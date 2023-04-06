@@ -20,6 +20,18 @@
 #'
 #' @param contact_data contact data containing columns: `age_to`, `age_from`,
 #'   and `pop_age_to` (from [add_population_age_to()])
+#'  @param school_demographics (optional) defaults to census average proportion
+#'    at school. You can provide a dataset with columns, "age" (numeric), and
+#'    "school_fraction" (0-1), if you would like to specify these
+#'    details. See `abs_avg_school` for the default values. If you would like to
+#'    use the original school demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_school_demographics`.
+#'  @param work_demographics (optional) defaults to census average proportion
+#'    employed. You can provide a dataset with columns, "age" (numeric), and
+#'    "work_fraction", if you would like to specify these details. See
+#'    `abs_avg_work` for the default values. If you would like to
+#'    use the original work demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_work_demographics`.
 #' @return dataset with 9 extra columns: school_fraction_age_from,
 #'   work_fraction_age_from, school_fraction_age_to, work_fraction_age_to,
 #'   school_probability, work_probability, school_year_probability, and
@@ -61,18 +73,18 @@ add_work_fraction <- function(contact_data, work_demographics = NULL) {
 
   # add work fraction data to both age_from and age_to
   contact_data %>%
-    left_join(
+    dplyr::left_join(
       work_demographics,
-      join_by(age_from == age)
+      dplyr::join_by(age_from == age)
     ) %>%
-    rename(
+    dplyr::rename(
       work_fraction_age_from = work_fraction
     ) %>%
-    left_join(
+    dplyr::left_join(
       work_demographics,
-      join_by(age_to == age)
+      dplyr::join_by(age_to == age)
     ) %>%
-    rename(
+    dplyr::rename(
       work_fraction_age_to = work_fraction
     )
 }
@@ -89,18 +101,18 @@ add_school_fraction <- function(contact_data, school_demographics = NULL) {
 
   # add work fraction data to both age_from and age_to
   contact_data %>%
-    left_join(
+    dplyr::left_join(
       school_demographics,
-      join_by(age_from == age)
+      dplyr::join_by(age_from == age)
     ) %>%
-    rename(
+    dplyr::rename(
       school_fraction_age_from = school_fraction
     ) %>%
-    left_join(
+    dplyr::left_join(
       school_demographics,
-      join_by(age_to == age)
+      dplyr::join_by(age_to == age)
     ) %>%
-    rename(
+    dplyr::rename(
       school_fraction_age_to = school_fraction
     )
 }
