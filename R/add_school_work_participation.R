@@ -39,55 +39,79 @@
 #'   add_population_age_to() %>%
 #'   add_school_work_participation()
 #' @export
-add_school_work_participation <- function(contact_data) {
+add_school_work_participation <- function(contact_data,
+                                          school_demographics = NULL,
+                                          work_demographics = NULL) {
+  contact_data %>%
+    add_school_fraction(school_demographics) %>%
+    add_school_probability() %>%
+    add_work_fraction(work_demographics) %>%
+    add_work_probability()
+}
+
+add_work_fraction <- function(contact_data, work_demographics = NULL) {
+  # user can provide their own work demographic data, however by default
+  # we will use averaged data from the ABS.
+  if (is.null(work_demographics)) {
+    work_demographics <- abs_avg_work
+  }
+
+  # check is has the right kind of data structure
+  check_work_demographics(work_demographics)
+
+  # add work fraction data to both age_from and age_to
+  contact_data %>%
+    left_join(
+      work_demographics,
+      join_by(age_from == age)
+    ) %>%
+    rename(
+      work_fraction_age_from = work_fraction
+    ) %>%
+    left_join(
+      work_demographics,
+      join_by(age_to == age)
+    ) %>%
+    rename(
+      work_fraction_age_to = work_fraction
+    )
+}
+
+add_school_fraction <- function(contact_data, school_demographics = NULL) {
+  # user can provide their own school demographic data, however by default
+  # we will use averaged data from the ABS.
+  if (is.null(school_demographics)) {
+    school_demographics <- abs_avg_school
+  }
+
+  # check is has the right kind of data structure
+  check_school_demographics(school_demographics)
+
+  # add work fraction data to both age_from and age_to
+  contact_data %>%
+    left_join(
+      school_demographics,
+      join_by(age_from == age)
+    ) %>%
+    rename(
+      school_fraction_age_from = school_fraction
+    ) %>%
+    left_join(
+      school_demographics,
+      join_by(age_to == age)
+    ) %>%
+    rename(
+      school_fraction_age_to = school_fraction
+    )
+}
+
+add_school_probability <- function(contact_data) {
   contact_data %>%
     dplyr::mutate(
-      # ok so this could perhaps instead be the "default" action
-      # and the alternative could be to pass some data that has a class in
-      # it that contains school and work data and also names of the
-      # columns that contain the relevant information.
-      # so as a first pass we can leave it as is
-      # and then we can develop an approach with polymod
-      # or perhaps have ABS as another default
-      # so the overall outcome is either that you provide this data
-      # or we provide some assumptions
-      dplyr::across(
-        c("age_from", "age_to"),
-        .fns = list(
-          # made up example - replace with education statistics
-          school_fraction = ~ dplyr::case_when(
-            # preschool
-            .x %in% 2:4 ~ 0.5,
-            # compulsory education
-            .x %in% 5:16 ~ 1,
-            # voluntary education
-            .x %in% 17:18 ~ 0.5,
-            # university
-            .x %in% 19:25 ~ 0.1,
-            # other
-            TRUE ~ 0.05
-          ),
-          # made up example - replace with labour force statistics
-          work_fraction = ~ dplyr::case_when(
-            # child labour
-            .x %in% 12:19 ~ 0.2,
-            # young adults (not at school)
-            .x %in% 20:24 ~ 0.7,
-            # main workforce
-            .x %in% 25:60 ~ 1,
-            # possibly retired
-            .x %in% 61:65 ~ 0.7,
-            # other
-            TRUE ~ 0.05
-          )
-        ),
-        .names = "{.fn}_{.col}"
-      ),
       # the probability that a person of the other age other party goes to the
       # same school/work. May not be the same place. But proportional to the
       # increase in contacts due to attendance. So this helps
       school_probability = school_fraction_age_from * school_fraction_age_to,
-      work_probability = work_fraction_age_from * work_fraction_age_to,
       # the probability that a person of the other age would be in the same
       # school year
       # So, if ages are the same, we get (2 - 0) / 4 = 0.5
@@ -108,5 +132,12 @@ add_school_work_participation <- function(contact_data) {
       # cohorting and regularised class sizes are unlikely to depend on the
       # population age distribution)
       school_weighted_pop_fraction = pop_age_to * (1 - school_year_probability) + 1 * school_year_probability
+    )
+}
+
+add_work_probability <- function(contact_data) {
+  contact_data %>%
+    dplyr::mutate(
+      work_probability = work_fraction_age_from * work_fraction_age_to
     )
 }

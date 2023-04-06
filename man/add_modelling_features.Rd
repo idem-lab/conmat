@@ -4,7 +4,12 @@
 \alias{add_modelling_features}
 \title{Add features required for modelling to the dataset}
 \usage{
-add_modelling_features(contact_data, ...)
+add_modelling_features(
+  contact_data,
+  ...,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
 \item{contact_data}{contact data with columns \code{age_to} and \code{age_from}}

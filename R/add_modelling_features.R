@@ -42,7 +42,9 @@
 #' )
 #' add_modelling_features(example_df)
 #' @export
-add_modelling_features <- function(contact_data, ...) {
+add_modelling_features <- function(contact_data, ...,
+                                   school_demographics = NULL,
+                                   work_demographics = NULL) {
   # use interpolated population of "age_to" (contact age) &
   # get the relative population grouped by "age_from" or participant age
   # add new variables for:
@@ -57,7 +59,10 @@ add_modelling_features <- function(contact_data, ...) {
     add_population_age_to(...) %>%
     # Adds school and work offset
     add_symmetrical_features() %>%
-    add_school_work_participation() %>%
+    add_school_work_participation(
+      school_demographics = school_demographics,
+      work_demographics = work_demographics
+    ) %>%
     # adds columns
     # `log_contactable_population_school`, and ` log_contactable_population`
     add_offset()

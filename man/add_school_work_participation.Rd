@@ -5,7 +5,11 @@
 \title{Add columns describing the fractions of the population in each age group
 that attend school/work (average FTE)}
 \usage{
-add_school_work_participation(contact_data)
+add_school_work_participation(
+  contact_data,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
 \item{contact_data}{contact data containing columns: \code{age_to}, \code{age_from},

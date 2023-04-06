@@ -6,18 +6,6 @@
         age_breaks = c(seq(0, 10, by = 5), Inf), per_capita_household_size = NULL)
     Message
       
-      Attaching package: 'purrr'
-      
-      The following objects are masked from 'package:conmat':
-      
-          %@%, flatten, flatten_chr, flatten_dbl, flatten_int, flatten_lgl,
-          flatten_raw, invoke, splice
-      
-      The following object is masked from 'package:testthat':
-      
-          is_null
-      
-      
       -- Setting Prediction Matrices -------------------------------------------------
     Output
       
