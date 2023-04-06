@@ -258,5 +258,5 @@ contact_model <- fit_single_contact_model(
   population = swiss_pop
 )
 
-italy_contact
+contact_model
 ```
