@@ -74,7 +74,11 @@ reference:
       - age_group_lookup
       - get_setting_transmission_matrices
       - prem_germany_contact_matrices
-
+      - conmat_original_school_demographics
+      - conmat_original_work_demographics
+      - abs_avg_school
+      - abs_avg_work
+      
   - title: "Extra functions for model fitting and prediction"
     desc: >
       Functions for model fitting and predictions - for more advanced use

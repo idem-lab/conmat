@@ -105,13 +105,13 @@
 #'   an example.
 #' @param symmetrical whether to enforce symmetrical terms in the model.
 #'   Defaults to TRUE. See `details` for more information.
-#'  @param school_demographics (optional) defaults to census average proportion
+#' @param school_demographics (optional) defaults to census average proportion
 #'    at school. You can provide a dataset with columns, "age" (numeric), and
 #'    "school_fraction" (0-1), if you would like to specify these
 #'    details. See `abs_avg_school` for the default values. If you would like to
 #'    use the original school demographics used in conmat, these are provided in
 #'    the dataset, `conmat_original_school_demographics`.
-#'  @param work_demographics (optional) defaults to census average proportion
+#' @param work_demographics (optional) defaults to census average proportion
 #'    employed. You can provide a dataset with columns, "age" (numeric), and
 #'    "work_fraction", if you would like to specify these details. See
 #'    `abs_avg_work` for the default values. If you would like to

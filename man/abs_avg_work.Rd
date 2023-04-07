@@ -21,7 +21,7 @@ abs_avg_work
 An internal dataset containing Australian Bureau of Statistics work data for
 each age in 2016. The data is averaged across each state to provide an
 overall average, and is used to provide estimated work populations for
-model fitting in \code{\link[=add_school_work_participation]{add_school_work_participation()}}, which is used in \code{\link[=fit_single_model]{fit_single_model()}}. The data is summarised from \code{data_abs_state_work},
+model fitting in \code{\link[=add_school_work_participation]{add_school_work_participation()}}, which is used in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}. The data is summarised from \code{data_abs_state_work},
 see \code{?data_abs_state_work} for more details.
 }
 \keyword{datasets}

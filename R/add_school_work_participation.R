@@ -20,13 +20,13 @@
 #'
 #' @param contact_data contact data containing columns: `age_to`, `age_from`,
 #'   and `pop_age_to` (from [add_population_age_to()])
-#'  @param school_demographics (optional) defaults to census average proportion
+#' @param school_demographics (optional) defaults to census average proportion
 #'    at school. You can provide a dataset with columns, "age" (numeric), and
 #'    "school_fraction" (0-1), if you would like to specify these
 #'    details. See `abs_avg_school` for the default values. If you would like to
 #'    use the original school demographics used in conmat, these are provided in
 #'    the dataset, `conmat_original_school_demographics`.
-#'  @param work_demographics (optional) defaults to census average proportion
+#' @param work_demographics (optional) defaults to census average proportion
 #'    employed. You can provide a dataset with columns, "age" (numeric), and
 #'    "work_fraction", if you would like to specify these details. See
 #'    `abs_avg_work` for the default values. If you would like to
@@ -36,7 +36,8 @@
 #'   work_fraction_age_from, school_fraction_age_to, work_fraction_age_to,
 #'   school_probability, work_probability, school_year_probability, and
 #'   school_weighted_pop_fraction.
-#' @note this uses fake data that will get replaced with abs data input soon
+#' @note To use previous approach input the arguments `school_demographics` and
+#'   `work_demographics` with `conmat_original_school_demographics` and `conmat_original_work_demographics`, respectively.
 #' @examples
 #' age_min <- 10
 #' age_max <- 15

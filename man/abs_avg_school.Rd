@@ -8,7 +8,7 @@
 A data frame with 116 rows and 2 variables:
 \describe{
 \item{age}{0 to 115}
-\item{work_fraction}{fraction of popoulation at school}
+\item{school_fraction}{fraction of popoulation at school}
 }
 }
 \source{
@@ -21,7 +21,7 @@ abs_avg_school
 An internal dataset containing Australian Bureau of Statistics education data for
 each age in 2016. The data is averaged across each state to provide an
 overall average, and is used to provide estimated education populations for
-model fitting in \code{\link[=add_school_work_participation]{add_school_work_participation()}}, which is used in \code{\link[=fit_single_model]{fit_single_model()}}. The data is summarised from \code{data_abs_state_education},
+model fitting in \code{\link[=add_school_work_participation]{add_school_work_participation()}}, which is used in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}. The data is summarised from \code{data_abs_state_education},
 see \code{?data_abs_state_education} for more details.
 }
 \keyword{datasets}
