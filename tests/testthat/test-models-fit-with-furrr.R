@@ -24,6 +24,14 @@ contact_model_pred <- predict_setting_contacts(
   age_breaks = c(seq(0, 20, by = 5), Inf)
 )
 
+# check that you can specify your own population data for school and work demographics
+contact_model_diff_data <- fit_setting_contacts(
+  contact_data_list = polymod_setting_short,
+  population = polymod_population_short,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
+)
+
 test_that("list names are kept", {
   expect_snapshot(names(contact_model))
   expect_snapshot(names(contact_model_pred))

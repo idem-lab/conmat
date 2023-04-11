@@ -31,6 +31,19 @@
 #'   Defaults to TRUE. See `details` of `fit_single_contact_model` for more
 #'   information.
 #'
+#' @param school_demographics (optional) defaults to census average proportion
+#'    at school. You can provide a dataset with columns, "age" (numeric), and
+#'    "school_fraction" (0-1), if you would like to specify these
+#'    details. See `abs_avg_school` for the default values. If you would like to
+#'    use the original school demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_school_demographics`.
+#' @param work_demographics (optional) defaults to census average proportion
+#'    employed. You can provide a dataset with columns, "age" (numeric), and
+#'    "work_fraction", if you would like to specify these details. See
+#'    `abs_avg_work` for the default values. If you would like to
+#'    use the original work demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_work_demographics`.
+#'
 #' @return predicted setting specific contact matrices, and for all combined
 #'
 #' @examples
@@ -54,6 +67,18 @@
 #'   per_capita_household_size = fairfield_hh
 #' )
 #'
+#' # or use different populations in school or work demographics
+#' fairfield_hh <- get_abs_per_capita_household_size(lga = "Fairfield (C)")
+#' contact_model_pred_est <- estimate_setting_contacts(
+#'   contact_data_list = get_polymod_setting_data(),
+#'   survey_population = get_polymod_population(),
+#'   prediction_population = abs_age_lga("Fairfield (C)"),
+#'   age_breaks = c(seq(0, 85, by = 5), Inf),
+#'   per_capita_household_size = fairfield_hh,
+#'   school_demographics = conmat_original_school_demographics,
+#'   work_demographics = conmat_original_work_demographics
+#' )
+#'
 #' # or use non-symmetric model terms
 #' contact_model_pred_est <- estimate_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(),
@@ -70,11 +95,15 @@ estimate_setting_contacts <- function(contact_data_list,
                                       prediction_population = survey_population,
                                       age_breaks,
                                       per_capita_household_size = NULL,
-                                      symmetrical = TRUE) {
+                                      symmetrical = TRUE,
+                                      school_demographics = NULL,
+                                      work_demographics = NULL) {
   setting_models <- fit_setting_contacts(
     contact_data_list = contact_data_list,
     population = survey_population,
-    symmetrical = symmetrical
+    symmetrical = symmetrical,
+    school_demographics = school_demographics,
+    work_demographics = work_demographics
   )
 
   contact_model_pred <- predict_setting_contacts(

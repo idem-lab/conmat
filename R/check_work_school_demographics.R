@@ -14,7 +14,6 @@ check_work_demographics <- function(work_demographics) {
     )
   }
 
-  vctrs::vec_assert(work_demographics$age, numeric())
   vctrs::vec_assert(work_demographics$work_fraction, numeric())
 
   is_proportion <- all(dplyr::between(work_demographics$work_fraction, 0, 1))
@@ -45,7 +44,6 @@ check_school_demographics <- function(school_demographics) {
     )
   }
 
-  vctrs::vec_assert(school_demographics$age, numeric())
   vctrs::vec_assert(school_demographics$school_fraction, numeric())
 
   is_proportion <- all(dplyr::between(school_demographics$school_fraction, 0, 1))

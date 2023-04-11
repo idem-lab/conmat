@@ -28,3 +28,18 @@ test_that("estimate_setting_contacts works", {
     )
   )
 })
+
+test_that("estimate_setting_contacts works with different demographic data", {
+  skip_on_ci()
+  skip_on_cran()
+  expect_snapshot(
+    estimate_setting_contacts(
+      contact_data_list = contact_data_cut,
+      survey_population = get_polymod_population(),
+      prediction_population = get_polymod_population(),
+      age_breaks = c(seq(0, 10, by = 5), Inf),
+      school_demographics = conmat_original_school_demographics,
+      work_demographics = conmat_original_work_demographics
+    )
+  )
+})

@@ -50,6 +50,14 @@
 #'   contact_data_list = polymod_setting_data,
 #'   population = polymod_population
 #' )
+#'
+#' # you can specify your own population data for school and work demographics
+#' contact_model_diff_data <- fit_setting_contacts(
+#'   contact_data_list = polymod_setting_data,
+#'   population = polymod_population,
+#'   school_demographics = conmat_original_school_demographics,
+#'   work_demographics = conmat_original_work_demographics
+#' )
 #' }
 fit_setting_contacts <- function(contact_data_list,
                                  population,

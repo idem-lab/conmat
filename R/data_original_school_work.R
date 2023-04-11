@@ -7,7 +7,7 @@
 #' @format A data frame with 121 rows and 2 variables:
 #' \describe{
 #'   \item{age}{0 to 120}
-#'   \item{school_fraction}{fraction of popoulation at school}
+#'   \item{school_fraction}{fraction of population at school}
 #' }
 #' @source {Census of Population and Housing, 2016, TableBuilder}
 "conmat_original_school_demographics"
@@ -21,7 +21,7 @@
 #' @format A data frame with 121 rows and 2 variables:
 #' \describe{
 #'   \item{age}{0 to 120}
-#'   \item{work_fraction}{fraction of popoulation working.}
+#'   \item{work_fraction}{fraction of population working.}
 #' }
 #' @source {Census of Population and Housing, 2016, TableBuilder}
 "conmat_original_work_demographics"

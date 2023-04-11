@@ -154,4 +154,12 @@ my_mod <- fit_single_contact_model(
   contact_data = example_contact_20,
   population = example_population
 )
+
+# you can specify your own population data for school and work demographics
+my_mod_diff_data <- fit_single_contact_model(
+  contact_data = example_contact_20,
+  population = example_population,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
+)
 }

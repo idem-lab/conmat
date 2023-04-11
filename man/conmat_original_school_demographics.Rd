@@ -8,7 +8,7 @@
 A data frame with 121 rows and 2 variables:
 \describe{
 \item{age}{0 to 120}
-\item{school_fraction}{fraction of popoulation at school}
+\item{school_fraction}{fraction of population at school}
 }
 }
 \source{
