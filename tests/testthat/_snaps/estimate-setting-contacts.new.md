@@ -4,6 +4,17 @@
       estimate_setting_contacts(contact_data_list = contact_data_cut,
         survey_population = get_polymod_population(), prediction_population = get_polymod_population(),
         age_breaks = c(seq(0, 10, by = 5), Inf), per_capita_household_size = NULL)
+    Condition
+      Warning in `dplyr::left_join()`:
+      Detected an unexpected many-to-many relationship between `x` and `y`.
+      i Row 1 of `x` matches multiple rows in `y`.
+      i Row 125 of `y` matches multiple rows in `x`.
+      i If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence this warning.
+      Warning in `dplyr::left_join()`:
+      Detected an unexpected many-to-many relationship between `x` and `y`.
+      i Row 1 of `x` matches multiple rows in `y`.
+      i Row 125 of `y` matches multiple rows in `x`.
+      i If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence this warning.
     Message
       
       -- Setting Prediction Matrices -------------------------------------------------

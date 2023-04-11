@@ -16,7 +16,7 @@
        8  2016 VIC       7               69543            73391      0.948
        9  2016 VIC       8               69673            73373      0.950
       10  2016 VIC       9               69894            73627      0.949
-      # ... with 106 more rows
+      # i 106 more rows
 
 ---
 
@@ -49,20 +49,20 @@
       abs_age_education_lga(lga = "Albury (C)")
     Output
       # A tibble: 116 x 8
-          year state lga          age population_educated total_popu~1 propo~2 anoma~3
-         <dbl> <chr> <chr>      <dbl>               <dbl>        <dbl>   <dbl> <lgl>  
-       1  2016 NSW   Albury (C)     0                   0          676   0     FALSE  
-       2  2016 NSW   Albury (C)     1                   0          664   0     FALSE  
-       3  2016 NSW   Albury (C)     2                   0          626   0     FALSE  
-       4  2016 NSW   Albury (C)     3                 250          706   0.354 FALSE  
-       5  2016 NSW   Albury (C)     4                 431          609   0.708 FALSE  
-       6  2016 NSW   Albury (C)     5                 533          608   0.877 FALSE  
-       7  2016 NSW   Albury (C)     6                 595          631   0.943 FALSE  
-       8  2016 NSW   Albury (C)     7                 608          644   0.944 FALSE  
-       9  2016 NSW   Albury (C)     8                 575          609   0.944 FALSE  
-      10  2016 NSW   Albury (C)     9                 630          680   0.926 FALSE  
-      # ... with 106 more rows, and abbreviated variable names 1: total_population,
-      #   2: proportion, 3: anomaly_flag
+          year state lga          age population_educated total_population proportion
+         <dbl> <chr> <chr>      <dbl>               <dbl>            <dbl>      <dbl>
+       1  2016 NSW   Albury (C)     0                   0              676      0    
+       2  2016 NSW   Albury (C)     1                   0              664      0    
+       3  2016 NSW   Albury (C)     2                   0              626      0    
+       4  2016 NSW   Albury (C)     3                 250              706      0.354
+       5  2016 NSW   Albury (C)     4                 431              609      0.708
+       6  2016 NSW   Albury (C)     5                 533              608      0.877
+       7  2016 NSW   Albury (C)     6                 595              631      0.943
+       8  2016 NSW   Albury (C)     7                 608              644      0.944
+       9  2016 NSW   Albury (C)     8                 575              609      0.944
+      10  2016 NSW   Albury (C)     9                 630              680      0.926
+      # i 106 more rows
+      # i 1 more variable: anomaly_flag <lgl>
 
 ---
 
@@ -70,15 +70,14 @@
       abs_age_education_lga(lga = "Albury (C)", age = 1:5)
     Output
       # A tibble: 5 x 8
-         year state lga          age population_educated total_popul~1 propo~2 anoma~3
-        <dbl> <chr> <chr>      <dbl>               <dbl>         <dbl>   <dbl> <lgl>  
-      1  2016 NSW   Albury (C)     1                   0           664   0     FALSE  
-      2  2016 NSW   Albury (C)     2                   0           626   0     FALSE  
-      3  2016 NSW   Albury (C)     3                 250           706   0.354 FALSE  
-      4  2016 NSW   Albury (C)     4                 431           609   0.708 FALSE  
-      5  2016 NSW   Albury (C)     5                 533           608   0.877 FALSE  
-      # ... with abbreviated variable names 1: total_population, 2: proportion,
-      #   3: anomaly_flag
+         year state lga          age population_educated total_population proportion
+        <dbl> <chr> <chr>      <dbl>               <dbl>            <dbl>      <dbl>
+      1  2016 NSW   Albury (C)     1                   0              664      0    
+      2  2016 NSW   Albury (C)     2                   0              626      0    
+      3  2016 NSW   Albury (C)     3                 250              706      0.354
+      4  2016 NSW   Albury (C)     4                 431              609      0.708
+      5  2016 NSW   Albury (C)     5                 533              608      0.877
+      # i 1 more variable: anomaly_flag <lgl>
 
 ---
 
@@ -86,10 +85,9 @@
       abs_age_education_lga(lga = c("Albury (C)", "Barcoo (S)"), age = 10)
     Output
       # A tibble: 2 x 8
-         year state lga          age population_educated total_popul~1 propo~2 anoma~3
-        <dbl> <chr> <chr>      <dbl>               <dbl>         <dbl>   <dbl> <lgl>  
-      1  2016 NSW   Albury (C)    10                 615           654   0.940 FALSE  
-      2  2016 QLD   Barcoo (S)    10                   7             7   1     FALSE  
-      # ... with abbreviated variable names 1: total_population, 2: proportion,
-      #   3: anomaly_flag
+         year state lga          age population_educated total_population proportion
+        <dbl> <chr> <chr>      <dbl>               <dbl>            <dbl>      <dbl>
+      1  2016 NSW   Albury (C)    10                 615              654      0.940
+      2  2016 QLD   Barcoo (S)    10                   7                7      1    
+      # i 1 more variable: anomaly_flag <lgl>
 
