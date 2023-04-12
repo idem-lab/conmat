@@ -5,11 +5,29 @@
 \title{Add columns describing the fractions of the population in each age group
 that attend school/work (average FTE)}
 \usage{
-add_school_work_participation(contact_data)
+add_school_work_participation(
+  contact_data,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
 \item{contact_data}{contact data containing columns: \code{age_to}, \code{age_from},
 and \code{pop_age_to} (from \code{\link[=add_population_age_to]{add_population_age_to()}})}
+
+\item{school_demographics}{(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See \code{abs_avg_school} for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_school_demographics}.}
+
+\item{work_demographics}{(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+\code{abs_avg_work} for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_work_demographics}.}
 }
 \value{
 dataset with 9 extra columns: school_fraction_age_from,
@@ -36,7 +54,8 @@ not affect classroom contacts (which due to cohorting and regularised
 class sizes are unlikely to depend on the population age distribution).
 }
 \note{
-this uses fake data that will get replaced with abs data input soon
+To use previous approach input the arguments \code{school_demographics} and
+\code{work_demographics} with \code{conmat_original_school_demographics} and \code{conmat_original_work_demographics}, respectively.
 }
 \examples{
 age_min <- 10
@@ -51,4 +70,11 @@ example_df <- expand_grid(
 example_df \%>\%
   add_population_age_to() \%>\%
   add_school_work_participation()
+  
+example_df \%>\%
+  add_population_age_to() \%>\%
+  add_school_work_participation(
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics 
+  )
 }

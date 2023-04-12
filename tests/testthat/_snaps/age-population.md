@@ -20,7 +20,7 @@
        8 Afghanistan  2015    3944912              15              19
        9 Afghanistan  2010    2450674              20              24
       10 Afghanistan  2015    3117448              20              24
-      # ... with 32 more rows
+      # i 32 more rows
 
 ---
 
@@ -43,5 +43,5 @@
        8 Afghanistan  1985    2276913               0               4
        9 Afghanistan  1990    2377868               0               4
       10 Afghanistan  1995    3325482               0               4
-      # ... with 284 more rows
+      # i 284 more rows
 

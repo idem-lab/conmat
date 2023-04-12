@@ -4,7 +4,13 @@
 \alias{fit_single_contact_model}
 \title{Fit a single GAM contact model to a dataset}
 \usage{
-fit_single_contact_model(contact_data, population, symmetrical = TRUE)
+fit_single_contact_model(
+  contact_data,
+  population,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
 \item{contact_data}{dataset with columns \code{age_to}, \code{age_from}, \code{setting},
@@ -17,6 +23,20 @@ an example.}
 
 \item{symmetrical}{whether to enforce symmetrical terms in the model.
 Defaults to TRUE. See \code{details} for more information.}
+
+\item{school_demographics}{(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See \code{abs_avg_school} for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_school_demographics}.}
+
+\item{work_demographics}{(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+\code{abs_avg_work} for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_work_demographics}.}
 }
 \value{
 single model
@@ -133,5 +153,13 @@ example_contact_20 <- example_contact \%>\%
 my_mod <- fit_single_contact_model(
   contact_data = example_contact_20,
   population = example_population
+)
+
+# you can specify your own population data for school and work demographics
+my_mod_diff_data <- fit_single_contact_model(
+  contact_data = example_contact_20,
+  population = example_population,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
 )
 }

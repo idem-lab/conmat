@@ -16,7 +16,7 @@
        8 all            0      7       12           92
        9 all            0      8        7           92
       10 all            0      9        8           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 
 # get_polymod_population() works
 
@@ -28,17 +28,17 @@
        - population: population
          lower.age.limit population
                    <int>      <dbl>
-       1               0   1852682.
-       2               5   1968449.
-       3              10   2138897.
-       4              15   2312032.
-       5              20   2407486.
-       6              25   2423602.
-       7              30   2585137.
-       8              35   2969393.
-       9              40   3041663.
-      10              45   2809154.
-      # ... with 11 more rows
+       1               0   1898966.
+       2               5   2017632.
+       3              10   2192410.
+       4              15   2369985.
+       5              20   2467873.
+       6              25   2484327.
+       7              30   2649826.
+       8              35   3043704.
+       9              40   3117812.
+      10              45   2879510.
+      # i 11 more rows
 
 # get_polymod_setting_data() and derivatives work
 
@@ -85,7 +85,7 @@
        8 home           0      7        9           92
        9 home           0      8        6           92
       10 home           0      9        6           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 
 ---
 
@@ -105,7 +105,7 @@
        8 work           0      7        0           92
        9 work           0      8        0           92
       10 work           0      9        0           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 
 ---
 
@@ -125,7 +125,7 @@
        8 school         0      7        0           92
        9 school         0      8        0           92
       10 school         0      9        0           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 
 ---
 
@@ -145,5 +145,5 @@
        8 other          0      7        5           92
        9 other          0      8        2           92
       10 other          0      9        3           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 

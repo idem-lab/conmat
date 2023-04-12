@@ -105,6 +105,18 @@
 #'   an example.
 #' @param symmetrical whether to enforce symmetrical terms in the model.
 #'   Defaults to TRUE. See `details` for more information.
+#' @param school_demographics (optional) defaults to census average proportion
+#'    at school. You can provide a dataset with columns, "age" (numeric), and
+#'    "school_fraction" (0-1), if you would like to specify these
+#'    details. See `abs_avg_school` for the default values. If you would like to
+#'    use the original school demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_school_demographics`.
+#' @param work_demographics (optional) defaults to census average proportion
+#'    employed. You can provide a dataset with columns, "age" (numeric), and
+#'    "work_fraction", if you would like to specify these details. See
+#'    `abs_avg_work` for the default values. If you would like to
+#'    use the original work demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_work_demographics`.
 #' @return single model
 #' @examples
 #' example_contact <- get_polymod_contact_data(setting = "home")
@@ -123,10 +135,20 @@
 #'   contact_data = example_contact_20,
 #'   population = example_population
 #' )
+#'
+#' # you can specify your own population data for school and work demographics
+#' my_mod_diff_data <- fit_single_contact_model(
+#'   contact_data = example_contact_20,
+#'   population = example_population,
+#'   school_demographics = conmat_original_school_demographics,
+#'   work_demographics = conmat_original_work_demographics
+#' )
 #' @export
 fit_single_contact_model <- function(contact_data,
                                      population,
-                                     symmetrical = TRUE) {
+                                     symmetrical = TRUE,
+                                     school_demographics = NULL,
+                                     work_demographics = NULL) {
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data
@@ -193,7 +215,9 @@ fit_single_contact_model <- function(contact_data,
       # the school and work offsets
       # pop_age_to (interpolated population)
       # `log_contactable_population_school`, and ` log_contactable_population`
-      population = population
+      population = population,
+      school_demographics = school_demographics,
+      work_demographics = work_demographics
     ) %>%
     mgcv::bam(
       formula = formula,

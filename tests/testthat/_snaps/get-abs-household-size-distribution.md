@@ -35,5 +35,5 @@
        8  2016 NSW   Albury (C)                         8      336
        9  2016 NSW   Armidale Regional (A)              1     2983
       10  2016 NSW   Armidale Regional (A)              2     7326
-      # ... with 1,038 more rows
+      # i 1,038 more rows
 

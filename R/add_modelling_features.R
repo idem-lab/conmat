@@ -24,8 +24,19 @@
 #'     `log_contactable_population_school`, and `log_contactable_population`.
 #'
 #' @param contact_data contact data with columns `age_to` and `age_from`
-#' @param ... extra dots passed to `population` argument of
-#'   [add_population_age_to()]
+#' @param population the `population` argument of [add_population_age_to()]
+#' @param school_demographics (optional) defaults to census average proportion
+#'    at school. You can provide a dataset with columns, "age" (numeric), and
+#'    "school_fraction" (0-1), if you would like to specify these
+#'    details. See `abs_avg_school` for the default values. If you would like to
+#'    use the original school demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_school_demographics`.
+#' @param work_demographics (optional) defaults to census average proportion
+#'    employed. You can provide a dataset with columns, "age" (numeric), and
+#'    "work_fraction", if you would like to specify these details. See
+#'    `abs_avg_work` for the default values. If you would like to
+#'    use the original work demographics used in conmat, these are provided in
+#'    the dataset, `conmat_original_work_demographics`.
 #' @return data frame with 11 extra columns - the contents of `contact_data`,
 #'   plus:  pop_age_to, school_fraction_age_from, work_fraction_age_from,
 #'     school_fraction_age_to, work_fraction_age_to, school_probability,
@@ -41,8 +52,17 @@
 #'   age_to = all_ages,
 #' )
 #' add_modelling_features(example_df)
+#' add_modelling_features(
+#'   example_df,
+#'   school_demographics = conmat_original_school_demographics,
+#'   work_demographics = conmat_original_work_demographics
+#' )
+#'
 #' @export
-add_modelling_features <- function(contact_data, ...) {
+add_modelling_features <- function(contact_data,
+                                   school_demographics = NULL,
+                                   work_demographics = NULL,
+                                   population = get_polymod_population()) {
   # use interpolated population of "age_to" (contact age) &
   # get the relative population grouped by "age_from" or participant age
   # add new variables for:
@@ -54,10 +74,13 @@ add_modelling_features <- function(contact_data, ...) {
   # offset for school setting & the rest.
   contact_data %>%
     # Adds interpolated age population - specifically, `pop_age_to`
-    add_population_age_to(...) %>%
+    add_population_age_to(population = population) %>%
     # Adds school and work offset
     add_symmetrical_features() %>%
-    add_school_work_participation() %>%
+    add_school_work_participation(
+      school_demographics = school_demographics,
+      work_demographics = work_demographics
+    ) %>%
     # adds columns
     # `log_contactable_population_school`, and ` log_contactable_population`
     add_offset()
