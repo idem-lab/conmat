@@ -82,7 +82,9 @@ impacted by any <code>future</code> plans provided.</p>
 <span>  prediction_population <span class="op">=</span> <span class="va">survey_population</span>,</span>
 <span>  <span class="va">age_breaks</span>,</span>
 <span>  per_capita_household_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  symmetrical <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  symmetrical <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  school_demographics <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  work_demographics <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,6 +124,24 @@ data with a workflow on how to get this number.</p></dd>
 Defaults to TRUE. See <code>details</code> of <code>fit_single_contact_model</code> for more
 information.</p></dd>
 
+
+<dt>school_demographics</dt>
+<dd><p>(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See <code>abs_avg_school</code> for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, <code>conmat_original_school_demographics</code>.</p></dd>
+
+
+<dt>work_demographics</dt>
+<dd><p>(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+<code>abs_avg_work</code> for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, <code>conmat_original_work_demographics</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -150,6 +170,18 @@ information.</p></dd>
 <span class="r-in"><span>  prediction_population <span class="op">=</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># or use different populations in school or work demographics</span></span></span>
+<span class="r-in"><span><span class="va">fairfield_hh</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_abs_per_capita_household_size.html">get_abs_per_capita_household_size</a></span><span class="op">(</span>lga <span class="op">=</span> <span class="st">"Fairfield (C)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">contact_model_pred_est</span> <span class="op">&lt;-</span> <span class="fu">estimate_setting_contacts</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="fu"><a href="get_polymod_setting_data.html">get_polymod_setting_data</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  survey_population <span class="op">=</span> <span class="fu"><a href="get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  prediction_population <span class="op">=</span> <span class="fu"><a href="abs_age_data.html">abs_age_lga</a></span><span class="op">(</span><span class="st">"Fairfield (C)"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  age_breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">85</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  per_capita_household_size <span class="op">=</span> <span class="va">fairfield_hh</span>,</span></span>
+<span class="r-in"><span>  school_demographics <span class="op">=</span> <span class="va">conmat_original_school_demographics</span>,</span></span>
+<span class="r-in"><span>  work_demographics <span class="op">=</span> <span class="va">conmat_original_work_demographics</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># or use non-symmetric model terms</span></span></span>

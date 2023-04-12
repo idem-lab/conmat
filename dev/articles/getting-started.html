@@ -107,7 +107,7 @@
 <span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     collapse</span></span>
-<span><span class="co">#&gt; This is mgcv 1.8-41. For overview type 'help("mgcv-package")'.</span></span>
+<span><span class="co">#&gt; This is mgcv 1.8-42. For overview type 'help("mgcv-package")'.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span></code></pre></div>
 <p>The goal of conmat is to simplify the process of generating synthetic
 contact matrices for a given age population.</p>
@@ -205,56 +205,56 @@ name - for example, the “home” setting contact matrix:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">perth_contact</span><span class="op">$</span><span class="va">home</span></span>
 <span><span class="co">#&gt;               [0,5)     [5,10)    [10,15)    [15,20)    [20,25)    [25,30)</span></span>
-<span><span class="co">#&gt; [0,5)    0.39743272 0.32858156 0.16266890 0.11549597 0.17737726 0.32337782</span></span>
-<span><span class="co">#&gt; [5,10)   0.19517061 0.31631444 0.20405822 0.07308499 0.05366436 0.09450085</span></span>
-<span><span class="co">#&gt; [10,15)  0.07340049 0.15501627 0.26262315 0.13052669 0.04629618 0.03647250</span></span>
-<span><span class="co">#&gt; [15,20)  0.08129556 0.08660778 0.20361271 0.34617980 0.17117933 0.06733926</span></span>
-<span><span class="co">#&gt; [20,25)  0.33520290 0.17073579 0.19389231 0.45958005 0.75033980 0.43371301</span></span>
-<span><span class="co">#&gt; [25,30)  1.12422936 0.55310701 0.28100613 0.33259296 0.79787952 1.25287546</span></span>
-<span><span class="co">#&gt; [30,35)  1.46981373 1.16733001 0.53958673 0.26907742 0.34942848 0.77286620</span></span>
-<span><span class="co">#&gt; [35,40)  0.75228654 1.03184699 0.76692996 0.32500119 0.17969761 0.22452945</span></span>
-<span><span class="co">#&gt; [40,45)  0.24714099 0.42175817 0.56434159 0.38442657 0.17519410 0.09664137</span></span>
-<span><span class="co">#&gt; [45,50)  0.12258162 0.15477531 0.26467697 0.33499218 0.24021233 0.11346046</span></span>
-<span><span class="co">#&gt; [50,55)  0.11634877 0.09453224 0.11980486 0.19681878 0.25441570 0.18843147</span></span>
-<span><span class="co">#&gt; [55,60)  0.13583681 0.09907539 0.07972905 0.09715725 0.16291241 0.21212824</span></span>
-<span><span class="co">#&gt; [60,65)  0.12409809 0.11019331 0.07728851 0.05785383 0.07334905 0.12295444</span></span>
-<span><span class="co">#&gt; [65,70)  0.08047604 0.09043208 0.07481086 0.04645367 0.03568280 0.04680601</span></span>
-<span><span class="co">#&gt; [70,75)  0.04563800 0.05602698 0.05732976 0.04134836 0.02651310 0.02292755</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.04426322 0.05402899 0.05735758 0.05301371 0.04629475 0.04067223</span></span>
+<span><span class="co">#&gt; [0,5)    0.40076181 0.33477812 0.16555012 0.11608014 0.17617098 0.32079759</span></span>
+<span><span class="co">#&gt; [5,10)   0.19885124 0.32216319 0.20765643 0.07226656 0.05193349 0.09275907</span></span>
+<span><span class="co">#&gt; [10,15)  0.07470057 0.15774971 0.26654020 0.12883717 0.04419741 0.03535209</span></span>
+<span><span class="co">#&gt; [15,20)  0.08170674 0.08563793 0.20097718 0.34425132 0.17025978 0.06763197</span></span>
+<span><span class="co">#&gt; [20,25)  0.33292330 0.16522893 0.18510249 0.45711126 0.73008179 0.41491477</span></span>
+<span><span class="co">#&gt; [25,30)  1.11525912 0.54291253 0.27237380 0.33403867 0.76329736 1.15720681</span></span>
+<span><span class="co">#&gt; [30,35)  1.45860486 1.15187002 0.52666015 0.27078533 0.33556433 0.71610024</span></span>
+<span><span class="co">#&gt; [35,40)  0.74668485 1.02027190 0.74962874 0.32720560 0.17284734 0.20851823</span></span>
+<span><span class="co">#&gt; [40,45)  0.24541744 0.41797497 0.55192548 0.38836042 0.16874222 0.08987479</span></span>
+<span><span class="co">#&gt; [45,50)  0.12179342 0.15376654 0.25912643 0.33988507 0.23163274 0.10557474</span></span>
+<span><span class="co">#&gt; [50,55)  0.11563694 0.09409502 0.11753342 0.20020602 0.24542407 0.17519639</span></span>
+<span><span class="co">#&gt; [55,60)  0.13503961 0.09876405 0.07843632 0.09845190 0.15621575 0.19574806</span></span>
+<span><span class="co">#&gt; [60,65)  0.12361018 0.11014329 0.07653905 0.05845473 0.07100810 0.11555725</span></span>
+<span><span class="co">#&gt; [65,70)  0.08050583 0.09083407 0.07498176 0.04709679 0.03585191 0.04657126</span></span>
+<span><span class="co">#&gt; [70,75)  0.04571279 0.05636194 0.05763523 0.04176239 0.02672337 0.02309248</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.04433925 0.05437000 0.05768114 0.05328648 0.04628235 0.04056598</span></span>
 <span><span class="co">#&gt;             [30,35)    [35,40)    [40,45)    [45,50)    [50,55)    [55,60)</span></span>
-<span><span class="co">#&gt; [0,5)    0.42309386 0.32249828 0.17482882 0.11643874 0.12111968 0.14046086</span></span>
-<span><span class="co">#&gt; [5,10)   0.19959024 0.26274269 0.17721602 0.08732629 0.05845263 0.06085201</span></span>
-<span><span class="co">#&gt; [10,15)  0.07008581 0.14835228 0.18013774 0.11344430 0.05627581 0.03720051</span></span>
-<span><span class="co">#&gt; [15,20)  0.05451947 0.09806839 0.19141749 0.22397873 0.14421799 0.07071525</span></span>
-<span><span class="co">#&gt; [20,25)  0.19008268 0.14557817 0.23420575 0.43119851 0.50050295 0.31834779</span></span>
-<span><span class="co">#&gt; [25,30)  0.77343430 0.33462789 0.23767091 0.37468074 0.68194766 0.76257233</span></span>
-<span><span class="co">#&gt; [30,35)  1.18337183 0.71235629 0.27862083 0.19726013 0.32950674 0.60259651</span></span>
-<span><span class="co">#&gt; [35,40)  0.47832995 0.74598235 0.41641836 0.15812553 0.12221004 0.21381367</span></span>
-<span><span class="co">#&gt; [40,45)  0.11337564 0.25235141 0.41451479 0.23314619 0.09520851 0.07604271</span></span>
-<span><span class="co">#&gt; [45,50)  0.05977803 0.07136314 0.17362987 0.31201559 0.18803938 0.07732844</span></span>
-<span><span class="co">#&gt; [50,55)  0.09111415 0.05032666 0.06469804 0.17158054 0.31976171 0.19028456</span></span>
-<span><span class="co">#&gt; [55,60)  0.16775025 0.08864244 0.05202211 0.07103519 0.19156607 0.35290686</span></span>
-<span><span class="co">#&gt; [60,65)  0.17318176 0.15183317 0.08300011 0.04953457 0.06990436 0.19371084</span></span>
-<span><span class="co">#&gt; [65,70)  0.08608739 0.13403123 0.11850338 0.06277680 0.03878107 0.05928730</span></span>
-<span><span class="co">#&gt; [70,75)  0.03335757 0.06575363 0.10223365 0.08777977 0.04847661 0.03283896</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.03731198 0.04258510 0.06921557 0.11451449 0.14108751 0.12662847</span></span>
+<span><span class="co">#&gt; [0,5)    0.41986733 0.32009689 0.17360957 0.11569004 0.12037866 0.13963653</span></span>
+<span><span class="co">#&gt; [5,10)   0.19694689 0.25979529 0.17562638 0.08675713 0.05818228 0.06066078</span></span>
+<span><span class="co">#&gt; [10,15)  0.06840680 0.14500559 0.17617452 0.11106526 0.05520885 0.03659734</span></span>
+<span><span class="co">#&gt; [15,20)  0.05486552 0.09873357 0.19337627 0.22725016 0.14669997 0.07165755</span></span>
+<span><span class="co">#&gt; [20,25)  0.18254084 0.14002857 0.22558064 0.41579752 0.48281403 0.30526183</span></span>
+<span><span class="co">#&gt; [25,30)  0.71662662 0.31076553 0.22102981 0.34863971 0.63404890 0.70368779</span></span>
+<span><span class="co">#&gt; [30,35)  1.09947651 0.66335662 0.25976689 0.18402632 0.30705923 0.55689293</span></span>
+<span><span class="co">#&gt; [35,40)  0.44542786 0.69615807 0.38905818 0.14785069 0.11414398 0.19791347</span></span>
+<span><span class="co">#&gt; [40,45)  0.10570365 0.23577102 0.38790919 0.21832411 0.08906823 0.07049240</span></span>
+<span><span class="co">#&gt; [45,50)  0.05576763 0.06672604 0.16259149 0.29222377 0.17596322 0.07176800</span></span>
+<span><span class="co">#&gt; [50,55)  0.08490703 0.04700502 0.06052547 0.16056139 0.29887960 0.17643556</span></span>
+<span><span class="co">#&gt; [55,60)  0.15502733 0.08205057 0.04822505 0.06592728 0.17762380 0.32453421</span></span>
+<span><span class="co">#&gt; [60,65)  0.16323144 0.14348475 0.07851056 0.04681736 0.06587880 0.18132674</span></span>
+<span><span class="co">#&gt; [65,70)  0.08575999 0.13412044 0.11910768 0.06317103 0.03886021 0.05882613</span></span>
+<span><span class="co">#&gt; [70,75)  0.03362083 0.06630028 0.10307451 0.08846877 0.04884175 0.03304499</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.03722015 0.04251769 0.06915906 0.11440610 0.14081425 0.12619944</span></span>
 <span><span class="co">#&gt;             [60,65)    [65,70)    [70,75)   [75,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)    0.12923192 0.09276131 0.06398890 0.03949403</span></span>
-<span><span class="co">#&gt; [5,10)   0.06816025 0.06191473 0.04666018 0.02863430</span></span>
-<span><span class="co">#&gt; [10,15)  0.03631734 0.03890983 0.03627042 0.02309264</span></span>
-<span><span class="co">#&gt; [15,20)  0.04240693 0.03768949 0.04080715 0.03329481</span></span>
-<span><span class="co">#&gt; [20,25)  0.14434743 0.07772649 0.07025032 0.07806026</span></span>
-<span><span class="co">#&gt; [25,30)  0.44513693 0.18756273 0.11175844 0.12616273</span></span>
-<span><span class="co">#&gt; [30,35)  0.62651639 0.34471913 0.16247928 0.11565443</span></span>
-<span><span class="co">#&gt; [35,40)  0.36883088 0.36038124 0.21505704 0.08863433</span></span>
-<span><span class="co">#&gt; [40,45)  0.12218423 0.19309132 0.20262997 0.08730195</span></span>
-<span><span class="co">#&gt; [45,50)  0.05430515 0.07617760 0.12956877 0.10756643</span></span>
-<span><span class="co">#&gt; [50,55)  0.06992880 0.04294051 0.06529161 0.12092723</span></span>
-<span><span class="co">#&gt; [55,60)  0.19508361 0.06608822 0.04452763 0.10926521</span></span>
-<span><span class="co">#&gt; [60,65)  0.35290261 0.19172258 0.07114219 0.07726893</span></span>
-<span><span class="co">#&gt; [65,70)  0.17321190 0.32753478 0.18703148 0.06145177</span></span>
-<span><span class="co">#&gt; [70,75)  0.05283892 0.15375773 0.28357109 0.09684605</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.09018228 0.07938642 0.15218488 0.24365406</span></span></code></pre></div>
+<span><span class="co">#&gt; [0,5)    0.12872383 0.09279565 0.06409376 0.03956186</span></span>
+<span><span class="co">#&gt; [5,10)   0.06812931 0.06218996 0.04693915 0.02881503</span></span>
+<span><span class="co">#&gt; [10,15)  0.03596518 0.03899872 0.03646368 0.02322291</span></span>
+<span><span class="co">#&gt; [15,20)  0.04284739 0.03821128 0.04121576 0.03346612</span></span>
+<span><span class="co">#&gt; [20,25)  0.13974053 0.07809486 0.07080747 0.07803935</span></span>
+<span><span class="co">#&gt; [25,30)  0.41835658 0.18662205 0.11256237 0.12583317</span></span>
+<span><span class="co">#&gt; [30,35)  0.59051931 0.34340814 0.16376160 0.11536980</span></span>
+<span><span class="co">#&gt; [35,40)  0.34855102 0.36062108 0.21684493 0.08849404</span></span>
+<span><span class="co">#&gt; [40,45)  0.11557517 0.19407598 0.20429657 0.08723069</span></span>
+<span><span class="co">#&gt; [45,50)  0.05132625 0.07665599 0.13058578 0.10746461</span></span>
+<span><span class="co">#&gt; [50,55)  0.06590183 0.04302814 0.06578340 0.12069301</span></span>
+<span><span class="co">#&gt; [55,60)  0.18261175 0.06557415 0.04480699 0.10889502</span></span>
+<span><span class="co">#&gt; [60,65)  0.33689152 0.19066624 0.07151884 0.07706387</span></span>
+<span><span class="co">#&gt; [65,70)  0.17225754 0.32955054 0.18796283 0.06150905</span></span>
+<span><span class="co">#&gt; [70,75)  0.05311866 0.15452338 0.28435950 0.09695813</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.08994295 0.07946041 0.15236100 0.24375399</span></span></code></pre></div>
 <p>These contact matrices could then be used in subsequent modelling,
 such as the input in a SIR (Susceptible, Infected, Recovered) model.</p>
 </div>
@@ -303,7 +303,7 @@ year with the <code>age_population</code> function:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">273</span>539              35              39</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">312</span>245              40              44</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> New Zealand  <span style="text-decoration: underline;">2</span>015     <span style="text-decoration: underline;">313</span>312              45              49</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
 <p>Then we could create a contact matrix for NZ population data for 2015
 like so:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -315,56 +315,56 @@ like so:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nz_contact</span><span class="op">$</span><span class="va">home</span></span>
 <span><span class="co">#&gt;               [0,5)     [5,10)    [10,15)    [15,20)    [20,25)    [25,30)</span></span>
-<span><span class="co">#&gt; [0,5)    0.59372117 0.48807593 0.24377912 0.16584841 0.23975317 0.45548642</span></span>
-<span><span class="co">#&gt; [5,10)   0.48735618 0.78767181 0.51898987 0.19288384 0.12966106 0.22071700</span></span>
-<span><span class="co">#&gt; [10,15)  0.24394805 0.52011652 0.85521627 0.45218987 0.16056629 0.11749698</span></span>
-<span><span class="co">#&gt; [15,20)  0.17066896 0.19878333 0.46501097 0.74634166 0.37886666 0.14176243</span></span>
-<span><span class="co">#&gt; [20,25)  0.25176429 0.13635788 0.16849356 0.38660988 0.62017139 0.34139229</span></span>
-<span><span class="co">#&gt; [25,30)  0.46211055 0.22425759 0.11912318 0.13976177 0.32983320 0.53602158</span></span>
-<span><span class="co">#&gt; [30,35)  0.59258512 0.46404285 0.21988147 0.11105734 0.13338957 0.29953916</span></span>
-<span><span class="co">#&gt; [35,40)  0.44053422 0.60229377 0.45916574 0.20800220 0.10911204 0.12575089</span></span>
-<span><span class="co">#&gt; [40,45)  0.24813611 0.42156753 0.56415008 0.41092584 0.19420400 0.09880733</span></span>
-<span><span class="co">#&gt; [45,50)  0.17232679 0.21969047 0.36922131 0.47226512 0.35903885 0.16576368</span></span>
-<span><span class="co">#&gt; [50,55)  0.17668769 0.14562290 0.18461788 0.29536175 0.39353569 0.29546690</span></span>
-<span><span class="co">#&gt; [55,60)  0.19201905 0.13985880 0.11424333 0.13662510 0.22732424 0.30388208</span></span>
-<span><span class="co">#&gt; [60,65)  0.15926284 0.13975180 0.09892502 0.07471056 0.09179506 0.15608975</span></span>
-<span><span class="co">#&gt; [65,70)  0.09790455 0.10895449 0.09008584 0.05757998 0.04323414 0.05575062</span></span>
-<span><span class="co">#&gt; [70,75)  0.05302412 0.06486384 0.06597804 0.04888336 0.03141857 0.02632443</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.05322248 0.06526955 0.06920200 0.06451199 0.05707800 0.05077948</span></span>
+<span><span class="co">#&gt; [0,5)    0.59904546 0.49663687 0.24783852 0.16685575 0.23779435 0.45167131</span></span>
+<span><span class="co">#&gt; [5,10)   0.49590450 0.80198425 0.52807734 0.19165851 0.12507770 0.21662190</span></span>
+<span><span class="co">#&gt; [10,15)  0.24801027 0.52922371 0.86792789 0.44837029 0.15277570 0.11386007</span></span>
+<span><span class="co">#&gt; [15,20)  0.17170557 0.19752052 0.46108309 0.74210402 0.37437407 0.14189402</span></span>
+<span><span class="co">#&gt; [20,25)  0.24970734 0.13153780 0.16031834 0.38202547 0.60099118 0.32615896</span></span>
+<span><span class="co">#&gt; [25,30)  0.45823995 0.22009679 0.11543594 0.13989150 0.31511566 0.49499779</span></span>
+<span><span class="co">#&gt; [30,35)  0.58789796 0.45791877 0.21460518 0.11138674 0.12795622 0.27752805</span></span>
+<span><span class="co">#&gt; [35,40)  0.43715208 0.59558222 0.44877557 0.20875654 0.10483077 0.11678179</span></span>
+<span><span class="co">#&gt; [40,45)  0.24637719 0.41784060 0.55173061 0.41392260 0.18686739 0.09189737</span></span>
+<span><span class="co">#&gt; [45,50)  0.17121478 0.21826147 0.36146201 0.47771534 0.34585427 0.15423717</span></span>
+<span><span class="co">#&gt; [50,55)  0.17561659 0.14494800 0.18110658 0.29956710 0.37925607 0.27470535</span></span>
+<span><span class="co">#&gt; [55,60)  0.19091227 0.13941710 0.11237964 0.13809560 0.21781394 0.28043336</span></span>
+<span><span class="co">#&gt; [60,65)  0.15865533 0.13968437 0.09795321 0.07534281 0.08879449 0.14665213</span></span>
+<span><span class="co">#&gt; [65,70)  0.09795471 0.10943657 0.09028519 0.05832945 0.04342008 0.05545301</span></span>
+<span><span class="co">#&gt; [70,75)  0.05312051 0.06525155 0.06632928 0.04936708 0.03166200 0.02651409</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.05332440 0.06568208 0.06959281 0.06485754 0.05705246 0.05063730</span></span>
 <span><span class="co">#&gt;             [30,35)    [35,40)    [40,45)    [45,50)    [50,55)    [55,60)</span></span>
-<span><span class="co">#&gt; [0,5)    0.62178022 0.47273161 0.25546533 0.17009553 0.17482914 0.20323908</span></span>
-<span><span class="co">#&gt; [5,10)   0.48618700 0.64536061 0.43337937 0.21652618 0.14387863 0.14781271</span></span>
-<span><span class="co">#&gt; [10,15)  0.23087433 0.49306630 0.58121593 0.36469323 0.18280251 0.12100258</span></span>
-<span><span class="co">#&gt; [15,20)  0.11991586 0.22969215 0.43536014 0.47969941 0.30074955 0.14881154</span></span>
-<span><span class="co">#&gt; [20,25)  0.14697309 0.12295252 0.20995680 0.37214425 0.40890406 0.25266113</span></span>
-<span><span class="co">#&gt; [25,30)  0.31886747 0.13690412 0.10320521 0.16599688 0.29661069 0.32631605</span></span>
-<span><span class="co">#&gt; [30,35)  0.47434704 0.27926066 0.10983187 0.07908944 0.13066467 0.23913330</span></span>
-<span><span class="co">#&gt; [35,40)  0.27306178 0.43376575 0.24335324 0.09408603 0.07081651 0.12061829</span></span>
-<span><span class="co">#&gt; [40,45)  0.11193671 0.25364723 0.41604280 0.23986879 0.09857511 0.07585060</span></span>
-<span><span class="co">#&gt; [45,50)  0.08407456 0.10228690 0.25019328 0.44061859 0.26925538 0.11099486</span></span>
-<span><span class="co">#&gt; [50,55)  0.13855966 0.07680014 0.10256560 0.26859440 0.49295805 0.29562369</span></span>
-<span><span class="co">#&gt; [55,60)  0.23706275 0.12228840 0.07377991 0.10350946 0.27636552 0.50468265</span></span>
-<span><span class="co">#&gt; [60,65)  0.22277113 0.19040752 0.10305079 0.06326389 0.09002586 0.24753763</span></span>
-<span><span class="co">#&gt; [65,70)  0.10512420 0.16287373 0.14000115 0.07461175 0.04669411 0.07105616</span></span>
-<span><span class="co">#&gt; [70,75)  0.03882415 0.07788079 0.11835254 0.10017738 0.05570677 0.03776983</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.04727707 0.05392646 0.08536482 0.13703371 0.16875709 0.15660524</span></span>
+<span><span class="co">#&gt; [0,5)    0.61686214 0.46910228 0.25365446 0.16899792 0.17376930 0.20206763</span></span>
+<span><span class="co">#&gt; [5,10)   0.47977067 0.63816915 0.42954802 0.21511775 0.14321182 0.14734590</span></span>
+<span><span class="co">#&gt; [10,15)  0.22533425 0.48190902 0.56842076 0.35702910 0.17932573 0.11902862</span></span>
+<span><span class="co">#&gt; [15,20)  0.12027154 0.23052514 0.43853510 0.48523543 0.30503162 0.15041321</span></span>
+<span><span class="co">#&gt; [20,25)  0.14098644 0.11812819 0.20202509 0.35847842 0.39406680 0.24209084</span></span>
+<span><span class="co">#&gt; [25,30)  0.29543605 0.12713952 0.09598769 0.15445415 0.27576878 0.30113624</span></span>
+<span><span class="co">#&gt; [30,35)  0.44075564 0.26007699 0.10241976 0.07378624 0.12176811 0.22102166</span></span>
+<span><span class="co">#&gt; [35,40)  0.25430395 0.40484109 0.22741314 0.08797632 0.06614672 0.11166469</span></span>
+<span><span class="co">#&gt; [40,45)  0.10438256 0.23703285 0.38946352 0.22464248 0.09222914 0.07033241</span></span>
+<span><span class="co">#&gt; [45,50)  0.07843709 0.09564466 0.23431160 0.41266991 0.25196526 0.10302438</span></span>
+<span><span class="co">#&gt; [50,55)  0.12912555 0.07173578 0.09596274 0.25134673 0.46077162 0.27413423</span></span>
+<span><span class="co">#&gt; [55,60)  0.21910793 0.11321083 0.06841237 0.09607651 0.25627598 0.46419737</span></span>
+<span><span class="co">#&gt; [60,65)  0.20993522 0.17991857 0.09746956 0.05977965 0.08481979 0.23166041</span></span>
+<span><span class="co">#&gt; [65,70)  0.10469289 0.16296452 0.14069818 0.07505802 0.04677449 0.07048263</span></span>
+<span><span class="co">#&gt; [70,75)  0.03913179 0.07853000 0.11932926 0.10096504 0.05612741 0.03800797</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.04714828 0.05382800 0.08528198 0.13688872 0.16841350 0.15605344</span></span>
 <span><span class="co">#&gt;             [60,65)    [65,70)    [70,75)   [75,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)    0.18962996 0.13726099 0.09466968 0.05459774</span></span>
-<span><span class="co">#&gt; [5,10)   0.16615331 0.15252761 0.11563763 0.06685737</span></span>
-<span><span class="co">#&gt; [10,15)  0.11786897 0.12638678 0.11787934 0.07103937</span></span>
-<span><span class="co">#&gt; [15,20)  0.09154143 0.08307282 0.08981351 0.06810253</span></span>
-<span><span class="co">#&gt; [20,25)  0.11477348 0.06365035 0.05890519 0.06148627</span></span>
-<span><span class="co">#&gt; [25,30)  0.18855468 0.07929840 0.04768337 0.05284919</span></span>
-<span><span class="co">#&gt; [30,35)  0.25279312 0.14046263 0.06606222 0.04622150</span></span>
-<span><span class="co">#&gt; [35,40)  0.21127183 0.21279445 0.12957846 0.05155211</span></span>
-<span><span class="co">#&gt; [40,45)  0.11917957 0.19064869 0.20524521 0.08505827</span></span>
-<span><span class="co">#&gt; [45,50)  0.07631472 0.10597694 0.18120369 0.14241867</span></span>
-<span><span class="co">#&gt; [50,55)  0.10833087 0.06616051 0.10051663 0.17495812</span></span>
-<span><span class="co">#&gt; [55,60)  0.27846513 0.09412025 0.06371175 0.15178295</span></span>
-<span><span class="co">#&gt; [60,65)  0.45192467 0.24477051 0.09071207 0.10291735</span></span>
-<span><span class="co">#&gt; [65,70)  0.20787743 0.39438792 0.22467643 0.07728059</span></span>
-<span><span class="co">#&gt; [70,75)  0.06049509 0.17642670 0.32608811 0.10587527</span></span>
-<span><span class="co">#&gt; [75,Inf) 0.11945422 0.10561731 0.18426904 0.27097932</span></span></code></pre></div>
+<span><span class="co">#&gt; [0,5)    0.18890661 0.13733131 0.09484177 0.05470230</span></span>
+<span><span class="co">#&gt; [5,10)   0.16607313 0.15320249 0.11632882 0.06727994</span></span>
+<span><span class="co">#&gt; [10,15)  0.11671106 0.12666645 0.11850689 0.07144055</span></span>
+<span><span class="co">#&gt; [15,20)  0.09231611 0.08415411 0.09070226 0.06846732</span></span>
+<span><span class="co">#&gt; [20,25)  0.11102181 0.06392410 0.05936161 0.06145876</span></span>
+<span><span class="co">#&gt; [25,30)  0.17715415 0.07887508 0.04802691 0.05270121</span></span>
+<span><span class="co">#&gt; [30,35)  0.23822736 0.13988632 0.06658570 0.04609558</span></span>
+<span><span class="co">#&gt; [35,40)  0.19963353 0.21291306 0.13065862 0.05145799</span></span>
+<span><span class="co">#&gt; [40,45)  0.11272481 0.19159789 0.20693902 0.08497573</span></span>
+<span><span class="co">#&gt; [45,50)  0.07211171 0.10661081 0.18262842 0.14226798</span></span>
+<span><span class="co">#&gt; [50,55)  0.10206625 0.06627440 0.10127563 0.17460191</span></span>
+<span><span class="co">#&gt; [55,60)  0.26060420 0.09336056 0.06411346 0.15124814</span></span>
+<span><span class="co">#&gt; [60,65)  0.43126546 0.24334924 0.09119461 0.10262151</span></span>
+<span><span class="co">#&gt; [65,70)  0.20667038 0.39677196 0.22579696 0.07733600</span></span>
+<span><span class="co">#&gt; [70,75)  0.06081689 0.17730659 0.32699747 0.10599402</span></span>
+<span><span class="co">#&gt; [75,Inf) 0.11911085 0.10569303 0.18447573 0.27108627</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="what-next">What next?<a class="anchor" aria-label="anchor" href="#what-next"></a>
@@ -407,17 +407,17 @@ age limit and the population in that age group.</p>
 <span><span class="co">#&gt;  <span style="color: #555555;">- population: </span><span style="color: #555555; font-weight: bold;">population</span></span></span>
 <span><span class="co">#&gt;    lower.age.limit population</span></span>
 <span><span class="co">#&gt;              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>               0   1<span style="text-decoration: underline;">852</span>682.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>               5   1<span style="text-decoration: underline;">968</span>449.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>              10   2<span style="text-decoration: underline;">138</span>897.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>              15   2<span style="text-decoration: underline;">312</span>032.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>              20   2<span style="text-decoration: underline;">407</span>486.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>              25   2<span style="text-decoration: underline;">423</span>602.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>              30   2<span style="text-decoration: underline;">585</span>137.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>              35   2<span style="text-decoration: underline;">969</span>393.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>              40   3<span style="text-decoration: underline;">041</span>663.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>              45   2<span style="text-decoration: underline;">809</span>154.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>               0   1<span style="text-decoration: underline;">898</span>966.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>               5   2<span style="text-decoration: underline;">017</span>632.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>              10   2<span style="text-decoration: underline;">192</span>410.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>              15   2<span style="text-decoration: underline;">369</span>985.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>              20   2<span style="text-decoration: underline;">467</span>873.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>              25   2<span style="text-decoration: underline;">484</span>327.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>              30   2<span style="text-decoration: underline;">649</span>826.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>              35   3<span style="text-decoration: underline;">043</span>704.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>              40   3<span style="text-decoration: underline;">117</span>812.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>              45   2<span style="text-decoration: underline;">879</span>510.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
 <p>We also provide control over the POLYMOD data retrieved from
 <code><a href="../reference/get_polymod_contact_data.html">get_polymod_contact_data()</a></code> via the arguments,
 <code>setting</code>, <code>country</code>, and <code>ages</code>. These
@@ -432,7 +432,7 @@ details. Below is a brief example of this:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polymod_contact_data_belgium_0_10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,433 × 5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,443 × 5</span></span></span>
 <span><span class="co">#&gt;    setting age_from age_to contacts participants</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> work           0      0        0            5</span></span>
@@ -445,7 +445,7 @@ details. Below is a brief example of this:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work           0     10        0            5</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> work           0     11        0            1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> work           0     12        0            1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3,423 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,433 more rows</span></span></span></code></pre></div>
 <p>Similarly, you can control the population data, retrieving it only
 for certain countries:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -465,7 +465,7 @@ for certain countries:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>              35     <span style="text-decoration: underline;">773</span>177</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>              40     <span style="text-decoration: underline;">823</span>305</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>              45     <span style="text-decoration: underline;">779</span>436</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span>
 <span><span class="fu"><a href="../reference/get_polymod_population.html">get_polymod_population</a></span><span class="op">(</span>countries <span class="op">=</span> <span class="st">"Finland"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 2</span> <span style="color: #BB0000;">(conmat_population)</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555;">- age: </span><span style="color: #555555; font-weight: bold;">lower.age.limit</span></span></span>
@@ -482,7 +482,7 @@ for certain countries:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>              35     <span style="text-decoration: underline;">352</span>962</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>              40     <span style="text-decoration: underline;">379</span>090</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>              45     <span style="text-decoration: underline;">381</span>713</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more rows</span></span></span></code></pre></div>
 <p>You can see the available countries in the helpfile with
 <code><a href="../reference/get_polymod_population.html">?get_polymod_population</a></code>.</p>
 <div class="section level3">
@@ -521,9 +521,9 @@ features of the contact rates.</p>
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 7.15 1.00 4.84 1.00 5.59 4.55  total = 27.13 </span></span>
+<span><span class="co">#&gt; 7.16 1.00 5.20 1.00 5.72 4.04  total = 27.11 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 1656.018     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 1639.944     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a
 new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in
@@ -573,17 +573,17 @@ even sub year.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 49 × 3</span></span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [0,5)          [0,5)        1.79<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [0,5)          [5,10)       1.61<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.60<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.68<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.60<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [0,5)          [10,15)      8.57<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [0,5)          [15,20)      5.73<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [0,5)          [20,25)      8.54<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [0,5)          [25,30)      1.80<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     2.40<span style="color: #949494;">e</span>+21</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [5,10)         [0,5)        1.53<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)       2.51<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [0,5)          [30,Inf)     1.07<span style="color: #949494;">e</span>+22</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [5,10)         [0,5)        1.52<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [5,10)         [5,10)       2.52<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [5,10)         [10,15)      1.88<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plotting">Plotting<a class="anchor" aria-label="anchor" href="#plotting"></a>
@@ -651,9 +651,9 @@ one, and get summary information out:</p>
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 6.239 1.000 4.863 1.000 0.698 4.394  total = 21.19 </span></span>
+<span><span class="co">#&gt; 6.17 1.00 1.00 1.00 2.80 4.56  total = 19.53 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 789.9536     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 790.1204     rank: 55/57</span></span></code></pre></div>
 <p>So this gives us our baseline model of a contact model. We have fit
 this model to the existing contact survey data. We can now predict to
 another age population, to create our “synthetic” contact matrix.</p>
@@ -676,27 +676,27 @@ providing some age breaks we want to predict to</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
-<span><span class="co">#&gt;  $ home  : 'conmat_age_matrix' num [1:5, 1:5] 1.16e-01 1.04e-01 5.74e-02 3.52e-02 1.77e+34 ...</span></span>
+<span><span class="co">#&gt;  $ home  : 'conmat_age_matrix' num [1:5, 1:5] 1.15e-01 1.04e-01 5.77e-02 3.50e-02 8.76e+30 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "age_breaks")= num [1:6] 0 5 10 15 20 ...</span></span>
-<span><span class="co">#&gt;  $ work  : 'conmat_age_matrix' num [1:5, 1:5] 0.000244 0.00015 0.000143 0.00217 0.000367 ...</span></span>
+<span><span class="co">#&gt;  $ work  : 'conmat_age_matrix' num [1:5, 1:5] 0.000233 0.00014 0.000169 0.002111 0.000361 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "age_breaks")= num [1:6] 0 5 10 15 20 ...</span></span>
-<span><span class="co">#&gt;  $ school: 'conmat_age_matrix' num [1:5, 1:5] 0.76853 0.1457 0.0087 0.00949 Inf ...</span></span>
+<span><span class="co">#&gt;  $ school: 'conmat_age_matrix' num [1:5, 1:5] 0.66797 0.13932 0.00889 0.00804 Inf ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "age_breaks")= num [1:6] 0 5 10 15 20 ...</span></span>
-<span><span class="co">#&gt;  $ other : 'conmat_age_matrix' num [1:5, 1:5] 1.64e-01 9.77e-02 3.89e-02 2.61e-02 2.68e+38 ...</span></span>
+<span><span class="co">#&gt;  $ other : 'conmat_age_matrix' num [1:5, 1:5] 1.65e-01 9.82e-02 3.90e-02 2.62e-02 8.52e+37 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "age_breaks")= num [1:6] 0 5 10 15 20 ...</span></span>
-<span><span class="co">#&gt;  $ all   : 'conmat_age_matrix' num [1:5, 1:5] 1.0486 0.3475 0.1051 0.0729 Inf ...</span></span>
+<span><span class="co">#&gt;  $ all   : 'conmat_age_matrix' num [1:5, 1:5] 0.9473 0.3417 0.1057 0.0713 Inf ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "age_breaks")= num [1:6] 0 5 10 15 20 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ : chr [1:5] "[0,5)" "[5,10)" "[10,15)" "[15,20)" ...</span></span>
@@ -705,17 +705,17 @@ providing some age breaks we want to predict to</p>
 <span><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "conmat_setting_prediction_matrix" "list"</span></span>
 <span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">home</span></span>
 <span><span class="co">#&gt;                 [0,5)       [5,10)      [10,15)      [15,20)     [20,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)    1.160003e-01 9.830709e-02 5.153552e-02 2.958917e-02 1.377237e+33</span></span>
-<span><span class="co">#&gt; [5,10)   1.039533e-01 1.570231e-01 1.137220e-01 4.114760e-02 4.499173e+26</span></span>
-<span><span class="co">#&gt; [10,15)  5.737655e-02 1.197343e-01 1.888259e-01 9.939819e-02 4.376313e+21</span></span>
-<span><span class="co">#&gt; [15,20)  3.515043e-02 4.622629e-02 1.060593e-01 1.663848e-01 9.740524e+16</span></span>
-<span><span class="co">#&gt; [20,Inf) 1.770787e+34 5.470627e+27 5.054038e+22 1.054247e+18 1.929846e+13</span></span>
+<span><span class="co">#&gt; [0,5)    1.145797e-01 9.841130e-02 5.180680e-02 2.942438e-02 6.814065e+29</span></span>
+<span><span class="co">#&gt; [5,10)   1.040635e-01 1.593116e-01 1.124681e-01 4.160006e-02 7.071807e+23</span></span>
+<span><span class="co">#&gt; [10,15)  5.767858e-02 1.184141e-01 1.884676e-01 9.906429e-02 2.318686e+18</span></span>
+<span><span class="co">#&gt; [15,20)  3.495467e-02 4.673458e-02 1.057030e-01 1.652793e-01 1.482000e+13</span></span>
+<span><span class="co">#&gt; [20,Inf) 8.761210e+30 8.598739e+24 2.677762e+19 1.604014e+14 1.033932e+09</span></span>
 <span><span class="va">synthetic_settings_5y_fairfield</span><span class="op">$</span><span class="va">all</span></span>
 <span><span class="co">#&gt;               [0,5)    [5,10)    [10,15)    [15,20) [20,Inf)</span></span>
-<span><span class="co">#&gt; [0,5)    1.04858409 0.3296462 0.09438879 0.06134469      Inf</span></span>
-<span><span class="co">#&gt; [5,10)   0.34752254 4.6872902 0.52828926 0.09026246      Inf</span></span>
-<span><span class="co">#&gt; [10,15)  0.10508680 0.5540780 6.73445049 0.57429654      Inf</span></span>
-<span><span class="co">#&gt; [15,20)  0.07287437 0.1014032 0.60944139 4.93719307      Inf</span></span>
+<span><span class="co">#&gt; [0,5)    0.94731881 0.3241321 0.09496626 0.06005841      Inf</span></span>
+<span><span class="co">#&gt; [5,10)   0.34173831 4.6139213 0.51481268 0.09161578      Inf</span></span>
+<span><span class="co">#&gt; [10,15)  0.10572972 0.5400433 6.64997416 0.58019782      Inf</span></span>
+<span><span class="co">#&gt; [15,20)  0.07134634 0.1029235 0.61571645 5.29546771      Inf</span></span>
 <span><span class="co">#&gt; [20,Inf)        Inf       Inf        Inf        Inf      Inf</span></span></code></pre></div>
 <p>We can use <code>autoplot</code> to plot all at once</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">

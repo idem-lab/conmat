@@ -70,7 +70,13 @@ and will be impacted by any <code>future</code> plans provided.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_setting_contacts</span><span class="op">(</span><span class="va">contact_data_list</span>, <span class="va">population</span>, symmetrical <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_setting_contacts</span><span class="op">(</span></span>
+<span>  <span class="va">contact_data_list</span>,</span>
+<span>  <span class="va">population</span>,</span>
+<span>  symmetrical <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  school_demographics <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  work_demographics <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -92,6 +98,24 @@ can be retrieved with <code><a href="get_polymod_setting_data.html">get_polymod_
 <dd><p>whether to enforce symmetrical terms in the model.
 Defaults to TRUE. See <code>details</code> of <code>fit_single_contact_model</code> for more
 information.</p></dd>
+
+
+<dt>school_demographics</dt>
+<dd><p>(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See <code>abs_avg_school</code> for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, <code>conmat_original_school_demographics</code>.</p></dd>
+
+
+<dt>work_demographics</dt>
+<dd><p>(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+<code>abs_avg_work</code> for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, <code>conmat_original_work_demographics</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -124,6 +148,14 @@ information.</p></dd>
 <span class="r-in"><span><span class="va">contact_model</span> <span class="op">&lt;-</span> <span class="fu">fit_setting_contacts</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="va">polymod_setting_data</span>,</span></span>
 <span class="r-in"><span>  population <span class="op">=</span> <span class="va">polymod_population</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># you can specify your own population data for school and work demographics</span></span></span>
+<span class="r-in"><span><span class="va">contact_model_diff_data</span> <span class="op">&lt;-</span> <span class="fu">fit_setting_contacts</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  contact_data_list <span class="op">=</span> <span class="va">polymod_setting_data</span>,</span></span>
+<span class="r-in"><span>  population <span class="op">=</span> <span class="va">polymod_population</span>,</span></span>
+<span class="r-in"><span>  school_demographics <span class="op">=</span> <span class="va">conmat_original_school_demographics</span>,</span></span>
+<span class="r-in"><span>  work_demographics <span class="op">=</span> <span class="va">conmat_original_work_demographics</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
