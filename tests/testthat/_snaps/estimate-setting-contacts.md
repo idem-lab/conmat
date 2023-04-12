@@ -34,17 +34,6 @@
         survey_population = get_polymod_population(), prediction_population = get_polymod_population(),
         age_breaks = c(seq(0, 10, by = 5), Inf), school_demographics = conmat_original_school_demographics,
         work_demographics = conmat_original_work_demographics)
-    Condition
-      Warning in `dplyr::left_join()`:
-      Detected an unexpected many-to-many relationship between `x` and `y`.
-      i Row 1 of `x` matches multiple rows in `y`.
-      i Row 125 of `y` matches multiple rows in `x`.
-      i If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence this warning.
-      Warning in `dplyr::left_join()`:
-      Detected an unexpected many-to-many relationship between `x` and `y`.
-      i Row 1 of `x` matches multiple rows in `y`.
-      i Row 125 of `y` matches multiple rows in `x`.
-      i If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence this warning.
     Message
       
       -- Setting Prediction Matrices -------------------------------------------------

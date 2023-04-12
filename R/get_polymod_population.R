@@ -34,7 +34,9 @@ get_polymod_population <- function(countries = c(
   socialmixr::polymod$participants %>%
     dplyr::filter(
       !is.na(year),
-      country %in% countries
+      country %in% countries,
+      # there were two luxembourgs otherwise - one in 2005!
+      year == 2006
     ) %>%
     dplyr::group_by(
       country,
@@ -45,9 +47,8 @@ get_polymod_population <- function(countries = c(
       .groups = "drop"
     ) %>%
     dplyr::left_join(
-      socialmixr::wpp_age() %>% dplyr::filter(year == 2005),
-      by = c("country"),
-      multiple = "all"
+      socialmixr::wpp_age() %>% dplyr::filter(year == 2005) %>% dplyr::select(country, lower.age.limit, population),
+      by = c("country")
     ) %>%
     dplyr::filter(
       !is.na(lower.age.limit)
