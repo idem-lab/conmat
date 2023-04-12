@@ -70,4 +70,11 @@ example_df <- expand_grid(
 example_df \%>\%
   add_population_age_to() \%>\%
   add_school_work_participation()
+  
+example_df \%>\%
+  add_population_age_to() \%>\%
+  add_school_work_participation(
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics 
+  )
 }

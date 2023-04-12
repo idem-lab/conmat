@@ -14,6 +14,8 @@
 
 * improved age break checking [#138](https://github.com/njtierney/conmat/issues/138)
 
+* extended `add_school_work_participation()`, `add_modelling_features()`, `fit_single_contact_model()`, `fit_setting_contacts()`, `estimate_setting_contacts()` to use different school and work demographics arguments. (#82 and #15, resolved by #153).
+
 ## Breaking changes
 
 * change `get_per_capita_household_size` to `get_abs_per_capita_household_size`

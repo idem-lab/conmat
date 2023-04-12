@@ -73,4 +73,10 @@ example_df <- expand_grid(
   age_to = all_ages,
 )
 add_modelling_features(example_df)
+add_modelling_features(
+  example_df,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics 
+  )
+  
 }

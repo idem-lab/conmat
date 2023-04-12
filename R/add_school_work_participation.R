@@ -51,6 +51,13 @@
 #' example_df %>%
 #'   add_population_age_to() %>%
 #'   add_school_work_participation()
+#'
+#' example_df %>%
+#'   add_population_age_to() %>%
+#'   add_school_work_participation(
+#'     school_demographics = conmat_original_school_demographics,
+#'     work_demographics = conmat_original_work_demographics
+#'   )
 #' @export
 add_school_work_participation <- function(contact_data,
                                           school_demographics = NULL,
