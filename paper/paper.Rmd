@@ -1,0 +1,129 @@
+---
+title: 'conmat: generate synthetic contact matrices for a given age population'
+authors:
+- affiliation: 1
+  name: Nicholas Tierney
+  orcid: 0000-0003-1460-8722
+- affiliation: 1,2
+  name: Nick Golding
+  orcid: 
+- affiliation: 1,3
+  name: Aarathy Babu
+  orcid: 
+- affiliation: 4
+  name: Michael Lydeamore
+  orcid: 
+date: "14 April 2023"
+output:
+  html_document:
+    keep_md: yes
+  pdf_document: default
+bibliography: paper.bib
+tags:
+- epidemiology
+- R
+- infectious disease
+affiliations:
+- index: 1
+  name: Telethon Kids Institute
+- index: 2
+  name: Curtin University
+- index: 3
+  name: 
+- index: 4
+  name: Monash University
+---
+
+# Summary
+
+Epidemiologists and public policy makers need to understand the spread of infectious diseases in a population. Knowing which groups are most vulnerable and how disease spread will unfold helps to make proactive decisions that benefit the most people.  Diseases like influenza and coronavirus spread via human-to-human, "social contact".  If we can measure the amount of social contact, we can use this to understand how diseases spread.
+
+We can measure social contact through social contact surveys, where people  describe the number and type of social contact they have. These surveys provide the empirical estimates of the number of social contacts from one age group to another, as well as the setting of contact. For example, homes have higher contact with 25-50 year olds with 0-15 year olds, workplaces have high contact within 25-60 year olds. 
+
+These surveys exist for a variety of countries, for example, Mossong et al., the "POLYMOD" study, covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands and Poland. However, what do we do when we want to look at contact rates in different countries that haven’t been measured? We can use this existing data to help us project to countries or places that do not have empirical survey data. These are called "synthetic contact matrices". A very popular approach by Prem et al projected from the POLYMOD study to 177 countries, and provided contact matrices at "urban" and "rural" levels for each country. 
+
+However not all countries were included in this list from Prem et al, and for some analyses these synthetic contact matrices were at a large area, such as "urban" or "rural" for a given country. We needed to make predictions at finer grained regions, were required. It was challenging to apply the methodology used by Prem et al, as while their analysis code was provided, it was not designed for reuse. We needed to create contact matrices based on existing studies like POLYMOD but projected to the age population in a given local government area in Australia.
+
+Conmat was created to fill a specific need for creating synthetic contact matrices for specific local government areas for Australia, for work commissioned by the Australian government. We created methods and software to facilitate the following:
+
+- Input: age and population data, and Output: synthetic contact matrix
+- Create next generation matrices (NGMs)
+- Apply vaccination reduction to NGMs
+- Use NGMs in disease modelling
+- Provide tidy Australian survey data from the Australian Bureau of Statistics for use.
+
+# Example
+
+As an example, let us generate a contact matrix for a local area using POLYMOD data.
+
+Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
+
+```{r}
+perth <- abs_age_lga("Perth (C)")
+perth
+```
+
+We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
+
+```{r}
+perth_contact <- extrapolate_polymod(population = perth)
+perth_contact
+```
+
+We can plot this with `autoplot`
+
+```{r}
+autoplot(perth_contact)
+```
+
+# Implementation
+
+Conmat was built to predict at four settings: work, school, home, and other. The model is built to predict four separate models, one for each setting.
+The model is a poisson generalised additive model (gam), predicting the count of contacts, with an offset of the log of participants. There are six terms to explain six key features of the relationship between ages, and optional terms for attendance at school or work, depending on which setting the model is predicting to.
+
+The six key features of the relationship are shown in the figure below
+
+```{r}
+# use DHARMA to show a partial dep plot of the six main terms
+```
+
+## Model interfaces
+
+We provide multiple levels for the user to interact with for model fitting, further detail can be seen at: https://njtierney.github.io/conmat/dev/
+
+* `fit_single_contact_model()`
+    * Using contact survey data to fit a GAM model, adding provided target population information to provide population size information. Recommended for when you want to fit to just a single setting, for which you might want to provide your own contact survey data.
+
+* `predict_contacts()`
+
+    * This takes a fitted model from `fit_single_contact_model`, and then predicts to a provided population
+
+* `fit_setting_contacts()`
+    * Fits the `fit_single_contact_model()` to each setting. Recommended for when you have multiple settings to fit. Returns a list of fitted models. 
+
+* `predict_setting_contacts()`
+    * Takes a list of fitted models from `fit_setting_contacts()` and predicts to a given population for each setting.
+
+* `estimate_setting_contacts()`
+    * A convenience function that fits multiple models, one for each setting. This means fitting `fit_setting_contacts()` and then `predict_setting_contacts()`. Recommended for when you have multiple settings to fit and want to predict to a given population as well.
+
+* `extrapolate_polymod()`
+    * Takes population information and projects pre-fit model from POLYMOD - used for speed when you know you want to take an already fit model from POLYMOD and just fit it to your provided population.
+
+# Future Work
+
+* Create a contact matrix using a custom contact survey from another source, such as the `socialmixr` R package.
+* Predict to any age brackets - such as monthly ages, for example, 1, 3, 6, month year old infants
+* Add ability to fit multiple contact surveys at once, e.g., POLYMOD and another dataset
+* Add ability to include known household age distributions as offsets in the 'home' setting model, in place of the whole population distribution. So compute household age matrices (like age-structured contact matrices, but for household members instead of contacts) from Polymod data. If we compute a different one for each household size, in the Polymod data (probably estimated with another GAM, to make best use of the limited data) we might be able to extrapolate household age matrices to new countries based on the distribution of household sizes.
+* Add methods for including household size distributions
+* Add uncertainty to estimates
+* Move Australian centric data into its own package
+* Add documentation on specifying your own GAM model and using this workflow
+
+
+# References
+
+- Prem 2017: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697
+- Prem 2021: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009098
+- Mossonget al 2007: https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074
