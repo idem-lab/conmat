@@ -72,7 +72,7 @@ add_modelling_features <- function(contact_data,
   # weighted combination of contact population & school year probability.
   #                       [ for using outside of classroom?]
   # offset for school setting & the rest.
-  contact_data %>%
+  res <- contact_data %>%
     # Adds interpolated age population - specifically, `pop_age_to`
     add_population_age_to(population = population) %>%
     # Adds school and work offset
@@ -84,6 +84,7 @@ add_modelling_features <- function(contact_data,
     # adds columns
     # `log_contactable_population_school`, and ` log_contactable_population`
     add_offset()
+  
 }
 
 #' Add column, "intergenerational"
