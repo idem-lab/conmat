@@ -107,6 +107,7 @@ prepare_population_for_modelling.data.frame <- function(data = data,
 #' @noRd
 #' @keywords internal
 return_age_population_function <- function(pop_model) {
+  # browser()
   fit <- fit_bounded_age_groups(pop_model$pop_model_bounded)
 
   pred <- predict_to_long_age_ranges(pop_model, fit)
@@ -197,7 +198,7 @@ predict_to_long_age_ranges <- function(pop_model, fit) {
       target_weight_sum = required_pop / max_bound_pop,
       weight = weight * target_weight_sum / weight_sum,
       population = ifelse(bounded, pred_adj, max_bound_pop * weight)
-    ) %>%
+    ) %>% 
     dplyr::ungroup() %>%
     dplyr::select(
       age,
@@ -221,6 +222,7 @@ predict_to_long_age_ranges <- function(pop_model, fit) {
 #' @noRd
 #' @keywords internal
 build_lookup_populations <- function(age, pred) {
+  # browser()
   tibble::tibble(
     age = age
   ) %>%
