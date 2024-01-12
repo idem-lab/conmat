@@ -29,15 +29,15 @@ check_lga_name <- function(lga_name,
   )
 
   does_lga_match <- nrow(lga_match) > 1
-
+  
   if (!does_lga_match) {
-    rlang::abort(
+    cli::cli_abort(
       message = c(
         "The LGA name provided does not match LGAs in Australia",
-        x = glue::glue("The lga name '{lga_name}' did not match (it probably \\
-                       needs '{lga_name} (C)' or similar"),
-        i = "See `abs_lga_lookup` for a list of all LGAs"
-      )
+        "x" = "The lga name '{lga_name}' did not match (it probably \\
+        needs '{lga_name} (C)' or similar)",
+        "i" = "See `abs_lga_lookup` for a list of all LGAs"
+    )
     )
   }
 
@@ -50,13 +50,13 @@ check_lga_name <- function(lga_name,
     more_than_one_lga <- length(unique_lga_names) > 1
 
     if (more_than_one_lga & !multiple_lga) {
-      rlang::abort(
+      cli::cli_abort(
         message = c(
           "The LGA name provided matches multiple LGAs",
-          i = "Specify the exact LGA name or set {.arg {multiple_lga}} = \\
+          "i" = "Specify the exact LGA name or set {.arg {multiple_lga}} = \\
           `TRUE`. See {.code {abs_lga_lookup}} for a list of all LGAs",
-          x = glue::glue("The lga name '{lga_name}' matched multiple LGAs:"),
-          glue::glue("{unique_lga_names}")
+          "x" = "The lga name '{lga_name}' matched multiple LGAs: \\
+          {unique_lga_names}"
         )
       )
     } # end if there is more than one matching LGA
@@ -79,26 +79,25 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
 
   all_match <- all(state_match)
   state_that_doesnt_match <- setdiff(state_name, state_that_matches)
-
-
+  
   if (!all_match) {
-    rlang::abort(
+    cli::cli_abort(
       message = c(
         "The state name provided does not match states in Australia",
-        x = glue::glue("The state name '{state_that_doesnt_match}' did not match"),
-        i = "See `abs_lga_lookup` for a list of all states"
+        "x" = "The state name '{state_that_doesnt_match}' did not match",
+        "i" = "See `abs_lga_lookup` for a list of all states"
       )
     )
   }
   more_than_one_state <- length(state_that_matches) > 1
   if (more_than_one_state & !multiple_state) {
-    rlang::abort(
+    cli::cli_abort(
       message = c(
         "The state name provided matches multiple states",
-        i = "Specify the exact state name or set {.arg {multiple_state}} = \\
+        "i" = "Specify the exact state name or set {.arg {multiple_state}} = \\
           `TRUE`. See {.code {abs_lga_lookup}} for a list of all states",
-        x = glue::glue("The state name '{state_name}' matched multiple states:"),
-        glue::glue("{ state_that_matches}")
+        "x" = "The state name '{state_name}' matched multiple states: \\
+        { state_that_matches}"
       )
     )
   }
@@ -148,7 +147,7 @@ check_if_data_frame <- function(x) {
     cli::cli_abort(
       c(
         "x must be a {.cls data.frame}",
-        i = "x is {.cls {class(x)}}"
+        "i" = "x is {.cls {class(x)}}"
       )
     )
   }
@@ -158,7 +157,7 @@ error_old_ngm_arg <- function(arg) {
   cli::cli_abort(
     c(
       "{arg} is no longer used in {.code generate_ngm}",
-      i = "Please use {.code generate_ngm_oz} instead"
+      "i" = "Please use {.code generate_ngm_oz} instead"
     )
   )
 }
@@ -203,7 +202,7 @@ check_age_breaks <- function(x,
       c(
         "Age breaks must be the same, but they are different:",
         compare_res,
-        i = "You can check the age breaks using `age_breaks(<object>)`"
+        "i" = "You can check the age breaks using `age_breaks(<object>)`"
       )
     )
   }

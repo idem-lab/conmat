@@ -6,7 +6,7 @@ check_work_demographics <- function(work_demographics) {
   work_names <- c("age", "work_fraction")
   names_correct <- all(work_names %in% names(work_demographics))
   if (!names_correct) {
-    cli::format_error(
+    cli::cli_abort(
       c(
         "work demographic data must be named {.var {work_names}}",
         "we see: {.var {names(work_demographics)}}"
@@ -19,7 +19,7 @@ check_work_demographics <- function(work_demographics) {
   is_proportion <- all(dplyr::between(work_demographics$work_fraction, 0, 1))
 
   if (!is_proportion) {
-    cli::format_error(
+    cli::cli_abort(
       c(
         "{.var work_fraction} must be between 0 and 1, however the range is:",
         "{range(work_demographics$work_fraction)}"
@@ -36,7 +36,7 @@ check_school_demographics <- function(school_demographics) {
   school_names <- c("age", "school_fraction")
   names_correct <- all(school_names %in% names(school_demographics))
   if (!names_correct) {
-    cli::format_error(
+    cli::cli_abort(
       c(
         "school demographic data must be named {.var {school_names}}",
         "we see: {.var {names(school_demographics)}}"
@@ -49,7 +49,7 @@ check_school_demographics <- function(school_demographics) {
   is_proportion <- all(dplyr::between(school_demographics$school_fraction, 0, 1))
 
   if (!is_proportion) {
-    cli::format_error(
+    cli::cli_abort(
       c(
         "{.var school_fraction} must be between 0 and 1, however the range is:",
         "{range(school_demographics$school_fraction)}"
