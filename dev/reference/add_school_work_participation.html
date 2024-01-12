@@ -185,12 +185,12 @@ school_weighted_pop_fraction.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   school_year_probability &lt;dbl&gt;, school_weighted_pop_fraction &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   work_fraction_age_from &lt;dbl&gt;, work_fraction_age_to &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   work_probability &lt;dbl&gt;</span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">example_df</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="add_population_age_to.html">add_population_age_to</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">add_school_work_participation</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  school_demographics <span class="op">=</span> <span class="va">conmat_original_school_demographics</span>,</span></span>
-<span class="r-in"><span>  work_demographics <span class="op">=</span> <span class="va">conmat_original_work_demographics</span> </span></span>
+<span class="r-in"><span>    school_demographics <span class="op">=</span> <span class="va">conmat_original_school_demographics</span>,</span></span>
+<span class="r-in"><span>    work_demographics <span class="op">=</span> <span class="va">conmat_original_work_demographics</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 36 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    age_from age_to pop_age_to intergenerational school_fraction_age_from</span>
