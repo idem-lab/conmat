@@ -16,8 +16,8 @@ knitr::opts_chunk$set(
 # conmat
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
+[![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/idem-lab/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/idem-lab/conmat?branch=master)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
@@ -74,14 +74,14 @@ We need methods that allow for flexibly creating synthetic contact matrices for 
 You can install the development version with:
 
 ```r
-install.packages("conmat", repos = "https://njtierney.r-universe.dev")
+install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
 ```
 
 Or alternatively you can use `remotes`
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("njtierney/conmat")
+remotes::install_github("idem-lab/conmat")
 ```
 
 ## Example
