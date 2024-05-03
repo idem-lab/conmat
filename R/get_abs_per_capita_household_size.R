@@ -21,11 +21,11 @@ get_abs_per_capita_household_size <- function(state = NULL, lga = NULL) {
   )
 
   if (level == "erroneous") {
-    abort("only one of state and lga may be specified")
+    rlang::abort("only one of state and lga may be specified")
   }
 
   if (length(state) > 1 | length(lga) > 1) {
-    abort("only one state or LGA at a time, please")
+    rlang::abort("only one state or LGA at a time, please")
   }
 
   if (!is.null(state)) {

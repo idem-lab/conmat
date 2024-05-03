@@ -55,4 +55,6 @@ aggregated_fairfield <- aggregate_predicted_contacts(
   population = fairfield,
   age_breaks = c(0, 5, 10, 15, Inf)
 )
+
+aggregated_fairfield
 }

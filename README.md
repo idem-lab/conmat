@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
+coverage](https://codecov.io/gh/idem-lab/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/idem-lab/conmat?branch=master)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact
@@ -62,14 +62,14 @@ representation of community infection in many regions.
 You can install the development version with:
 
 ``` r
-install.packages("conmat", repos = "https://njtierney.r-universe.dev")
+install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
 ```
 
 Or alternatively you can use `remotes`
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("njtierney/conmat")
+remotes::install_github("idem-lab/conmat")
 ```
 
 ## Example
@@ -103,17 +103,17 @@ polymod_survey_data
 #>  - population: population
 #>    lower.age.limit population
 #>              <int>      <dbl>
-#>  1               0   1852682.
-#>  2               5   1968449.
-#>  3              10   2138897.
-#>  4              15   2312032.
-#>  5              20   2407486.
-#>  6              25   2423602.
-#>  7              30   2585137.
-#>  8              35   2969393.
-#>  9              40   3041663.
-#> 10              45   2809154.
-#> # … with 11 more rows
+#>  1               0   1898966.
+#>  2               5   2017632.
+#>  3              10   2192410.
+#>  4              15   2369985.
+#>  5              20   2467873.
+#>  6              25   2484327.
+#>  7              30   2649826.
+#>  8              35   3043704.
+#>  9              40   3117812.
+#> 10              45   2879510.
+#> # ℹ 11 more rows
 ```
 
 ## Predicting the contact rate
@@ -127,8 +127,6 @@ contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
 )
-#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
-#> fitted rates numerically 0 occurred
 ```
 
 This fits a generalised additive model (GAM), predicting the contact
@@ -147,9 +145,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.27 5.51 6.23 7.89 7.36  total = 35.26 
+#> 1.85 3.95 3.82 7.10 7.59 4.77  total = 32.09 
 #> 
-#> fREML score: 24060.58     rank: 55/57
+#> fREML score: 24429.55     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -203,17 +201,17 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00213
-#>  2 [0,5)          [5,10)        0.00360
-#>  3 [0,5)          [10,15)       0.00305
-#>  4 [0,5)          [15,20)       0.00444
-#>  5 [0,5)          [20,25)       0.0110 
-#>  6 [0,5)          [25,30)       0.0218 
-#>  7 [0,5)          [30,35)       0.0317 
-#>  8 [0,5)          [35,40)       0.0345 
-#>  9 [0,5)          [40,45)       0.0341 
-#> 10 [0,5)          [45,50)       0.0330 
-#> # … with 314 more rows
+#>  1 [0,5)          [0,5)         0.00281
+#>  2 [0,5)          [5,10)        0.00318
+#>  3 [0,5)          [10,15)       0.00345
+#>  4 [0,5)          [15,20)       0.00571
+#>  5 [0,5)          [20,25)       0.0133 
+#>  6 [0,5)          [25,30)       0.0261 
+#>  7 [0,5)          [30,35)       0.0356 
+#>  8 [0,5)          [35,40)       0.0372 
+#>  9 [0,5)          [40,45)       0.0349 
+#> 10 [0,5)          [45,50)       0.0317 
+#> # ℹ 314 more rows
 ```
 
 ## Plotting
@@ -299,7 +297,7 @@ abs_lga_lookup
 #>  8 NSW      10600 Bellingen (A)        
 #>  9 NSW      10650 Berrigan (A)         
 #> 10 NSW      10750 Blacktown (C)        
-#> # … with 534 more rows
+#> # ℹ 534 more rows
 ```
 
 Or get the information for states like so:

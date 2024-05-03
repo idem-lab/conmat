@@ -38,6 +38,8 @@
 #'   population = fairfield,
 #'   age_breaks = c(0, 5, 10, 15, Inf)
 #' )
+#' 
+#' aggregated_fairfield
 #' @export
 aggregate_predicted_contacts <- function(predicted_contacts_1y,
                                          population,
