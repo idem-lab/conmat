@@ -10,3 +10,5 @@ README_cache
 .vscode/launch.json
 .pre-commit-config.yaml
 tests/README.md
+paper/*.html
+paper/*.pdf

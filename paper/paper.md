@@ -37,22 +37,7 @@ affiliations:
   name: Monash University
 ---
 
-```{r}
-#| label: setup
-#| echo: false
-#| message: false
-#| warning: false
-#| comment: false
-knitr::opts_chunk$set(comment = "#>",
-                      echo = TRUE,
-                      out.width = "95%",
-                      retina = 3,
-                      fig.height = 4,
-                      fig.align = "center",
-                      dpi = 300,
-                      dev = "png")
-options(tinytex.clean = FALSE)
-```
+
 
 # Summary
 
@@ -78,28 +63,100 @@ As an example, let us generate a contact matrix for a local area using POLYMOD d
 
 Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
 
-```{r}
-#| label: load-conmat
+
+```r
 library(conmat)
 perth <- abs_age_lga("Perth (C)")
 perth
 ```
 
+```
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
+#>    lga       lower.age.limit  year population
+#>    <chr>               <dbl> <dbl>      <dbl>
+#>  1 Perth (C)               0  2020       1331
+#>  2 Perth (C)               5  2020        834
+#>  3 Perth (C)              10  2020        529
+#>  4 Perth (C)              15  2020        794
+#>  5 Perth (C)              20  2020       3615
+#>  6 Perth (C)              25  2020       5324
+#>  7 Perth (C)              30  2020       4667
+#>  8 Perth (C)              35  2020       3110
+#>  9 Perth (C)              40  2020       1650
+#> 10 Perth (C)              45  2020       1445
+#> 11 Perth (C)              50  2020       1299
+#> 12 Perth (C)              55  2020       1344
+#> 13 Perth (C)              60  2020       1359
+#> 14 Perth (C)              65  2020       1145
+#> 15 Perth (C)              70  2020       1004
+#> 16 Perth (C)              75  2020        673
+#> 17 Perth (C)              80  2020        481
+#> 18 Perth (C)              85  2020        367
+```
+
 We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
 
-```{r}
-#| label: extrapolate-polymod
-#| echo: true
+
+```r
 perth_contact <- extrapolate_polymod(population = perth)
 perth_contact
 ```
 
+```
+#> 
+```
+
+```
+#> ── Setting Prediction Matrices ─────────────────────────────────────────────────
+```
+
+```
+#> A list of matrices containing the model predicted contact rate between ages in
+#> each setting.
+```
+
+```
+#> There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
+```
+
+```
+#> • home: a 16x16 <matrix>
+```
+
+```
+#> • work: a 16x16 <matrix>
+```
+
+```
+#> • school: a 16x16 <matrix>
+```
+
+```
+#> • other: a 16x16 <matrix>
+```
+
+```
+#> • all: a 16x16 <matrix>
+```
+
+```
+#> ℹ Access each <matrix> with `x$name`
+```
+
+```
+#> ℹ e.g., `x$home`
+```
+
 We can plot this with `autoplot`
 
-```{r}
-#| label: autoplot-contacts
+
+```r
 autoplot(perth_contact)
 ```
+
+<img src="paper_files/figure-html/autoplot-contacts-1.png" width="95%" style="display: block; margin: auto;" />
 
 # Implementation
 
@@ -108,7 +165,8 @@ The model is a poisson generalised additive model (gam), predicting the count of
 
 The six key features of the relationship are shown in the figure below
 
-```{r}
+
+```r
 # use DHARMA to show a partial dep plot of the six main terms
 ```
 
