@@ -37,7 +37,7 @@ affiliations:
   name: Monash University
 ---
 
-```{r}
+```{r Document Setup}
 #| label: setup
 #| echo: false
 #| message: false
@@ -78,7 +78,7 @@ As an example, let us generate a contact matrix for a local area using POLYMOD d
 
 Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
 
-```{r}
+```{r load conmat}
 #| label: load-conmat
 library(conmat)
 perth <- abs_age_lga("Perth (C)")
@@ -87,7 +87,7 @@ perth
 
 We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
 
-```{r}
+```{r extrapolate polymod}
 #| label: extrapolate-polymod
 #| echo: true
 perth_contact <- extrapolate_polymod(population = perth)
@@ -96,7 +96,7 @@ perth_contact
 
 We can plot this with `autoplot`
 
-```{r}
+```{r autoplot contacts}
 #| label: autoplot-contacts
 autoplot(perth_contact)
 ```
@@ -106,11 +106,15 @@ autoplot(perth_contact)
 Conmat was built to predict at four settings: work, school, home, and other. The model is built to predict four separate models, one for each setting.
 The model is a poisson generalised additive model (gam), predicting the count of contacts, with an offset of the log of participants. There are six terms to explain six key features of the relationship between ages, and optional terms for attendance at school or work, depending on which setting the model is predicting to.
 
-The six key features of the relationship are shown in the figure below
+The six terms are 
+
+The six key features of the relationship are shown in the figure below.
 
 ```{r}
 # use DHARMA to show a partial dep plot of the six main terms
 ```
+
+[#TODO notes-to-self: the model structure wasn't generated through any particularly robust process, it was just coming up with structures that looked mildly appropriate for our use case. ]
 
 ## Model interfaces
 
