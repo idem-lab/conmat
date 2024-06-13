@@ -74,9 +74,9 @@ The `conmat` package was created to fill a specific need for creating synthetic 
 
 # Example
 
-As an example, let us generate a contact matrix for a local area using POLYMOD data.
+As an example, let us generate a contact matrix for a local area using a model fitted from the POLYMOD data.
 
-Suppose we want to get a contact matrix for a given region in Australia, let's say the city of Perth. We can get that from a helper function, `abs_age_lga`.
+Suppose we want to generate a contact matrix for the City of Perth in Australia. We can get the population data for Perth from the helper function `abs_age_lga`:
 
 ```{r load conmat}
 #| label: load-conmat
@@ -85,7 +85,7 @@ perth <- abs_age_lga("Perth (C)")
 perth
 ```
 
-We can get a contact matrix made for `perth` using the `extrapolate_polymod` function:
+We can generate a contact matrix for `perth` using the `extrapolate_polymod` function, where the contact matrix is generated using a model fitted from the POLYMOD data. 
 
 ```{r extrapolate polymod}
 #| label: extrapolate-polymod
@@ -94,7 +94,7 @@ perth_contact <- extrapolate_polymod(population = perth)
 perth_contact
 ```
 
-We can plot this with `autoplot`
+We can plot the resulting contact matrix with `autoplot`:
 
 ```{r autoplot contacts}
 #| label: autoplot-contacts
@@ -104,7 +104,7 @@ autoplot(perth_contact)
 # Implementation
 
 Conmat was built to predict at four settings: work, school, home, and other. The model is built to predict four separate models, one for each setting.
-The model is a poisson generalised additive model (gam), predicting the count of contacts, with an offset of the log of participants. There are six terms to explain six key features of the relationship between ages, and optional terms for attendance at school or work, depending on which setting the model is predicting to.
+The model is a Poisson generalised additive model (GAM), predicting the count of contacts, with an offset of the log of participants. There are six terms to explain six key features of the relationship between ages, and optional terms for attendance at school or work, depending on which setting the model is predicting to.
 
 The six terms are 
 
