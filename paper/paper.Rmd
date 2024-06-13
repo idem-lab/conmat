@@ -1,5 +1,5 @@
 ---
-title: 'conmat: generate synthetic contact matrices for a given age population'
+title: 'conmat: generate synthetic contact matrices for a given age-stratified population'
 authors:
 - affiliation: 1
   name: Nicholas Tierney
@@ -74,9 +74,9 @@ The `conmat` package was created to fill a specific need for creating synthetic 
 
 # Example
 
-As an example, let us generate a contact matrix for a local area using a model fitted from the POLYMOD data.
+As an example, let us generate a contact matrix for a local government area within Australia, using a model fitted from the POLYMOD data.
 
-Suppose we want to generate a contact matrix for the City of Perth in Australia. We can get the population data for Perth from the helper function `abs_age_lga`:
+Suppose we want to generate a contact matrix for the City of Perth. We can get the age-stratified population data for Perth from the helper function `abs_age_lga`:
 
 ```{r load conmat}
 #| label: load-conmat
@@ -94,7 +94,7 @@ perth_contact <- extrapolate_polymod(population = perth)
 perth_contact
 ```
 
-We can plot the resulting contact matrix with `autoplot`:
+We can plot the resulting contact matrix for Perth with `autoplot`:
 
 ```{r autoplot contacts}
 #| label: autoplot-contacts
