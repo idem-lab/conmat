@@ -262,7 +262,8 @@ set.seed(2021 - 09 - 24)
 polymod_setting_data <- get_polymod_setting_data()
 
 polymod_setting_data_small <- polymod_setting_data %>%
-  lapply(FUN = function(x) x %>% filter(age_from <= 20, age_to <= 20))
+  lapply(FUN = function(x) x %>% filter(age_from <= 20, age_to <= 20)) |> 
+  new_setting_data()
 
 setting_models <- fit_setting_contacts(
   contact_data_list = polymod_setting_data_small,

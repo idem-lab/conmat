@@ -12,6 +12,7 @@
 \alias{age_breaks.array}
 \alias{age_breaks.predicted_contacts}
 \alias{age_breaks.transmission_probability_matrix}
+\alias{age_breaks.setting_contact_model}
 \alias{age_breaks.default}
 \title{Extract age break attribute information}
 \usage{
@@ -36,6 +37,8 @@ age_breaks(x)
 \method{age_breaks}{predicted_contacts}(x)
 
 \method{age_breaks}{transmission_probability_matrix}(x)
+
+\method{age_breaks}{setting_contact_model}(x)
 
 \method{age_breaks}{default}(x)
 }
@@ -69,6 +72,8 @@ Extract age break attribute information
 \item \code{age_breaks(predicted_contacts)}: Get age break information
 
 \item \code{age_breaks(transmission_probability_matrix)}: Get age break information
+
+\item \code{age_breaks(setting_contact_model)}: Get age break information
 
 \item \code{age_breaks(default)}: Get age break information
 

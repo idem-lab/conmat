@@ -1,3 +1,56 @@
+# predict_setting_contact model prints appropriately
+
+    Code
+      contact_model_pred
+    Message
+      
+      -- Setting Prediction Matrices -------------------------------------------------
+    Output
+      
+    Message
+      A list of matrices containing the model predicted contact rate between ages in
+      each setting.
+    Output
+      
+    Message
+      There are 5 age breaks, ranging 0-20+ years, with a regular 5 year interval
+    Output
+      
+    Message
+      * home: a 5x5 <matrix>
+      * work: a 5x5 <matrix>
+      * school: a 5x5 <matrix>
+      * other: a 5x5 <matrix>
+      * all: a 5x5 <matrix>
+      i Access each <matrix> with `x$name`
+      i e.g., `x$home`
+
+# fit_setting_contact model prints appropriately
+
+    Code
+      contact_model
+    Message
+      
+      -- Fitted Setting Contact Models -----------------------------------------------
+    Output
+      
+    Message
+      A list of fitted <bam> models for each setting. Each <bam> model predicts the
+      contact rate between ages, for that setting.
+    Output
+      
+    Message
+      There are 20 age breaks, ranging 0-20 years, with a regular 1 year interval
+    Output
+      
+    Message
+      * home: a <bam> model (441 obs)
+      * work: a <bam> model (441 obs)
+      * school: a <bam> model (441 obs)
+      * other: a <bam> model (441 obs)
+      i Access each <bam> with `x$name`
+      i e.g., `x$home`
+
 # list names are kept
 
     Code
