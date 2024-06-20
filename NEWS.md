@@ -1,4 +1,3 @@
-
 # conmat 0.0.2.9000
 
 ## Changes
@@ -15,6 +14,9 @@
 * improved age break checking [#138](https://github.com/njtierney/conmat/issues/138)
 
 * extended `add_school_work_participation()`, `add_modelling_features()`, `fit_single_contact_model()`, `fit_setting_contacts()`, `estimate_setting_contacts()` to use different school and work demographics arguments. (#82 and #15, resolved by #153).
+
+* exports `new_ngm_setting_matrix()` and `new_setting_data()` 
+* Exports new `age_breaks()` method for class `setting_contact_model` (used in `fit_setting_contacts()`).
 
 ## Breaking changes
 

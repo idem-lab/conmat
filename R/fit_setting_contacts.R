@@ -76,5 +76,8 @@ fit_setting_contacts <- function(contact_data_list,
     .options = furrr::furrr_options(seed = TRUE)
   )
 
-  new_setting_contact_model(fitted_setting_contacts)
+  new_setting_contact_model(
+    list_model = fitted_setting_contacts,
+    age_breaks = age_breaks(contact_data_list)
+    )
 }

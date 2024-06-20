@@ -131,12 +131,24 @@ age_breaks.transmission_probability_matrix <- function(x) {
 
 #' @describeIn age_breaks Get age break information
 #' @export
+age_breaks.setting_contact_model <- function(x){
+  attr(x, "age_breaks")
+}
+
+#' @describeIn age_breaks Get age break information
+#' @export
 age_breaks.default <- function(x) {
   cli::cli_abort(
     "no method for {.code age_breaks()} defined for object of class {.cls {class(x)}} yet"
   )
 }
 
+#' Establish new setting data
+#'
+#' @param list_df list of data frames
+#'
+#' @return object with additional (primary) class "setting data" and an "age_breaks attribute. 
+#' @export
 new_setting_data <- function(list_df) {
   structure(
     list_df,
@@ -145,6 +157,15 @@ new_setting_data <- function(list_df) {
   )
 }
 
+#' Establish new BGM setting data
+#'
+#' @param list_matrix list of matrices
+#' @param raw_eigenvalue the raw eigenvalue
+#' @param scaling scaling factor
+#' @param age_breaks vector of age breaks
+#'
+#' @return object with additional (primary) class "ngm_setting_matrix", and attributes for "age_breaks", "scaling", and "raw_eigenvalue". 
+#' @export
 new_ngm_setting_matrix <- function(list_matrix,
                                    raw_eigenvalue,
                                    scaling,
@@ -207,8 +228,13 @@ scaling <- function(list_matrix) {
   attr(list_matrix, "scaling")
 }
 
-new_setting_contact_model <- function(list_model) {
-  add_new_class(list_model, "setting_contact_model")
+new_setting_contact_model <- function(list_model, 
+                                      age_breaks) {
+  structure(
+    list_model,
+    age_breaks = age_breaks,
+    class = c("setting_contact_model", class(list_model))
+  )
 }
 
 new_setting_vaccination_matrix <- function(list_matrix,
