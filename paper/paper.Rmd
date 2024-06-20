@@ -37,7 +37,7 @@ affiliations:
   name: Monash University
 ---
 
-```{r Document Setup}
+```{r setup}
 #| label: setup
 #| echo: false
 #| message: false
@@ -56,11 +56,13 @@ options(tinytex.clean = FALSE)
 
 # Summary
 
-Epidemiologists and public policy makers need to understand the dynamics of infectious disease transmission in a population. Identifying vulnerable groups and predicting disease transmission dynamics are essential for informed public health decision-making. Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how diseases spread.
+#TODO - A better first sentence that encapsulates conmat use? 
+Understanding the dynamics of infectious disease transmission in a population is an important task (?) for epidemiologists and public policy makers.
+Identifying vulnerable groups and predicting disease transmission (?)dynamics are essential for informed public health decision-making. Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how diseases spread.
 
-We can measure social contact through social contact surveys, where people  describe the number and type of social contact they have. These surveys provide an empirical estimate of the number of social contacts from one age group to another and the setting of contact. For example, we might learn from a contact survey that homes have higher contact between 25-50 year olds and 0-15 year olds, whereas workplaces might have high contact within 25-60 year olds.
+We can measure social contact through social contact surveys, where people describe the number and type of social contact they have. These surveys provide (?) a measure of contact rates: an empirical estimate of the number of social contacts from one age group to another and the setting of contact. For example, we might learn from a contact survey that homes have higher contact between 25-50 year olds and 0-15 year olds, whereas workplaces might have high contact within 25-60 year olds.
 
-These surveys exist for a variety of countries, for example, @mossong2008 the "POLYMOD" study, covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands and Poland [@mossong2008]. However, what do we do when we want to look at contact rates in different countries that haven’t been measured? We can use this existing data to help us project to countries or places that do not have empirical survey data. These are called "synthetic contact matrices". A very popular approach by Prem et al projected from the POLYMOD study to 152 countries [@prem2017]. This which was later updated to include contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
+These social contact surveys exist for a few countries. As an example, @mossong2008 the "POLYMOD" study covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to (?)look at/estimate contact rates in different countries that have not been measured? We can use this existing data to help us project to countries or places that do not have empirical survey data. These are called "synthetic contact matrices". A very popular approach by Prem et al projected from the POLYMOD study to 152 countries [@prem2017]. This which was later updated to include contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
 
 However not all countries were included in this list from @prem2021, and for some analyses these synthetic contact matrices were at a large area, such as "urban" or "rural" for a given country. One limitation of this is that the predictions were not provided at smaller grained regons. This might be important, if for example, a public health group needed to make predictions for specific areas. It was challenging to apply the methodology used by Prem et al, as while their analysis code was provided, it was not designed for reuse. 
 
@@ -78,7 +80,7 @@ As an example, let us generate a contact matrix for a local government area with
 
 Suppose we want to generate a contact matrix for the City of Perth. We can get the age-stratified population data for Perth from the helper function `abs_age_lga`:
 
-```{r load conmat}
+```{r}
 #| label: load-conmat
 library(conmat)
 perth <- abs_age_lga("Perth (C)")
@@ -87,7 +89,7 @@ perth
 
 We can generate a contact matrix for `perth` using the `extrapolate_polymod` function, where the contact matrix is generated using a model fitted from the POLYMOD data. 
 
-```{r extrapolate polymod}
+```{r}
 #| label: extrapolate-polymod
 #| echo: true
 perth_contact <- extrapolate_polymod(population = perth)
@@ -96,7 +98,7 @@ perth_contact
 
 We can plot the resulting contact matrix for Perth with `autoplot`:
 
-```{r autoplot contacts}
+```{r}
 #| label: autoplot-contacts
 autoplot(perth_contact)
 ```
@@ -118,6 +120,8 @@ The six key features of the relationship are shown in the figure below.
 Each cell in the resulting contact matrix, indexed *i*, *j*, is the predicted number of people in age group *j* that a single individual in age group *i* will have contact with per day. If you sum across all the *j* age groups for each *i* age group, you get the predicted total number of contacts per day for each individual of age group *i*. [ #TODO expected, predicted, or average?]
 
 [ #TODO notes-to-self: the model structure wasn't generated through any particularly robust process, it was just coming up with structures that looked mildly appropriate for our use case. 
+
+The results are surveys that can be found in the syncomat package, which can be seen at: https://idem-lab
 
 ## Model interfaces
 
