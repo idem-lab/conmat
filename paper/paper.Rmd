@@ -54,6 +54,8 @@ knitr::opts_chunk$set(comment = "#>",
 options(tinytex.clean = FALSE)
 ```
 
+[comment]: Revised, edited text below the original text.  
+
 # Summary
 
 #TODO - A better first sentence that encapsulates conmat use? 
@@ -105,11 +107,11 @@ autoplot(perth_contact)
 
 # Implementation
 
+[ #NOTE revised text of above paragraph ]
 `conmat` was built to predict at four settings: work, school, home, and other. 
-The model is built to predict four separate models, one for each setting. [ #TODO a better way of saying the sentence prior? Predict four separate matrices?]
-The model is a Poisson generalised additive model (GAM), predicting the count of contacts, with an offset of the log of participants. There are six terms to explain six key features of the relationship between ages, and optional terms for attendance at school or work, depending on which setting the model is predicting to.
+The model fitted is a Poisson generalised additive model (GAM) which predicts the count of contacts, with an offset for the log of participants. The model has six (?)covariates/terms to explain six key features of the relationship between ages, and two optional terms for attendance at school or work. The two optional terms are included depending on which setting the model is fitted for. There are four resulting models, with one model fitted for each setting. 
 
-The six terms are 
+The six terms are the `|i-j|`, 
 
 The six key features of the relationship are shown in the figure below.
 
