@@ -56,7 +56,13 @@ options(tinytex.clean = FALSE)
 
 [comment]: Revised, edited text below the original text.  
 
-# Summary
+# Abstract
+
+A common issue 
+
+This article introduces `conmat`, an R package which generates synthetic contact matrices.
+
+# Motivation / Introduction
 
 #TODO - A better first sentence that encapsulates conmat use? 
 Understanding the dynamics of infectious disease transmission in a population is an important task (?) for epidemiologists and public policy makers.
