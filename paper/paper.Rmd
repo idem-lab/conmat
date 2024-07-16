@@ -165,8 +165,9 @@ We provide functions for model fitting at various use cases. Further detail for 
 
 [ #TODO for the above it's good to explain what exactly is predicted. Otherwise it's confusing for the user to understand what each of the model outputs? ]
 
-# Conclusions and Future Direction
+# Conclusions and future directions
 
+Our future direction for `conmat` includes adding the following functionalities:
 * Create a contact matrix using a custom contact survey from another source, such as the `socialmixr` R package.
 * Predict to any age brackets - such as monthly ages, for example, 1, 3, 6, month year old infants
 * Add ability to fit multiple contact surveys at once, e.g., POLYMOD and another dataset
@@ -175,5 +176,7 @@ We provide functions for model fitting at various use cases. Further detail for 
 * Add uncertainty to estimates
 * Move Australian centric data into its own package
 * Add documentation on specifying your own GAM model and using this workflow
+
+[ #TODO Change the following sentence, copied ad verbatim from JSS bizicount because I like it ] For now, however, we feel that our base `bizicount` package is sufficiently general to assist in estimating the models most often encountered by applied researchers.
 
 # References
