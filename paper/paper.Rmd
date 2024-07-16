@@ -54,8 +54,6 @@ knitr::opts_chunk$set(comment = "#>",
 options(tinytex.clean = FALSE)
 ```
 
-[comment]: Revised, edited text below the original text.  
-
 # Abstract
 
 This article introduces `conmat`, an R package which generates synthetic contact matrices.
@@ -63,9 +61,10 @@ This article introduces `conmat`, an R package which generates synthetic contact
 There are currently few options to generate synthetic contact matrices with existing contact surveys. 
 Existing methods to generate synthetic contact matrices are not designed for replicability, do not have enough granularity, and does not cover enough administrative areas (some countries are not included).
 
+[ What's different and useful about conmat? ] 
 A higher level of granularity however is sometimes required to make public health decisions for a given population.
 
-[ What's different and useful about conmat? ]
+`conmat` also provides flexibility, in that it allows users to specify the area in which they would like the contact matrices to be generated; it allows users to specify their own age groups and population structures; it allows users to upload their own contact surveys to fit the model on; and it allows users to generate the contact matrices at different settings.
 
 [ What else is covered in this paper? ] The implemented methods are tested and an example of its use is provided for a local government area (i.e. sub-national level) in Australia.
 
