@@ -58,9 +58,17 @@ options(tinytex.clean = FALSE)
 
 # Abstract
 
-A common issue 
-
 This article introduces `conmat`, an R package which generates synthetic contact matrices.
+
+There are currently few options to generate synthetic contact matrices with existing contact surveys. 
+Existing methods to generate synthetic contact matrices are not designed for replicability, do not have enough granularity, and does not cover enough administrative areas (some countries are not included).
+
+A higher level of granularity however is sometimes required to make public health decisions for a given population.
+
+[ What's different and useful about conmat? ]
+
+[ What else is covered in this paper? ] The implemented methods are tested and an example of its use is provided for a local government area (i.e. sub-national level) in Australia.
+
 
 # Motivation / Introduction
 
@@ -72,9 +80,9 @@ We can measure social contact through social contact surveys, where people descr
 
 These social contact surveys exist for a few countries. As an example, the "POLYMOD" study by @mossong2008 covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to (?)look at/estimate contact rates in other countries that have not been measured? We can use this existing data to help us project to countries or places that do not have empirical contact survey data. These are called "synthetic contact matrices". A popular approach by @prem2017 projected contact rates from the POLYMOD study to 152 countries. This was later updated to include synthetic contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
 
-However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, some of the synthetic contact matrices did not have enough granularity; they covered a large area, such as "urban" or "rural" for a given country. This is disadvantegous as public health groups might need to make predictions for more fine-grained areas within a country, such as a district or municipality. Third, the methodology used by Prem et al. was challenging to reuse in other contexts. Prem et al. provided the code used for their analysis, but that code was not designed for replicability and user-defined inputs.
+However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, some of the synthetic contact matrices did not have enough granularity; they covered a large area, such as "urban" or "rural" for a given country. This is disadvantegous as public health groups might need to make predictions for more fine-grained areas within a country, such as a district or municipality. Third, the methodology used by Prem et al. was challenging to reuse in other contexts. Prem et al. provided the code used for their analysis, but that code was not designed for replicability and use with user-defined inputs.
 
-The `conmat` package was created to fill a specific need for creating synthetic contact matrices for specific local government areas for Australia, for work commissioned by the Australian government. We created methods and software to facilitate the following:
+[REVISED PARAGRAPH BELOW] The `conmat` package was created to fill a specific need for creating synthetic contact matrices for specific local government areas for Australia, for work commissioned by the Australian government. We created methods and software to facilitate the following:
 
 The `conmat` package was developed to fill the specific need of creating synthetic contact matrices for local government areas in Australia. This package is used for [ #TODO what work, specifically? Health? Provide example. Or is *this* package commissioned by the Aus govt? ] work commissioned by the Australian government.
 We developed methods and software to facilitate the following tasks.
