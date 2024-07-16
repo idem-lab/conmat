@@ -152,7 +152,7 @@ We provide functions for model fitting at various use cases. Further detail for 
 
 [ #TODO for the above it's good to explain what exactly is predicted. Otherwise it's confusing for the user to understand what each of the model outputs? ]
 
-# Future Work
+# Conclusions and Future Direction
 
 * Create a contact matrix using a custom contact survey from another source, such as the `socialmixr` R package.
 * Predict to any age brackets - such as monthly ages, for example, 1, 3, 6, month year old infants
