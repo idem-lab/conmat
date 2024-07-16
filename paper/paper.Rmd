@@ -70,11 +70,14 @@ However, there were major limitations with the methods in @prem2021. First, not 
 
 The `conmat` package was created to fill a specific need for creating synthetic contact matrices for specific local government areas for Australia, for work commissioned by the Australian government. We created methods and software to facilitate the following:
 
-- Input: age and population data, and Output: synthetic contact matrix
-- Create next generation matrices (NGMs)
-- Apply vaccination reduction to NGMs
-- Use NGMs in disease modelling
-- Provide tidy Australian survey data from the Australian Bureau of Statistics for use.
+The `conmat` package was developed to fill the specific need of creating synthetic contact matrices for local government areas in Australia. This package is used for [ #TODO what work, specifically? Health? Provide example. Or is *this* package commissioned by the Aus govt? ] work commissioned by the Australian government.
+We developed methods and software to facilitate the following tasks.
+
+- Generate, as output, synthetic contact matrices from age-stratfied population data.
+- Create next generation matrices (NGMs).
+- Apply vaccination reduction to NGMs.
+- Use NGMs in disease modelling.
+- Provide tidied population data from the Australian Bureau of Statistics.
 
 # Example
 
@@ -107,46 +110,47 @@ autoplot(perth_contact)
 
 # Implementation
 
-[ #NOTE revised text of above paragraph ]
 `conmat` was built to predict at four settings: work, school, home, and other. 
 The model fitted is a Poisson generalised additive model (GAM) which predicts the count of contacts, with an offset for the log of participants. The model has six (?)covariates/terms to explain six key features of the relationship between ages, and two optional terms for attendance at school or work. The two optional terms are included depending on which setting the model is fitted for. There are four resulting models, with one model fitted for each setting. 
 
 The six terms are the `|i-j|`, 
 
-The six key features of the relationship are shown in the figure below.
+The six key features of the relationship between the age groups, represented by the six terms, are displayed in the figure below.
 
 ```{r}
 # use DHARMA to show a partial dep plot of the six main terms
 ```
 
-Each cell in the resulting contact matrix, indexed *i*, *j*, is the predicted number of people in age group *j* that a single individual in age group *i* will have contact with per day. If you sum across all the *j* age groups for each *i* age group, you get the predicted total number of contacts per day for each individual of age group *i*. [ #TODO expected, predicted, or average?]
+Each cell in the resulting contact matrix, indexed *i*, *j*, is the predicted number of people in age group *j* that a single individual in age group *i* will have contact with per day. If you sum across all the *j* age groups for each *i* age group, you get the predicted total number of contacts per day for each individual of age group *i*. [ #TODO expected, predicted, or average? ]
 
-[ #TODO notes-to-self: the model structure wasn't generated through any particularly robust process, it was just coming up with structures that looked mildly appropriate for our use case. 
+[ #TODO notes-to-self: the model structure wasn't generated through any particularly robust process, it was just coming up with structures that looked mildly appropriate for our use case. ]
 
 The results are surveys that can be found in the syncomat package, which can be seen at: https://idem-lab
 
 ## Model interfaces
 
-We provide multiple levels for the user to interact with for model fitting, further detail can be seen at: https://idem-lab.github.io/conmat/dev/
+We provide functions for model fitting at various use cases. Further detail for each of the following functions can be seen at: https://idem-lab.github.io/conmat/dev/
 
 * `fit_single_contact_model()`
-    * Using contact survey data to fit a GAM model, adding provided target population information to provide population size information. Recommended for when you want to fit to just a single setting, for which you might want to provide your own contact survey data.
+    * Fits a generalised additive model (GAM) using contact survey data and population size information. This function is recommended for when you want to fit a model to only one setting, for which you might want to provide your own contact survey data.
 
 * `predict_contacts()`
 
-    * This takes a fitted model from `fit_single_contact_model`, and then predicts to a provided population
+    * This takes a fitted model from `fit_single_contact_model()` and predicts [ #TODO what is predicted? ] to a provided (?) population structure.
 
 * `fit_setting_contacts()`
-    * Fits the `fit_single_contact_model()` to each setting. Recommended for when you have multiple settings to fit. Returns a list of fitted models. 
+    * Fits the `fit_single_contact_model()` to each setting. This function is useful for when you have multiple settings to fit. Returns a list of fitted models. 
 
 * `predict_setting_contacts()`
-    * Takes a list of fitted models from `fit_setting_contacts()` and predicts to a given population for each setting.
+    * Takes a list of fitted models from `fit_setting_contacts()` and predicts [ #TODO what is predicted? ] to a given population for each setting.
 
 * `estimate_setting_contacts()`
     * A convenience function that fits multiple models, one for each setting. This means fitting `fit_setting_contacts()` and then `predict_setting_contacts()`. Recommended for when you have multiple settings to fit and want to predict to a given population as well.
 
 * `extrapolate_polymod()`
     * Takes population information and projects pre-fit model from POLYMOD - used for speed when you know you want to take an already fit model from POLYMOD and just fit it to your provided population.
+
+[ #TODO for the above it's good to explain what exactly is predicted. Otherwise it's confusing for the user to understand what each of the model outputs? ]
 
 # Future Work
 
