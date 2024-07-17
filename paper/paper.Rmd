@@ -73,14 +73,16 @@ A higher level of granularity however is sometimes required to make public healt
 # Motivation / Introduction
 
 #TODO - A better first sentence that encapsulates conmat use? 
-Understanding the dynamics of infectious disease transmission in a population is an important task (?) for epidemiologists and public policy makers.
-Identifying vulnerable groups and predicting disease transmission (?)dynamics are essential for informed public health decision-making. Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how diseases spread.
+Understanding the dynamics of infectious disease transmission is an important task (?) for epidemiologists and public policy makers.
+Identifying vulnerable groups and predicting disease transmission (?)dynamics / how diseases spread are essential for informed public health decision-making. 
+Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how these diseases spread. [ Is this circular? ] / and how best to mitigate the spread of these diseases.
 
 We can measure social contact through social contact surveys, where people describe the number and type of social contact they have. These surveys provide (?) a measure of contact rates: an empirical estimate of the number of social contacts from one age group to another and the setting of contact. For example, we might learn from a contact survey that homes have higher contact between 25-50 year olds and 0-15 year olds, whereas workplaces might have high contact within 25-60 year olds.
 
-These social contact surveys exist for a few countries. As an example, the "POLYMOD" study by @mossong2008 covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to (?)look at/estimate contact rates in other countries that have not been measured? We can use this existing data to help us project to countries or places that do not have empirical contact survey data. These are called "synthetic contact matrices". A popular approach by @prem2017 projected contact rates from the POLYMOD study to 152 countries. This was later updated to include synthetic contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
+These social contact surveys exist for a few countries. As an example, the "POLYMOD" study by @mossong2008 covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to estimate contact rates in other countries where this is not yet measured? We can use existing data--the contact rates obtained from contact surveys--to help us project / predict these estimates to countries or places that do not have them. These are called "synthetic contact matrices". A popular approach by @prem2017 projected contact rates from the POLYMOD study to 152 countries. This was later updated to include synthetic contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
+[ #TODO is project or predict a better word? Does it matter? ]
 
-However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, some of the synthetic contact matrices did not have enough granularity; they covered a large area, such as "urban" or "rural" for a given country. This is disadvantegous as public health groups might need to make predictions for more fine-grained areas within a country, such as a district or municipality. Third, the methodology used by Prem et al. was challenging to reuse in other contexts. Prem et al. provided the code used for their analysis, but that code was not designed for replicability and use with user-defined inputs.
+However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, some of the synthetic contact matrices did not have enough granularity; in other words, they covered areas that are too large, such as the "urban" or "rural" parts of a country. This is disadvantageous as public health groups might need to make predictions for more fine-grained areas within a country, such as a district or municipality. Third, the methodology used by Prem et al. was challenging to reuse in other contexts. Prem et al. provided the code used for their analysis, but that code was not designed for replicability and easy modification with user-defined inputs.
 
 [REVISED PARAGRAPH BELOW] The `conmat` package was created to fill a specific need for creating synthetic contact matrices for specific local government areas for Australia, for work commissioned by the Australian government. We created methods and software to facilitate the following:
 
@@ -106,7 +108,7 @@ perth <- abs_age_lga("Perth (C)")
 perth
 ```
 
-We can generate a contact matrix for `perth` using the `extrapolate_polymod` function, where the contact matrix is generated using a model fitted from the POLYMOD data. 
+We can then generate a contact matrix for `perth` using the `extrapolate_polymod` function, where the contact matrix is generated using a model fitted from the POLYMOD data. 
 
 ```{r}
 #| label: extrapolate-polymod
@@ -122,7 +124,6 @@ We can plot the resulting contact matrix for Perth with `autoplot`:
 autoplot(perth_contact)
 ```
 
-[ #TODO Is this also a heat map? ]
 
 # Implementation
 
