@@ -54,7 +54,9 @@ knitr::opts_chunk$set(comment = "#>",
 options(tinytex.clean = FALSE)
 ```
 
-# Abstract
+# Summary
+
+A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.
 
 This article introduces `conmat`, an R package which generates synthetic contact matrices.
 
@@ -70,7 +72,9 @@ A higher level of granularity however is sometimes required to make public healt
 
 [ What else is covered in this paper? ] The implemented methods are tested and an example of its use is provided for a local government area (i.e. at the sub-national level) in Australia.
 
-# Motivation / Introduction
+# Statement of need
+
+A Statement of need section that clearly illustrates the research purpose of the software and places it in the context of related work.
 
 #TODO - A better first sentence that encapsulates conmat use? 
 Understanding the dynamics of infectious disease transmission is an important task (?) for epidemiologists and public policy makers.
