@@ -176,10 +176,10 @@ The resulting synthetic contact matrices, and a replicable / extensible (?) anal
 
 ## Model interfaces
 
-We provide functions for model fitting at various use cases. Further detail for each of the following functions can be seen at: https://idem-lab.github.io/conmat/dev/
+We provide functions for model fitting at various use cases. Further detail for each of the following functions are available at: https://idem-lab.github.io/conmat/dev/
 
 * `fit_single_contact_model()`
-    * Fits a generalised additive model (GAM) using contact survey data and population size information. This function is recommended for when you want to fit a model to only one setting, for which you might want to provide your own contact survey data.
+    * Fits a generalised additive model (GAM) using contact survey data and population size information. This function is recommended when you want to fit a model to only one setting, for which you might want to provide your own contact survey data.
 
 * `predict_contacts()`
 
