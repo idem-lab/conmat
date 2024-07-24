@@ -56,7 +56,7 @@ options(tinytex.clean = FALSE)
 
 # Summary
 
-A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience.
+[ A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience. ]
 
 This article introduces `conmat`, an R package which generates synthetic contact matrices.
 
@@ -70,11 +70,12 @@ A higher level of granularity however is sometimes required to make public healt
 
 `conmat` also provides flexibility, in that it allows users to specify the area in which they would like the contact matrices to be generated; it allows users to specify their own age groups and population structures; it allows users to upload their own contact surveys to fit the model on; and it allows users to generate the contact matrices at different settings.
 
-[ What else is covered in this paper? ] The implemented methods are tested and an example of its use is provided for a local government area (i.e. at the sub-national level) in Australia.
+[ What else is covered in this paper? ] An example use-case for `conmat` is provided for a local government area (i.e. at the sub-national level) in Australia.
+Also provided is an analysis pipeline to support conmat, [`syncomat`](https://github.com/idem-lab/syncomat), which generates synthetic contact matrices for 200 countries.
 
 # Statement of need
 
-A Statement of need section that clearly illustrates the research purpose of the software and places it in the context of related work.
+[ A Statement of need section that clearly illustrates the research purpose of the software and places it in the context of related work. ]
 
 #TODO - A better first sentence that encapsulates conmat use? 
 Understanding the dynamics of infectious disease transmission is an important task (?) for epidemiologists and public policy makers.
@@ -211,6 +212,6 @@ Our future direction for `conmat` includes adding the following functionalities:
 * Move Australian centric data into its own package
 * Add documentation on specifying your own GAM model and using this workflow
 
-[ #TODO Change the following sentence, copied ad verbatim from JSS bizicount because I like it ] For now, however, we feel that our base `bizicount` package is sufficiently general to assist in estimating the models most often encountered by applied researchers.
+[ #TODO Change concluding sentence. The following is copied ad verbatim from JSS bizicount because I like it ] For now, however, we feel that our base `bizicount` package is sufficiently general to assist in estimating the models most often encountered by applied researchers.
 
 # References
