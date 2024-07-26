@@ -9,12 +9,13 @@
 Builds contact matrices using GAMs and population data. This package incorporates data that is copyright Commonwealth of Australia (Australian Electoral Commission and Australian Bureau of Statistics) 2020.
 }
 \author{
-\strong{Maintainer}: Nicholas Tierney \email{nicholas.tierney@gmail.com} (\href{https://orcid.org/0000-0003-1460-8722}{ORCID})
+\strong{Maintainer}: Nicholas Tierney \email{nicholas.tierney@gmail.com} (\href{https://orcid.org/0000-0003-1460-8722}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
   \item Nick Golding \email{nick.golding.research@gmail.com} (\href{https://orcid.org/0000-0001-8916-5570}{ORCID})
   \item Aarathy Babu \email{aarathybabu907@gmail.com} (\href{https://orcid.org/0000-0002-6982-5989}{ORCID})
+  \item Chitra Saraswati \email{chitra.saraswati@telethonkids.org.au} (\href{https://orcid.org/0000-0002-8159-0414}{ORCID})
   \item Michael Lydeamore \email{michael.lydeamore@monash.edu} (\href{https://orcid.org/0000-0001-6515-827X}{ORCID})
 }
 

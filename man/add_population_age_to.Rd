@@ -15,7 +15,8 @@ columns. But it can optionally be any data frame with columns,
 \code{lower.age.limit}, and \code{population}.}
 }
 \value{
-data frame
+data frame of \code{contact_data} with the number of intergenerational
+mixing contacts added.
 }
 \description{
 Adds the population distribution of contact ages. Requires a column called

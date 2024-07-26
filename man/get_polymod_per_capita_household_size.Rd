@@ -13,6 +13,9 @@ number, 3.248971
 Convenience function to help get the per capita household size.
 This is calculated as \code{mean(socialmixr::polymod$participants$hh_size)}.
 }
+\examples{
+get_polymod_per_capita_hosuehold_size()
+}
 \author{
 Nicholas Tierney
 }

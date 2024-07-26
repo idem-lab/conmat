@@ -8,6 +8,9 @@
 #' @author njtierney
 #' @keywords internal
 #' @name prepare_population_for_modelling
+#' @examples
+#' prepare_population_for_modelling(get_polymod_population())
+#' 
 #' @export
 prepare_population_for_modelling <- function(data, ...) {
   UseMethod("prepare_population_for_modelling")
