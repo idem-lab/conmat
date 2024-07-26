@@ -20,7 +20,7 @@ Authors@R: c(
      person(given = "Chitra",
              family = "Saraswati",
              role = c("aut"),
-             email = "chitra.saraswati@telethonkids.org.au"),
+             email = "chitra.saraswati@telethonkids.org.au",
              comment = c(ORCID = "https://orcid.org/0000-0002-8159-0414")),
       person(given = "Michael",
              family = "Lydeamore",
