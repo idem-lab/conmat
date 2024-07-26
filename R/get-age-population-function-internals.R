@@ -17,6 +17,7 @@ prepare_population_for_modelling <- function(data, ...) {
 }
 
 #' @rdname prepare_population_for_modelling
+#' @export
 prepare_population_for_modelling.conmat_population <- function(data, ...) {
   age_col <- age(data)
   pop_col <- population(data)
@@ -61,6 +62,7 @@ prepare_population_for_modelling.conmat_population <- function(data, ...) {
 #' @param age_col column of ages
 #' @param pop_col column of population,
 #' @param ... extra arguments
+#' @export
 prepare_population_for_modelling.data.frame <- function(data = data,
                                                         age_col = age_col,
                                                         pop_col = pop_col,
