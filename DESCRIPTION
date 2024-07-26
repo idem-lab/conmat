@@ -76,3 +76,5 @@ Imports:
     scales,
     english,
     waldo
+URL: https://github.com/idem-lab/conmat
+BugReports: https://github.com/idem-lab/conmat/issues
