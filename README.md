@@ -59,6 +59,12 @@ representation of community infection in many regions.
 
 ## Installation
 
+You can install the stable version from cran with:
+
+``` r
+install.packages("conmat")
+```
+
 You can install the development version with:
 
 ``` r
@@ -127,6 +133,7 @@ contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
 )
+#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, : fitted rates numerically 0 occurred
 ```
 
 This fits a generalised additive model (GAM), predicting the contact
@@ -145,9 +152,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.85 3.95 3.82 7.10 7.59 4.77  total = 32.09 
+#> 1.76 4.07 4.67 6.95 7.57 4.90  total = 32.91 
 #> 
-#> fREML score: 24429.55     rank: 55/57
+#> fREML score: 24428.78     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -201,16 +208,16 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00281
-#>  2 [0,5)          [5,10)        0.00318
-#>  3 [0,5)          [10,15)       0.00345
-#>  4 [0,5)          [15,20)       0.00571
-#>  5 [0,5)          [20,25)       0.0133 
-#>  6 [0,5)          [25,30)       0.0261 
-#>  7 [0,5)          [30,35)       0.0356 
-#>  8 [0,5)          [35,40)       0.0372 
-#>  9 [0,5)          [40,45)       0.0349 
-#> 10 [0,5)          [45,50)       0.0317 
+#>  1 [0,5)          [0,5)         0.00285
+#>  2 [0,5)          [5,10)        0.00309
+#>  3 [0,5)          [10,15)       0.00329
+#>  4 [0,5)          [15,20)       0.00554
+#>  5 [0,5)          [20,25)       0.0132 
+#>  6 [0,5)          [25,30)       0.0263 
+#>  7 [0,5)          [30,35)       0.0358 
+#>  8 [0,5)          [35,40)       0.0374 
+#>  9 [0,5)          [40,45)       0.0353 
+#> 10 [0,5)          [45,50)       0.0322 
 #> # ℹ 314 more rows
 ```
 
