@@ -1,5 +1,5 @@
 Package: conmat
-Title: Builds contact matrices using GAMs and population data
+Title: Builds Contact Matrices using GAMs and Population Data
 Version: 0.0.2.9000
 Authors@R: c(
       person(given = "Nicholas",
