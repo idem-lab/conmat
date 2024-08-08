@@ -58,18 +58,23 @@ options(tinytex.clean = FALSE)
 
 [ A summary describing the high-level functionality and purpose of the software for a diverse, non-specialist audience. ]
 
-This article introduces `conmat`, an R package which generates synthetic contact matrices.
+This article introduces `conmat`, an R package which generates synthetic contact matrices. Contact matrices describe the number of contacts between individuals, typically age groups. They are used to create models of infectious disease spread.
 
-There are currently few options for a user to generate their own synthetic contact matrices. [TODO add references/examples - e.g., socialmixr].
-Existing methods to generate synthetic contact matrices are not designed for replicability, do not have enough granularity, and not all areas of interest (countries) are included. 
+There are currently only a few options for a user to access synthetic contact matrices [@socialmixr; @prem]. Existing methods describing how to generate synthetic contact matrices from @prem are not designed for replicability, and not all areas of interest (countries) are included.
 
 [ What's different and useful about conmat? ] 
 
-Current interfaces to contact matrices are typically fixed to a given country. This means there aren't clear options for retrieving contact matrices for areas of different sizes. This is important as not all public health decisions are made at country levels - they might need to be made for specific smaller areas, such as cities and suburbs. Perhaps a smaller suburb within a country, or perhaps several countries all together. The conmat software allows users to provide their own age population data and combine this with information from an existing contact survey, such as POLYMOD (cite polymod). The software exposes model fitting and prediction separately to the user. This means users can generate synthetic contact matrices for any region they have age population information for.
+Current interfaces to contact matrices are typically fixed to a given country. There is not a designed interface for someone to access a contact matrix for a sub-region of a country, such as a state, city, or suburb. These sub-region areas are important, as many public health decisions are made at that level. 
+
+The conmat software allows users to generate their own contact matrix, by providing their own age population data and combining this with information from an existing contact survey, such as POLYMOD [@polymod]. The software exposes model fitting and prediction separately to the user. Users can fit a model based on a contact survey such as POLYMOD, then predict from this model to their own data. This means users can generate synthetic contact matrices for any region, with any contact survey, provided they have the relevant data.
 
 [ What else is covered in this paper? ] 
 
-We demonstrate a use-case for `conmat` by creating contact matrices for a state (i.e. at the sub-national level) in Australia. It is also worth noting that there is an updated analysis pipeline that uses conmat, [`syncomat`](https://github.com/idem-lab/syncomat), to generate synthetic contact matrices for 200 countries.
+We demonstrate a use-case for `conmat` by creating contact matrices for a state (i.e. at the sub-national level) in Australia. 
+
+[Need to work out where to fit in `syncomat`]
+
+It is also worth noting that there is an updated analysis pipeline that uses conmat, [`syncomat`](https://github.com/idem-lab/syncomat), to generate synthetic contact matrices for 200 countries.
 
 # Statement of need
 
@@ -77,15 +82,13 @@ We demonstrate a use-case for `conmat` by creating contact matrices for a state 
 
 #TODO - A better first sentence that encapsulates conmat use? 
 
-Infectious diseases like influenza and COVID19 spread via social contact. If we can understand patterns of contact - which people are more likely be in contact with each other - then we will be able to create models of how disease spreads. Epidemiologists and public policy makers can uses these models to make decisions to keep a population safe and healthy.
+Infectious diseases like influenza and COVID19 spread via social contact. If we can understand patterns of contact - which people are more likely be in contact with each other - then we will be able to create models of how disease spreads. Epidemiologists and public policy makers can use these models to make decisions to keep a population safe and healthy.
 
-Identifying vulnerable groups and predicting disease transmission (?)dynamics / how diseases spread are essential for informed public health decision-making. 
-Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how these diseases spread. [ Is this circular? ] / and how best to mitigate the spread of these diseases.
+Identifying vulnerable groups and predicting how diseases spread are essential for informed public health decision-making. Infectious diseases such as influenza and coronavirus spread through human-to-human interactions, or in other words, "social contact". Quantifying social contact and its patterns can provide critical insights into how these diseases spread. [ Is this circular? ] / and how best to mitigate the spread of these diseases.
 
-We can measure social contact through social contact surveys, where people describe the number and type of social contact they have. These surveys provide (?) a measure of contact rates: an empirical estimate of the number of social contacts from one age group to another and the setting of contact. For example, we might learn from a contact survey that homes have higher contact between 25-50 year olds and 0-15 year olds, whereas workplaces might have high contact within 25-60 year olds.
+Social contact surveys quantify social contact by asking people to describe the frequency and type of social contact across different settings (home, work, school, other). These surveys provide (?) a measure of contact rates: an empirical estimate of the number of social contacts from one age group to another and the setting of contact. For example, we might learn from a contact survey that homes have higher contact between 25-50 year olds and 0-15 year olds, whereas workplaces might have high contact within 25-60 year olds.
 
-These social contact surveys exist for a few countries. As an example, the "POLYMOD" study by @mossong2008 covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to estimate contact rates in other countries where this is not yet measured? We can use existing data--the contact rates obtained from contact surveys--to help us project / predict these estimates to countries or places that do not have them. These are called "synthetic contact matrices". A popular approach by @prem2017 projected contact rates from the POLYMOD study to 152 countries. This was later updated to include synthetic contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
-[ #TODO is project or predict a better word? Does it matter? ] (decision - use *predict*)
+These social contact surveys exist for a few countries. As an example, the "POLYMOD" study by @mossong2008 covered 8 European countries: Belgium, Germany, Finland, Great Britain, Italy, Luxembourg, The Netherlands, and Poland [@mossong2008]. However, what do we do when we want to estimate contact rates in other countries where this is not yet measured? We can use existing data--the contact rates obtained from contact surveys--to help us predict these estimates to countries or places that do not have them. These are called "synthetic contact matrices". A popular approach by @prem2017 predicted contact rates from the POLYMOD study to 152 countries. This was later updated to include synthetic contact matrices for 177 countries at "urban" and "rural" levels for each country [@prem2021]. 
 
 However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, some of the synthetic contact matrices did not have enough granularity; in other words, they covered areas that are too large, such as the "urban" or "rural" parts of a country. This is disadvantageous as public health groups might need to make predictions for more fine-grained areas within a country, such as a district or municipality. Third, the methodology used by Prem et al. was challenging to reuse in other contexts. Prem et al. provided the code used for their analysis, but that code was not designed for replicability and easy modification with user-defined inputs.
 
@@ -196,7 +199,7 @@ We provide functions for model fitting at various use cases. Further detail for 
     * A convenience function that fits multiple models, one for each setting. This means fitting `fit_setting_contacts()` and then `predict_setting_contacts()`. Recommended for when you have multiple settings to fit and want to predict to a given population as well.
 
 * `extrapolate_polymod()`
-    * Takes population information and projects pre-fit model from POLYMOD - used for speed when you know you want to take an already fit model from POLYMOD and just fit it to your provided population.
+    * Takes population information and predicts pre-fit model from POLYMOD - used for speed when you know you want to take an already fit model from POLYMOD and just fit it to your provided population.
 
 [ #TODO for the above it's good to explain what exactly is predicted. Otherwise it's confusing for the user to understand what each of the model outputs? ]
 
