@@ -205,8 +205,29 @@ We provide functions for model fitting at various use cases. Further detail for 
 
 # Conclusions and future directions
 
-Our future direction for `conmat` includes adding the following functionalities:
-* Create a contact matrix using a custom contact survey from another source, such as the `socialmixr` R package.
+The `conmat` software provides a flexible interface to generating synthetic contact matrices using population data and contact surveys. These contact matrices can then be used in infectious disease modelling and surveillance.
+
+## Strengths + Weaknesses
+
+The main strength of `conmat` is its interface requiring only age population data to create a synthetic contact matrix. Current approaches provide only a selection of country level contact matrices. This software can predict to arbitrary demography, such as sub-national, or simulated populations. 
+
+We provide a trained model of contact rate that is fit to the POLYMOD survey for ease of use. The software also has an interface to use other contact surveys, such as @comix. This is important as POLYMOD represents contact patterns in 8 countries in Europe, and contact patterns are known to differ across nations and cultures.
+
+The model structure (covariates?) provided in conmat was designed to represent the key features that are typically present in a contact matrix for different settings (work, school, home, other). Including other sources of information that may better describe these contact patterns, such as ..., may improve model performance. 
+
+The interface to the model formula in conmat is fixed; users cannot change the covariates of the model. This means that if there is an unusual structure in their contact data it might not be accurately captured by conmat. It was a design decision that was made to focus on the key feature of conmat: using just age population data to predict a contact matrix. 
+
+## Meaning of the work
+
+Public health decisions are often based on age specific information, which means the more accurate your age specific models are, the better those decisions are likely to be. This is the first piece of software that will provide appropriate contact matrices for a population, which means more accurate models of disease. 
+
+This work was used as a key input into several models for COVID19 in Australia and contributed directly to decisions around vaccination policy.
+
+## Unanswered questions / Future Directions
+
+Future directions for this software could include:
+
+* Create a contact matrix using a custom contact survey from another source, such as  the `socialmixr` R package.
 * Predict to any age brackets - such as monthly ages, for example, 1, 3, 6, month year old infants
 * Add ability to fit multiple contact surveys at once, e.g., POLYMOD and another dataset
 * Add ability to include known household age distributions as offsets in the 'home' setting model, in place of the whole population distribution. So compute household age matrices (like age-structured contact matrices, but for household members instead of contacts) from POLYMOD data. If we compute a different one for each household size, in the POLYMOD data (probably estimated with another GAM, to make best use of the limited data) we might be able to extrapolate household age matrices to new countries based on the distribution of household sizes.
@@ -215,9 +236,11 @@ Our future direction for `conmat` includes adding the following functionalities:
 * Move Australian centric data into its own package
 * Add documentation on specifying your own GAM model and using this workflow
 
-[ #TODO Change concluding sentence. The following is copied ad verbatim from JSS bizicount because I like it ] For now, however, we feel that our base `bizicount` package is sufficiently general to assist in estimating the models most often encountered by applied researchers.
+Software is never finished, and the software in its current format has proven useful for infectious disease modelling. In time we hope it can become more widely used and be useful for more applications in epidemiology and public health. 
 
 # References
+
+https://www.doherty.edu.au/our-work/institute-themes/viral-infectious-diseases/covid-19/covid-19-modelling/modelling
 
 # Cutting Room Floor
 
