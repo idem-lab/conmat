@@ -54,6 +54,14 @@ knitr::opts_chunk$set(comment = "#>",
 options(tinytex.clean = FALSE)
 ```
 
+```{r}
+#| label: libraries
+library(purrr)
+library(patchwork)
+library(conmat)
+library(ggplot2)
+```
+
 # Summary
 
 This article introduces `conmat`, an R package which generates synthetic contact matrices. Contact matrices describe the number of contacts between individuals, typically age groups. They are used to create models of infectious disease spread.
@@ -85,8 +93,7 @@ The `conmat` package was developed to fill the specific need of creating contact
 We will generate a contact matrix for Tasmania, a state in Australia, using a model fitted from the POLYMOD contact survey. We can get the age-stratified population data for Tasmania from the helper function `abs_age_state()`:
 
 ```{r}
-#| label: load-conmat
-library(conmat)
+#| label: abs-age
 tasmania <- abs_age_state("TAS")
 tasmania
 ```
@@ -137,12 +144,75 @@ $\text{min}(i, j)$.
 The six key features of the relationship between the age groups, represented by the six covariates, are displayed in the figure below. These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix).
 
 ```{r}
-# Show partial dep plot of the six main covariates
+#| label: partial-plots
+#| echo: FALSE
+fit_home <- polymod_setting_models$home
+age_grid <- create_age_grid(ages = 1:99)
+term_names <- extract_term_names(fit_home)
+term_var_names <- clean_term_names(term_names)
+age_predictions <- predict_individual_terms(
+  age_grid = age_grid,
+  fit = fit_home,
+  term_names = term_names,
+  term_var_names = term_var_names
+)
+
+age_predictions_all_settings <- map_dfr(
+  .x = polymod_setting_models,
+  .f = function(x) {
+    predict_individual_terms(
+      age_grid = age_grid,
+      fit = x,
+      term_names = term_names,
+      term_var_names = term_var_names
+    )
+  },
+  .id = "setting"
+)
+
+plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
+age_predictions_long <- pivot_longer_age_preds(age_predictions)
+# this is a figure we want
+plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
+  coord_equal() +
+  labs(x = "Age from",
+       y = "Age to")
+
+age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
+# this is a figure we want
+plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
+  labs(x = "Age from",
+       y = "Age to")
+# this is a figure we want
+```
+
+
+```{r}
+#| echo: FALSE
+#| fig.height: 8
+plot_all_terms_sum <- plot_age_predictions_long +
+  plot_age_predictions_sum + 
+  plot_layout(design = "
+            A
+            A
+            A
+            A
+            A
+            A
+            A
+            B
+            ") + 
+  plot_annotation(
+    tag_levels = "A"
+  )
+  
+
+plot_all_terms_sum
 ```
 
 Note that these partial dependency plots are on the log scale. 
 
-When the six covariates are added up together for each setting (in other words, each model) and exponentiated, they show the following patterns:
+When the six covariates are added up together for each setting (in other words, each model), then exponentiated, they show the following patterns:
 
 ```{r}
 # Show combined partial dep plot (i.e. sum of the partial dependencies for all six covariates) in each setting: home, school, work and other
