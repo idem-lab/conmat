@@ -13,3 +13,4 @@
 ^pkgdown$
 ^touchstone$
 ^cran-comments\.md$
+^paper$
