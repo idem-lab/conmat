@@ -198,17 +198,23 @@ pivot_longer_age_preds <- function(age_predictions) {
 #' @author njtierney
 #' @export
 gg_age_partial_pred_long <- function(age_predictions_long) {
+
+  facet_names <- data.frame(
+    pred = c("diag_prod", "diag_sum", "offdiag", "offdiag_2", "pmax", "pmin"),
+    math_name = c("i x j", "i + j", "|i - j|", "|i - j|^2", "max(i, j)", "min(i, j)")
+  )
   
   age_predictions_long %>%
+    dplyr::left_join(facet_names, by = dplyr::join_by("pred")) %>%
     ggplot(
       aes(
         x = age_from,
         y = age_to,
-        group = pred,
+        group = math_name,
         fill = value
       )
     ) +
-    facet_wrap(~pred, ncol = 1) +
+    facet_wrap(~math_name, ncol = 3) +
     geom_tile() +
     scale_fill_viridis_c(
       name = "log(contacts)"
@@ -262,6 +268,7 @@ gg_age_partial_sum <- function(age_predictions_long_sum) {
     geom_tile() +
     scale_fill_viridis_c(
       name = "Num.\ncontacts",
+      option = "magma",
       limits = c(0, 12)
     ) +
     theme_minimal()
