@@ -30,14 +30,13 @@ Description: Builds contact matrices using GAMs and population data. This packag
   Electoral Commission and Australian Bureau of Statistics) 2020.
 License: MIT + file LICENSE
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 Suggests: 
     covr,
     knitr,
     vdiffr,
     testthat (>= 3.0.0),
     rmarkdown,
-    stringr,
     future,
     spelling,
     deSolve
@@ -49,7 +48,7 @@ Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2
 Imports: 
     mgcv,
     dplyr (>= 1.0.9),
@@ -70,4 +69,5 @@ Imports:
     vctrs,
     scales,
     english,
-    waldo
+    waldo,
+    stringr
