@@ -241,9 +241,13 @@ The main strength of `conmat` is its interface requiring only age population dat
 
 We provide a trained model of contact rate that is fit to the POLYMOD survey for ease of use. The software also has an interface to use other contact surveys, such as @comix. This is important as POLYMOD represents contact patterns in 8 countries in Europe, and contact patterns are known to differ across nations and cultures.
 
+[njt: should we reference that contact patterns are known to differ?]
+
 The covariates used by conmat were designed to represent the key features that are typically present in a contact matrix for different settings (work, school, home, other). Including other sources of information that may better describe these contact patterns, such as inter-generational mixing, or differences in school ages of a local demographic, may improve model performance. 
 
-The interface to the model formula in conmat is fixed; users cannot change the covariates of the model. This means that if there is an unusual structure in their contact data it might not be accurately captured by conmat. It was a design decision that was made to focus on the key feature of conmat: using just age population data to predict a contact matrix. 
+The interface to the model formula in conmat is fixed; users cannot change the covariates of the model. This means if there is an unusual structure in their contact data it might not be accurately captured by conmat. This fixed formula was a design decision made to focus on the key feature of conmat: using just age population data to predict a contact matrix. 
+
+[njt: should we have conmat as `conmat`]
 
 Public health decisions are often based on age specific information, which means the more accurate your age specific models are, the better those decisions are likely to be. This is the first piece of software that will provide appropriate contact matrices for a population, which means more accurate models of disease. 
 
