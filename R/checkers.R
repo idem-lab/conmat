@@ -142,13 +142,16 @@ check_if_var_numeric <- function(data, var, attribute) {
   }
 }
 
-check_if_data_frame <- function(x) {
+check_if_data_frame <- function(x,
+                                arg = rlang::caller_arg(x),
+                                call = rlang::caller_env()) {
   if (!is.data.frame(x)) {
     cli::cli_abort(
-      c(
-        "x must be a {.cls data.frame}",
-        "i" = "x is {.cls {class(x)}}"
-      )
+      message = c(
+        "{.arg {arg}} must be a {.cls data.frame}",
+        "i" = "{.arg {arg}} is {.cls {class(x)}}"
+      ),
+      call = call
     )
   }
 }
