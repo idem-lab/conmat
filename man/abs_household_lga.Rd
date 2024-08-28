@@ -15,7 +15,7 @@ A data frame with 4986 rows and 6 variables:
 }
 }
 \source{
-\url{https://stat.data.abs.gov.au/Index.aspx?Datasetcode=ABS_FAMILY_PROJ}
+\url{https://www.abs.gov.au/statistics}
 (downloaded the CSV) PEOPLE > People and Communities > Household Composition > Census 2016, T23 Household Composition By Number Of Persons Usually Resident (LGA)
 }
 \usage{

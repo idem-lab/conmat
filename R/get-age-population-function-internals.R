@@ -8,12 +8,16 @@
 #' @author njtierney
 #' @keywords internal
 #' @name prepare_population_for_modelling
+#' @examples
+#' prepare_population_for_modelling(get_polymod_population())
+#' 
 #' @export
 prepare_population_for_modelling <- function(data, ...) {
   UseMethod("prepare_population_for_modelling")
 }
 
 #' @rdname prepare_population_for_modelling
+#' @export
 prepare_population_for_modelling.conmat_population <- function(data, ...) {
   age_col <- age(data)
   pop_col <- population(data)
@@ -58,6 +62,7 @@ prepare_population_for_modelling.conmat_population <- function(data, ...) {
 #' @param age_col column of ages
 #' @param pop_col column of population,
 #' @param ... extra arguments
+#' @export
 prepare_population_for_modelling.data.frame <- function(data = data,
                                                         age_col = age_col,
                                                         pop_col = pop_col,

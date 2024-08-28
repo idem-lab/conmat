@@ -19,8 +19,8 @@ A data frame with 5600 rows and 8 variables:
 }
 }
 \source{
-ABS.stat \url{https://stat.data.abs.gov.au/Index.aspx?} LABOUR >
-Employment and Unemployment > Labour force status >
+ABS.stat \url{https://www.abs.gov.au/statistics} LABOUR >
+Employment and Unemployment > Labour force, Australia >
 Census 2016, G43 labour status by age and sex (LGA)
 }
 \usage{

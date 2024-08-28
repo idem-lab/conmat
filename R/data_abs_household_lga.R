@@ -16,6 +16,6 @@
 #'   \item{n_households}{number of households with that number of people}
 #' }
 #' @note still need to clean this
-#' @source  \url{https://stat.data.abs.gov.au/Index.aspx?Datasetcode=ABS_FAMILY_PROJ}
+#' @source  \url{https://www.abs.gov.au/statistics}
 #' (downloaded the CSV) PEOPLE > People and Communities > Household Composition > Census 2016, T23 Household Composition By Number Of Persons Usually Resident (LGA)
 "abs_household_lga"

@@ -16,7 +16,8 @@
 #'  `conmat_population` object, which specifies the `age` and `population`
 #'  columns. But it can optionally be any data frame with columns,
 #'  `lower.age.limit`, and `population`.
-#' @return data frame
+#' @return data frame of `contact_data` with the number of intergenerational
+#' mixing contacts added.
 #' @examples
 #' age_min <- 10
 #' age_max <- 15
