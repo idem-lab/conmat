@@ -24,14 +24,14 @@ This vignette focuses on using other data sources with conmat.
 
 # Using `socialmixr`
 
-We can use some other functions from `socialmixr` to extract similar estimates for different populations in different countries.
+We can use some functions from `socialmixr` to extract similar estimates for different populations in different countries.
 
 We could extract some data from Italy using the [`socialmixr`](https://epiforecasts.io/socialmixr/) R package:
 
 ```{r}
 library(socialmixr)
 
-italy_2005 <- wpp_age("Italy", "2005")
+italy_2005 <- socialmixr::wpp_age("Italy", "2005")
 
 head(italy_2005)
 ```
@@ -63,6 +63,39 @@ It is important to consider the contact survey you are using to fit to your coun
 Models built on contact patterns (and thus contact surveys) different to your population of interest may give different results. For example, if a model was fitted using the POLYMOD contact survey (which is based in Europe, and thus generally does not have people from multiple generations living within the same household) for a population that has multi-generational households such as China, the results will likely be different in comparison to using a contact survey from China itself.
 
 For further discussion on this problem, refer to the paper "Apparent structural changes in contact patterns during COVID-19 were driven by survey design and long-term demographic trends" by Harris et al. (2024). https://arxiv.org/abs/2406.01639
+
+We will walk through model creation using other contact surveys in this example. Here we use China. 
+
+```{r}
+# Another way of downloading the contact survey from socialmixr
+socialmixr::list_surveys()
+
+# Once we know which survey we want, we download it from Zenodo
+china_survey <- socialmixr::get_survey("https://doi.org/10.5281/zenodo.3878754")
+
+china_imputed <- impupte_contact_data(china_survey)
+
+china_filtered <- china_imputed %>%
+    dplyr::group_by(part_id) %>%
+    dplyr::mutate(
+      missing_any_contact_age = any(is.na(cnt_age_exact)),
+      missing_any_contact_setting = any(
+        is.na(cnt_home) | 
+          is.na(cnt_work) | 
+          is.na(cnt_school) | 
+          is.na(cnt_transport) | 
+          is.na(cnt_otherplace) | 
+          is.na(cnt_otherpublicplace)
+      )
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(
+      !is.na(part_age),
+      !missing_any_contact_age,
+      !missing_any_contact_setting
+    )
+```
+
 
 # Creating a next generation matrix (NGM)
 
