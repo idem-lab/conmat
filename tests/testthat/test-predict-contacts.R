@@ -1,9 +1,11 @@
 library(dplyr)
-contact_data <- get_polymod_contact_data("all")  %>% 
-  filter(age_from <= 20,
-         age_to <= 20)
+contact_data <- get_polymod_contact_data("all") %>%
+  filter(
+    age_from <= 20,
+    age_to <= 20
+  )
 
-population <- get_polymod_population() %>% 
+population <- get_polymod_population() %>%
   filter(lower.age.limit <= 20)
 
 m_all <- fit_single_contact_model(
@@ -14,12 +16,10 @@ m_all <- fit_single_contact_model(
 age_breaks_5y <- c(seq(0, 10, by = 5), Inf)
 
 synthetic_pred <- predict_contacts(
-  model = m_all, 
+  model = m_all,
   population = population,
   age_breaks = age_breaks_5y
 )
-
-synthetic_pred
 
 test_that("predict_contacts() works", {
   expect_s3_class(synthetic_pred, "tbl_df")

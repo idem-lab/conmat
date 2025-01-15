@@ -1,42 +1,45 @@
 #' @title Aggregate predicted contacts to specified age breaks
-#' 
-#' @description Aggregates contacts rate from, say, a 1 year level into 
+#'
+#' @description Aggregates contacts rate from, say, a 1 year level into
 #'   provided age  breaks, weighting the contact rate by the specified age
-#'   population. For example, if you specify breaks as c(0, 5, 10, 15, Inf), 
-#'   it will return age groups as 0-5, 5-10, 10-15, and 15+ (Inf). Used 
+#'   population. For example, if you specify breaks as c(0, 5, 10, 15, Inf),
+#'   it will return age groups as 0-5, 5-10, 10-15, and 15+ (Inf). Used
 #'   internally within [predict_contacts()], although can be used by users.
-#'   
-#' @param predicted_contacts_1y contacts in 1 year breaks (could technically 
+#'
+#' @param predicted_contacts_1y contacts in 1 year breaks (could technically
 #'   by in other year breaks). Data must contain columns, `age_from`, `age_to`,
-#'   `contacts`, and `se_contacts`, which is the same output as 
+#'   `contacts`, and `se_contacts`, which is the same output as
 #'   [predict_contacts_1y()] - see examples below.
-#' @param population population with columns `lower.age.limit`, and 
-#'   `population`. See examples below.
+#' @param population a `conmat_population` object, which has the `age` and
+#'   `population` columns specified, or a dataframe with columns
+#'   `lower.age.limit`, and `population`. See examples below.
 #' @param age_breaks vector of ages. Default: c(seq(0, 75, by = 5), Inf)
 #' @return data frame with columns, `age_group_from`, `age_group_to`, and
 #'  `contacts`, which is the aggregated model.
 #' @examples
-#'  fairfield_abs_data <- abs_age_lga("Fairfield (C)")
-#'  
-#'  fairfield_abs_data
-#'  
-#'  # We can predict the contact rate for Fairfield from the existing contact 
-#'  # data, say, between the age groups of 0-15 in 5 year bins for school:
-#'    
+#' fairfield <- abs_age_lga("Fairfield (C)")
+#'
+#' fairfield
+#'
+#' # We can predict the contact rate for Fairfield from the existing contact
+#' # data, say, between the age groups of 0-15 in 5 year bins for school:
+#'
 #' fairfield_contacts_1 <- predict_contacts_1y(
 #'   model = polymod_setting_models$home,
-#'   population = fairfield_abs_data,
+#'   population = fairfield,
 #'   age_min = 0,
 #'   age_max = 15
 #' )
-#'  
-#'  fairfield_contacts_1
-#'  
+#'
+#' fairfield_contacts_1
+#'
 #' aggregated_fairfield <- aggregate_predicted_contacts(
 #'   predicted_contacts_1y = fairfield_contacts_1,
-#'   population = fairfield_abs_data,
-#'   age_breaks = c(0, 5, 10, 15,Inf)
-#'     )
+#'   population = fairfield,
+#'   age_breaks = c(0, 5, 10, 15, Inf)
+#' )
+#' 
+#' aggregated_fairfield
 #' @export
 aggregate_predicted_contacts <- function(predicted_contacts_1y,
                                          population,
@@ -44,7 +47,6 @@ aggregate_predicted_contacts <- function(predicted_contacts_1y,
                                            seq(0, 75, by = 5),
                                            Inf
                                          )) {
-
   # get function for 1y age populations in this country
   age_population_function <- get_age_population_function(population)
 

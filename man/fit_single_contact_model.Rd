@@ -4,15 +4,39 @@
 \alias{fit_single_contact_model}
 \title{Fit a single GAM contact model to a dataset}
 \usage{
-fit_single_contact_model(contact_data, population)
+fit_single_contact_model(
+  contact_data,
+  population,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
 \item{contact_data}{dataset with columns \code{age_to}, \code{age_from}, \code{setting},
 \code{contacts}, and \code{participants}. See \code{\link[=get_polymod_contact_data]{get_polymod_contact_data()}} for
 an example dataset - or the dataset in examples below.}
 
-\item{population}{population data, with columns \code{lower.age.limit} and
-\code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for an example.}
+\item{population}{\code{conmat_population} object, or data frame with columns
+\code{lower.age.limit} and \code{population}. See \code{\link[=get_polymod_population]{get_polymod_population()}} for
+an example.}
+
+\item{symmetrical}{whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See \code{details} for more information.}
+
+\item{school_demographics}{(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See \code{abs_avg_school} for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_school_demographics}.}
+
+\item{work_demographics}{(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+\code{abs_avg_work} for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_work_demographics}.}
 }
 \value{
 single model
@@ -25,21 +49,31 @@ and so on), for a specified setting, with specific terms being added for
 given settings. See "details" for further information.
 }
 \details{
-The model fit is a Generalised Additive Model (GAM). To help
-account for assortativity with age, where people of similar ages have
-more contact with each other, we include predictors \code{age_from}, and
-\code{age_to}. To account for intergenerational contact patterns, where
-parents and grandparents will interact with their children and grand
-children, we include a term that is the absolute difference of age_from
-and age_to. We also include the interaction of intergenerational contact
-patterns with contacts from one age with the term that is the absolute
-difference of age_from and age_to, and age_from. These terms are fit with
-a smoothing function. Specifically, the relevant code looks like this:
+The model fit is a Generalised Additive Model (GAM). We provide two
+"modes" for model fitting. Either using "symmetric" or "non-symmetric"
+model predictor terms with the logical variance "symmetrical", which is set
+to TRUE by default. We recommend using the "symmetrical" terms as it
+reflects the fact that contacts are symmetric - person A having contact
+with person B means person B has had contact with person A. We've included
+a variety of terms to account for assortativity with age, where people of
+similar ages have more contact with each other. And included terms to
+account for intergenerational contact patterns, where parents and
+grandparents will interact with their children and grand children.
+These terms are fit with a smoothing function. Specifically, the relevant
+code looks like this:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{s(age_to) + 
-  s(age_from) + 
-  s(abs(age_from - age_to)) + 
-  s(abs(age_from - age_to), age_from)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# abs(age_from - age_to)
+s(gam_age_offdiag) +
+# abs(age_from - age_to)^2
+s(gam_age_offdiag_2) +
+# abs(age_from * age_to)
+s(gam_age_diag_prod) +
+# abs(age_from + age_to)
+s(gam_age_diag_sum) +
+# pmax(age_from, age_to)
+s(gam_age_pmax) +
+# pmin(age_from, age_to)
+s(gam_age_pmin)
 }\if{html}{\out{</div>}}
 
 We also include predictors for the probability of attending school, and
@@ -61,15 +95,42 @@ This leaves us with a model that looks like so:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
   formula = contacts ~
+    # abs(age_from - age_to)
+    s(gam_age_offdiag) +
+    # abs(age_from - age_to)^2
+    s(gam_age_offdiag_2) +
+    # abs(age_from * age_to)
+    s(gam_age_diag_prod) +
+    # abs(age_from + age_to)
+    s(gam_age_diag_sum) +
+    # pmax(age_from, age_to)
+    s(gam_age_pmax) +
+    # pmin(age_from, age_to)
+    s(gam_age_pmin) +
+    school_probability +
+    work_probability +
+    offset(log_contactable_population) +
+    # or for school settings
+    # offset(log_contactable_population_school)
+    family = stats::poisson,
+  offset = log(participants),
+  data = population_data
+)
+}\if{html}{\out{</div>}}
+
+But if the term \code{symmetrical = FALSE} is used, you get:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mgcv::bam(
+  formula = contacts ~
     s(age_to) +
     s(age_from) +
     s(abs(age_from - age_to)) +
     s(abs(age_from - age_to), age_from) +
     school_probability +
-    work_probability + 
+    work_probability +
     offset(log_contactable_population) +
     # or for school settings
-    # offset(log_contactable_population_school) 
+    # offset(log_contactable_population_school)
     family = stats::poisson,
   offset = log(participants),
   data = population_data
@@ -83,12 +144,22 @@ example_population <- get_polymod_population()
 
 library(dplyr)
 
-example_contact_20 <- example_contact \%>\% 
-  filter(age_to <= 20,
-         age_from <= 20)
-         
+example_contact_20 <- example_contact \%>\%
+  filter(
+    age_to <= 20,
+    age_from <= 20
+  )
+
 my_mod <- fit_single_contact_model(
   contact_data = example_contact_20,
   population = example_population
+)
+
+# you can specify your own population data for school and work demographics
+my_mod_diff_data <- fit_single_contact_model(
+  contact_data = example_contact_20,
+  population = example_population,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
 )
 }

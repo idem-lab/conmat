@@ -1,89 +1,115 @@
-template:
-  params:
-    bootswatch: flatly
 
 home:
-  links:
-  - text: Learn more
-    href: https://github.com/njtierney/conmat
-    
-reference:
+  title: An R Package For Creating Synthetic Contact Matrices
+  description: >
+    Builds synthetic contact matrices using Generalised Additive Models,
+    the POLYMOD contact survey data, you just provide the population data. 
+    This package also incorporates data that is copyright Commonwealth of 
+    Australia (Australian Electoral Commission and Australian Bureau of 
+    Statistics) 2020.
 
-  - title: "Data"
-    desc: >
-      Data provided with the package to assist with model fitting
+authors:
+  Nick Tierney:
+    href: https://njtierney.com/
+  Nick Golding:
+    href: https://www.telethonkids.org.au/contact-us/our-people/g/nick-golding/
+  Aarathy Babu: 
+    href: https://aarathybabu.netlify.app/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  
+development:
+  mode: auto
+# 
+# navbar:
+#   left:
+#   - text: Getting Started
+#     href: articles/getting-started.html
+#   - text: Example Pipeline
+#     href: articles/example-pipeline.Rmd
+#   - text: Data Sources
+#     href: articles/data-sources.Rmd
+#   - text: Reference
+#     href: reference/index.html
+#   - text: News
+#     href: news/index.html
+
+reference:
+  - title: "Core functions"
+    desc: > 
+      These are the core functions that we intend users to interface with
+    contents:
+      - extrapolate_polymod
+      - apply_vaccination
+      - generate_ngm
+      - generate_ngm_oz
+      - autoplot
+      - autoplot-conmat
+      
+  - title: "ABS Data accessors and helpers"
+    desc: > 
+      Functions and data objects to access data from the Australian Bureau of Statistics
     contents:
       - starts_with("abs_")
-      - data_abs_lga_education
-      - data_abs_lga_work
-      - data_abs_state_education
-      - data_abs_state_work
+      - starts_with("data_abs_")
+      - starts_with("get_abs_")
+      - get_abs_household_size_distribution
+      - get_abs_per_capita_household_size
+      - abs_abbreviate_states
+      - abs_unabbreviate_states
+
+  - title: "Data and model objects"
+    desc: >
+      Functions and objects for accessing data, models, and assisting with model fitting.
+    contents:
+      - starts_with("get_polymod")
+      - age_population
+      - vaccination_effect_example_data
+      - polymod_setting_models
       - davies_age_extended
       - eyre_transmission_probabilities
       - polymod
       - setting_weights
-
-  - title: "Model fitting and predictions"
+      - age_group_lookup
+      - get_setting_transmission_matrices
+      - prem_germany_contact_matrices
+      - conmat_original_school_demographics
+      - conmat_original_work_demographics
+      - abs_avg_school
+      - abs_avg_work
+      
+  - title: "Extra functions for model fitting and prediction"
     desc: >
-      Functions for model fitting and predictions
+      Functions for model fitting and predictions - for more advanced use
     contents:
       - fit_single_contact_model
       - fit_setting_contacts
-      - adjust_household_contact_matrix
       - aggregate_predicted_contacts
       - estimate_setting_contacts
-      - extrapolate_polymod
       - predict_contacts
       - predict_contacts_1y
+      - predict_setting_contacts
       - predictions_to_matrix
       - matrix_to_predictions
-      
-  - title: "Plotting"
-    desc: >
-      For plotting the matrix outputs
-    contents:
-      - plot_matrix
-      - plot_setting_matrices
-      
-  - title: "Helper functions"
-    desc: >
-      For dealing with ABS data and other features
-    contents:
-      - abbreviate_states
-      - age_population
-      - age_group_lookup
-      - bin_widths
-      - check_lga_name
-      - check_state_name
-      - unabbreviate_states
-      
-  - title: "Helpers for adding and joining data"
-    desc: >
-      For joining data and adding other features
-    contents:
-      - add_modelling_features
-      - add_offset
-      - add_population_age_to
-      - add_school_work_participation
-      - apply_vaccination
-      - generate_ngm
       - get_age_population_function
-      - get_data_abs_age_education
-      - get_data_abs_age_work
-      - get_household_size_distribution
-      - get_per_capita_household_size
-      - get_polymod_contact_data
-      - get_polymod_per_capita_household_size
-      - get_polymod_population
-      - get_polymod_setting_data
-      - get_setting_transmission_matrices
       - per_capita_household_size
-
-navbar:
-  left:
-  - text: Getting Started
-    href: articles/getting-started.html
-  - text: Reference
-    href: reference/index.html
-  - text: News
-    href: news/index.html
+      - starts_with("add_")
+      
+  - title: "Creating and accessing information on `conmat_population` objects"
+    desc: >
+      Store and use age and population information in a dataframe for use in 
+      other functions in conmat.
+    contents:
+      - conmat_population
+      - as_conmat_population
+      - age
+      - population
+      - age_breaks
+      - raw_eigenvalue
+      - scaling
+      - new_age_matrix
+      - setting_prediction_matrix
+      - as_setting_prediction_matrix
+      - transmission_probability_matrix

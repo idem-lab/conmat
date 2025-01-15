@@ -11,9 +11,10 @@ extrapolate_polymod(
 )
 }
 \arguments{
-\item{population}{data set with information on the population of the desired
-location - containing \code{lower.age.limit} and \code{population} columns. See
-\code{get_polymod_population()} for an example of this data.}
+\item{population}{a \code{conmat_population} object, specifying the \code{age}
+and \code{population} characteristics. Or a data frame with \code{lower.age.limit}
+and \code{population} columns. See \code{get_polymod_population()} for an example
+of this data.}
 
 \item{age_breaks}{vector depicting age values. Default value is
 \code{c(seq(0, 75, by = 5), Inf)}}
@@ -22,7 +23,7 @@ location - containing \code{lower.age.limit} and \code{population} columns. See
 adjusts the household contact matrix by some per capita household size.
 To set it, provide a single number, the per capita household size. More
 information is provided below in Details. See
-\code{\link[=get_per_capita_household_size]{get_per_capita_household_size()}} function for a helper for Australian
+\code{\link[=get_abs_per_capita_household_size]{get_abs_per_capita_household_size()}} function for a helper for Australian
 data with a workflow on how to get this number.}
 }
 \value{
@@ -31,7 +32,16 @@ desired ages.
 }
 \description{
 Uses \code{\link[=estimate_setting_contacts]{estimate_setting_contacts()}} to fit a contact model on the data from
-polymod and later extrapolate on to a desired population.
+polymod and later extrapolate on to a desired population. Note that this
+function is parallelisable with \code{future}, and will be impacted by any
+\code{future} plans provided.
+}
+\details{
+Also note that since this model uses the already fit \code{polymod_setting_models}
+data, which has been fit using symmetrical model terms, if you want to
+fit a model with asymmetric model terms, you will need to go through
+the full process of building new models. You can find this detail in last
+section of the vignette "example pipeline".
 }
 \examples{
 \dontrun{
@@ -44,6 +54,5 @@ synthetic_settings_5y_fairfield <- extrapolate_polymod(
   population = abs_age_lga("Fairfield (C)")
 )
 synthetic_settings_5y_fairfield
-)
 }
 }

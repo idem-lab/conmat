@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
+[![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
+coverage](https://codecov.io/gh/idem-lab/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/idem-lab/conmat?branch=master)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact
@@ -62,14 +62,14 @@ representation of community infection in many regions.
 You can install the development version with:
 
 ``` r
-install.packages("conmat", repos = "https://njtierney.r-universe.dev")
+install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
 ```
 
 Or alternatively you can use `remotes`
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("njtierney/conmat")
+remotes::install_github("idem-lab/conmat")
 ```
 
 ## Example
@@ -98,21 +98,22 @@ the population in that age group.
 
 ``` r
 polymod_survey_data
-#> # A tibble: 21 × 2
+#> # A tibble: 21 × 2 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lower.age.limit population
 #>              <int>      <dbl>
-#>  1               0   1841420.
-#>  2               5   1950666.
-#>  3              10   2122856.
-#>  4              15   2323822.
-#>  5              20   2406141.
-#>  6              25   2377541.
-#>  7              30   2552587.
-#>  8              35   2982293.
-#>  9              40   3044427.
-#> 10              45   2828202.
-#> # … with 11 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#>  1               0   1898966.
+#>  2               5   2017632.
+#>  3              10   2192410.
+#>  4              15   2369985.
+#>  5              20   2467873.
+#>  6              25   2484327.
+#>  7              30   2649826.
+#>  8              35   3043704.
+#>  9              40   3117812.
+#> 10              45   2879510.
+#> # ℹ 11 more rows
 ```
 
 ## Predicting the contact rate
@@ -121,13 +122,11 @@ We can create a model of the contact *rate* with the function
 `fit_single_contact_model`
 
 ``` r
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
-  )
-#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
-#> fitted rates numerically 0 occurred
+)
 ```
 
 This fits a generalised additive model (GAM), predicting the contact
@@ -146,9 +145,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.26 5.40 6.32 7.90 7.38  total = 35.26 
+#> 1.85 3.95 3.82 7.10 7.59 4.77  total = 32.09 
 #> 
-#> fREML score: 23815.8     rank: 55/57
+#> fREML score: 24429.55     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -159,9 +158,11 @@ Australia (this was the initial motivation for the package, so there are
 some helper functions for Australian specific data).
 
 ``` r
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
-#> # A tibble: 18 × 4
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lga           lower.age.limit  year population
 #>    <chr>                   <dbl> <dbl>      <dbl>
 #>  1 Fairfield (C)               0  2020      12261
@@ -189,10 +190,10 @@ with the fairfield age population data, and some age breaks that we want
 to predict to.
 
 ``` r
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
-  population = fairfield_age_pop,
+  population = fairfield,
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 
@@ -200,29 +201,28 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00213
-#>  2 [0,5)          [5,10)        0.00361
-#>  3 [0,5)          [10,15)       0.00292
-#>  4 [0,5)          [15,20)       0.00419
-#>  5 [0,5)          [20,25)       0.0106 
-#>  6 [0,5)          [25,30)       0.0216 
-#>  7 [0,5)          [30,35)       0.0316 
-#>  8 [0,5)          [35,40)       0.0341 
-#>  9 [0,5)          [40,45)       0.0334 
-#> 10 [0,5)          [45,50)       0.0324 
-#> # … with 314 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#>  1 [0,5)          [0,5)         0.00281
+#>  2 [0,5)          [5,10)        0.00318
+#>  3 [0,5)          [10,15)       0.00345
+#>  4 [0,5)          [15,20)       0.00571
+#>  5 [0,5)          [20,25)       0.0133 
+#>  6 [0,5)          [25,30)       0.0261 
+#>  7 [0,5)          [30,35)       0.0356 
+#>  8 [0,5)          [35,40)       0.0372 
+#>  9 [0,5)          [40,45)       0.0349 
+#> 10 [0,5)          [45,50)       0.0317 
+#> # ℹ 314 more rows
 ```
 
 ## Plotting
 
 Let’s visualise the matrix to get a sense of the predictions with
-`plot_matrix`. First we need to transform the predictions to a matrix:
+`autoplot`. First we need to transform the predictions to a matrix:
 
 ``` r
-synthetic_contact_fairfield %>% 
-  predictions_to_matrix() %>% 
-  plot_matrix()
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
+  autoplot()
 ```
 
 <img src="man/figures/README-plot-matrix-differents-1.png" width="100%" />
@@ -254,7 +254,9 @@ so:
 
 ``` r
 abs_age_lga("Brisbane (C)")
-#> # A tibble: 18 × 4
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>    lga          lower.age.limit  year population
 #>    <chr>                  <dbl> <dbl>      <dbl>
 #>  1 Brisbane (C)               0  2020      72894
@@ -295,16 +297,16 @@ abs_lga_lookup
 #>  8 NSW      10600 Bellingen (A)        
 #>  9 NSW      10650 Berrigan (A)         
 #> 10 NSW      10750 Blacktown (C)        
-#> # … with 534 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ℹ 534 more rows
 ```
 
 Or get the information for states like so:
 
 ``` r
 abs_age_state(state_name = "QLD")
-#> # A tibble: 18 × 4
-#> # Groups:   year, state [1]
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
 #>     year state lower.age.limit population
 #>    <dbl> <chr>           <dbl>      <dbl>
 #>  1  2020 QLD                 0     314602

@@ -53,7 +53,7 @@ estimates, and accounting for vaccination, reduced mixing, and reduced
 transmissibility in work and other settings due to hygiene behaviour; and
 estimates of the relative transmissibility in household vs non-household
 settings - scaled linearly for non-household transmission and binomially for
-household transmission (so that onward onfections do not to exceed the number
+household transmission (so that onward infections do not to exceed the number
 of other household members).
 
 When using this data, ensure that you cite this package, and the original
@@ -75,11 +75,11 @@ setting_models <- fit_setting_contacts(
 age_breaks <- c(seq(0, 80, by = 5), Inf)
 
 # define a new population age distribution to predict to
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
+fairfield <- abs_age_lga("Fairfield (C)")
 
 # predict setting-specific contact matrices to a new population
 contact_matrices <- predict_setting_contacts(
-  population = fairfield_age_pop,
+  population = fairfield,
   contact_model = setting_models,
   age_breaks = age_breaks
 )

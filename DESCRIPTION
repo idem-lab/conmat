@@ -1,6 +1,6 @@
 Package: conmat
 Title: Builds contact matrices using GAMs and population data
-Version: 0.0.0.9004
+Version: 0.0.2.9000
 Authors@R: c(
       person(given = "Nicholas",
              family = "Tierney",
@@ -17,6 +17,11 @@ Authors@R: c(
              role = c("aut"),
              email = "aarathybabu907@gmail.com",
              comment = c(ORCID = "https://orcid.org/0000-0002-6982-5989")),
+      person(given = "Michael",
+             family = "Lydeamore",
+             role = "aut",
+             email = "michael.lydeamore@monash.edu",
+             comment = c(ORCID = "https://orcid.org/0000-0001-6515-827X")),
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
@@ -25,35 +30,44 @@ Description: Builds contact matrices using GAMs and population data. This packag
   Electoral Commission and Australian Bureau of Statistics) 2020.
 License: MIT + file LICENSE
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 Suggests: 
     covr,
     knitr,
+    vdiffr,
     testthat (>= 3.0.0),
     rmarkdown,
-    future
+    future,
+    spelling,
+    deSolve
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
-Language: en-GB
+Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Imports: 
     mgcv,
-    dplyr,
+    dplyr (>= 1.0.9),
+    tidyr (>= 1.2.0),
+    cli,
     stats,
-    tidyr,
-    socialmixr,
+    socialmixr (>= 0.2.0),
     ggplot2,
-    tibble,
+    tibble (>= 3.1.8),
     patchwork,
     magrittr,
-    stringr,
-    rlang,
-    glue,
+    rlang (>= 1.0.4),
+    glue (>= 1.6.2),
     readr,
     furrr,
-    purrr
+    purrr (>= 1.0.1),
+    tidyselect,
+    vctrs,
+    scales,
+    english,
+    waldo,
+    stringr

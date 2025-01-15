@@ -3,8 +3,9 @@
     Code
       abs_age_state("NSW")
     Output
-      # A tibble: 18 x 4
-      # Groups:   year, state [1]
+      # A tibble: 18 x 4 (conmat_population)
+       - age: lower.age.limit
+       - population: population
           year state lower.age.limit population
          <dbl> <chr>           <dbl>      <dbl>
        1  2020 NSW                 0     495091
@@ -30,8 +31,9 @@
 
     Code
       abs_age_state("Imaginary World")
-    Error <rlang_error>
-      The state name provided does not match states in Australia
+    Condition
+      Error in `check_state_name()`:
+      ! The state name provided does not match states in Australia
       x The state name 'Imaginary World' did not match
       i See `abs_lga_lookup` for a list of all states
 

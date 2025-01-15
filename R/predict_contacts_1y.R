@@ -37,7 +37,7 @@
 #'
 #' fairfield_contacts_1 <- predict_contacts_1y(
 #'   model = polymod_setting_models$home,
-#'   population = fairfield_abs_data,
+#'   population = fairfield,
 #'   age_min = 0,
 #'   age_max = 2
 #' )

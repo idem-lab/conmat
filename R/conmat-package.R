@@ -2,6 +2,14 @@
 #' @importFrom stats predict
 "_PACKAGE"
 
+# generics to re-export
+
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
+
+#' @import rlang
+
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
@@ -13,6 +21,8 @@ globalVariables(
   c(
     "abs_household_lga",
     "abs_pop_age_lga_2020",
+    "abs_avg_school",
+    "abs_avg_work",
     "acquisition_multiplier",
     "across",
     "age",
@@ -62,6 +72,7 @@ globalVariables(
     "missing_any_contact_setting",
     "model_per_capita_household_size",
     "modelled_pop",
+    "na.omit",
     "n_households",
     "n_people",
     "n_persons_usually_resident",
@@ -78,6 +89,7 @@ globalVariables(
     "probability",
     "ratio",
     "required_pop",
+    "school_fraction",
     "school_fraction_age_from",
     "school_fraction_age_to",
     "school_probability",
@@ -97,6 +109,7 @@ globalVariables(
     "weight",
     "weight_sum",
     "work_education",
+    "work_fraction",
     "work_fraction_age_from",
     "work_fraction_age_to",
     "year",

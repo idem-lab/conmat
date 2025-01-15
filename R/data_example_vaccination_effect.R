@@ -5,7 +5,7 @@
 #'    acquisition/susceptibility and efficacy of transmission/infectiousness
 #'    for the ordered age groups from lowest to highest of the next generation
 #'    matrix.
-#'    
+#'
 #' @format A data frame with 17 rows and 4 variables
 #' \describe{
 #'   \item{age_band}{character. age bands: 0-4,5-11, 12-15, 16-19, 20-24, etc}

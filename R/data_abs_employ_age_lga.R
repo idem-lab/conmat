@@ -8,7 +8,7 @@
 #'   \item{year}{year - 2016}
 #'   \item{state}{state - short state or territory name}
 #'   \item{lga}{local government area name}
-#'   \item{age_group}{age groups are as follows: 15-19, 20-24, 25-34, 35-44, 
+#'   \item{age_group}{age groups are as follows: 15-19, 20-24, 25-34, 35-44,
 #'   45-54, 55-64, 65-74, 75-84, 85+, total}
 #'   \item{total_employed}{total  number of people employed}
 #'   \item{total_unemployed}{total number of people unemployed}

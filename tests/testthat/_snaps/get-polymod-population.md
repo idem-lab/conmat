@@ -16,34 +16,62 @@
        8 all            0      7       12           92
        9 all            0      8        7           92
       10 all            0      9        8           92
-      # ... with 8,777 more rows
+      # i 8,777 more rows
 
 # get_polymod_population() works
 
     Code
       get_polymod_population()
     Output
-      # A tibble: 21 x 2
+      # A tibble: 21 x 2 (conmat_population)
+       - age: lower.age.limit
+       - population: population
          lower.age.limit population
                    <int>      <dbl>
-       1               0   1841420.
-       2               5   1950666.
-       3              10   2122856.
-       4              15   2323822.
-       5              20   2406141.
-       6              25   2377541.
-       7              30   2552587.
-       8              35   2982293.
-       9              40   3044427.
-      10              45   2828202.
-      # ... with 11 more rows
+       1               0   1898966.
+       2               5   2017632.
+       3              10   2192410.
+       4              15   2369985.
+       5              20   2467873.
+       6              25   2484327.
+       7              30   2649826.
+       8              35   3043704.
+       9              40   3117812.
+      10              45   2879510.
+      # i 11 more rows
 
-# get_polymod_setting_data() works
+# get_polymod_setting_data() and derivatives work
 
     Code
-      get_polymod_setting_data()
+      polymod_setting_data
+    Message
+      
+      -- Setting Data ----------------------------------------------------------------
     Output
-      $home
+      
+    Message
+      A list of <data.frame>s containing the number of contacts between ages in each
+      setting.
+    Output
+      
+    Message
+      There are 86 age breaks, ranging 0-90 years, with an irregular year interval,
+      (on average, 1.05 years)
+    Output
+      
+    Message
+      * home: a 8,787x5 <data.frame>
+      * work: a 8,787x5 <data.frame>
+      * school: a 8,787x5 <data.frame>
+      * other: a 8,787x5 <data.frame>
+      i Access each <data.frame> with `x$name`
+      i e.g., `x$home`
+
+---
+
+    Code
+      polymod_setting_data$home
+    Output
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
          <chr>      <int>  <dbl>    <int>        <int>
@@ -57,9 +85,13 @@
        8 home           0      7        9           92
        9 home           0      8        6           92
       10 home           0      9        6           92
-      # ... with 8,777 more rows
-      
-      $work
+      # i 8,777 more rows
+
+---
+
+    Code
+      polymod_setting_data$work
+    Output
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
          <chr>      <int>  <dbl>    <int>        <int>
@@ -73,9 +105,13 @@
        8 work           0      7        0           92
        9 work           0      8        0           92
       10 work           0      9        0           92
-      # ... with 8,777 more rows
-      
-      $school
+      # i 8,777 more rows
+
+---
+
+    Code
+      polymod_setting_data$school
+    Output
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
          <chr>      <int>  <dbl>    <int>        <int>
@@ -89,9 +125,13 @@
        8 school         0      7        0           92
        9 school         0      8        0           92
       10 school         0      9        0           92
-      # ... with 8,777 more rows
-      
-      $other
+      # i 8,777 more rows
+
+---
+
+    Code
+      polymod_setting_data$other
+    Output
       # A tibble: 8,787 x 5
          setting age_from age_to contacts participants
          <chr>      <int>  <dbl>    <int>        <int>
@@ -105,6 +145,5 @@
        8 other          0      7        5           92
        9 other          0      8        2           92
       10 other          0      9        3           92
-      # ... with 8,777 more rows
-      
+      # i 8,777 more rows
 

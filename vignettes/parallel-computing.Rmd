@@ -1,0 +1,72 @@
+---
+title: "Parallel Computing"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Parallel Computing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+`conmat` supports parallelisation via the [`future`](https://future.futureverse.org/) and [`furrr`](https://furrr.futureverse.org/) R packages. The functions that will be impacted by this are:
+
+* extrapolate_polymod
+* estimate_setting_contacts
+* fit_setting_contacts (called in above functions)
+* predict_setting_contacts (called in above functions)
+
+First we set the future plan, saying "multisession", with 4 workers. 
+
+```{r load-future}
+library(future)
+plan(multisession, workers = 4)
+```
+
+Then we run our code as normal to get the parallelisation! (note that you must specify the plan, otherwise it does not know how to parallelise. See the [future package documentation](https://future.futureverse.org/reference/plan.html) for more details).
+
+Note that these functions will run about 3 times faster than normal, they might still take some time. They are able to run in parallel as we are fitting a model to each setting, which is a task that is embarrasingly parallel.
+
+```{r show-off-furrr-1}
+perth <- abs_age_lga("Perth (C)")
+perth_contacts <- extrapolate_polymod(
+  population = perth
+)
+```
+
+```{r}
+settings_estimated_contacts <- estimate_setting_contacts(
+  contact_data_list = get_polymod_setting_data(),
+  survey_population = get_polymod_population(),
+  prediction_population = get_polymod_population(),
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  per_capita_household_size = NULL
+)
+```
+
+```{r}
+polymod_setting_data <- get_polymod_setting_data()
+polymod_population <- get_polymod_population()
+
+contact_model <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  population = polymod_population
+)
+```
+
+```{r}
+synthetic_settings_5y_perth <- predict_setting_contacts(
+  population = perth,
+  contact_model = contact_model,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+```

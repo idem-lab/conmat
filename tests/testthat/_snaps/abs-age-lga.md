@@ -3,7 +3,9 @@
     Code
       abs_age_lga("Albury (C)")
     Output
-      # A tibble: 18 x 4
+      # A tibble: 18 x 4 (conmat_population)
+       - age: lower.age.limit
+       - population: population
          lga        lower.age.limit  year population
          <chr>                <dbl> <dbl>      <dbl>
        1 Albury (C)               0  2020       3764
@@ -27,10 +29,7 @@
 
 # abs_age_lga() returns the right shape errors
 
-    Code
-      abs_age_lga("Imaginary World")
-    Error <rlang_error>
-      The LGA name provided does not match LGAs in Australia
-      x The lga name 'Imaginary World' did not match (it probably needs 'Imaginary World (C)' or similar
-      i See `abs_lga_lookup` for a list of all LGAs
+    The LGA name provided does not match LGAs in Australia
+    x The lga name 'Imaginary World' did not match (it probably needs 'Imaginary World (C)' or similar)
+    i See `abs_lga_lookup` for a list of all LGAs
 

@@ -4,10 +4,12 @@ library(janitor)
 library(conmat)
 
 data_lga_state <- read_csv("data-raw/2011_lga_state.csv") %>%
-  select(state = STATE_NAME_2011,
-         lga_code = LGA_CODE_2011,
-         lga = LGA_NAME_2011) %>%
-  mutate(state = abbreviate_states(state)) %>%
+  select(
+    state = STATE_NAME_2011,
+    lga_code = LGA_CODE_2011,
+    lga = LGA_NAME_2011
+  ) %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   distinct_all() %>%
   dplyr::mutate(state = replace_na(state, "Other Territories")) %>%
   mutate(
@@ -34,9 +36,13 @@ abs_census_lga_work <-
     col_types = cols(...1 = col_character()),
     skip = 8,
     n_max = 65873
-  ) %>% row_to_names(1) %>% clean_names() %>%
-  rename(age = na,
-         lga = lfsp_labour_force_status) %>%
+  ) %>%
+  row_to_names(1) %>%
+  clean_names() %>%
+  rename(
+    age = na,
+    lga = lfsp_labour_force_status
+  ) %>%
   slice(-1) %>%
   mutate(
     year = 2016,
@@ -81,12 +87,13 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
     TRUE ~ as.numeric(proportion)
   )) %>%
   select(year,
-         lga,
-         age,
-         employed_population,
-         total_population = total,
-         proportion,
-         anomaly_flag)%>%
+    lga,
+    age,
+    employed_population,
+    total_population = total,
+    proportion,
+    anomaly_flag
+  ) %>%
   mutate(
     lga = case_when(
       lga == "Botany Bay (C)" ~ "Bayside (A)",
@@ -111,7 +118,7 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
 data_lga_state <- data_lga_state %>%
   mutate(lga = case_when(
     (state == "NSW" &
-       lga == "Campbelltown (C)") ~ "Campbelltown (C) (NSW)",
+      lga == "Campbelltown (C)") ~ "Campbelltown (C) (NSW)",
     TRUE ~ as.character(lga)
   ))
 
@@ -120,7 +127,7 @@ conmat::abs_household_lga %>%
 
 lgas_in_work_census <- data_abs_census_lga_work %>%
   select(lga) %>%
-  distinct()%>%
+  distinct() %>%
   mutate(
     lga = case_when(
       lga == "Botany Bay (C)" ~ "Bayside (A)",
@@ -186,25 +193,25 @@ data_abs_census_lga_work %>%
       lga == "Kalamunda (S)" ~ "Kalamunda (C)",
       lga == "Kalgoorlie/Boulder (C)" ~ "Kalgoorlie-Boulder (C)",
       TRUE ~ lga
-    ))%>%
+    )
+  ) %>%
   mutate(lga = case_when(
     (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
     (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
     (state == "QLD" & lga == "Central Highlands (R)") ~ "Central Highlands (R) (Qld)",
     (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
     (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
-    
     (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
     (state == "TAS" & lga == "Central Coast (M)") ~ "Central Coast (M) (Tas.)",
     (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
     (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
     (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
     TRUE ~ as.character(lga)
-  ))-> data_abs_lga_work
-  # mutate(lga = case_when(
-  #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
-  #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
-  # )) 
+  )) -> data_abs_lga_work
+# mutate(lga = case_when(
+#   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
+#   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
+# ))
 
 summary(data_abs_lga_work)
 
@@ -228,6 +235,6 @@ use_data(data_abs_lga_work, compress = "xz", overwrite = TRUE)
 
 visdat::vis_miss(data_abs_lga_work)
 
-data_abs_lga_work%>%
-  filter(is.na(state))%>%
-  distinct(lga)->missing
+data_abs_lga_work %>%
+  filter(is.na(state)) %>%
+  distinct(lga) -> missing

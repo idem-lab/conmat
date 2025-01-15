@@ -63,8 +63,10 @@ abs_education_state <- abs_education_state_raw %>%
   # NOTE
   # we are collapsing 4 and under into 4
   # and 21 and older into 21
-  mutate(age = parse_number(age),
-         state = toupper(state)) %>%
+  mutate(
+    age = parse_number(age),
+    state = toupper(state)
+  ) %>%
   arrange(age) %>%
   ungroup()
 

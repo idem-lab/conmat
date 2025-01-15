@@ -25,7 +25,7 @@ abs_employ_age_lga <- abs_employment_raw %>%
   ) %>%
   clean_names() %>%
   # remove "total"
-  filter(age != "Total") %>% 
+  filter(age != "Total") %>%
   mutate(
     diff = persons - (males + females),
     age = case_when(
@@ -64,26 +64,30 @@ abs_employ_age_lga <- abs_employment_raw %>%
     labour_force_status,
     age,
     everything()
-  ) %>% 
-  filter(str_detect(labour_force_status, "Total")) %>% 
-  select(-males,
-         -females,
-         -diff) %>% 
+  ) %>%
+  filter(str_detect(labour_force_status, "Total")) %>%
+  select(
+    -males,
+    -females,
+    -diff
+  ) %>%
   pivot_wider(
     names_from = labour_force_status,
     values_from = persons
-  ) %>% 
-  clean_names() %>% 
-  mutate(state = abbreviate_states(state)) %>%
+  ) %>%
+  clean_names() %>%
+  mutate(state = abs_abbreviate_states(state)) %>%
   # drop "other territories"
-  drop_na() %>% 
-  select(-lga_code) %>% 
-  rename(age_group = age) %>% 
-  select(year,
-         state,
-         lga,
-         age_group,
-         total_employed)
+  drop_na() %>%
+  select(-lga_code) %>%
+  rename(age_group = age) %>%
+  select(
+    year,
+    state,
+    lga,
+    age_group,
+    total_employed
+  )
 
 abs_employ_age_lga %>% pull(age_group)
 
@@ -93,37 +97,37 @@ abs_employ_age_lga
 use_data(abs_employ_age_lga, overwrite = TRUE)
 
 # interpolation stuff
-abs_employ_age_lga %>% 
+abs_employ_age_lga %>%
   ungroup() %>%
   # take the lower? age group?
-  mutate(age = parse_number(as.character(age_group))) %>% 
+  mutate(age = parse_number(as.character(age_group))) %>%
   complete(
     year,
     state,
     lga,
     age = 0:100,
     fill = list(total_employed = 0)
-  ) %>% 
-  select(-age_group) %>% 
+  ) %>%
+  select(-age_group) %>%
   left_join(
     age_group_lookup,
     by = c("age" = "lower")
-  ) %>% 
-  select(-upper) %>% 
-  fill(age_group) %>% 
+  ) %>%
+  select(-upper) %>%
+  fill(age_group) %>%
   mutate(
     lower.age.limit = parse_number(as.character(age_group)),
-  ) %>% 
+  ) %>%
   select(
     state,
     lga,
     lower.age.limit,
     total_employed
-  )  %>% 
+  ) %>%
   group_by(state) %>%
-  nest() %>% 
+  nest() %>%
   mutate(age_function = map(data, get_age_population_function))
-  select(-data) %>%
+select(-data) %>%
   summarise(
     population_interpolated = map_dbl(0:100, age_function),
     age = 0:100
@@ -145,5 +149,3 @@ abs_employ_age_lga %>%
   mutate(abs_pct = (abs(diff) / persons) * 100) %>%
   pull(abs_pct) %>%
   hist()
-
-

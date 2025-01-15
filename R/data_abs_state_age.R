@@ -1,6 +1,6 @@
 #' ABS state population data for 2020
 #'
-#' Dataset containing Australian Bureau of Statistics state level population 
+#' Dataset containing Australian Bureau of Statistics state level population
 #'   data for 2020
 #'
 #' @format A data frame with 168 rows and 3 variables:

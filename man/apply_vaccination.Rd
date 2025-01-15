@@ -36,7 +36,7 @@ transmission in each age group.
 }
 \details{
 Vaccination improves a person's immunity from a disease. When a
-sizable section of the population receives vaccinations or when vaccine
+sizeable section of the population receives vaccinations or when vaccine
 coverage is sufficient enough, the likelihood that the unvaccinated
 population will contract the disease is decreased. This helps to slow
 infectious disease spread as well as lessen its severity. For this reason,
@@ -56,14 +56,44 @@ transmission reduction matrix and the next generation matrices passed to
 the function as an argument.
 }
 \examples{
-
+# examples take 20 second to run so skipping
+\dontrun{
 # example data frame with vaccine coverage, acquisition and transmission
 # efficacy of different age groups
 vaccination_effect_example_data
 
 # Generate next generation matrices
+
+perth <- abs_age_lga("Perth (C)")
+perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
+
+age_breaks_0_80 <- c(seq(0, 80, by = 5), Inf)
+
+# refit the model - note that the default if age_breaks isn't specified is
+# 0 to 75
+perth_contact_0_80 <- extrapolate_polymod(
+  perth,
+  per_capita_household_size = perth_hh,
+  age_breaks = age_breaks_0_80
+)
+
+perth_ngm_0_80 <- generate_ngm(perth_contact_0_80,
+  age_breaks = age_breaks_0_80,
+  per_capita_household_size = perth_hh,
+  R_target = 1.5
+)
+
+# In the old way we used to be able to pass age_breaks_0_80 along
+generate_ngm_oz(
+  lga_name = "Perth (C)",
+  age_breaks = age_breaks_0_80,
+  R_target = 1.5
+)
+
+
+# another way to do this using the previous method for generating NGMs
 # The number of age breaks must match the vaccination effect data
-ngm_nsw <- generate_ngm(
+ngm_nsw <- generate_ngm_oz(
   state_name = "NSW",
   age_breaks = c(seq(0, 80, by = 5), Inf),
   R_target = 1.5
@@ -77,5 +107,5 @@ ngm_nsw_vacc <- apply_vaccination(
   acquisition_col = acquisition,
   transmission_col = transmission
 )
-
+}
 }

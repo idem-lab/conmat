@@ -1,14 +1,14 @@
-# abbreviate_states() works
+# abs_abbreviate_states() works
 
     Code
-      abbreviate_states("New South Wales")
+      abs_abbreviate_states("New South Wales")
     Output
       [1] "NSW"
 
-# unabbreviate_states() works
+# abs_unabbreviate_states() works
 
     Code
-      unabbreviate_states("NSW")
+      abs_unabbreviate_states("NSW")
     Output
       [1] "New South Wales"
 

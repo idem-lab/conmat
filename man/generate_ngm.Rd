@@ -2,28 +2,69 @@
 % Please edit documentation in R/generate-ngm.R
 \name{generate_ngm}
 \alias{generate_ngm}
+\alias{generate_ngm.conmat_setting_prediction_matrix}
+\alias{generate_ngm.conmat_population}
 \title{Calculate next generation contact matrices}
 \usage{
-generate_ngm(state_name = NULL, lga_name = NULL, age_breaks, R_target)
+generate_ngm(x, age_breaks, R_target, setting_transmission_matrix, ...)
+
+\method{generate_ngm}{conmat_setting_prediction_matrix}(
+  x,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+)
+
+\method{generate_ngm}{conmat_population}(
+  x,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+)
 }
 \arguments{
-\item{state_name}{target Australian state name in abbreviated form, such
-as "QLD", "NSW", or "TAS"}
-
-\item{lga_name}{target Australian local government area (LGA) name, such
-as "Fairfield (C)".  See \code{\link[=abs_lga_lookup]{abs_lga_lookup()}} for list of lga names.}
+\item{x}{data input - could be a \code{conmat_population} (such as the output from
+\code{\link[=abs_age_lga]{abs_age_lga()}}), or a \code{conmat_setting_prediction_matrix}, which is the
+output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.}
 
 \item{age_breaks}{vector depicting age values with the highest age depicted
 as \code{Inf}. For example, c(seq(0, 85, by = 5), Inf)}
 
 \item{R_target}{target reproduction number}
+
+\item{setting_transmission_matrix}{default is NULL, which calculates the transmission
+matrix using \code{get_setting_transmission_matrices(age_breaks)}. You can
+provide your own transmission matrix, but its rows and columns must match
+the number of rows and columns, and must be a list of one matrix for each
+setting. See the output for \code{get_setting_transmission_matrices(age_breaks)}
+to get a sense of the structure. See \code{\link[=get_setting_transmission_matrices]{get_setting_transmission_matrices()}}
+for more detail.}
+
+\item{...}{extra arguments, currently not used}
+
+\item{per_capita_household_size}{default is NULL - which defaults to \code{\link[=get_polymod_per_capita_household_size]{get_polymod_per_capita_household_size()}}, which gives 3.248971}
+
+\item{lga_name}{now defunct, but capturing arguments for informative error}
+
+\item{state_name}{now defunct, but capturing arguments for informative error}
 }
 \description{
 Once infected, a person can transmit an infectious disease to
 another, creating generations of infected individuals. We can define a
 matrix describing the number of newly infected individuals in given
 categories, such as age, for consecutive generations. This matrix is
-called a "next generation matrix" (NGM).
+called a "next generation matrix" (NGM). We can generate an NGM from two
+sources - a \code{conmat_population} object (such as the output from
+\code{\link[=abs_age_lga]{abs_age_lga()}}), or a \code{conmat_setting_prediction_matrix}, which is the
+output from \code{\link[=extrapolate_polymod]{extrapolate_polymod()}} or \code{\link[=predict_setting_contacts]{predict_setting_contacts()}}.
 }
 \details{
 The NGM can be used to calculate the expected number of secondary
@@ -40,18 +81,59 @@ settings is obtained by calculating the unique, positive eigen value of
 the combination NGM. This ratio is then used to scale all the setting
 specific NGMs.
 }
+\note{
+When using a setting prediction contact matrix (such as one generated
+by \code{extrapolate_polymod}, with class \code{conmat_setting_prediction_matrix}),
+the age breaks specified in \code{generate_ngm} must be the same as the age
+breaks specified in the synthetic contact matrix, otherwise it will error
+as it is trying to multiple incompatible matrices.
+}
 \examples{
-# don't run as both together takes a long time to run
 \dontrun{
-ngm_nsw <- generate_ngm(
-  state_name = "NSW",
-  age_breaks = c(seq(0, 85, by = 5), Inf),
+perth <- abs_age_lga("Perth (C)")
+perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
+
+age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
+
+# you can also run this without `per_capita_household_size`
+perth_ngm_lga <- generate_ngm(
+  perth,
+  age_breaks = age_breaks_0_80_plus,
+  per_capita_household_size = perth_hh,
   R_target = 1.5
 )
-ngm_fairfield <- generate_ngm(
-  lga_name = "Fairfield (C)",
-  age_breaks = c(seq(0, 85, by = 5), Inf),
+
+perth_contact <- extrapolate_polymod(
+  perth,
+  per_capita_household_size = perth_hh
+)
+
+perth_ngm <- generate_ngm(
+  perth_contact,
+  age_breaks = age_breaks_0_80_plus,
   R_target = 1.5
 )
+
+# using our own transmission matrix
+new_transmission_matrix <- get_setting_transmission_matrices(
+  age_breaks = age_breaks_0_80_plus,
+  # is normally 0.5
+  asymptomatic_relative_infectiousness = 0.75
+)
+
+new_transmission_matrix
+
+perth_ngm_0_80_new_tmat <- generate_ngm(
+  perth_contact,
+  age_breaks = age_breaks_0_80_plus,
+  R_target = 1.5,
+  setting_transmission_matrix = new_transmission_matrix
+)
+}
+# examples not run as they take a long time
+\dontrun{
+perth <- abs_age_lga("Perth (C)")
+perth_contact <- extrapolate_polymod(perth)
+generate_ngm(perth_contact, age_breaks = c(seq(0, 85, by = 5), Inf))
 }
 }

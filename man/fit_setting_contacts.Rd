@@ -2,19 +2,43 @@
 % Please edit documentation in R/fit_setting_contacts.R
 \name{fit_setting_contacts}
 \alias{fit_setting_contacts}
-\title{Fit a contact model to a survey poulation}
+\title{Fit a contact model to a survey population}
 \usage{
-fit_setting_contacts(contact_data_list, population)
+fit_setting_contacts(
+  contact_data_list,
+  population,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+)
 }
 \arguments{
-\item{contact_data_list}{A list of dataframes, each containing informatio
+\item{contact_data_list}{A list of dataframes, each containing information
 on the setting (home, work, school, other), age_from, age_to,
 the number of contacts, and the number of participants. Example data
 can be retrieved with \code{\link[=get_polymod_setting_data]{get_polymod_setting_data()}}.}
 
-\item{population}{survey population data, containing columns
+\item{population}{\code{conmat_population} object or dataset with columns
 \code{lower.age.limit} and \code{population}. Example data can be retrieved with
 \code{\link[=get_polymod_population]{get_polymod_population()}}.}
+
+\item{symmetrical}{whether to enforce symmetrical terms in the model.
+Defaults to TRUE. See \code{details} of \code{fit_single_contact_model} for more
+information.}
+
+\item{school_demographics}{(optional) defaults to census average proportion
+at school. You can provide a dataset with columns, "age" (numeric), and
+"school_fraction" (0-1), if you would like to specify these
+details. See \code{abs_avg_school} for the default values. If you would like to
+use the original school demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_school_demographics}.}
+
+\item{work_demographics}{(optional) defaults to census average proportion
+employed. You can provide a dataset with columns, "age" (numeric), and
+"work_fraction", if you would like to specify these details. See
+\code{abs_avg_work} for the default values. If you would like to
+use the original work demographics used in conmat, these are provided in
+the dataset, \code{conmat_original_work_demographics}.}
 }
 \value{
 list of fitted gam models - one for each setting provided
@@ -23,13 +47,14 @@ list of fitted gam models - one for each setting provided
 fits a gam model for each setting on the survey population data & the
 setting wise contact data. The underlying method is described in more
 detail in \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}. The models can be fit in parallel,
-see the examples.
+see the examples. Note that this function is parallelisable with \code{future},
+and will be impacted by any \code{future} plans provided.
 }
 \examples{
 # These aren't being  run as they take too long to fit
 \dontrun{
 contact_model <- fit_setting_contacts(
-  contact_data_list = get_polymod_setting_data(), 
+  contact_data_list = get_polymod_setting_data(),
   population = get_polymod_population()
 )
 
@@ -43,6 +68,14 @@ polymod_population <- get_polymod_population()
 contact_model <- fit_setting_contacts(
   contact_data_list = polymod_setting_data,
   population = polymod_population
+)
+
+# you can specify your own population data for school and work demographics
+contact_model_diff_data <- fit_setting_contacts(
+  contact_data_list = polymod_setting_data,
+  population = polymod_population,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
 )
 }
 }

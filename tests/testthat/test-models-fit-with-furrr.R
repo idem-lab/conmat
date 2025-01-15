@@ -10,7 +10,8 @@ polymod_setting_short <- map(
   .f = function(x) {
     x %>% filter(age_from <= 20, age_to <= 20)
   }
-)
+) |> 
+  new_setting_data()
 
 polymod_population_short <- polymod_population %>% filter(lower.age.limit <= 20)
 
@@ -18,11 +19,28 @@ contact_model <- fit_setting_contacts(
   contact_data_list = polymod_setting_short,
   population = polymod_population_short
 )
+
 contact_model_pred <- predict_setting_contacts(
   population = polymod_population_short,
   contact_model = contact_model,
   age_breaks = c(seq(0, 20, by = 5), Inf)
 )
+
+test_that("predict_setting_contact model prints appropriately", {
+  expect_snapshot(contact_model_pred)
+})
+
+# check that you can specify your own population data for school and work demographics
+contact_model_diff_data <- fit_setting_contacts(
+  contact_data_list = polymod_setting_short,
+  population = polymod_population_short,
+  school_demographics = conmat_original_school_demographics,
+  work_demographics = conmat_original_work_demographics
+)
+
+test_that("fit_setting_contact model prints appropriately",{
+  expect_snapshot(contact_model)
+})
 
 test_that("list names are kept", {
   expect_snapshot(names(contact_model))

@@ -16,9 +16,8 @@ knitr::opts_chunk$set(
 # conmat
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/njtierney/conmat/workflows/R-CMD-check/badge.svg)](https://github.com/njtierney/conmat/actions)
-[![Codecov test coverage](https://codecov.io/gh/njtierney/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/njtierney/conmat?branch=master)
-[![R-CMD-check](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/conmat/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/idem-lab/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/idem-lab/conmat?branch=master)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
@@ -42,10 +41,10 @@ cmat <- matrix(
   dimnames = list(
     name_vec,
     name_vec
-    )
+  )
 )
 
-diag(cmat) <- c(10,11,13)
+diag(cmat) <- c(10, 11, 13)
 cmat[upper.tri(cmat)] <- 3:5
 cmat[lower.tri(cmat)] <- 3:5
 
@@ -75,14 +74,14 @@ We need methods that allow for flexibly creating synthetic contact matrices for 
 You can install the development version with:
 
 ```r
-install.packages("conmat", repos = "https://njtierney.r-universe.dev")
+install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
 ```
 
 Or alternatively you can use `remotes`
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("njtierney/conmat")
+remotes::install_github("idem-lab/conmat")
 ```
 
 ## Example
@@ -108,11 +107,11 @@ polymod_survey_data
 We can create a model of the contact *rate* with the function `fit_single_contact_model`
 
 ```{r fit-polymod}
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
-  )
+)
 ```
 
 This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.
@@ -126,17 +125,17 @@ We can use this contact model to then predict the contact rate in a new populati
 As a demonstration, let's take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).
 
 ```{r fairfield}
-fairfield_age_pop <- abs_age_lga("Fairfield (C)")
-fairfield_age_pop
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
 ```
 
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to.
 
 ```{r predict-contacts}
-set.seed(2022-09-06)
+set.seed(2022 - 09 - 06)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
-  population = fairfield_age_pop,
+  population = fairfield,
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 
@@ -145,12 +144,12 @@ synthetic_contact_fairfield
 
 ## Plotting
 
-Let's visualise the matrix to get a sense of the predictions with `plot_matrix`. First we need to transform the predictions to a matrix:
+Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
 ```{r plot-matrix-differents}
-synthetic_contact_fairfield %>% 
-  predictions_to_matrix() %>% 
-  plot_matrix()
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
+  autoplot()
 ```
 
 ## Applying the model across all settings.
@@ -187,5 +186,3 @@ The contact matrices created using this package are transposed when compared to 
 ## Code of Conduct
 
 Please note that the conmat project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
-
-

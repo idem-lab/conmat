@@ -22,5 +22,4 @@ polymod_contact <- get_polymod_contact_data()
 
 polymod_contact \%>\% add_intergenerational()
 
-
 }

@@ -6,3 +6,12 @@ inst/doc
 .DS_Store
 docs
 README_cache
+.Rprofile
+.vscode/launch.json
+.pre-commit-config.yaml
+tests/README.md
+paper/*.html
+paper/*.pdf
+paper/paper_cache/
+paper/paper_files/
+chitra/

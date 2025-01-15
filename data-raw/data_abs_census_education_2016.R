@@ -1,6 +1,6 @@
 
 
-#Data Source: Census of Population and Housing, 2016, TableBuilder
+# Data Source: Census of Population and Housing, 2016, TableBuilder
 
 library(readr)
 library(conmat)
@@ -9,7 +9,7 @@ library(tidyverse)
 
 
 
-#TYPP included
+# TYPP included
 
 data_abs_state_education <-
   read_csv("data-raw/2016_census_education.csv", skip = 8) %>%
@@ -22,16 +22,19 @@ data_abs_state_education <-
       "Cells in this table have been randomly adjusted to avoid the release of confidential data. No reliance should be placed on small cells."
     )
   ) %>%
-  
   # Institution (TYPP) stated, full-time/part-time status (STUP) not stated -> considered
-  mutate(state = abbreviate_states(`STATE (UR)`),
-         state=replace_na(state,"OT")) %>%
-  rename(age = "AGEP Age",
-         student_type = "STUP Full-Time/Part-Time Student Status") %>%
+  mutate(
+    state = abs_abbreviate_states(`STATE (UR)`),
+    state = replace_na(state, "OT")
+  ) %>%
+  rename(
+    age = "AGEP Age",
+    student_type = "STUP Full-Time/Part-Time Student Status"
+  ) %>%
   select(state, age, student_type, Count) %>%
   filter(
     student_type %in% c(
-      "Full-time student" ,
+      "Full-time student",
       "Part-time student",
       "Total",
       "Institution (TYPP) stated, full-time/part-time status (STUP) not stated"
@@ -41,9 +44,11 @@ data_abs_state_education <-
     str_detect(student_type, "TYPP") ~ "TYPP",
     TRUE ~ as.character(student_type)
   )) %>%
-  pivot_wider(names_from = student_type,
-              values_from = Count,
-              values_fn = list) %>%
+  pivot_wider(
+    names_from = student_type,
+    values_from = Count,
+    values_fn = list
+  ) %>%
   unnest(cols = everything()) %>%
   mutate(total_population = as.numeric(Total)) %>%
   mutate(
@@ -56,27 +61,30 @@ data_abs_state_education <-
   mutate(proportion = case_when(
     total_population == 0 & population_educated == 0 ~ 0,
     TRUE ~ as.numeric(proportion)
-  ))%>%
-  #filter(total_population != 0) %>%
-  select(year,
-         state,
-         age,
-         population_educated,
-         total_population,
-         proportion)
-# 
+  )) %>%
+  # filter(total_population != 0) %>%
+  select(
+    year,
+    state,
+    age,
+    population_educated,
+    total_population,
+    proportion
+  )
+#
 data_abs_state_education %>%
   ggplot(aes(x = age, y = proportion)) +
-  geom_point() + facet_wrap( ~ state)
+  geom_point() +
+  facet_wrap(~state)
 
 use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 
-# 
+#
 # data_census_education %>%
 #   filter(state == "VIC", age > 90) %>%
 #   ggplot(aes(x = age, y = proportion)) +
 #   geom_point()
-# 
+#
 # data_agg_data <- data_census_education %>%
 #   mutate(
 #     age_group = case_when(
@@ -95,9 +103,9 @@ use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 #   mutate(age_group = factor(age_group, levels = c("2-4", "5-16", "17-18", "19-25", "Other"))) %>%
 #   group_by(age_group) %>%
 #   summarise(prop = sum(population_educated) / sum(total_population))
-# 
+#
 # # TYPP not considered
-# 
+#
 # misc_census_education <-
 #   read_csv("data-raw/2016_census_education.csv", skip = 8) %>%
 #   row_to_names(row_number = 1) %>%
@@ -113,7 +121,7 @@ use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 #   # Type of Educational Institution Attending (TYPP). Definition in below link
 #   # https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/by%20Subject/2900.0~2016~Main%20Features~TYPP%20Type%20of%20Educational%20Institution%20Attending~10086
 #   # Institution (TYPP) stated, full-time/part-time status (STUP) not stated -> Not considered
-#   mutate(state = abbreviate_states(`STATE (UR)`)) %>%
+#   mutate(state = abs_abbreviate_states(`STATE (UR)`)) %>%
 #   rename(age = "AGEP Age",
 #          student_type = "STUP Full-Time/Part-Time Student Status") %>%
 #   select(state, age, student_type, Count) %>%
@@ -137,20 +145,20 @@ use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 #          population_educated,
 #          total_population,
 #          proportion)
-# 
+#
 # misc_census_education %>%
 #   ggplot(aes(x = age, y = proportion)) +
 #   geom_point() + facet_wrap( ~ state)
-# 
+#
 # misc_census_education %>%
 #   filter(state == "VIC", age > 90) %>%
 #   ggplot(aes(x = age, y = proportion)) +
 #   geom_point()
-# 
+#
 # misc_census_education %>%
 #   filter(state == "VIC", age > 90) %>%
 #   arrange(-proportion)
-# 
+#
 # misc_agg_data <- misc_census_education %>%
 #   mutate(
 #     age_group = case_when(
@@ -169,17 +177,17 @@ use_data(data_abs_state_education, compress = "xz", overwrite = TRUE)
 #   mutate(age_group = factor(age_group, levels = c("2-4", "5-16", "17-18", "19-25", "Other"))) %>%
 #   group_by(age_group) %>%
 #   summarise(prop_excluding_typp = sum(population_educated) / sum(total_population))
-# 
+#
 # misc_agg_data
-# 
+#
 # conmat_prop_data <-
 #   tibble(
 #     age_group = c("2-4", "5-16", "17-18", "19-25", "Other"),
 #     conmat_prop = c(0.5, 1, 0.5, 0.1, 0.05)
 #   )
-# 
+#
 # inner_join(conmat_prop_data,misc_agg_data) -> misc_comparison_table
-# 
+#
 # inner_join(conmat_prop_data,data_agg_data ) %>%
 #   inner_join(misc_comparison_table) -> comparison_table
 # comparison_table
