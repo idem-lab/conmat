@@ -94,7 +94,7 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
             type = "terms",
             terms = term_name) |>
       tibble::as_tibble() |>
-      setNames(glue::glue("pred_{term_var_name}"))
+      stats::setNames(glue::glue("pred_{term_var_name}"))
   }
   
   all_predicted_terms <- purrr::map2_dfc(
@@ -201,7 +201,7 @@ gg_age_partial_pred_long <- function(age_predictions_long) {
 
   facet_names <- data.frame(
     pred = c("diag_prod", "diag_sum", "offdiag", "offdiag_2", "pmax", "pmin"),
-    math_name = c("i x j", "i + j", "|i - j|", "|i - j|²", "max(i, j)", "min(i, j)")
+    math_name = c("i x j", "i + j", "|i - j|", "|i - j|^2^", "max(i, j)", "min(i, j)")
   )
   
   age_predictions_long %>%

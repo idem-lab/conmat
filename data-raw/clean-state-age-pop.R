@@ -15,7 +15,7 @@ abs_state_age <- read_excel(
   skip = 51,
   n_max = 22
 ) %>%
-  setNames(abs_state_age_names) %>%
+  stats::setNames(abs_state_age_names) %>%
   pivot_longer(
     cols = -`Age group (years)`,
     names_to = "state",
