@@ -8,7 +8,7 @@
 # Matrix dimensions are kept
 
     Code
-      map(synthetic_settings_5y_polymod, dim)
+      purrr::map(synthetic_settings_5y_polymod, dim)
     Output
       $home
       [1] 16 16

@@ -1,11 +1,11 @@
 # digitise setting- and age-specific transmission probability matrices
-source("data-raw/digitise_eyre_matrix.R")
-source("data-raw/euclidean_join.R")
-source("data-raw/get_age_group_lookup.R")
 library(dplyr)
 library(tidyr)
 library(png)
 library(fields)
+source("data-raw/digitise_eyre_matrix.R")
+source("data-raw/euclidean_join.R")
+source("data-raw/get_age_group_lookup.R")
 eyre_transmission_probabilities <- bind_rows(
   household = digitise_eyre_matrix(
     matrix_file = "data-raw/eyre_transmission_household.png"

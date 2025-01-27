@@ -38,9 +38,9 @@ clean_age_population_year <- function(data,
 
     return(age_population_location_df)
   } else {
-    return(age_population_year_df)
     # return the whole data frame or the df with only year filter
     # if year variable is present
+    return(age_population_year_df)
   }
 }
 

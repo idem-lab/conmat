@@ -40,7 +40,7 @@ test_that("Model fits", {
   expect_no_warning(
     fit_single_contact_model(
       contact_data = contact_data,
-      population = population,
+      population = population
     )
   )
 })

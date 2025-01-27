@@ -1,14 +1,15 @@
-
-
 test_that("refactored code works", {
-  expect_equal(get_abs_per_capita_household_size_state("NSW"), get_abs_per_capita_household_size("NSW"))
+  expect_identical(
+    get_abs_per_capita_household_size_state("NSW"), 
+    get_abs_per_capita_household_size("NSW")
+    )
 })
 
 test_that("refactored code works with lga", {
-  expect_equal(
+  expect_identical(
     get_abs_per_capita_household_size_lga(unique(abs_lga_lookup$lga)[1]),
     get_abs_per_capita_household_size(lga = unique(abs_lga_lookup$lga)[1])
-  )
+    )
 })
 
 

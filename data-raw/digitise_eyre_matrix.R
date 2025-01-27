@@ -87,7 +87,7 @@ digitise_eyre_matrix <- function(matrix_file,
   # extrapolate to all ages, filling in the value for the nearest age pair
   matrix_vals_prob_1y_all <- expand_grid(
     case_age = age_breaks_1y,
-    contact_age = age_breaks_1y,
+    contact_age = age_breaks_1y
   ) %>%
     euclidean_join(
       matrix_vals_prob_1y
@@ -111,7 +111,7 @@ digitise_eyre_matrix <- function(matrix_file,
         -case_age
       ) %>%
       rename(
-        case_age = age_group,
+        case_age = age_group
       ) %>%
       left_join(
         age_group_lookup,
