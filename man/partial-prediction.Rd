@@ -2,25 +2,25 @@
 % Please edit documentation in R/partial-prediction-helpers.R
 \name{partial-prediction}
 \alias{partial-prediction}
-\alias{conmat_partial_effects}
-\alias{conmat_partial_effects.contact_model}
-\alias{conmat_partial_effects.setting_contact_model}
-\alias{conmat_partial_effects_sum}
-\alias{conmat_partial_effects_sum.contact_model}
-\alias{conmat_partial_effects_sum.setting_contact_model}
+\alias{partial_effects}
+\alias{partial_effects.contact_model}
+\alias{partial_effects.setting_contact_model}
+\alias{partial_effects_sum}
+\alias{partial_effects_sum.contact_model}
+\alias{partial_effects_sum.setting_contact_model}
 \title{Helper functions to create partial predictive plots.}
 \usage{
-conmat_partial_effects(model, ages, ...)
+partial_effects(model, ages, ...)
 
-\method{conmat_partial_effects}{contact_model}(model, ages, ...)
+\method{partial_effects}{contact_model}(model, ages, ...)
 
-\method{conmat_partial_effects}{setting_contact_model}(model, ages, ...)
+\method{partial_effects}{setting_contact_model}(model, ages, ...)
 
-conmat_partial_effects_sum(model, ages, ...)
+partial_effects_sum(model, ages, ...)
 
-\method{conmat_partial_effects_sum}{contact_model}(model, ages, ...)
+\method{partial_effects_sum}{contact_model}(model, ages, ...)
 
-\method{conmat_partial_effects_sum}{setting_contact_model}(model, ages, ...)
+\method{partial_effects_sum}{setting_contact_model}(model, ages, ...)
 }
 \arguments{
 \item{model}{either a model fit with}
@@ -75,14 +75,30 @@ plots for other settings (school, work and other) show patterns that
 correspond with real-life situations.
 }
 \examples{
-fit_home_partials <- conmat_partial_effects(
+# just partial effects for a single setting
+partials_home <- partial_effects(
   polymod_setting_models$home, 
   ages = 1:99
   )
-fit_setting_partials <- conmat_partial_effects(
+autoplot(partials_home)
+# partial effects for all settings
+partials_setting <- partial_effects(
   polymod_setting_models, 
   ages = 1:99
   )
-autoplot(fit_home_partials)
-autoplot(fit_setting_partials)
+autoplot(partials_setting)
+
+# Summed up partial effects (y-hat) for a single setting
+partials_summed_home <- partial_effects_sum(
+    polymod_setting_models$home,
+    ages = 1:99
+  )
+  
+autoplot(partials_summed_home)
+# summed up partial effects (y-hat) for all settings
+partials_summed_setting <- partial_effects_sum(
+    polymod_setting_models,
+    ages = 1:99
+  )
+autoplot(partials_summed_setting)
 }

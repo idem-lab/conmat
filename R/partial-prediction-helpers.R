@@ -49,23 +49,39 @@
 #'   combination of ages. Contains transformed coefficients from ages.
 #' @name partial-prediction
 #' @examples
-#' fit_home_partials <- conmat_partial_effects(
+#' # just partial effects for a single setting
+#' partials_home <- partial_effects(
 #'   polymod_setting_models$home, 
 #'   ages = 1:99
 #'   )
-#' fit_setting_partials <- conmat_partial_effects(
+#' autoplot(partials_home)
+#' # partial effects for all settings
+#' partials_setting <- partial_effects(
 #'   polymod_setting_models, 
 #'   ages = 1:99
 #'   )
-#' autoplot(fit_home_partials)
-#' autoplot(fit_setting_partials)
-conmat_partial_effects <- function(model, ages, ...){
-  UseMethod("conmat_partial_effects")
+#' autoplot(partials_setting)
+#' 
+#' # Summed up partial effects (y-hat) for a single setting
+#' partials_summed_home <- partial_effects_sum(
+#'     polymod_setting_models$home,
+#'     ages = 1:99
+#'   )
+#'   
+#' autoplot(partials_summed_home)
+#' # summed up partial effects (y-hat) for all settings
+#' partials_summed_setting <- partial_effects_sum(
+#'     polymod_setting_models,
+#'     ages = 1:99
+#'   )
+#' autoplot(partials_summed_setting)
+partial_effects <- function(model, ages, ...){
+  UseMethod("partial_effects")
 }
 
 #' @rdname partial-prediction
 #' @export
-conmat_partial_effects.contact_model <- function(model, ages, ...){
+partial_effects.contact_model <- function(model, ages, ...){
   
   age_grid <- create_age_grid(ages = ages)
   term_names <- extract_term_names(model)
@@ -73,7 +89,7 @@ conmat_partial_effects.contact_model <- function(model, ages, ...){
   
   predict_individual_terms(
     age_grid = age_grid,
-    fit = model,
+    model = model,
     term_names = term_names,
     term_var_names = term_var_names
   )
@@ -86,20 +102,26 @@ conmat_partial_effects.contact_model <- function(model, ages, ...){
   )
 }
 
+
 #' @rdname partial-prediction
 #' @export
-conmat_partial_effects.setting_contact_model <- function(model, ages, ...){
-  
+partial_effects.setting_contact_model <- function(model, ages, ...){
   age_grid <- create_age_grid(ages = ages)
-  term_names <- extract_term_names(model)
-  term_var_names <- clean_term_names(term_names)
+  term_names <- map(model, extract_term_names)
+  term_var_names <- map(term_names, clean_term_names)
   
-  age_predictions_all_settings <- purrr::map_dfr(
-    .x = model,
-    .f = function(x) {
+  age_predictions_all_settings <- purrr::pmap_dfr(
+    .l = list(
+      model = model,
+      term_names = term_names,
+      term_var_names = term_var_names
+    ),
+    .f = function(model,
+                  term_names,
+                  term_var_names) {
       predict_individual_terms(
         age_grid = age_grid,
-        fit = x,
+        model = model,
         term_names = term_names,
         term_var_names = term_var_names
       )
@@ -116,14 +138,14 @@ conmat_partial_effects.setting_contact_model <- function(model, ages, ...){
 
 #' @rdname partial-prediction
 #' @export
-conmat_partial_effects_sum <- function(model, ages, ...){
-  UseMethod("conmat_partial_effects_sum")
+partial_effects_sum <- function(model, ages, ...){
+  UseMethod("partial_effects_sum")
 }
 
 #' @rdname partial-prediction
 #' @export
-conmat_partial_effects_sum.contact_model <- function(model, ages, ...){
-  age_predictions_long <- conmat_partial_effects(model, ages)
+partial_effects_sum.contact_model <- function(model, ages, ...){
+  age_predictions_long <- partial_effects(model, ages)
   partial_sums <- add_age_partial_sum(age_predictions_long)
   structure(
     partial_sums,
@@ -140,8 +162,8 @@ autoplot.partial_predictions_sum <- function(object, ...){
 
 #' @rdname partial-prediction
 #' @export
-conmat_partial_effects_sum.setting_contact_model <- function(model, ages, ...){
-  setting_age_predictions_long <- conmat_partial_effects(model, ages)
+partial_effects_sum.setting_contact_model <- function(model, ages, ...){
+  setting_age_predictions_long <- partial_effects(model, ages)
 
   setting_partial_sums <- purrr::map_dfr(
     .x = setting_age_predictions_long,
@@ -207,15 +229,15 @@ create_age_grid <- function(ages) {
 
 #' Helper function to extract term names out of GAM fitted model object.
 #' 
-#' @param fit fitted object for one single conmat model setting. E.g., the 
+#' @param model fitted model object for one single conmat model setting. E.g., the 
 #'   home setting.
 #' @return character vector of term names
 #' @noRd
 #' @examples
 #' extract_term_names(polymod_setting_models$home)
-extract_term_names <- function(fit) {
+extract_term_names <- function(model) {
   
-  coef_names <- names(fit$coefficients) |>
+  coef_names <- names(model$coefficients) |>
     stringr::str_remove_all("\\.[^.]*$") |>
     unique() |>
     stringr::str_subset("^s\\(")
@@ -240,7 +262,7 @@ clean_term_names <- function(term_names) {
 
 #' 
 #' @param age_grid grid of ages from [create_age_grid()]
-#' @param fit model fitted object from conmat, e.g., 
+#' @param model model fitted object from conmat, e.g., 
 #'   `polymod_setting_models$home`.
 #' @param term_names terms from model extracted with [extract_term_names()].
 #' @param term_var_names Cleaned up term names from model used with 
@@ -248,21 +270,10 @@ clean_term_names <- function(term_names) {
 #' @return Data frame containing predicted values added to output of 
 #'   [create_age_grid()].
 #' @noRd
-#' @examples
-#' fit_home <- polymod_setting_models$home
-#' age_grid <- create_age_grid(ages = 1:99)
-#' term_names <- extract_term_names(fit_home)
-#' term_var_names <- clean_term_names(term_names)
-#' age_predictions <- predict_individual_terms(
-#'   age_grid = age_grid,
-#'   fit = fit_home,
-#'   term_names = term_names,
-#'   term_var_names = term_var_names
-#' )
-predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) {
+predict_individual_terms <- function(age_grid, model, term_names, term_var_names) {
   
-  predicted_term <- function(age_grid, fit, term_name, term_var_name){
-    predict(object = fit,
+  predicted_term <- function(age_grid, model, term_name, term_var_name){
+    predict(object = model,
             newdata = age_grid,
             type = "terms",
             terms = term_name) |>
@@ -275,7 +286,7 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
     .y = term_var_names,
     .f = function(.x, .y){
       predicted_term(age_grid = age_grid,
-                     fit = fit,
+                     model = model,
                      term_name = .x,
                      term_var_name = .y)
     }
@@ -291,35 +302,6 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
 #' @return ggplot objects
 #' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap labs
 #' @noRd
-#' @examples
-#' library(purrr)
-#' fit_home <- polymod_setting_models$home
-#' age_grid <- create_age_grid(ages = 1:99)
-#' term_names <- extract_term_names(fit_home)
-#' term_var_names <- clean_term_names(term_names)
-#' age_predictions <- predict_individual_terms(
-#'   age_grid = age_grid,
-#'   fit = fit_home,
-#'   term_names = term_names,
-#'   term_var_names = term_var_names
-#' )
-#' 
-#' age_predictions_all_settings <- map_dfr(
-#'   .x = polymod_setting_models,
-#'   .f = function(x) {
-#'     predict_individual_terms(
-#'       age_grid = age_grid,
-#'       fit = x,
-#'       term_names = term_names,
-#'       term_var_names = term_var_names
-#'     )
-#'   },
-#'   .id = "setting"
-#' )
-#' 
-#' plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-#' 
-#' plot_age_term_settings
 gg_age_terms_settings <- function(age_predictions_all_settings) {
   
   pred_all_setting_longer <- age_predictions_all_settings |>
