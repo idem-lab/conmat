@@ -110,6 +110,8 @@ reference:
       - raw_eigenvalue
       - scaling
       - new_age_matrix
+      - new_ngm_setting_matrix
+      - new_setting_data
       - setting_prediction_matrix
       - as_setting_prediction_matrix
       - transmission_probability_matrix
