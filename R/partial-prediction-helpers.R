@@ -46,8 +46,8 @@
 #' @param ages vector of integer ages
 #' @return data frame with 20 columns plus n rows based on expand.grid 
 #'   combination of ages. Contains transformed coefficients from ages.
-#' @export
 #' @name partial-prediction
+#' @noRd
 #' @examples
 #' fit_home <- polymod_setting_models$home
 #' age_grid <- create_age_grid(ages = 1:99)
@@ -140,8 +140,7 @@ create_age_grid <- function(ages) {
 #' @param fit fitted object for one single conmat model setting. E.g., the 
 #'   home setting.
 #' @return character vector of term names
-#' @inheritSection partial-prediction details
-#' @export
+#' @noRd
 #' @examples
 #' extract_term_names(polymod_setting_models$home)
 extract_term_names <- function(fit) {
@@ -157,9 +156,8 @@ extract_term_names <- function(fit) {
 
 #' Clean up GAM term names for use in plotting
 #' @param term_names character vector of model term names (e.g., 's(offdiag)').
-#' @inheritSection partial-prediction details
 #' @return names like "offdiag", instead of "s(offdiag)"
-#' @export
+#' @noRd
 #' @examples
 #' extract_term_names(polymod_setting_models$home) |> clean_term_names()
 clean_term_names <- function(term_names) {
@@ -179,8 +177,7 @@ clean_term_names <- function(term_names) {
 #'   [clean_term_names()].
 #' @return Data frame containing predicted values added to output of 
 #'   [create_age_grid()].
-#' @inheritSection partial-prediction details
-#' @export
+#' @noRd
 #' @examples
 #' fit_home <- polymod_setting_models$home
 #' age_grid <- create_age_grid(ages = 1:99)
@@ -221,10 +218,9 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
 #' Plot all age terms across all settings
 #' @param age_predictions_all_settings output from mapped 
 #'   `predict_individual_terms`.
-#' @rdname partial-prediction
-#' @return
+#' @return ggplot objects
 #' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap
-#' @export
+#' @noRd
 #' @examples
 #' library(purrr)
 #' fit_home <- polymod_setting_models$home
@@ -278,7 +274,8 @@ gg_age_terms_settings <- function(age_predictions_all_settings) {
       geom_tile() +
       facet_grid(setting~pred,
                  switch = "y") +
-      coord_fixed()
+      coord_fixed() +
+      labs(fill = place)
     
   }
   
@@ -301,10 +298,9 @@ gg_age_terms_settings <- function(age_predictions_all_settings) {
   
 }
 
-#' @param age_predictions
-#' @rdname partial-prediction
-#' @return
-#' @export
+#' @param age_predictions age predictions
+#' @return data frame
+#' @noRd
 pivot_longer_age_preds <- function(age_predictions) {
   age_predictions |>
     tidyr::pivot_longer(
@@ -315,10 +311,9 @@ pivot_longer_age_preds <- function(age_predictions) {
     )
 }
 
-#' @param age_predictions_long
-#' @rdname partial-prediction
-#' @return
-#' @export
+#' @param age_predictions_long age prediction data frame
+#' @return ggplot object
+#' @noRd
 gg_age_partial_pred_long <- function(age_predictions_long) {
 
   facet_names <- data.frame(
@@ -345,10 +340,9 @@ gg_age_partial_pred_long <- function(age_predictions_long) {
   
 }
 
-#' @param age_predictions_long
-#' @return
-#' @rdname partial-prediction
-#' @export
+#' @param age_predictions_long age prediction data
+#' @return data.frame
+#' @noRd
 add_age_partial_sum <- function(age_predictions_long) {
   
   age_partial_sum <- age_predictions_long |>
@@ -363,10 +357,9 @@ add_age_partial_sum <- function(age_predictions_long) {
   
 }
 
-#' @param age_predictions_long_sum
-#' @return
-#' @rdname partial-prediction
-#' @export
+#' @param age_predictions_long_sum age prediction data
+#' @return ggplot object
+#' @noRd
 gg_age_partial_sum <- function(age_predictions_long_sum) {
   
   ggplot(
