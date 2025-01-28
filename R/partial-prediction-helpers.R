@@ -219,7 +219,7 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
 #' @param age_predictions_all_settings output from mapped 
 #'   `predict_individual_terms`.
 #' @return ggplot objects
-#' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap
+#' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap labs
 #' @noRd
 #' @examples
 #' library(purrr)
