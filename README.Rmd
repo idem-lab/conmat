@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/idem-lab/conmat/branch/master/graph/badge.svg)](https://codecov.io/gh/idem-lab/conmat?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/idem-lab/conmat/graph/badge.svg)](https://app.codecov.io/gh/idem-lab/conmat)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
@@ -70,6 +70,12 @@ Existing methods only provide outputs of the contact matrices for each country, 
 We need methods that allow for flexibly creating synthetic contact matrices for a specified age population, as the age population distribution of many countries (e.g., Australia), are quite heterogeneous, and assuming it is homogeneous would result in inaccurate representation of community infection in many regions.
 
 ## Installation
+
+You can install the stable version from CRAN with:
+
+```r
+install.packages("conmat")
+```
 
 You can install the development version with:
 

@@ -38,9 +38,9 @@ clean_age_population_year <- function(data,
 
     return(age_population_location_df)
   } else {
-    return(age_population_year_df)
     # return the whole data frame or the df with only year filter
     # if year variable is present
+    return(age_population_year_df)
   }
 }
 
@@ -226,25 +226,6 @@ ungroup_age_breaks <- function(x) {
     unique() %>%
     sort()
 }
-#
-# group_age_breaks(1:10, pad_inf = FALSE)
-# group_age_breaks(1:10, pad_inf = FALSE) %>% ungroup_age_breaks()
-# group_age_breaks(1:10, pad_inf = TRUE)
-# group_age_breaks(1:10, pad_inf = TRUE) %>% ungroup_age_breaks()
-#
-# group_age_breaks(c(1:10, Inf), pad_inf = TRUE)
-# group_age_breaks(c(1:10, Inf), pad_inf = TRUE) %>% ungroup_age_breaks()
-#
-# group_age_breaks(c(1:10, Inf), pad_inf = FALSE)
-# group_age_breaks(c(1:10, Inf), pad_inf = FALSE) %>% ungroup_age_breaks()
-#
-# group_age_breaks(age_breaks_0_80_plus)
-# group_age_breaks(1:10, pad_inf = FALSE)
-# group_age_breaks(1:9, pad_inf = FALSE)
-# group_age_breaks(1:8, pad_inf = FALSE)
-# group_age_breaks(1:10)
-# group_age_breaks(1:9)
-# group_age_breaks(1:8)
 
 all_matrix <- function(x) {
   all(vapply(
@@ -299,8 +280,6 @@ set_age_breaks_matrices <- function(list_matrix, age_breaks) {
     age_breaks
   )
 }
-
-# age_breaks(perth_contact_0_75)
 
 remove_inf <- function(x) {
   x_inf <- is.infinite(x)

@@ -116,7 +116,7 @@ abs_employ_age_lga %>%
   select(-upper) %>%
   fill(age_group) %>%
   mutate(
-    lower.age.limit = parse_number(as.character(age_group)),
+    lower.age.limit = parse_number(as.character(age_group))
   ) %>%
   select(
     state,

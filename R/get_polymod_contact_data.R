@@ -91,7 +91,7 @@ get_polymod_contact_data <- function(setting = c("all", "home", "work", "school"
   contact_data_filtered <- contact_data_imputed %>%
     dplyr::group_by(part_id) %>%
     dplyr::mutate(
-      missing_any_contact_age = any(is.na(cnt_age)),
+      missing_any_contact_age = anyNA(cnt_age),
       missing_any_contact_setting = any(
         is.na(cnt_home) |
           is.na(cnt_work) |

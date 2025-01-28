@@ -16,7 +16,7 @@
 #'   \item{total}{sum of these totals...or thereabouts??}
 #' }
 #' @note still need to finalise these columns
-#' @source ABS.stat \url{https://stat.data.abs.gov.au/Index.aspx?} LABOUR >
-#'   Employment and Unemployment > Labour force status >
+#' @source ABS.stat \url{https://www.abs.gov.au/statistics} LABOUR >
+#'   Employment and Unemployment > Labour force, Australia >
 #'   Census 2016, G43 labour status by age and sex (LGA)
 "abs_employ_age_lga"

@@ -56,6 +56,9 @@ for more detail.}
 
 \item{state_name}{now defunct, but capturing arguments for informative error}
 }
+\value{
+A next generation matrix, containing the rates of contact between two age groups.
+}
 \description{
 Once infected, a person can transmit an infectious disease to
 another, creating generations of infected individuals. We can define a

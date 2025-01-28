@@ -52,9 +52,8 @@ abs_census_lga_work <-
     total = as.numeric(total)
   )
 
-for (i in 1:nrow(abs_census_lga_work))
-{
-  if (is.na(abs_census_lga_work$age[i]) == TRUE) {
+for (i in seq_len(nrow(abs_census_lga_work))){
+  if (is.na(abs_census_lga_work$age[i])) {
     abs_census_lga_work$age[i] <- abs_census_lga_work$age[i - 1]
   } else {
     abs_census_lga_work$age[i] <- abs_census_lga_work$age[i]
@@ -122,8 +121,8 @@ data_lga_state <- data_lga_state %>%
     TRUE ~ as.character(lga)
   ))
 
-conmat::abs_household_lga %>%
-  distinct(lga, state) -> conmat_abs_household_data
+conmat_abs_household_data <- conmat::abs_household_lga %>%
+  distinct(lga, state)
 
 lgas_in_work_census <- data_abs_census_lga_work %>%
   select(lga) %>%
@@ -174,7 +173,7 @@ lga_state <- lgas_in_work_census %>%
 #     "\\(Vic\\.\\)|\\(ACT\\)|\\(NSW\\)|\\(NT\\)|\\(OT\\)|\\(Qld\\)|\\(SA\\)|\\(Tas\\.\\)|\\(WA\\)"
 #   )
 
-data_abs_census_lga_work %>%
+data_abs_lga_work <- data_abs_census_lga_work %>%
   left_join(lga_state, by = "lga") %>%
   relocate(year, state, everything()) %>%
   filter(!str_detect(lga, "No usual address")) %>%
@@ -207,7 +206,7 @@ data_abs_census_lga_work %>%
     (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
     (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
     TRUE ~ as.character(lga)
-  )) -> data_abs_lga_work
+  ))
 # mutate(lga = case_when(
 #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
 #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
@@ -216,7 +215,8 @@ data_abs_census_lga_work %>%
 summary(data_abs_lga_work)
 
 data_abs_lga_work %>%
-  filter(anomaly_flag == FALSE) %>%
+  # filter(anomaly_flag == FALSE) %>%
+  filter(!anomaly_flag) %>%
   ggplot(aes(x = age, y = proportion)) +
   geom_point()
 
@@ -235,6 +235,6 @@ use_data(data_abs_lga_work, compress = "xz", overwrite = TRUE)
 
 visdat::vis_miss(data_abs_lga_work)
 
-data_abs_lga_work %>%
+missing <- data_abs_lga_work %>%
   filter(is.na(state)) %>%
-  distinct(lga) -> missing
+  distinct(lga)

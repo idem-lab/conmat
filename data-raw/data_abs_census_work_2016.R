@@ -79,7 +79,7 @@ work_fraction <- ~ dplyr::case_when(
   TRUE ~ 0.05
 )
 
-data_abs_state_work_2016 %>%
+work_fraction <- data_abs_state_work_2016 %>%
   mutate(age_group = case_when(
     # child labour
     age %in% 12:19 ~ "12-19",
@@ -93,7 +93,7 @@ data_abs_state_work_2016 %>%
     TRUE ~ "Other"
   )) %>%
   group_by(age_group) %>%
-  summarise(work_fraction = sum(employed_population) / sum(total_population)) -> work_fraction
+  summarise(work_fraction = sum(employed_population) / sum(total_population))
 
 
 conmat_work_prop_data <-
@@ -102,5 +102,10 @@ conmat_work_prop_data <-
     conmat_work_prop = c(0.2, 0.7, 1, 0.7, 0.05)
   )
 
-inner_join(conmat_work_prop_data, work_fraction, by = "age_group") -> work_fraction_comparison_table
+work_fraction_comparison_table <- inner_join(
+  conmat_work_prop_data, 
+  work_fraction, 
+  by = "age_group"
+  )
+
 work_fraction_comparison_table

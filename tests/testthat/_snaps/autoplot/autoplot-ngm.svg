@@ -48,6 +48,33 @@
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
+  <clipPath id='cpMzYwLjAwfDY3MS44MHwyMi43OHwyODguOTk='>
+    <rect x='360.00' y='22.78' width='311.80' height='266.20' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzYwLjAwfDY3MS44MHwyMi43OHwyODguOTk=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNDguMjB8MzYwLjAwfDI4OC45OXw1NzAuNTI='>
+    <rect x='48.20' y='288.99' width='311.80' height='281.54' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNDguMjB8MzYwLjAwfDI4OC45OXw1NzAuNTI=)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpMzYwLjAwfDY3MS44MHwyODguOTl8NTcwLjUy'>
+    <rect x='360.00' y='288.99' width='311.80' height='281.54' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzYwLjAwfDY3MS44MHwyODguOTl8NTcwLjUy)'>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
   <clipPath id='cpODguMjJ8MjkxLjYyfDQ1LjU3fDI0OC45Nw=='>
     <rect x='88.22' y='45.57' width='203.40' height='203.40' />
   </clipPath>
@@ -103,15 +130,6 @@
 <text x='88.22' y='37.35' style='font-size: 13.20px; font-family: sans;' textLength='33.03px' lengthAdjust='spacingAndGlyphs'>home</text>
 </g>
 <defs>
-  <clipPath id='cpMzYwLjAwfDY3MS44MHwyMi43OHwyODguOTk='>
-    <rect x='360.00' y='22.78' width='311.80' height='266.20' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzYwLjAwfDY3MS44MHwyMi43OHwyODguOTk=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-</g>
-<defs>
   <clipPath id='cpNDAwLjAxfDYwMy40Mnw0NS41N3wyNDguOTc='>
     <rect x='400.01' y='45.57' width='203.40' height='203.40' />
   </clipPath>
@@ -162,15 +180,6 @@
 <text x='642.62' y='152.83' style='font-size: 8.80px; font-family: sans;' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>0.1</text>
 <text x='642.62' y='129.98' style='font-size: 8.80px; font-family: sans;' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>0.2</text>
 <text x='400.01' y='37.35' style='font-size: 13.20px; font-family: sans;' textLength='38.17px' lengthAdjust='spacingAndGlyphs'>school</text>
-</g>
-<defs>
-  <clipPath id='cpNDguMjB8MzYwLjAwfDI4OC45OXw1NzAuNTI='>
-    <rect x='48.20' y='288.99' width='311.80' height='281.54' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpNDguMjB8MzYwLjAwfDI4OC45OXw1NzAuNTI=)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpODguMjJ8MjkxLjYyfDMyNy4xMHw1MzAuNTE='>
@@ -229,15 +238,6 @@
 <text x='330.82' y='414.20' style='font-size: 8.80px; font-family: sans;' textLength='17.13px' lengthAdjust='spacingAndGlyphs'>0.15</text>
 <text x='330.82' y='403.37' style='font-size: 8.80px; font-family: sans;' textLength='17.13px' lengthAdjust='spacingAndGlyphs'>0.20</text>
 <text x='88.22' y='303.55' style='font-size: 13.20px; font-family: sans;' textLength='27.88px' lengthAdjust='spacingAndGlyphs'>work</text>
-</g>
-<defs>
-  <clipPath id='cpMzYwLjAwfDY3MS44MHwyODguOTl8NTcwLjUy'>
-    <rect x='360.00' y='288.99' width='311.80' height='281.54' />
-  </clipPath>
-</defs>
-<g clip-path='url(#cpMzYwLjAwfDY3MS44MHwyODguOTl8NTcwLjUy)'>
-</g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
 <defs>
   <clipPath id='cpNDAwLjAxfDYwMy40MnwzMjcuMTB8NTMwLjUx'>

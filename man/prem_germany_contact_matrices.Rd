@@ -15,17 +15,21 @@ year age group}
 year age group}
 \item{other}{A 16x16 matrix containing the number of other contacts, by 5
 year age group}
+\item{all}{A 16x16 matrix containing the number of all contacts, by 5
+year age group}
 }
 All age groups are 5 year age bands, from 0 to 80.
 }
 \source{
-\url{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697}
+\url{https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009098}
+
+\url{https://github.com/kieshaprem/synthetic-contact-matrices}
 }
 \usage{
 prem_germany_contact_matrices
 }
 \description{
-Contact matrices as calculated by Prem. et al. PLoS Computational Biology.
-DOI: 10.1371/journal.pcbi.1005697
+Contact matrices as calculated by Prem. et al. (2021) PLoS Computational Biology. Updated to use the latest corrected matrices from their 2021 publication.
+DOI: 10.1371/journal.pcbi.1009098
 }
 \keyword{datasets}

@@ -119,8 +119,8 @@ data_lga_state <- data_lga_state %>%
     TRUE ~ as.character(lga)
   ))
 
-conmat::abs_household_lga %>%
-  distinct(lga, state) -> conmat_abs_household_data
+conmat_abs_household_data <- conmat::abs_household_lga %>%
+  distinct(lga, state) 
 
 lgas_in_education_census <- data_abs_census_lga_education %>%
   select(lga) %>%
@@ -166,7 +166,7 @@ lga_state <- lgas_in_education_census %>%
   )) %>%
   select(lga, state = state_new)
 
-data_abs_census_lga_education %>%
+data_abs_lga_education <- data_abs_census_lga_education %>%
   left_join(lga_state, by = "lga") %>%
   relocate(year, state, everything()) %>%
   filter(!str_detect(lga, "No usual address")) %>%
@@ -182,17 +182,17 @@ data_abs_census_lga_education %>%
     (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
     (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
     TRUE ~ as.character(lga)
-  )) -> data_abs_lga_education
+  ))
 # mutate(lga = case_when(
 #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
 #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))
 # ))
 
 
-data_abs_lga_education %>%
+check_lga <- data_abs_lga_education %>%
   select(lga) %>%
   distinct() %>%
-  left_join(conmat_abs_household_data) -> check_lga
+  left_join(conmat_abs_household_data)
 summary(data_abs_census_lga_education)
 
 skimr::skim(data_abs_lga_education)

@@ -12,4 +12,9 @@
 ^docs$
 ^pkgdown$
 ^touchstone$
+^cran-comments\.md$
 ^paper$
+
+
+# flint files
+^flint$

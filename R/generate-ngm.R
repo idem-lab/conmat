@@ -44,6 +44,7 @@
 #'   for more detail.
 #' @param ... extra arguments, currently not used
 #' @name generate_ngm
+#' @return A next generation matrix, containing the rates of contact between two age groups.
 #' @examples
 #' \dontrun{
 #' perth <- abs_age_lga("Perth (C)")

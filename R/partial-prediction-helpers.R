@@ -1,17 +1,113 @@
-#' .. content for \description{} (no empty lines) ..
+#' Helper functions to create partial predictive plots.
+#' 
+#' These helper functions exist to make it easier to explore and understand the 
+#'   impact of each of the covariates used in the conmat GAM model. These were 
+#'   initially developed for the official Journal of Open Source Software paper 
+#'   for `conmat`, and have been made available for the user, in case it is of
+#'   interest. The relevant excerpt from the paper is included in "details", 
+#'   below. How to use the functions is shown in the examples section below.
+#' 
+#' @details
+#' 
+#' `conmat` was built to predict at four settings: work, school, home, and 
+#'   other. One model is fitted for each setting. Each model fitted is a 
+#'   Poisson generalised additive model (GAM) with a log link function, which 
+#'   predicts the count of contacts, with an offset for the log of participants. 
+#'   The model has six covariates to explain six key features of the 
+#'   relationship between ages, and two optional covariates for attendance 
+#'   at school or work. The two optional covariates are included depending on 
+#'   which setting the model is fitted for.
+#'   
+#'   Each cell in the resulting contact matrix (after back-transformation of 
+#'   the link function), indexed ($i$, $j$), is the predicted number of people 
+#'   in age group $j$ that a single individual in age group $i$ will have 
+#'   contact with per day. The sum over all age groups $j$ for a particular age 
+#'   group $i$ is the predicted total number of contacts per day for each 
+#'   individual of age group $i$.
+#'   
+#'   The six covariates are: (1) $|i-j|$, (2) $|i-j|^{2}$, (3) $i + j$, 
+#'   (4) $i \times j$, (5) $\text{max}(i, j)$ and (6) $\text{min}(i, j)$.
+#'   
+#'   These covariates capture typical features of inter-person contact, where 
+#'   individuals primarily interact with people of similar age (the diagonals 
+#'   of the matrix), and with grandparents and/or children (the so-called 
+#'   'wings' of the matrix). The key features of the relationship between the 
+#'   age groups, represented by spline transformations of the six covariates, 
+#'   are displayed in the example below for the home setting. The 
+#'   spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal 
+#'   lines modelling people generally living with those of similar age and 
+#'   the intergenerational effect of parents and (faintly) grandparents with 
+#'   children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$
+#'   terms give the higher rates of at-home contact among younger people of 
+#'   similar ages and with their parents. Visualising the partial predictive 
+#'   plots for other settings (school, work and other) show patterns that 
+#'   correspond with real-life situations.
 #'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param ages
-#' @return
-#' @author njtierney
-#' @export
+#' @param ages vector of integer ages
+#' @return data frame with 20 columns plus n rows based on expand.grid 
+#'   combination of ages. Contains transformed coefficients from ages.
+#' @name partial-prediction
+#' @noRd
+#' @examples
+#' fit_home <- polymod_setting_models$home
+#' age_grid <- create_age_grid(ages = 1:99)
+#' term_names <- extract_term_names(fit_home)
+#' term_var_names <- clean_term_names(term_names)
+#' age_predictions <- predict_individual_terms(
+#'   age_grid = age_grid,
+#'   fit = fit_home,
+#'   term_names = term_names,
+#'   term_var_names = term_var_names
+#' )
+#' 
+#' age_predictions_all_settings <- map_dfr(
+#'   .x = polymod_setting_models,
+#'   .f = function(x) {
+#'     predict_individual_terms(
+#'       age_grid = age_grid,
+#'       fit = x,
+#'       term_names = term_names,
+#'       term_var_names = term_var_names
+#'     )
+#'   },
+#'   .id = "setting"
+#' )
+#' 
+#' plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
+#' age_predictions_long <- pivot_longer_age_preds(age_predictions)
+#' 
+#' library(ggplot2)
+#' plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
+#'   coord_equal() +
+#'   labs(
+#'     x = "Age from",
+#'     y = "Age to"
+#'   ) + 
+#'   theme(
+#'     legend.position = "bottom",
+#'     axis.text = element_text(size = 6),
+#'     panel.spacing = unit(x = 1, units = "lines")
+#'   ) +
+#'   scale_x_continuous(expand = c(0,0)) +
+#'   scale_y_continuous(expand = c(0,0)) +
+#'   expand_limits(x = c(0, 100), y = c(0, 100))
+#' 
+#' age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
+#' plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
+#'   labs(x = "Age from",
+#'        y = "Age to") +
+#'   theme(
+#'     legend.position = "bottom"
+#'   ) +
+#'   scale_x_continuous(expand = c(0,0)) +
+#'   scale_y_continuous(expand = c(0,0)) +
+#'   expand_limits(x = c(0, 100), y = c(0, 100))
+#' 
+#' plot_age_term_settings
+#' plot_age_predictions_long
+#' plot_age_predictions_sum
+
 create_age_grid <- function(ages) {
-  ## TODO
-  ## Wrap this up into a function that generates an age grid data frame
-  ## with all the terms needed to fit a conmat model
-  ## (from `fit_single_contact_model.R`)
   age_grid <- expand.grid(
     age_from = ages,
     age_to = ages
@@ -35,21 +131,21 @@ create_age_grid <- function(ages) {
     # conmat::add_modelling_features()
     add_modelling_features()
   
+  age_grid
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param fit_home
-#' @return
-#' @author njtierney
-#' @export
-extract_term_names <- function(fit_home) {
+#' Helper function to extract term names out of GAM fitted model object.
+#' 
+#' @param fit fitted object for one single conmat model setting. E.g., the 
+#'   home setting.
+#' @return character vector of term names
+#' @noRd
+#' @examples
+#' extract_term_names(polymod_setting_models$home)
+extract_term_names <- function(fit) {
   
-  coef_names <- names(fit_home$coefficients) |>
+  coef_names <- names(fit$coefficients) |>
     stringr::str_remove_all("\\.[^.]*$") |>
     unique() |>
     stringr::str_subset("^s\\(")
@@ -58,15 +154,12 @@ extract_term_names <- function(fit_home) {
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param term_names
-#' @return
-#' @author njtierney
-#' @export
+#' Clean up GAM term names for use in plotting
+#' @param term_names character vector of model term names (e.g., 's(offdiag)').
+#' @return names like "offdiag", instead of "s(offdiag)"
+#' @noRd
+#' @examples
+#' extract_term_names(polymod_setting_models$home) |> clean_term_names()
 clean_term_names <- function(term_names) {
   
   term_names |>
@@ -75,17 +168,27 @@ clean_term_names <- function(term_names) {
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_grid
-#' @param term_names
-#' @param term_var_names
-#' @return
-#' @author njtierney
-#' @export
+#' 
+#' @param age_grid grid of ages from [create_age_grid()]
+#' @param fit model fitted object from conmat, e.g., 
+#'   `polymod_setting_models$home`.
+#' @param term_names terms from model extracted with [extract_term_names()].
+#' @param term_var_names Cleaned up term names from model used with 
+#'   [clean_term_names()].
+#' @return Data frame containing predicted values added to output of 
+#'   [create_age_grid()].
+#' @noRd
+#' @examples
+#' fit_home <- polymod_setting_models$home
+#' age_grid <- create_age_grid(ages = 1:99)
+#' term_names <- extract_term_names(fit_home)
+#' term_var_names <- clean_term_names(term_names)
+#' age_predictions <- predict_individual_terms(
+#'   age_grid = age_grid,
+#'   fit = fit_home,
+#'   term_names = term_names,
+#'   term_var_names = term_var_names
+#' )
 predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) {
   
   predicted_term <- function(age_grid, fit, term_name, term_var_name){
@@ -94,7 +197,7 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
             type = "terms",
             terms = term_name) |>
       tibble::as_tibble() |>
-      setNames(glue::glue("pred_{term_var_name}"))
+      stats::setNames(glue::glue("pred_{term_var_name}"))
   }
   
   all_predicted_terms <- purrr::map2_dfc(
@@ -112,16 +215,41 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_predictions_all_settings
-#' @return
-#' @author njtierney
-#' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap
-#' @export
+#' Plot all age terms across all settings
+#' @param age_predictions_all_settings output from mapped 
+#'   `predict_individual_terms`.
+#' @return ggplot objects
+#' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap labs
+#' @noRd
+#' @examples
+#' library(purrr)
+#' fit_home <- polymod_setting_models$home
+#' age_grid <- create_age_grid(ages = 1:99)
+#' term_names <- extract_term_names(fit_home)
+#' term_var_names <- clean_term_names(term_names)
+#' age_predictions <- predict_individual_terms(
+#'   age_grid = age_grid,
+#'   fit = fit_home,
+#'   term_names = term_names,
+#'   term_var_names = term_var_names
+#' )
+#' 
+#' age_predictions_all_settings <- map_dfr(
+#'   .x = polymod_setting_models,
+#'   .f = function(x) {
+#'     predict_individual_terms(
+#'       age_grid = age_grid,
+#'       fit = x,
+#'       term_names = term_names,
+#'       term_var_names = term_var_names
+#'     )
+#'   },
+#'   .id = "setting"
+#' )
+#' 
+#' plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
+#' 
+#' plot_age_term_settings
 gg_age_terms_settings <- function(age_predictions_all_settings) {
   
   pred_all_setting_longer <- age_predictions_all_settings |>
@@ -146,7 +274,8 @@ gg_age_terms_settings <- function(age_predictions_all_settings) {
       geom_tile() +
       facet_grid(setting~pred,
                  switch = "y") +
-      coord_fixed()
+      coord_fixed() +
+      labs(fill = place)
     
   }
   
@@ -169,15 +298,9 @@ gg_age_terms_settings <- function(age_predictions_all_settings) {
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_predictions
-#' @return
-#' @author njtierney
-#' @export
+#' @param age_predictions age predictions
+#' @return data frame
+#' @noRd
 pivot_longer_age_preds <- function(age_predictions) {
   age_predictions |>
     tidyr::pivot_longer(
@@ -188,20 +311,14 @@ pivot_longer_age_preds <- function(age_predictions) {
     )
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_predictions_long
-#' @return
-#' @author njtierney
-#' @export
+#' @param age_predictions_long age prediction data frame
+#' @return ggplot object
+#' @noRd
 gg_age_partial_pred_long <- function(age_predictions_long) {
 
   facet_names <- data.frame(
     pred = c("diag_prod", "diag_sum", "offdiag", "offdiag_2", "pmax", "pmin"),
-    math_name = c("i x j", "i + j", "|i - j|", "|i - j|²", "max(i, j)", "min(i, j)")
+    math_name = c("i x j", "i + j", "|i - j|", "|i - j|^2^", "max(i, j)", "min(i, j)")
   )
   
   age_predictions_long %>%
@@ -223,15 +340,9 @@ gg_age_partial_pred_long <- function(age_predictions_long) {
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_predictions_long
-#' @return
-#' @author njtierney
-#' @export
+#' @param age_predictions_long age prediction data
+#' @return data.frame
+#' @noRd
 add_age_partial_sum <- function(age_predictions_long) {
   
   age_partial_sum <- age_predictions_long |>
@@ -246,15 +357,9 @@ add_age_partial_sum <- function(age_predictions_long) {
   
 }
 
-#' .. content for \description{} (no empty lines) ..
-#'
-#' .. content for \details{} ..
-#'
-#' @title
-#' @param age_predictions_long_sum
-#' @return
-#' @author njtierney
-#' @export
+#' @param age_predictions_long_sum age prediction data
+#' @return ggplot object
+#' @noRd
 gg_age_partial_sum <- function(age_predictions_long_sum) {
   
   ggplot(
