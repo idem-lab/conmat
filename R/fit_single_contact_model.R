@@ -204,7 +204,7 @@ fit_single_contact_model <- function(contact_data,
   formula <- update(formula_no_offset, formula_offset)
 
   # contact model for all locations together
-  contact_data %>%
+  model <- contact_data %>%
     # NOTE
     # Do we need to have this data cleaning step in here?
     # I think we should instead have this as a separate preparation step for
@@ -228,4 +228,9 @@ fit_single_contact_model <- function(contact_data,
       offset = log(participants),
       data = .
     )
+  
+  new_contact_model(
+    model = model
+  )
+  
 }

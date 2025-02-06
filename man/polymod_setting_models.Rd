@@ -5,7 +5,7 @@
 \alias{polymod_setting_models}
 \title{Polymod Settings models}
 \format{
-An object of class \code{list} of length 4.
+An object of class \code{setting_contact_model} (inherits from \code{list}) of length 4.
 }
 \usage{
 polymod_setting_models

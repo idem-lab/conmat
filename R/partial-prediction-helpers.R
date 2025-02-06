@@ -42,70 +42,150 @@
 #'   similar ages and with their parents. Visualising the partial predictive 
 #'   plots for other settings (school, work and other) show patterns that 
 #'   correspond with real-life situations.
-#'
+#' 
+#' @param model either a model fit with
 #' @param ages vector of integer ages
 #' @return data frame with 20 columns plus n rows based on expand.grid 
 #'   combination of ages. Contains transformed coefficients from ages.
 #' @name partial-prediction
-#' @noRd
 #' @examples
-#' fit_home <- polymod_setting_models$home
-#' age_grid <- create_age_grid(ages = 1:99)
-#' term_names <- extract_term_names(fit_home)
-#' term_var_names <- clean_term_names(term_names)
-#' age_predictions <- predict_individual_terms(
-#'   age_grid = age_grid,
-#'   fit = fit_home,
-#'   term_names = term_names,
-#'   term_var_names = term_var_names
-#' )
+#' # just partial effects for a single setting
+#' partials_home <- partial_effects(
+#'   polymod_setting_models$home, 
+#'   ages = 1:99
+#'   )
+#' autoplot(partials_home)
+#' # partial effects for all settings
+#' partials_setting <- partial_effects(
+#'   polymod_setting_models, 
+#'   ages = 1:99
+#'   )
+#' autoplot(partials_setting)
 #' 
-#' age_predictions_all_settings <- map_dfr(
-#'   .x = polymod_setting_models,
-#'   .f = function(x) {
-#'     predict_individual_terms(
-#'       age_grid = age_grid,
-#'       fit = x,
-#'       term_names = term_names,
-#'       term_var_names = term_var_names
-#'     )
-#'   },
-#'   .id = "setting"
-#' )
-#' 
-#' plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-#' age_predictions_long <- pivot_longer_age_preds(age_predictions)
-#' 
-#' library(ggplot2)
-#' plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
-#'   coord_equal() +
-#'   labs(
-#'     x = "Age from",
-#'     y = "Age to"
-#'   ) + 
-#'   theme(
-#'     legend.position = "bottom",
-#'     axis.text = element_text(size = 6),
-#'     panel.spacing = unit(x = 1, units = "lines")
-#'   ) +
-#'   scale_x_continuous(expand = c(0,0)) +
-#'   scale_y_continuous(expand = c(0,0)) +
-#'   expand_limits(x = c(0, 100), y = c(0, 100))
-#' 
-#' age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
-#' plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
-#'   labs(x = "Age from",
-#'        y = "Age to") +
-#'   theme(
-#'     legend.position = "bottom"
-#'   ) +
-#'   scale_x_continuous(expand = c(0,0)) +
-#'   scale_y_continuous(expand = c(0,0)) +
-#'   expand_limits(x = c(0, 100), y = c(0, 100))
-#' 
-#' plot_age_term_settings
-#' plot_age_predictions_long
-#' plot_age_predictions_sum
+#' # Summed up partial effects (y-hat) for a single setting
+#' partials_summed_home <- partial_effects_sum(
+#'     polymod_setting_models$home,
+#'     ages = 1:99
+#'   )
+#'   
+#' autoplot(partials_summed_home)
+#' # summed up partial effects (y-hat) for all settings
+#' partials_summed_setting <- partial_effects_sum(
+#'     polymod_setting_models,
+#'     ages = 1:99
+#'   )
+#' autoplot(partials_summed_setting)
+partial_effects <- function(model, ages, ...){
+  UseMethod("partial_effects")
+}
+
+#' @rdname partial-prediction
+#' @export
+partial_effects.contact_model <- function(model, ages, ...){
+  age_grid <- create_age_grid(ages = ages)
+  term_names <- extract_term_names(model)
+  term_var_names <- clean_term_names(term_names)
+  
+  predict_individual_terms(
+    age_grid = age_grid,
+    model = model,
+    term_names = term_names,
+    term_var_names = term_var_names
+  )
+  
+  age_predictions_long <- pivot_longer_age_preds(age_predictions)
+  
+  structure(
+    age_predictions_long,
+    class = c("partial_predictions", class(age_predictions_long))
+  )
+}
+
+
+#' @rdname partial-prediction
+#' @export
+partial_effects.setting_contact_model <- function(model, ages, ...){
+  
+  age_predictions_setting_long <- purrr::map_dfr(
+    model, 
+    partial_effects, 
+    ages = ages,
+    .id = "setting"
+    )
+  
+  structure(
+    age_predictions_setting_long,
+    class = c("setting_partial_predictions", 
+              class(age_predictions_setting_long))
+  )
+}
+
+#' @rdname partial-prediction
+#' @export
+partial_effects_sum <- function(model, ages, ...){
+  UseMethod("partial_effects_sum")
+}
+
+#' @rdname partial-prediction
+#' @export
+partial_effects_sum.contact_model <- function(model, ages, ...){
+  age_predictions_long <- partial_effects(model, ages)
+  partial_sums <- add_age_partial_sum(age_predictions_long)
+  structure(
+    partial_sums,
+    class = c("partial_predictions_sum", 
+              class(partial_sums))
+  )
+}
+
+#' @rdname autoplot-conmat-partial
+#' @export
+autoplot.partial_predictions_sum <- function(object, ...){
+  gg_age_partial_sum(object) + 
+    scale_fill_viridis_c(
+      name = "Num.\ncontacts"
+    )
+}
+
+#' @rdname partial-prediction
+#' @export
+partial_effects_sum.setting_contact_model <- function(model, ages, ...){
+  
+  setting_partial_sums <- purrr::map_dfr(
+    model, 
+    partial_effects_sum, 
+    ages = ages,
+    .id = "setting"
+    )
+  
+  structure(
+    setting_partial_sums,
+    class = c("setting_partial_predictions_sum", 
+              class(setting_partial_sums))
+  )
+}
+
+# TODO
+# add autoplot method for summed partials settings?
+
+
+#' Plot partial predictive plots using ggplot2
+#'
+#' @param object An object with partial predictions from 
+#' @param ...	 Other arguments passed on
+#' @return a ggplot visualisation of partial effects
+#' @name autoplot-conmat-partial
+#' @export
+autoplot.partial_predictions <- function(object, ...){
+  gg_age_partial_pred_long(object)
+}
+
+#' @rdname autoplot-conmat-partial
+#' @export
+autoplot.setting_partial_predictions <- function(object, ...){
+  gg_age_terms_settings(object)
+}
+
 
 create_age_grid <- function(ages) {
   age_grid <- expand.grid(
@@ -137,15 +217,15 @@ create_age_grid <- function(ages) {
 
 #' Helper function to extract term names out of GAM fitted model object.
 #' 
-#' @param fit fitted object for one single conmat model setting. E.g., the 
+#' @param model fitted model object for one single conmat model setting. E.g., the 
 #'   home setting.
 #' @return character vector of term names
 #' @noRd
 #' @examples
 #' extract_term_names(polymod_setting_models$home)
-extract_term_names <- function(fit) {
+extract_term_names <- function(model) {
   
-  coef_names <- names(fit$coefficients) |>
+  coef_names <- names(model$coefficients) |>
     stringr::str_remove_all("\\.[^.]*$") |>
     unique() |>
     stringr::str_subset("^s\\(")
@@ -170,7 +250,7 @@ clean_term_names <- function(term_names) {
 
 #' 
 #' @param age_grid grid of ages from [create_age_grid()]
-#' @param fit model fitted object from conmat, e.g., 
+#' @param model model fitted object from conmat, e.g., 
 #'   `polymod_setting_models$home`.
 #' @param term_names terms from model extracted with [extract_term_names()].
 #' @param term_var_names Cleaned up term names from model used with 
@@ -178,21 +258,10 @@ clean_term_names <- function(term_names) {
 #' @return Data frame containing predicted values added to output of 
 #'   [create_age_grid()].
 #' @noRd
-#' @examples
-#' fit_home <- polymod_setting_models$home
-#' age_grid <- create_age_grid(ages = 1:99)
-#' term_names <- extract_term_names(fit_home)
-#' term_var_names <- clean_term_names(term_names)
-#' age_predictions <- predict_individual_terms(
-#'   age_grid = age_grid,
-#'   fit = fit_home,
-#'   term_names = term_names,
-#'   term_var_names = term_var_names
-#' )
-predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) {
+predict_individual_terms <- function(age_grid, model, term_names, term_var_names) {
   
-  predicted_term <- function(age_grid, fit, term_name, term_var_name){
-    predict(object = fit,
+  predicted_term <- function(age_grid, model, term_name, term_var_name){
+    predict(object = model,
             newdata = age_grid,
             type = "terms",
             terms = term_name) |>
@@ -205,7 +274,7 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
     .y = term_var_names,
     .f = function(.x, .y){
       predicted_term(age_grid = age_grid,
-                     fit = fit,
+                     model = model,
                      term_name = .x,
                      term_var_name = .y)
     }
@@ -221,35 +290,6 @@ predict_individual_terms <- function(age_grid, fit, term_names, term_var_names) 
 #' @return ggplot objects
 #' @importFrom ggplot2 ggplot aes geom_tile facet_grid coord_fixed scale_fill_viridis_c theme_minimal facet_wrap labs
 #' @noRd
-#' @examples
-#' library(purrr)
-#' fit_home <- polymod_setting_models$home
-#' age_grid <- create_age_grid(ages = 1:99)
-#' term_names <- extract_term_names(fit_home)
-#' term_var_names <- clean_term_names(term_names)
-#' age_predictions <- predict_individual_terms(
-#'   age_grid = age_grid,
-#'   fit = fit_home,
-#'   term_names = term_names,
-#'   term_var_names = term_var_names
-#' )
-#' 
-#' age_predictions_all_settings <- map_dfr(
-#'   .x = polymod_setting_models,
-#'   .f = function(x) {
-#'     predict_individual_terms(
-#'       age_grid = age_grid,
-#'       fit = x,
-#'       term_names = term_names,
-#'       term_var_names = term_var_names
-#'     )
-#'   },
-#'   .id = "setting"
-#' )
-#' 
-#' plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-#' 
-#' plot_age_term_settings
 gg_age_terms_settings <- function(age_predictions_all_settings) {
   
   pred_all_setting_longer <- age_predictions_all_settings |>
@@ -371,12 +411,37 @@ gg_age_partial_sum <- function(age_predictions_long_sum) {
     )
   ) +
     geom_tile() +
-    scale_fill_viridis_c(
-      name = "Num.\ncontacts",
-      option = "magma",
-      limits = c(0, 12)
-    ) +
     theme_minimal()
   
 }
 
+gg_age_partial_sum_setting <- function(age_predictions_long_sum_setting){
+  
+  facet_age_plot <- function(data, place){
+    data |>
+      dplyr::filter(setting == place) |>
+      gg_age_partial_sum()
+    
+  }
+  
+  p_home <- facet_age_plot(age_predictions_long_sum_setting, "home") + 
+    scale_fill_viridis_c(name = "home")
+  p_work <- facet_age_plot(age_predictions_long_sum_setting, "work") + 
+    scale_fill_viridis_c(option = "rocket",
+                         name = "work") 
+  p_school <- facet_age_plot(age_predictions_long_sum_setting, "school") + 
+    scale_fill_viridis_c(option = "plasma",
+                         name = "school")
+  p_other <- facet_age_plot(age_predictions_long_sum_setting, "other") + 
+    scale_fill_viridis_c(option = "mako",
+                         name = "other") 
+  
+  patchwork::wrap_plots(
+    p_home,
+    p_work,
+    p_school,
+    p_other,
+    nrow = 4
+  )
+  
+}

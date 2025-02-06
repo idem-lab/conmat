@@ -237,6 +237,13 @@ new_setting_contact_model <- function(list_model,
   )
 }
 
+new_contact_model <- function(model){
+  structure(
+    model,
+    class = c("contact_model", class(model))
+  )
+}
+
 new_setting_vaccination_matrix <- function(list_matrix,
                                            age_breaks) {
   structure(
