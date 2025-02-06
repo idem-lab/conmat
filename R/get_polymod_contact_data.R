@@ -53,7 +53,7 @@ get_polymod_contact_data <- function(setting = c("all", "home", "work", "school"
   setting <- match.arg(setting)
   contact_age_imputation <- match.arg(contact_age_imputation)
 
-  contact_data <- polymod$participants %>%
+  contact_data <- socialmixr::polymod$participants %>%
     dplyr::filter(
       country %in% countries
     ) %>%
