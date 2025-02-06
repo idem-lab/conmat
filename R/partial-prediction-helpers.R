@@ -82,7 +82,6 @@ partial_effects <- function(model, ages, ...){
 #' @rdname partial-prediction
 #' @export
 partial_effects.contact_model <- function(model, ages, ...){
-  
   age_grid <- create_age_grid(ages = ages)
   term_names <- extract_term_names(model)
   term_var_names <- clean_term_names(term_names)
@@ -106,33 +105,18 @@ partial_effects.contact_model <- function(model, ages, ...){
 #' @rdname partial-prediction
 #' @export
 partial_effects.setting_contact_model <- function(model, ages, ...){
-  age_grid <- create_age_grid(ages = ages)
-  term_names <- map(model, extract_term_names)
-  term_var_names <- map(term_names, clean_term_names)
   
-  age_predictions_all_settings <- purrr::pmap_dfr(
-    .l = list(
-      model = model,
-      term_names = term_names,
-      term_var_names = term_var_names
-    ),
-    .f = function(model,
-                  term_names,
-                  term_var_names) {
-      predict_individual_terms(
-        age_grid = age_grid,
-        model = model,
-        term_names = term_names,
-        term_var_names = term_var_names
-      )
-    },
+  age_predictions_setting_long <- purrr::map_dfr(
+    model, 
+    partial_effects, 
+    ages = ages,
     .id = "setting"
-  )
+    )
   
   structure(
-    age_predictions_all_settings,
+    age_predictions_setting_long,
     class = c("setting_partial_predictions", 
-              class(age_predictions_all_settings))
+              class(age_predictions_setting_long))
   )
 }
 
@@ -157,19 +141,23 @@ partial_effects_sum.contact_model <- function(model, ages, ...){
 #' @rdname autoplot-conmat-partial
 #' @export
 autoplot.partial_predictions_sum <- function(object, ...){
-  gg_age_partial_sum(object)
+  gg_age_partial_sum(object) + 
+    scale_fill_viridis_c(
+      name = "Num.\ncontacts"
+    )
 }
 
 #' @rdname partial-prediction
 #' @export
 partial_effects_sum.setting_contact_model <- function(model, ages, ...){
-  setting_age_predictions_long <- partial_effects(model, ages)
-
+  
   setting_partial_sums <- purrr::map_dfr(
-    .x = setting_age_predictions_long,
-    .f = add_age_partial_sum,
+    model, 
+    partial_effects_sum, 
+    ages = ages,
     .id = "setting"
-  )
+    )
+  
   structure(
     setting_partial_sums,
     class = c("setting_partial_predictions_sum", 
@@ -423,12 +411,37 @@ gg_age_partial_sum <- function(age_predictions_long_sum) {
     )
   ) +
     geom_tile() +
-    scale_fill_viridis_c(
-      name = "Num.\ncontacts",
-      option = "magma",
-      limits = c(0, 12)
-    ) +
     theme_minimal()
   
 }
 
+gg_age_partial_sum_setting <- function(age_predictions_long_sum_setting){
+  
+  facet_age_plot <- function(data, place){
+    data |>
+      dplyr::filter(setting == place) |>
+      gg_age_partial_sum()
+    
+  }
+  
+  p_home <- facet_age_plot(age_predictions_long_sum_setting, "home") + 
+    scale_fill_viridis_c(name = "home")
+  p_work <- facet_age_plot(age_predictions_long_sum_setting, "work") + 
+    scale_fill_viridis_c(option = "rocket",
+                         name = "work") 
+  p_school <- facet_age_plot(age_predictions_long_sum_setting, "school") + 
+    scale_fill_viridis_c(option = "plasma",
+                         name = "school")
+  p_other <- facet_age_plot(age_predictions_long_sum_setting, "other") + 
+    scale_fill_viridis_c(option = "mako",
+                         name = "other") 
+  
+  patchwork::wrap_plots(
+    p_home,
+    p_work,
+    p_school,
+    p_other,
+    nrow = 4
+  )
+  
+}
