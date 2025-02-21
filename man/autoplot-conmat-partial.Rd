@@ -17,7 +17,7 @@
 \method{autoplot}{setting_partial_predictions}(object, ...)
 }
 \arguments{
-\item{object}{An object with partial predictions from}
+\item{object}{An object with partial predictions from \link{partial_predictions}}
 
 \item{...}{Other arguments passed on}
 }

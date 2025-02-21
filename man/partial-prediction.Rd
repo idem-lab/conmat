@@ -5,8 +5,6 @@
 \alias{partial_effects}
 \alias{partial_effects.contact_model}
 \alias{partial_effects.setting_contact_model}
-\alias{partial_effects_sum}
-\alias{partial_effects_sum.contact_model}
 \alias{partial_effects_sum.setting_contact_model}
 \title{Helper functions to create partial predictive plots.}
 \usage{
@@ -16,14 +14,10 @@ partial_effects(model, ages, ...)
 
 \method{partial_effects}{setting_contact_model}(model, ages, ...)
 
-partial_effects_sum(model, ages, ...)
-
-\method{partial_effects_sum}{contact_model}(model, ages, ...)
-
 \method{partial_effects_sum}{setting_contact_model}(model, ages, ...)
 }
 \arguments{
-\item{model}{either a model fit with}
+\item{model}{A fitted model, or list of fitted models}
 
 \item{ages}{vector of integer ages}
 }
@@ -33,49 +27,18 @@ combination of ages. Contains transformed coefficients from ages.
 }
 \description{
 These helper functions exist to make it easier to explore and understand the
-impact of each of the covariates used in the conmat GAM model. These were
-initially developed for the official Journal of Open Source Software paper
-for \code{conmat}, and have been made available for the user, in case it is of
-interest. The relevant excerpt from the paper is included in "details",
-below. How to use the functions is shown in the examples section below.
+impact of each of the covariates used in the conmat GAM model.
 }
 \details{
-\code{conmat} was built to predict at four settings: work, school, home, and
-other. One model is fitted for each setting. Each model fitted is a
-Poisson generalised additive model (GAM) with a log link function, which
-predicts the count of contacts, with an offset for the log of participants.
-The model has six covariates to explain six key features of the
-relationship between ages, and two optional covariates for attendance
-at school or work. The two optional covariates are included depending on
-which setting the model is fitted for.
+Partial predictive plots give a visual representation of the effect of each
+covariate on the model, or (equivalently) the effect of each setting on the total
+contact matrix. Positive values indicate more contacts in that region of the matrix compared
+to the null case, while negative values indicate less.
 
-Each cell in the resulting contact matrix (after back-transformation of
-the link function), indexed ($i$, $j$), is the predicted number of people
-in age group $j$ that a single individual in age group $i$ will have
-contact with per day. The sum over all age groups $j$ for a particular age
-group $i$ is the predicted total number of contacts per day for each
-individual of age group $i$.
-
-The six covariates are: (1) $|i-j|$, (2) $|i-j|^{2}$, (3) $i + j$,
-(4) $i \times j$, (5) $\text{max}(i, j)$ and (6) $\text{min}(i, j)$.
-
-These covariates capture typical features of inter-person contact, where
-individuals primarily interact with people of similar age (the diagonals
-of the matrix), and with grandparents and/or children (the so-called
-'wings' of the matrix). The key features of the relationship between the
-age groups, represented by spline transformations of the six covariates,
-are displayed in the example below for the home setting. The
-spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal
-lines modelling people generally living with those of similar age and
-the intergenerational effect of parents and (faintly) grandparents with
-children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$
-terms give the higher rates of at-home contact among younger people of
-similar ages and with their parents. Visualising the partial predictive
-plots for other settings (school, work and other) show patterns that
-correspond with real-life situations.
+Scales are not comparable \emph{across} settings, as each setting has it's own intercept term
+which is not accounted for in partial effects.
 }
 \examples{
-# just partial effects for a single setting
 partials_home <- partial_effects(
   polymod_setting_models$home, 
   ages = 1:99
@@ -87,18 +50,4 @@ partials_setting <- partial_effects(
   ages = 1:99
   )
 autoplot(partials_setting)
-
-# Summed up partial effects (y-hat) for a single setting
-partials_summed_home <- partial_effects_sum(
-    polymod_setting_models$home,
-    ages = 1:99
-  )
-  
-autoplot(partials_summed_home)
-# summed up partial effects (y-hat) for all settings
-partials_summed_setting <- partial_effects_sum(
-    polymod_setting_models,
-    ages = 1:99
-  )
-autoplot(partials_summed_setting)
 }

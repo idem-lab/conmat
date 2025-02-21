@@ -1,55 +1,24 @@
 #' Helper functions to create partial predictive plots.
 #' 
 #' These helper functions exist to make it easier to explore and understand the 
-#'   impact of each of the covariates used in the conmat GAM model. These were 
-#'   initially developed for the official Journal of Open Source Software paper 
-#'   for `conmat`, and have been made available for the user, in case it is of
-#'   interest. The relevant excerpt from the paper is included in "details", 
-#'   below. How to use the functions is shown in the examples section below.
+#'   impact of each of the covariates used in the conmat GAM model.
 #' 
 #' @details
 #' 
-#' `conmat` was built to predict at four settings: work, school, home, and 
-#'   other. One model is fitted for each setting. Each model fitted is a 
-#'   Poisson generalised additive model (GAM) with a log link function, which 
-#'   predicts the count of contacts, with an offset for the log of participants. 
-#'   The model has six covariates to explain six key features of the 
-#'   relationship between ages, and two optional covariates for attendance 
-#'   at school or work. The two optional covariates are included depending on 
-#'   which setting the model is fitted for.
-#'   
-#'   Each cell in the resulting contact matrix (after back-transformation of 
-#'   the link function), indexed ($i$, $j$), is the predicted number of people 
-#'   in age group $j$ that a single individual in age group $i$ will have 
-#'   contact with per day. The sum over all age groups $j$ for a particular age 
-#'   group $i$ is the predicted total number of contacts per day for each 
-#'   individual of age group $i$.
-#'   
-#'   The six covariates are: (1) $|i-j|$, (2) $|i-j|^{2}$, (3) $i + j$, 
-#'   (4) $i \times j$, (5) $\text{max}(i, j)$ and (6) $\text{min}(i, j)$.
-#'   
-#'   These covariates capture typical features of inter-person contact, where 
-#'   individuals primarily interact with people of similar age (the diagonals 
-#'   of the matrix), and with grandparents and/or children (the so-called 
-#'   'wings' of the matrix). The key features of the relationship between the 
-#'   age groups, represented by spline transformations of the six covariates, 
-#'   are displayed in the example below for the home setting. The 
-#'   spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal 
-#'   lines modelling people generally living with those of similar age and 
-#'   the intergenerational effect of parents and (faintly) grandparents with 
-#'   children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$
-#'   terms give the higher rates of at-home contact among younger people of 
-#'   similar ages and with their parents. Visualising the partial predictive 
-#'   plots for other settings (school, work and other) show patterns that 
-#'   correspond with real-life situations.
+#' Partial predictive plots give a visual representation of the effect of each
+#' covariate on the model, or (equivalently) the effect of each setting on the total
+#' contact matrix. Positive values indicate more contacts in that region of the matrix compared
+#' to the null case, while negative values indicate less.
 #' 
-#' @param model either a model fit with
+#' Scales are not comparable _across_ settings, as each setting has it's own intercept term
+#' which is not accounted for in partial effects.
+#' 
+#' @param model A fitted model, or list of fitted models
 #' @param ages vector of integer ages
 #' @return data frame with 20 columns plus n rows based on expand.grid 
 #'   combination of ages. Contains transformed coefficients from ages.
 #' @name partial-prediction
 #' @examples
-#' # just partial effects for a single setting
 #' partials_home <- partial_effects(
 #'   polymod_setting_models$home, 
 #'   ages = 1:99
@@ -61,20 +30,6 @@
 #'   ages = 1:99
 #'   )
 #' autoplot(partials_setting)
-#' 
-#' # Summed up partial effects (y-hat) for a single setting
-#' partials_summed_home <- partial_effects_sum(
-#'     polymod_setting_models$home,
-#'     ages = 1:99
-#'   )
-#'   
-#' autoplot(partials_summed_home)
-#' # summed up partial effects (y-hat) for all settings
-#' partials_summed_setting <- partial_effects_sum(
-#'     polymod_setting_models,
-#'     ages = 1:99
-#'   )
-#' autoplot(partials_summed_setting)
 partial_effects <- function(model, ages, ...){
   UseMethod("partial_effects")
 }
@@ -120,13 +75,47 @@ partial_effects.setting_contact_model <- function(model, ages, ...){
   )
 }
 
-#' @rdname partial-prediction
+#' Helper functions to create partial predictive plots for a set of fitted models.
+#' 
+#' These helper functions exist to make it easier to explore and understand the 
+#'   impact of each of the covariates used in the conmat GAM model.
+#' 
+#' @details
+#' 
+#' Partial predictive plots give a visual representation of the effect of each
+#' covariate on the model, or (equivalently) the effect of each setting on the total
+#' contact matrix. Positive values indicate more contacts in that region of the matrix compared
+#' to the null case, while negative values indicate less.
+#' 
+#' Scales are not comparable _across_ settings, as each setting has it's own intercept term
+#' which is not accounted for in partial effects.
+#' 
+#' @param model A fitted model, or list of fitted models
+#' @param ages vector of integer ages
+#' @return data frame with 3 columns plus n rows based on expand.grid 
+#'   combination of ages. The column `gam_total_term` is the sum over the coefficients
+#'   for that age bracket.
+#' @name partial-prediction-sum
+#' @examples
+#' # Summed up partial effects (y-hat) for a single setting
+#' partials_summed_home <- partial_effects_sum(
+#'     polymod_setting_models$home,
+#'     ages = 1:99
+#'   )
+#'   
+#' autoplot(partials_summed_home)
+#' # summed up partial effects (y-hat) for all settings
+#' partials_summed_setting <- partial_effects_sum(
+#'     polymod_setting_models,
+#'     ages = 1:99
+#'   )
+#' autoplot(partials_summed_setting)
 #' @export
 partial_effects_sum <- function(model, ages, ...){
   UseMethod("partial_effects_sum")
 }
 
-#' @rdname partial-prediction
+#' @rdname partial-prediction-sum
 #' @export
 partial_effects_sum.contact_model <- function(model, ages, ...){
   age_predictions_long <- partial_effects(model, ages)
@@ -208,7 +197,7 @@ autoplot.setting_partial_predictions_sum <- function(object, ...) {
 
 #' Plot partial predictive plots using ggplot2
 #'
-#' @param object An object with partial predictions from 
+#' @param object An object with partial predictions from [conmat::partial_predictions]
 #' @param ...	 Other arguments passed on
 #' @return a ggplot visualisation of partial effects
 #' @name autoplot-conmat-partial
