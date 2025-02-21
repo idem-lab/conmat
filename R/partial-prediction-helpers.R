@@ -293,12 +293,6 @@ predict_individual_terms <- function(age_grid, model, term_names, term_var_names
 gg_age_terms_settings <- function(age_predictions_all_settings) {
   
   pred_all_setting_longer <- age_predictions_all_settings |>
-    tidyr::pivot_longer(
-      dplyr::starts_with("pred"),
-      names_to = "pred",
-      values_to = "value",
-      names_prefix = "pred_"
-    ) |>
     dplyr::select(age_from,
            age_to,
            value,
