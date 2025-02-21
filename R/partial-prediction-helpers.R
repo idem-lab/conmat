@@ -86,7 +86,7 @@ partial_effects.contact_model <- function(model, ages, ...){
   term_names <- extract_term_names(model)
   term_var_names <- clean_term_names(term_names)
   
-  predict_individual_terms(
+  age_predictions <- predict_individual_terms(
     age_grid = age_grid,
     model = model,
     term_names = term_names,
