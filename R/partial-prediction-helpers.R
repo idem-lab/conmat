@@ -165,6 +165,43 @@ partial_effects_sum.setting_contact_model <- function(model, ages, ...){
   )
 }
 
+#' @rdname autoplot-conmat-partial
+#' @export
+autoplot.setting_partial_predictions_sum <- function(object, ...) {
+  
+  facet_age_plot <- function(data, place){
+    data |>
+      dplyr::filter(setting == place) |>
+      ggplot(aes(x = age_from,
+                 y = age_to,
+                 fill = gam_total_term)) +
+      geom_tile() +
+      facet_grid(~setting,
+                 switch = "y") +
+      coord_fixed() +
+      labs(fill = place) +
+      theme_minimal()
+    
+  }
+  
+  p_home <- facet_age_plot(object, "home") + 
+    scale_fill_viridis_c()
+  p_work <- facet_age_plot(object, "work") + 
+    scale_fill_viridis_c(option = "rocket")
+  p_school <- facet_age_plot(object, "school") + 
+    scale_fill_viridis_c(option = "plasma")
+  p_other <- facet_age_plot(object, "other") + 
+    scale_fill_viridis_c(option = "mako")
+  
+  patchwork::wrap_plots(
+    p_home,
+    p_work,
+    p_school,
+    p_other,
+    nrow = 2
+  )
+}
+
 # TODO
 # add autoplot method for summed partials settings?
 
@@ -380,10 +417,9 @@ gg_age_partial_pred_long <- function(age_predictions_long) {
 add_age_partial_sum <- function(age_predictions_long) {
   
   age_partial_sum <- age_predictions_long |>
-    dplyr::group_by(age_from,
-             age_to) |>
+    dplyr::group_by(age_from, age_to) |>
     dplyr::summarise(
-      gam_total_term = exp(sum(value)),
+      gam_total_term = sum(value),
       .groups = "drop"
     )
   

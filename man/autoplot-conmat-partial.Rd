@@ -2,12 +2,15 @@
 % Please edit documentation in R/partial-prediction-helpers.R
 \name{autoplot.partial_predictions_sum}
 \alias{autoplot.partial_predictions_sum}
+\alias{autoplot.setting_partial_predictions_sum}
 \alias{autoplot-conmat-partial}
 \alias{autoplot.partial_predictions}
 \alias{autoplot.setting_partial_predictions}
 \title{Plot partial predictive plots using ggplot2}
 \usage{
 \method{autoplot}{partial_predictions_sum}(object, ...)
+
+\method{autoplot}{setting_partial_predictions_sum}(object, ...)
 
 \method{autoplot}{partial_predictions}(object, ...)
 
