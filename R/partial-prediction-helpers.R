@@ -30,6 +30,7 @@
 #'   ages = 1:99
 #'   )
 #' autoplot(partials_setting)
+#' @export
 partial_effects <- function(model, ages, ...){
   UseMethod("partial_effects")
 }
@@ -92,6 +93,7 @@ partial_effects.setting_contact_model <- function(model, ages, ...){
 #' 
 #' @param model A fitted model, or list of fitted models
 #' @param ages vector of integer ages
+#' @param ... dots for future extension. Currently not used.
 #' @return data frame with 3 columns plus n rows based on expand.grid 
 #'   combination of ages. The column `gam_total_term` is the sum over the coefficients
 #'   for that age bracket.

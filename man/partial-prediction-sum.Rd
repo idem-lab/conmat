@@ -14,6 +14,8 @@ partial_effects_sum(model, ages, ...)
 \item{model}{A fitted model, or list of fitted models}
 
 \item{ages}{vector of integer ages}
+
+\item{...}{dots for future extension. Currently not used.}
 }
 \value{
 data frame with 3 columns plus n rows based on expand.grid

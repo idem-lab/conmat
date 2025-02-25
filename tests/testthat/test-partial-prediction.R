@@ -75,9 +75,13 @@ partial_effects(polymod_setting_models$home, ages = 1:99) |> autoplot()
 partial_effects(polymod_setting_models, ages = 1:99) |> autoplot()
 
 pe_standard <- partial_effects(polymod_setting_models, ages = 1:99)
-pe_alt <- polymod_setting_models |> map_dfr(partial_effects, 
-                                            ages = 1:99,
-                                            .id = "setting")
+
+pe_alt <- purrr::map_dfr(
+  .x = polymod_setting_models,
+  .f = partial_effects, 
+  ages = 1:99,
+  .id = "setting"
+  )
 
 pe_standard
 pe_alt
@@ -88,36 +92,37 @@ class(pe_standard)
 autoplot(pe_standard)
 
 
-  ggplot(aes(x = age_from,
-             y = age_to,
-             fill = value)) +
-  geom_tile() +
-  facet_grid(setting~pred,
-             switch = "y") +
-  coord_fixed() +
-  labs(fill = place)
+  # ggplot(aes(x = age_from,
+  #            y = age_to,
+  #            fill = value)) +
+  # geom_tile() +
+  # facet_grid(setting~pred,
+  #            switch = "y") +
+  # coord_fixed() +
+  # labs(fill = place)
 
 gg_age_terms_settings(pe_standard)
 gg_age_terms_settings(pe_alt)
 
-age_predictions_all_settings |>
-  tidyr::pivot_longer(
-    dplyr::starts_with("pred"),
-    names_to = "pred",
-    values_to = "value",
-    names_prefix = "pred_"
-  ) |>
-  dplyr::select(age_from,
-                age_to,
-                value,
-                pred,
-                setting)
+# age_predictions_all_settings |>
+#   tidyr::pivot_longer(
+#     dplyr::starts_with("pred"),
+#     names_to = "pred",
+#     values_to = "value",
+#     names_prefix = "pred_"
+#   ) |>
+#   dplyr::select(age_from,
+#                 age_to,
+#                 value,
+#                 pred,
+#                 setting)
 
 
 partial_effects_sum(polymod_setting_models, ages = 1:99)
 
-alt_partial_sum <- polymod_setting_models |> 
-  map_dfr(partial_effects_sum,
+alt_partial_sum <- purrr::map_dfr(
+  .x = polymod_setting_models,
+  .f = partial_effects_sum,
           ages = 1:99,
           .id = "setting")
 
@@ -151,7 +156,7 @@ all.equal(
 
 alt_partial_effects |> 
   named_group_split(setting) |> 
-  map_dfr(add_age_partial_sum,
+  purrr::map_dfr(add_age_partial_sum,
           .id = "setting") |> 
   gg_age_partial_sum() + 
   facet_wrap(~setting)
@@ -186,12 +191,12 @@ current_partial_effects_sum |>
             average = mean(gam_total_term),
             .groups = "drop")
 
-ggplot(current_partial_effects_sum,
-       aes(x = setting,
-           y = gam_total_term)) + 
-  geom_boxplot() + 
-  facet_wrap(~setting,
-             scales = "free")
+# ggplot(current_partial_effects_sum,
+#        aes(x = setting,
+#            y = gam_total_term)) + 
+#   geom_boxplot() + 
+#   facet_wrap(~setting,
+#              scales = "free")
 
 gg_age_partial_sum_setting(current_partial_effects_sum)
 
