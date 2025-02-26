@@ -6,15 +6,17 @@
 #' @details
 #' 
 #' Partial predictive plots give a visual representation of the effect of each
-#' covariate on the model, or (equivalently) the effect of each setting on the total
-#' contact matrix. Positive values indicate more contacts in that region of the matrix compared
-#' to the null case, while negative values indicate less.
+#'   covariate on the model, or (equivalently) the effect of each setting on 
+#'   the total contact matrix. Positive values indicate more contacts in that 
+#'   region of the matrix compared to the null case, while negative values 
+#'   indicate less.
 #' 
-#' Scales are not comparable _across_ settings, as each setting has it's own intercept term
-#' which is not accounted for in partial effects.
+#' Scales are not comparable _across_ settings, as each setting has it's own 
+#'   intercept term which is not accounted for in partial effects.
 #' 
-#' @param model A fitted model, or list of fitted models
-#' @param ages vector of integer ages
+#' @param model A fitted model, or list of fitted models.
+#' @param ages vector of integer ages.
+#' @param ... extra arguments. Currently not used.
 #' @return data frame with 20 columns plus n rows based on expand.grid 
 #'   combination of ages. Contains transformed coefficients from ages.
 #' @name partial-prediction
@@ -76,7 +78,7 @@ partial_effects.setting_contact_model <- function(model, ages, ...){
   )
 }
 
-#' Helper functions to create partial predictive plots for a set of fitted models.
+#' Create partial predictive plots for a set of fitted models.
 #' 
 #' These helper functions exist to make it easier to explore and understand the 
 #'   impact of each of the covariates used in the conmat GAM model.
@@ -84,19 +86,20 @@ partial_effects.setting_contact_model <- function(model, ages, ...){
 #' @details
 #' 
 #' Partial predictive plots give a visual representation of the effect of each
-#' covariate on the model, or (equivalently) the effect of each setting on the total
-#' contact matrix. Positive values indicate more contacts in that region of the matrix compared
-#' to the null case, while negative values indicate less.
+#'   covariate on the model, or (equivalently) the effect of each setting on 
+#'   the total contact matrix. Positive values indicate more contacts in that 
+#'   region of the matrix compared to the null case, while negative values 
+#'   indicate less.
 #' 
-#' Scales are not comparable _across_ settings, as each setting has it's own intercept term
-#' which is not accounted for in partial effects.
+#' Scales are not comparable _across_ settings, as each setting has it's own
+#'   intercept term, which is not accounted for in partial effects.
 #' 
 #' @param model A fitted model, or list of fitted models
 #' @param ages vector of integer ages
 #' @param ... dots for future extension. Currently not used.
 #' @return data frame with 3 columns plus n rows based on expand.grid 
-#'   combination of ages. The column `gam_total_term` is the sum over the coefficients
-#'   for that age bracket.
+#'   combination of ages. The column `gam_total_term` is the sum over 
+#'   the coefficients for that age bracket.
 #' @name partial-prediction-sum
 #' @examples
 #' # Summed up partial effects (y-hat) for a single setting
@@ -199,8 +202,9 @@ autoplot.setting_partial_predictions_sum <- function(object, ...) {
 
 #' Plot partial predictive plots using ggplot2
 #'
-#' @param object An object with partial predictions from [conmat::partial_predictions]
-#' @param ...	 Other arguments passed on
+#' @param object An object with partial predictions from 
+#'   [conmat::partial_predictions()].
+#' @param ...	 Other arguments passed on. Currently not used.
 #' @return a ggplot visualisation of partial effects
 #' @name autoplot-conmat-partial
 #' @export

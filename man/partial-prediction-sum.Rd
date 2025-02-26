@@ -4,7 +4,7 @@
 \alias{partial-prediction-sum}
 \alias{partial_effects_sum}
 \alias{partial_effects_sum.contact_model}
-\title{Helper functions to create partial predictive plots for a set of fitted models.}
+\title{Create partial predictive plots for a set of fitted models.}
 \usage{
 partial_effects_sum(model, ages, ...)
 
@@ -19,8 +19,8 @@ partial_effects_sum(model, ages, ...)
 }
 \value{
 data frame with 3 columns plus n rows based on expand.grid
-combination of ages. The column \code{gam_total_term} is the sum over the coefficients
-for that age bracket.
+combination of ages. The column \code{gam_total_term} is the sum over
+the coefficients for that age bracket.
 }
 \description{
 These helper functions exist to make it easier to explore and understand the
@@ -28,12 +28,13 @@ impact of each of the covariates used in the conmat GAM model.
 }
 \details{
 Partial predictive plots give a visual representation of the effect of each
-covariate on the model, or (equivalently) the effect of each setting on the total
-contact matrix. Positive values indicate more contacts in that region of the matrix compared
-to the null case, while negative values indicate less.
+covariate on the model, or (equivalently) the effect of each setting on
+the total contact matrix. Positive values indicate more contacts in that
+region of the matrix compared to the null case, while negative values
+indicate less.
 
-Scales are not comparable \emph{across} settings, as each setting has it's own intercept term
-which is not accounted for in partial effects.
+Scales are not comparable \emph{across} settings, as each setting has it's own
+intercept term, which is not accounted for in partial effects.
 }
 \examples{
 # Summed up partial effects (y-hat) for a single setting

@@ -17,9 +17,10 @@
 \method{autoplot}{setting_partial_predictions}(object, ...)
 }
 \arguments{
-\item{object}{An object with partial predictions from \link{partial_predictions}}
+\item{object}{An object with partial predictions from
+\code{\link[=partial_predictions]{partial_predictions()}}.}
 
-\item{...}{Other arguments passed on}
+\item{...}{Other arguments passed on. Currently not used.}
 }
 \value{
 a ggplot visualisation of partial effects

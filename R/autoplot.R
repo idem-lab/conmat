@@ -1,9 +1,10 @@
 #' Plot setting matrices using ggplot2
 #'
-#' @param object  A matrix or a list of square matrices, with row and column names
-#'   indicating the age groups.
+#' @param object  A matrix or a list of square matrices, with row and column 
+#'   names indicating the age groups.
 #' @param ...	 Other arguments passed on
-#' @param title Title to give to plot setting matrices. Defaults are provided for certain objects
+#' @param title Title to give to plot setting matrices. Defaults are provided 
+#'   for certain objects
 #' @return a ggplot visualisation of contact rates
 #' @importFrom ggplot2 autoplot
 #' @name autoplot-conmat

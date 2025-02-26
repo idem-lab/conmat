@@ -17,9 +17,11 @@ partial_effects(model, ages, ...)
 \method{partial_effects_sum}{setting_contact_model}(model, ages, ...)
 }
 \arguments{
-\item{model}{A fitted model, or list of fitted models}
+\item{model}{A fitted model, or list of fitted models.}
 
-\item{ages}{vector of integer ages}
+\item{ages}{vector of integer ages.}
+
+\item{...}{extra arguments. Currently not used.}
 }
 \value{
 data frame with 20 columns plus n rows based on expand.grid
@@ -31,12 +33,13 @@ impact of each of the covariates used in the conmat GAM model.
 }
 \details{
 Partial predictive plots give a visual representation of the effect of each
-covariate on the model, or (equivalently) the effect of each setting on the total
-contact matrix. Positive values indicate more contacts in that region of the matrix compared
-to the null case, while negative values indicate less.
+covariate on the model, or (equivalently) the effect of each setting on
+the total contact matrix. Positive values indicate more contacts in that
+region of the matrix compared to the null case, while negative values
+indicate less.
 
-Scales are not comparable \emph{across} settings, as each setting has it's own intercept term
-which is not accounted for in partial effects.
+Scales are not comparable \emph{across} settings, as each setting has it's own
+intercept term which is not accounted for in partial effects.
 }
 \examples{
 partials_home <- partial_effects(
