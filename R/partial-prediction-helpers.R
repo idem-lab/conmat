@@ -202,8 +202,7 @@ autoplot.setting_partial_predictions_sum <- function(object, ...) {
 
 #' Plot partial predictive plots using ggplot2
 #'
-#' @param object An object with partial predictions from 
-#'   [conmat::partial_predictions()].
+#' @param object An object with partial predictions from [partial_effects()].
 #' @param ...	 Other arguments passed on. Currently not used.
 #' @return a ggplot visualisation of partial effects
 #' @name autoplot-conmat-partial
