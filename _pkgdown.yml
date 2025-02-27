@@ -47,6 +47,7 @@ reference:
       - generate_ngm_oz
       - autoplot
       - autoplot-conmat
+      - autoplot.partial_predictions_sum
       
   - title: "ABS Data accessors and helpers"
     desc: > 
@@ -96,6 +97,8 @@ reference:
       - get_age_population_function
       - per_capita_household_size
       - starts_with("add_")
+      - partial-prediction
+      - partial-prediction-sum
       
   - title: "Creating and accessing information on `conmat_population` objects"
     desc: >
