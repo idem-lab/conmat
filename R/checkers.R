@@ -21,15 +21,14 @@
 #' }
 #' @keywords internal
 #' @noRd
-check_lga_name <- function(lga_name,
-                           multiple_lga = FALSE) {
+check_lga_name <- function(lga_name, multiple_lga = FALSE) {
   lga_match <- dplyr::filter(
     abs_pop_age_lga_2020,
     lga %in% lga_name
   )
 
   does_lga_match <- nrow(lga_match) > 1
-  
+
   if (!does_lga_match) {
     cli::cli_abort(
       message = c(
@@ -37,7 +36,7 @@ check_lga_name <- function(lga_name,
         "x" = "The lga name '{lga_name}' did not match (it probably \\
         needs '{lga_name} (C)' or similar)",
         "i" = "See `abs_lga_lookup` for a list of all LGAs"
-    )
+      )
     )
   }
 
@@ -79,7 +78,7 @@ check_state_name <- function(state_name, multiple_state = FALSE) {
 
   all_match <- all(state_match)
   state_that_doesnt_match <- setdiff(state_name, state_that_matches)
-  
+
   if (!all_match) {
     cli::cli_abort(
       message = c(
@@ -142,9 +141,11 @@ check_if_var_numeric <- function(data, var, attribute) {
   }
 }
 
-check_if_data_frame <- function(x,
-                                arg = rlang::caller_arg(x),
-                                call = rlang::caller_env()) {
+check_if_data_frame <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
   if (!is.data.frame(x)) {
     cli::cli_abort(
       message = c(
@@ -189,10 +190,7 @@ check_if_all_matrix <- function(x) {
   }
 }
 
-check_age_breaks <- function(x,
-                             y,
-                             x_arg = "old",
-                             y_arg = "new") {
+check_age_breaks <- function(x, y, x_arg = "old", y_arg = "new") {
   if (!identical(x, y)) {
     compare_res <- waldo::compare(
       x = x,

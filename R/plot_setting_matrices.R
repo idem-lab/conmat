@@ -35,8 +35,10 @@
 #' }
 #' @noRd
 #' @keywords internal
-plot_setting_matrices <- function(matrices,
-                                  title = "Setting-specific synthetic contact matrices") {
+plot_setting_matrices <- function(
+  matrices,
+  title = "Setting-specific synthetic contact matrices"
+) {
   plot_home <- plot_matrix(matrices$home) + ggplot2::ggtitle("home")
   plot_school <- plot_matrix(matrices$school) + ggplot2::ggtitle("school")
   plot_work <- plot_matrix(matrices$work) + ggplot2::ggtitle("work")

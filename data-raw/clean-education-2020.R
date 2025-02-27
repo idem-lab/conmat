@@ -57,7 +57,8 @@ abs_state_age_lookup <- abs_state_age %>%
   )
 
 abs_education_state_2020_raw %>%
-  left_join(abs_state_age_lookup,
+  left_join(
+    abs_state_age_lookup,
     by = c(
       "state",
       "age"
@@ -85,7 +86,9 @@ abs_education_state_2020$population[[2]]
 abs_education_state_2020
 
 abs_education_state_raw_table_notes <- read_excel(
-  here("data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"),
+  here(
+    "data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"
+  ),
   sheet = "Table 2",
   skip = 68563
 )

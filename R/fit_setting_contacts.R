@@ -59,11 +59,13 @@
 #'   work_demographics = conmat_original_work_demographics
 #' )
 #' }
-fit_setting_contacts <- function(contact_data_list,
-                                 population,
-                                 symmetrical = TRUE,
-                                 school_demographics = NULL,
-                                 work_demographics = NULL) {
+fit_setting_contacts <- function(
+  contact_data_list,
+  population,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+) {
   check_if_list(contact_data_list)
 
   fitted_setting_contacts <- furrr::future_map(
@@ -79,5 +81,5 @@ fit_setting_contacts <- function(contact_data_list,
   new_setting_contact_model(
     list_model = fitted_setting_contacts,
     age_breaks = age_breaks(contact_data_list)
-    )
+  )
 }

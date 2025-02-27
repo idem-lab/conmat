@@ -27,7 +27,6 @@ test_that("check_lga_name errors for some lgas", {
 # t_household_per_capita_runs <- transpose(household_per_capita_runs)
 # compact(t_household_per_capita_runs$error)
 
-
 # thinking about which ones error?
 # safe_check_lga_name <- safely(check_lga_name)
 #

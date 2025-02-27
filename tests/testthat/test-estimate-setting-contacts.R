@@ -10,7 +10,8 @@ filter_setting_age <- function(list_df, age) {
     list_df,
     filter_age,
     age
-  ) %>% new_setting_data()
+  ) %>%
+    new_setting_data()
 }
 
 contact_data_cut <- filter_setting_age(polymod_contacts, 10)

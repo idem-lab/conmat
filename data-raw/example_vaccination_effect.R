@@ -1,4 +1,6 @@
-vaccination_effect_example_data <- readr::read_csv("data-raw/example_vaccine_coverage_effects.csv") %>%
+vaccination_effect_example_data <- readr::read_csv(
+  "data-raw/example_vaccine_coverage_effects.csv"
+) %>%
   select(age_band, coverage, acquisition, transmission) %>%
   tibble::as_tibble()
 

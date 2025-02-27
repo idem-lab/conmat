@@ -90,14 +90,16 @@
 #' )
 #' }
 #' @export
-estimate_setting_contacts <- function(contact_data_list,
-                                      survey_population,
-                                      prediction_population = survey_population,
-                                      age_breaks,
-                                      per_capita_household_size = NULL,
-                                      symmetrical = TRUE,
-                                      school_demographics = NULL,
-                                      work_demographics = NULL) {
+estimate_setting_contacts <- function(
+  contact_data_list,
+  survey_population,
+  prediction_population = survey_population,
+  age_breaks,
+  per_capita_household_size = NULL,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+) {
   setting_models <- fit_setting_contacts(
     contact_data_list = contact_data_list,
     population = survey_population,

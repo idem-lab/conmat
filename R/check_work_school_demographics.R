@@ -46,7 +46,11 @@ check_school_demographics <- function(school_demographics) {
 
   vctrs::vec_assert(school_demographics$school_fraction, numeric())
 
-  is_proportion <- all(dplyr::between(school_demographics$school_fraction, 0, 1))
+  is_proportion <- all(dplyr::between(
+    school_demographics$school_fraction,
+    0,
+    1
+  ))
 
   if (!is_proportion) {
     cli::cli_abort(

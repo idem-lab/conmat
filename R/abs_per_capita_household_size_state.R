@@ -18,8 +18,6 @@ get_abs_per_capita_household_size_state <- function(state = NULL) {
   # get state mean household sizes
   household_data <- get_abs_household_size_population(state = state)
 
-
-
   # set up aggregation
   household_data <- household_data %>%
     dplyr::filter(state == !!state) %>%

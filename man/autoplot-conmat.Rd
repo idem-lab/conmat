@@ -24,12 +24,13 @@
 \method{autoplot}{setting_vaccination_matrix}(object, ..., title = "Setting-specific vaccination matrices")
 }
 \arguments{
-\item{object}{A matrix or a list of square matrices, with row and column names
-indicating the age groups.}
+\item{object}{A matrix or a list of square matrices, with row and column
+names indicating the age groups.}
 
 \item{...}{Other arguments passed on}
 
-\item{title}{Title to give to plot setting matrices. Defaults are provided for certain objects}
+\item{title}{Title to give to plot setting matrices. Defaults are provided
+for certain objects}
 }
 \value{
 a ggplot visualisation of contact rates

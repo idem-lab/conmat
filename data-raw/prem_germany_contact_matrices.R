@@ -8,19 +8,19 @@ load("data-raw/prem/contact_all.rdata")
 
 # ISO3 code for Germany is DEU
 
-prem_home <- contact_home[["DEU"]] %>% 
+prem_home <- contact_home[["DEU"]] %>%
   t()
 
-prem_work <- contact_work[["DEU"]] %>% 
+prem_work <- contact_work[["DEU"]] %>%
   t()
 
-prem_school <- contact_school[["DEU"]] %>% 
+prem_school <- contact_school[["DEU"]] %>%
   t()
 
-prem_other <- contact_others[["DEU"]] %>% 
+prem_other <- contact_others[["DEU"]] %>%
   t()
 
-prem_all <- contact_all[["DEU"]] %>% 
+prem_all <- contact_all[["DEU"]] %>%
   t()
 
 prem_germany_contact_matrices <- list(

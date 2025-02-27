@@ -1,5 +1,7 @@
-new_transmission_probability_matrix <- function(list_matrix,
-                                                age_breaks = NULL) {
+new_transmission_probability_matrix <- function(
+  list_matrix,
+  age_breaks = NULL
+) {
   structure(
     list_matrix,
     age_breaks = age_breaks,
@@ -40,8 +42,7 @@ new_transmission_probability_matrix <- function(list_matrix,
 #' x_example
 #'
 #' @export
-transmission_probability_matrix <- function(...,
-                                            age_breaks) {
+transmission_probability_matrix <- function(..., age_breaks) {
   list_matrix <- prepare_list_matrix(...)
 
   setting_transmission_mat <- set_age_breaks_matrices(

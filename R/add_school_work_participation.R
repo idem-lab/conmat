@@ -59,9 +59,11 @@
 #'     work_demographics = conmat_original_work_demographics
 #'   )
 #' @export
-add_school_work_participation <- function(contact_data,
-                                          school_demographics = NULL,
-                                          work_demographics = NULL) {
+add_school_work_participation <- function(
+  contact_data,
+  school_demographics = NULL,
+  work_demographics = NULL
+) {
   contact_data %>%
     add_school_fraction(school_demographics) %>%
     add_school_probability() %>%
@@ -143,7 +145,9 @@ add_school_probability <- function(contact_data) {
       # year
       # if they're one year apart, they have a 25% chance of being in the same year
       # note - might change this to be an if else or case when
-      school_year_probability = school_probability * (2 - pmin(2, abs(age_from - age_to))) / 4,
+      school_year_probability = school_probability *
+        (2 - pmin(2, abs(age_from - age_to))) /
+        4,
       # a weighted combination of this and the population age distribution, so
       # that if the contact is in the same school year, the weight is 1, and
       # otherwise it is the population age fraction. this can be used as an
@@ -151,7 +155,9 @@ add_school_probability <- function(contact_data) {
       # classroom, but does not affect classroom contacts (which due to
       # cohorting and regularised class sizes are unlikely to depend on the
       # population age distribution)
-      school_weighted_pop_fraction = pop_age_to * (1 - school_year_probability) + 1 * school_year_probability
+      school_weighted_pop_fraction = pop_age_to *
+        (1 - school_year_probability) +
+        1 * school_year_probability
     )
 }
 

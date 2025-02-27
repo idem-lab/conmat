@@ -141,7 +141,6 @@ unique(abs_employ_age_lga$age)
 unique(abs_employ_age_lga$labour_force_status)
 
 
-
 abs_employ_age_lga %>%
   arrange(lga, age, labour_force_status)
 

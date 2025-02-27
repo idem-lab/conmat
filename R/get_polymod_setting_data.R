@@ -11,10 +11,18 @@
 #' get_polymod_setting_data()
 #' get_polymod_setting_data("Belgium")
 #' @export
-get_polymod_setting_data <- function(countries = c(
-                                       "Belgium", "Finland", "Germany", "Italy", "Luxembourg", "Netherlands",
-                                       "Poland", "United Kingdom"
-                                     )) {
+get_polymod_setting_data <- function(
+  countries = c(
+    "Belgium",
+    "Finland",
+    "Germany",
+    "Italy",
+    "Luxembourg",
+    "Netherlands",
+    "Poland",
+    "United Kingdom"
+  )
+) {
   list(
     home = get_polymod_contact_data(
       setting = "home",

@@ -131,7 +131,7 @@ age_breaks.transmission_probability_matrix <- function(x) {
 
 #' @describeIn age_breaks Get age break information
 #' @export
-age_breaks.setting_contact_model <- function(x){
+age_breaks.setting_contact_model <- function(x) {
   attr(x, "age_breaks")
 }
 
@@ -147,7 +147,7 @@ age_breaks.default <- function(x) {
 #'
 #' @param list_df list of data frames
 #'
-#' @return object with additional (primary) class "setting data" and an "age_breaks attribute. 
+#' @return object with additional (primary) class "setting data" and an "age_breaks attribute.
 #' @export
 new_setting_data <- function(list_df) {
   structure(
@@ -164,12 +164,14 @@ new_setting_data <- function(list_df) {
 #' @param scaling scaling factor
 #' @param age_breaks vector of age breaks
 #'
-#' @return object with additional (primary) class "ngm_setting_matrix", and attributes for "age_breaks", "scaling", and "raw_eigenvalue". 
+#' @return object with additional (primary) class "ngm_setting_matrix", and attributes for "age_breaks", "scaling", and "raw_eigenvalue".
 #' @export
-new_ngm_setting_matrix <- function(list_matrix,
-                                   raw_eigenvalue,
-                                   scaling,
-                                   age_breaks) {
+new_ngm_setting_matrix <- function(
+  list_matrix,
+  raw_eigenvalue,
+  scaling,
+  age_breaks
+) {
   structure(
     list_matrix,
     raw_eigenvalue = raw_eigenvalue,
@@ -228,8 +230,7 @@ scaling <- function(list_matrix) {
   attr(list_matrix, "scaling")
 }
 
-new_setting_contact_model <- function(list_model, 
-                                      age_breaks) {
+new_setting_contact_model <- function(list_model, age_breaks) {
   structure(
     list_model,
     age_breaks = age_breaks,
@@ -237,8 +238,14 @@ new_setting_contact_model <- function(list_model,
   )
 }
 
-new_setting_vaccination_matrix <- function(list_matrix,
-                                           age_breaks) {
+new_contact_model <- function(model) {
+  structure(
+    model,
+    class = c("contact_model", class(model))
+  )
+}
+
+new_setting_vaccination_matrix <- function(list_matrix, age_breaks) {
   structure(
     list_matrix,
     age_breaks = age_breaks,

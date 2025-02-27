@@ -15,12 +15,14 @@
 #'
 #' @return data frame with `lower.age.limit` and `upper.age.limit` and
 #'   optionally filtered down to specific location or year.
-clean_age_population_year <- function(data,
-                                      location_col = NULL,
-                                      location = NULL,
-                                      age_col,
-                                      year_col = NULL,
-                                      year = NULL) {
+clean_age_population_year <- function(
+  data,
+  location_col = NULL,
+  location = NULL,
+  age_col,
+  year_col = NULL,
+  year = NULL
+) {
   # separate age group into "lower.age.limit" & "upper.age.limit"
   age_population_year_df <- separate_age_group(data, {{ age_col }})
 
@@ -115,11 +117,13 @@ print_model_info <- function(x, object_class) {
   cli::cli_li(names_x)
 }
 
-print_setting_info <- function(x,
-                               heading,
-                               description = NULL,
-                               list_print_fun = print_list_dim(x, object_class),
-                               object_class) {
+print_setting_info <- function(
+  x,
+  heading,
+  description = NULL,
+  list_print_fun = print_list_dim(x, object_class),
+  object_class
+) {
   age_breaks <- age_breaks(x)
   cli::cli_h1(heading)
   cli::cat_line()
@@ -323,14 +327,20 @@ print_age_breaks <- function(age_breaks) {
   year_gap <- age_interval(age_breaks)
 
   if (has_inf) {
-    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age}+ years, ")
+    age_info <- glue::glue(
+      "There are {n_age_breaks} age breaks, ranging {min_age}-{max_age}+ years, "
+    )
   } else if (!has_inf) {
-    age_info <- glue::glue("There are {n_age_breaks} age breaks, ranging {min_age}-{max_age} years, ")
+    age_info <- glue::glue(
+      "There are {n_age_breaks} age breaks, ranging {min_age}-{max_age} years, "
+    )
   }
   if (equally_spaced) {
     age_gap_info <- glue::glue("with a regular {year_gap} year interval")
   } else if (!equally_spaced) {
-    age_gap_info <- glue::glue("with an irregular year interval, (on average, {year_gap} years)")
+    age_gap_info <- glue::glue(
+      "with an irregular year interval, (on average, {year_gap} years)"
+    )
   }
 
   cli::cli_text(
@@ -339,4 +349,12 @@ print_age_breaks <- function(age_breaks) {
       age_gap_info
     )
   )
+}
+
+
+named_group_split <- function(df, group_var) {
+  grouped_df <- df |> group_by({{ group_var }})
+  split_list <- grouped_df |> group_split()
+  names(split_list) <- grouped_df |> group_keys() |> pull({{ group_var }})
+  return(split_list)
 }

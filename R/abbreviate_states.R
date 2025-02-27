@@ -38,7 +38,8 @@ abs_abbreviate_states <- function(state_names) {
 #' @export
 abs_unabbreviate_states <- function(state_names) {
   dplyr::case_when(
-    state_names %in% c("Australian Capital Territory", "ACT") ~ "Australian Capital Territory",
+    state_names %in% c("Australian Capital Territory", "ACT") ~
+      "Australian Capital Territory",
     state_names %in% c("New South Wales", "NSW") ~ "New South Wales",
     state_names %in% c("Northern Territory", "NT") ~ "Northern Territory",
     state_names %in% c("Queensland", "QLD") ~ "Queensland",

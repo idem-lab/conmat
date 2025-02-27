@@ -25,9 +25,11 @@
 #'   n_people_col = n_people
 #' )
 #'
-per_capita_household_size <- function(household_data,
-                                      household_size_col = household_size,
-                                      n_people_col = n_people) {
+per_capita_household_size <- function(
+  household_data,
+  household_size_col = household_size,
+  n_people_col = n_people
+) {
   # aggregate and average household sizes
   household_data %>%
     dplyr::group_by(

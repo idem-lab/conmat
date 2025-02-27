@@ -144,11 +144,13 @@
 #'   work_demographics = conmat_original_work_demographics
 #' )
 #' @export
-fit_single_contact_model <- function(contact_data,
-                                     population,
-                                     symmetrical = TRUE,
-                                     school_demographics = NULL,
-                                     work_demographics = NULL) {
+fit_single_contact_model <- function(
+  contact_data,
+  population,
+  symmetrical = TRUE,
+  school_demographics = NULL,
+  work_demographics = NULL
+) {
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data
@@ -158,39 +160,40 @@ fit_single_contact_model <- function(contact_data,
       # Prem method did a post-hoc smoothing
       # abs(age_from - age_to)
       s(gam_age_offdiag) +
-      # abs(age_from - age_to)^2
-      s(gam_age_offdiag_2) +
-      # abs(age_from * age_to)
-      s(gam_age_diag_prod) +
-      # abs(age_from + age_to)
-      s(gam_age_diag_sum) +
-      # pmax(age_from, age_to)
-      s(gam_age_pmax) +
-      # pmin(age_from, age_to)
-      s(gam_age_pmin) +
-      school_probability +
-      work_probability
+        # abs(age_from - age_to)^2
+        s(gam_age_offdiag_2) +
+        # abs(age_from * age_to)
+        s(gam_age_diag_prod) +
+        # abs(age_from + age_to)
+        s(gam_age_diag_sum) +
+        # pmax(age_from, age_to)
+        s(gam_age_pmax) +
+        # pmin(age_from, age_to)
+        s(gam_age_pmin) +
+        school_probability +
+        work_probability
   } else if (!symmetrical) {
     formula_no_offset <- contacts ~
       # # deviation of contact age distribution from population age distribution
       s(age_to) +
-      # # number of contacts by age
-      s(age_from) +
-      # # intergenerational contact patterns - enables the off-diagonals
-      # # intergenerational is defined as:
-      #   # intergenerational = abs(age_from - age_to)
-      s(intergenerational) +
-      # # interaction between intergenerational patterns and age_from, to remove
-      # # ridge for some ages and settings
-      s(intergenerational, age_from) +
-      # probabilities of both attending (any) school/work
-      school_probability +
-      work_probability
+        # # number of contacts by age
+        s(age_from) +
+        # # intergenerational contact patterns - enables the off-diagonals
+        # # intergenerational is defined as:
+        #   # intergenerational = abs(age_from - age_to)
+        s(intergenerational) +
+        # # interaction between intergenerational patterns and age_from, to remove
+        # # ridge for some ages and settings
+        s(intergenerational, age_from) +
+        # probabilities of both attending (any) school/work
+        school_probability +
+        work_probability
   }
 
   # choose the offset variable based on the setting
   setting <- contact_data$setting[1]
-  offset_variable <- switch(setting,
+  offset_variable <- switch(
+    setting,
     school = "log_contactable_population_school",
     "log_contactable_population"
   )
@@ -204,7 +207,7 @@ fit_single_contact_model <- function(contact_data,
   formula <- update(formula_no_offset, formula_offset)
 
   # contact model for all locations together
-  contact_data %>%
+  model <- contact_data %>%
     # NOTE
     # Do we need to have this data cleaning step in here?
     # I think we should instead have this as a separate preparation step for
@@ -228,4 +231,8 @@ fit_single_contact_model <- function(contact_data,
       offset = log(participants),
       data = .
     )
+
+  new_contact_model(
+    model = model
+  )
 }

@@ -10,7 +10,7 @@ polymod_setting_short <- map(
   .f = function(x) {
     x %>% filter(age_from <= 20, age_to <= 20)
   }
-) |> 
+) |>
   new_setting_data()
 
 polymod_population_short <- polymod_population %>% filter(lower.age.limit <= 20)
@@ -38,7 +38,7 @@ contact_model_diff_data <- fit_setting_contacts(
   work_demographics = conmat_original_work_demographics
 )
 
-test_that("fit_setting_contact model prints appropriately",{
+test_that("fit_setting_contact model prints appropriately", {
   expect_snapshot(contact_model)
 })
 

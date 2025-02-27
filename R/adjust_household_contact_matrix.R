@@ -24,9 +24,11 @@
 #' @author Nick Golding
 #' @keywords internal
 #' @noRd
-adjust_household_contact_matrix <- function(setting_matrices,
-                                            per_capita_household_size,
-                                            model_per_capita_household_size) {
+adjust_household_contact_matrix <- function(
+  setting_matrices,
+  per_capita_household_size,
+  model_per_capita_household_size
+) {
   # given a list of 4 setting-specific synthetic contact matrices (including
   # 'home'), and a mean household size, adjust the number of household contacts
   # to match the average household size in that LGA from ABS, accounting for the
@@ -36,7 +38,8 @@ adjust_household_contact_matrix <- function(setting_matrices,
   # get ratio between expected number of other household members (household size
   # minus 1) for this place from ABS data, and the average from the data used to
   # train the model
-  ratio <- (per_capita_household_size - 1) / (model_per_capita_household_size - 1)
+  ratio <- (per_capita_household_size - 1) /
+    (model_per_capita_household_size - 1)
 
   # adjust home matrix and recompute all matrix
   settings <- setdiff(names(setting_matrices), "all")

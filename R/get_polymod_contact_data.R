@@ -37,23 +37,25 @@
 #' get_polymod_contact_data(contact_age_imputation = "mean")
 #' get_polymod_contact_data(contact_age_imputation = "remove_participant")
 #' @export
-get_polymod_contact_data <- function(setting = c("all", "home", "work", "school", "other"),
-                                     countries = c(
-                                       "Belgium",
-                                       "Finland",
-                                       "Germany",
-                                       "Italy",
-                                       "Luxembourg",
-                                       "Netherlands",
-                                       "Poland",
-                                       "United Kingdom"
-                                     ),
-                                     ages = 0:100,
-                                     contact_age_imputation = c("sample", "mean", "remove_participant")) {
+get_polymod_contact_data <- function(
+  setting = c("all", "home", "work", "school", "other"),
+  countries = c(
+    "Belgium",
+    "Finland",
+    "Germany",
+    "Italy",
+    "Luxembourg",
+    "Netherlands",
+    "Poland",
+    "United Kingdom"
+  ),
+  ages = 0:100,
+  contact_age_imputation = c("sample", "mean", "remove_participant")
+) {
   setting <- match.arg(setting)
   contact_age_imputation <- match.arg(contact_age_imputation)
 
-  contact_data <- polymod$participants %>%
+  contact_data <- socialmixr::polymod$participants %>%
     dplyr::filter(
       country %in% countries
     ) %>%

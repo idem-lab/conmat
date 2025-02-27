@@ -88,11 +88,13 @@
 #' )
 #' }
 #' @export
-generate_ngm <- function(x,
-                         age_breaks,
-                         R_target,
-                         setting_transmission_matrix,
-                         ...) {
+generate_ngm <- function(
+  x,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix,
+  ...
+) {
   # detect if state_name or lga_name are used
   # then give an informative error that the user should use
   # `generate_ngm_oz`
@@ -113,14 +115,16 @@ generate_ngm <- function(x,
 #' }
 #' @rdname generate_ngm
 #' @export
-generate_ngm.conmat_setting_prediction_matrix <- function(x,
-                                                          age_breaks,
-                                                          R_target,
-                                                          setting_transmission_matrix = NULL,
-                                                          per_capita_household_size = NULL,
-                                                          ...,
-                                                          lga_name,
-                                                          state_name) {
+generate_ngm.conmat_setting_prediction_matrix <- function(
+  x,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+) {
   if (!missing(state_name)) {
     error_old_ngm_arg(state_name)
   }
@@ -151,14 +155,16 @@ generate_ngm.conmat_setting_prediction_matrix <- function(x,
 #' @param per_capita_household_size default is NULL - which defaults to [get_polymod_per_capita_household_size()], which gives 3.248971
 #' @rdname generate_ngm
 #' @export
-generate_ngm.conmat_population <- function(x,
-                                           age_breaks,
-                                           R_target,
-                                           setting_transmission_matrix = NULL,
-                                           per_capita_household_size = NULL,
-                                           ...,
-                                           lga_name,
-                                           state_name) {
+generate_ngm.conmat_population <- function(
+  x,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL,
+  per_capita_household_size = NULL,
+  ...,
+  lga_name,
+  state_name
+) {
   setting_contact_rates <- extrapolate_polymod(
     population = x,
     age_breaks = age_breaks,
@@ -212,17 +218,21 @@ generate_ngm.conmat_population <- function(x,
 #'   R_target = 1.5
 #' )
 #' }
-generate_ngm_oz <- function(state_name = NULL,
-                            lga_name = NULL,
-                            age_breaks,
-                            R_target,
-                            setting_transmission_matrix = NULL) {
+generate_ngm_oz <- function(
+  state_name = NULL,
+  lga_name = NULL,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix = NULL
+) {
   # pull out the age distribution of the target population &
   # the per-capita (ie. averaged over people, not households) household
   # size in this population
   if (!is.null(state_name)) {
     population <- abs_age_state(state_name = {{ state_name }})
-    household_size <- get_abs_per_capita_household_size(state = {{ state_name }})
+    household_size <- get_abs_per_capita_household_size(
+      state = {{ state_name }}
+    )
   } else {
     population <- abs_age_lga(lga_name = {{ lga_name }})
     household_size <- get_abs_per_capita_household_size(lga = {{ lga_name }})
@@ -251,10 +261,12 @@ generate_ngm_oz <- function(state_name = NULL,
 }
 
 
-calculate_ngm <- function(setting_prediction_matrix,
-                          age_breaks,
-                          R_target,
-                          setting_transmission_matrix) {
+calculate_ngm <- function(
+  setting_prediction_matrix,
+  age_breaks,
+  R_target,
+  setting_transmission_matrix
+) {
   # get relative (ie. needing to be scaled to a given R) transmission
   # probabilities between pairs of ages in different settings - these incorporate
   # relative infectiousness by age (based on symptomatic fraction), relative
@@ -293,14 +305,18 @@ calculate_ngm <- function(setting_prediction_matrix,
     SIMPLIFY = FALSE
   )
 
-  new_ngm_setting_matrix(setting_ngms,
+  new_ngm_setting_matrix(
+    setting_ngms,
     raw_eigenvalue = R_raw,
     scaling = scaling,
     age_breaks = age_breaks
   )
 }
 
-check_transmission_probabilities <- function(input_transmission_probs, age_breaks) {
+check_transmission_probabilities <- function(
+  input_transmission_probs,
+  age_breaks
+) {
   if (is.null(input_transmission_probs)) {
     input_transmission_probs <- get_setting_transmission_matrices(
       age_breaks = age_breaks

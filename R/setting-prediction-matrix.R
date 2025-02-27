@@ -1,5 +1,4 @@
-new_setting_prediction_matrix <- function(list_matrix,
-                                          age_breaks = NULL) {
+new_setting_prediction_matrix <- function(list_matrix, age_breaks = NULL) {
   structure(
     list_matrix,
     age_breaks = age_breaks,
@@ -40,8 +39,7 @@ new_setting_prediction_matrix <- function(list_matrix,
 #' x_example
 #'
 #' @export
-setting_prediction_matrix <- function(...,
-                                      age_breaks) {
+setting_prediction_matrix <- function(..., age_breaks) {
   list_matrix <- prepare_list_matrix(...)
 
   setting_pred_matrix <- set_age_breaks_matrices(
@@ -89,16 +87,12 @@ setting_prediction_matrix <- function(...,
 #' mat_set
 #'
 #' @export
-as_setting_prediction_matrix <- function(list_matrix,
-                                         age_breaks,
-                                         ...) {
+as_setting_prediction_matrix <- function(list_matrix, age_breaks, ...) {
   UseMethod("as_setting_prediction_matrix")
 }
 
 #' @export
-as_setting_prediction_matrix.default <- function(list_matrix,
-                                                 age_breaks,
-                                                 ...) {
+as_setting_prediction_matrix.default <- function(list_matrix, age_breaks, ...) {
   cli::cli_abort(
     "{.code as_setting_prediction_matrix} method not implemented for {.cls \\
     {class(list_matrix)}}"
@@ -106,9 +100,11 @@ as_setting_prediction_matrix.default <- function(list_matrix,
 }
 
 #' @export
-as_setting_prediction_matrix.conmat_setting_prediction_matrix <- function(list_matrix,
-                                                                          age_breaks,
-                                                                          ...) {
+as_setting_prediction_matrix.conmat_setting_prediction_matrix <- function(
+  list_matrix,
+  age_breaks,
+  ...
+) {
   cli::cli_warn(
     "{.code as_setting_prediction_matrix} not used as this object is alreadt of
     a {.cls conmat_setting_prediction_matrix} method not implemented for \\
@@ -117,9 +113,7 @@ as_setting_prediction_matrix.conmat_setting_prediction_matrix <- function(list_m
 }
 
 #' @export
-as_setting_prediction_matrix.list <- function(list_matrix,
-                                              age_breaks,
-                                              ...) {
+as_setting_prediction_matrix.list <- function(list_matrix, age_breaks, ...) {
   check_if_all_matrix(list_matrix)
   # do something if list_matrix doesn't have any names
   list_matrix <- repair_list_matrix_names(list_matrix)

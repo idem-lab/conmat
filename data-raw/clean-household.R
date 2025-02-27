@@ -1,7 +1,9 @@
 library(tidyverse)
 library(here)
 library(conmat)
-abs_household_lga <- read_csv(file = here("data-raw/ABS_C16_T23_LGA_06092021160753604.csv")) %>%
+abs_household_lga <- read_csv(
+  file = here("data-raw/ABS_C16_T23_LGA_06092021160753604.csv")
+) %>%
   rename(
     throw_hhcd_2016 = HHCD_2016,
     household_composition = `Household Composition`,
@@ -117,10 +119,13 @@ household_raw %>%
 
 
 household_raw %>%
-  filter(n_persons_usually_resident %in% c(
-    "total",
-    "8+"
-  )) %>%
+  filter(
+    n_persons_usually_resident %in%
+      c(
+        "total",
+        "8+"
+      )
+  ) %>%
   left_join(
     abs_2016_lga_pop,
     by = c("year", "state", "lga_name")
