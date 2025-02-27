@@ -1,12 +1,9 @@
-
-
 # Data Source: Census of Population and Housing, 2016, TableBuilder
 
 library(readr)
 library(conmat)
 library(janitor)
 library(tidyverse)
-
 
 
 # TYPP included
@@ -16,11 +13,12 @@ data_abs_state_education <-
   row_to_names(row_number = 1) %>%
   select(-1) %>%
   filter(
-    !`STATE (UR)` %in% c(
-      "Total",
-      NA,
-      "Cells in this table have been randomly adjusted to avoid the release of confidential data. No reliance should be placed on small cells."
-    )
+    !`STATE (UR)` %in%
+      c(
+        "Total",
+        NA,
+        "Cells in this table have been randomly adjusted to avoid the release of confidential data. No reliance should be placed on small cells."
+      )
   ) %>%
   # Institution (TYPP) stated, full-time/part-time status (STUP) not stated -> considered
   mutate(
@@ -33,17 +31,20 @@ data_abs_state_education <-
   ) %>%
   select(state, age, student_type, Count) %>%
   filter(
-    student_type %in% c(
-      "Full-time student",
-      "Part-time student",
-      "Total",
-      "Institution (TYPP) stated, full-time/part-time status (STUP) not stated"
+    student_type %in%
+      c(
+        "Full-time student",
+        "Part-time student",
+        "Total",
+        "Institution (TYPP) stated, full-time/part-time status (STUP) not stated"
+      )
+  ) %>%
+  mutate(
+    student_type = case_when(
+      str_detect(student_type, "TYPP") ~ "TYPP",
+      TRUE ~ as.character(student_type)
     )
   ) %>%
-  mutate(student_type = case_when(
-    str_detect(student_type, "TYPP") ~ "TYPP",
-    TRUE ~ as.character(student_type)
-  )) %>%
   pivot_wider(
     names_from = student_type,
     values_from = Count,
@@ -55,13 +56,16 @@ data_abs_state_education <-
     age = as.numeric(age),
     year = 2016,
     population_educated = as.numeric(`Full-time student`) +
-      as.numeric(`Part-time student`) + as.numeric(`TYPP`),
+      as.numeric(`Part-time student`) +
+      as.numeric(`TYPP`),
     proportion = population_educated / total_population
   ) %>%
-  mutate(proportion = case_when(
-    total_population == 0 & population_educated == 0 ~ 0,
-    TRUE ~ as.numeric(proportion)
-  )) %>%
+  mutate(
+    proportion = case_when(
+      total_population == 0 & population_educated == 0 ~ 0,
+      TRUE ~ as.numeric(proportion)
+    )
+  ) %>%
   # filter(total_population != 0) %>%
   select(
     year,

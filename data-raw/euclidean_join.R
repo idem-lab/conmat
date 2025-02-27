@@ -7,9 +7,11 @@
 #' @return
 #' @author Nick Golding
 #' @export
-euclidean_join <- function(.data,
-                           legend,
-                           by = intersect(names(.data), names(legend))) {
+euclidean_join <- function(
+  .data,
+  legend,
+  by = intersect(names(.data), names(legend))
+) {
   # Do Euclidean lookup from matrix pixels to legends
 
   # get Euclidean distance matrix between data and legend

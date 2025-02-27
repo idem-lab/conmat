@@ -3,7 +3,9 @@ library(janitor)
 
 
 aus_states <- c(
-  "New South Wales", "Victoria", "Queensland",
+  "New South Wales",
+  "Victoria",
+  "Queensland",
   "South Australia",
   "Western Australia",
   "Tasmania",
@@ -11,8 +13,10 @@ aus_states <- c(
   "Australian Capital Territory"
 )
 
-abs_census_labour_status <- read_csv("data-raw/2016_abs_census_labour_status.csv",
-  skip = 8, n_max = 138
+abs_census_labour_status <- read_csv(
+  "data-raw/2016_abs_census_labour_status.csv",
+  skip = 8,
+  n_max = 138
 )
 
 get_data <- function(i) {
@@ -30,9 +34,11 @@ get_data <- function(i) {
     mutate(
       year = 2016,
       age = as.numeric(age),
-      employed_population = as.numeric(employed_worked_full_time +
-        employed_worked_part_time +
-        employed_away_from_work),
+      employed_population = as.numeric(
+        employed_worked_full_time +
+          employed_worked_part_time +
+          employed_away_from_work
+      ),
       proportion = employed_population / total,
       state = abs_census_labour_status$...1[[i]]
     ) %>%
@@ -40,11 +46,20 @@ get_data <- function(i) {
       state = conmat::abs_abbreviate_states(state),
       state = replace_na(state, "OT")
     ) %>%
-    select(year, state, age, employed_population, total_population = total, proportion) %>%
-    mutate(proportion = case_when(
-      total_population == 0 & employed_population == 0 ~ 0,
-      TRUE ~ as.numeric(proportion)
-    ))
+    select(
+      year,
+      state,
+      age,
+      employed_population,
+      total_population = total,
+      proportion
+    ) %>%
+    mutate(
+      proportion = case_when(
+        total_population == 0 & employed_population == 0 ~ 0,
+        TRUE ~ as.numeric(proportion)
+      )
+    )
 }
 
 
@@ -80,18 +95,20 @@ work_fraction <- ~ dplyr::case_when(
 )
 
 work_fraction <- data_abs_state_work_2016 %>%
-  mutate(age_group = case_when(
-    # child labour
-    age %in% 12:19 ~ "12-19",
-    # young adults (not at school)
-    age %in% 20:24 ~ "20-24",
-    # main workforce
-    age %in% 25:60 ~ "25-60",
-    # possibly retired
-    age %in% 61:65 ~ "61-64",
-    # other
-    TRUE ~ "Other"
-  )) %>%
+  mutate(
+    age_group = case_when(
+      # child labour
+      age %in% 12:19 ~ "12-19",
+      # young adults (not at school)
+      age %in% 20:24 ~ "20-24",
+      # main workforce
+      age %in% 25:60 ~ "25-60",
+      # possibly retired
+      age %in% 61:65 ~ "61-64",
+      # other
+      TRUE ~ "Other"
+    )
+  ) %>%
   group_by(age_group) %>%
   summarise(work_fraction = sum(employed_population) / sum(total_population))
 
@@ -103,9 +120,9 @@ conmat_work_prop_data <-
   )
 
 work_fraction_comparison_table <- inner_join(
-  conmat_work_prop_data, 
-  work_fraction, 
+  conmat_work_prop_data,
+  work_fraction,
   by = "age_group"
-  )
+)
 
 work_fraction_comparison_table

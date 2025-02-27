@@ -45,7 +45,8 @@ abs_state_age <- read_excel(
       age_group == "100 and over" ~ "100+",
       TRUE ~ age_group
     ),
-    age_group = factor(age_group,
+    age_group = factor(
+      age_group,
       levels = str_sort(unique(age_group), numeric = TRUE)
     )
   )

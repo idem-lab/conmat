@@ -38,9 +38,11 @@
 #' synthetic_settings_5y_fairfield
 #' }
 #' @export
-extrapolate_polymod <- function(population,
-                                age_breaks = c(seq(0, 75, by = 5), Inf),
-                                per_capita_household_size = NULL) {
+extrapolate_polymod <- function(
+  population,
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  per_capita_household_size = NULL
+) {
   contact_model_pred <- predict_setting_contacts(
     population = population,
     # using already fit polymod_setting_models object

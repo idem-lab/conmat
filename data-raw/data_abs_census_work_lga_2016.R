@@ -52,7 +52,7 @@ abs_census_lga_work <-
     total = as.numeric(total)
   )
 
-for (i in seq_len(nrow(abs_census_lga_work))){
+for (i in seq_len(nrow(abs_census_lga_work))) {
   if (is.na(abs_census_lga_work$age[i])) {
     abs_census_lga_work$age[i] <- abs_census_lga_work$age[i - 1]
   } else {
@@ -62,7 +62,6 @@ for (i in seq_len(nrow(abs_census_lga_work))){
 
 # new total calculated as total in the data is giving weird values such as < employed people in the given lga. Check
 # Etheridge (S)for age 46
-
 
 data_abs_census_lga_work <- abs_census_lga_work %>%
   filter(age != "Total") %>%
@@ -81,11 +80,14 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
     ),
     anomaly_flag = as.logical(anomaly_flag)
   ) %>%
-  mutate(proportion = case_when(
-    total == 0 & employed_population == 0 ~ 0,
-    TRUE ~ as.numeric(proportion)
-  )) %>%
-  select(year,
+  mutate(
+    proportion = case_when(
+      total == 0 & employed_population == 0 ~ 0,
+      TRUE ~ as.numeric(proportion)
+    )
+  ) %>%
+  select(
+    year,
     lga,
     age,
     employed_population,
@@ -115,11 +117,14 @@ data_abs_census_lga_work <- abs_census_lga_work %>%
 # No usual address : https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/2900.0main+features100882016
 
 data_lga_state <- data_lga_state %>%
-  mutate(lga = case_when(
-    (state == "NSW" &
-      lga == "Campbelltown (C)") ~ "Campbelltown (C) (NSW)",
-    TRUE ~ as.character(lga)
-  ))
+  mutate(
+    lga = case_when(
+      (state == "NSW" &
+        lga == "Campbelltown (C)") ~
+        "Campbelltown (C) (NSW)",
+      TRUE ~ as.character(lga)
+    )
+  )
 
 conmat_abs_household_data <- conmat::abs_household_lga %>%
   distinct(lga, state)
@@ -161,11 +166,13 @@ lga_state <- lgas_in_work_census %>%
     )
   ) %>%
   left_join(conmat_abs_household_data, by = c("lga")) %>%
-  mutate(state_new = case_when(
-    is.na(state.x) ~ as.character(state.y),
-    is.na(state.y) ~ as.character(state.x),
-    TRUE ~ as.character(state.y)
-  )) %>%
+  mutate(
+    state_new = case_when(
+      is.na(state.x) ~ as.character(state.y),
+      is.na(state.y) ~ as.character(state.x),
+      TRUE ~ as.character(state.y)
+    )
+  ) %>%
   select(lga, state = state_new)
 
 # patterns <-
@@ -194,19 +201,24 @@ data_abs_lga_work <- data_abs_census_lga_work %>%
       TRUE ~ lga
     )
   ) %>%
-  mutate(lga = case_when(
-    (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
-    (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
-    (state == "QLD" & lga == "Central Highlands (R)") ~ "Central Highlands (R) (Qld)",
-    (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
-    (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
-    (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
-    (state == "TAS" & lga == "Central Coast (M)") ~ "Central Coast (M) (Tas.)",
-    (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
-    (state == "TAS" & lga == "Central Highlands (M)") ~ "Central Highlands (M) (Tas.)",
-    (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
-    TRUE ~ as.character(lga)
-  ))
+  mutate(
+    lga = case_when(
+      (state == "VIC" & lga == "Kingston (C)") ~ "Kingston (C) (Vic.)",
+      (state == "VIC" & lga == "Latrobe (C)") ~ "Latrobe (C) (Vic.)",
+      (state == "QLD" & lga == "Central Highlands (R)") ~
+        "Central Highlands (R) (Qld)",
+      (state == "QLD" & lga == "Flinders (S)") ~ "Flinders (S) (Qld)",
+      (state == "SA" & lga == "Campbelltown (C)") ~ "Campbelltown (C) (SA)",
+      (state == "SA" & lga == "Kingston (DC)") ~ "Kingston (DC) (SA)",
+      (state == "TAS" & lga == "Central Coast (M)") ~
+        "Central Coast (M) (Tas.)",
+      (state == "TAS" & lga == "Flinders (M)") ~ "Flinders (M) (Tas.)",
+      (state == "TAS" & lga == "Central Highlands (M)") ~
+        "Central Highlands (M) (Tas.)",
+      (state == "TAS" & lga == "Latrobe (M)") ~ "Latrobe (M) (Tas.)",
+      TRUE ~ as.character(lga)
+    )
+  )
 # mutate(lga = case_when(
 #   str_detect(lga, "Migratory - Offshore - Shipping") ~ as.character(lga),
 #   TRUE ~ str_trim(str_remove_all(lga, pattern = patterns))

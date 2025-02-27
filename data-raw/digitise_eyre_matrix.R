@@ -8,14 +8,16 @@
 #' @return
 #' @author Nick Golding
 #' @export
-digitise_eyre_matrix <- function(matrix_file,
-                                 legend_file = "data-raw/eyre_legend_raw.png",
-                                 matrix_age_range = c(4.5, 70.5),
-                                 legend_probability_range = c(0.16, 0.8),
-                                 age_breaks = seq(0, 100)) {
+digitise_eyre_matrix <- function(
+  matrix_file,
+  legend_file = "data-raw/eyre_legend_raw.png",
+  matrix_age_range = c(4.5, 70.5),
+  legend_probability_range = c(0.16, 0.8),
+  age_breaks = seq(0, 100)
+) {
   # load the rasters
-  matrix <- png::readPNG(matrix_file)[, , 1:3]
-  legend <- png::readPNG(legend_file)[, , 1:3]
+  matrix <- png::readPNG(matrix_file)[,, 1:3]
+  legend <- png::readPNG(legend_file)[,, 1:3]
 
   # bounds of the age matrix
   n_contact_pixels <- dim(matrix)[1]
@@ -53,9 +55,7 @@ digitise_eyre_matrix <- function(matrix_file,
     )
 
   # interpolate linearly from colours to probabilities, based on the legend
-  mod <- lm(probability ~ R + G + B,
-    data = legend_vals
-  )
+  mod <- lm(probability ~ R + G + B, data = legend_vals)
 
   matrix_vals_prob <- matrix_vals %>%
     mutate(
@@ -74,7 +74,8 @@ digitise_eyre_matrix <- function(matrix_file,
       )
     ) %>%
     group_by(
-      case_age, contact_age
+      case_age,
+      contact_age
     ) %>%
     summarise(
       across(
@@ -130,7 +131,8 @@ digitise_eyre_matrix <- function(matrix_file,
       mutate(
         across(
           ends_with("age"),
-          ~ factor(.x,
+          ~ factor(
+            .x,
             levels = str_sort(
               unique(.x),
               numeric = TRUE

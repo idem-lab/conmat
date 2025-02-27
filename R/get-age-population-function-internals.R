@@ -10,7 +10,7 @@
 #' @name prepare_population_for_modelling
 #' @examples
 #' prepare_population_for_modelling(get_polymod_population())
-#' 
+#'
 #' @export
 prepare_population_for_modelling <- function(data, ...) {
   UseMethod("prepare_population_for_modelling")
@@ -35,8 +35,10 @@ prepare_population_for_modelling.conmat_population <- function(data, ...) {
 
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(pop_model %>%
-    dplyr::pull(!!age_col))
+  max_bound <- max(
+    pop_model %>%
+      dplyr::pull(!!age_col)
+  )
 
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
@@ -63,10 +65,12 @@ prepare_population_for_modelling.conmat_population <- function(data, ...) {
 #' @param pop_col column of population,
 #' @param ... extra arguments
 #' @export
-prepare_population_for_modelling.data.frame <- function(data = data,
-                                                        age_col = age_col,
-                                                        pop_col = pop_col,
-                                                        ...) {
+prepare_population_for_modelling.data.frame <- function(
+  data = data,
+  age_col = age_col,
+  pop_col = pop_col,
+  ...
+) {
   pop_model <- data %>%
     dplyr::arrange(
       {{ age_col }}
@@ -81,8 +85,10 @@ prepare_population_for_modelling.data.frame <- function(data = data,
 
   # find the maximum of the bounded age groups, and the populations above and
   # below
-  max_bound <- max(pop_model %>%
-    dplyr::pull({{ age_col }}))
+  max_bound <- max(
+    pop_model %>%
+      dplyr::pull({{ age_col }})
+  )
 
   # filter to just the bounded age groups for fitting
   pop_model_bounded <- pop_model %>%
@@ -203,7 +209,7 @@ predict_to_long_age_ranges <- function(pop_model, fit) {
       target_weight_sum = required_pop / max_bound_pop,
       weight = weight * target_weight_sum / weight_sum,
       population = ifelse(bounded, pred_adj, max_bound_pop * weight)
-    ) %>% 
+    ) %>%
     dplyr::ungroup() %>%
     dplyr::select(
       age,

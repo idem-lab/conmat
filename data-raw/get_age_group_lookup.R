@@ -8,9 +8,11 @@
 #' @return
 #' @author Nick Golding
 #' @export
-get_age_group_lookup <- function(age_breaks,
-                                 age_breaks_1y = 0:100,
-                                 label_includes_upper = FALSE) {
+get_age_group_lookup <- function(
+  age_breaks,
+  age_breaks_1y = 0:100,
+  label_includes_upper = FALSE
+) {
   n_breaks <- length(age_breaks)
   age_group_lookup <- expand.grid(
     age = age_breaks_1y,

@@ -1,4 +1,3 @@
-
 #' Predict setting contacts
 #'
 #' Predict contact rate for each setting. Note that this function is
@@ -66,12 +65,13 @@
 #' )
 #' }
 #' @export
-predict_setting_contacts <- function(population,
-                                     contact_model,
-                                     age_breaks,
-                                     per_capita_household_size = NULL,
-                                     model_per_capita_household_size =
-                                       get_polymod_per_capita_household_size()) {
+predict_setting_contacts <- function(
+  population,
+  contact_model,
+  age_breaks,
+  per_capita_household_size = NULL,
+  model_per_capita_household_size = get_polymod_per_capita_household_size()
+) {
   setting_predictions <- furrr::future_map(
     .x = contact_model,
     .f = predict_contacts,
@@ -107,7 +107,8 @@ predict_setting_contacts <- function(population,
     )
   }
 
-  setting_matrices <- new_setting_prediction_matrix(setting_matrices,
+  setting_matrices <- new_setting_prediction_matrix(
+    setting_matrices,
     age_breaks = age_breaks
   )
 

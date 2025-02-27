@@ -30,7 +30,8 @@ get_abs_household_size_population <- function(state = NULL, lga = NULL) {
     dplyr::select(-c(n_persons_usually_resident, n_households)) %>%
     dplyr::rename(household_size = size)
 
-  household_data <- switch(level,
+  household_data <- switch(
+    level,
     national = household_data,
     state = household_data %>%
       dplyr::filter(state == !!state),

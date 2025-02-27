@@ -69,8 +69,10 @@ get_age_population_function <- function(data, ...) {
 
 #' @name get_age_population_function
 #' @export
-get_age_population_function.conmat_population <- function(data = population,
-                                                          ...) {
+get_age_population_function.conmat_population <- function(
+  data = population,
+  ...
+) {
   # prepare population data for modelling
   pop_model <- prepare_population_for_modelling(
     data = data
@@ -83,10 +85,12 @@ get_age_population_function.conmat_population <- function(data = population,
 #' @param pop_col bare variable name for the column with population information
 #' @name get_age_population_function
 #' @export
-get_age_population_function.data.frame <- function(data = population,
-                                                   age_col = lower.age.limit,
-                                                   pop_col = population,
-                                                   ...) {
+get_age_population_function.data.frame <- function(
+  data = population,
+  age_col = lower.age.limit,
+  pop_col = population,
+  ...
+) {
   # prepare population data for modelling
   pop_model <- prepare_population_for_modelling(
     data = data,

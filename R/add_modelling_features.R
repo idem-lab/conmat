@@ -59,10 +59,12 @@
 #' )
 #'
 #' @export
-add_modelling_features <- function(contact_data,
-                                   school_demographics = NULL,
-                                   work_demographics = NULL,
-                                   population = get_polymod_population()) {
+add_modelling_features <- function(
+  contact_data,
+  school_demographics = NULL,
+  work_demographics = NULL,
+  population = get_polymod_population()
+) {
   # use interpolated population of "age_to" (contact age) &
   # get the relative population grouped by "age_from" or participant age
   # add new variables for:
@@ -84,7 +86,6 @@ add_modelling_features <- function(contact_data,
     # adds columns
     # `log_contactable_population_school`, and ` log_contactable_population`
     add_offset()
-  
 }
 
 #' Add column, "intergenerational"

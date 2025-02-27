@@ -62,7 +62,8 @@ get_abs_household_size_distribution <- function(state = NULL, lga = NULL) {
   lga <- rlang::enquo(lga)
 
   # set up aggregation
-  household_data <- switch(level,
+  household_data <- switch(
+    level,
     national = household_data,
     state = household_data %>%
       dplyr::filter(state == !!state) %>%

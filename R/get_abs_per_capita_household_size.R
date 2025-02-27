@@ -61,7 +61,8 @@ get_abs_per_capita_household_size <- function(state = NULL, lga = NULL) {
   lga <- rlang::enquo(lga)
 
   # set up aggregation
-  household_data <- switch(level,
+  household_data <- switch(
+    level,
     national = household_data,
     state = household_data %>%
       dplyr::filter(state == !!state) %>%

@@ -13,9 +13,7 @@ age_group_lookup <- tibble(
       age_group == "100-Inf" ~ "100+",
       TRUE ~ age_group
     ),
-    age_group = factor(age_group,
-      levels = str_sort(age_group, numeric = TRUE)
-    )
+    age_group = factor(age_group, levels = str_sort(age_group, numeric = TRUE))
   ) %>%
   arrange(age_group)
 

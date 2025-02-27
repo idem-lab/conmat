@@ -42,7 +42,7 @@ partials_summed_home <- partial_effects_sum(
     polymod_setting_models$home,
     ages = 1:99
   )
-  
+
 autoplot(partials_summed_home)
 # summed up partial effects (y-hat) for all settings
 partials_summed_setting <- partial_effects_sum(

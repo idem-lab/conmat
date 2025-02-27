@@ -59,10 +59,12 @@ abs_lga_lookup <- abs_pop_age_lga_2020_raw %>%
     lga
   ) %>%
   distinct() %>%
-  mutate(state = case_when(
-    lga == "Unincorp. Other Territories" ~ "OT",
-    TRUE ~ as.character(state)
-  )) %>%
+  mutate(
+    state = case_when(
+      lga == "Unincorp. Other Territories" ~ "OT",
+      TRUE ~ as.character(state)
+    )
+  ) %>%
   filter_all(any_vars(!is.na(.)))
 
 use_data(abs_lga_lookup, overwrite = TRUE)

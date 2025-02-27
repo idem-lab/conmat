@@ -89,9 +89,11 @@
 #' # get the all-settings NGM
 #' ngm_overall <- Reduce("+", next_generation_matrices)
 #' }
-get_setting_transmission_matrices <- function(age_breaks = c(seq(0, 80, by = 5), Inf),
-                                              asymptomatic_relative_infectiousness = 0.5,
-                                              susceptibility_estimate = c("davies_updated", "davies_original")) {
+get_setting_transmission_matrices <- function(
+  age_breaks = c(seq(0, 80, by = 5), Inf),
+  asymptomatic_relative_infectiousness = 0.5,
+  susceptibility_estimate = c("davies_updated", "davies_original")
+) {
   if (!dplyr::last(is.infinite(age_breaks))) {
     age_breaks <- c(age_breaks, Inf)
   }
@@ -112,8 +114,9 @@ get_setting_transmission_matrices <- function(age_breaks = c(seq(0, 80, by = 5),
   age_effects <- davies_age_extended %>%
     dplyr::filter(age <= max(age_breaks)) %>%
     dplyr::mutate(
-      infectiousness = clinical_fraction + (1 - clinical_fraction) *
-        asymptomatic_relative_infectiousness
+      infectiousness = clinical_fraction +
+        (1 - clinical_fraction) *
+          asymptomatic_relative_infectiousness
     ) %>%
     # select which set to use
     dplyr::select(

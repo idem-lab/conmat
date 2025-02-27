@@ -97,11 +97,13 @@
 #' )
 #' }
 #' @export
-apply_vaccination <- function(ngm,
-                              data,
-                              coverage_col,
-                              acquisition_col,
-                              transmission_col) {
+apply_vaccination <- function(
+  ngm,
+  data,
+  coverage_col,
+  acquisition_col,
+  transmission_col
+) {
   # NOTE
   # `apply_vaccination` should accept an ngm class object otherwise
   # give an error maybe?
@@ -114,23 +116,24 @@ apply_vaccination <- function(ngm,
       acquisition_multiplier = 1 - {{ acquisition_col }} * {{ coverage_col }},
       transmission_multiplier = 1 - {{ transmission_col }} * {{ coverage_col }},
     ) %>%
-    dplyr::select(-c(
-      {{ coverage_col }},
-      {{ acquisition_col }},
-      {{ transmission_col }}
-    )) %>%
+    dplyr::select(
+      -c(
+        {{ coverage_col }},
+        {{ acquisition_col }},
+        {{ transmission_col }}
+      )
+    ) %>%
     # transform these into matrices of reduction in transmission, matching the NGM
     dplyr::summarise(
-      transmission_reduction_matrix =
-        list(
-          outer(
-            # 'to' groups are on the rows in conmat, and first element in outer is rows,
-            # so acquisition first
-            acquisition_multiplier,
-            transmission_multiplier,
-            FUN = "*"
-          )
-        ),
+      transmission_reduction_matrix = list(
+        outer(
+          # 'to' groups are on the rows in conmat, and first element in outer is rows,
+          # so acquisition first
+          acquisition_multiplier,
+          transmission_multiplier,
+          FUN = "*"
+        )
+      ),
       .groups = "drop"
     ) %>%
     dplyr::pull(transmission_reduction_matrix)

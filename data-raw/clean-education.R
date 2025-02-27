@@ -3,7 +3,9 @@ library(janitor)
 library(tidyverse)
 library(here)
 abs_education_state_raw <- read_excel(
-  here("data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"),
+  here(
+    "data-raw/Table 42b Number of Full-time and Part-time Students, 2006-2020.xlsx"
+  ),
   sheet = "Table 2",
   skip = 4,
   n_max = 68559,

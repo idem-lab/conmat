@@ -17,14 +17,16 @@ ngm_VIC_vacc <- apply_vaccination(
 
 
 test_that("apply_vaccination() returns expected matrices", {
-  expect_true(purrr::map2_lgl(
-    .x = ngm_VIC_vacc,
-    .y = ngm_VIC,
-    .f = function(.x, .y) {
-      all(.x <= .y)
-    }
-  ) %>%
-    all())
+  expect_true(
+    purrr::map2_lgl(
+      .x = ngm_VIC_vacc,
+      .y = ngm_VIC,
+      .f = function(.x, .y) {
+        all(.x <= .y)
+      }
+    ) %>%
+      all()
+  )
 })
 
 test_that("apply_vaccination() errors when there's an incorrect variable name", {

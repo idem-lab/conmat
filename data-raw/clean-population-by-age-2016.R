@@ -63,7 +63,8 @@ abs_pop_age_lga_2016_raw <- file_path %>%
       "–",
       "-"
     ),
-    age_group = factor(age_group,
+    age_group = factor(
+      age_group,
       levels = str_sort(unique(age_group), numeric = TRUE)
     )
   ) %>%

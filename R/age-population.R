@@ -74,12 +74,14 @@
 #'   year = 2020
 #' )
 #'
-age_population <- function(data,
-                           location_col = NULL,
-                           location = NULL,
-                           age_col,
-                           year_col = NULL,
-                           year = NULL) {
+age_population <- function(
+  data,
+  location_col = NULL,
+  location = NULL,
+  age_col,
+  year_col = NULL,
+  year = NULL
+) {
   # checks the data type of age col and puts age into buckets if its numeric
   # which gets separated later as lower and upper limits
 

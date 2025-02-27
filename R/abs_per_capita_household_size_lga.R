@@ -24,7 +24,6 @@ get_abs_per_capita_household_size_lga <- function(lga = NULL) {
     dplyr::filter(lga == !!lga) %>%
     dplyr::group_by(lga)
 
-
   # aggregate and average household sizes
   household_data %>%
     per_capita_household_size()

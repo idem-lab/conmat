@@ -1,8 +1,3 @@
-
-
-
-
-
 test_that("check_dimensions() returns nothing when compatible dimensions", {
   demo_matrix <- list(
     matrix(1:6, nrow = 3, ncol = 2),
@@ -18,7 +13,6 @@ test_that("check_dimensions() returns nothing when compatible dimensions", {
     demo_data
   ))
 })
-
 
 
 test_that("check_dimensions() returns error", {
@@ -37,7 +31,8 @@ test_that("check_dimensions() returns error", {
 })
 
 test_that("apply_vaccination gives error when incompatible dimensions present", {
-  demo_matrix <- matrix(1:16,
+  demo_matrix <- matrix(
+    1:16,
     nrow = 4,
     ncol = 4,
     dimnames = list(
@@ -49,7 +44,6 @@ test_that("apply_vaccination gives error when incompatible dimensions present", 
   demo_matrix <- replicate(5, demo_matrix, simplify = FALSE)
 
   names(demo_matrix) <- c("home", "school", "work", "other", "all")
-
 
   expect_snapshot_error(
     apply_vaccination(

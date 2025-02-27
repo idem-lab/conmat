@@ -63,9 +63,11 @@
 #' fairfield_school_contacts
 #'
 #' @export
-predict_contacts <- function(model,
-                             population,
-                             age_breaks = c(seq(0, 75, by = 5), Inf)) {
+predict_contacts <- function(
+  model,
+  population,
+  age_breaks = c(seq(0, 75, by = 5), Inf)
+) {
   age <- age(population)
   age_var <- age_label(population)
   population <- population %>%

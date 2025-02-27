@@ -24,11 +24,7 @@ extract_term_name <- function(x) {
 # tail(predict_gam_term(sim_m, sim_data, formula_terms[1]))
 predict_gam_term <- function(model, data, terms) {
   c(
-    predict(model,
-      data,
-      type = "terms",
-      terms = terms
-    )
+    predict(model, data, type = "terms", terms = terms)
   )
 }
 
@@ -39,9 +35,7 @@ add_intercept <- function(data, model) {
   )
 }
 
-tidy_predict_term <- function(data,
-                              model,
-                              term) {
+tidy_predict_term <- function(data, model, term) {
   term_name <- extract_term_name(term)
 
   dat_term <- tibble::tibble(x = predict_gam_term(model, data, term))

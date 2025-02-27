@@ -21,16 +21,18 @@
 #' get_polymod_population("United Kingdom")
 #' get_polymod_population("Italy")
 #' @export
-get_polymod_population <- function(countries = c(
-                                     "Belgium",
-                                     "Finland",
-                                     "Germany",
-                                     "Italy",
-                                     "Luxembourg",
-                                     "Netherlands",
-                                     "Poland",
-                                     "United Kingdom"
-                                   )) {
+get_polymod_population <- function(
+  countries = c(
+    "Belgium",
+    "Finland",
+    "Germany",
+    "Italy",
+    "Luxembourg",
+    "Netherlands",
+    "Poland",
+    "United Kingdom"
+  )
+) {
   socialmixr::polymod$participants %>%
     dplyr::filter(
       !is.na(year),
@@ -47,7 +49,9 @@ get_polymod_population <- function(countries = c(
       .groups = "drop"
     ) %>%
     dplyr::left_join(
-      socialmixr::wpp_age() %>% dplyr::filter(year == 2005) %>% dplyr::select(country, lower.age.limit, population),
+      socialmixr::wpp_age() %>%
+        dplyr::filter(year == 2005) %>%
+        dplyr::select(country, lower.age.limit, population),
       by = c("country")
     ) %>%
     dplyr::filter(

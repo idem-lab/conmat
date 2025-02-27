@@ -38,15 +38,17 @@
 #'   population = fairfield,
 #'   age_breaks = c(0, 5, 10, 15, Inf)
 #' )
-#' 
+#'
 #' aggregated_fairfield
 #' @export
-aggregate_predicted_contacts <- function(predicted_contacts_1y,
-                                         population,
-                                         age_breaks = c(
-                                           seq(0, 75, by = 5),
-                                           Inf
-                                         )) {
+aggregate_predicted_contacts <- function(
+  predicted_contacts_1y,
+  population,
+  age_breaks = c(
+    seq(0, 75, by = 5),
+    Inf
+  )
+) {
   # get function for 1y age populations in this country
   age_population_function <- get_age_population_function(population)
 

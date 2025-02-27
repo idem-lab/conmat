@@ -64,8 +64,10 @@ as_conmat_population <- function(data, ...) {
 #' @rdname as_conmat_population
 #' @export
 as_conmat_population.default <- function(data, ...) {
-  abort("Cannot currently convert object of class {.cls {class(data)}} into \\
-        a {.cls conmat_population} object.")
+  abort(
+    "Cannot currently convert object of class {.cls {class(data)}} into \\
+        a {.cls conmat_population} object."
+  )
 }
 
 #' @param age age column - an unquoted variable of numeric integer ages
@@ -140,8 +142,10 @@ age_label <- function(x) {
 #' @rdname accessors
 #' @export
 age_label.default <- function(x) {
-  cli::cli_abort("Cannot access {.val age} information from class \\
-                 {.cls {class(x)}}")
+  cli::cli_abort(
+    "Cannot access {.val age} information from class \\
+                 {.cls {class(x)}}"
+  )
 }
 
 #' @rdname accessors
@@ -159,8 +163,10 @@ population_label <- function(x) {
 #' @rdname accessors
 #' @export
 population_label.default <- function(x) {
-  cli::cli_abort("Cannot access {.val population} information from class \\
-        {.cls {class(x)}")
+  cli::cli_abort(
+    "Cannot access {.val population} information from class \\
+        {.cls {class(x)}"
+  )
 }
 
 #' @rdname accessors
@@ -189,7 +195,9 @@ print.conmat_population <- function(x, ...) {
   population_out <- cli::col_grey(population_txt)
   # adds to the top of the tibble
   msg <- sprintf(
-    "%s %s\n %s\n %s\n", format(x)[1], out,
+    "%s %s\n %s\n %s\n",
+    format(x)[1],
+    out,
     age_out,
     population_out
   )
