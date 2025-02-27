@@ -36,6 +36,12 @@ execute:
   echo: true
   cache: false
 format: 
+  pdf: 
+    keep-md: true
+    fig-height: 4
+    fig-align: center
+    fig-format: png
+    dpi: 300
   html: 
     keep-md: true
     fig-height: 4
@@ -44,24 +50,20 @@ format:
     dpi: 300
 ---
 
-```{r}
-#| label: setup
-#| echo: false
-#| message: false
-#| warning: false
-options(tinytex.clean = FALSE)
-```
 
-```{r}
-#| label: libraries
-#| echo: false
-#| output: false
 
-library(purrr)
-library(patchwork)
-library(conmat)
-library(ggplot2)
-```
+
+
+
+::: {.cell}
+
+:::
+
+::: {.cell}
+
+:::
+
+
 
 # Summary
 
@@ -93,29 +95,170 @@ The `conmat` package was developed to fill the specific need of creating contact
 
 We will generate a contact matrix for Tasmania, a state in Australia, using a model fitted from the POLYMOD contact survey. We can get the age-stratified population data for Tasmania from the Australian Bureau of Statistics (ABS) with the helper function, `abs_age_state()`:
 
-```{r}
-#| label: abs-age
+
+
+::: {.cell}
+
+```{.r .cell-code}
 tasmania <- abs_age_state("TAS")
 head(tasmania)
 ```
 
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 4 (conmat_population)
+ - age: lower.age.limit
+ - population: population
+   year state lower.age.limit population
+  <dbl> <chr>           <dbl>      <dbl>
+1  2020 TAS                 0      29267
+2  2020 TAS                 5      31717
+3  2020 TAS                10      33318
+4  2020 TAS                15      31019
+5  2020 TAS                20      31641
+6  2020 TAS                25      34115
+```
+
+
+:::
+:::
+
+
+
 We can then generate a synthetic contact matrix for Tasmania, by extrapolating the contact patterns between age groups learned from the POLYMOD study, using `extrapolate_polymod()`.
 
-```{r}
-#| label: extrapolate-polymod
+
+
+::: {.cell}
+
+```{.r .cell-code}
 tasmania_contact <- extrapolate_polymod(population = tasmania)
 tasmania_contact
 ```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Setting Prediction Matrices ─────────────────────────────────────────────────
+```
+
+
+:::
+
+
+::: {.cell-output .cell-output-stderr}
+
+```
+A list of matrices containing the model predicted contact rate between ages in
+each setting.
+```
+
+
+:::
+
+
+::: {.cell-output .cell-output-stderr}
+
+```
+There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
+```
+
+
+:::
+
+
+::: {.cell-output .cell-output-stderr}
+
+```
+• home: a 16x16 <matrix>
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+• work: a 16x16 <matrix>
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+• school: a 16x16 <matrix>
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+• other: a 16x16 <matrix>
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+• all: a 16x16 <matrix>
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+ℹ Access each <matrix> with `x$name`
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+ℹ e.g., `x$home`
+```
+
+
+:::
+:::
+
+
+
 We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in @fig-autoplot-contacts.
 
-```{r}
-#| label: fig-autoplot-contacts
-#| fig-cap: "Contact patterns between individuals for different age groups across four settings: home, work, school, and other. The x axis shows the age groups for focal individuals ('from'), and the y axis shows the age groups for people those individuals have contact with ('to'), coloured by the average number of contacts the individual has in that age group. We see different contact patterns in different settings, for example, diagonal with 'wings' for the home setting."
-#| fig-width: 8
-#| fig-height: 8
+
+
+::: {.cell}
+
+```{.r .cell-code}
 autoplot(tasmania_contact)
 ```
+
+::: {.cell-output-display}
+![Contact patterns between individuals for different age groups across four settings: home, work, school, and other. The x axis shows the age groups for focal individuals ('from'), and the y axis shows the age groups for people those individuals have contact with ('to'), coloured by the average number of contacts the individual has in that age group. We see different contact patterns in different settings, for example, diagonal with 'wings' for the home setting.](paper_files/figure-html/fig-autoplot-contacts-1.png){#fig-autoplot-contacts}
+:::
+:::
+
+
 
 # Implementation
 
@@ -146,99 +289,19 @@ The six covariates are:
 
 These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in @fig-show-partial-plots for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
 
-```{r}
-#| label: partial-plots-create
-#| echo: false
-
-partial_effects(model = polymod_setting_models$home,
-                ages = 1:99) |> 
-  autoplot()
-# fit_home <- polymod_setting_models$home
-# age_grid <- create_age_grid(ages = 1:99)
-# term_names <- extract_term_names(fit_home)
-# term_var_names <- clean_term_names(term_names)
-# age_predictions <- predict_individual_terms(
-#   age_grid = age_grid,
-#   fit = fit_home,
-#   term_names = term_names,
-#   term_var_names = term_var_names
-# )
-
-age_predictions_home <- partial_effects(
-  model = polymod_setting_models$home,
-  ages = 1:99
-)
-
-age_predictions_all_settings <- partial_effects(
-  model = polymod_setting_models,
-  ages = 1:99
-)
-
-# age_predictions_all_settings <- map_dfr(
-#   .x = polymod_setting_models,
-#   .f = function(x) {
-#     predict_individual_terms(
-#       age_grid = age_grid,
-#       fit = x,
-#       term_names = term_names,
-#       term_var_names = term_var_names
-#     )
-#   },
-#   .id = "setting"
-# )
-
-plot_age_term_settings <- autoplot(age_predictions_all_settings)
 
 
-plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-age_predictions_long <- pivot_longer_age_preds(age_predictions)
-plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
-  coord_equal() +
-  labs(
-    x = "Age from",
-    y = "Age to"
-    ) + 
-  theme(
-    legend.position = "bottom",
-    axis.text = element_text(size = 6),
-    panel.spacing = unit(x = 1, units = "lines")
-  ) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  expand_limits(x = c(0, 100), y = c(0, 100))
+::: {.cell}
 
-age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
-plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
-  labs(x = "Age from",
-       y = "Age to") +
-  theme(
-    legend.position = "bottom"
-  ) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  expand_limits(x = c(0, 100), y = c(0, 100))
-```
+:::
+
+::: {.cell}
+::: {.cell-output-display}
+![Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape.](paper_files/figure-html/fig-show-partial-plots-1.png){#fig-show-partial-plots}
+:::
+:::
 
 
-```{r}
-#| label: fig-show-partial-plots
-#| echo: false
-#| fig-cap: "Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape."
-plot_all_terms_sum <- plot_age_predictions_long +
-  plot_age_predictions_sum + 
-  plot_layout(design = "
-            AAAAABBBB
-            AAAAABBBB
-            AAAAABBBB
-            AAAAABBBB
-            ") + 
-  plot_annotation(
-    tag_levels = "A"
-  )
-  
-
-plot_all_terms_sum
-```
 
 Visualising the partial predictive plots for other settings (school, work and other) show patterns that correspond with real-life situations. A full visualisation pipeline is available at https://idem-lab.github.io/conmat/dev/articles/visualising-conmat.html
 
