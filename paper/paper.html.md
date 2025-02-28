@@ -36,12 +36,6 @@ execute:
   echo: true
   cache: false
 format: 
-  pdf: 
-    keep-md: true
-    fig-height: 4
-    fig-align: center
-    fig-format: png
-    dpi: 300
   html: 
     keep-md: true
     fig-height: 4

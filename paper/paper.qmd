@@ -150,54 +150,21 @@ These covariates capture typical features of inter-person contact, where individ
 #| label: partial-plots-create
 #| echo: false
 
-partial_effects(model = polymod_setting_models$home,
-                ages = 1:99) |> 
-  autoplot()
-# fit_home <- polymod_setting_models$home
-# age_grid <- create_age_grid(ages = 1:99)
-# term_names <- extract_term_names(fit_home)
-# term_var_names <- clean_term_names(term_names)
-# age_predictions <- predict_individual_terms(
-#   age_grid = age_grid,
-#   fit = fit_home,
-#   term_names = term_names,
-#   term_var_names = term_var_names
-# )
-
-age_predictions_home <- partial_effects(
+partial_home <- partial_effects(
   model = polymod_setting_models$home,
   ages = 1:99
 )
 
-age_predictions_all_settings <- partial_effects(
-  model = polymod_setting_models,
+gg_partial_home <- autoplot(partial_home)
+
+partial_home_sum <- partial_effects_sum(
+  model = polymod_setting_models$home,
   ages = 1:99
 )
 
-# age_predictions_all_settings <- map_dfr(
-#   .x = polymod_setting_models,
-#   .f = function(x) {
-#     predict_individual_terms(
-#       age_grid = age_grid,
-#       fit = x,
-#       term_names = term_names,
-#       term_var_names = term_var_names
-#     )
-#   },
-#   .id = "setting"
-# )
+gg_partial_home_sum <- autoplot(partial_home_sum)
 
-plot_age_term_settings <- autoplot(age_predictions_all_settings)
-
-
-plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-age_predictions_long <- pivot_longer_age_preds(age_predictions)
-plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
-  coord_equal() +
-  labs(
-    x = "Age from",
-    y = "Age to"
-    ) + 
+gg_partial_home_tidy <- gg_partial_home + 
   theme(
     legend.position = "bottom",
     axis.text = element_text(size = 6),
@@ -207,10 +174,7 @@ plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
   scale_y_continuous(expand = c(0,0)) +
   expand_limits(x = c(0, 100), y = c(0, 100))
 
-age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
-plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
-  labs(x = "Age from",
-       y = "Age to") +
+gg_partial_home_sum_tidy <- gg_partial_home_sum +
   theme(
     legend.position = "bottom"
   ) +
@@ -224,8 +188,8 @@ plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord
 #| label: fig-show-partial-plots
 #| echo: false
 #| fig-cap: "Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape."
-plot_all_terms_sum <- plot_age_predictions_long +
-  plot_age_predictions_sum + 
+plot_all_terms_sum <- gg_partial_home_tidy +
+  gg_partial_home_sum_tidy + 
   plot_layout(design = "
             AAAAABBBB
             AAAAABBBB
