@@ -137,7 +137,7 @@ partial_effects_sum.contact_model <- function(model, ages, ...) {
 autoplot.partial_predictions_sum <- function(object, ...) {
   gg_age_partial_sum(object) +
     scale_fill_viridis_c(
-      name = "Num.\ncontacts"
+      name = "log\ncontacts"
     )
 }
 
