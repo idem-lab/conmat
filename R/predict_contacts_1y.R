@@ -29,9 +29,9 @@
 #'   contacts and standard error around the prediction.
 #' @examples
 #'
-#' fairfield <- abs_age_lga("Fairfield (C)")
+#' fairfield_abs_data <- abs_age_lga("Fairfield (C)")
 #'
-#' fairfield
+#' fairfield_abs_data
 #'
 #' # predict the contact rates in 1 year blocks to Fairfield data
 #'
@@ -42,37 +42,19 @@
 #'   age_max = 2
 #' )
 #' @export
-predict_contacts_1y <- function(model, population, age_min = 0, age_max = 100) {
+predict_contacts_1y <- function(
+  model,
+  population,
+  age_min = 0,
+  age_max = 100
+) {
   all_ages <- age_min:age_max
 
-  # predict contacts to all integer years, adjusting for the population in a given place
+  # predict contacts to all integer years, adjusting for the population in a 
+  # given place
   tidyr::expand_grid(
     age_from = all_ages,
     age_to = all_ages,
   ) %>%
-    # add on prediction features, setting the population to predict to
-    add_modelling_features(
-      population = population
-    ) %>%
-    dplyr::mutate(
-      # prediction
-      contacts = mgcv::predict.bam(
-        model,
-        newdata = .,
-        type = "response"
-      ),
-      # uncertainty
-      se_contacts = mgcv::predict.bam(
-        model,
-        newdata = .,
-        type = "response",
-        se.fit = TRUE
-      )$se.fit
-    ) %>%
-    dplyr::select(
-      age_from,
-      age_to,
-      contacts,
-      se_contacts
-    )
+    make_bam_predictions()
 }
