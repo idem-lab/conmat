@@ -18,7 +18,6 @@ authors:
   orcid: 0000-0001-8916-5570
 date: today
 bibliography: paper.bib
-cite-method: biblatex
 tags:
 - epidemiology
 - R
