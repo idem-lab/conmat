@@ -8,9 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+all_times <- list()  # store the time for each chunk
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }
+}))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  time_it = TRUE
 )
 ```
 
@@ -268,3 +281,8 @@ This is a bit briefer than the two step process, and might be preferable to crea
 <!-- The initial phase of COVID-19 pandemic saw a significant age dependence in the distribution of confirmed cases with fewer confirmed cases among children. This might have been a result of younger ages being less susceptible to infection and/or less likely to exhibit clinical signs when infected [ [Davies et al](https://www.nature.com/articles/s41591-020-0962-9)] . A population's clinical fraction and age-varying susceptibility to infection both profoundly influence the likelihood that an infectious agent would spread there. This likelihood that an infectious agent would spread from an infected source to a new susceptible host and infect the host is known as transmission probability. -->
 
 <!-- The age and setting specific relative per-contact transmission probability matrices when combined with contact matrices could be used to produce the setting-specific relative next generation matrices (NGMs) which is used to obtain the distribution of numbers of new cases in each generation of infection from any arbitrary initial number of introduced infections. Conmat creates these age and setting specific relative per-contact transmission probability matrices through `get_setting_transmission_matrices()` by making use of clinical fraction and relative susceptibility parameters from Davies et al available through `davies_age_extended`.  -->
+
+```{r}
+all_times
+```
+
