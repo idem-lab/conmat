@@ -8,9 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+all_times <- list()  # store the time for each chunk
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }
+}))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  time_it = TRUE
 )
 ```
 
@@ -310,3 +323,8 @@ autoplot(
   title = "Setting-specific synthetic contact matrices (fairfield 2020 projected)"
 )
 ```
+
+```{r}
+all_times
+```
+
