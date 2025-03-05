@@ -1,37 +1,5 @@
 ---
 title: '`conmat`: generate synthetic contact matrices for a given age-stratified population'
-authors:
-- affiliation: 1
-  name: Nicholas Tierney
-  orcid: 0000-0003-1460-8722
-- affiliation: 1,3
-  name: Chitra Saraswati
-  orcid: 0000-0002-8159-0414
-- affiliation: 1,3
-  name: Aarathy Babu
-  orcid: 
-- affiliation: 4
-  name: Michael Lydeamore
-  orcid: 0000-0001-6515-827X
-- affiliation: 1,2
-  name: Nick Golding
-  orcid: 0000-0001-8916-5570
-date: today
-bibliography: paper.bib
-tags:
-- epidemiology
-- R
-- infectious disease
-affiliations:
-- index: 1
-  name: The Kids Research Institute Australia, WA, Australia
-- index: 2
-  name:  University of Western Australia, WA, Australia
-- index: 3
-  name: Monash University, VIC, Australia
-execute: 
-  echo: true
-  cache: false
 format: 
   html: 
     keep-md: true
@@ -39,6 +7,35 @@ format:
     fig-align: center
     fig-format: png
     dpi: 300
+tags:
+  - epidemiology
+  - R
+  - infectious disease
+authors:
+  - affiliation: 1
+    name: Nicholas Tierney
+    orcid: 0000-0003-1460-8722
+  - affiliation: 1,3
+    name: Chitra Saraswati
+    orcid: 0000-0002-8159-0414
+  - affiliation: 1,3
+    name: Aarathy Babu
+    orcid: 
+  - affiliation: 4
+    name: Michael Lydeamore
+    orcid: 0000-0001-6515-827X
+  - affiliation: 1,2
+    name: Nick Golding
+    orcid: 0000-0001-8916-5570
+affiliations:
+- index: 1
+  name: The Kids Research Institute Australia, WA, Australia
+- index: 2
+  name:  University of Western Australia, WA, Australia
+- index: 3
+  name: Monash University, VIC, Australia
+date: today
+bibliography: paper.bib
 ---
 
 
@@ -123,109 +120,6 @@ We can then generate a synthetic contact matrix for Tasmania, by extrapolating t
 tasmania_contact <- extrapolate_polymod(population = tasmania)
 tasmania_contact
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Setting Prediction Matrices ─────────────────────────────────────────────────
-```
-
-
-:::
-
-
-::: {.cell-output .cell-output-stderr}
-
-```
-A list of matrices containing the model predicted contact rate between ages in
-each setting.
-```
-
-
-:::
-
-
-::: {.cell-output .cell-output-stderr}
-
-```
-There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
-```
-
-
-:::
-
-
-::: {.cell-output .cell-output-stderr}
-
-```
-• home: a 16x16 <matrix>
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-• work: a 16x16 <matrix>
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-• school: a 16x16 <matrix>
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-• other: a 16x16 <matrix>
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-• all: a 16x16 <matrix>
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-ℹ Access each <matrix> with `x$name`
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-ℹ e.g., `x$home`
-```
-
-
-:::
 :::
 
 
