@@ -17,21 +17,18 @@ authors:
   name: Nick Golding
   orcid: 0000-0001-8916-5570
 date: today
-bibliography: references.bib
-cite-method: biblatex
+bibliography: paper.bib
 tags:
 - epidemiology
 - R
 - infectious disease
 affiliations:
 - index: 1
-  name: Telethon Kids Institute
+  name: The Kids Research Institute Australia, WA, Australia
 - index: 2
-  name: Curtin University
+  name:  University of Western Australia, WA, Australia
 - index: 3
-  name: 
-- index: 4
-  name: Monash University
+  name: Monash University, VIC, Australia
 execute: 
   echo: true
   cache: false
@@ -107,7 +104,7 @@ tasmania_contact <- extrapolate_polymod(population = tasmania)
 tasmania_contact
 ```
 
-We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in @fig-autoplot-contacts.
+We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in (Figure \ref{fig-autoplot-contacts}).
 
 ```{r}
 #| label: fig-autoplot-contacts
@@ -144,44 +141,27 @@ The six covariates are:
 - $\text{max}(i, j)$ and 
 - $\text{min}(i, j)$.
 
-These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in @fig-show-partial-plots for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
+These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in Figure \ref{fig-show-partial-plots} for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
 
 ```{r}
 #| label: partial-plots-create
 #| echo: false
 
-fit_home <- polymod_setting_models$home
-age_grid <- create_age_grid(ages = 1:99)
-term_names <- extract_term_names(fit_home)
-term_var_names <- clean_term_names(term_names)
-age_predictions <- predict_individual_terms(
-  age_grid = age_grid,
-  fit = fit_home,
-  term_names = term_names,
-  term_var_names = term_var_names
+partial_home <- partial_effects(
+  model = polymod_setting_models$home,
+  ages = 1:99
 )
 
-age_predictions_all_settings <- map_dfr(
-  .x = polymod_setting_models,
-  .f = function(x) {
-    predict_individual_terms(
-      age_grid = age_grid,
-      fit = x,
-      term_names = term_names,
-      term_var_names = term_var_names
-    )
-  },
-  .id = "setting"
+gg_partial_home <- autoplot(partial_home)
+
+partial_home_sum <- partial_effects_sum(
+  model = polymod_setting_models$home,
+  ages = 1:99
 )
 
-plot_age_term_settings <- gg_age_terms_settings(age_predictions_all_settings)
-age_predictions_long <- pivot_longer_age_preds(age_predictions)
-plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
-  coord_equal() +
-  labs(
-    x = "Age from",
-    y = "Age to"
-    ) + 
+gg_partial_home_sum <- autoplot(partial_home_sum)
+
+gg_partial_home_tidy <- gg_partial_home + 
   theme(
     legend.position = "bottom",
     axis.text = element_text(size = 6),
@@ -191,10 +171,7 @@ plot_age_predictions_long <- gg_age_partial_pred_long(age_predictions_long) +
   scale_y_continuous(expand = c(0,0)) +
   expand_limits(x = c(0, 100), y = c(0, 100))
 
-age_predictions_long_sum <- add_age_partial_sum(age_predictions_long)
-plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord_equal() +
-  labs(x = "Age from",
-       y = "Age to") +
+gg_partial_home_sum_tidy <- gg_partial_home_sum +
   theme(
     legend.position = "bottom"
   ) +
@@ -208,8 +185,8 @@ plot_age_predictions_sum <- gg_age_partial_sum(age_predictions_long_sum) + coord
 #| label: fig-show-partial-plots
 #| echo: false
 #| fig-cap: "Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape."
-plot_all_terms_sum <- plot_age_predictions_long +
-  plot_age_predictions_sum + 
+plot_all_terms_sum <- gg_partial_home_tidy +
+  gg_partial_home_sum_tidy + 
   plot_layout(design = "
             AAAAABBBB
             AAAAABBBB

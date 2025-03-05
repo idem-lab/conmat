@@ -17,22 +17,31 @@ authors:
   name: Nick Golding
   orcid: 0000-0001-8916-5570
 date: today
-bibliography: paper.bib
+bibliography: references.bib
+cite-method: biblatex
 tags:
 - epidemiology
 - R
 - infectious disease
 affiliations:
 - index: 1
-  name: The Kids Research Institute Australia, WA, Australia
+  name: Telethon Kids Institute
 - index: 2
-  name:  University of Western Australia, WA, Australia
+  name: Curtin University
 - index: 3
-  name: Monash University, VIC, Australia
+  name: 
+- index: 4
+  name: Monash University
 execute: 
   echo: true
   cache: false
 format: 
+  pdf: 
+    keep-md: true
+    fig-height: 4
+    fig-align: center
+    fig-format: png
+    dpi: 300
   html: 
     keep-md: true
     fig-height: 4
@@ -40,6 +49,10 @@ format:
     fig-format: png
     dpi: 300
 ---
+
+
+
+
 
 
 ::: {.cell}
@@ -230,7 +243,7 @@ There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
 
 
 
-We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in (Figure \ref{fig-autoplot-contacts}).
+We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in @fig-autoplot-contacts.
 
 
 
@@ -274,7 +287,7 @@ The six covariates are:
 - $\text{max}(i, j)$ and 
 - $\text{min}(i, j)$.
 
-These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in Figure \ref{fig-show-partial-plots} for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
+These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in @fig-show-partial-plots for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
 
 
 
