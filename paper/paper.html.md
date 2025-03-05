@@ -12,28 +12,29 @@ tags:
   - R
   - infectious disease
 authors:
-  - affiliation: 1
-    name: Nicholas Tierney
+  - name: Nicholas Tierney
     orcid: 0000-0003-1460-8722
-  - affiliation: 1,3
-    name: Chitra Saraswati
+    corresponding: true
+    affiliation: "1"
+  - name: Chitra Saraswati
     orcid: 0000-0002-8159-0414
-  - affiliation: 1,3
-    name: Aarathy Babu
-    orcid: 
-  - affiliation: 4
-    name: Michael Lydeamore
+    affiliation: "1"
+  - name: Aarathy Babu
+    orcid: 0000-0002-6982-5989
+    affiliation: "1,3"
+  - name: Michael Lydeamore
     orcid: 0000-0001-6515-827X
-  - affiliation: 1,2
-    name: Nick Golding
+    affiliation: "1"
+  - name: Nick Golding
     orcid: 0000-0001-8916-5570
+    affiliation: "1,2"
 affiliations:
-- index: 1
-  name: The Kids Research Institute Australia, WA, Australia
-- index: 2
-  name:  University of Western Australia, WA, Australia
-- index: 3
-  name: Monash University, VIC, Australia
+  - index: 1
+    name: The Kids Research Institute Australia, WA, Australia
+  - index: 2
+    name:  University of Western Australia, WA, Australia
+  - index: 3
+    name: Monash University, VIC, Australia
 date: today
 bibliography: paper.bib
 ---
@@ -200,7 +201,7 @@ The interface to the model formula in `conmat` is fixed; users cannot change the
 
 Public health decisions are often based on age specific information, which means the more accurate your age specific models are, the better those decisions are likely to be. This is the first piece of software that will provide appropriate contact matrices for a population, which means more accurate models of disease. 
 
-This code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling].
+This code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling; @conway2023; @ryan2024].
 
 Some future directions for this software include:
 
