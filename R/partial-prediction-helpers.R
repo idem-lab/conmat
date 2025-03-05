@@ -1,7 +1,8 @@
-#' Helper functions to create partial predictive plots.
+#' Create partial predictions and partial prediction plots.
 #'
-#' These helper functions exist to make it easier to explore and understand the
-#'   impact of each of the covariates used in the conmat GAM model.
+#' Partial predictions allow you to explore and understand the impact of each 
+#'   of the covariates used in the conmat GAM model. See 'Details' for more
+#'   information.
 #'
 #' @details
 #'
@@ -9,12 +10,13 @@
 #'   covariate on the model, or (equivalently) the effect of each setting on
 #'   the total contact matrix. Positive values indicate more contacts in that
 #'   region of the matrix compared to the null case, while negative values
-#'   indicate less.
+#'   indicate less. Essentially, they represent the change in outcome variable
+#'   on the __model scale__ with a unit change in input variable.
 #'
 #' Scales are not comparable _across_ settings, as each setting has it's own
 #'   intercept term which is not accounted for in partial effects.
 #'
-#' @param model A fitted model, or list of fitted models.
+#' @param model A fitted contact model, with class `contact_model` (from [fit_single_model()], or a simple element from list output of [fit_setting_contacts()]), e.g. `polymod_setting_models$home`. Or, class `setting_contact_model` - a list of fitted contact models (from [fit_setting_contacts()])), e.g. `polymod_setting_models`.
 #' @param ages vector of integer ages.
 #' @param ... extra arguments. Currently not used.
 #' @return data frame with 20 columns plus n rows based on expand.grid

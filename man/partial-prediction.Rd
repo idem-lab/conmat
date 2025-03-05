@@ -6,7 +6,7 @@
 \alias{partial_effects.contact_model}
 \alias{partial_effects.setting_contact_model}
 \alias{partial_effects_sum.setting_contact_model}
-\title{Helper functions to create partial predictive plots.}
+\title{Create partial predictions and partial prediction plots.}
 \usage{
 partial_effects(model, ages, ...)
 
@@ -17,7 +17,7 @@ partial_effects(model, ages, ...)
 \method{partial_effects_sum}{setting_contact_model}(model, ages, ...)
 }
 \arguments{
-\item{model}{A fitted model, or list of fitted models.}
+\item{model}{A fitted contact model, with class \code{contact_model} (from \code{\link[=fit_single_model]{fit_single_model()}}, or a simple element from list output of \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}), e.g. \code{polymod_setting_models$home}. Or, class \code{setting_contact_model} - a list of fitted contact models (from \code{\link[=fit_setting_contacts]{fit_setting_contacts()}})), e.g. \code{polymod_setting_models}.}
 
 \item{ages}{vector of integer ages.}
 
@@ -28,15 +28,17 @@ data frame with 20 columns plus n rows based on expand.grid
 combination of ages. Contains transformed coefficients from ages.
 }
 \description{
-These helper functions exist to make it easier to explore and understand the
-impact of each of the covariates used in the conmat GAM model.
+Partial predictions allow you to explore and understand the impact of each
+of the covariates used in the conmat GAM model. See 'Details' for more
+information.
 }
 \details{
 Partial predictive plots give a visual representation of the effect of each
 covariate on the model, or (equivalently) the effect of each setting on
 the total contact matrix. Positive values indicate more contacts in that
 region of the matrix compared to the null case, while negative values
-indicate less.
+indicate less. Essentially, they represent the change in outcome variable
+on the \strong{model scale} with a unit change in input variable.
 
 Scales are not comparable \emph{across} settings, as each setting has it's own
 intercept term which is not accounted for in partial effects.

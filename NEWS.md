@@ -8,6 +8,9 @@
   * `as_setting_prediction_matrix()` for coercing lists into a `setting_prediction_matrix`
   * `transmission_probability_matrix()` for creating new transmission probability
   matrices
+  * `partial_effects()` and `partial_effects_sum()` to provide partial 
+    predictions allow you to explore and understand the impact of each of the 
+    covariates used in the conmat GAM model. (#88).
 
 * there is now a print method for age group information in setting matrices - [#139](https://github.com/idem-lab/conmat/issues/139)
 
