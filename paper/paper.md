@@ -1,53 +1,42 @@
 ---
 title: '`conmat`: generate synthetic contact matrices for a given age-stratified population'
-authors:
-- affiliation: 1
-  name: Nicholas Tierney
-  orcid: 0000-0003-1460-8722
-- affiliation: 1,2
-  name: Nick Golding
-  orcid: 0000-0001-8916-5570
-- affiliation: 1,3
-  name: Aarathy Babu
-  orcid: 
-- affiliation: 4
-  name: Michael Lydeamore
-  orcid: 0000-0001-6515-827X
-- affiliation: 1,3
-  name: Chitra Saraswati
-  orcid: 0000-0002-8159-0414
-date: today
-bibliography: references.bib
-cite-method: biblatex
-tags:
-- epidemiology
-- R
-- infectious disease
-affiliations:
-- index: 1
-  name: Telethon Kids Institute
-- index: 2
-  name: Curtin University
-- index: 3
-  name: 
-- index: 4
-  name: Monash University
-execute: 
-  echo: true
-  cache: false
 format: 
-  pdf: 
-    keep-md: true
-    fig-height: 4
-    fig-align: center
-    fig-format: png
-    dpi: 300
   html: 
     keep-md: true
     fig-height: 4
     fig-align: center
     fig-format: png
     dpi: 300
+tags:
+  - epidemiology
+  - R
+  - infectious disease
+authors:
+  - name: Nicholas Tierney
+    orcid: 0000-0003-1460-8722
+    corresponding: true
+    affiliation: "1"
+  - name: Chitra Saraswati
+    orcid: 0000-0002-8159-0414
+    affiliation: "1"
+  - name: Aarathy Babu
+    orcid: 0000-0002-6982-5989
+    affiliation: "1"
+  - name: Michael Lydeamore
+    orcid: 0000-0001-6515-827X
+    affiliation: "3"
+  - name: Nick Golding
+    orcid: 0000-0001-8916-5570
+    affiliation: "1,2"
+affiliations:
+  - index: 1
+    name: "The Kids Research Institute Australia, WA, Australia"
+  - index: 2
+    name:  "University of Western Australia, WA, Australia"
+  - index: 3
+    name: "Department of Econometrics and Business Statistics, Monash University, VIC, Australia"
+date: today
+bibliography: paper.bib
 ---
 
 
@@ -58,6 +47,7 @@ format:
 ::: {.cell}
 
 :::
+
 
 
 # Summary
@@ -91,6 +81,7 @@ The `conmat` package was developed to fill the specific need of creating contact
 We will generate a contact matrix for Tasmania, a state in Australia, using a model fitted from the POLYMOD contact survey. We can get the age-stratified population data for Tasmania from the Australian Bureau of Statistics (ABS) with the helper function, `abs_age_state()`:
 
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -99,8 +90,9 @@ head(tasmania)
 ```
 
 ::: {.cell-output .cell-output-stdout}
+
 ```
-# A tibble: 6 x 4 (conmat_population)
+# A tibble: 6 × 4 (conmat_population)
  - age: lower.age.limit
  - population: population
    year state lower.age.limit population
@@ -112,11 +104,15 @@ head(tasmania)
 5  2020 TAS                20      31641
 6  2020 TAS                25      34115
 ```
+
+
 :::
 :::
+
 
 
 We can then generate a synthetic contact matrix for Tasmania, by extrapolating the contact patterns between age groups learned from the POLYMOD study, using `extrapolate_polymod()`.
+
 
 
 ::: {.cell}
@@ -125,80 +121,12 @@ We can then generate a synthetic contact matrix for Tasmania, by extrapolating t
 tasmania_contact <- extrapolate_polymod(population = tasmania)
 tasmania_contact
 ```
-
-::: {.cell-output .cell-output-stderr}
-```
-
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
--- Setting Prediction Matrices -------------------------------------------------
-```
 :::
 
 
-::: {.cell-output .cell-output-stderr}
-```
-A list of matrices containing the model predicted contact rate between ages in
-each setting.
-```
-:::
 
+We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in (Figure \ref{fig-autoplot-contacts}).
 
-::: {.cell-output .cell-output-stderr}
-```
-There are 16 age breaks, ranging 0-75+ years, with a regular 5 year interval
-```
-:::
-
-
-::: {.cell-output .cell-output-stderr}
-```
-* home: a 16x16 <matrix>
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-* work: a 16x16 <matrix>
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-* school: a 16x16 <matrix>
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-* other: a 16x16 <matrix>
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-* all: a 16x16 <matrix>
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-i Access each <matrix> with `x$name`
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-i e.g., `x$home`
-```
-:::
-:::
-
-
-We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in @fig-autoplot-contacts.
 
 
 ::: {.cell}
@@ -208,9 +136,10 @@ autoplot(tasmania_contact)
 ```
 
 ::: {.cell-output-display}
-![Contact patterns between individuals for different age groups across four settings: home, work, school, and other. The x axis shows the age groups for focal individuals ('from'), and the y axis shows the age groups for people those individuals have contact with ('to'), coloured by the average number of contacts the individual has in that age group. We see different contact patterns in different settings, for example, diagonal with 'wings' for the home setting.](paper_files/figure-pdf/fig-autoplot-contacts-1.png){#fig-autoplot-contacts fig-pos='H'}
+![Contact patterns between individuals for different age groups across four settings: home, work, school, and other. The x axis shows the age groups for focal individuals ('from'), and the y axis shows the age groups for people those individuals have contact with ('to'), coloured by the average number of contacts the individual has in that age group. We see different contact patterns in different settings, for example, diagonal with 'wings' for the home setting.](paper_files/figure-html/fig-autoplot-contacts-1.png){#fig-autoplot-contacts}
 :::
 :::
+
 
 
 # Implementation
@@ -240,7 +169,8 @@ The six covariates are:
 - $\text{max}(i, j)$ and 
 - $\text{min}(i, j)$.
 
-These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in @fig-show-partial-plots for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
+These covariates capture typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups, represented by spline transformations of the six covariates, are displayed in Figure \ref{fig-show-partial-plots} for the home setting. The spline-transformed $|i-j|$ and $|i-j|^{2}$ terms give the strong diagonal lines modelling people generally living with those of similar age and the intergenerational effect of parents and (faintly) grandparents with children. The spline-transformed $\text{max}(i, j)$ and $\text{min}(i, j)$ terms give the higher rates of at-home contact among younger people of similar ages and with their parents.
+
 
 
 ::: {.cell}
@@ -249,9 +179,10 @@ These covariates capture typical features of inter-person contact, where individ
 
 ::: {.cell}
 ::: {.cell-output-display}
-![Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape.](paper_files/figure-pdf/fig-show-partial-plots-1.png){#fig-show-partial-plots}
+![Partial predictive plot (A) and overall synthetic contact matrix (B) for the Poisson GAM fitted to the POLYMOD contact survey in the home setting. The strong diagonal elements, and parents/grandparents interacting with children result in the classic 'diagonal with wings' shape.](paper_files/figure-html/fig-show-partial-plots-1.png){#fig-show-partial-plots}
 :::
 :::
+
 
 
 Visualising the partial predictive plots for other settings (school, work and other) show patterns that correspond with real-life situations. A full visualisation pipeline is available at https://idem-lab.github.io/conmat/dev/articles/visualising-conmat.html
@@ -270,7 +201,7 @@ The interface to the model formula in `conmat` is fixed; users cannot change the
 
 Public health decisions are often based on age specific information, which means the more accurate your age specific models are, the better those decisions are likely to be. This is the first piece of software that will provide appropriate contact matrices for a population, which means more accurate models of disease. 
 
-This code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling].
+This code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling; @conway2023; @ryan2024].
 
 Some future directions for this software include:
 
