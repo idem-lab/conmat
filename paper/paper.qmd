@@ -30,11 +30,11 @@ authors:
     affiliation: "1,2"
 affiliations:
   - index: 1
-    name: The Kids Research Institute Australia, WA, Australia
+    name: "The Kids Research Institute Australia, WA, Australia"
   - index: 2
-    name:  University of Western Australia, WA, Australia
+    name:  "University of Western Australia, WA, Australia"
   - index: 3
-    name: Department of Econometrics and Business Statistics, Monash University, VIC, Australia
+    name: "Department of Econometrics and Business Statistics, Monash University, VIC, Australia"
 date: today
 bibliography: paper.bib
 ---

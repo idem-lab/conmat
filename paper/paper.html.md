@@ -21,20 +21,20 @@ authors:
     affiliation: "1"
   - name: Aarathy Babu
     orcid: 0000-0002-6982-5989
-    affiliation: "1,3"
+    affiliation: "1"
   - name: Michael Lydeamore
     orcid: 0000-0001-6515-827X
-    affiliation: "1"
+    affiliation: "3"
   - name: Nick Golding
     orcid: 0000-0001-8916-5570
     affiliation: "1,2"
 affiliations:
   - index: 1
-    name: The Kids Research Institute Australia, WA, Australia
+    name: "The Kids Research Institute Australia, WA, Australia"
   - index: 2
-    name:  University of Western Australia, WA, Australia
+    name:  "University of Western Australia, WA, Australia"
   - index: 3
-    name: Monash University, VIC, Australia
+    name: "Department of Econometrics and Business Statistics, Monash University, VIC, Australia"
 date: today
 bibliography: paper.bib
 ---
