@@ -76,5 +76,5 @@ Imports:
     english,
     waldo,
     stringr
-URL: https://github.com/idem-lab/conmat
+URL: https://idem-lab.github.io/conmat/, https://github.com/idem-lab/conmat
 BugReports: https://github.com/idem-lab/conmat/issues
