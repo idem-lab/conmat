@@ -6,7 +6,7 @@ Authors@R: c(
              family = "Tierney",
              role = c("aut", "cre", "cph"),
              email = "nicholas.tierney@gmail.com",
-             comment = c(ORCID = "https://orcid.org/0000-0003-1460-8722")),
+             comment = c(ORCID = "0000-0003-1460-8722")),
       person(given = "Nick",
              family = "Golding",
              role = "aut",
@@ -16,27 +16,27 @@ Authors@R: c(
              family = "Babu",
              role = c("aut"),
              email = "aarathybabu907@gmail.com",
-             comment = c(ORCID = "https://orcid.org/0000-0002-6982-5989")),
+             comment = c(ORCID = "0000-0002-6982-5989")),
      person(given = "Chitra",
              family = "Saraswati",
              role = c("aut"),
              email = "chitra.saraswati@telethonkids.org.au",
-             comment = c(ORCID = "https://orcid.org/0000-0002-8159-0414")),
+             comment = c(ORCID = "0000-0002-8159-0414")),
       person(given = "Michael",
              family = "Lydeamore",
              role = "aut",
              email = "michael.lydeamore@monash.edu",
-             comment = c(ORCID = "https://orcid.org/0000-0001-6515-827X")),
+             comment = c(ORCID = "0000-0001-6515-827X")),
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
-Description: Builds contact matrices using GAMs and population data. This package 
-  incorporates data that is copyright Commonwealth of Australia (Australian 
+Description: Builds contact matrices using GAMs and population data. This package
+  incorporates data that is copyright Commonwealth of Australia (Australian
   Electoral Commission and Australian Bureau of Statistics) 2020.
 License: MIT + file LICENSE
-Depends: 
+Depends:
     R (>= 4.1.0)
-Suggests: 
+Suggests:
     covr,
     knitr,
     vdiffr,
@@ -45,7 +45,7 @@ Suggests:
     future,
     spelling,
     deSolve
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
@@ -54,7 +54,7 @@ LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Imports: 
+Imports:
     mgcv,
     dplyr (>= 1.0.9),
     tidyr (>= 1.2.0),
