@@ -24,7 +24,7 @@ get_abs_per_capita_household_size <- function(state = NULL, lga = NULL) {
     rlang::abort("only one of state and lga may be specified")
   }
 
-  if (length(state) > 1 | length(lga) > 1) {
+  if (length(state) > 1 || length(lga) > 1) {
     rlang::abort("only one state or LGA at a time, please")
   }
 
