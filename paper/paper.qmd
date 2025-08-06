@@ -228,4 +228,8 @@ Some future directions for this software include:
 
 Software is never finished, and the software in its current format has proven useful for infectious disease modelling. In time we hope it can become more widely used and be useful for more applications in epidemiology and public health. 
 
+# Acknowledgements
+
+The authors would like to thank Gerry Ryan for his contributions to conmat, as well as the authors of "Projecting social contact matrices in 152 countries using contact surveys and demographic data", Kiesha Prem, Alex Cook, and Mark Jit, for making their original data public. We would also like to thank reviewers Hugo Gruson and Anthony Baptista for their contributions.
+
 # References
