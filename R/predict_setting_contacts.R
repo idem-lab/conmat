@@ -72,18 +72,28 @@ predict_setting_contacts <- function(
   per_capita_household_size = NULL,
   model_per_capita_household_size = get_polymod_per_capita_household_size()
 ) {
-  setting_predictions <- furrr::future_map(
+  force(population)
+  force(age_breaks)
+  setting_predictions <- purrr::map(
     .x = contact_model,
-    .f = predict_contacts,
-    population = population,
-    age_breaks = age_breaks,
-    .options = furrr::furrr_options(seed = TRUE)
+    .f = carrier::crate(
+      function(x) {
+        conmat::predict_contacts(
+          x,
+          population = population,
+          age_breaks = age_breaks
+        )
+      },
+      population = population,
+      age_breaks = age_breaks
+    ),
+    .parallel = TRUE
   )
 
-  setting_matrices <- furrr::future_map(
+  setting_matrices <- purrr::map(
     .x = setting_predictions,
-    .f = predictions_to_matrix,
-    .options = furrr::furrr_options(seed = TRUE)
+    .f = conmat::predictions_to_matrix,
+    .parallel = TRUE
   )
 
   combination <- Reduce("+", setting_matrices)

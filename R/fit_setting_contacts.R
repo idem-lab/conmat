@@ -68,14 +68,24 @@ fit_setting_contacts <- function(
 ) {
   check_if_list(contact_data_list)
 
-  fitted_setting_contacts <- furrr::future_map(
+  fitted_setting_contacts <- purrr::map(
     .x = contact_data_list,
-    .f = fit_single_contact_model,
-    population = population,
-    symmetrical = symmetrical,
-    school_demographics = NULL,
-    work_demographics = NULL,
-    .options = furrr::furrr_options(seed = TRUE)
+    .f = carrier::crate(
+      function(x) {
+        conmat::fit_single_contact_model(
+          contact_data = x,
+          population = population,
+          symmetrical = symmetrical,
+          school_demographics = school_demographics,
+          work_demographics = work_demographics
+        )
+      },
+      population = population,
+      symmetrical = symmetrical,
+      school_demographics = school_demographics,
+      work_demographics = school_demographics
+    ),
+    .parallel = TRUE
   )
 
   new_setting_contact_model(
