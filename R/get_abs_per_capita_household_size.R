@@ -52,7 +52,7 @@ get_abs_per_capita_household_size <- function(state = NULL, lga = NULL) {
     dplyr::mutate(
       # household size as a number, assuming all people in households 8+ are
       # exactly 8
-      size = readr::parse_number(n_persons_usually_resident),
+      size = minty::parse_number(n_persons_usually_resident),
       # number of *people* in a household of that size
       n_people = n_households * size,
     )

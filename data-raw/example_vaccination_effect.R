@@ -1,4 +1,4 @@
-vaccination_effect_example_data <- readr::read_csv(
+vaccination_effect_example_data <- minty::read_csv(
   "data-raw/example_vaccine_coverage_effects.csv"
 ) %>%
   select(age_band, coverage, acquisition, transmission) %>%

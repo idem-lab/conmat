@@ -19,7 +19,7 @@ abs_age_lga <- function(lga_name) {
       year,
       population
     ) %>%
-    dplyr::mutate(age_group = readr::parse_number(as.character(age_group))) %>%
+    dplyr::mutate(age_group = minty::parse_number(as.character(age_group))) %>%
     dplyr::rename(lower.age.limit = age_group)
 
   conmat_population(
@@ -43,7 +43,7 @@ abs_age_state <- function(state_name) {
       year,
       population
     ) %>%
-    dplyr::mutate(age_group = readr::parse_number(as.character(age_group))) %>%
+    dplyr::mutate(age_group = minty::parse_number(as.character(age_group))) %>%
     dplyr::rename(lower.age.limit = age_group) %>%
     dplyr::group_by(year, state, lower.age.limit) %>%
     dplyr::summarise(population = sum(population))

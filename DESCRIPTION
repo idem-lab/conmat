@@ -67,7 +67,7 @@ Imports:
     magrittr,
     rlang (>= 1.0.4),
     glue (>= 1.6.2),
-    readr,
+    minty,
     furrr,
     purrr (>= 1.0.1),
     tidyselect,

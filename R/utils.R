@@ -69,7 +69,7 @@ separate_age_group <- function(data, age_col) {
     dplyr::mutate(
       across(
         .cols = c(lower.age.limit, upper.age.limit),
-        .fns = function(x) readr::parse_number(as.character(x))
+        .fns = function(x) minty::parse_number(as.character(x))
       )
     )
 
