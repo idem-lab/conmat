@@ -353,8 +353,10 @@ print_age_breaks <- function(age_breaks) {
 
 
 named_group_split <- function(df, group_var) {
-  grouped_df <- df |> group_by({{ group_var }})
-  split_list <- grouped_df |> group_split()
-  names(split_list) <- grouped_df |> group_keys() |> pull({{ group_var }})
+  grouped_df <- df |> dplyr::group_by({{ group_var }})
+  split_list <- grouped_df |> dplyr::group_split()
+  names(split_list) <- grouped_df |>
+    dplyr::group_keys() |>
+    dplyr::pull({{ group_var }})
   return(split_list)
 }
