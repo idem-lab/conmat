@@ -73,12 +73,11 @@ predict_contacts <- function(
   population <- population %>%
     dplyr::arrange(!!age)
 
-  # this could be changed to a function for lower age limit
-  age_min_integration <- min(population[[age_var]])
-  bin_widths <- diff(population[[age_var]])
-  final_bin_width <- bin_widths[length(bin_widths)]
-  age_max_integration <- max(population[[age_var]]) + final_bin_width
-
+  # get the age ranges plus the final age bin (which is the bin width)
+  the_age_ranges <- age_ranges(population$lower.age.limit)
+  age_min_integration <- min(the_age_ranges)
+  age_max_integration <- max(the_age_ranges)
+  
   # need to check we are not predicting to 0 populations (interpolator can
   # predict 0 values, then the aggregated ages get screwed up)
   pop_fun <- get_age_population_function(population)
