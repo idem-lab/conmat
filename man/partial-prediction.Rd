@@ -17,7 +17,7 @@ partial_effects(model, ages, ...)
 \method{partial_effects_sum}{setting_contact_model}(model, ages, ...)
 }
 \arguments{
-\item{model}{A fitted contact model, with class \code{contact_model} (from \code{\link[=fit_single_model]{fit_single_model()}}, or a simple element from list output of \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}), e.g. \code{polymod_setting_models$home}. Or, class \code{setting_contact_model} - a list of fitted contact models (from \code{\link[=fit_setting_contacts]{fit_setting_contacts()}})), e.g. \code{polymod_setting_models}.}
+\item{model}{A fitted contact model, with class \code{contact_model} (from \code{\link[=fit_single_contact_model]{fit_single_contact_model()}}, or a simple element from list output of \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}), e.g. \code{polymod_setting_models$home}. Or, class \code{setting_contact_model} - a list of fitted contact models (from \code{\link[=fit_setting_contacts]{fit_setting_contacts()}})), e.g. \code{polymod_setting_models}.}
 
 \item{ages}{vector of integer ages.}
 

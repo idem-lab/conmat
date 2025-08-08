@@ -1,6 +1,6 @@
 #' Create partial predictions and partial prediction plots.
 #'
-#' Partial predictions allow you to explore and understand the impact of each 
+#' Partial predictions allow you to explore and understand the impact of each
 #'   of the covariates used in the conmat GAM model. See 'Details' for more
 #'   information.
 #'
@@ -16,7 +16,7 @@
 #' Scales are not comparable _across_ settings, as each setting has it's own
 #'   intercept term which is not accounted for in partial effects.
 #'
-#' @param model A fitted contact model, with class `contact_model` (from [fit_single_model()], or a simple element from list output of [fit_setting_contacts()]), e.g. `polymod_setting_models$home`. Or, class `setting_contact_model` - a list of fitted contact models (from [fit_setting_contacts()])), e.g. `polymod_setting_models`.
+#' @param model A fitted contact model, with class `contact_model` (from [fit_single_contact_model()], or a simple element from list output of [fit_setting_contacts()]), e.g. `polymod_setting_models$home`. Or, class `setting_contact_model` - a list of fitted contact models (from [fit_setting_contacts()])), e.g. `polymod_setting_models`.
 #' @param ages vector of integer ages.
 #' @param ... extra arguments. Currently not used.
 #' @return data frame with 20 columns plus n rows based on expand.grid
