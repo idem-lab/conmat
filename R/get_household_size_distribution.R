@@ -23,7 +23,7 @@ get_abs_household_size_distribution <- function(state = NULL, lga = NULL) {
     abort("only one of state and lga may be specified")
   }
 
-  if (length(state) > 1 | length(lga) > 1) {
+  if (length(state) > 1 || length(lga) > 1) {
     abort("only one state or LGA at a time, please")
   }
 
