@@ -92,7 +92,7 @@ breaks specified in the synthetic contact matrix, otherwise it will error
 as it is trying to multiple incompatible matrices.
 }
 \examples{
-\dontrun{
+\donttest{
 perth <- abs_age_lga("Perth (C)")
 perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 
@@ -134,7 +134,7 @@ perth_ngm_0_80_new_tmat <- generate_ngm(
 )
 }
 # examples not run as they take a long time
-\dontrun{
+\donttest{
 perth <- abs_age_lga("Perth (C)")
 perth_contact <- extrapolate_polymod(perth)
 generate_ngm(perth_contact, age_breaks = c(seq(0, 85, by = 5), Inf))

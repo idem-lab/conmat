@@ -23,7 +23,7 @@
 #'   \item{probability}{probability of transmission. Value is 0 - 1}
 #' }
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #'
 #' # plot this
 #' library(ggplot2)

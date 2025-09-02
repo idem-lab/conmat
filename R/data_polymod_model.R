@@ -8,7 +8,7 @@
 #'
 #' @seealso [fit_setting_contacts()]
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # code used to produce this data
 #' library(conmat)
 #' set.seed(2022 - 08 - 26)

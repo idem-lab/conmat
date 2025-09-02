@@ -7,10 +7,8 @@
 #' @examples
 #' get_abs_household_size_distribution(lga = "Fairfield (C)")
 #' get_abs_household_size_distribution(state = "NSW")
-#' \dontrun{
-#' # cannot specify both state and LGA
-#' get_abs_household_size_distribution(state = "NSW", lga = "Fairfield (C)")
-#' }
+#' # cannot specify both state and LGA - errrors
+#' try(get_abs_household_size_distribution(state = "NSW", lga = "Fairfield (C)"))
 get_abs_household_size_distribution <- function(state = NULL, lga = NULL) {
   level <- dplyr::case_when(
     is.null(state) & is.null(lga) ~ "national",

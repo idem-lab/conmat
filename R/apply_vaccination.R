@@ -45,7 +45,7 @@
 #'
 #' @examples
 #' # examples take 20 second to run so skipping
-#' \dontrun{
+#' \donttest{
 #' # example data frame with vaccine coverage, acquisition and transmission
 #' # efficacy of different age groups
 #' vaccination_effect_example_data

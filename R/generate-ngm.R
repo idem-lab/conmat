@@ -46,7 +46,7 @@
 #' @name generate_ngm
 #' @return A next generation matrix, containing the rates of contact between two age groups.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 #'
@@ -108,7 +108,7 @@ generate_ngm <- function(
 #' @param state_name now defunct, but capturing arguments for informative error
 #' @examples
 #' # examples not run as they take a long time
-#' \dontrun{
+#' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_contact <- extrapolate_polymod(perth)
 #' generate_ngm(perth_contact, age_breaks = c(seq(0, 85, by = 5), Inf))
@@ -206,7 +206,7 @@ generate_ngm.conmat_population <- function(
 #' @export
 #' @examples
 #' # don't run as both together takes a long time to run
-#' \dontrun{
+#' \donttest{
 #' ngm_nsw <- generate_ngm_oz(
 #'   state_name = "NSW",
 #'   age_breaks = c(seq(0, 85, by = 5), Inf),

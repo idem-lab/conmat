@@ -66,7 +66,7 @@ Note that this function is parallelisable with \code{future}, and will be
 impacted by any \code{future} plans provided.
 }
 \examples{
-\dontrun{
+\donttest{
 # takes a long time to run
 settings_estimated_contacts <- estimate_setting_contacts(
   contact_data_list = get_polymod_setting_data(),

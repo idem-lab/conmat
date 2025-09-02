@@ -39,7 +39,6 @@ a ggplot visualisation of contact rates
 Plot setting matrices using ggplot2
 }
 \examples{
-\dontrun{
 if (interactive()) {
   polymod_contact_data <- get_polymod_setting_data()
   polymod_survey_data <- get_polymod_population()
@@ -73,6 +72,5 @@ if (interactive()) {
     object = synthetic_settings_5y_fairfield_hh$work,
     title = "Work"
   )
-}
 }
 }

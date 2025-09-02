@@ -49,7 +49,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # fit polymod model
 #' setting_models <- fit_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(),

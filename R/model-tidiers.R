@@ -4,12 +4,7 @@
 #'
 #' @name formula-terms
 #' @keywords internal
-#' @examples
-#' \dontrun{
-#' formula_terms <- get_formulas_terms(sim_m)
-#' formula_terms
-#' }
-#'
+#' @noRd
 get_formulas_terms <- function(model) {
   as.character(attr(stats::terms(model$formula), "variables"))[-c(1, 2)]
 }

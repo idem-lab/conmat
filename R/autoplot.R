@@ -9,7 +9,6 @@
 #' @importFrom ggplot2 autoplot
 #' @name autoplot-conmat
 #' @examples
-#' \dontrun{
 #' if (interactive()) {
 #'   polymod_contact_data <- get_polymod_setting_data()
 #'   polymod_survey_data <- get_polymod_population()
@@ -43,7 +42,6 @@
 #'     object = synthetic_settings_5y_fairfield_hh$work,
 #'     title = "Work"
 #'   )
-#' }
 #' }
 #' @export
 autoplot.conmat_age_matrix <- function(

@@ -37,11 +37,9 @@ age or population symbol or label
 Accessing conmat attributes
 }
 \examples{
-\dontrun{
 perth <- abs_age_lga("Perth (C)")
 age(perth)
 age_label(perth)
 population(perth)
 population_label(perth)
-}
 }

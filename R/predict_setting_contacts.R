@@ -34,7 +34,7 @@
 #' @export
 #' @examples
 #' # don't run as it takes too long to fit
-#' \dontrun{
+#' \donttest{
 #' fairfield <- abs_age_lga("Fairfield (C)")
 #' fairfield
 #'

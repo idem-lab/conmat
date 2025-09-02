@@ -64,7 +64,7 @@ transmission and control of COVID-19 epidemics. Nat Med 26, 1205–1211 (2020).
 https://doi.org/10.1038/s41591-020-0962-9
 }
 \examples{
-\dontrun{
+\donttest{
 # fit polymod model
 setting_models <- fit_setting_contacts(
   contact_data_list = get_polymod_setting_data(),

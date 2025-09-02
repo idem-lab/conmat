@@ -10,7 +10,7 @@
 #'   groups
 #' @return a ggplot visualisation of contact rates
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' set.seed(2021 - 09 - 24)
 #' polymod_contact_data <- get_polymod_setting_data()

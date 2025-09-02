@@ -13,12 +13,10 @@
 #'   multiple_lga = TRUE
 #' )
 #' # this will error, so isn't run
-#' \dontrun{
-#' # don't set the `multiple_lga` flag
-#' check_lga_name(lga_name = c("Fairfield (C)", "Sydney (C)"))
-#' # not a fully specified LGA
-#' check_lga_name("Fairfield")
-#' }
+#' # don't set the `multiple_lga` flag - errors
+#' try(check_lga_name(lga_name = c("Fairfield (C)", "Sydney (C)")))
+#' # not a fully specified LGA - errors
+#' try(check_lga_name("Fairfield"))
 #' @keywords internal
 #' @noRd
 check_lga_name <- function(lga_name, multiple_lga = FALSE) {
