@@ -52,7 +52,7 @@ eyre_transmission_probabilities_with_5y <- eyre_transmission_probabilities %>%
 
 eyre_transmission_probabilities <- eyre_transmission_probabilities_with_5y
 
-readr::write_csv(
+minty::write_csv(
   x = eyre_transmission_probabilities,
   file = "data-raw/eyre_transmission_probabilities.csv"
 )
@@ -62,7 +62,7 @@ zip::zip(
   files = "data-raw/eyre_transmission_probabilities.csv"
 )
 
-thing <- readr::read_csv("data-raw/eyre_transmission_probabilities.csv.gz")
+thing <- minty::read_csv("data-raw/eyre_transmission_probabilities.csv.gz")
 
 fs::file_delete("data-raw/eyre_transmission_probabilities.csv")
 

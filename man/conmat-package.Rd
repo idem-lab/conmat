@@ -11,6 +11,7 @@ Builds contact matrices using GAMs and population data. This package incorporate
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://idem-lab.github.io/conmat/}
   \item \url{https://github.com/idem-lab/conmat}
   \item Report bugs at \url{https://github.com/idem-lab/conmat/issues}
 }
