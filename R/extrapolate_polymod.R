@@ -26,7 +26,7 @@
 #' @return Returns setting-specific and combined contact matrices for the
 #'   desired ages.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' polymod_population <- get_polymod_population()
 #' synthetic_settings_5y_polymod <- extrapolate_polymod(
 #'   population = polymod_population

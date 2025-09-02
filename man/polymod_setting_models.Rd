@@ -18,7 +18,7 @@ see \code{\link[=fit_setting_contacts]{fit_setting_contacts()}}. This object has
 avoid recomputing a relatively common type of model for use with \code{conmat}.
 }
 \examples{
-\dontrun{
+\donttest{
 # code used to produce this data
 library(conmat)
 set.seed(2022 - 08 - 26)

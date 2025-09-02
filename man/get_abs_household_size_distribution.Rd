@@ -21,8 +21,6 @@ Get household size distribution based on state or LGA name
 \examples{
 get_abs_household_size_distribution(lga = "Fairfield (C)")
 get_abs_household_size_distribution(state = "NSW")
-\dontrun{
-# cannot specify both state and LGA
-get_abs_household_size_distribution(state = "NSW", lga = "Fairfield (C)")
-}
+# cannot specify both state and LGA - errrors
+try(get_abs_household_size_distribution(state = "NSW", lga = "Fairfield (C)"))
 }

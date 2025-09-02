@@ -44,7 +44,7 @@ the full process of building new models. You can find this detail in last
 section of the vignette "example pipeline".
 }
 \examples{
-\dontrun{
+\donttest{
 polymod_population <- get_polymod_population()
 synthetic_settings_5y_polymod <- extrapolate_polymod(
   population = polymod_population

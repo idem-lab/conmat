@@ -17,7 +17,7 @@ Get raw eigvenvalue from NGM matrix
 }
 \examples{
 # examples not run as they take a long time
-\dontrun{
+\donttest{
 perth <- abs_age_lga("Perth (C)")
 perth_contact <- extrapolate_polymod(perth)
 perth_ngm <- generate_ngm(

@@ -190,7 +190,7 @@ new_ngm_setting_matrix <- function(
 #'
 #' @examples
 #' # examples not run as they take a long time
-#' \dontrun{
+#' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_contact <- extrapolate_polymod(perth)
 #' perth_ngm <- generate_ngm(
@@ -215,7 +215,7 @@ raw_eigenvalue <- function(list_matrix) {
 #'
 #' @examples
 #' # examples not run as they take a long time
-#' \dontrun{
+#' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_contact <- extrapolate_polymod(perth)
 #' perth_ngm <- generate_ngm(

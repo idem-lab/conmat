@@ -121,13 +121,11 @@ as_conmat_population.NULL <- function(data, ...) {
 #'
 #' @rdname accessors
 #' @examples
-#' \dontrun{
 #' perth <- abs_age_lga("Perth (C)")
 #' age(perth)
 #' age_label(perth)
 #' population(perth)
 #' population_label(perth)
-#' }
 #' @export
 age <- function(x) {
   sym(age_label(x))

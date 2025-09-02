@@ -18,7 +18,7 @@ R value provided to the NGM, and \code{R_raw} is the raw eigenvalue.
 }
 \examples{
 # examples not run as they take a long time
-\dontrun{
+\donttest{
 perth <- abs_age_lga("Perth (C)")
 perth_contact <- extrapolate_polymod(perth)
 perth_ngm <- generate_ngm(

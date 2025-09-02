@@ -21,10 +21,8 @@ Get per capita household size based on state or LGA name
 \examples{
 get_abs_per_capita_household_size(lga = "Fairfield (C)")
 get_abs_per_capita_household_size(state = "NSW")
-\dontrun{
-# cannot specify both state and LGA
-get_abs_per_capita_household_size(state = "NSW", lga = "Fairfield (C)")
-}
+# cannot specify both state and LGA - this will error
+try(get_abs_per_capita_household_size(state = "NSW", lga = "Fairfield (C)"))
 }
 \author{
 Nick Golding

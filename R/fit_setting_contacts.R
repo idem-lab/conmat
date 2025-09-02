@@ -33,7 +33,7 @@
 #' @export
 #' @examples
 #' # These aren't being  run as they take too long to fit
-#' \dontrun{
+#' \donttest{
 #' contact_model <- fit_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(),
 #'   population = get_polymod_population()

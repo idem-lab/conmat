@@ -47,7 +47,7 @@
 #' @return predicted setting specific contact matrices, and for all combined
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # takes a long time to run
 #' settings_estimated_contacts <- estimate_setting_contacts(
 #'   contact_data_list = get_polymod_setting_data(),

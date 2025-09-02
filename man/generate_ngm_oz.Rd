@@ -39,7 +39,7 @@ For full details see \code{\link[=generate_ngm]{generate_ngm()}}.
 }
 \examples{
 # don't run as both together takes a long time to run
-\dontrun{
+\donttest{
 ngm_nsw <- generate_ngm_oz(
   state_name = "NSW",
   age_breaks = c(seq(0, 85, by = 5), Inf),
