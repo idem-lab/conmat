@@ -8,9 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+all_times <- list()  # store the time for each chunk
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }
+}))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  time_it = TRUE
 )
 ```
 
@@ -70,3 +83,8 @@ synthetic_settings_5y_perth <- predict_setting_contacts(
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 ```
+
+```{r}
+all_times
+```
+

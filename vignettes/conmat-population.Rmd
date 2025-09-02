@@ -8,9 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+all_times <- list()  # store the time for each chunk
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }
+}))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  time_it = TRUE
 )
 ```
 
@@ -212,3 +225,8 @@ If you want to use `conmat_population` within your R package, then please get in
 # Conclusion
 
 That's how we can use the conmat population information! Please go ahead and use and enjoy!
+
+```{r}
+all_times
+```
+

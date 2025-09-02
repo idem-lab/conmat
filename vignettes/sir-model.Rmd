@@ -7,10 +7,24 @@ vignette: >
     %\VignetteEncoding{UTF-8}
 ---
 ```{r, include = FALSE}
+all_times <- list()  # store the time for each chunk
+knitr::knit_hooks$set(time_it = local({
+  now <- NULL
+  function(before, options) {
+    if (before) {
+      now <<- Sys.time()
+    } else {
+      res <- difftime(Sys.time(), now)
+      all_times[[options$label]] <<- res
+    }
+  }
+}))
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  time_it = TRUE
 )
+
 ```
 
 ```{r setup}
@@ -564,3 +578,8 @@ conmat_prem_soln %>%
 
 
 So now we have as fair of a comparison of the two matrices as we will get, and yet, there are significant differences in the dynamics of the two models.
+
+```{r}
+all_times
+```
+
