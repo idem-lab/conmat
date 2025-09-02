@@ -265,7 +265,7 @@ extract_term_names <- function(model) {
 clean_term_names <- function(term_names) {
   term_names |>
     stringr::str_remove_all("^s\\(gam_age_") |>
-    stringr::str_remove_all("\\)")
+    stringr::str_remove_all(stringr::fixed(")"))
 }
 
 #'
