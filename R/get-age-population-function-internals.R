@@ -131,7 +131,7 @@ return_age_population_function <- function(pop_model) {
 
 #' @title Predict log population based on age midpoints
 #' @description Used within the internal function,
-#'   [return_age_population_function()], ultimately for the
+#'   `return_age_population_function()`, ultimately for the
 #'   [get_age_population_function()] function.
 #' @param pop_model_bounded population data frame with columns of an age
 #'   `midpoint`, and log population (`log_pop`).
@@ -151,7 +151,7 @@ fit_bounded_age_groups <- function(pop_model_bounded) {
 }
 
 #' @title Build prediction table
-#' @description Internal function used in [return_age_population_function()],
+#' @description Internal function used in `return_age_population_function()`,
 #'   ultimately for the [get_age_population_function()] function.
 #' @param pop_model population model object from
 #'    [prepare_population_for_modelling()].
@@ -224,7 +224,7 @@ predict_to_long_age_ranges <- function(pop_model, fit) {
 
 #' @title Build a population table for use in lookup
 #' @description this function is used internally in the also internal function,
-#'    [return_age_population_function()], ultimately for the
+#'    `return_age_population_function()`, ultimately for the
 #'   [get_age_population_function()] function.
 #' @param pred model predictions
 #' @param age vector of ages

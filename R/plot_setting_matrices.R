@@ -1,6 +1,6 @@
 #' Visualise predicted contact matrix for each setting
 #'
-#' This is an extension of [plot_matrix()], which visualises the contact
+#' This is an extension of [autoplot.conmat_age_matrix()], which visualises the contact
 #'   matrix for each setting. It uses `patchwork` to combine all the matrices
 #'   together
 #'

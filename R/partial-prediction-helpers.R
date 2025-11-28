@@ -269,14 +269,14 @@ clean_term_names <- function(term_names) {
 }
 
 #'
-#' @param age_grid grid of ages from [create_age_grid()]
+#' @param age_grid grid of ages from `create_age_grid()`
 #' @param model model fitted object from conmat, e.g.,
 #'   `polymod_setting_models$home`.
-#' @param term_names terms from model extracted with [extract_term_names()].
+#' @param term_names terms from model extracted with `extract_term_names()`.
 #' @param term_var_names Cleaned up term names from model used with
-#'   [clean_term_names()].
+#'   `clean_term_names()`.
 #' @return Data frame containing predicted values added to output of
-#'   [create_age_grid()].
+#'   `create_age_grid()`.
 #' @noRd
 predict_individual_terms <- function(
   age_grid,
