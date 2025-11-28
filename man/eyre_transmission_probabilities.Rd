@@ -33,12 +33,14 @@ and the code to digitise these figures is in \code{data-raw} under
 you cite the original authors at 'Eyre, D. W., Taylor, D., Purver, M., Chapman, D., Fowler, T., Pouwels, K. B., Walker, A. S., & Peto, T. E. (2021). The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission (Preprint). Infectious Diseases (except HIV/AIDS). https://doi.org/10.1101/2021.09.28.21264260'
 }
 \examples{
+eyre_transmission_probabilities
 if (interactive()) {
 
 # plot this
 library(ggplot2)
 library(stringr)
-eyre_transmission_probabilities \%>\%
+library(dplyr)
+plot_eyre_transmission_probabilities <- eyre_transmission_probabilities \%>\%
   group_by(
     setting,
     case_age_5y,
@@ -65,8 +67,12 @@ eyre_transmission_probabilities \%>\%
         )
       )
     )
-  ) \%>\%
+  )
+
+  plot_eyre_transmission_probabilities
+
   ggplot(
+    plot_eyre_transmission_probabilities,
     aes(
       x = case_age,
       y = contact_age,
@@ -75,7 +81,7 @@ eyre_transmission_probabilities \%>\%
   ) +
   facet_wrap(~setting) +
   geom_tile() +
-  scale_fill_viridis() +
+  scale_fill_viridis_c() +
   coord_fixed() +
   theme_minimal() +
   theme(

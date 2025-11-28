@@ -23,12 +23,14 @@
 #'   \item{probability}{probability of transmission. Value is 0 - 1}
 #' }
 #' @examples
+#' eyre_transmission_probabilities
 #' if (interactive()) {
 #'
 #' # plot this
 #' library(ggplot2)
 #' library(stringr)
-#' eyre_transmission_probabilities %>%
+#' library(dplyr)
+#' plot_eyre_transmission_probabilities <- eyre_transmission_probabilities %>%
 #'   group_by(
 #'     setting,
 #'     case_age_5y,
@@ -55,8 +57,12 @@
 #'         )
 #'       )
 #'     )
-#'   ) %>%
+#'   )
+#'
+#'   plot_eyre_transmission_probabilities
+#'
 #'   ggplot(
+#'     plot_eyre_transmission_probabilities,
 #'     aes(
 #'       x = case_age,
 #'       y = contact_age,
@@ -65,7 +71,7 @@
 #'   ) +
 #'   facet_wrap(~setting) +
 #'   geom_tile() +
-#'   scale_fill_viridis() +
+#'   scale_fill_viridis_c() +
 #'   coord_fixed() +
 #'   theme_minimal() +
 #'   theme(

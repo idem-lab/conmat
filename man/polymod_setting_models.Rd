@@ -21,12 +21,12 @@ avoid recomputing a relatively common type of model for use with \code{conmat}.
 \donttest{
 # code used to produce this data
 library(conmat)
-set.seed(2022 - 08 - 26)
+set.seed(2025 - 11 - 28)
 polymod_contact_data <- get_polymod_setting_data()
 polymod_survey_data <- get_polymod_population()
 polymod_setting_models <- fit_setting_contacts(
   contact_data_list = polymod_contact_data,
-  # population = polymod_survey_data
+  population = polymod_survey_data
 )
 }
 

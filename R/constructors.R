@@ -193,9 +193,11 @@ new_ngm_setting_matrix <- function(
 #' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_contact <- extrapolate_polymod(perth)
+#' perth_contact
+#' # must be the same age breaks as in perth_contact - 0-75
 #' perth_ngm <- generate_ngm(
 #'   perth_contact,
-#'   age_breaks = c(seq(0, 85, by = 5), Inf)
+#'   age_breaks = c(seq(0, 75, by = 5), Inf)
 #' )
 #' raw_eigenvalue(perth_ngm)
 #' }

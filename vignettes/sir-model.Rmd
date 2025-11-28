@@ -6,14 +6,17 @@ vignette: >
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
 ---
-```{r, include = FALSE}
+```{r include = FALSE}
+#| label: setup
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+
+```{r include = FALSE}
+#| label: library
 library(conmat)
 library(deSolve)
 library(tidyr)

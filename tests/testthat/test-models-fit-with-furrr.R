@@ -64,3 +64,5 @@ test_that("Model coefficients are the same", {
 test_that("Matrix dims are kept", {
   expect_snapshot(map(contact_model_pred, dim))
 })
+## Shut down parallel workers
+future::plan("sequential")

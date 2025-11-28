@@ -70,3 +70,11 @@ synthetic_settings_5y_perth <- predict_setting_contacts(
   age_breaks = c(seq(0, 85, by = 5), Inf)
 )
 ```
+
+For computational purposes, we need to ensure we shut down the parallel workers, as per the vignette from `future`, [Best Practices for Package Developers](https://future.futureverse.org/articles/future-7-for-package-developers.html#writing-examples):
+
+```{r}
+## Shut down parallel workers
+future::plan("sequential")
+```
+

@@ -58,6 +58,8 @@
 #'   school_demographics = conmat_original_school_demographics,
 #'   work_demographics = conmat_original_work_demographics
 #' )
+#' # Shut down parallel workers
+#' future::plan("sequential")
 #' }
 fit_setting_contacts <- function(
   contact_data_list,

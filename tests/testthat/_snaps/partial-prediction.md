@@ -58,16 +58,16 @@
       # A tibble: 9,801 x 3
          age_from age_to gam_total_term
        *    <dbl>  <dbl>          <dbl>
-       1        1      1          1.51 
+       1        1      1          1.52 
        2        1      2          1.55 
        3        1      3          1.55 
        4        1      4          1.50 
        5        1      5          1.43 
-       6        1      6          1.33 
-       7        1      7          1.21 
+       6        1      6          1.32 
+       7        1      7          1.20 
        8        1      8          1.07 
-       9        1      9          0.934
-      10        1     10          0.794
+       9        1      9          0.930
+      10        1     10          0.792
       # i 9,791 more rows
 
 ---
@@ -78,15 +78,15 @@
       # A tibble: 39,204 x 4
          setting age_from age_to gam_total_term
        * <chr>      <dbl>  <dbl>          <dbl>
-       1 home           1      1          1.51 
+       1 home           1      1          1.52 
        2 home           1      2          1.55 
        3 home           1      3          1.55 
        4 home           1      4          1.50 
        5 home           1      5          1.43 
-       6 home           1      6          1.33 
-       7 home           1      7          1.21 
+       6 home           1      6          1.32 
+       7 home           1      7          1.20 
        8 home           1      8          1.07 
-       9 home           1      9          0.934
-      10 home           1     10          0.794
+       9 home           1      9          0.930
+      10 home           1     10          0.792
       # i 39,194 more rows
 

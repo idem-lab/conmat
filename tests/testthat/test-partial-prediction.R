@@ -183,15 +183,7 @@ current_partial_effects_sum <- partial_effects_sum(
   ages = 1:99
 )
 
-iris %>%
-  group_by(Species) %>%
-  summarise(across(
-    starts_with("Sepal"),
-    list(mean = mean, sd = sd),
-    .names = "{.col}.{.fn}"
-  ))
-#> #
-
+library(dplyr)
 current_partial_effects_sum |>
   group_by(setting) |>
   summarise(
