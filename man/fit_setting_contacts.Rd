@@ -77,6 +77,8 @@ contact_model_diff_data <- fit_setting_contacts(
   school_demographics = conmat_original_school_demographics,
   work_demographics = conmat_original_work_demographics
 )
+# Shut down parallel workers
+future::plan("sequential")
 }
 }
 \author{
