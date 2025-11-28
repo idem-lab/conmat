@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+
+```{r include = FALSE}
+#| label: library
 library(conmat)
 library(deSolve)
 library(tidyr)
