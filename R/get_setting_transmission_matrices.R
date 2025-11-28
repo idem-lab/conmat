@@ -219,6 +219,7 @@ get_setting_transmission_matrices <- function(
     lapply(purrr::pluck, 1)
 
   new_transmission_probability_matrix(
-    matrices[c("home", "school", "work", "other")]
+    list_matrix = matrices[c("home", "school", "work", "other")],
+    age_breaks = age_breaks
   )
 }
