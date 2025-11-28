@@ -50,12 +50,12 @@
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_hh <- get_abs_per_capita_household_size(lga = "Perth (C)")
 #'
-#' age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
+#' age_breaks_0_75_plus <- c(seq(0, 75, by = 5), Inf)
 #'
 #' # you can also run this without `per_capita_household_size`
 #' perth_ngm_lga <- generate_ngm(
 #'   perth,
-#'   age_breaks = age_breaks_0_80_plus,
+#'   age_breaks = age_breaks_0_75_plus,
 #'   per_capita_household_size = perth_hh,
 #'   R_target = 1.5
 #' )
@@ -67,13 +67,13 @@
 #'
 #' perth_ngm <- generate_ngm(
 #'   perth_contact,
-#'   age_breaks = age_breaks_0_80_plus,
+#'   age_breaks = age_breaks_0_75_plus,
 #'   R_target = 1.5
 #' )
 #'
 #' # using our own transmission matrix
 #' new_transmission_matrix <- get_setting_transmission_matrices(
-#'   age_breaks = age_breaks_0_80_plus,
+#'   age_breaks = age_breaks_0_75_plus,
 #'   # is normally 0.5
 #'   asymptomatic_relative_infectiousness = 0.75
 #' )
@@ -82,7 +82,7 @@
 #'
 #' perth_ngm_0_80_new_tmat <- generate_ngm(
 #'   perth_contact,
-#'   age_breaks = age_breaks_0_80_plus,
+#'   age_breaks = age_breaks_0_75_plus,
 #'   R_target = 1.5,
 #'   setting_transmission_matrix = new_transmission_matrix
 #' )
@@ -111,7 +111,13 @@ generate_ngm <- function(
 #' \donttest{
 #' perth <- abs_age_lga("Perth (C)")
 #' perth_contact <- extrapolate_polymod(perth)
-#' generate_ngm(perth_contact, age_breaks = c(seq(0, 85, by = 5), Inf))
+#' perth_contact
+#' # make sure to use the same age breaks as used in `extrapolate_polymod()`
+#' generate_ngm(
+#'   perth_contact,
+#'   age_breaks = c(seq(0, 75, by = 5), Inf),
+#'   R_target = 1.5
+#'   )
 #' }
 #' @rdname generate_ngm
 #' @export
