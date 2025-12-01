@@ -71,12 +71,6 @@ We need methods that allow for flexibly creating synthetic contact matrices for 
 
 ## Installation
 
-You can install the stable version from CRAN with:
-
-```r
-install.packages("conmat")
-```
-
 You can install the development version with:
 
 ```r

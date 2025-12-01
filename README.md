@@ -59,12 +59,6 @@ representation of community infection in many regions.
 
 ## Installation
 
-You can install the stable version from CRAN with:
-
-``` r
-install.packages("conmat")
-```
-
 You can install the development version with:
 
 ``` r
