@@ -1,7 +1,7 @@
 library(future)
 library(purrr)
 library(dplyr)
-plan(multisession, workers = 4)
+plan(multisession, workers = 2)
 polymod_setting_data <- get_polymod_setting_data()
 polymod_population <- get_polymod_population()
 
