@@ -62,8 +62,6 @@ contact_model <- fit_setting_contacts(
   population = polymod_population
 )
 #> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
-#> algorithm did not converge
-#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
 #> fitted rates numerically 0 occurred
 #> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
 #> fitted rates numerically 0 occurred

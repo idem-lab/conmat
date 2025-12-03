@@ -36,6 +36,9 @@ polymod_setting_models <- fit_setting_contacts(
   contact_data_list = polymod_contact_data,
   population = polymod_survey_data
 )
+#> Warning: algorithm did not converge
+#> Warning: fitted rates numerically 0 occurred
+#> Warning: algorithm did not converge
 #> Warning: fitted rates numerically 0 occurred
 # }
 ```

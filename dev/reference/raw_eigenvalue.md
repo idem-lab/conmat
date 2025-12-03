@@ -21,8 +21,6 @@ raw eigenvalue
 ## Examples
 
 ``` r
-# examples not run as they take a long time
-# \donttest{
 perth <- abs_age_lga("Perth (C)")
 perth_contact <- extrapolate_polymod(perth)
 perth_contact
@@ -44,10 +42,9 @@ perth_contact
 # must be the same age breaks as in perth_contact - 0-75
 perth_ngm <- generate_ngm(
   perth_contact,
-  age_breaks = c(seq(0, 75, by = 5), Inf)
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  R_target = 1.5
 )
-#> Error in generate_ngm.conmat_setting_prediction_matrix(perth_contact,     age_breaks = c(seq(0, 75, by = 5), Inf)): argument "R_target" is missing, with no default
 raw_eigenvalue(perth_ngm)
-#> Error: object 'perth_ngm' not found
-# }
+#> [1] 3.469723
 ```

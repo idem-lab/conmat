@@ -102,7 +102,7 @@ contact_model_pred_est <- estimate_setting_contacts(
   age_breaks = c(seq(0, 85, by = 5), Inf),
   per_capita_household_size = fairfield_hh
 )
-#> Warning: fitted rates numerically 0 occurred
+#> Warning: algorithm did not converge
 #> Warning: fitted rates numerically 0 occurred
 
 # or use different populations in school or work demographics
@@ -116,7 +116,6 @@ contact_model_pred_est <- estimate_setting_contacts(
   school_demographics = conmat_original_school_demographics,
   work_demographics = conmat_original_work_demographics
 )
-#> Warning: algorithm did not converge
 #> Warning: fitted rates numerically 0 occurred
 #> Warning: fitted rates numerically 0 occurred
 
