@@ -1,0 +1,117 @@
+# Get Setting Transmission Matrices
+
+Given some age breaks, return a named list of matrices containing
+age-specific relative per-contact transmission probability matrices for
+each of 4 settings: home, school, work, other. These can be combined
+with contact matrices to produce setting-specific relative next
+generation matrices (NGMs). These can be scaled to match a required
+reproduction number based on the dominant eigenvalue of the all-settings
+NGM (the elementwise sum of all setting NGMs).
+
+## Usage
+
+``` r
+get_setting_transmission_matrices(
+  age_breaks = c(seq(0, 80, by = 5), Inf),
+  asymptomatic_relative_infectiousness = 0.5,
+  susceptibility_estimate = c("davies_updated", "davies_original")
+)
+```
+
+## Arguments
+
+- age_breaks:
+
+  vector of age breaks, defaults to `c(seq(0, 80, by = 5), Inf)`
+
+- asymptomatic_relative_infectiousness:
+
+  the assumed ratio of onward infectiousness between asymptomatic and
+  symptomatic cases. This represents the infectiousness of asymptomatic
+  relative to symptomatic. Default value is 0.5, which means the
+  asymptomatic cases are 50% less infectious than symptomatic cases.
+
+- susceptibility_estimate:
+
+  Which estimate to use for susceptibility by age. Either, the smoothed
+  original Davies et al estimates, "davies_original" or, the set updated
+  to match UK under-16 infections (the default), "davies_updated".
+
+## Value
+
+list of matrices, containing the relative per-contact transmission
+probability for each setting
+
+## Details
+
+These matrices are created from: an estimate of the clinical fraction
+for each age (inferred by applying a smoothing spline to the mean
+estimates from Davies et al.); an assumption of the infectiousness of
+asymptomatics relative to symptomatics (provided as an argument);
+estimates of the relative susceptibility to infection of individuals of
+different ages, inferred from a smoothing-spline estimate of the mean
+relative susceptibility estimate from Davies et al., combined with a
+re-estimation of the susceptibility profile for under-16s, estimated in
+a similar way but to the age-distribution of infections in England from
+the UK ONS prevalence survey (rather than case counts with may
+undercount children), assuming the above clinical fraction estimates,
+and accounting for vaccination, reduced mixing, and reduced
+transmissibility in work and other settings due to hygiene behaviour;
+and estimates of the relative transmissibility in household vs
+non-household settings - scaled linearly for non-household transmission
+and binomially for household transmission (so that onward infections do
+not to exceed the number of other household members).
+
+When using this data, ensure that you cite this package, and the
+original authors of the paper from which these estimates were derived:
+
+Davies, N.G., Klepac, P., Liu, Y. et al. Age-dependent effects in the
+transmission and control of COVID-19 epidemics. Nat Med 26, 1205–1211
+(2020). https://doi.org/10.1038/s41591-020-0962-9
+
+## Examples
+
+``` r
+# \donttest{
+# fit polymod model
+setting_models <- fit_setting_contacts(
+  contact_data_list = get_polymod_setting_data(),
+  population = get_polymod_population()
+)
+#> Warning: fitted rates numerically 0 occurred
+#> Warning: fitted rates numerically 0 occurred
+
+# define age breaks for prediction
+age_breaks <- c(seq(0, 80, by = 5), Inf)
+
+# define a new population age distribution to predict to
+fairfield <- abs_age_lga("Fairfield (C)")
+
+# predict setting-specific contact matrices to a new population
+contact_matrices <- predict_setting_contacts(
+  population = fairfield,
+  contact_model = setting_models,
+  age_breaks = age_breaks
+)
+
+# remove the 'all' matrix, keep the other four settings
+contact_matrices <- contact_matrices[c("home", "school", "work", "other")]
+
+# get setting-specific per-contact transmission rate matrices for the same
+# age aggregations
+transmission_matrices <- get_setting_transmission_matrices(
+  age_breaks = age_breaks
+)
+
+# combine them to get setting-specific (unscaled) next-generation matrices
+next_generation_matrices <- mapply(
+  FUN = `*`,
+  contact_matrices,
+  transmission_matrices,
+  SIMPLIFY = FALSE
+)
+
+# get the all-settings NGM
+ngm_overall <- Reduce("+", next_generation_matrices)
+# }
+```
