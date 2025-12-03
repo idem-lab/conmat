@@ -13,7 +13,7 @@ test_that("check_lga_name errors for some lgas", {
   skip_on_ci()
   expect_snapshot_error(map(
     .x = unique(abs_household_lga$lga),
-    .f = ~ check_lga_name(lga = .x)
+    .f = ~ check_lga_name(lga_name = .x)
   ))
 })
 
@@ -32,7 +32,7 @@ test_that("check_lga_name errors for some lgas", {
 #
 # check_lga_name_runs <- map(
 #   .x = unique(abs_household_lga$lga),
-#   .f = ~ safe_check_lga_name(lga = .x)
+#   .f = ~ safe_check_lga_name(lga_name = .x)
 # )
 #
 # transpose_errors <- transpose(check_lga_name_runs)
