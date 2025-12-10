@@ -220,7 +220,8 @@ raw_eigenvalue <- function(list_matrix) {
 #' perth_contact <- extrapolate_polymod(perth)
 #' perth_ngm <- generate_ngm(
 #'   perth_contact,
-#'   age_breaks = c(seq(0, 85, by = 5), Inf)
+#'   age_breaks = c(seq(0, 75, by = 5), Inf),
+#'   R_target = 1.5
 #' )
 #' raw_eigenvalue(perth_ngm)
 #' scaling(perth_ngm)
