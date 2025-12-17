@@ -28,15 +28,12 @@ perth <- abs_age_lga("Perth (C)")
 perth_contact <- extrapolate_polymod(perth)
 perth_ngm <- generate_ngm(
   perth_contact,
-  age_breaks = c(seq(0, 85, by = 5), Inf)
+  age_breaks = c(seq(0, 75, by = 5), Inf),
+  R_target = 1.5
 )
-#> Error in check_age_breaks(x = age_breaks(x), y = age_breaks, x_arg = "x",     y_arg = "age_breaks"): Age breaks must be the same, but they are different:
-#>          `x[14:17]`: 65 70 75 Inf       
-#> `age_breaks[14:19]`: 65 70 75  80 85 Inf
-#> ℹ You can check the age breaks using `age_breaks(<object>)`
 raw_eigenvalue(perth_ngm)
-#> Error: object 'perth_ngm' not found
+#> [1] 3.469723
 scaling(perth_ngm)
-#> Error: object 'perth_ngm' not found
+#> [1] 0.4323112
 # }
 ```
