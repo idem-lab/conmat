@@ -103,7 +103,7 @@ tasmania_contact <- extrapolate_polymod(population = tasmania)
 tasmania_contact
 ```
 
-We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in (Figure \ref{fig-autoplot-contacts}).
+We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in Figure \ref{fig-autoplot-contacts}.
 
 ```{r}
 #| label: fig-autoplot-contacts
@@ -124,7 +124,7 @@ The overall approach of `conmat` has two parts:
 
 `conmat` was built to predict at four settings: work, school, home, and other. 
 One model is fitted for each setting. 
-Each model fitted is a Poisson generalised additive model (GAM) with a log link function, which predicts the count of contacts, with an offset for the log of participants. 
+Each model fitted is a Poisson generalised additive model (GAM) with a log link function, which predicts the count of contacts, with an offset for the log of the number of participants. 
 The model has six covariates to explain key features of the relationship between ages, 
 and two optional covariates for attendance at school or work.
 
@@ -204,7 +204,7 @@ The covariates used by `conmat` were designed to represent the key features that
 <!-- The interface to the model formula in `conmat` is fixed; users cannot change the covariates of the model. This means if there is an unusual structure in their contact data it might not be accurately captured by `conmat`. This fixed formula was a design decision made to focus on the key feature of `conmat`: using only age population data to predict a contact matrix.  -->
 
 
-This code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling; @conway2023; @ryan2024].
+The code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling; @conway2023; @ryan2024].
 
 Software is never finished, and the software in its current format has proven useful for infectious disease modelling. In time we hope it can become more widely used and be useful for more applications in epidemiology and public health. 
 
