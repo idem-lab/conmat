@@ -25,16 +25,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/idem-lab/conmat/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/idem-lab/conmat/blob/v1.0/DESCRIPTION)
 
-Tierney N, Golding N, Babu A, Saraswati C, Lydeamore M (2025). *conmat:
+Tierney N, Golding N, Babu A, Saraswati C, Lydeamore M (2026). *conmat:
 Builds Contact Matrices using GAMs and Population Data*. R package
 version 0.0.2.9000, <https://idem-lab.github.io/conmat/>.
 
     @Manual{,
       title = {conmat: Builds Contact Matrices using GAMs and Population Data},
       author = {Nicholas Tierney and Nick Golding and Aarathy Babu and Chitra Saraswati and Michael Lydeamore},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.0.2.9000},
       url = {https://idem-lab.github.io/conmat/},
     }

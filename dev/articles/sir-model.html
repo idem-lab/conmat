@@ -67,7 +67,7 @@
       <h1>SIR modelling with conmat</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/idem-lab/conmat/blob/master/vignettes/sir-model.Rmd" class="external-link"><code>vignettes/sir-model.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/idem-lab/conmat/blob/v1.0/vignettes/sir-model.Rmd" class="external-link"><code>vignettes/sir-model.Rmd</code></a></small>
       <div class="d-none name"><code>sir-model.Rmd</code></div>
     </div>
 
@@ -426,12 +426,12 @@ the non age structured:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Value"</span>, colour <span class="op">=</span> <span class="st">"State"</span>, linetype <span class="op">=</span> <span class="st">"Model"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg_combined_solutions</span></span></code></pre></div>
-<p><img src="sir-model_files/figure-html/plot-both-models-1.png" class="r-plt" width="700"></p>
+<p><img src="sir-model_files/figure-html/plot-both-models-1.png" class="r-plt" alt="" width="700"></p>
 <p>Voila! These lines are the same! We can double check this by plotting
 them as facets:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg_combined_solutions</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">type</span><span class="op">)</span></span></code></pre></div>
-<p><img src="sir-model_files/figure-html/facetted-sir-1.png" class="r-plt" width="700"></p>
+<p><img src="sir-model_files/figure-html/facetted-sir-1.png" class="r-plt" alt="" width="700"></p>
 <p>So, we have successfully collapsed our stratified model down to the
 non-stratified model, which is a great sense check for every time you
 write out a complicated model.</p>
@@ -604,7 +604,7 @@ probability matrix from the data we have on Germany.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Proportion"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg_germany_sir</span></span></code></pre></div>
-<p><img src="sir-model_files/figure-html/germany-sir-plot-1.png" class="r-plt" width="700"></p>
+<p><img src="sir-model_files/figure-html/germany-sir-plot-1.png" class="r-plt" alt="" width="700"></p>
 <p>Let’s compare to the Prem matrices. Prem only has 16 age classes so
 we do need to re-do our population.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -707,7 +707,7 @@ solving the ODE</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Value"</span>, colour <span class="op">=</span> <span class="st">"Model"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">name</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="sir-model_files/figure-html/plot-conmat-prem-1.png" class="r-plt" width="700"></p>
+<p><img src="sir-model_files/figure-html/plot-conmat-prem-1.png" class="r-plt" alt="" width="700"></p>
 <p>These are really different, but we have to be careful about why. The
 contact matrices might refer to the same quantity, but if we dive a
 little deeper, we find out that might not be the case…</p>
@@ -839,7 +839,7 @@ models should be differences in the contact matrices.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Time"</span>, y <span class="op">=</span> <span class="st">"Population"</span>, colour <span class="op">=</span> <span class="st">"Model"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="sir-model_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" width="700"></p>
+<p><img src="sir-model_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="700"></p>
 <p>So now we have as fair of a comparison of the two matrices as we will
 get, and yet, there are significant differences in the dynamics of the
 two models.</p>
