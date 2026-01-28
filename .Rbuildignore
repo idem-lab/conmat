@@ -18,3 +18,5 @@
 
 # flint files
 ^flint$
+chitra/
+.comments/
