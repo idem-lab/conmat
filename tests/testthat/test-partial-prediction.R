@@ -1,12 +1,10 @@
 test_that("Partial prediction functions work for a single model setting", {
   skip_on_ci()
   # just partial effects for a single setting
-  expect_no_failure({
-    partials_home <- partial_effects(
-      polymod_setting_models$home,
-      ages = 1:99
-    )
-  })
+  partials_home <- partial_effects(
+    polymod_setting_models$home,
+    ages = 1:99
+  )
 
   expect_snapshot(partials_home)
 
@@ -19,12 +17,10 @@ test_that("Partial prediction functions work for a single model setting", {
 test_that("Partial prediction functions work for all model settings", {
   skip_on_ci()
   # partial effects for all settings
-  expect_no_failure({
-    partials_setting <- partial_effects(
-      polymod_setting_models,
-      ages = 1:99
-    )
-  })
+  partials_setting <- partial_effects(
+    polymod_setting_models,
+    ages = 1:99
+  )
 
   expect_snapshot(partials_setting)
 
@@ -38,12 +34,10 @@ test_that("Partial prediction functions work for all model settings", {
 test_that("Partial prediction sum functions work for a single model setting", {
   skip_on_ci()
   # Summed up partial effects (y-hat) for a single setting
-  expect_no_failure({
-    partials_summed_home <- partial_effects_sum(
-      polymod_setting_models$home,
-      ages = 1:99
-    )
-  })
+  partials_summed_home <- partial_effects_sum(
+    polymod_setting_models$home,
+    ages = 1:99
+  )
 
   expect_snapshot(partials_summed_home)
 
@@ -57,12 +51,10 @@ test_that("Partial prediction sum functions work for a single model setting", {
 test_that("Partial prediction sum functions work for a single model setting", {
   skip_on_ci()
   # summed up partial effects (y-hat) for all settings
-  expect_no_failure({
-    partials_summed_setting <- partial_effects_sum(
-      polymod_setting_models,
-      ages = 1:99
-    )
-  })
+  partials_summed_setting <- partial_effects_sum(
+    polymod_setting_models,
+    ages = 1:99
+  )
 
   expect_snapshot(partials_summed_setting)
 
