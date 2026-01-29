@@ -147,9 +147,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.29 4.32 7.12 7.60 4.73  total = 32.06 
+#> 1.00 4.35 3.95 7.14 7.57 4.85  total = 31.86 
 #> 
-#> fREML score: 24333.66     rank: 55/57
+#> fREML score: 11816.72     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -203,16 +203,16 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00288
-#>  2 [0,5)          [5,10)        0.00312
-#>  3 [0,5)          [10,15)       0.00327
-#>  4 [0,5)          [15,20)       0.00554
+#>  1 [0,5)          [0,5)         0.00286
+#>  2 [0,5)          [5,10)        0.00321
+#>  3 [0,5)          [10,15)       0.00346
+#>  4 [0,5)          [15,20)       0.00573
 #>  5 [0,5)          [20,25)       0.0133 
-#>  6 [0,5)          [25,30)       0.0264 
-#>  7 [0,5)          [30,35)       0.0359 
-#>  8 [0,5)          [35,40)       0.0373 
-#>  9 [0,5)          [40,45)       0.0353 
-#> 10 [0,5)          [45,50)       0.0322 
+#>  6 [0,5)          [25,30)       0.0262 
+#>  7 [0,5)          [30,35)       0.0357 
+#>  8 [0,5)          [35,40)       0.0370 
+#>  9 [0,5)          [40,45)       0.0346 
+#> 10 [0,5)          [45,50)       0.0315 
 #> # ℹ 314 more rows
 ```
 
@@ -227,7 +227,7 @@ synthetic_contact_fairfield %>%
   autoplot()
 ```
 
-<img src="man/figures/README-plot-matrix-differents-1.png" width="100%" />
+<img src="man/figures/README-plot-matrix-differents-1.png" alt="" width="100%" />
 
 ## Applying the model across all settings.
 

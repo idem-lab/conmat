@@ -105,7 +105,7 @@ get_polymod_contact_data <- function(
     ) %>%
     dplyr::ungroup() %>%
     dplyr::filter(
-      !is.na(part_age),
+      !is.na(part_age_exact),
       !missing_any_contact_age,
       !missing_any_contact_setting
     )
@@ -126,7 +126,7 @@ get_polymod_contact_data <- function(
   contact_data_setting %>%
     dplyr::select(
       part_id,
-      age_from = part_age,
+      age_from = part_age_exact,
       age_to = cnt_age,
       contacted
     ) %>%

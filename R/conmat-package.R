@@ -81,7 +81,7 @@ globalVariables(
     "n_households",
     "n_people",
     "n_persons_usually_resident",
-    "part_age",
+    "part_age_exact",
     "part_id",
     "participants",
     "per_capita_household_size",

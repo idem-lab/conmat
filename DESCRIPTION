@@ -1,6 +1,6 @@
 Package: conmat
-Title: Builds Contact Matrices using GAMs and Population Data
-Version: 0.0.2.9000
+Title: Builds Contact Matrices using 'GAMs' and Population Data
+Version: 0.1.0
 Authors@R: c(
       person(given = "Nicholas",
              family = "Tierney",
@@ -30,7 +30,7 @@ Authors@R: c(
       person("Commonwealth of Australia", "AEC", role = c("cph")),
       person("Australian Bureau of Statistics", "ABS", role = c("cph"))
       )
-Description: Builds contact matrices using GAMs and population data. This package
+Description: Builds contact matrices using 'GAMs' and population data. This package
   incorporates data that is copyright Commonwealth of Australia (Australian
   Electoral Commission and Australian Bureau of Statistics) 2020.
 License: MIT + file LICENSE
@@ -60,7 +60,7 @@ Imports:
     tidyr (>= 1.2.0),
     cli,
     stats,
-    socialmixr (>= 0.2.0),
+    socialmixr (>= 0.5.0),
     ggplot2,
     tibble (>= 3.1.8),
     patchwork,
