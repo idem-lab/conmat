@@ -1,258 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/conmat-population.html</loc>
-  </url>
-  <url>
-    <loc>/articles/data-sources.html</loc>
-  </url>
-  <url>
-    <loc>/articles/example-pipeline.html</loc>
-  </url>
-  <url>
-    <loc>/articles/getting-started.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/other-data-sources.html</loc>
-  </url>
-  <url>
-    <loc>/articles/parallel-computing.html</loc>
-  </url>
-  <url>
-    <loc>/articles/visualising-conmat.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abbreviate_states.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_age_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_education_state.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_education_state_2020.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_employ_age_lga.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_household_lga.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_household_size_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_lga_lookup.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_per_capita_household_size_lga.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_per_capita_household_size_state.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_pop_age_lga_2016.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_pop_age_lga_2020.html</loc>
-  </url>
-  <url>
-    <loc>/reference/abs_state_age.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accessors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_intergenerational.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_modelling_features.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_offset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_population_age_to.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_school_work_participation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_symmetrical_features.html</loc>
-  </url>
-  <url>
-    <loc>/reference/age_group_lookup.html</loc>
-  </url>
-  <url>
-    <loc>/reference/age_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/aggregate_predicted_contacts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/apply_vaccination.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_conmat_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/autoplot-conmat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_dimensions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_if_list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_age_population_year.html</loc>
-  </url>
-  <url>
-    <loc>/reference/conmat-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/conmat_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_abs_lga_education.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_abs_lga_work.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_abs_state_education.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_abs_state_work.html</loc>
-  </url>
-  <url>
-    <loc>/reference/davies_age_extended.html</loc>
-  </url>
-  <url>
-    <loc>/reference/estimate_setting_contacts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extrapolate_polymod.html</loc>
-  </url>
-  <url>
-    <loc>/reference/eyre_transmission_probabilities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fit_setting_contacts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fit_single_contact_model.html</loc>
-  </url>
-  <url>
-    <loc>/reference/formula-terms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generate_ngm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_age_population_function.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_data_abs_age_education.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_data_abs_age_work.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_household_size_distribution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_per_capita_household_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_polymod_contact_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_polymod_per_capita_household_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_polymod_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_polymod_setting_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_setting_transmission_matrices.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/matrix_to_predictions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/new_conmat_population.html</loc>
-  </url>
-  <url>
-    <loc>/reference/per_capita_household_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/polymod.html</loc>
-  </url>
-  <url>
-    <loc>/reference/polymod_setting_models.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict_contacts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict_contacts_1y.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict_setting_contacts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predictions_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prepare_population_for_modelling.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/separate_age_group.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setting_weights.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unabbreviate_states.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vaccination_effect_example_data.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://idem-lab.github.io/conmat/404.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/CONTRIBUTING.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/LICENSE-text.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/LICENSE.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/conmat-population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/data-sources.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/example-pipeline.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/getting-started.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/index.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/other-data-sources.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/parallel-computing.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/sir-model.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/articles/visualising-conmat.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/authors.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/index.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/news/index.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs-age-education.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs-age-work.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_abbreviate_states.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_age_data.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_avg_school.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_avg_work.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_education_state.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_education_state_2020.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_employ_age_lga.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_household_lga.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_lga_lookup.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_pop_age_lga_2016.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_pop_age_lga_2020.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_state_age.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/abs_unabbreviate_states.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/accessors.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_intergenerational.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_modelling_features.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_offset.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_population_age_to.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_school_work_participation.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/add_symmetrical_features.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/age_breaks.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/age_group_lookup.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/age_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/aggregate_predicted_contacts.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/apply_vaccination.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/as_conmat_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/as_setting_prediction_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/autoplot-conmat-partial.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/autoplot-conmat.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/check_dimensions.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/check_if_list.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/check_school_demographics.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/check_work_demographics.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/clean_age_population_year.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/conmat-package.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/conmat_original_school_demographics.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/conmat_original_work_demographics.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/conmat_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/data_abs_lga_education.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/data_abs_lga_work.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/data_abs_state_education.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/data_abs_state_work.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/davies_age_extended.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/estimate_setting_contacts.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/extrapolate_polymod.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/eyre_transmission_probabilities.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/fit_setting_contacts.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/fit_single_contact_model.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/generate_ngm.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/generate_ngm_oz.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_abs_household_size_distribution.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_abs_household_size_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size_lga.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size_state.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_age_population_function.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_polymod_contact_data.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_polymod_per_capita_household_size.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_polymod_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_polymod_setting_data.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/get_setting_transmission_matrices.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/index.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/matrix_to_predictions.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/new_age_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/new_conmat_population.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/new_ngm_setting_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/new_setting_data.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/partial-prediction-sum.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/partial-prediction.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/per_capita_household_size.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/pipe.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/polymod.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/polymod_setting_models.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/predict_contacts.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/predict_contacts_1y.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/predict_setting_contacts.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/predictions_to_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/prem_germany_contact_matrices.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/prepare_population_for_modelling.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/raw_eigenvalue.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/reexports.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/scaling.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/separate_age_group.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/setting_prediction_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/setting_weights.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/transmission_probability_matrix.html</loc></url>
+<url><loc>https://idem-lab.github.io/conmat/reference/vaccination_effect_example_data.html</loc></url>
 </urlset>
+

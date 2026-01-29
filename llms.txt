@@ -1,0 +1,597 @@
+# conmat
+
+The goal of conmat is to make it easy to generate synthetic contact
+matrices for a given age population.
+
+**What is a contact matrix?**
+
+Contact matrices describe the degree of contact between individuals of
+given age groups.
+
+For example, this matrix describes the number of contacts between
+individuals
+
+``` R
+#>       0-4 5-9 10-14
+#> 0-4    10   3     4
+#> 5-9     3  11     5
+#> 10-14   4   5    13
+```
+
+The rows and columns represent the age groups of the people. On the main
+diagonal we see that we have a higher number of contacts - showing that
+people of similar ages tend to interact more with one another.
+
+We can use the information in these matrices to model how diseases such
+as COVID-19 spread in a population through social contact.
+
+**Why do we need *synthetic* contact matrices?**
+
+Contact matrices are produced from empirical data resulting from a
+contact survey, which requires individuals to diary the amount and
+manner of contact a person has in a day.
+
+However, these surveys are highly time-consuming and expensive to run,
+meaning that only a handful of these empirical datasets exist globally.
+
+We can use statistical methods to create *synthetic contact matrices*,
+which are new contact matrices that have been generalised to new
+countries based on existing surveys.
+
+**Why do we need `conmat`?**
+
+Existing methods only provide outputs of the contact matrices for each
+country, or at best, for urban and rural areas for a given country.
+
+We need methods that allow for flexibly creating synthetic contact
+matrices for a specified age population, as the age population
+distribution of many countries (e.g., Australia), are quite
+heterogeneous, and assuming it is homogeneous would result in inaccurate
+representation of community infection in many regions.
+
+## Installation
+
+You can install the development version with:
+
+``` r
+install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
+```
+
+Or alternatively you can use `remotes`
+
+``` r
+# install.packages("remotes")
+remotes::install_github("idem-lab/conmat")
+```
+
+## Example
+
+First we want to fit the model to the POLYMOD data, which contains
+various survey and population data.
+
+``` r
+library(conmat)
+polymod_contact_data <- get_polymod_contact_data(setting = "work")
+polymod_survey_data <- get_polymod_population()
+```
+
+The contact data is a data frame containing the age from and to, and the
+number of contacts for each of the specified settings, “home”, “work”,
+“school”, “other”, or “all” as well as the number of participants. By
+default, `polymod_contact_data` contains data from “all”, but we’re
+going to use the “work” set of data, as it produces an interesting
+looking dataset. Each row contains survey information of the number of
+contacts. Specifically, the number of contacts from one age group to
+another age group, and then the number of participants in that age
+group.
+
+The survey data, `polymod_survey_data` contains the lower age limit and
+the population in that age group.
+
+``` r
+polymod_survey_data
+#> # A tibble: 21 × 2 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
+#>    lower.age.limit population
+#>              <int>      <dbl>
+#>  1               0   1898966.
+#>  2               5   2017632.
+#>  3              10   2192410.
+#>  4              15   2369985.
+#>  5              20   2467873.
+#>  6              25   2484327.
+#>  7              30   2649826.
+#>  8              35   3043704.
+#>  9              40   3117812.
+#> 10              45   2879510.
+#> # ℹ 11 more rows
+```
+
+## Predicting the contact rate
+
+We can create a model of the contact *rate* with the function
+`fit_single_contact_model`
+
+``` r
+set.seed(2022 - 09 - 06)
+contact_model <- fit_single_contact_model(
+  contact_data = polymod_contact_data,
+  population = polymod_survey_data
+)
+#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
+#> fitted rates numerically 0 occurred
+```
+
+This fits a generalised additive model (GAM), predicting the contact
+rate, based on a series of prediction terms that describe various
+features of the contact rates.
+
+``` r
+contact_model
+#> 
+#> Family: poisson 
+#> Link function: log 
+#> 
+#> Formula:
+#> contacts ~ s(gam_age_offdiag) + s(gam_age_offdiag_2) + s(gam_age_diag_prod) + 
+#>     s(gam_age_diag_sum) + s(gam_age_pmax) + s(gam_age_pmin) + 
+#>     school_probability + work_probability + offset(log_contactable_population)
+#> 
+#> Estimated degrees of freedom:
+#> 1.00 4.35 3.95 7.14 7.57 4.85  total = 31.86 
+#> 
+#> fREML score: 11816.72     rank: 55/57
+```
+
+We can use this contact model to then predict the contact rate in a new
+population.
+
+As a demonstration, let’s take an age population from a given LGA in
+Australia (this was the initial motivation for the package, so there are
+some helper functions for Australian specific data).
+
+``` r
+fairfield <- abs_age_lga("Fairfield (C)")
+fairfield
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
+#>    lga           lower.age.limit  year population
+#>    <chr>                   <dbl> <dbl>      <dbl>
+#>  1 Fairfield (C)               0  2020      12261
+#>  2 Fairfield (C)               5  2020      13093
+#>  3 Fairfield (C)              10  2020      13602
+#>  4 Fairfield (C)              15  2020      14323
+#>  5 Fairfield (C)              20  2020      15932
+#>  6 Fairfield (C)              25  2020      16190
+#>  7 Fairfield (C)              30  2020      14134
+#>  8 Fairfield (C)              35  2020      13034
+#>  9 Fairfield (C)              40  2020      12217
+#> 10 Fairfield (C)              45  2020      13449
+#> 11 Fairfield (C)              50  2020      13419
+#> 12 Fairfield (C)              55  2020      13652
+#> 13 Fairfield (C)              60  2020      12907
+#> 14 Fairfield (C)              65  2020      10541
+#> 15 Fairfield (C)              70  2020       8227
+#> 16 Fairfield (C)              75  2020       5598
+#> 17 Fairfield (C)              80  2020       4006
+#> 18 Fairfield (C)              85  2020       4240
+```
+
+We can then pass the contact model through to `predict_contacts`, along
+with the fairfield age population data, and some age breaks that we want
+to predict to.
+
+``` r
+set.seed(2022 - 09 - 06)
+synthetic_contact_fairfield <- predict_contacts(
+  model = contact_model,
+  population = fairfield,
+  age_breaks = c(seq(0, 85, by = 5), Inf)
+)
+
+synthetic_contact_fairfield
+#> # A tibble: 324 × 3
+#>    age_group_from age_group_to contacts
+#>    <fct>          <fct>           <dbl>
+#>  1 [0,5)          [0,5)         0.00286
+#>  2 [0,5)          [5,10)        0.00321
+#>  3 [0,5)          [10,15)       0.00346
+#>  4 [0,5)          [15,20)       0.00573
+#>  5 [0,5)          [20,25)       0.0133 
+#>  6 [0,5)          [25,30)       0.0262 
+#>  7 [0,5)          [30,35)       0.0357 
+#>  8 [0,5)          [35,40)       0.0370 
+#>  9 [0,5)          [40,45)       0.0346 
+#> 10 [0,5)          [45,50)       0.0315 
+#> # ℹ 314 more rows
+```
+
+## Plotting
+
+Let’s visualise the matrix to get a sense of the predictions with
+`autoplot`. First we need to transform the predictions to a matrix:
+
+``` r
+synthetic_contact_fairfield %>%
+  predictions_to_matrix() %>%
+  autoplot()
+```
+
+![](reference/figures/README-plot-matrix-differents-1.png)
+
+## Applying the model across all settings.
+
+You can also fit a model for all of the settings all at once with a
+series of functions, `fit_setting_contacts`, and
+`predict_setting_contacts`. This means we can do the above, but for each
+setting, “home”, “work”, “school”, “other”, and “all”. We would
+recommend this when using conmat, as it is a pretty common use case.
+However for demonstration purposes we wanted to show how it works for a
+single matrix here first. We also provide details on how to fit the
+model to each of these settings in parallel. For more details on that
+workflow, see the “getting started” vignette.
+
+## Data sources
+
+This package provides data and helper functions for the data, for use in
+calculating contact matrices. The data sources are from the Australian
+Bureau of Statistics (ABS), as we were using these a lot when we created
+the package. In the future we might wrap these data sources and helpers
+into another package, but for the time being they are here. Below are a
+couple of examples of data provided, see the “data sources” vignette and
+helpful at the website for full details.
+
+You can extract the age population structure for the LGA, Brisbane, like
+so:
+
+``` r
+abs_age_lga("Brisbane (C)")
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
+#>    lga          lower.age.limit  year population
+#>    <chr>                  <dbl> <dbl>      <dbl>
+#>  1 Brisbane (C)               0  2020      72894
+#>  2 Brisbane (C)               5  2020      75933
+#>  3 Brisbane (C)              10  2020      73990
+#>  4 Brisbane (C)              15  2020      72010
+#>  5 Brisbane (C)              20  2020     104564
+#>  6 Brisbane (C)              25  2020     119000
+#>  7 Brisbane (C)              30  2020     110798
+#>  8 Brisbane (C)              35  2020     100493
+#>  9 Brisbane (C)              40  2020      86630
+#> 10 Brisbane (C)              45  2020      86791
+#> 11 Brisbane (C)              50  2020      76063
+#> 12 Brisbane (C)              55  2020      69273
+#> 13 Brisbane (C)              60  2020      59666
+#> 14 Brisbane (C)              65  2020      49134
+#> 15 Brisbane (C)              70  2020      42252
+#> 16 Brisbane (C)              75  2020      29927
+#> 17 Brisbane (C)              80  2020      20898
+#> 18 Brisbane (C)              85  2020      22683
+```
+
+Note that you need to use the exact LGA name - you can look up LGA names
+in the data set `abs_lga_lookup`:
+
+``` r
+abs_lga_lookup
+#> # A tibble: 544 × 3
+#>    state lga_code lga                  
+#>    <chr>    <dbl> <chr>                
+#>  1 NSW      10050 Albury (C)           
+#>  2 NSW      10180 Armidale Regional (A)
+#>  3 NSW      10250 Ballina (A)          
+#>  4 NSW      10300 Balranald (A)        
+#>  5 NSW      10470 Bathurst Regional (A)
+#>  6 NSW      10500 Bayside (A)          
+#>  7 NSW      10550 Bega Valley (A)      
+#>  8 NSW      10600 Bellingen (A)        
+#>  9 NSW      10650 Berrigan (A)         
+#> 10 NSW      10750 Blacktown (C)        
+#> # ℹ 534 more rows
+```
+
+Or get the information for states like so:
+
+``` r
+abs_age_state(state_name = "QLD")
+#> # A tibble: 18 × 4 (conmat_population)
+#>  - age: lower.age.limit
+#>  - population: population
+#>     year state lower.age.limit population
+#>    <dbl> <chr>           <dbl>      <dbl>
+#>  1  2020 QLD                 0     314602
+#>  2  2020 QLD                 5     339247
+#>  3  2020 QLD                10     345205
+#>  4  2020 QLD                15     319014
+#>  5  2020 QLD                20     338824
+#>  6  2020 QLD                25     370468
+#>  7  2020 QLD                30     362541
+#>  8  2020 QLD                35     354219
+#>  9  2020 QLD                40     325208
+#> 10  2020 QLD                45     348003
+#> 11  2020 QLD                50     321168
+#> 12  2020 QLD                55     317489
+#> 13  2020 QLD                60     288317
+#> 14  2020 QLD                65     254114
+#> 15  2020 QLD                70     226033
+#> 16  2020 QLD                75     156776
+#> 17  2020 QLD                80     100692
+#> 18  2020 QLD                85      94266
+```
+
+## Note
+
+The contact matrices created using this package are transposed when
+compared to the contact matrices discussed by
+[Prem](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697)
+and
+[Mossong](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0050074).
+That is, the rows are “age group to”, and the columns are “age group
+from”.
+
+## Code of Conduct
+
+Please note that the conmat project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## Core functions
+
+These are the core functions that we intend users to interface with
+
+- [`extrapolate_polymod()`](https://idem-lab.github.io/conmat/reference/extrapolate_polymod.md)
+  : Fit all-of-polymod model and extrapolate to a given population an
+  age breaks
+- [`apply_vaccination()`](https://idem-lab.github.io/conmat/reference/apply_vaccination.md)
+  : Apply vaccination effects to next generation contact matrices
+- [`generate_ngm()`](https://idem-lab.github.io/conmat/reference/generate_ngm.md)
+  : Calculate next generation contact matrices
+- [`generate_ngm_oz()`](https://idem-lab.github.io/conmat/reference/generate_ngm_oz.md)
+  : Calculate next generation contact matrices from ABS data
+- [`reexports`](https://idem-lab.github.io/conmat/reference/reexports.md)
+  [`autoplot`](https://idem-lab.github.io/conmat/reference/reexports.md)
+  : Objects exported from other packages
+- [`autoplot(`*`<conmat_age_matrix>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat.md)
+  [`autoplot(`*`<conmat_setting_prediction_matrix>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat.md)
+  [`autoplot(`*`<transmission_probability_matrix>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat.md)
+  [`autoplot(`*`<ngm_setting_matrix>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat.md)
+  [`autoplot(`*`<setting_vaccination_matrix>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat.md)
+  : Plot setting matrices using ggplot2
+- [`autoplot(`*`<partial_predictions_sum>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat-partial.md)
+  [`autoplot(`*`<setting_partial_predictions_sum>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat-partial.md)
+  [`autoplot(`*`<partial_predictions>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat-partial.md)
+  [`autoplot(`*`<setting_partial_predictions>`*`)`](https://idem-lab.github.io/conmat/reference/autoplot-conmat-partial.md)
+  : Plot partial predictive plots using ggplot2
+
+## ABS Data accessors and helpers
+
+Functions and data objects to access data from the Australian Bureau of
+Statistics
+
+- [`abs_age_education_state()`](https://idem-lab.github.io/conmat/reference/abs-age-education.md)
+  [`abs_age_education_lga()`](https://idem-lab.github.io/conmat/reference/abs-age-education.md)
+  : Return data on educated population for a given age and state or lga
+  of Australia.
+- [`abs_age_work_lga()`](https://idem-lab.github.io/conmat/reference/abs-age-work.md)
+  [`abs_age_work_state()`](https://idem-lab.github.io/conmat/reference/abs-age-work.md)
+  : Return data on employed population for a given age and state or lga
+  of Australia
+- [`abs_abbreviate_states()`](https://idem-lab.github.io/conmat/reference/abs_abbreviate_states.md)
+  : Abbreviate Australian State Names
+- [`abs_age_lga()`](https://idem-lab.github.io/conmat/reference/abs_age_data.md)
+  [`abs_age_state()`](https://idem-lab.github.io/conmat/reference/abs_age_data.md)
+  : Return Australian Bureau of Statistics (ABS) age population data for
+  a given Local Government Area (LGA) or state
+- [`abs_avg_school`](https://idem-lab.github.io/conmat/reference/abs_avg_school.md)
+  : ABS education data for 2016
+- [`abs_avg_work`](https://idem-lab.github.io/conmat/reference/abs_avg_work.md)
+  : ABS work data for 2016
+- [`abs_education_state`](https://idem-lab.github.io/conmat/reference/abs_education_state.md)
+  : ABS education by state for 2006-2020
+- [`abs_education_state_2020`](https://idem-lab.github.io/conmat/reference/abs_education_state_2020.md)
+  : 2020 ABS education population data, interpolated into 1 year bins,
+  by state.
+- [`abs_employ_age_lga`](https://idem-lab.github.io/conmat/reference/abs_employ_age_lga.md)
+  : ABS employment by age and LGA for 2016
+- [`abs_household_lga`](https://idem-lab.github.io/conmat/reference/abs_household_lga.md)
+  : ABS household data for 2016
+- [`abs_lga_lookup`](https://idem-lab.github.io/conmat/reference/abs_lga_lookup.md)
+  : ABS lookup table of states, lga code and lga name
+- [`abs_pop_age_lga_2016`](https://idem-lab.github.io/conmat/reference/abs_pop_age_lga_2016.md)
+  : ABS population by age for 2016 for LGAs
+- [`abs_pop_age_lga_2020`](https://idem-lab.github.io/conmat/reference/abs_pop_age_lga_2020.md)
+  : ABS population by age for 2020 for LGAs
+- [`abs_state_age`](https://idem-lab.github.io/conmat/reference/abs_state_age.md)
+  : ABS state population data for 2020
+- [`abs_unabbreviate_states()`](https://idem-lab.github.io/conmat/reference/abs_unabbreviate_states.md)
+  : Un-abbreviate Australian state names
+- [`data_abs_lga_education`](https://idem-lab.github.io/conmat/reference/data_abs_lga_education.md)
+  : LGA wise ABS education population data on different ages for year
+  2016
+- [`data_abs_lga_work`](https://idem-lab.github.io/conmat/reference/data_abs_lga_work.md)
+  : LGA wise ABS work population data on different ages for year 2016
+- [`data_abs_state_education`](https://idem-lab.github.io/conmat/reference/data_abs_state_education.md)
+  : State wise ABS education population data on different ages for year
+  2016
+- [`data_abs_state_work`](https://idem-lab.github.io/conmat/reference/data_abs_state_work.md)
+  : State wise ABS work population data on different ages for year 2016
+- [`get_abs_household_size_distribution()`](https://idem-lab.github.io/conmat/reference/get_abs_household_size_distribution.md)
+  : Get household size distribution based on state or LGA name
+- [`get_abs_household_size_population()`](https://idem-lab.github.io/conmat/reference/get_abs_household_size_population.md)
+  : Get population associated with each household size in an LGA or a
+  state
+- [`get_abs_per_capita_household_size()`](https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size.md)
+  : Get per capita household size based on state or LGA name
+- [`get_abs_per_capita_household_size_lga()`](https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size_lga.md)
+  : Get household size distribution based on LGA name
+- [`get_abs_per_capita_household_size_state()`](https://idem-lab.github.io/conmat/reference/get_abs_per_capita_household_size_state.md)
+  : Get household size distribution based on state name
+
+## Data and model objects
+
+Functions and objects for accessing data, models, and assisting with
+model fitting.
+
+- [`get_polymod_contact_data()`](https://idem-lab.github.io/conmat/reference/get_polymod_contact_data.md)
+  : Format POLYMOD data and filter contacts to certain settings
+
+- [`get_polymod_per_capita_household_size()`](https://idem-lab.github.io/conmat/reference/get_polymod_per_capita_household_size.md)
+  : Get polymod per capita household size.
+
+- [`get_polymod_population()`](https://idem-lab.github.io/conmat/reference/get_polymod_population.md)
+  : Return the polymod-average population age distribution in 5y
+
+- [`get_polymod_setting_data()`](https://idem-lab.github.io/conmat/reference/get_polymod_setting_data.md)
+  : Get polymod setting data
+
+- [`age_population()`](https://idem-lab.github.io/conmat/reference/age_population.md)
+  : Get cleaned population data with lower and upper limits of age.
+
+- [`vaccination_effect_example_data`](https://idem-lab.github.io/conmat/reference/vaccination_effect_example_data.md)
+  : Example dataset with information on age based vaccination coverage,
+  acquisition and transmission
+
+- [`polymod_setting_models`](https://idem-lab.github.io/conmat/reference/polymod_setting_models.md)
+  : Polymod Settings models
+
+- [`davies_age_extended`](https://idem-lab.github.io/conmat/reference/davies_age_extended.md)
+  : Susceptibility and clinical fraction parameters from Davies et al.
+
+- [`eyre_transmission_probabilities`](https://idem-lab.github.io/conmat/reference/eyre_transmission_probabilities.md)
+  : Transmission probabilities of COVID19 from Eyre et al.
+
+- [`polymod`](https://idem-lab.github.io/conmat/reference/polymod.md) :
+
+  Social contact data from 8 European countries (imported from
+  `socialmixr`)
+
+- [`setting_weights`](https://idem-lab.github.io/conmat/reference/setting_weights.md)
+  : Setting weights computed for transmission probabilities.
+
+- [`age_group_lookup`](https://idem-lab.github.io/conmat/reference/age_group_lookup.md)
+  : Lookup table of age groups in 5 year bins
+
+- [`get_setting_transmission_matrices()`](https://idem-lab.github.io/conmat/reference/get_setting_transmission_matrices.md)
+  : Get Setting Transmission Matrices
+
+- [`prem_germany_contact_matrices`](https://idem-lab.github.io/conmat/reference/prem_germany_contact_matrices.md)
+  : Contact matrices as calculated by Prem. et al.
+
+- [`conmat_original_school_demographics`](https://idem-lab.github.io/conmat/reference/conmat_original_school_demographics.md)
+  : Original school demographics for conmat
+
+- [`conmat_original_work_demographics`](https://idem-lab.github.io/conmat/reference/conmat_original_work_demographics.md)
+  : Original work demographics for conmat
+
+- [`abs_avg_school`](https://idem-lab.github.io/conmat/reference/abs_avg_school.md)
+  : ABS education data for 2016
+
+- [`abs_avg_work`](https://idem-lab.github.io/conmat/reference/abs_avg_work.md)
+  : ABS work data for 2016
+
+## Extra functions for model fitting and prediction
+
+Functions for model fitting and predictions - for more advanced use
+
+- [`fit_single_contact_model()`](https://idem-lab.github.io/conmat/reference/fit_single_contact_model.md)
+  : Fit a single GAM contact model to a dataset
+- [`fit_setting_contacts()`](https://idem-lab.github.io/conmat/reference/fit_setting_contacts.md)
+  : Fit a contact model to a survey population
+- [`aggregate_predicted_contacts()`](https://idem-lab.github.io/conmat/reference/aggregate_predicted_contacts.md)
+  : Aggregate predicted contacts to specified age breaks
+- [`estimate_setting_contacts()`](https://idem-lab.github.io/conmat/reference/estimate_setting_contacts.md)
+  : Get predicted setting specific as well as combined contact matrices
+- [`predict_contacts()`](https://idem-lab.github.io/conmat/reference/predict_contacts.md)
+  : Predict contact rate between two age populations, given some model.
+- [`predict_contacts_1y()`](https://idem-lab.github.io/conmat/reference/predict_contacts_1y.md)
+  : Predict contact rate to a given population at full 1y resolution
+- [`predict_setting_contacts()`](https://idem-lab.github.io/conmat/reference/predict_setting_contacts.md)
+  : Predict setting contacts
+- [`predictions_to_matrix()`](https://idem-lab.github.io/conmat/reference/predictions_to_matrix.md)
+  : Convert dataframe of predicted contacts into matrix
+- [`matrix_to_predictions()`](https://idem-lab.github.io/conmat/reference/matrix_to_predictions.md)
+  : Convert a contact matrix as output into a long-form tibble
+- [`get_age_population_function()`](https://idem-lab.github.io/conmat/reference/get_age_population_function.md)
+  : Return an interpolating function for populations in 1y age
+  increments
+- [`per_capita_household_size()`](https://idem-lab.github.io/conmat/reference/per_capita_household_size.md)
+  : Get per capita household size with household size distribution
+- [`add_intergenerational()`](https://idem-lab.github.io/conmat/reference/add_intergenerational.md)
+  : Add column, "intergenerational"
+- [`add_modelling_features()`](https://idem-lab.github.io/conmat/reference/add_modelling_features.md)
+  : Add features required for modelling to the dataset
+- [`add_offset()`](https://idem-lab.github.io/conmat/reference/add_offset.md)
+  : Adds offset variables
+- [`add_population_age_to()`](https://idem-lab.github.io/conmat/reference/add_population_age_to.md)
+  : Add the population distribution for contact ages.
+- [`add_school_work_participation()`](https://idem-lab.github.io/conmat/reference/add_school_work_participation.md)
+  : Add columns describing the fractions of the population in each age
+  group that attend school/work (average FTE)
+- [`add_symmetrical_features()`](https://idem-lab.github.io/conmat/reference/add_symmetrical_features.md)
+  : Add symmetrical, age based features
+- [`partial_effects()`](https://idem-lab.github.io/conmat/reference/partial-prediction.md)
+  [`partial_effects_sum(`*`<setting_contact_model>`*`)`](https://idem-lab.github.io/conmat/reference/partial-prediction.md)
+  : Create partial predictions and partial prediction plots.
+- [`partial_effects_sum()`](https://idem-lab.github.io/conmat/reference/partial-prediction-sum.md)
+  : Create partial predictive plots for a set of fitted models.
+
+## Creating and accessing information on `conmat_population` objects
+
+Store and use age and population information in a dataframe for use in
+other functions in conmat.
+
+- [`conmat_population()`](https://idem-lab.github.io/conmat/reference/conmat_population.md)
+  : Define a conmat population
+- [`as_conmat_population()`](https://idem-lab.github.io/conmat/reference/as_conmat_population.md)
+  : Convert to conmat population
+- [`age()`](https://idem-lab.github.io/conmat/reference/accessors.md)
+  [`age_label()`](https://idem-lab.github.io/conmat/reference/accessors.md)
+  [`population_label()`](https://idem-lab.github.io/conmat/reference/accessors.md)
+  [`population()`](https://idem-lab.github.io/conmat/reference/accessors.md)
+  : Accessing conmat attributes
+- [`age_breaks()`](https://idem-lab.github.io/conmat/reference/age_breaks.md)
+  : Extract age break attribute information
+- [`raw_eigenvalue()`](https://idem-lab.github.io/conmat/reference/raw_eigenvalue.md)
+  : Get raw eigvenvalue from NGM matrix
+- [`scaling()`](https://idem-lab.github.io/conmat/reference/scaling.md)
+  : Get the scaling from NGM matrix
+- [`new_age_matrix()`](https://idem-lab.github.io/conmat/reference/new_age_matrix.md)
+  : Build new age matrix
+- [`new_ngm_setting_matrix()`](https://idem-lab.github.io/conmat/reference/new_ngm_setting_matrix.md)
+  : Establish new BGM setting data
+- [`new_setting_data()`](https://idem-lab.github.io/conmat/reference/new_setting_data.md)
+  : Establish new setting data
+- [`setting_prediction_matrix()`](https://idem-lab.github.io/conmat/reference/setting_prediction_matrix.md)
+  : Create a setting prediction matrix
+- [`as_setting_prediction_matrix()`](https://idem-lab.github.io/conmat/reference/as_setting_prediction_matrix.md)
+  : Coerce object to a setting prediction matrix
+- [`transmission_probability_matrix()`](https://idem-lab.github.io/conmat/reference/transmission_probability_matrix.md)
+  : Create a setting transmission matrix
+
+# Articles
+
+### All vignettes
+
+- [Conmat Population
+  Data](https://idem-lab.github.io/conmat/articles/conmat-population.md):
+- [Data
+  Sources](https://idem-lab.github.io/conmat/articles/data-sources.md):
+- [Example
+  Pipeline](https://idem-lab.github.io/conmat/articles/example-pipeline.md):
+- [Getting
+  Started](https://idem-lab.github.io/conmat/articles/getting-started.md):
+- [Using other data
+  sources](https://idem-lab.github.io/conmat/articles/other-data-sources.md):
+- [Parallel
+  Computing](https://idem-lab.github.io/conmat/articles/parallel-computing.md):
+- [SIR modelling with
+  conmat](https://idem-lab.github.io/conmat/articles/sir-model.md):
+- [Visualisation
+  gallery](https://idem-lab.github.io/conmat/articles/visualising-conmat.md):
