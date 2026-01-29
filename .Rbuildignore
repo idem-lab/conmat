@@ -20,3 +20,4 @@
 ^flint$
 chitra/
 .comments/
+^CRAN-SUBMISSION$
