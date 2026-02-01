@@ -56,42 +56,12 @@ age_population(
   year = c(2010:2020)
 )
 
-# Tidy data for a given location irrespective of year
-age_population(
-  data = world_data,
-  location_col = country,
-  location = "Afghanistan",
-  age_col = lower.age.limit
-)
-
-# Tidy data for a given location irrespective of location
-age_population(
-  data = world_data,
-  age_col = lower.age.limit
-)
-age_population(
-  data = world_data,
-  age_col = lower.age.limit,
-  year_col = year,
-  year = c(2011:2015)
-)
-
 # Tidy datasets with age groups
 population_age_groups <- abs_pop_age_lga_2020
 population_age_groups
 age_population(
   data = population_age_groups,
   age_col = age_group,
-  year_col = year,
-  year = 2020
-)
-
-# Tidy datasets with numeric age
-population_numeric_age <- abs_age_state("WA")
-population_numeric_age
-age_population(
-  data = population_numeric_age,
-  age_col = lower.age.limit,
   year_col = year,
   year = 2020
 )

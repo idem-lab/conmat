@@ -27,13 +27,11 @@
 #'   polymod_setting_models$home,
 #'   ages = 1:99
 #'   )
-#' autoplot(partials_home)
 #' # partial effects for all settings
 #' partials_setting <- partial_effects(
 #'   polymod_setting_models,
 #'   ages = 1:99
 #'   )
-#' autoplot(partials_setting)
 #' @export
 partial_effects <- function(model, ages, ...) {
   UseMethod("partial_effects")
