@@ -1,6 +1,6 @@
 # conmat: Builds Contact Matrices using 'GAMs' and Population Data
 
-Builds contact matrices using GAMs and population data. This package
+Builds contact matrices using 'GAMs' and population data. This package
 incorporates data that is copyright Commonwealth of Australia
 (Australian Electoral Commission and Australian Bureau of Statistics)
 2020.
