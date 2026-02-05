@@ -1,8 +1,7 @@
 ---
-title: '`conmat`: generate synthetic contact matrices for a given age-stratified population'
+title: 'conmat: generate synthetic contact matrices for a given age-stratified population'
 format: 
-  wordcount-html: 
-    wordcounter-banner: true
+  html: 
     keep-md: true
     fig-height: 4
     fig-align: center
@@ -48,10 +47,11 @@ bibliography: paper.bib
 
 :::
 
+
+
 ::: {.cell}
 
 :::
-
 
 
 # Summary
@@ -62,7 +62,7 @@ Contact matrices describe the number of contacts between individuals. They are u
 
 The `conmat` package exposes model fitting and prediction separately to the user. Users can fit a model based on a contact survey, then predict from this model to their own demographic data. This means users can generate synthetic contact matrices for any region, with any contact survey.
 
-We demonstrate a use-case for `conmat` by creating contact matrices for sub-national level (in this case, a state) in Australia. 
+We demonstrate a use-case for `conmat` by creating contact matrices for a sub-national entity (in this case, a state) in Australia. 
 
 For users who do not wish to run the entire `conmat` pipeline, we have pre-generated synthetic contact matrices for 200 countries, based on a list of countries from the United Nations, using a model fit to the POLYMOD contact survey. These resulting synthetic contact matrices, and the associated code, can be found in the syncomat analysis pipeline ([GitHub](https://github.com/idem-lab/syncomat), [Zenodo](https://zenodo.org/records/11365943)) [@syncomat].
 
@@ -70,16 +70,15 @@ For users who do not wish to run the entire `conmat` pipeline, we have pre-gener
 
 Infectious diseases like influenza and COVID-19 spread via social contact. If we can understand patterns of contact---which individuals are more likely be in contact with each other---then we will be able to create accurate models of how disease spreads. Epidemiologists and public policy makers can use these models to make decisions to keep a population safe and healthy.
 
-Empirical estimates of social contact are provided by social contact surveys, which provide samples of the frequency and type of social contact across different settings (home, work, school, other). These surveys can be projected onto a given demographic structure, resulting in what is known as 'synthetic' contact matrices. A widely used approach by @prem2017 [@prem2021] produced such matrices for 177 countries at 'urban' and 'rural' levels for each country using data from 8 European Countries by @mossong2008. 
+Empirical estimates of social contact are provided by social contact surveys, which provide samples of the frequency and type of social contact across different settings (home, work, school, other). These surveys can be projected onto a given demographic structure, resulting in what are known as 'synthetic' contact matrices. A widely used approach by @prem2017 [@prem2021] produced such matrices for 177 countries at 'urban' and 'rural' levels for each country using data from eight European countries by @mossong2008. 
 
 However, there were major limitations with the methods in @prem2021. First, not all countries were included in their analyses. Second, the contact matrices only covered broad population groups within entire countries. Third, the code provided by Prem et al. was not designed for replicability and easy modification with user-defined inputs.
 
-The `conmat` package was developed to fill the specific need of creating contact matrices for arbitrary age categories and populations to inform infectious diease models. We developed the method to output synthetic contact matrices. We also provided methods to create next generation matrices.
+The `conmat` package was developed to fill the specific need of creating contact matrices for arbitrary age categories and populations to inform infectious diease models. We developed the method to output synthetic contact matrices. We also provided methods to create next-generation matrices.
 
 # Example
 
-We will generate a contact matrix for Tasmania, a state in Australia, using a model fitted from the POLYMOD contact survey. We can get the age-stratified population data for Tasmania from the Australian Bureau of Statistics (ABS) with the helper function, `abs_age_state()`:
-
+We will generate a contact matrix for Tasmania, a state in Australia, using a model fitted from the POLYMOD contact survey. We can get the age-stratified population data for Tasmania from the Australian Bureau of Statistics (ABS) with the helper function `abs_age_state()`:
 
 
 ::: {.cell}
@@ -110,9 +109,7 @@ head(tasmania)
 :::
 
 
-
 We can then generate a synthetic contact matrix for Tasmania, by extrapolating the contact patterns between age groups learned from the POLYMOD study, using `extrapolate_polymod()`.
-
 
 
 ::: {.cell}
@@ -124,9 +121,7 @@ tasmania_contact
 :::
 
 
-
 We can plot the resulting contact matrix for Tasmania with `autoplot`, shown in Figure \ref{fig-autoplot-contacts}.
-
 
 
 ::: {.cell}
@@ -139,7 +134,6 @@ autoplot(tasmania_contact)
 ![Contact patterns between individuals for different age groups across four settings: home, work, school, and other. The x axis shows the age groups for focal individuals ('from'), and the y axis shows the age groups for people those individuals have contact with ('to'), coloured by the average number of contacts the individual has in that age group. We see different contact patterns in different settings, for example, diagonal with 'wings' for the home setting.](paper_files/figure-html/fig-autoplot-contacts-1.png){#fig-autoplot-contacts}
 :::
 :::
-
 
 
 # Implementation
@@ -161,10 +155,12 @@ Each cell in the resulting contact matrix (after back-transformation of the link
 
 The model captures typical features of inter-person contact, where individuals primarily interact with people of similar age (the diagonals of the matrix), and with grandparents and/or children (the so-called 'wings' of the matrix). The key features of the relationship between the age groups are displayed in Figure \ref{fig-show-partial-plots} for the home setting. 
 
-
 ::: {.cell}
 
 :::
+
+
+
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -173,14 +169,13 @@ The model captures typical features of inter-person contact, where individuals p
 :::
 
 
-
-Visualising the partial predictive plots for other settings (school, work and other) show patterns that correspond with real-life situations. A full visualisation pipeline is available at https://idem-lab.github.io/conmat/dev/articles/visualising-conmat.html
+Visualising the partial predictive plots for other settings (school, work and other) show patterns that correspond with real-life situations. A full visualisation pipeline is available at https://idem-lab.github.io/conmat/dev/articles/visualising-conmat.html.
 
 # Conclusions and future directions
 
 The `conmat` software provides a flexible interface to generating synthetic contact matrices using population data and contact surveys. These contact matrices can then be used in infectious disease modelling and surveillance. Public health decisions are based on models using these matrices as input data. This is the first piece of software that can provide context-appropriate contact matrices for a population, which means more accurate models of disease. 
 
-The main strength of `conmat` is its interface requiring only age population data to create a synthetic contact matrix. Current approaches provide only a selection of country level contact matrices. This software can predict to arbitrary demography, such as sub-national or simulated populations. 
+The main strength of `conmat` is its interface requiring only age population data to create a synthetic contact matrix. Current approaches provide only a selection of country-level contact matrices. This software can predict to arbitrary demography, such as sub-national or simulated populations. 
 
 We provide a trained model of contact rate that is fit to the POLYMOD survey for ease of use. The software also has an interface to train models to other contact surveys, such as @comix. This is important as POLYMOD represents contact patterns in 8 countries in Europe, and contact patterns are known to differ across nations and cultures.
 
@@ -191,10 +186,10 @@ The covariates used by `conmat` were designed to represent the key features that
 
 The code underlying this software was used as a key input into several models for COVID-19 transmission and control in Australia and contributed to decisions around vaccination policy [@DohertyModelling; @conway2023; @ryan2024].
 
-Software is never finished, and the software in its current format has proven useful for infectious disease modelling. In time we hope it can become more widely used and be useful for more applications in epidemiology and public health. 
+Software is never finished, and the software in its current format has proven useful for infectious disease modelling. In time, we hope it can become more widely used and be useful for more applications in epidemiology and public health. 
 
 # Acknowledgements
 
-The authors would like to thank Gerry Ryan for his contributions to conmat, as well as the authors of "Projecting social contact matrices in 152 countries using contact surveys and demographic data", Kiesha Prem, Alex Cook, and Mark Jit, for making their original data public. We would also like to thank reviewers Hugo Gruson and Anthony Baptista for their contributions.
+The authors would like to thank Gerry Ryan for his contributions to `conmat`, as well as the authors of "Projecting social contact matrices in 152 countries using contact surveys and demographic data", Kiesha Prem, Alex Cook, and Mark Jit, for making their original data public. We would also like to thank reviewers Hugo Gruson and Anthony Baptista for their contributions.
 
 # References
