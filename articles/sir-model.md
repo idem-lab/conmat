@@ -334,8 +334,12 @@ tidy_ode <- function(ode_soln) {
 
 # For the stratified model, we have to add up all the age categories together for a fair comparison.
 grouped_structure <- tidy_ode(homogeneous_soln)
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 
 combined_solutions <- bind_rows(
   "non_structured" = ungrouped_structure,
@@ -407,8 +411,12 @@ world_data <- socialmixr::wpp_age() %>%
   summarise(
     population = sum(population)
   )
-#> `summarise()` has grouped output by 'new_lower_age', 'country'. You can
-#> override using the `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by new_lower_age, country, and year.
+#> ℹ Output is grouped by new_lower_age and country.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(new_lower_age, country, year))` for per-operation
+#>   grouping (`?dplyr::dplyr_by`) instead.
 germany_2015 <- age_population(
   data = world_data,
   location_col = country,
@@ -539,8 +547,12 @@ tail(germany_soln)
 germany_soln_long <- germany_soln %>%
   tidy_ode() %>%
   mutate(type = "age_structured")
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 
 germany_soln_long
 #> # A tibble: 3,003 × 4
@@ -640,13 +652,21 @@ tail(prem_soln)
 
 ``` r
 germany_aggregated <- tidy_ode(germany_soln)
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 
 # For the stratified model, we have to add up all the age categories together for a fair comparison.
 prem_aggregated <- tidy_ode(prem_soln)
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 
 conmat_prem_soln <- bind_rows(
   conmat = germany_aggregated,
@@ -774,11 +794,19 @@ prem_soln <- ode(
 )
 
 germany_aggregated <- tidy_ode(as_tibble(as.data.frame(germany_soln)))
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 prem_aggregated <- tidy_ode(as_tibble(as.data.frame(prem_soln)))
-#> `summarise()` has grouped output by 'time'. You can override using the
-#> `.groups` argument.
+#> `summarise()` has regrouped the output.
+#> ℹ Summaries were computed grouped by time and parent_state.
+#> ℹ Output is grouped by time.
+#> ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+#> ℹ Use `summarise(.by = c(time, parent_state))` for per-operation grouping
+#>   (`?dplyr::dplyr_by`) instead.
 
 conmat_prem_soln <- bind_rows(
   conmat = germany_aggregated,
