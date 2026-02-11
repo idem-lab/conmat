@@ -119,8 +119,6 @@ contact_model <- fit_single_contact_model(
   contact_data = polymod_contact_data,
   population = polymod_survey_data
 )
-#> Warning in bgam.fit(G, mf, chunk.size, gp, scale, gamma, method = method, :
-#> fitted rates numerically 0 occurred
 ```
 
 This fits a generalised additive model (GAM), predicting the contact
@@ -139,9 +137,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.00 4.35 3.95 7.14 7.57 4.85  total = 31.86 
+#> 1.34 4.32 4.34 6.96 7.53 4.98  total = 32.46 
 #> 
-#> fREML score: 11816.72     rank: 55/57
+#> fREML score: 11769.97     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -195,16 +193,16 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00286
-#>  2 [0,5)          [5,10)        0.00321
-#>  3 [0,5)          [10,15)       0.00346
-#>  4 [0,5)          [15,20)       0.00573
-#>  5 [0,5)          [20,25)       0.0133 
-#>  6 [0,5)          [25,30)       0.0262 
-#>  7 [0,5)          [30,35)       0.0357 
+#>  1 [0,5)          [0,5)         0.00273
+#>  2 [0,5)          [5,10)        0.00313
+#>  3 [0,5)          [10,15)       0.00349
+#>  4 [0,5)          [15,20)       0.00585
+#>  5 [0,5)          [20,25)       0.0135 
+#>  6 [0,5)          [25,30)       0.0261 
+#>  7 [0,5)          [30,35)       0.0354 
 #>  8 [0,5)          [35,40)       0.0370 
-#>  9 [0,5)          [40,45)       0.0346 
-#> 10 [0,5)          [45,50)       0.0315 
+#>  9 [0,5)          [40,45)       0.0348 
+#> 10 [0,5)          [45,50)       0.0316 
 #> # ℹ 314 more rows
 ```
 
