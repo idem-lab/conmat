@@ -21,3 +21,4 @@
 chitra/
 .comments/
 ^CRAN-SUBMISSION$
+^CITATION\.cff$

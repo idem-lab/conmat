@@ -1,0 +1,56 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Tierney
+  given-names: Nicholas
+  orcid: "https://orcid.org/0000-0003-1460-8722"
+- family-names: Saraswati
+  given-names: Chitra
+  orcid: "https://orcid.org/0000-0002-8159-0414"
+- family-names: Babu
+  given-names: Aarathy
+  orcid: "https://orcid.org/0000-0002-6982-5989"
+- family-names: Lydeamore
+  given-names: Michael
+  orcid: "https://orcid.org/0000-0001-6515-827X"
+- family-names: Golding
+  given-names: Nick
+  orcid: "https://orcid.org/0000-0001-8916-5570"
+contact:
+- family-names: Tierney
+  given-names: Nicholas
+  orcid: "https://orcid.org/0000-0003-1460-8722"
+doi: 10.5281/zenodo.18307331
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Tierney
+    given-names: Nicholas
+    orcid: "https://orcid.org/0000-0003-1460-8722"
+  - family-names: Saraswati
+    given-names: Chitra
+    orcid: "https://orcid.org/0000-0002-8159-0414"
+  - family-names: Babu
+    given-names: Aarathy
+    orcid: "https://orcid.org/0000-0002-6982-5989"
+  - family-names: Lydeamore
+    given-names: Michael
+    orcid: "https://orcid.org/0000-0001-6515-827X"
+  - family-names: Golding
+    given-names: Nick
+    orcid: "https://orcid.org/0000-0001-8916-5570"
+  date-published: 2026-02-05
+  doi: 10.21105/joss.08326
+  issn: 2475-9066
+  issue: 118
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 8326
+  title: "conmat: generate synthetic contact matrices for a given
+    age-stratified population"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.08326"
+  volume: 11
+title: "conmat: generate synthetic contact matrices for a given
+  age-stratified population"

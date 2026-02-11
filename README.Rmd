@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/idem-lab/conmat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/idem-lab/conmat/graph/badge.svg)](https://app.codecov.io/gh/idem-lab/conmat)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.08326/status.svg)](https://doi.org/10.21105/joss.08326)
 <!-- badges: end -->
 
 The goal of conmat is to make it easy to generate synthetic contact matrices for a given age population.
