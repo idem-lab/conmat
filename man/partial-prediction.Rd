@@ -45,12 +45,7 @@ intercept term which is not accounted for in partial effects.
 }
 \examples{
 partials_home <- partial_effects(
-  polymod_setting_models$home,
-  ages = 1:99
-  )
-# partial effects for all settings
-partials_setting <- partial_effects(
-  polymod_setting_models,
+  polymod_setting_models$home, # Do for all models by omitting $home
   ages = 1:99
   )
 }

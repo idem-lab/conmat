@@ -29,13 +29,12 @@
 #'   number of participants in that row.
 #' @examples
 #' get_polymod_contact_data()
-#' get_polymod_contact_data(setting = "home")
-#' get_polymod_contact_data(countries = "Belgium")
-#' get_polymod_contact_data(countries = c("Belgium", "Italy"))
-#' get_polymod_contact_data(ages = 0:50)
-#' get_polymod_contact_data(contact_age_imputation = "sample")
-#' get_polymod_contact_data(contact_age_imputation = "mean")
-#' get_polymod_contact_data(contact_age_imputation = "remove_participant")
+#' get_polymod_contact_data(
+#'   setting = "home",
+#'   countries = c("Belgium", "Italy"),
+#'   ages = 0:50,
+#'   contact_age_imputation = "mean"
+#' )
 #' @export
 get_polymod_contact_data <- function(
   setting = c("all", "home", "work", "school", "other"),
@@ -110,17 +109,7 @@ get_polymod_contact_data <- function(
       !missing_any_contact_setting
     )
 
-  # get contacts by setting (keeping 0s, so we can record 0 contacts for some individuals)
-  contact_data_setting <- contact_data_filtered %>%
-    dplyr::mutate(
-      contacted = dplyr::case_when(
-        setting == "all" ~ 1L,
-        setting == "home" ~ cnt_home,
-        setting == "school" ~ cnt_school,
-        setting == "work" ~ cnt_work,
-        setting == "other" ~ pmax(cnt_transport, cnt_leisure, cnt_otherplace),
-      )
-    )
+  contact_data_setting <- add_contacted_setting(contact_data_filtered, setting)
 
   # collapse down number of contacts per participant and contact age
   contact_data_setting %>%
@@ -150,4 +139,40 @@ get_polymod_contact_data <- function(
       setting = setting,
       .before = dplyr::everything()
     )
+}
+
+# helper function to replace deprecated usage of case_when
+add_contacted_setting <- function(
+  contact_data_filtered,
+  setting = c("all", "home", "school", "work", "other")
+) {
+  setting <- rlang::arg_match(setting)
+
+  if (setting == "all") {
+    contact_data_setting <- contact_data_filtered |>
+      dplyr::mutate(
+        contacted = 1L
+      )
+  } else if (setting == "home") {
+    contact_data_setting <- contact_data_filtered |>
+      dplyr::mutate(
+        contacted = cnt_home
+      )
+  } else if (setting == "school") {
+    contact_data_setting <- contact_data_filtered |>
+      dplyr::mutate(
+        contacted = cnt_school
+      )
+  } else if (setting == "work") {
+    contact_data_setting <- contact_data_filtered |>
+      dplyr::mutate(
+        contacted = cnt_work
+      )
+  } else if (setting == "other") {
+    contact_data_setting <- contact_data_filtered |>
+      dplyr::mutate(
+        contacted = pmax(cnt_transport, cnt_leisure, cnt_otherplace)
+      )
+  }
+  contact_data_setting
 }

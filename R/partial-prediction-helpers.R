@@ -24,12 +24,7 @@
 #' @name partial-prediction
 #' @examples
 #' partials_home <- partial_effects(
-#'   polymod_setting_models$home,
-#'   ages = 1:99
-#'   )
-#' # partial effects for all settings
-#' partials_setting <- partial_effects(
-#'   polymod_setting_models,
+#'   polymod_setting_models$home, # Do for all models by omitting $home
 #'   ages = 1:99
 #'   )
 #' @export
@@ -103,16 +98,9 @@ partial_effects.setting_contact_model <- function(model, ages, ...) {
 #'   the coefficients for that age bracket.
 #' @name partial-prediction-sum
 #' @examples
-#' # Summed up partial effects (y-hat) for a single setting
-#' partials_summed_home <- partial_effects_sum(
-#'     polymod_setting_models$home,
-#'     ages = 1:99
-#'   )
-#'
-#' autoplot(partials_summed_home)
 #' # summed up partial effects (y-hat) for all settings
 #' partials_summed_setting <- partial_effects_sum(
-#'     polymod_setting_models,
+#'     polymod_setting_models, # can also do for one setting with $home
 #'     ages = 1:99
 #'   )
 #' autoplot(partials_summed_setting)
