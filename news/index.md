@@ -1,6 +1,6 @@
 # Changelog
 
-## conmat 0.0.2.9000
+## conmat 0.1.0
 
 ### Changes
 
@@ -46,6 +46,13 @@
   [`age_breaks()`](https://idem-lab.github.io/conmat/reference/age_breaks.md)
   method for class `setting_contact_model` (used in
   [`fit_setting_contacts()`](https://idem-lab.github.io/conmat/reference/fit_setting_contacts.md)).
+
+- use \|\> over %\>%
+  ([\#206](https://github.com/idem-lab/conmat/issues/206))
+
+- Resolve
+  [`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
+  issue ([\#207](https://github.com/idem-lab/conmat/issues/207))
 
 ### Breaking changes
 
