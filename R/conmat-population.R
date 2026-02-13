@@ -55,6 +55,7 @@ conmat_population <- function(data, age, population) {
 #' @param data data.frame
 #' @param ... extra arguments
 #' @name as_conmat_population
+#' @returns Creates conmat population object, which knows about its age, position, and population.
 #'
 #' @export
 as_conmat_population <- function(data, ...) {

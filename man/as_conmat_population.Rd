@@ -27,6 +27,9 @@ as_conmat_population(data, ...)
 
 \item{population}{population column - an unquoted variable, numeric value}
 }
+\value{
+Creates conmat population object, which knows about its age, position, and population.
+}
 \description{
 Convert to conmat population
 }

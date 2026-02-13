@@ -6,7 +6,6 @@ CMD
 COVID
 CoV
 Codecov
-DOI
 Diekmann
 FTE
 Fairfield
@@ -72,6 +71,7 @@ helpfiles
 https
 intergenerational
 ish
+joss
 labour
 lga
 magrittr
@@ -86,6 +86,7 @@ parallelisable
 parallelisation
 parallelise
 pcbi
+poisition
 polymod
 pre
 probabilists
@@ -100,7 +101,6 @@ tibble
 tibbles
 transmissibility
 undercount
-unscaled
 unvaccinated
 upweighted
 usceptible

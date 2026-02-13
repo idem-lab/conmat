@@ -32,6 +32,10 @@ setting. See the output for \code{get_setting_transmission_matrices(age_breaks)}
 to get a sense of the structure. See \code{\link[=get_setting_transmission_matrices]{get_setting_transmission_matrices()}}
 for more detail.}
 }
+\value{
+Next Generation Matrix for each setting, based on state or LGA from
+Australian Bureau of Statistics (ABS).
+}
 \description{
 This function calculates a next generation matrix (NGM)
 based on state or LGA data from the Australian Bureau of Statistics (ABS).

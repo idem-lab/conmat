@@ -209,6 +209,9 @@ generate_ngm.conmat_population <- function(
 #'   as "Fairfield (C)".  See [abs_lga_lookup()] for list of lga names.
 #' @inheritParams generate_ngm
 #'
+#' @returns Next Generation Matrix for each setting, based on state or LGA from
+#'   Australian Bureau of Statistics (ABS).
+#'
 #' @export
 #' @examples
 #' # don't run as both together takes a long time to run
@@ -285,6 +288,10 @@ calculate_ngm <- function(
   # check_if_age_breaks_match(setting_transmission_matrix,
   #                           setting_prediction_matrix)
 
+  check_age_breaks(
+    age_breaks(setting_prediction_matrix),
+    age_breaks(setting_transmission_matrix)
+  )
   # combine to get relative setting-specific NGMs - keeping the four settings in
   # the right order
   settings <- names(setting_transmission_matrix)
