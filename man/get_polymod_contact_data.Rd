@@ -51,11 +51,10 @@ settings.
 }
 \examples{
 get_polymod_contact_data()
-get_polymod_contact_data(setting = "home")
-get_polymod_contact_data(countries = "Belgium")
-get_polymod_contact_data(countries = c("Belgium", "Italy"))
-get_polymod_contact_data(ages = 0:50)
-get_polymod_contact_data(contact_age_imputation = "sample")
-get_polymod_contact_data(contact_age_imputation = "mean")
-get_polymod_contact_data(contact_age_imputation = "remove_participant")
+get_polymod_contact_data(
+  setting = "home",
+  countries = c("Belgium", "Italy"),
+  ages = 0:50,
+  contact_age_imputation = "mean"
+)
 }
