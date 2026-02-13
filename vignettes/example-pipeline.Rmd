@@ -7,14 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(conmat)
 ```
 
@@ -29,7 +31,8 @@ This vignette outlines a basic workflow of:
 
 We can create a synthetic matrix from all POLYMOD data by using the `extrapolate_polymod` function. First, let's extract an age distribution from the ABS data.
 
-```{r fairfield}
+```{r}
+#| label: fairfield
 fairfield <- abs_age_lga("Fairfield (C)")
 fairfield
 ```
@@ -38,7 +41,8 @@ Note that this is a `conmat_population` object, which is just a data frame that 
 
 We then extrapolate this to home, work, school, other and all settings, using the full POLYMOD data. This gives us a setting prediction matrix.
 
-```{r extrapolate-fairfield}
+```{r}
+#| label: extrapolate-fairfield
 age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
 synthetic_fairfield_5y <- extrapolate_polymod(
   population = fairfield,
@@ -50,7 +54,8 @@ synthetic_fairfield_5y$home
 
 By full POLYMOD data, we mean these data:
 
-```{r polymod-setting-population}
+```{r}
+#| label: polymod-setting-population
 polymod_setting <- get_polymod_setting_data()
 
 polymod_population <- get_polymod_population()
@@ -127,7 +132,8 @@ fairfield_ngm_0_80_new_tmat <- generate_ngm(
 
 We can also generate an NGM for Australian specific data like so, which refits and extrapolates the data based on the Australian state or LGA provided.
 
-```{r ngm-fairfield}
+```{r}
+#| label: ngm-fairfield
 ngm_fairfield <- generate_ngm_oz(
   lga_name = "Fairfield (C)",
   age_breaks = age_breaks_0_80_plus,
@@ -155,7 +161,8 @@ It takes two key arguments:
 
 The vaccination effect could look like the following:
 
-```{r print-vaccination-effect}
+```{r}
+#| label: print-vaccination-effect
 vaccination_effect_example_data
 ```
 

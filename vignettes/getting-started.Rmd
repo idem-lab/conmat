@@ -7,14 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(conmat)
 library(socialmixr)
 library(ggplot2)
@@ -150,7 +152,8 @@ The above example showed how we might extract a contact matrix based on the poly
 
 First we want to fit the model to the POLYMOD data, which contains various survey and population data.
 
-```{r get-polymod}
+```{r}
+#| label: get-polymod
 library(conmat)
 polymod_contact_data_home <- get_polymod_contact_data(setting = "home")
 polymod_survey_data <- get_polymod_population()
@@ -160,13 +163,15 @@ The contact data is a data frame containing the age from and to, and the number 
 
 The survey data, `polymod_survey_data` contains the lower age limit and the population in that age group.
 
-```{r show-polymod}
+```{r}
+#| label: show-polymod
 polymod_survey_data
 ```
 
 We also provide control over the POLYMOD data retrieved from `get_polymod_contact_data()` via the arguments, `setting`, `country`, and `ages`. These allow you to specify the data to be only from certain settings or countries or ages. See `?get_polymod_contact_data` for more details. Below is a brief example of this:
 
-```{r show-off-polymod-contact-data}
+```{r}
+#| label: show-off-polymod-contact-data
 polymod_contact_data_belgium_0_10 <- get_polymod_contact_data(
   setting = "work",
   countries = "Belgium",
@@ -178,7 +183,8 @@ polymod_contact_data_belgium_0_10
 
 Similarly, you can control the population data, retrieving it only for certain countries:
 
-```{r show-off-polymod}
+```{r}
+#| label: show-off-polymod
 get_polymod_population(countries = "Belgium")
 get_polymod_population(countries = "Finland")
 ```
@@ -189,7 +195,8 @@ You can see the available countries in the helpfile with `?get_polymod_populatio
 
 We can create a model of the contact *rate* with the function `fit_single_contact_model`. We're first going to use some smaller sets of the data, to save on computation time.
 
-```{r fit-polymod}
+```{r}
+#| label: fit-polymod
 set.seed(2022 - 10 - 04)
 polymod_contact_data_home_small <- polymod_contact_data_home %>%
   filter(
@@ -208,7 +215,8 @@ contact_model <- fit_single_contact_model(
 
 This fits a generalised additive model (GAM), predicting the contact rate, based on a series of prediction terms that describe various features of the contact rates.
 
-```{r show-conctact-model}
+```{r}
+#| label: show-conctact-model
 contact_model
 ```
 
@@ -216,14 +224,16 @@ We can use this contact model to then predict the contact rate in a new populati
 
 As a demonstration, let's take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).
 
-```{r fairfield}
+```{r}
+#| label: fairfield
 fairfield <- abs_age_lga("Fairfield (C)")
 fairfield
 ```
 
 We can then pass the contact model through to `predict_contacts`, along with the fairfield age population data, and some age breaks that we want to predict to. Note that these age breaks could be any size, we just have them set to 5 year age brackets in most of the examples, but these could be 1 year, 2 year, or even sub year.
 
-```{r predict-contacts}
+```{r}
+#| label: predict-contacts
 set.seed(2022 - 10 - 04)
 synthetic_contact_fairfield <- predict_contacts(
   model = contact_model,
@@ -238,7 +248,8 @@ synthetic_contact_fairfield
 
 Let's visualise the matrix to get a sense of the predictions with `autoplot`. First we need to transform the predictions to a matrix:
 
-```{r plot-matrix-differents}
+```{r}
+#| label: plot-matrix-differents
 synthetic_contact_fairfield %>%
   predictions_to_matrix() %>%
   autoplot()
@@ -256,7 +267,8 @@ Our experience has been that we would be fitting the same models to each setting
 
 We can create a model for each of the settings with `fit_setting_contacts()`.
 
-```{r fit-polymod-setting}
+```{r}
+#| label: fit-polymod-setting
 set.seed(2021 - 09 - 24)
 
 polymod_setting_data <- get_polymod_setting_data()
@@ -273,7 +285,8 @@ setting_models <- fit_setting_contacts(
 
 This contains a list of models, one for each setting. We can look at one, and get summary information out:
 
-```{r names-setting-models}
+```{r}
+#| label: names-setting-models
 names(setting_models)
 setting_models$home
 ```
@@ -284,7 +297,8 @@ So this gives us our baseline model of a contact model. We have fit this model t
 
 Then we take the model we had earlier, and extrapolate to the fairfield data with `predict_setting_contacts`, also providing some age breaks we want to predict to
 
-```{r fairfield-synth-5}
+```{r}
+#| label: fairfield-synth-5
 set.seed(2021 - 10 - 04)
 synthetic_settings_5y_fairfield <- predict_setting_contacts(
   population = fairfield,
@@ -295,7 +309,8 @@ synthetic_settings_5y_fairfield <- predict_setting_contacts(
 
 This then returns a list of synthetic matrices, "home", "work", "school", "other", and "all", which is the sum of all matrices.
 
-```{r str-synthetic-fairfield}
+```{r}
+#| label: str-synthetic-fairfield
 str(synthetic_settings_5y_fairfield)
 synthetic_settings_5y_fairfield$home
 synthetic_settings_5y_fairfield$all
@@ -303,7 +318,8 @@ synthetic_settings_5y_fairfield$all
 
 We can use `autoplot` to plot all at once
 
-```{r fairfield-synth-5-plot}
+```{r}
+#| label: fairfield-synth-5-plot
 # this code is erroring for the moment - something to do with rendering a large plot I think.
 autoplot(
   synthetic_settings_5y_fairfield,

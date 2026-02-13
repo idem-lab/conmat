@@ -7,14 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(conmat)
 ```
 
@@ -27,7 +29,8 @@ library(conmat)
 
 First we set the future plan, saying "multisession", with 4 workers. 
 
-```{r load-future}
+```{r}
+#| label: load-future
 library(future)
 plan(multisession, workers = 4)
 ```
@@ -36,7 +39,8 @@ Then we run our code as normal to get the parallelisation! (note that you must s
 
 Note that these functions will run about 3 times faster than normal, they might still take some time. They are able to run in parallel as we are fitting a model to each setting, which is a task that is embarrasingly parallel.
 
-```{r show-off-furrr-1}
+```{r}
+#| label: show-off-furrr-1
 perth <- abs_age_lga("Perth (C)")
 perth_contacts <- extrapolate_polymod(
   population = perth

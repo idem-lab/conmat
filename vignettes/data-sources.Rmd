@@ -7,7 +7,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -16,7 +17,8 @@ knitr::opts_chunk$set(
 
 We provide access to a variety of different data sources in `conmat`. Most of these are centred around Australian data, as the package was initially created for disease modelling work in Australia. The aim of this vignette is to give a quick tour of the data sources available in `conmat`.
 
-```{r setup}
+```{r}
+#| label: setup
 library(conmat)
 ```
 
@@ -55,7 +57,8 @@ We provide two functions to access LGA  (Local Government Area), and state level
 
 #### `abs_age_lga()`
 
-```{r abs-age-lga}
+```{r}
+#| label: abs-age-lga
 fairfield <- abs_age_lga(lga_name = "Fairfield (C)")
 fairfield
 ```
@@ -64,13 +67,15 @@ Note that this is a `conmat_population` object, which prints in red at the top o
 
 Also note that `abs_age_lga` requires you to know the exact name of the LGA, you can see them in the dataset, `abs_lga_lookup`
 
-```{r abs-lga-lookup}
+```{r}
+#| label: abs-lga-lookup
 abs_lga_lookup
 ```
 
 And if you're not sure about a particular name of a place, you can use `agrep` and `filter`, to match on similar-ish characters, like so:
 
-```{r abs-lga-lookup-filter}
+```{r}
+#| label: abs-lga-lookup-filter
 library(dplyr)
 abs_lga_lookup %>%
   filter(agrepl("Sydney", lga))
@@ -80,7 +85,8 @@ abs_lga_lookup %>%
 
 This takes in the abbreviated state names, and is also a `conmat_population` object.
 
-```{r abs-age-state}
+```{r}
+#| label: abs-age-state
 abs_age_state(state_name = "NSW")
 ```
 
@@ -98,47 +104,54 @@ We provide other ABS data, listed now. You can read the full details of the data
 
 #### Education by state data for 2006 -2020
 
-```{r abs-education-state}
+```{r}
+#| label: abs-education-state
 abs_education_state
 ```
 
 #### Education by state data for 2020
 
-```{r abs-education-state-2020}
+```{r}
+#| label: abs-education-state-2020
 abs_education_state_2020
 ```
 
 
 #### Employment by LGA for 2016
 
-```{r abs-employ-age-lga}
+```{r}
+#| label: abs-employ-age-lga
 abs_employ_age_lga
 ```
 
 
 #### Number of people in each household by LGA for 2016
 
-```{r abs-household-lga}
+```{r}
+#| label: abs-household-lga
 abs_household_lga
 ```
 
 
 #### LGA age population for 2016 for all states and LGAs
 
-```{r abs-pop-age-lga-2016}
+```{r}
+#| label: abs-pop-age-lga-2016
 abs_pop_age_lga_2016
 ```
 
 
 #### LGA age population for 2020 for all states and LGAs
 
-```{r abs-pop-age-lga-2020}
+```{r}
+#| label: abs-pop-age-lga-2020
 abs_pop_age_lga_2020
 ```
 
 #### State age population for 2020
 
-```{r abs-state-age}
+```{r}
+#| label: abs-state-age
 abs_state_age
 ```
 
@@ -149,13 +162,15 @@ abs_state_age
 
 A dataset containing data digitised from "The impact of SARS-CoV-2 vaccination on Alpha & Delta variant transmission", by David W Eyre, Donald Taylor, Mark Purver, David Chapman, Tom Fowler, Koen B Pouwels, A Sarah Walker, Tim EA Peto
 
-```{r eyre-transmission-probabilities}
+```{r}
+#| label: eyre-transmission-probabilities
 eyre_transmission_probabilities
 ```
 
 We can visualise the data like so:
 
-```{r eyre-transmission-probabilities-plot}
+```{r}
+#| label: eyre-transmission-probabilities-plot
 library(ggplot2)
 library(stringr)
 library(dplyr)
