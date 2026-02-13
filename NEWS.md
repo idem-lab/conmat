@@ -1,4 +1,4 @@
-# conmat 0.0.2.9000
+# conmat 0.1.0
 
 ## Changes
 
@@ -20,6 +20,8 @@
 
 * exports `new_ngm_setting_matrix()` and `new_setting_data()` 
 * Exports new `age_breaks()` method for class `setting_contact_model` (used in `fit_setting_contacts()`).
+* use |> over %>% (#206)
+* Resolve `dplyr::case_when()` issue (#207)
 
 ## Breaking changes
 
