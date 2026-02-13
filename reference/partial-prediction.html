@@ -104,12 +104,7 @@ intercept term which is not accounted for in partial effects.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">partials_home</span> <span class="op">&lt;-</span> <span class="fu">partial_effects</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">home</span>,</span></span>
-<span class="r-in"><span>  ages <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">99</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># partial effects for all settings</span></span></span>
-<span class="r-in"><span><span class="va">partials_setting</span> <span class="op">&lt;-</span> <span class="fu">partial_effects</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">polymod_setting_models</span>,</span></span>
+<span class="r-in"><span>  <span class="va">polymod_setting_models</span><span class="op">$</span><span class="va">home</span>, <span class="co"># Do for all models by omitting $home</span></span></span>
 <span class="r-in"><span>  ages <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">99</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 </code></pre></div>

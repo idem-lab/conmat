@@ -46,17 +46,9 @@ own intercept term, which is not accounted for in partial effects.
 ## Examples
 
 ``` r
-# Summed up partial effects (y-hat) for a single setting
-partials_summed_home <- partial_effects_sum(
-    polymod_setting_models$home,
-    ages = 1:99
-  )
-
-autoplot(partials_summed_home)
-
 # summed up partial effects (y-hat) for all settings
 partials_summed_setting <- partial_effects_sum(
-    polymod_setting_models,
+    polymod_setting_models, # can also do for one setting with $home
     ages = 1:99
   )
 autoplot(partials_summed_setting)

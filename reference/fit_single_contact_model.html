@@ -233,15 +233,11 @@ weighted by the proportion of the population attending school.</p>
 <span class="r-in"><span>    <span class="va">age_from</span> <span class="op">&lt;=</span> <span class="fl">20</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">my_mod</span> <span class="op">&lt;-</span> <span class="fu">fit_single_contact_model</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  contact_data <span class="op">=</span> <span class="va">example_contact_20</span>,</span></span>
-<span class="r-in"><span>  population <span class="op">=</span> <span class="va">example_population</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># you can specify your own population data for school and work demographics</span></span></span>
 <span class="r-in"><span><span class="va">my_mod_diff_data</span> <span class="op">&lt;-</span> <span class="fu">fit_single_contact_model</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  contact_data <span class="op">=</span> <span class="va">example_contact_20</span>,</span></span>
 <span class="r-in"><span>  population <span class="op">=</span> <span class="va">example_population</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># optional arguments</span></span></span>
 <span class="r-in"><span>  school_demographics <span class="op">=</span> <span class="va">conmat_original_school_demographics</span>,</span></span>
 <span class="r-in"><span>  work_demographics <span class="op">=</span> <span class="va">conmat_original_work_demographics</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>

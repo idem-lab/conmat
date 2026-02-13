@@ -75,109 +75,24 @@ get_polymod_contact_data()
 #>  9 all            0      8        7           92
 #> 10 all            0      9        8           92
 #> # ℹ 8,777 more rows
-get_polymod_contact_data(setting = "home")
-#> # A tibble: 8,787 × 5
+get_polymod_contact_data(
+  setting = "home",
+  countries = c("Belgium", "Italy"),
+  ages = 0:50,
+  contact_age_imputation = "mean"
+)
+#> # A tibble: 5,988 × 5
 #>    setting age_from age_to contacts participants
 #>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 home           0      0       10           92
-#>  2 home           0      1        7           92
-#>  3 home           0      2       11           92
-#>  4 home           0      3       15           92
-#>  5 home           0      4       11           92
-#>  6 home           0      5        6           92
-#>  7 home           0      6        9           92
-#>  8 home           0      7        9           92
-#>  9 home           0      8        6           92
-#> 10 home           0      9        6           92
-#> # ℹ 8,777 more rows
-get_polymod_contact_data(countries = "Belgium")
-#> # A tibble: 8,282 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0        8            5
-#>  2 all            0      1        5            5
-#>  3 all            0      2        5            5
-#>  4 all            0      3        1            5
-#>  5 all            0      4        1            5
-#>  6 all            0      5        1            5
-#>  7 all            0      6        0            5
-#>  8 all            0      7        3            5
-#>  9 all            0      8        0            5
-#> 10 all            0      9        0            5
-#> # ℹ 8,272 more rows
-get_polymod_contact_data(countries = c("Belgium", "Italy"))
-#> # A tibble: 8,383 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0        9           11
-#>  2 all            0      1        5           11
-#>  3 all            0      2        4           11
-#>  4 all            0      3        6           11
-#>  5 all            0      4        2           11
-#>  6 all            0      5        1           11
-#>  7 all            0      6        0           11
-#>  8 all            0      7        4           11
-#>  9 all            0      8        1           11
-#> 10 all            0      9        0           11
-#> # ℹ 8,373 more rows
-get_polymod_contact_data(ages = 0:50)
-#> # A tibble: 7,183 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0       31           92
-#>  2 all            0      1       13           92
-#>  3 all            0      2       24           92
-#>  4 all            0      3       23           92
-#>  5 all            0      4       15           92
-#>  6 all            0      5       12           92
-#>  7 all            0      6       12           92
-#>  8 all            0      7       11           92
-#>  9 all            0      8        7           92
-#> 10 all            0      9        8           92
-#> # ℹ 7,173 more rows
-get_polymod_contact_data(contact_age_imputation = "sample")
-#> # A tibble: 8,787 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0       31           92
-#>  2 all            0      1       11           92
-#>  3 all            0      2       27           92
-#>  4 all            0      3       23           92
-#>  5 all            0      4       14           92
-#>  6 all            0      5       12           92
-#>  7 all            0      6       12           92
-#>  8 all            0      7       11           92
-#>  9 all            0      8        7           92
-#> 10 all            0      9        8           92
-#> # ℹ 8,777 more rows
-get_polymod_contact_data(contact_age_imputation = "mean")
-#> # A tibble: 8,787 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0       31           93
-#>  2 all            0      1       11           93
-#>  3 all            0      2       27           93
-#>  4 all            0      3       23           93
-#>  5 all            0      4       16           93
-#>  6 all            0      5       12           93
-#>  7 all            0      6       11           93
-#>  8 all            0      7       12           93
-#>  9 all            0      8        7           93
-#> 10 all            0      9        8           93
-#> # ℹ 8,777 more rows
-get_polymod_contact_data(contact_age_imputation = "remove_participant")
-#> # A tibble: 8,686 × 5
-#>    setting age_from age_to contacts participants
-#>    <chr>      <int>  <dbl>    <int>        <int>
-#>  1 all            0      0        1           36
-#>  2 all            0      1        6           36
-#>  3 all            0      2        3           36
-#>  4 all            0      3        8           36
-#>  5 all            0      4        4           36
-#>  6 all            0      5        2           36
-#>  7 all            0      6        5           36
-#>  8 all            0      7        3           36
-#>  9 all            0      8        3           36
-#> 10 all            0      9        7           36
-#> # ℹ 8,676 more rows
+#>  1 home           0      0        0           11
+#>  2 home           0      1        2           11
+#>  3 home           0      2        0           11
+#>  4 home           0      3        4           11
+#>  5 home           0      4        1           11
+#>  6 home           0      5        1           11
+#>  7 home           0      6        0           11
+#>  8 home           0      7        2           11
+#>  9 home           0      8        1           11
+#> 10 home           0      9        0           11
+#> # ℹ 5,978 more rows
 ```
