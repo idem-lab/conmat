@@ -72,7 +72,7 @@ We need methods that allow for flexibly creating synthetic contact matrices for 
 
 ## Installation
 
-You can install the development version with:
+You can install the development version from the IDEM lab [R-Universe](https://idem-lab.r-universe.dev/builds) with:
 
 ```r
 install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
