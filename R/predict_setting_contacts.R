@@ -76,7 +76,7 @@ predict_setting_contacts <- function(
     .x = contact_model,
     .f = predict_contacts,
     population = population,
-    age_breaks = age_breaks,
+    age_breaks = age_breaks
     .options = furrr::furrr_options(seed = TRUE)
   )
 

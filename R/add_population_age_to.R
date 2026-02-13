@@ -34,7 +34,9 @@ add_population_age_to <- function(
   population = get_polymod_population()
 ) {
   # get function to interpolate population age distributions to 1y bins
-  age_population_function <- get_age_population_function(population)
+  age_population_function <- get_age_population_function(
+    population
+    )
 
   # add the population in each 'to' age for the survey context
   contact_data %>%
