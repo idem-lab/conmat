@@ -38,6 +38,11 @@ as_conmat_population(data, age, population, ...)
 
   population column - an unquoted variable, numeric value
 
+## Value
+
+Creates conmat population object, which knows about its age, position,
+and population.
+
 ## Examples
 
 ``` r

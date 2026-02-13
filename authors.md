@@ -25,17 +25,22 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/idem-lab/conmat/blob/master/DESCRIPTION)
+[`inst/CITATION`](https://github.com/idem-lab/conmat/blob/master/inst/CITATION)
 
-Tierney N, Golding N, Babu A, Saraswati C, Lydeamore M (2026). *conmat:
-Builds Contact Matrices using Generalised Additive Models (GAMs) and
-Population Data*. R package version 0.1.0,
-<https://idem-lab.github.io/conmat/>.
+Tierney N, Saraswati C, Babu A, Lydeamore M, Golding N (2026). “conmat:
+generate synthetic contact matrices for a given age-stratified
+population.” *Journal of Open Source Software*, **11**(118), 8326.
+[doi:10.21105/joss.08326](https://doi.org/10.21105/joss.08326),
+<https://joss.theoj.org/papers/10.21105/joss.08326>.
 
-    @Manual{,
-      title = {conmat: Builds Contact Matrices using Generalised Additive Models (GAMs) and Population Data},
-      author = {Nicholas Tierney and Nick Golding and Aarathy Babu and Chitra Saraswati and Michael Lydeamore},
+    @Article{,
+      title = {conmat: generate synthetic contact matrices for a given age-stratified population},
+      author = {Nicholas Tierney and Chitra Saraswati and Aarathy Babu and Michael Lydeamore and Nick Golding},
+      journal = {Journal of Open Source Software},
       year = {2026},
-      note = {R package version 0.1.0},
-      url = {https://idem-lab.github.io/conmat/},
+      volume = {11},
+      number = {118},
+      pages = {8326},
+      doi = {10.21105/joss.08326},
+      url = {https://joss.theoj.org/papers/10.21105/joss.08326},
     }

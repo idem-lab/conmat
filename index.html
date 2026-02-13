@@ -86,7 +86,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version with:</p>
+<p>You can install the development version from the IDEM lab <a href="https://idem-lab.r-universe.dev/builds" class="external-link">R-Universe</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"conmat"</span>, repos <span class="op">=</span> <span class="st">"https://idem-lab.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
 <p>Or alternatively you can use <code>remotes</code></p>
@@ -146,9 +146,9 @@
 <span><span class="co">#&gt;     school_probability + work_probability + offset(log_contactable_population)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimated degrees of freedom:</span></span>
-<span><span class="co">#&gt; 1.34 4.32 4.34 6.96 7.53 4.98  total = 32.46 </span></span>
+<span><span class="co">#&gt; 1.00 4.29 4.14 7.02 7.54 4.81  total = 31.81 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; fREML score: 11769.97     rank: 55/57</span></span></code></pre></div>
+<span><span class="co">#&gt; fREML score: 11895.29     rank: 55/57</span></span></code></pre></div>
 <p>We can use this contact model to then predict the contact rate in a new population.</p>
 <p>As a demonstration, let’s take an age population from a given LGA in Australia (this was the initial motivation for the package, so there are some helper functions for Australian specific data).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -190,16 +190,16 @@
 <span><span class="co">#&gt; # A tibble: 324 × 3</span></span>
 <span><span class="co">#&gt;    age_group_from age_group_to contacts</span></span>
 <span><span class="co">#&gt;    &lt;fct&gt;          &lt;fct&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00273</span></span>
-<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00313</span></span>
-<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00349</span></span>
-<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00585</span></span>
-<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0135 </span></span>
-<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0261 </span></span>
-<span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0354 </span></span>
-<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0370 </span></span>
-<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0348 </span></span>
-<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0316 </span></span>
+<span><span class="co">#&gt;  1 [0,5)          [0,5)         0.00271</span></span>
+<span><span class="co">#&gt;  2 [0,5)          [5,10)        0.00319</span></span>
+<span><span class="co">#&gt;  3 [0,5)          [10,15)       0.00363</span></span>
+<span><span class="co">#&gt;  4 [0,5)          [15,20)       0.00602</span></span>
+<span><span class="co">#&gt;  5 [0,5)          [20,25)       0.0137 </span></span>
+<span><span class="co">#&gt;  6 [0,5)          [25,30)       0.0263 </span></span>
+<span><span class="co">#&gt;  7 [0,5)          [30,35)       0.0356 </span></span>
+<span><span class="co">#&gt;  8 [0,5)          [35,40)       0.0372 </span></span>
+<span><span class="co">#&gt;  9 [0,5)          [40,45)       0.0350 </span></span>
+<span><span class="co">#&gt; 10 [0,5)          [45,50)       0.0318 </span></span>
 <span><span class="co">#&gt; # ℹ 314 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">

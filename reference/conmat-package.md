@@ -1,9 +1,12 @@
 # conmat: Builds Contact Matrices using Generalised Additive Models (GAMs) and Population Data
 
 Builds contact matrices using Generalised Additive Models (GAMs) and
-population data. This package incorporates data that is copyright
-Commonwealth of Australia (Australian Electoral Commission and
-Australian Bureau of Statistics) 2020.
+population data, as described in Tierney, Saraswati, Babu, Lydeamore,
+and Golding (2026)
+[doi:10.21105/joss.08326](https://doi.org/10.21105/joss.08326) . This
+package incorporates data that is copyright Commonwealth of Australia
+(Australian Electoral Commission and Australian Bureau of Statistics)
+2020.
 
 ## See also
 

@@ -52,6 +52,11 @@ generate_ngm_oz(
   [`get_setting_transmission_matrices()`](https://idem-lab.github.io/conmat/reference/get_setting_transmission_matrices.md)
   for more detail.
 
+## Value
+
+Next Generation Matrix for each setting, based on state or LGA from
+Australian Bureau of Statistics (ABS).
+
 ## Examples
 
 ``` r

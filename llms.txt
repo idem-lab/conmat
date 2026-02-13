@@ -51,7 +51,8 @@ representation of community infection in many regions.
 
 ## Installation
 
-You can install the development version with:
+You can install the development version from the IDEM lab
+[R-Universe](https://idem-lab.r-universe.dev/builds) with:
 
 ``` r
 install.packages("conmat", repos = "https://idem-lab.r-universe.dev")
@@ -137,9 +138,9 @@ contact_model
 #>     school_probability + work_probability + offset(log_contactable_population)
 #> 
 #> Estimated degrees of freedom:
-#> 1.34 4.32 4.34 6.96 7.53 4.98  total = 32.46 
+#> 1.00 4.29 4.14 7.02 7.54 4.81  total = 31.81 
 #> 
-#> fREML score: 11769.97     rank: 55/57
+#> fREML score: 11895.29     rank: 55/57
 ```
 
 We can use this contact model to then predict the contact rate in a new
@@ -193,16 +194,16 @@ synthetic_contact_fairfield
 #> # A tibble: 324 × 3
 #>    age_group_from age_group_to contacts
 #>    <fct>          <fct>           <dbl>
-#>  1 [0,5)          [0,5)         0.00273
-#>  2 [0,5)          [5,10)        0.00313
-#>  3 [0,5)          [10,15)       0.00349
-#>  4 [0,5)          [15,20)       0.00585
-#>  5 [0,5)          [20,25)       0.0135 
-#>  6 [0,5)          [25,30)       0.0261 
-#>  7 [0,5)          [30,35)       0.0354 
-#>  8 [0,5)          [35,40)       0.0370 
-#>  9 [0,5)          [40,45)       0.0348 
-#> 10 [0,5)          [45,50)       0.0316 
+#>  1 [0,5)          [0,5)         0.00271
+#>  2 [0,5)          [5,10)        0.00319
+#>  3 [0,5)          [10,15)       0.00363
+#>  4 [0,5)          [15,20)       0.00602
+#>  5 [0,5)          [20,25)       0.0137 
+#>  6 [0,5)          [25,30)       0.0263 
+#>  7 [0,5)          [30,35)       0.0356 
+#>  8 [0,5)          [35,40)       0.0372 
+#>  9 [0,5)          [40,45)       0.0350 
+#> 10 [0,5)          [45,50)       0.0318 
 #> # ℹ 314 more rows
 ```
 
