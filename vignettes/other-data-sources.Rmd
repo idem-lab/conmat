@@ -22,9 +22,9 @@ library(conmat)
 
 The primary goal of the conmat package is to be able to get a contact matrix for a given age population. It was initially written for work done in Australia, and so the initial focus was on cleaning and extracting data from the Australian Bureau of Statistics. 
 
-This vignette focusses on using other data sources with conmat.
+This vignette focusses on using other data sources with conmat. We can use some other functions from `socialmixr` to extract similar estimates for different populations in different countries.
 
-We can use some other functions from `socialmixr` to extract similar estimates for different populations in different countries.
+## Predicting contact matrices to other countries
 
 We could extract some data from Italy using the [`socialmixr`](https://epiforecasts.io/socialmixr/) R package
 
@@ -56,7 +56,7 @@ italy_contact <- extrapolate_polymod(
 italy_contact
 ```
 
-# Creating a next generation matrix (NGM)
+### Creating a next generation matrix (NGM)
 
 To create a next generation matrix, you can use either a conmat population
 object, or setting prediction matrices, like so:
@@ -84,7 +84,7 @@ italy_2005_ngm_polymod
 identical(italy_2005_ngm, italy_2005_ngm_polymod)
 ```
 
-# Applying vaccination to an NGM
+### Applying vaccination to an NGM
 
 We can then take a next generation matrix and apply vaccination data, such as the provided `vaccination_effect_example_data` dataset.
 
@@ -100,4 +100,165 @@ ngm_italy_vacc <- apply_vaccination(
 )
 
 ngm_italy_vacc
+```
+
+
+## Predicting using data that isn't POLYMOD
+
+If we want using survey data that isn't POLYMOD, here is how to do that.
+
+```{r}
+new_polymod <- get_polymod_contact_data()
+```
+
+We can get another contact survey from the `socialmixr` package.
+
+We can see what is available here: 
+```{r}
+available_surverys <- socialmixr::list_surveys()
+available_surverys
+```
+
+Let's get the data for Switzerland
+
+```{r}
+swiss_data <- available_surverys %>%
+  filter(agrepl("switzerland", title))
+
+swiss_url <- swiss_data$url[1]
+
+swiss_contact_data <- socialmixr::get_survey(swiss_url)
+
+swiss_contact_data
+```
+
+```{r}
+survey_data <- swiss_contact_data
+contact_age_imputation <- "sample"
+# setting = c("all", "home", "work", "school", "other")
+setting <- "all"
+ages <- 0:100
+contact_data <- survey_data$participants %>%
+  # dplyr::filter(
+  #   country %in% countries
+  # ) %>%
+  dplyr::left_join(
+    survey_data$contacts,
+    by = "part_id",
+    multiple = "all"
+  )
+
+# impute contact ages according to the required method
+contact_data_imputed <- contact_data %>%
+  dplyr::mutate(
+    cnt_age_sampled = floor(
+      # suppress warnings about NAs in runif
+      suppressWarnings(
+        stats::runif(
+          n = dplyr::n(),
+          min = cnt_age_est_min,
+          max = cnt_age_est_max + 1
+        )
+      )
+    ),
+    cnt_age_mean = floor(
+      cnt_age_est_min + (cnt_age_est_max + 1 - cnt_age_est_min) / 2
+    ),
+    cnt_age = dplyr::case_when(
+      !is.na(cnt_age_exact) ~ as.numeric(cnt_age_exact),
+      contact_age_imputation == "sample" ~ cnt_age_sampled,
+      contact_age_imputation == "mean" ~ cnt_age_mean,
+      TRUE ~ NA_real_
+    ),
+  )
+
+# filter out any participants with missing contact ages or settings (can't
+# just remove the contacts as that will bias the count)
+contact_data_filtered <- contact_data_imputed %>%
+  dplyr::group_by(part_id) %>%
+  dplyr::mutate(
+    missing_any_contact_age = any(is.na(cnt_age)),
+    missing_any_contact_setting = any(
+      is.na(cnt_home) |
+        is.na(cnt_work) |
+        is.na(cnt_school) |
+        is.na(cnt_transport) |
+        is.na(cnt_leisure) |
+        is.na(cnt_otherplace)
+    )
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(
+    !is.na(part_age),
+    !missing_any_contact_age,
+    !missing_any_contact_setting
+  )
+
+# get contacts by setting (keeping 0s, so we can record 0 contacts for some individuals)
+contact_data_setting <- contact_data_filtered %>%
+  dplyr::mutate(
+    contacted = dplyr::case_when(
+      setting == "all" ~ 1L,
+      setting == "home" ~ cnt_home,
+      setting == "school" ~ cnt_school,
+      setting == "work" ~ cnt_work,
+      setting == "other" ~ pmax(cnt_transport, cnt_leisure, cnt_otherplace),
+    )
+  )
+
+# collapse down number of contacts per participant and contact age
+swiss_contact_data <- contact_data_setting %>%
+  dplyr::select(
+    part_id,
+    age_from = part_age,
+    age_to = cnt_age,
+    contacted
+  ) %>%
+  tidyr::complete(
+    tidyr::nesting(age_from, part_id),
+    age_to = ages,
+    fill = list(contacted = 0)
+  ) %>%
+  dplyr::group_by(
+    age_from,
+    age_to
+  ) %>%
+  dplyr::summarise(
+    contacts = sum(contacted),
+    participants = dplyr::n_distinct(part_id),
+    .groups = "drop"
+  ) %>%
+  # add the setting information, so models can act differently for each
+  # setting
+  dplyr::mutate(
+    setting = setting,
+    .before = dplyr::everything()
+  ) %>%
+  mutate(
+    age_from = floor(age_from)
+  )
+
+swiss_contact_data
+```
+
+```{r}
+swiss_2015 <- wpp_age("Switzerland", "2015")
+
+swiss_pop <- as_conmat_population(
+  data = swiss_2015,
+  age = lower.age.limit,
+  population = population
+)
+
+swiss_pop
+```
+
+```{r}
+age_breaks_0_80_plus <- c(seq(0, 80, by = 5), Inf)
+contact_model <- fit_single_contact_model(
+  contact_data = swiss_contact_data,
+  population = swiss_pop
+)
+
+contact_model
 ```

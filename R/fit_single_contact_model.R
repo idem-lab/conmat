@@ -150,7 +150,6 @@ fit_single_contact_model <- function(
   # programatically add the offset term to the formula, so the model defines
   # information about the setting, without us having to pass it through to the
   # prediction data
-
   if (symmetrical) {
     formula_no_offset <- contacts ~
       # Prem method did a post-hoc smoothing
