@@ -1,0 +1,285 @@
+---
+title: "understanding-conmat"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{understanding-conmat}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(conmat)
+```
+
+The goal of this vignette is to unpack the functions used in conmat, specifically:
+
+- `fit_single_contact_model()`
+- `predict_single_contact_model()`
+- `fit_setting_contacts()`
+- `estimate_setting_contacts()`
+- `extrapolate_polymod()`
+
+By the end of this vignette, you should know which functions to use to fit and predict to single settings, or all settings, and when do use `extrapolate_polymod()`.
+
+# Some history
+
+The `{conmat}` package was written during the "re-opening" phase in Australia, around August 2021. It was initially designed to predict the expected number of social contacts between age groups. In order to do this, we needed the following:
+
+- Data describing the number of contacts between people
+- A model that takes in input on the age population data (the population of a given age), and then predicts the number of contacts.
+
+We found data that describes the number of contacts between people in the POLYMOD survey, across different settings (home, work, school, other). The data looks like this:
+
+```{r}
+example_contact <- get_polymod_contact_data(setting = "home")
+example_contact
+library(dplyr)
+example_contact_20 <- example_contact %>%
+ filter(
+   age_to <= 20,
+   age_from <= 20
+ )
+
+example_contact_20
+```
+
+(note that we've trimmed down the max number of years so we can get a smaller dataset that we can model much faster).
+
+Each row represents the average number of contacts between age groups in a setting, and the number of participants in that survey. So the first row shows that in a home setting, people aged 0 had an average number of 10 contacts with another person aged 0, and there were 92 participants.
+
+Our aim is to build a model that predicts the number of contacts for a given age. We use a GAM, which allows for more flexible modelling options. Instead of predicting out `contacts ~ age_from + age_to`, we created various features (extra variables) derived from various combinations of `age_from`, and `age_to`. This facilitates capturing various contact patterns.
+
+The model effectively looks like this:
+
+```{r}
+contact_model <- mgcv::bam(
+      formula = contacts ~
+      # age_offdiag
+      s(abs(age_from - age_to)) + 
+      # age_diag_prod
+      s(abs(age_from * age_to)) + 
+      # age_diag_sum
+      s(abs(age_from + age_to)) + 
+      # age_pmax
+      s(pmax(age_from, age_to)) + 
+      # age_pmin
+      s(pmin(age_from, age_to)),
+      family = stats::poisson,
+      # NOTE: the offset of participants allows us to get the rate per person
+      offset = log(participants),
+      data = example_contact_20
+    )
+
+contact_model
+```
+
+## A note on using an offset term
+
+We are using an offset term in the model. This allows us to get the rate per person. To unpack this, let's take a slightly different example model to explain the concept of using an offset to get the rate per person. Our model predicting the number of counts could be written as a poisson:
+
+$$
+n_{contacts} \sim Poisson(\lambda)
+$$
+With lambda given by an intercept ($\beta_0$) and coefficient ($\beta_1$)
+
+$$
+log(\lambda) = \beta_0 + \beta_1x
+$$
+
+We can get the rate ($\lambda$) per person by dividing $\lambda$ by the number of people, $N$:
+
+$$
+log(\frac{\lambda}{N}) = \beta_0 + \beta_1x
+$$
+
+Because we are using `log`, we can follow log laws and rewrite them as subtraction:
+
+$$
+log(\lambda) - log(N) = \beta_0 + \beta_1x
+$$
+
+And by adding $log(N)$ to both sides we get:
+
+$$
+log(\lambda) = log(N) + \beta_0 + \beta_1x 
+$$
+
+This offset doesn't get estimated, rather it's simply added in the model.
+
+## Back to the model
+
+Now, we wrap up that model fitting code above into a function `fit_single_contact_model()`:
+
+```{r}
+example_population <- get_polymod_population()
+example_population
+
+home_contact_model <- fit_single_contact_model(
+ contact_data = example_contact_20,
+ population = example_population
+)
+
+home_contact_model
+```
+
+Note here that we include some `population` data. The reason for this is to allow for different sized offsets for school or work setting data.
+
+## Predicting to other data
+
+Now we have a model, what do we do with it? We want to predict to some given population, so that we can know the predicted number of contacts for a given population.
+
+The context of this in our initial modelling during the pandemic was that we needed to predict contact rates for specified local government areas (LGAs) in Australia. We built some helper functions to provide LGA age population data, `abs_age_lga()` - let's get the Brisbane LGA age population information:
+
+```{r}
+lga_brisbane <- abs_age_lga("Brisbane (C)")
+lga_brisbane
+```
+
+Now we can take the model that we've fit, `my_mod`, and predict the expected contact rate between each specified age group. So there are three parts:
+
+1. The model: `home_contact_model`,
+2. The population: `lga_brisbane`
+3. The age breaks: `c(seq(0, 20, by = 5), Inf)`
+
+```{r}
+brisbane_contacts <- predict_contacts(
+  model = home_contact_model,
+  population = lga_brisbane,
+  age_breaks = c(seq(0, 20, by = 5), Inf)
+)
+
+brisbane_contacts
+```
+
+Each row here represents the number of expected contacts per person, between age groups. 
+
+# Working across settings
+
+Currently we are just fitting an entire model to home settings, but we actually want to fit separate models for each setting. We could get each dataset, and then fit each model, like so:
+
+```{r}
+example_contact_home <- get_polymod_contact_data(setting = "home")
+example_contact_work <- get_polymod_contact_data(setting = "work")
+example_contact_school <- get_polymod_contact_data(setting = "school")
+example_contact_other <- get_polymod_contact_data(setting = "other")
+
+example_contact_home_20 <- example_contact_home |> 
+  filter(age_to <= 20,
+         age_from <= 20)
+example_contact_work_20 <- example_contact_work |> 
+  filter(age_to <= 20,
+         age_from <= 20)
+example_contact_school_20 <- example_contact_school |> 
+  filter(age_to <= 20,
+         age_from <= 20)
+example_contact_other_20 <- example_contact_other |> 
+  filter(age_to <= 20,
+         age_from <= 20)
+
+example_contact_home_20
+example_contact_work_20
+example_contact_school_20
+example_contact_other_20
+```
+
+But this is a bit of repetition! To save ourselves from this, we can get all the setting data with `get_polymod_setting_data()`, which returns a special summary print method, to save printing out a big list of data to the console:
+
+```{r}
+example_setting_data <- get_polymod_setting_data()
+
+example_setting_data
+```
+
+We could then trim down the years here like so
+
+```{r}
+library(purrr)
+example_setting_data_20 <- map(
+  .x = example_setting_data,
+  .f = \(x) filter(x, age_to <= 20, age_from <= 20)
+) |> new_setting_data()
+  
+example_setting_data_20
+```
+
+
+```{r}
+contact_model_home <- fit_single_contact_model(
+ contact_data = example_contact_home_20,
+ population = example_population
+)
+contact_model_work <- fit_single_contact_model(
+ contact_data = example_contact_work_20,
+ population = example_population
+)
+contact_model_school <- fit_single_contact_model(
+ contact_data = example_contact_school_20,
+ population = example_population
+)
+contact_model_other <- fit_single_contact_model(
+ contact_data = example_contact_other_20,
+ population = example_population
+)
+
+contact_model_home
+contact_model_work
+contact_model_school
+contact_model_other
+```
+
+And now instead of fitting the model separately several times ourselves like this:
+
+```{r}
+my_mod_home <- fit_single_contact_model(
+ contact_data = example_setting_data_20$home,
+ population = example_population
+)
+my_mod_work <- fit_single_contact_model(
+ contact_data = example_setting_data_20$work,
+ population = example_population
+)
+my_mod_school <- fit_single_contact_model(
+ contact_data = example_setting_data_20$school,
+ population = example_population
+)
+my_mod_other <- fit_single_contact_model(
+ contact_data = example_setting_data_20$other,
+ population = example_population
+)
+```
+
+We can fit all the models instead using `fit_setting_contacts()`:
+
+```{r}
+my_mod_all_settings <- fit_setting_contacts(
+  contact_data_list = example_setting_data_20,
+  population = example_population
+)
+my_mod_all_settings
+```
+
+And since this operation is something that is easily parallelisable, you can use `future` to get this to run in parallel. See vignette, "parallel-computing" for details.
+
+## Predicting across settings
+
+Now, we might be able to imagine that as we 
+
+```{r}
+
+```
+
+
+# Estimating across setting contacts: Fitting then predicting
+
+This pattern, of fitting a model, then predicting out to some population, is somewhat common, so we decided to write a function to do both of those steps together, `estimate_
+
+```{r}
+
+```
