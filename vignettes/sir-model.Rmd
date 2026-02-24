@@ -58,10 +58,30 @@ people at a given time point. We can model how these numbers change at each time
 
 We start with a complicated version of a relatively simple model: an age-stratified SIR Model, but with all age groups acting exactly the same.
 
+For the sake of speed, we will use just 3 age bands. 
 We will use 17 age groups, each in 5 year age bands, and turn these into a `conmat_population` object. This is an object that knows which columns represent age and population, which is used by other functions within `conmat`.
 
 ```{r}
 #| label: create-population
+age_bands <- seq(0, 80, length.out = 3)
+n_age_bands <- length(age_bands)
+homogeneous_population <- data.frame(
+  age = age_bands,
+  population = rep(100, times = n_age_bands)
+) |>
+  as_conmat_population(
+    age = age,
+    population = population
+  )
+
+homogeneous_population
+```
+
+As an exercise, we recommend that the user explores using many age bands, e.g., with
+
+```{r}
+#| label: create-population-many
+#| eval: false
 homogeneous_population <- data.frame(
   age = seq(0, 80, by = 10),
   population = rep(100, times = 9)
@@ -78,8 +98,8 @@ Then, we extrapolate these into a set of contact matrices, which we can construc
 
 ```{r}
 #| label: homogenous-contact
-age_breaks_0_80_plus <- c(seq(0, 80, by = 10), Inf)
-mat_ones <- matrix(1, nrow = 9, ncol = 9)
+age_breaks_0_80_plus <- c(age_bands, Inf)
+mat_ones <- matrix(1, nrow = n_age_bands, ncol = n_age_bands)
 
 # Relative number of contacts between individuals in 2 age categories
 # Think of as P(contact)
@@ -98,7 +118,7 @@ Similarly, we construct a set of transmission matrices, which provide the probab
 
 ```{r}
 #| label: homogenous-transmission
-mat_05 <- matrix(0.05, nrow = 9, ncol = 9)
+mat_05 <- matrix(0.05, nrow = n_age_bands, ncol = n_age_bands)
 transmission_matrix <- transmission_probability_matrix(
   home = mat_05,
   work = mat_05,
@@ -114,13 +134,13 @@ We also need to set up our population structures. We'll have all the S states, t
 
 ```{r}
 #| label: initial-condition
-S0 <- rep(999, times = 9)
-I0 <- rep(1, times = 9)
-R0 <- rep(0, times = 9)
+S0 <- rep(999, times = n_age_bands)
+I0 <- rep(1, times = n_age_bands)
+R0 <- rep(0, times = n_age_bands)
 initial_condition <- c(S0, I0, R0)
 names(initial_condition) <- paste(
-  rep(c("S0", "I0", "R0"), each = 9),
-  age_breaks_0_80_plus[1:9],
+  rep(c("S0", "I0", "R0"), each = n_age_bands),
+  age_breaks_0_80_plus[1:n_age_bands],
   sep = "_"
 )
 
@@ -136,9 +156,9 @@ parameters <- list(
   "transmission_matrix" = transmission_matrix,
   "homogeneous_contact" = homogeneous_contact,
   "gamma" = 1,
-  "s_indexes" = 1:9,
-  "i_indexes" = 10:18,
-  "r_indexes" = 19:27
+  "s_indexes" = 1,
+  "i_indexes" = 2,
+  "r_indexes" = 3
 )
 
 parameters
@@ -232,7 +252,7 @@ Now, let's compare this to an SIR model with no stratification - as in, no age g
 ```{r}
 #| label: standard-sir
 parameters_sir <- c("beta" = 1.8, "gamma" = 1)
-initial_condition_sir <- c("S" = 8991, "I" = 9, "R" = 0)
+initial_condition_sir <- c("S" = 8991, "I" = n_age_bands, "R" = 0)
 
 sir <- function(time, state, parameters) {
   N <- sum(state)
