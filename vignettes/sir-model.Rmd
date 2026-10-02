@@ -49,13 +49,16 @@ people at a given time point. We can model how these numbers change at each time
 
 We start with a complicated version of a relatively simple model: an age-stratified SIR Model, but with all age groups acting exactly the same.
 
-We will use 17 age groups, each in 5 year age bands, and turn these into a `conmat_population` object. This is an object that knows which columns represent age and population, which is used by other functions within `conmat`.
+We will use five age groups, each in 15 year age bands with a final 60+ group,
+and turn these into a `conmat_population` object. This is an object that knows
+which columns represent age and population, which is used by other functions
+within `conmat`.
 
 ```{r}
 #| label: create-population
 homogeneous_population <- data.frame(
-  age = seq(0, 80, by = 10),
-  population = rep(100, times = 9)
+  age = seq(0, 60, by = 15),
+  population = rep(100, times = 5)
 ) |>
   as_conmat_population(
     age = age,
@@ -69,8 +72,9 @@ Then, we extrapolate these into a set of contact matrices, which we can construc
 
 ```{r}
 #| label: homogenous-contact
-age_breaks_0_80_plus <- c(seq(0, 80, by = 10), Inf)
-mat_ones <- matrix(1, nrow = 9, ncol = 9)
+age_breaks <- c(seq(0, 60, by = 15), Inf)
+n_age_groups <- length(age_breaks) - 1
+mat_ones <- matrix(1, nrow = n_age_groups, ncol = n_age_groups)
 
 # Relative number of contacts between individuals in 2 age categories
 # Think of as P(contact)
@@ -79,23 +83,23 @@ homogeneous_contact <- setting_prediction_matrix(
   work = mat_ones,
   school = mat_ones,
   other = mat_ones,
-  age_breaks = age_breaks_0_80_plus
+  age_breaks = age_breaks
 )
 
 homogeneous_contact
 ```
 
-Similarly, we construct a set of transmission matrices, which provide the probability of transmission for each age group, using `transmission_probability_matrix`. These all have the same transmission probability - 0.05 (1 in 20).
+Similarly, we construct a set of transmission matrices, which provide the probability of transmission for each age group, using `transmission_probability_matrix`. These all have the same transmission probability. We use 0.09 so that, with five groups and four settings, the stratified model has the same transmission parameter ($\beta = 1.8$) as the non-stratified model below.
 
 ```{r}
 #| label: homogenous-transmission
-mat_05 <- matrix(0.05, nrow = 9, ncol = 9)
+mat_09 <- matrix(0.09, nrow = n_age_groups, ncol = n_age_groups)
 transmission_matrix <- transmission_probability_matrix(
-  home = mat_05,
-  work = mat_05,
-  school = mat_05,
-  other = mat_05,
-  age_breaks = age_breaks_0_80_plus
+  home = mat_09,
+  work = mat_09,
+  school = mat_09,
+  other = mat_09,
+  age_breaks = age_breaks
 )
 
 transmission_matrix
@@ -105,13 +109,13 @@ We also need to set up our population structures. We'll have all the S states, t
 
 ```{r}
 #| label: initial-condition
-S0 <- rep(999, times = 9)
-I0 <- rep(1, times = 9)
-R0 <- rep(0, times = 9)
+S0 <- rep(999, times = n_age_groups)
+I0 <- rep(1, times = n_age_groups)
+R0 <- rep(0, times = n_age_groups)
 initial_condition <- c(S0, I0, R0)
 names(initial_condition) <- paste(
-  rep(c("S0", "I0", "R0"), each = 9),
-  age_breaks_0_80_plus[1:9],
+  rep(c("S0", "I0", "R0"), each = n_age_groups),
+  age_breaks[1:n_age_groups],
   sep = "_"
 )
 
@@ -127,9 +131,9 @@ parameters <- list(
   "transmission_matrix" = transmission_matrix,
   "homogeneous_contact" = homogeneous_contact,
   "gamma" = 1,
-  "s_indexes" = 1:9,
-  "i_indexes" = 10:18,
-  "r_indexes" = 19:27
+  "s_indexes" = 1:n_age_groups,
+  "i_indexes" = (n_age_groups + 1):(2 * n_age_groups),
+  "r_indexes" = (2 * n_age_groups + 1):(3 * n_age_groups)
 )
 
 parameters
@@ -223,7 +227,7 @@ Now, let's compare this to an SIR model with no stratification - as in, no age g
 ```{r}
 #| label: standard-sir
 parameters_sir <- c("beta" = 1.8, "gamma" = 1)
-initial_condition_sir <- c("S" = 8991, "I" = 9, "R" = 0)
+initial_condition_sir <- c("S" = 4995, "I" = 5, "R" = 0)
 
 sir <- function(time, state, parameters) {
   N <- sum(state)
@@ -331,7 +335,7 @@ Now let's construct a non-homogenous contact matrix, and transmission probabilit
 
 ```{r}
 #| label: conmat-germany
-age_breaks_socialmixr <- c(seq(0, 75, by = 5), Inf)
+age_breaks_socialmixr <- c(seq(0, 60, by = 15), Inf)
 
 germany_contacts <- extrapolate_polymod(
   population = germany_2015,
@@ -361,7 +365,16 @@ parameters <- list(
   "r_indexes" = (2 * n_finite_states + 1):(3 * n_finite_states)
 )
 
-S0 <- germany_2015$population
+S0 <- germany_2015 %>%
+  mutate(
+    age_group = cut(lower.age.limit,
+      breaks = age_breaks_socialmixr,
+      right = FALSE
+    )
+  ) %>%
+  group_by(age_group) %>%
+  summarise(population = sum(population), .groups = "drop") %>%
+  pull(population)
 I0 <- rep(1, times = n_finite_states)
 R0 <- rep(0, times = n_finite_states)
 initial_condition <- c(S0, I0, R0)
@@ -409,16 +422,50 @@ gg_germany_sir <- ggplot(
 gg_germany_sir
 ```
 
-Let's compare to the Prem matrices. Prem only has 16 age classes so we do need to re-do our population.
+Let's compare to the Prem matrices. The source data has 16 five-year age
+classes. To keep this vignette quick, we aggregate it to the same five age
+classes used for the `conmat` matrix. Contacts with people in each broader age
+group are summed, while the contact rates of participants in that group are
+averaged using the German population as weights.
 
 ```{r}
 #| label: load-prem
-# NOTE - consider ways to present this data nicer
-# str(prem_germany_contact_matrices)
-as_setting_prediction_matrix(
+collapse_contact_matrix <- function(contact_matrix, population, age_breaks) {
+  source_ages <- seq(0, 75, by = 5)
+  broad_group <- cut(source_ages,
+    breaks = age_breaks,
+    labels = FALSE,
+    right = FALSE
+  )
+
+  # Rows are contact ages: total the contacts received by each broad group.
+  contacts_by_age_to <- rowsum(contact_matrix, broad_group, reorder = FALSE)
+
+  # Columns are participant ages: take a population-weighted mean.
+  vapply(
+    seq_len(max(broad_group)),
+    function(group) {
+      in_group <- broad_group == group
+      drop(contacts_by_age_to[, in_group, drop = FALSE] %*%
+        population[in_group] / sum(population[in_group]))
+    },
+    numeric(nrow(contacts_by_age_to))
+  )
+}
+
+prem_germany_contact_matrices <- lapply(
   prem_germany_contact_matrices,
-  age_breaks = seq(0, 80, by = 5)
+  collapse_contact_matrix,
+  population = germany_2015$population,
+  age_breaks = age_breaks_socialmixr
 )
+
+prem_germany_contact_matrices <- as_setting_prediction_matrix(
+  prem_germany_contact_matrices,
+  age_breaks = age_breaks_socialmixr
+)
+
+prem_germany_contact_matrices
 ```
 
 So we go through a similar process, setting up parameters, and solving the ODE
